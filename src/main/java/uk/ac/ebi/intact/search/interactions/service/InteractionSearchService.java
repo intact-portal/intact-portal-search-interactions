@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import uk.ac.ebi.intact.search.interactions.model.Interaction;
 import uk.ac.ebi.intact.search.interactions.repository.InteractionRepository;
 
+import java.util.Optional;
+
 /**
  * @author Elisabet Barrera
  */
@@ -20,8 +22,8 @@ public class InteractionSearchService {
         return this.interactionRepository.findAll();
     }
 
-    public Interaction findBy(String id) {
-        return this.interactionRepository.findOne(id);
+    public Optional<Interaction> findBy(String id) {
+        return this.interactionRepository.findById(id);
     }
 
     public long countDocuments() {

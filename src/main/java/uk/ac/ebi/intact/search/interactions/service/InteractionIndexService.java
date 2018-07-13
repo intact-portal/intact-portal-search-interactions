@@ -30,8 +30,8 @@ public class InteractionIndexService {
     }
 
     @Transactional
-    public void save(Collection<Interaction> interactions) {
-        this.interactionRepository.save(interactions);
+    public void save(Iterable<Interaction> interactions) {
+        this.interactionRepository.saveAll(interactions);
     }
 
     @Transactional

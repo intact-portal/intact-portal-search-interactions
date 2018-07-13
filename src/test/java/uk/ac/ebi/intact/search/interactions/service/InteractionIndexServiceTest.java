@@ -13,6 +13,8 @@ import uk.ac.ebi.intact.search.interactions.service.util.RequiresSolrServer;
 import javax.annotation.Resource;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Optional;
 
 import static org.junit.Assert.*;
 
@@ -44,19 +46,20 @@ public class InteractionIndexServiceTest {
         //Create new interactors documents
         interaction1 = new Interaction("pa et al.",
                 50,
-                Arrays.asList("interaction_id1", "interaction_id2", "interaction_id3"),
-                Arrays.asList("publication_1", "publication_2", "publication_3"));
+                new HashSet(Arrays.asList("interaction_id1", "interaction_id2", "interaction_id3")),
+                new HashSet(Arrays.asList("publication_1", "publication_2", "publication_3")));
         interaction2 = new Interaction("Ma et al.",
                 50,
-                Arrays.asList("interaction_id1", "interaction_id2", "interaction_id3"),
-                Arrays.asList("publication_1", "publication_2", "publication_3"));
+                new HashSet(Arrays.asList("interaction_id1", "interaction_id2", "interaction_id3")),
+                        new HashSet(Arrays.asList("publication_1", "publication_2", "publication_3")));
     }
 
     @Test
     public void triggerSchemaUpdateOnFirstSave() {
         interactionIndexService.save(interaction1);
 
-        Interaction interaction = interactionSearchService.findBy("pa et al.");
+        Optional<Interaction> interactionOp = interactionSearchService.findBy("pa et al.");
+        Interaction interaction=interactionOp.get();
         assertEquals(interaction.getAuthor(), interaction1.getAuthor());
         assertEquals(interactionSearchService.countDocuments(), 1);
     }
