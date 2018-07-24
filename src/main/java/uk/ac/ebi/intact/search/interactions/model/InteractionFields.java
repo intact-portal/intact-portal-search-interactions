@@ -39,5 +39,20 @@ public class InteractionFields {
     public static final String IDENTIFICATION_METHOD_A = "identification_method_A";
     public static final String IDENTIFICATION_METHOD_B = "identification_method_B";
 
+    public static final String INTERACTION_DETECTION_METHOD = "interaction_detection_method";
+    public static final String PUBLICATION_AUTHORS = "publication_authors";
+    public static final String PUBLICATION_ID = "publication_id";
+    public static final String SOURCE_DATABASES = "source_databases";
+    public static final String INTERACTION_IDENTIFIERS = "interaction_identifiers";
+    public static final String CONFIDENCE_VALUES = "confidence_values";
+    public static final String EXPANSION_METHOD = "expansion_method";
+    public static final String INTERACTION_XREFS = "interaction_xrefs";
+    public static final String INTERACTION_ANNOTATIONS = "interaction_annotations";
+    public static final String INTERACTION_PARAMETERS = "interaction_parameters";
+    public static final String CREATION_DATE = "creation_date";
+    public static final String UPDATION_DATE = "updation_date";
+    public static final String INTERACTION_CHECKSUM = "interaction_checksum";
+    public static final String INTERACTION_NEGATIVE="interaction_negative";
+
 
 }
