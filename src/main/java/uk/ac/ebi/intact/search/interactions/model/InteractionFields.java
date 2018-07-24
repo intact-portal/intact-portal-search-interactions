@@ -26,4 +26,18 @@ public class InteractionFields {
     public static final String SPECIES_B = "speciesB";
     public static final String UNIQUE_KEY = "uniqueKey";
 
+    //participants
+
+    public static final String BIOLOGICAL_ROLE_A = "biological_role_A";
+    public static final String BIOLOGICAL_ROLE_B = "biological_role_B";
+    public static final String EXPERIMENTAL_ROLE_A = "experimental_role_A";
+    public static final String EXPERIMENTAL_ROLE_B = "experimental_role_B";
+    public static final String FEATURE_A = "feature_A";
+    public static final String FEATURE_B = "feature_B";
+    public static final String STOICHIOMETRY_A = "stoichiometry_A";
+    public static final String STOICHIOMETRY_B = "stoichiometry_B";
+    public static final String IDENTIFICATION_METHOD_A = "identification_method_A";
+    public static final String IDENTIFICATION_METHOD_B = "identification_method_B";
+
+
 }

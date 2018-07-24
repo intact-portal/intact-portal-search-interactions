@@ -107,6 +107,49 @@ public class Interaction {
     @Nullable
     private String speciesB;
 
+    //participants
+
+    @Field(InteractionFields.BIOLOGICAL_ROLE_A)
+    @Nullable
+    private String biologicalRoleA;
+
+    @Field(InteractionFields.BIOLOGICAL_ROLE_B)
+    @Nullable
+    private String biologicalRoleB;
+
+    @Field(InteractionFields.EXPERIMENTAL_ROLE_A)
+    @Nullable
+    private String experimentalRoleA;
+
+    @Field(InteractionFields.EXPERIMENTAL_ROLE_B)
+    @Nullable
+    private String experimentalRoleB;
+
+    @Field(InteractionFields.FEATURE_A)
+    @Nullable
+    private Set<String> featureA;
+
+    @Field(InteractionFields.FEATURE_B)
+    @Nullable
+    private Set<String> featureB;
+
+    @Field(InteractionFields.STOICHIOMETRY_A)
+    @Nullable
+    private String stoichiometryA;
+
+    @Field(InteractionFields.STOICHIOMETRY_B)
+    @Nullable
+    private String stoichiometryB;
+
+    @Field(InteractionFields.IDENTIFICATION_METHOD_A)
+    @Nullable
+    private Set<String> identificationMethodA;
+
+    @Field(InteractionFields.IDENTIFICATION_METHOD_B)
+    @Nullable
+    private Set<String> identificationMethodB;
+
+
 
     public Interaction() {
     }
@@ -119,31 +162,6 @@ public class Interaction {
         this.publicationId = publicationId;
     }
 
-    public Interaction(String uniqueKey, String author, Integer interactionCount, Set<String> interactionIds, Set<String> publicationId, String idA, String idB, Set<String> altIdsA, Set<String> altIdsB, Set<String> aliasesA, Set<String> aliasesB, Integer taxIdA, Integer taxIdB, String typeA, String typeB, Set<String> xrefsA, Set<String> xrefsB, Set<String> annotationsA, Set<String> annotationsB, Set<String> checksumsA, Set<String> checksumsB, String speciesA, String speciesB) {
-        this.uniqueKey = uniqueKey;
-        this.author = author;
-        this.interactionCount = interactionCount;
-        this.interactionIds = interactionIds;
-        this.publicationId = publicationId;
-        this.idA = idA;
-        this.idB = idB;
-        this.altIdsA = altIdsA;
-        this.altIdsB = altIdsB;
-        this.aliasesA = aliasesA;
-        this.aliasesB = aliasesB;
-        this.taxIdA = taxIdA;
-        this.taxIdB = taxIdB;
-        this.typeA = typeA;
-        this.typeB = typeB;
-        this.xrefsA = xrefsA;
-        this.xrefsB = xrefsB;
-        this.annotationsA = annotationsA;
-        this.annotationsB = annotationsB;
-        this.checksumsA = checksumsA;
-        this.checksumsB = checksumsB;
-        this.speciesA = speciesA;
-        this.speciesB = speciesB;
-    }
 
     public String getAuthor() {
         return author;
@@ -306,32 +324,6 @@ public class Interaction {
         this.checksumsB = checksumsB;
     }
 
-    @Override
-    public String toString() {
-        return "Interaction{" +
-                "author='" + author + '\'' +
-                ", interactionCount=" + interactionCount +
-                ", interactionIds=" + interactionIds +
-                ", publicationId=" + publicationId +
-                ", idA='" + idA + '\'' +
-                ", idB='" + idB + '\'' +
-                ", altIdsA=" + altIdsA +
-                ", altIdsB=" + altIdsB +
-                ", aliasesA=" + aliasesA +
-                ", aliasesB=" + aliasesB +
-                ", taxIdA='" + taxIdA + '\'' +
-                ", taxIdB='" + taxIdB + '\'' +
-                ", typeA='" + typeA + '\'' +
-                ", typeB='" + typeB + '\'' +
-                ", xrefsA=" + xrefsA +
-                ", xrefsB=" + xrefsB +
-                ", annotationsA=" + annotationsA +
-                ", annotationsB=" + annotationsB +
-                ", checksumsA=" + checksumsA +
-                ", checksumsB=" + checksumsB +
-                '}';
-    }
-
     public String getSpeciesA() {
         return speciesA;
     }
@@ -354,5 +346,161 @@ public class Interaction {
 
     public void setUniqueKey(String uniqueKey) {
         this.uniqueKey = uniqueKey;
+    }
+
+
+    public String getBiologicalRoleA() {
+        return biologicalRoleA;
+    }
+
+    public void setBiologicalRoleA(String biologicalRoleA) {
+        this.biologicalRoleA = biologicalRoleA;
+    }
+
+    public String getBiologicalRoleB() {
+        return biologicalRoleB;
+    }
+
+    public void setBiologicalRoleB(String biologicalRoleB) {
+        this.biologicalRoleB = biologicalRoleB;
+    }
+
+    public String getExperimentalRoleA() {
+        return experimentalRoleA;
+    }
+
+    public void setExperimentalRoleA(String experimentalRoleA) {
+        this.experimentalRoleA = experimentalRoleA;
+    }
+
+    public String getExperimentalRoleB() {
+        return experimentalRoleB;
+    }
+
+    @Override
+    public String toString() {
+        return "Interaction{" +
+                "uniqueKey='" + uniqueKey + '\'' +
+                ", author='" + author + '\'' +
+                ", interactionCount=" + interactionCount +
+                ", interactionIds=" + interactionIds +
+                ", publicationId=" + publicationId +
+                ", idA='" + idA + '\'' +
+                ", idB='" + idB + '\'' +
+                ", altIdsA=" + altIdsA +
+                ", altIdsB=" + altIdsB +
+                ", aliasesA=" + aliasesA +
+                ", aliasesB=" + aliasesB +
+                ", taxIdA=" + taxIdA +
+                ", taxIdB=" + taxIdB +
+                ", typeA='" + typeA + '\'' +
+                ", typeB='" + typeB + '\'' +
+                ", xrefsA=" + xrefsA +
+                ", xrefsB=" + xrefsB +
+                ", annotationsA=" + annotationsA +
+                ", annotationsB=" + annotationsB +
+                ", checksumsA=" + checksumsA +
+                ", checksumsB=" + checksumsB +
+                ", speciesA='" + speciesA + '\'' +
+                ", speciesB='" + speciesB + '\'' +
+                ", biologicalRoleA='" + biologicalRoleA + '\'' +
+                ", biologicalRoleB='" + biologicalRoleB + '\'' +
+                ", experimentalRoleA='" + experimentalRoleA + '\'' +
+                ", experimentalRoleB='" + experimentalRoleB + '\'' +
+                ", featureA=" + featureA +
+                ", featureB=" + featureB +
+                ", stoichiometryA='" + stoichiometryA + '\'' +
+                ", stoichiometryB='" + stoichiometryB + '\'' +
+                ", identificationMethodA=" + identificationMethodA +
+                ", identificationMethodB=" + identificationMethodB +
+                '}';
+    }
+
+    public Interaction(String uniqueKey, String author, Integer interactionCount, Set<String> interactionIds, Set<String> publicationId, String idA, String idB, Set<String> altIdsA, Set<String> altIdsB, Set<String> aliasesA, Set<String> aliasesB, Integer taxIdA, Integer taxIdB, String typeA, String typeB, Set<String> xrefsA, Set<String> xrefsB, Set<String> annotationsA, Set<String> annotationsB, Set<String> checksumsA, Set<String> checksumsB, String speciesA, String speciesB, String biologicalRoleA, String biologicalRoleB, String experimentalRoleA, String experimentalRoleB, Set<String> featureA, Set<String> featureB, String stoichiometryA, String stoichiometryB, Set<String> identificationMethodA, Set<String> identificationMethodB) {
+        this.uniqueKey = uniqueKey;
+        this.author = author;
+        this.interactionCount = interactionCount;
+        this.interactionIds = interactionIds;
+        this.publicationId = publicationId;
+        this.idA = idA;
+        this.idB = idB;
+        this.altIdsA = altIdsA;
+        this.altIdsB = altIdsB;
+        this.aliasesA = aliasesA;
+        this.aliasesB = aliasesB;
+        this.taxIdA = taxIdA;
+        this.taxIdB = taxIdB;
+        this.typeA = typeA;
+        this.typeB = typeB;
+        this.xrefsA = xrefsA;
+        this.xrefsB = xrefsB;
+        this.annotationsA = annotationsA;
+        this.annotationsB = annotationsB;
+        this.checksumsA = checksumsA;
+        this.checksumsB = checksumsB;
+        this.speciesA = speciesA;
+        this.speciesB = speciesB;
+        this.biologicalRoleA = biologicalRoleA;
+        this.biologicalRoleB = biologicalRoleB;
+        this.experimentalRoleA = experimentalRoleA;
+        this.experimentalRoleB = experimentalRoleB;
+        this.featureA = featureA;
+        this.featureB = featureB;
+        this.stoichiometryA = stoichiometryA;
+        this.stoichiometryB = stoichiometryB;
+        this.identificationMethodA = identificationMethodA;
+        this.identificationMethodB = identificationMethodB;
+    }
+
+    public void setExperimentalRoleB(String experimentalRoleB) {
+        this.experimentalRoleB = experimentalRoleB;
+    }
+
+    public String getStoichiometryA() {
+        return stoichiometryA;
+    }
+
+    public void setStoichiometryA(String stoichiometryA) {
+        this.stoichiometryA = stoichiometryA;
+    }
+
+    public String getStoichiometryB() {
+        return stoichiometryB;
+    }
+
+    public void setStoichiometryB(String stoichiometryB) {
+        this.stoichiometryB = stoichiometryB;
+    }
+
+    public Set<String> getFeatureA() {
+        return featureA;
+    }
+
+    public void setFeatureA(Set<String> featureA) {
+        this.featureA = featureA;
+    }
+
+    public Set<String> getFeatureB() {
+        return featureB;
+    }
+
+    public void setFeatureB(Set<String> featureB) {
+        this.featureB = featureB;
+    }
+
+    public Set<String> getIdentificationMethodA() {
+        return identificationMethodA;
+    }
+
+    public void setIdentificationMethodA(Set<String> identificationMethodA) {
+        this.identificationMethodA = identificationMethodA;
+    }
+
+    public Set<String> getIdentificationMethodB() {
+        return identificationMethodB;
+    }
+
+    public void setIdentificationMethodB(Set<String> identificationMethodB) {
+        this.identificationMethodB = identificationMethodB;
     }
 }
