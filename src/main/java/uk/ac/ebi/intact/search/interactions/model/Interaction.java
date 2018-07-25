@@ -198,6 +198,79 @@ public class Interaction {
     @Nullable
     private boolean negative;
 
+    @Field(InteractionFields.INTERACTION_TYPE)
+    @Nullable
+    private String interactionType;
+
+    @Field(InteractionFields.INTERACTION_AC)
+    @Nullable
+    private String interactionAc;
+
+    @Field(InteractionFields.HOST_ORGANISM)
+    @Nullable
+    private String hostOrganism;
+
+
+
+    public Interaction(String uniqueKey, Integer interactionCount, Set<String> interactionIds, String idA, String idB, Set<String> altIdsA, Set<String> altIdsB, Set<String> aliasesA, Set<String> aliasesB, Integer taxIdA, Integer taxIdB, String typeA, String typeB, Set<String> xrefsA, Set<String> xrefsB, Set<String> annotationsA, Set<String> annotationsB, Set<String> checksumsA, Set<String> checksumsB, String speciesA, String speciesB, String biologicalRoleA, String biologicalRoleB, String experimentalRoleA, String experimentalRoleB, Set<String> featureA, Set<String> featureB, String stoichiometryA, String stoichiometryB, Set<String> identificationMethodA, Set<String> identificationMethodB, String interactionDetectionMethod, Set<String> authors, String publicationId, Set<String> sourceDatabases, Set<String> interactionIdentifiers, Set<String> confidenceValues, String expansionMethod, Set<String> interactionXrefs, Set<String> interactionAnnotations, Set<String> interactionParameters, Date creationDate, Date updationDate, Set<String> interactionChecksums, boolean negative, String interactiontype) {
+        this.uniqueKey = uniqueKey;
+        this.interactionCount = interactionCount;
+        this.interactionIds = interactionIds;
+        this.idA = idA;
+        this.idB = idB;
+        this.altIdsA = altIdsA;
+        this.altIdsB = altIdsB;
+        this.aliasesA = aliasesA;
+        this.aliasesB = aliasesB;
+        this.taxIdA = taxIdA;
+        this.taxIdB = taxIdB;
+        this.typeA = typeA;
+        this.typeB = typeB;
+        this.xrefsA = xrefsA;
+        this.xrefsB = xrefsB;
+        this.annotationsA = annotationsA;
+        this.annotationsB = annotationsB;
+        this.checksumsA = checksumsA;
+        this.checksumsB = checksumsB;
+        this.speciesA = speciesA;
+        this.speciesB = speciesB;
+        this.biologicalRoleA = biologicalRoleA;
+        this.biologicalRoleB = biologicalRoleB;
+        this.experimentalRoleA = experimentalRoleA;
+        this.experimentalRoleB = experimentalRoleB;
+        this.featureA = featureA;
+        this.featureB = featureB;
+        this.stoichiometryA = stoichiometryA;
+        this.stoichiometryB = stoichiometryB;
+        this.identificationMethodA = identificationMethodA;
+        this.identificationMethodB = identificationMethodB;
+        this.interactionDetectionMethod = interactionDetectionMethod;
+        this.authors = authors;
+        this.publicationId = publicationId;
+        this.sourceDatabases = sourceDatabases;
+        this.interactionIdentifiers = interactionIdentifiers;
+        this.confidenceValues = confidenceValues;
+        this.expansionMethod = expansionMethod;
+        this.interactionXrefs = interactionXrefs;
+        this.interactionAnnotations = interactionAnnotations;
+        this.interactionParameters = interactionParameters;
+        this.creationDate = creationDate;
+        this.updationDate = updationDate;
+        this.interactionChecksums = interactionChecksums;
+        this.negative = negative;
+
+    }
+
+    public Interaction() {
+    }
+
+    public Interaction(Set<String> author, Integer interactionCount, Set<String> interactionIds, String publicationId) {
+        this.setAuthors(author);
+        this.interactionCount = interactionCount;
+        this.interactionIds = interactionIds;
+        this.setPublicationId(publicationId);
+    }
+
     @Override
     public String toString() {
         return "Interaction{" +
@@ -246,65 +319,8 @@ public class Interaction {
                 ", updationDate=" + updationDate +
                 ", interactionChecksums=" + interactionChecksums +
                 ", negative=" + negative +
+
                 '}';
-    }
-
-    public Interaction(String uniqueKey, Integer interactionCount, Set<String> interactionIds, String idA, String idB, Set<String> altIdsA, Set<String> altIdsB, Set<String> aliasesA, Set<String> aliasesB, Integer taxIdA, Integer taxIdB, String typeA, String typeB, Set<String> xrefsA, Set<String> xrefsB, Set<String> annotationsA, Set<String> annotationsB, Set<String> checksumsA, Set<String> checksumsB, String speciesA, String speciesB, String biologicalRoleA, String biologicalRoleB, String experimentalRoleA, String experimentalRoleB, Set<String> featureA, Set<String> featureB, String stoichiometryA, String stoichiometryB, Set<String> identificationMethodA, Set<String> identificationMethodB, String interactionDetectionMethod, Set<String> authors, String publicationId, Set<String> sourceDatabases, Set<String> interactionIdentifiers, Set<String> confidenceValues, String expansionMethod, Set<String> interactionXrefs, Set<String> interactionAnnotations, Set<String> interactionParameters, Date creationDate, Date updationDate, Set<String> interactionChecksums, boolean negative) {
-        this.uniqueKey = uniqueKey;
-        this.interactionCount = interactionCount;
-        this.interactionIds = interactionIds;
-        this.idA = idA;
-        this.idB = idB;
-        this.altIdsA = altIdsA;
-        this.altIdsB = altIdsB;
-        this.aliasesA = aliasesA;
-        this.aliasesB = aliasesB;
-        this.taxIdA = taxIdA;
-        this.taxIdB = taxIdB;
-        this.typeA = typeA;
-        this.typeB = typeB;
-        this.xrefsA = xrefsA;
-        this.xrefsB = xrefsB;
-        this.annotationsA = annotationsA;
-        this.annotationsB = annotationsB;
-        this.checksumsA = checksumsA;
-        this.checksumsB = checksumsB;
-        this.speciesA = speciesA;
-        this.speciesB = speciesB;
-        this.biologicalRoleA = biologicalRoleA;
-        this.biologicalRoleB = biologicalRoleB;
-        this.experimentalRoleA = experimentalRoleA;
-        this.experimentalRoleB = experimentalRoleB;
-        this.featureA = featureA;
-        this.featureB = featureB;
-        this.stoichiometryA = stoichiometryA;
-        this.stoichiometryB = stoichiometryB;
-        this.identificationMethodA = identificationMethodA;
-        this.identificationMethodB = identificationMethodB;
-        this.interactionDetectionMethod = interactionDetectionMethod;
-        this.authors = authors;
-        this.publicationId = publicationId;
-        this.sourceDatabases = sourceDatabases;
-        this.interactionIdentifiers = interactionIdentifiers;
-        this.confidenceValues = confidenceValues;
-        this.expansionMethod = expansionMethod;
-        this.interactionXrefs = interactionXrefs;
-        this.interactionAnnotations = interactionAnnotations;
-        this.interactionParameters = interactionParameters;
-        this.creationDate = creationDate;
-        this.updationDate = updationDate;
-        this.interactionChecksums = interactionChecksums;
-        this.negative = negative;
-    }
-
-    public Interaction() {
-    }
-
-    public Interaction(Set<String> author, Integer interactionCount, Set<String> interactionIds, String publicationId) {
-        this.setAuthors(author);
-        this.interactionCount = interactionCount;
-        this.interactionIds = interactionIds;
-        this.setPublicationId(publicationId);
     }
 
     public Integer getInteractionCount() {
@@ -666,5 +682,31 @@ public class Interaction {
 
     public void setInteractionXrefs(Set<String> interactionXrefs) {
         this.interactionXrefs = interactionXrefs;
+    }
+
+
+    public String getInteractionType() {
+        return interactionType;
+    }
+
+    public void setInteractionType(String interactionType) {
+        this.interactionType = interactionType;
+    }
+
+    public String getInteractionAc() {
+        return interactionAc;
+    }
+
+    public void setInteractionAc(String interactionAc) {
+        this.interactionAc = interactionAc;
+    }
+
+
+    public String getHostOrganism() {
+        return hostOrganism;
+    }
+
+    public void setHostOrganism(String hostOrganism) {
+        this.hostOrganism = hostOrganism;
     }
 }

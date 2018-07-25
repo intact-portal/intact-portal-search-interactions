@@ -44,14 +44,14 @@ public class InteractionIndexServiceTest {
         interactionIndexService.deleteAll();
 
         //Create new interactors documents
-        interaction1 = new Interaction("pa et al.",
+        interaction1 = new Interaction(new HashSet(Arrays.asList("pa et al.")),
                 50,
                 new HashSet(Arrays.asList("interaction_id1", "interaction_id2", "interaction_id3")),
-                new HashSet(Arrays.asList("publication_1", "publication_2", "publication_3")));
-        interaction2 = new Interaction("Ma et al.",
+                "publication_1");
+        interaction2 = new Interaction(new HashSet(Arrays.asList("Ma et al.")),
                 50,
                 new HashSet(Arrays.asList("interaction_id1", "interaction_id2", "interaction_id3")),
-                        new HashSet(Arrays.asList("publication_1", "publication_2", "publication_3")));
+                        "publication_1");
     }
 
     @Test
@@ -60,7 +60,7 @@ public class InteractionIndexServiceTest {
 
         Optional<Interaction> interactionOp = interactionSearchService.findBy("pa et al.");
         Interaction interaction=interactionOp.get();
-        assertEquals(interaction.getAuthor(), interaction1.getAuthor());
+        assertEquals(interaction.getAuthors(), interaction1.getAuthors());
         assertEquals(interactionSearchService.countDocuments(), 1);
     }
 

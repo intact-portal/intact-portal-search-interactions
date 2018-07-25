@@ -53,6 +53,9 @@ public class InteractionFields {
     public static final String UPDATION_DATE = "updation_date";
     public static final String INTERACTION_CHECKSUM = "interaction_checksum";
     public static final String INTERACTION_NEGATIVE="interaction_negative";
+    public static final String INTERACTION_TYPE="interaction_type";
+    public static final String HOST_ORGANISM="host_organism";
+    public static final String INTERACTION_AC="interaction_ac";
 
 
 }
