@@ -2,6 +2,8 @@ package uk.ac.ebi.intact.search.interactions.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import uk.ac.ebi.intact.search.interactions.model.Interaction;
 import uk.ac.ebi.intact.search.interactions.repository.InteractionRepository;
@@ -28,5 +30,10 @@ public class InteractionSearchService {
 
     public long countDocuments() {
         return this.interactionRepository.count();
+    }
+
+    public Page<Interaction> findInteractions(String query) {
+        PageRequest pageRequest = new PageRequest(0, 10);
+        return interactionRepository.findInteractions(query, pageRequest);
     }
 }
