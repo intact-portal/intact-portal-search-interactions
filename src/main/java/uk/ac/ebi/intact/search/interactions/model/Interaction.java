@@ -12,8 +12,10 @@ import java.util.Set;
 /**
  * @author Elisabet Barrera
  */
-@SolrDocument(solrCoreName = "interactions")
+@SolrDocument(solrCoreName =Interaction.INTERACTIONS)
 public class Interaction {
+
+    public static final String INTERACTIONS = "interactions";
 
     @Id
     @Field(InteractionFields.UNIQUE_KEY)
@@ -209,6 +211,10 @@ public class Interaction {
     @Field(InteractionFields.HOST_ORGANISM)
     @Nullable
     private String hostOrganism;
+
+    @Field(InteractionFields.INTACT_MISCORE)
+    @Nullable
+    private double intactMiscore;
 
 
 
@@ -708,5 +714,13 @@ public class Interaction {
 
     public void setHostOrganism(String hostOrganism) {
         this.hostOrganism = hostOrganism;
+    }
+
+    public double getIntactMiscore() {
+        return intactMiscore;
+    }
+
+    public void setIntactMiscore(double intactMiscore) {
+        this.intactMiscore = intactMiscore;
     }
 }

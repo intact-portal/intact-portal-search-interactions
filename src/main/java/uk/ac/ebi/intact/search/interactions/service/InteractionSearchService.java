@@ -6,9 +6,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import uk.ac.ebi.intact.search.interactions.model.Interaction;
+import uk.ac.ebi.intact.search.interactions.model.InteractionResult;
 import uk.ac.ebi.intact.search.interactions.repository.InteractionRepository;
 
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * @author Elisabet Barrera
@@ -36,4 +38,10 @@ public class InteractionSearchService {
         PageRequest pageRequest = new PageRequest(0, 10);
         return interactionRepository.findInteractions(query, pageRequest);
     }
+
+    public InteractionResult findInteractionWithFacet(String query, Set<String> detectionMethodFilter, Set<String> interactionTypeFilter,Set<String> hostOrganismFilter,boolean isNegativeFilter, int page, int pageSize) {
+        PageRequest pageRequest = new PageRequest(page, pageSize);
+        return interactionRepository.findInteractionWithFacet(query, detectionMethodFilter, interactionTypeFilter,hostOrganismFilter,isNegativeFilter, null, pageRequest);
+    }
+
 }
