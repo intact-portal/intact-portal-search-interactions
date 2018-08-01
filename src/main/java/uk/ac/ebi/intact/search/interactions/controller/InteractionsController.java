@@ -46,9 +46,12 @@ public class InteractionsController {
             @RequestParam(value = "interactionTypeFilter", required = false) Set<String> interactionTypeFilter,
             @RequestParam(value = "hostOrganismFilter", required = false) Set<String> hostOrganismFilter,
             @RequestParam(value = "isNegativeFilter", required = false) boolean isNegativeFilter,
+            @RequestParam(value = "minMiscore",defaultValue = "0", required = false) double minMiscore,
+            @RequestParam(value = "maxMiscore",defaultValue = "1", required = false) double maxMiscore,
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
-        return this.interactionSearchService.findInteractionWithFacet(query, detectionMethodFilter, interactionTypeFilter,hostOrganismFilter,isNegativeFilter, page, pageSize);
+        return this.interactionSearchService.findInteractionWithFacet(query, detectionMethodFilter, interactionTypeFilter,hostOrganismFilter,isNegativeFilter,minMiscore,maxMiscore,
+                page, pageSize);
     }
 
 }

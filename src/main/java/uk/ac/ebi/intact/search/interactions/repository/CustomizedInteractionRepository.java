@@ -24,6 +24,6 @@ public interface CustomizedInteractionRepository {
      * @param pageable
      * @return
      */
-    InteractionResult findInteractionWithFacet(String query, Set<String> detectionMethodFilter, Set<String> interactionTypeFilter,Set<String> hostOrganismFilter,boolean isNegativeFilter, Sort sort, Pageable pageable);
+    InteractionResult findInteractionWithFacet(String query, Set<String> detectionMethodFilter, Set<String> interactionTypeFilter,Set<String> hostOrganismFilter,boolean isNegativeFilter,double minMiScore,double maxMiScore, Sort sort, Pageable pageable);
 
 }

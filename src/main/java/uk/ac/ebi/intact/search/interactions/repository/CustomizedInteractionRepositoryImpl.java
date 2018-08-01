@@ -1,5 +1,6 @@
 package uk.ac.ebi.intact.search.interactions.repository;
 
+import org.apache.solr.common.params.FacetParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -35,7 +36,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
     }
 
     @Override
-    public InteractionResult findInteractionWithFacet(String query, Set<String> detectionMethodFilter, Set<String> interactionTypeFilter,Set<String> hostOrganismFilter,boolean isNegativeFilter, Sort sort, Pageable pageable) {
+    public InteractionResult findInteractionWithFacet(String query, Set<String> detectionMethodFilter, Set<String> interactionTypeFilter,Set<String> hostOrganismFilter,boolean isNegativeFilter,double minMiScore,double maxMiScore, Sort sort, Pageable pageable) {
 
         // search query
         SimpleFacetQuery search = new SimpleFacetQuery();
@@ -45,7 +46,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         search.addCriteria(conditions);
 
         // filters
-        List<FilterQuery> filterQueries = createFilterQuery(detectionMethodFilter, interactionTypeFilter,hostOrganismFilter,isNegativeFilter);
+        List<FilterQuery> filterQueries = createFilterQuery(detectionMethodFilter, interactionTypeFilter,hostOrganismFilter,isNegativeFilter,minMiScore,maxMiScore);
         if (filterQueries != null && !filterQueries.isEmpty()) {
             for (FilterQuery filterQuery : filterQueries) {
                 search.addFilterQuery(filterQuery);
@@ -54,8 +55,14 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         }
 
         // facet
-        FacetOptions facetOptions = new FacetOptions(InteractionFields.INTERACTION_DETECTION_METHOD_STR, InteractionFields.INTERACTION_TYPE_STR,InteractionFields.HOST_ORGANISM_STR,InteractionFields.INTERACTION_NEGATIVE);
+        FacetOptions facetOptions = new FacetOptions(InteractionFields.INTERACTION_DETECTION_METHOD_STR, InteractionFields.INTERACTION_TYPE_STR,InteractionFields.HOST_ORGANISM_STR,InteractionFields.INTERACTION_NEGATIVE,InteractionFields.INTACT_MISCORE);
         facetOptions.setFacetLimit(FACET_MIN_COUNT);
+        facetOptions.addFacetByRange(
+                new FacetOptions.FieldWithNumericRangeParameters(InteractionFields.INTACT_MISCORE, 0.0, 1.0, .01)
+                        .setHardEnd(true)
+                        .setInclude(FacetParams.FacetRangeInclude.ALL)
+
+        );
         search.setFacetOptions(facetOptions);
 
         // pagination
@@ -96,7 +103,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         return conditions;
     }
 
-    private List<FilterQuery> createFilterQuery(Set<String> detectionMethodFilter, Set<String> interactionTypeFilter,Set<String> hostOrganismFilter,boolean isNegativeFilter) {
+    private List<FilterQuery> createFilterQuery(Set<String> detectionMethodFilter, Set<String> interactionTypeFilter,Set<String> hostOrganismFilter,boolean isNegativeFilter,double minMiScore,double maxMiScore) {
         List<FilterQuery> filterQueries = new ArrayList<FilterQuery>();
 
         //Interaction Detection Method filter
@@ -112,7 +119,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         createFilterCriteria(isNegativeFilter, InteractionFields.INTERACTION_NEGATIVE, filterQueries);
 
         //miscore filter
-        //createFilterCriteria(interactorTypeFilter, SearchInteractorFields.INTERACTOR_TYPE, filterQueries);
+        createFilterCriteria(minMiScore,maxMiScore, InteractionFields.INTACT_MISCORE, filterQueries);
 
         return filterQueries;
     }
@@ -140,5 +147,19 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
            Criteria conditions = null;
            conditions = new Criteria(field).is(value);
+
+        if (conditions != null) {
+            filterQueries.add(new SimpleFilterQuery(conditions));
+        }
+    }
+
+    private void createFilterCriteria(double minScore,double maxScore, String field, List<FilterQuery> filterQueries) {
+
+        Criteria conditions = null;
+        conditions = new Criteria(field).between(minScore,maxScore);
+
+        if (conditions != null) {
+            filterQueries.add(new SimpleFilterQuery(conditions));
+        }
     }
 }

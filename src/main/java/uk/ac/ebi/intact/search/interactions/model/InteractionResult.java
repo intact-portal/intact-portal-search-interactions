@@ -107,8 +107,16 @@ public class InteractionResult implements Page<Interaction> {
 
         for (Field field : page.getFacetFields()) {
             Set<FacetCount> facet = new HashSet<>();
-            for (FacetFieldEntry facetFieldEntry : page.getFacetResultPage(field).getContent()) {
-                facet.add(new FacetCount(facetFieldEntry.getValue(), facetFieldEntry.getValueCount()));
+            if(field.getName().equals(InteractionFields.INTACT_MISCORE)){
+                System.out.println("I am here");
+                for (FacetFieldEntry facetFieldEntry : page.getRangeFacetResultPage(field).getContent()) {
+                    System.out.println("I am here 2");
+                    facet.add(new FacetCount(facetFieldEntry.getValue(), facetFieldEntry.getValueCount()));
+                }
+            }else {
+                for (FacetFieldEntry facetFieldEntry : page.getFacetResultPage(field).getContent()) {
+                    facet.add(new FacetCount(facetFieldEntry.getValue(), facetFieldEntry.getValueCount()));
+                }
             }
             facetPerFieldMap.put(field.getName(), facet);
         }
