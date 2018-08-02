@@ -39,9 +39,9 @@ public class InteractionSearchService {
         return interactionRepository.findInteractions(query, pageRequest);
     }
 
-    public InteractionResult findInteractionWithFacet(String query, Set<String> detectionMethodFilter, Set<String> interactionTypeFilter,Set<String> hostOrganismFilter,boolean isNegativeFilter,double minMiScore,double maxMiScore, int page, int pageSize) {
+    public InteractionResult findInteractionWithFacet(String query, Set<String> detectionMethodFilter, Set<String> interactionTypeFilter,Set<String> hostOrganismFilter,boolean isNegativeFilter,double minMiScore,double maxMiScore,Set<String> species, boolean interSpecies, int page, int pageSize) {
         PageRequest pageRequest = new PageRequest(page, pageSize);
-        return interactionRepository.findInteractionWithFacet(query, detectionMethodFilter, interactionTypeFilter,hostOrganismFilter,isNegativeFilter,minMiScore,maxMiScore, null, pageRequest);
+        return interactionRepository.findInteractionWithFacet(query, detectionMethodFilter, interactionTypeFilter,hostOrganismFilter,isNegativeFilter,minMiScore,maxMiScore,species,interSpecies, null, pageRequest);
     }
 
 }

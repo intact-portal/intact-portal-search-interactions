@@ -12,6 +12,7 @@ import uk.ac.ebi.intact.search.interactions.model.InteractionFields;
 import uk.ac.ebi.intact.search.interactions.model.InteractionResult;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -37,7 +38,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
     }
 
     @Override
-    public InteractionResult findInteractionWithFacet(String query, Set<String> detectionMethodFilter, Set<String> interactionTypeFilter, Set<String> hostOrganismFilter, boolean isNegativeFilter, double minMiScore, double maxMiScore, Sort sort, Pageable pageable) {
+    public InteractionResult findInteractionWithFacet(String query, Set<String> detectionMethodFilter, Set<String> interactionTypeFilter, Set<String> hostOrganismFilter, boolean isNegativeFilter, double minMiScore, double maxMiScore, Set<String> species, boolean interSpecies, Sort sort, Pageable pageable) {
 
         // search query
         SimpleFacetQuery search = new SimpleFacetQuery();
@@ -47,7 +48,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         search.addCriteria(conditions);
 
         // filters
-        List<FilterQuery> filterQueries = createFilterQuery(detectionMethodFilter, interactionTypeFilter, hostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore);
+        List<FilterQuery> filterQueries = createFilterQuery(detectionMethodFilter, interactionTypeFilter, hostOrganismFilter, isNegativeFilter, species, interSpecies, minMiScore, maxMiScore);
         if (filterQueries != null && !filterQueries.isEmpty()) {
             for (FilterQuery filterQuery : filterQueries) {
                 search.addFilterQuery(filterQuery);
@@ -56,14 +57,15 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         }
 
         // facet
-        FacetOptions facetOptions = new FacetOptions(InteractionFields.INTERACTION_DETECTION_METHOD_STR, InteractionFields.INTERACTION_TYPE_STR, InteractionFields.HOST_ORGANISM_STR, InteractionFields.INTERACTION_NEGATIVE, InteractionFields.INTACT_MISCORE);
+        FacetOptions facetOptions = new FacetOptions(InteractionFields.INTERACTION_DETECTION_METHOD_STR, InteractionFields.INTERACTION_TYPE_STR, InteractionFields.HOST_ORGANISM_STR, InteractionFields.INTERACTION_NEGATIVE, InteractionFields.INTACT_MISCORE,InteractionFields.SPECIES_A_B);
         facetOptions.setFacetLimit(FACET_MIN_COUNT);
         facetOptions.addFacetByRange(
-                new FacetOptions.FieldWithNumericRangeParameters(InteractionFields.INTACT_MISCORE, 0d,1d,0.01d)
+                new FacetOptions.FieldWithNumericRangeParameters(InteractionFields.INTACT_MISCORE, 0d, 1d, 0.01d)
                         .setHardEnd(true)
                         .setInclude(FacetParams.FacetRangeInclude.ALL)
 
         );
+        facetOptions.getFieldsWithParameters().add(new FacetOptions.FieldWithFacetParameters(InteractionFields.SPECIES_A_B).setMethod("enum"));
         search.setFacetOptions(facetOptions);
 
         // pagination
@@ -104,7 +106,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         return conditions;
     }
 
-    private List<FilterQuery> createFilterQuery(Set<String> detectionMethodFilter, Set<String> interactionTypeFilter, Set<String> hostOrganismFilter, boolean isNegativeFilter, double minMiScore, double maxMiScore) {
+    private List<FilterQuery> createFilterQuery(Set<String> detectionMethodFilter, Set<String> interactionTypeFilter, Set<String> hostOrganismFilter, boolean isNegativeFilter, Set<String> species, boolean interSpecies, double minMiScore, double maxMiScore) {
         List<FilterQuery> filterQueries = new ArrayList<FilterQuery>();
 
         //Interaction Detection Method filter
@@ -121,6 +123,9 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
         //miscore filter
         createFilterCriteria(minMiScore, maxMiScore, InteractionFields.INTACT_MISCORE, filterQueries);
+
+        //species filter
+        createFilterCriteriaForSpecies(species, interSpecies, filterQueries);
 
         return filterQueries;
     }
@@ -161,6 +166,40 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
         if (conditions != null) {
             filterQueries.add(new SimpleFilterQuery(conditions));
+        }
+    }
+
+    private void createFilterCriteriaForSpecies(Set<String> species, boolean interSpecies, List<FilterQuery> filterQueries) {
+
+        if (species != null) {
+            Criteria conditions = null;
+            if (!interSpecies) {
+                for (String value : species) {
+
+                    if (conditions == null) {
+                        conditions = new Criteria(InteractionFields.SPECIES_A_STR).is(value);
+                        conditions.or(new Criteria(InteractionFields.SPECIES_B_STR).is(value));
+                    } else {
+                        conditions = conditions.or(new Criteria(InteractionFields.SPECIES_A_STR).is(value));
+                        conditions.or(new Criteria(InteractionFields.SPECIES_B_STR).is(value));
+                    }
+                }
+            }else{
+                Iterator iterator=species.iterator();
+                String speciesA;
+                String speciesB;
+
+                speciesA= (iterator.hasNext()) ? (String)iterator.next():"";
+                speciesB= (iterator.hasNext()) ? (String)iterator.next():"";
+                System.out.println("speciesA"+speciesA);
+                System.out.println("speciesB"+speciesB);
+                conditions = new Criteria(InteractionFields.SPECIES_A_STR).is(speciesA);
+                conditions.and(new Criteria(InteractionFields.SPECIES_B_STR).is(speciesB));
+                conditions.or(new Criteria(InteractionFields.SPECIES_A_STR).is(speciesB).and(new Criteria(InteractionFields.SPECIES_B_STR).is(speciesA)));
+            }
+            if (conditions != null) {
+                filterQueries.add(new SimpleFilterQuery(conditions));
+            }
         }
     }
 }

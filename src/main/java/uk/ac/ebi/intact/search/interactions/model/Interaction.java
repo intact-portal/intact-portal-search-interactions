@@ -7,6 +7,7 @@ import org.springframework.data.solr.core.mapping.SolrDocument;
 import org.springframework.lang.Nullable;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -215,6 +216,10 @@ public class Interaction {
     @Field(InteractionFields.INTACT_MISCORE)
     @Nullable
     private double intactMiscore;
+
+    @Field(InteractionFields.SPECIES_A_B)
+    @Nullable
+    private Set<String> speciesAB=new HashSet<String>();
 
 
 
@@ -479,6 +484,7 @@ public class Interaction {
 
     public void setSpeciesA(String speciesA) {
         this.speciesA = speciesA;
+        this.speciesAB.add(speciesA);
     }
 
     public String getSpeciesB() {
@@ -487,6 +493,7 @@ public class Interaction {
 
     public void setSpeciesB(String speciesB) {
         this.speciesB = speciesB;
+        this.speciesAB.add(speciesB);
     }
 
     public String getUniqueKey() {
@@ -722,5 +729,13 @@ public class Interaction {
 
     public void setIntactMiscore(double intactMiscore) {
         this.intactMiscore = intactMiscore;
+    }
+
+    public Set<String> getSpeciesAB() {
+        return speciesAB;
+    }
+
+    public void setSpeciesAB(Set<String> speciesAB) {
+        this.speciesAB = speciesAB;
     }
 }
