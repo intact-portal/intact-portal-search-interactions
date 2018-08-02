@@ -4,6 +4,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import uk.ac.ebi.intact.search.interactions.model.InteractionResult;
+
 import java.util.Set;
 
 /**
@@ -14,16 +15,15 @@ import java.util.Set;
 public interface CustomizedInteractionRepository {
 
     /**
-     *
      * @param query
      * @param detectionMethodFilter (optional)
      * @param interactionTypeFilter (optional)
-     * @param hostOrganismFilter (optional)
-     * @param isNegativeFilter (optional)
+     * @param hostOrganismFilter    (optional)
+     * @param isNegativeFilter      (optional)
      * @param sort
      * @param pageable
      * @return
      */
-    InteractionResult findInteractionWithFacet(String query, Set<String> detectionMethodFilter, Set<String> interactionTypeFilter,Set<String> hostOrganismFilter,boolean isNegativeFilter,double minMiScore,double maxMiScore, Sort sort, Pageable pageable);
+    InteractionResult findInteractionWithFacet(String query, Set<String> detectionMethodFilter, Set<String> interactionTypeFilter, Set<String> hostOrganismFilter, boolean isNegativeFilter, double minMiScore, double maxMiScore, Sort sort, Pageable pageable);
 
 }

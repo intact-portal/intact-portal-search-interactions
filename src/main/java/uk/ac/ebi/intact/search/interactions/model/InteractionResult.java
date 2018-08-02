@@ -6,7 +6,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.solr.core.query.Field;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
-import uk.ac.ebi.intact.search.interactions.model.Interaction;
+
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.function.Function;
 
@@ -107,13 +108,12 @@ public class InteractionResult implements Page<Interaction> {
 
         for (Field field : page.getFacetFields()) {
             Set<FacetCount> facet = new HashSet<>();
-            if(field.getName().equals(InteractionFields.INTACT_MISCORE)){
-                System.out.println("I am here");
+            if (field.getName().equals(InteractionFields.INTACT_MISCORE)) {
                 for (FacetFieldEntry facetFieldEntry : page.getRangeFacetResultPage(field).getContent()) {
-                    System.out.println("I am here 2");
-                    facet.add(new FacetCount(facetFieldEntry.getValue(), facetFieldEntry.getValueCount()));
+                    DecimalFormat df = new DecimalFormat("####0.00");// inherently it is giving long decimal values
+                    facet.add(new FacetCount(df.format(Double.parseDouble(facetFieldEntry.getValue())), facetFieldEntry.getValueCount()));
                 }
-            }else {
+            } else {
                 for (FacetFieldEntry facetFieldEntry : page.getFacetResultPage(field).getContent()) {
                     facet.add(new FacetCount(facetFieldEntry.getValue(), facetFieldEntry.getValueCount()));
                 }
