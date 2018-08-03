@@ -27,6 +27,7 @@ public class InteractionFields {
     public static final String SPECIES_B = "speciesB";
     public static final String SPECIES_B_STR = "speciesB_str";
     public static final String SPECIES_A_B = "speciesA_B";
+    public static final String SPECIES_A_B_STR = "speciesA_B_str";
 
     public static final String UNIQUE_KEY = "uniqueKey";
 

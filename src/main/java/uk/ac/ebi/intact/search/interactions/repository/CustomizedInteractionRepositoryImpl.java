@@ -57,7 +57,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         }
 
         // facet
-        FacetOptions facetOptions = new FacetOptions(InteractionFields.INTERACTION_DETECTION_METHOD_STR, InteractionFields.INTERACTION_TYPE_STR, InteractionFields.HOST_ORGANISM_STR, InteractionFields.INTERACTION_NEGATIVE, InteractionFields.INTACT_MISCORE,InteractionFields.SPECIES_A_B);
+        FacetOptions facetOptions = new FacetOptions(InteractionFields.INTERACTION_DETECTION_METHOD_STR, InteractionFields.INTERACTION_TYPE_STR, InteractionFields.HOST_ORGANISM_STR, InteractionFields.INTERACTION_NEGATIVE, InteractionFields.INTACT_MISCORE, InteractionFields.SPECIES_A_B_STR);
         facetOptions.setFacetLimit(FACET_MIN_COUNT);
         facetOptions.addFacetByRange(
                 new FacetOptions.FieldWithNumericRangeParameters(InteractionFields.INTACT_MISCORE, 0d, 1d, 0.01d)
@@ -177,29 +177,24 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                 for (String value : species) {
 
                     if (conditions == null) {
-                        conditions = new Criteria(InteractionFields.SPECIES_A_STR).is(value);
-                        conditions.or(new Criteria(InteractionFields.SPECIES_B_STR).is(value));
+                        conditions = new Criteria(InteractionFields.SPECIES_A_STR).is(value).or(new Criteria(InteractionFields.SPECIES_B_STR).is(value));
                     } else {
-                        conditions = conditions.or(new Criteria(InteractionFields.SPECIES_A_STR).is(value));
-                        conditions.or(new Criteria(InteractionFields.SPECIES_B_STR).is(value));
+                        conditions = conditions.or(new Criteria(InteractionFields.SPECIES_A_STR).is(value)).or(new Criteria(InteractionFields.SPECIES_B_STR).is(value));
                     }
                 }
-            }else{
-                Iterator iterator=species.iterator();
+            } else {
+                Iterator iterator = species.iterator();
                 String speciesA;
                 String speciesB;
 
-                speciesA= (iterator.hasNext()) ? (String)iterator.next():"";
-                speciesB= (iterator.hasNext()) ? (String)iterator.next():"";
-                System.out.println("speciesA"+speciesA);
-                System.out.println("speciesB"+speciesB);
-                conditions = new Criteria(InteractionFields.SPECIES_A_STR).is(speciesA);
-                conditions.and(new Criteria(InteractionFields.SPECIES_B_STR).is(speciesB));
-                conditions.or(new Criteria(InteractionFields.SPECIES_A_STR).is(speciesB).and(new Criteria(InteractionFields.SPECIES_B_STR).is(speciesA)));
+                speciesA = (iterator.hasNext()) ? (String) iterator.next() : "";
+                speciesB = (iterator.hasNext()) ? (String) iterator.next() : "";
+                conditions = new Criteria(InteractionFields.SPECIES_A_B_STR).is(speciesA).and(new Criteria(InteractionFields.SPECIES_A_B_STR).is(speciesB));
             }
             if (conditions != null) {
                 filterQueries.add(new SimpleFilterQuery(conditions));
             }
+
         }
     }
 }
