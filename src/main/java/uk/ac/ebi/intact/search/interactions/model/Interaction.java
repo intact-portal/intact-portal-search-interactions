@@ -39,6 +39,14 @@ public class Interaction {
     @Nullable
     private String idB;
 
+    @Field(InteractionFields.INTERACTOR_AC_A)
+    @Nullable
+    private String interactorAAc;
+
+    @Field(InteractionFields.INTERACTOR_AC_B)
+    @Nullable
+    private String interactorBAc;
+
     @Field(InteractionFields.ALT_IDS_A)
     @Nullable
     private Set<String> altIdsA;
@@ -129,6 +137,14 @@ public class Interaction {
     @Nullable
     private Set<String> featureB;
 
+    @Field(InteractionFields.FEATURE_SHORTLABEL_A)
+    @Nullable
+    private Set<String> featureShortLabelA;
+
+    @Field(InteractionFields.FEATURE_SHORTLABEL_B)
+    @Nullable
+    private Set<String> featureShortLabelB;
+
     @Field(InteractionFields.STOICHIOMETRY_A)
     @Nullable
     private String stoichiometryA;
@@ -157,9 +173,9 @@ public class Interaction {
     @Nullable
     private String publicationId;
 
-    @Field(InteractionFields.SOURCE_DATABASES)
+    @Field(InteractionFields.SOURCE_DATABASE)
     @Nullable
-    private Set<String> sourceDatabases;
+    private String sourceDatabase;
 
     @Field(InteractionFields.INTERACTION_IDENTIFIERS)
     @Nullable
@@ -221,6 +237,38 @@ public class Interaction {
     @Nullable
     private Set<String> speciesAB=new HashSet<String>();
 
+    @Field(InteractionFields.MOLECULE_A)
+    @Nullable
+    private String moleculeA;
+
+    @Field(InteractionFields.MOLECULE_B)
+    @Nullable
+    private String moleculeB;
+
+    @Field(InteractionFields.FIRST_AUTHOR)
+    @Nullable
+    private String firstAuthor;
+
+    @Field(InteractionFields.EXPERIMENTAL_PREPARATIONS_A)
+    @Nullable
+    private Set<String> experimentalPreparationsA;
+
+    @Field(InteractionFields.EXPERIMENTAL_PREPARATIONS_B)
+    @Nullable
+    private Set<String> experimentalPreparationsB;
+
+    @Field(InteractionFields.RELEASE_DATE)
+    @Nullable
+    private Date releaseDate;
+
+    @Field(InteractionFields.UNIQUE_ID_A)
+    @Nullable
+    private String uniqueIdA;
+
+    @Field(InteractionFields.UNIQUE_ID_B)
+    @Nullable
+    private String uniqueIdB;
+
 
 
     public Interaction(String uniqueKey, Integer interactionCount, Set<String> interactionIds, String idA, String idB, Set<String> altIdsA, Set<String> altIdsB, Set<String> aliasesA, Set<String> aliasesB, Integer taxIdA, Integer taxIdB, String typeA, String typeB, Set<String> xrefsA, Set<String> xrefsB, Set<String> annotationsA, Set<String> annotationsB, Set<String> checksumsA, Set<String> checksumsB, String speciesA, String speciesB, String biologicalRoleA, String biologicalRoleB, String experimentalRoleA, String experimentalRoleB, Set<String> featureA, Set<String> featureB, String stoichiometryA, String stoichiometryB, Set<String> identificationMethodA, Set<String> identificationMethodB, String interactionDetectionMethod, Set<String> authors, String publicationId, Set<String> sourceDatabases, Set<String> interactionIdentifiers, Set<String> confidenceValues, String expansionMethod, Set<String> interactionXrefs, Set<String> interactionAnnotations, Set<String> interactionParameters, Date creationDate, Date updationDate, Set<String> interactionChecksums, boolean negative, String interactiontype) {
@@ -258,7 +306,7 @@ public class Interaction {
         this.interactionDetectionMethod = interactionDetectionMethod;
         this.authors = authors;
         this.publicationId = publicationId;
-        this.sourceDatabases = sourceDatabases;
+        this.sourceDatabase = sourceDatabase;
         this.interactionIdentifiers = interactionIdentifiers;
         this.confidenceValues = confidenceValues;
         this.expansionMethod = expansionMethod;
@@ -319,7 +367,7 @@ public class Interaction {
                 ", interactionDetectionMethod='" + interactionDetectionMethod + '\'' +
                 ", authors=" + authors +
                 ", publicationId='" + publicationId + '\'' +
-                ", sourceDatabases=" + sourceDatabases +
+                ", sourceDatabase=" + sourceDatabase +
                 ", interactionIdentifiers=" + interactionIdentifiers +
                 ", confidenceValues=" + confidenceValues +
                 ", expansionMethod='" + expansionMethod + '\'' +
@@ -608,14 +656,6 @@ public class Interaction {
         this.publicationId = publicationId;
     }
 
-    public Set<String> getSourceDatabases() {
-        return sourceDatabases;
-    }
-
-    public void setSourceDatabases(Set<String> sourceDatabases) {
-        this.sourceDatabases = sourceDatabases;
-    }
-
     public Set<String> getInteractionIdentifiers() {
         return interactionIdentifiers;
     }
@@ -737,5 +777,109 @@ public class Interaction {
 
     public void setSpeciesAB(Set<String> speciesAB) {
         this.speciesAB = speciesAB;
+    }
+
+    public String getInteractorAAc() {
+        return interactorAAc;
+    }
+
+    public void setInteractorAAc(String interactorAAc) {
+        this.interactorAAc = interactorAAc;
+    }
+
+    public String getInteractorBAc() {
+        return interactorBAc;
+    }
+
+    public void setInteractorBAc(String interactorBAc) {
+        this.interactorBAc = interactorBAc;
+    }
+
+    public Set<String> getFeatureShortLabelA() {
+        return featureShortLabelA;
+    }
+
+    public void setFeatureShortLabelA(Set<String> featureShortLabelA) {
+        this.featureShortLabelA = featureShortLabelA;
+    }
+
+    public Set<String> getFeatureShortLabelB() {
+        return featureShortLabelB;
+    }
+
+    public void setFeatureShortLabelB(Set<String> featureShortLabelB) {
+        this.featureShortLabelB = featureShortLabelB;
+    }
+
+    public String getSourceDatabase() {
+        return sourceDatabase;
+    }
+
+    public void setSourceDatabase(String sourceDatabase) {
+        this.sourceDatabase = sourceDatabase;
+    }
+
+    public String getMoleculeA() {
+        return moleculeA;
+    }
+
+    public void setMoleculeA(String moleculeA) {
+        this.moleculeA = moleculeA;
+    }
+
+    public String getMoleculeB() {
+        return moleculeB;
+    }
+
+    public void setMoleculeB(String moleculeB) {
+        this.moleculeB = moleculeB;
+    }
+
+    public String getFirstAuthor() {
+        return firstAuthor;
+    }
+
+    public void setFirstAuthor(String firstAuthor) {
+        this.firstAuthor = firstAuthor;
+    }
+
+    public Date getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(Date releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public String getUniqueIdA() {
+        return uniqueIdA;
+    }
+
+    public void setUniqueIdA(String uniqueIdA) {
+        this.uniqueIdA = uniqueIdA;
+    }
+
+    public String getUniqueIdB() {
+        return uniqueIdB;
+    }
+
+    public void setUniqueIdB(String uniqueIdB) {
+        this.uniqueIdB = uniqueIdB;
+    }
+
+    public Set<String> getExperimentalPreparationsB() {
+        return experimentalPreparationsB;
+    }
+
+    public void setExperimentalPreparationsB(Set<String> experimentalPreparationsB) {
+        this.experimentalPreparationsB = experimentalPreparationsB;
+    }
+
+    public Set<String> getExperimentalPreparationsA() {
+        return experimentalPreparationsA;
+    }
+
+    public void setExperimentalPreparationsA(Set<String> experimentalPreparationsA) {
+        this.experimentalPreparationsA = experimentalPreparationsA;
     }
 }
