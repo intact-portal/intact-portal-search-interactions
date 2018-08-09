@@ -8,6 +8,7 @@ import org.springframework.lang.Nullable;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -167,7 +168,7 @@ public class Interaction {
 
     @Field(InteractionFields.PUBLICATION_AUTHORS)
     @Nullable
-    private Set<String> authors;
+    private LinkedHashSet<String> authors;
 
     @Field(InteractionFields.PUBLICATION_ID)
     @Nullable
@@ -271,7 +272,7 @@ public class Interaction {
 
 
 
-    public Interaction(String uniqueKey, Integer interactionCount, Set<String> interactionIds, String idA, String idB, Set<String> altIdsA, Set<String> altIdsB, Set<String> aliasesA, Set<String> aliasesB, Integer taxIdA, Integer taxIdB, String typeA, String typeB, Set<String> xrefsA, Set<String> xrefsB, Set<String> annotationsA, Set<String> annotationsB, Set<String> checksumsA, Set<String> checksumsB, String speciesA, String speciesB, String biologicalRoleA, String biologicalRoleB, String experimentalRoleA, String experimentalRoleB, Set<String> featureA, Set<String> featureB, String stoichiometryA, String stoichiometryB, Set<String> identificationMethodA, Set<String> identificationMethodB, String interactionDetectionMethod, Set<String> authors, String publicationId, Set<String> sourceDatabases, Set<String> interactionIdentifiers, Set<String> confidenceValues, String expansionMethod, Set<String> interactionXrefs, Set<String> interactionAnnotations, Set<String> interactionParameters, Date creationDate, Date updationDate, Set<String> interactionChecksums, boolean negative, String interactiontype) {
+    public Interaction(String uniqueKey, Integer interactionCount, Set<String> interactionIds, String idA, String idB, Set<String> altIdsA, Set<String> altIdsB, Set<String> aliasesA, Set<String> aliasesB, Integer taxIdA, Integer taxIdB, String typeA, String typeB, Set<String> xrefsA, Set<String> xrefsB, Set<String> annotationsA, Set<String> annotationsB, Set<String> checksumsA, Set<String> checksumsB, String speciesA, String speciesB, String biologicalRoleA, String biologicalRoleB, String experimentalRoleA, String experimentalRoleB, Set<String> featureA, Set<String> featureB, String stoichiometryA, String stoichiometryB, Set<String> identificationMethodA, Set<String> identificationMethodB, String interactionDetectionMethod, LinkedHashSet<String> authors, String publicationId, Set<String> sourceDatabases, Set<String> interactionIdentifiers, Set<String> confidenceValues, String expansionMethod, Set<String> interactionXrefs, Set<String> interactionAnnotations, Set<String> interactionParameters, Date creationDate, Date updationDate, Set<String> interactionChecksums, boolean negative, String interactiontype) {
         this.uniqueKey = uniqueKey;
         this.interactionCount = interactionCount;
         this.interactionIds = interactionIds;
@@ -323,7 +324,7 @@ public class Interaction {
     public Interaction() {
     }
 
-    public Interaction(Set<String> author, Integer interactionCount, Set<String> interactionIds, String publicationId) {
+    public Interaction(LinkedHashSet<String> author, Integer interactionCount, Set<String> interactionIds, String publicationId) {
         this.setAuthors(author);
         this.interactionCount = interactionCount;
         this.interactionIds = interactionIds;
@@ -640,11 +641,11 @@ public class Interaction {
         this.interactionDetectionMethod = interactionDetectionMethod;
     }
 
-    public Set<String> getAuthors() {
+    public LinkedHashSet<String> getAuthors() {
         return authors;
     }
 
-    public void setAuthors(Set<String> authors) {
+    public void setAuthors(LinkedHashSet<String> authors) {
         this.authors = authors;
     }
 

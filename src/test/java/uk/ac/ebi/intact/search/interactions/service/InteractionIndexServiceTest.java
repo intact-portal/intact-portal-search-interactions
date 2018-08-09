@@ -14,6 +14,7 @@ import javax.annotation.Resource;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
@@ -44,11 +45,11 @@ public class InteractionIndexServiceTest {
         interactionIndexService.deleteAll();
 
         //Create new interactors documents
-        interaction1 = new Interaction(new HashSet(Arrays.asList("pa et al.")),
+        interaction1 = new Interaction(new LinkedHashSet(Arrays.asList("pa et al.")),
                 50,
                 new HashSet(Arrays.asList("interaction_id1", "interaction_id2", "interaction_id3")),
                 "publication_1");
-        interaction2 = new Interaction(new HashSet(Arrays.asList("Ma et al.")),
+        interaction2 = new Interaction(new LinkedHashSet(Arrays.asList("Ma et al.")),
                 50,
                 new HashSet(Arrays.asList("interaction_id1", "interaction_id2", "interaction_id3")),
                         "publication_1");
