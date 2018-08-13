@@ -270,6 +270,10 @@ public class Interaction {
     @Nullable
     private String uniqueIdB;
 
+    @Field(InteractionFields.PUBLICATION_IDENTIFIERS)
+    @Nullable
+    private Set<String> publicationIdentifiers;
+
 
 
     public Interaction(String uniqueKey, Integer interactionCount, Set<String> interactionIds, String idA, String idB, Set<String> altIdsA, Set<String> altIdsB, Set<String> aliasesA, Set<String> aliasesB, Integer taxIdA, Integer taxIdB, String typeA, String typeB, Set<String> xrefsA, Set<String> xrefsB, Set<String> annotationsA, Set<String> annotationsB, Set<String> checksumsA, Set<String> checksumsB, String speciesA, String speciesB, String biologicalRoleA, String biologicalRoleB, String experimentalRoleA, String experimentalRoleB, Set<String> featureA, Set<String> featureB, String stoichiometryA, String stoichiometryB, Set<String> identificationMethodA, Set<String> identificationMethodB, String interactionDetectionMethod, LinkedHashSet<String> authors, String publicationId, Set<String> sourceDatabases, Set<String> interactionIdentifiers, Set<String> confidenceValues, String expansionMethod, Set<String> interactionXrefs, Set<String> interactionAnnotations, Set<String> interactionParameters, Date creationDate, Date updationDate, Set<String> interactionChecksums, boolean negative, String interactiontype) {
@@ -882,5 +886,13 @@ public class Interaction {
 
     public void setExperimentalPreparationsA(Set<String> experimentalPreparationsA) {
         this.experimentalPreparationsA = experimentalPreparationsA;
+    }
+
+    public Set<String> getPublicationIdentifiers() {
+        return publicationIdentifiers;
+    }
+
+    public void setPublicationIdentifiers(Set<String> publicationIdentifiers) {
+        this.publicationIdentifiers = publicationIdentifiers;
     }
 }

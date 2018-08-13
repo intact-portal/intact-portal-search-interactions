@@ -57,6 +57,7 @@ public class InteractionFields {
     public static final String PUBLICATION_AUTHORS = "publication_authors";
     public static final String FIRST_AUTHOR="first_author";
     public static final String PUBLICATION_ID = "publication_id";
+    public static final String PUBLICATION_IDENTIFIERS = "publication_identifiers";
     public static final String SOURCE_DATABASE = "source_database";
     public static final String INTERACTION_IDENTIFIERS = "interaction_identifiers";
     public static final String CONFIDENCE_VALUES = "confidence_values";
