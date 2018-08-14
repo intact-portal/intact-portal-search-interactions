@@ -70,7 +70,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         );
 
         facetOptions.getFieldsWithParameters().add(new FacetOptions.FieldWithFacetParameters(InteractionFields.SPECIES_A_B).setMethod("enum"));
-        facetOptions.setFacetSort(FacetOptions.FacetSort.COUNT);
+        /*facetOptions.setFacetSort(FacetOptions.FacetSort.COUNT);*/
         search.setFacetOptions(facetOptions);
 
         // pagination
