@@ -2,6 +2,8 @@ package uk.ac.ebi.intact.search.interactions.repository;
 
 import org.apache.solr.common.params.FacetParams;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.solr.core.SolrOperations;
@@ -64,8 +66,11 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                         .setHardEnd(true)
                         .setInclude(FacetParams.FacetRangeInclude.ALL)
 
+
         );
+
         facetOptions.getFieldsWithParameters().add(new FacetOptions.FieldWithFacetParameters(InteractionFields.SPECIES_A_B).setMethod("enum"));
+        facetOptions.setFacetSort(FacetOptions.FacetSort.COUNT);
         search.setFacetOptions(facetOptions);
 
         // pagination

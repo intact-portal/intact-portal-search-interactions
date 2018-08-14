@@ -103,11 +103,11 @@ public class InteractionResult implements Page<Interaction> {
         return page.getFacetFields();
     }
 
-    public Map<String, Set<FacetCount>> getFacetResultPage() {
-        Map<String, Set<FacetCount>> facetPerFieldMap = new HashMap<>();
+    public Map<String, List<FacetCount>> getFacetResultPage() {
+        Map<String, List<FacetCount>> facetPerFieldMap = new HashMap<>();
 
         for (Field field : page.getFacetFields()) {
-            Set<FacetCount> facet = new HashSet<>();
+            List<FacetCount> facet = new ArrayList<>();
             if (field.getName().equals(InteractionFields.INTACT_MISCORE)) {
                 for (FacetFieldEntry facetFieldEntry : page.getRangeFacetResultPage(field).getContent()) {
                     DecimalFormat df = new DecimalFormat("####0.00");// inherently it is giving long decimal values
