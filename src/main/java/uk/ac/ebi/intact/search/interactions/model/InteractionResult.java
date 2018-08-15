@@ -138,7 +138,7 @@ public class InteractionResult implements Page<Interaction> {
         return facetPerFieldMap;
     }*/
 
-    private class FacetCount {
+    public class FacetCount {
 
         private String value;
         private Long valueCount;
