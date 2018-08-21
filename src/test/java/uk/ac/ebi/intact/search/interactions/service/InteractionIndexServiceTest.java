@@ -13,7 +13,10 @@ import uk.ac.ebi.intact.search.interactions.service.util.RequiresSolrServer;
 import uk.ac.ebi.intact.search.interactions.service.util.TestUtil;
 
 import javax.annotation.Resource;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 
@@ -92,7 +95,7 @@ public class InteractionIndexServiceTest {
      * Behaviour If the User types "Host Organism" in search box
      */
     public void findByHostOrganism() {
-        Page<Interaction> interactionOp = interactionSearchService.findInteractions("In vitro");
+        Page<Interaction> interactionOp = interactionSearchService.findInteractions("\"In vitro\"");
         assertEquals(interactionOp.getNumberOfElements(), 6);
     }
 
@@ -102,16 +105,16 @@ public class InteractionIndexServiceTest {
      */
     public void facetTest() {
         InteractionResult interactionOp = interactionSearchService.findInteractionWithFacet("physical association", null, null, null, false, 0, 1, null, false, 0, 10);
-        Set<String> facetFields=interactionOp.getFacetResultPage().keySet();
-        assertEquals(true,facetFields.contains("interaction_negative"));
-        assertEquals(true,facetFields.contains("intact_miscore"));
-        assertEquals(true,facetFields.contains("interaction_detection_method_str"));
-        assertEquals(true,facetFields.contains("interaction_type_str"));
-        assertEquals(true,facetFields.contains("host_organism_str"));
-        assertEquals(true,facetFields.contains("speciesA_B_str"));
+        Set<String> facetFields = interactionOp.getFacetResultPage().keySet();
+        assertEquals(true, facetFields.contains("interaction_negative"));
+        assertEquals(true, facetFields.contains("intact_miscore"));
+        assertEquals(true, facetFields.contains("interaction_detection_method_str"));
+        assertEquals(true, facetFields.contains("interaction_type_str"));
+        assertEquals(true, facetFields.contains("host_organism_str"));
+        assertEquals(true, facetFields.contains("speciesA_B_str"));
 
         for (String facetField : interactionOp.getFacetResultPage().keySet()) {
-             if (facetField.equals("interaction_negative")) {
+            if (facetField.equals("interaction_negative")) {
                 List<InteractionResult.FacetCount> facetCounts = interactionOp.getFacetResultPage().get(facetField);
                 for (InteractionResult.FacetCount facetCount : facetCounts) {
                     if (facetCount.getValue().equals("false")) {
@@ -190,43 +193,43 @@ public class InteractionIndexServiceTest {
             }
         }
 
-        assertEquals(10,interactionOp.getNumberOfElements());
+        assertEquals(10, interactionOp.getNumberOfElements());
     }
 
     @Test
     /**
      * Expected behaviour when filter elements are passed
      */
-     public void filterTest1() {
+    public void filterTest1() {
 
         //filter1
 
-        Set<String> detectionMethod=new HashSet<String>();
+        Set<String> detectionMethod = new HashSet<String>();
         detectionMethod.add("molecular sieving");
 
-        Set<String> interactiontype=new HashSet<String>();
+        Set<String> interactiontype = new HashSet<String>();
         interactiontype.add("physical association");
 
-        Set<String> hostOrganism=new HashSet<String>();
+        Set<String> hostOrganism = new HashSet<String>();
         hostOrganism.add("In vitro");
 
-        boolean isNegative=false;
+        boolean isNegative = false;
 
-        double minMiscore=0;
+        double minMiscore = 0;
 
-        double maxMiscore=0.6;
+        double maxMiscore = 0.6;
 
-        Set<String> species=new HashSet<String>();
+        Set<String> species = new HashSet<String>();
         species.add("Homo sapiens");
 
-        boolean interSpecies=false;
+        boolean interSpecies = false;
 
-        int page=0;
+        int page = 0;
 
-        int size=10;
+        int size = 10;
 
         InteractionResult interactionOp = interactionSearchService.
-                findInteractionWithFacet("physical association", detectionMethod, interactiontype, hostOrganism, isNegative, minMiscore, maxMiscore,species, false, page, size);
+                findInteractionWithFacet("physical association", detectionMethod, interactiontype, hostOrganism, isNegative, minMiscore, maxMiscore, species, false, page, size);
         assertEquals(1, interactionOp.getNumberOfElements());
 
     }
@@ -239,33 +242,33 @@ public class InteractionIndexServiceTest {
 
         //filter2
 
-        Set<String> detectionMethod=new HashSet<String>();
+        Set<String> detectionMethod = new HashSet<String>();
         detectionMethod.add("molecular sieving");
 
-        Set<String> interactiontype=new HashSet<String>();
+        Set<String> interactiontype = new HashSet<String>();
         interactiontype.add("physical association");
 
-        Set<String> hostOrganism=new HashSet<String>();
+        Set<String> hostOrganism = new HashSet<String>();
         hostOrganism.add("In vitro");
 
-        boolean isNegative=false;
+        boolean isNegative = false;
 
-        double minMiscore=0;
+        double minMiscore = 0;
 
-        double maxMiscore=0.6;
+        double maxMiscore = 0.6;
 
-        Set<String> species=new HashSet<String>();
+        Set<String> species = new HashSet<String>();
         species.add("Homo sapiens");
         species.add("Rattus norvegicus (Rat)");
 
-        boolean interSpecies=true;
+        boolean interSpecies = true;
 
-        int page=0;
+        int page = 0;
 
-        int size=10;
+        int size = 10;
 
         InteractionResult interactionOp = interactionSearchService.
-                findInteractionWithFacet("physical association", detectionMethod, interactiontype, hostOrganism, isNegative, minMiscore, maxMiscore,species, interSpecies, page, size);
+                findInteractionWithFacet("physical association", detectionMethod, interactiontype, hostOrganism, isNegative, minMiscore, maxMiscore, species, interSpecies, page, size);
         assertEquals(0, interactionOp.getNumberOfElements());
 
     }
