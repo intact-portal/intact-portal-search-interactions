@@ -11,6 +11,9 @@ import java.text.DecimalFormat;
 import java.util.*;
 import java.util.function.Function;
 
+/**
+ * This class has all the methods/utils of a Page and one more customized method getFacetResultPage()
+ */
 public class InteractionResult implements Page<Interaction> {
 
     private final FacetPage<Interaction> page;
@@ -103,6 +106,12 @@ public class InteractionResult implements Page<Interaction> {
         return page.getFacetFields();
     }
 
+    /**
+     * Gives map of facet fields and List of FacetCount,
+     * where List of FacetCount contains List of facet field values and their respective counts.
+     * This was implemented to save client from complexity of calculating facets from page.
+     * @return
+     */
     public Map<String, List<FacetCount>> getFacetResultPage() {
         Map<String, List<FacetCount>> facetPerFieldMap = new HashMap<>();
 

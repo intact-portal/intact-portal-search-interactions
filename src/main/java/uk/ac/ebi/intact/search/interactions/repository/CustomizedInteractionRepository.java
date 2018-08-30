@@ -15,11 +15,16 @@ import java.util.Set;
 public interface CustomizedInteractionRepository {
 
     /**
+     *
      * @param query
-     * @param detectionMethodFilter (optional)
-     * @param interactionTypeFilter (optional)
-     * @param hostOrganismFilter    (optional)
-     * @param isNegativeFilter      (optional)
+     * @param detectionMethodFilter (Optional)
+     * @param interactionTypeFilter (Optional)
+     * @param hostOrganismFilter (Optional)
+     * @param isNegativeFilter (Optional)
+     * @param minMiScore
+     * @param maxMiScore
+     * @param species (Optional)
+     * @param interSpecies
      * @param sort
      * @param pageable
      * @return

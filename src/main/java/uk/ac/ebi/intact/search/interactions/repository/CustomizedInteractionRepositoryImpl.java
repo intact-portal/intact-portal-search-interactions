@@ -39,6 +39,22 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         this.solrOperations = solrOperations;
     }
 
+    /**
+     *
+     * @param query
+     * @param detectionMethodFilter (Optional)
+     * @param interactionTypeFilter (Optional)
+     * @param hostOrganismFilter (Optional)
+     * @param isNegativeFilter (Optional)
+     * @param minMiScore
+     * @param maxMiScore
+     * @param species (Optional)
+     * @param interSpecies: if true it expects two species and returned interactions should be between the given two species
+     *                      if false interactions should atleast have one of the given species
+     * @param sort
+     * @param pageable
+     * @return
+     */
     @Override
     public InteractionResult findInteractionWithFacet(String query, Set<String> detectionMethodFilter, Set<String> interactionTypeFilter, Set<String> hostOrganismFilter, boolean isNegativeFilter, double minMiScore, double maxMiScore, Set<String> species, boolean interSpecies, Sort sort, Pageable pageable) {
 
@@ -86,6 +102,11 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         return new InteractionResult(solrOperations.queryForFacetPage(Interaction.INTERACTIONS, search, Interaction.class));
     }
 
+    /**
+     *
+     * @param searchTerms
+     * @return Criteria
+     */
     private Criteria createSearchConditions(String searchTerms) {
         Criteria conditions = null;
 
@@ -111,6 +132,18 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         return conditions;
     }
 
+    /**
+     * Creates filter conditions for all the filters passed in.
+     * @param detectionMethodFilter
+     * @param interactionTypeFilter
+     * @param hostOrganismFilter
+     * @param isNegativeFilter
+     * @param species
+     * @param interSpecies
+     * @param minMiScore
+     * @param maxMiScore
+     * @return
+     */
     private List<FilterQuery> createFilterQuery(Set<String> detectionMethodFilter, Set<String> interactionTypeFilter, Set<String> hostOrganismFilter, boolean isNegativeFilter, Set<String> species, boolean interSpecies, double minMiScore, double maxMiScore) {
         List<FilterQuery> filterQueries = new ArrayList<FilterQuery>();
 
@@ -135,6 +168,12 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         return filterQueries;
     }
 
+    /**
+     * Creates filter conditions in filterQueries for set of String values passed for a field
+     * @param values
+     * @param field
+     * @param filterQueries
+     */
     private void createFilterCriteria(Set<String> values, String field, List<FilterQuery> filterQueries) {
 
         if (values != null) {
@@ -154,6 +193,12 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         }
     }
 
+    /**
+     * Creates filter conditions in filterQueries for boolean value passed for a field
+     * @param value
+     * @param field
+     * @param filterQueries
+     */
     private void createFilterCriteria(boolean value, String field, List<FilterQuery> filterQueries) {
 
         Criteria conditions = null;
@@ -164,6 +209,13 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         }
     }
 
+    /**
+     * Creates filter conditions in filterQueries for a range of value passed for a field
+     * @param minScore
+     * @param maxScore
+     * @param field
+     * @param filterQueries
+     */
     private void createFilterCriteria(double minScore, double maxScore, String field, List<FilterQuery> filterQueries) {
 
         Criteria conditions = null;
@@ -174,6 +226,13 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         }
     }
 
+    /**
+     * Creates filter conditions in filterQueries for a set of species passed.
+     * @param species
+     * @param interSpecies: if true it creates 'and' condition between two species
+     *                      if false it creates 'or' condition between set of species
+     * @param filterQueries
+     */
     private void createFilterCriteriaForSpecies(Set<String> species, boolean interSpecies, List<FilterQuery> filterQueries) {
 
         if (species != null) {
