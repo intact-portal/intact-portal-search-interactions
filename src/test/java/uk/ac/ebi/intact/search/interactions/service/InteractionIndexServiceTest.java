@@ -42,6 +42,10 @@ public class InteractionIndexServiceTest {
     @ClassRule
     RequiresSolrServer requiresRunningServer = RequiresSolrServer.onLocalhost();
 
+    /**
+     * Before any tests run, this cleans the solr index and creates a new index with stored interactions in an xml
+     * @throws Exception
+     */
     @Before
     public void setUp() throws Exception {
 
