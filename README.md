@@ -4,12 +4,12 @@ Web Services for accessing interaction details from solr index.
 Has Following end points:
 
 * /interactions/findInteractions/queryString
-* interactions/findInteractionWithFacet/queryString?species=?&interactionTypeFilter=?&detectionMethodFilter=?&hostOrganismFilter=?&isNegativeFilter=?&minMiscore=?&maxMiscore=?&interSpecies=?&page=?&pageSize=?
+* /interactions/findInteractionWithFacet/queryString?species=?&interactionTypeFilter=?&detectionMethodFilter=?&hostOrganismFilter=?&isNegativeFilter=?&minMiscore=?&maxMiscore=?&interSpecies=?&page=?&pageSize=?
   (all the parameters are optional)
 
 ## Prerequisites
 
-1. You would need running solr 7.3.1 with cores created and indexed (Details below)
+1. solr 7.3.1 with interactions core created and indexed (Details below)
 2. [jdk 1.8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 
 ### Step for pointing the application to an running instance of solr for eg. [http://example/solr]
