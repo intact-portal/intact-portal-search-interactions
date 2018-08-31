@@ -9,7 +9,7 @@ Has Following end points:
 
 ## Prerequisites
 
-1. solr 7.3.1 with interactions core created and indexed (Details below)
+1. Running instance of solr 7.3.1 with interactions core created and indexed (Details below)
 2. [jdk 1.8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 
 ### Step for pointing the application to an running instance of solr for eg. [http://example/solr]
