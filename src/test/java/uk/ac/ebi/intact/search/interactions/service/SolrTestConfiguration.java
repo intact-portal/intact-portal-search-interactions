@@ -14,8 +14,7 @@ import org.springframework.data.solr.repository.config.EnableSolrRepositories;
  */
 @Configuration
 @EnableSolrRepositories(basePackages = "uk.ac.ebi.intact.search.interactions.repository",
-        schemaCreationSupport = true,
-        multicoreSupport = true)
+        schemaCreationSupport = true)
 @ComponentScan(basePackages = {"uk.ac.ebi.intact.search.interactions.service"})
 @SpringBootApplication
 public class SolrTestConfiguration {

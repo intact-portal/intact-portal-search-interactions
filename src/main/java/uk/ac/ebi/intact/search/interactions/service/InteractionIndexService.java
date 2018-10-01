@@ -4,10 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import uk.ac.ebi.intact.search.interactions.model.Interaction;
+import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.repository.InteractionRepository;
-
-import java.util.Collection;
 
 /**
  * @author Elisabet Barrera
@@ -15,9 +13,12 @@ import java.util.Collection;
 @Service
 public class InteractionIndexService {
 
+    private final InteractionRepository interactionRepository;
+
     @Autowired
-    @Qualifier("interactionRepository")
-    private InteractionRepository interactionRepository;
+    public InteractionIndexService(@Qualifier("interactionRepository") InteractionRepository interactionRepository) {
+        this.interactionRepository = interactionRepository;
+    }
 
     @Transactional
     public void deleteAll() {
@@ -25,17 +26,17 @@ public class InteractionIndexService {
     }
 
     @Transactional
-    public void save(Interaction interaction) {
-        this.interactionRepository.save(interaction);
+    public void save(SearchInteraction searchInteraction) {
+        this.interactionRepository.save(searchInteraction);
     }
 
     @Transactional
-    public void save(Collection<Interaction> interactions) {
-        this.interactionRepository.save(interactions);
+    public void save(Iterable<SearchInteraction> interactions) {
+        this.interactionRepository.saveAll(interactions);
     }
 
     @Transactional
-    public void delete(Interaction id) {
+    public void delete(SearchInteraction id) {
         this.interactionRepository.delete(id);
     }
 
