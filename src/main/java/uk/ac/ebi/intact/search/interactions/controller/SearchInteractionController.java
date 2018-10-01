@@ -3,8 +3,8 @@ package uk.ac.ebi.intact.search.interactions.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
-import uk.ac.ebi.intact.search.interactions.model.Interaction;
-import uk.ac.ebi.intact.search.interactions.model.InteractionResult;
+import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
+import uk.ac.ebi.intact.search.interactions.model.SearchInteractionResult;
 import uk.ac.ebi.intact.search.interactions.service.InteractionIndexService;
 import uk.ac.ebi.intact.search.interactions.service.InteractionSearchService;
 
@@ -16,14 +16,14 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/interactions")
-public class InteractionsController {
+public class SearchInteractionController {
 
     private InteractionIndexService interactionIndexService;
     private InteractionSearchService interactionSearchService;
 
     @Autowired
-    public InteractionsController(InteractionIndexService interactionIndexService,
-                                      InteractionSearchService interactionSearchService) {
+    public SearchInteractionController(InteractionIndexService interactionIndexService,
+                                       InteractionSearchService interactionSearchService) {
         this.interactionIndexService = interactionIndexService;
         this.interactionSearchService = interactionSearchService;
     }
@@ -34,13 +34,13 @@ public class InteractionsController {
     }
 
     @RequestMapping("/findInteractions/{query}")
-    public Page<Interaction> findInteractions(
+    public Page<SearchInteraction> findInteractions(
             @PathVariable String query) {
         return this.interactionSearchService.findInteractions(query);
     }
 
     @RequestMapping(value = "/findInteractionWithFacet/{query}")
-     public InteractionResult findInteractionWithFacet(
+     public SearchInteractionResult findInteractionWithFacet(
             @PathVariable String query,
             @RequestParam(value = "detectionMethodFilter", required = false) Set<String> detectionMethodFilter,
             @RequestParam(value = "interactionTypeFilter", required = false) Set<String> interactionTypeFilter,
@@ -52,7 +52,8 @@ public class InteractionsController {
             @RequestParam(value = "interSpecies", required = false) boolean interSpecies,
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
-        return this.interactionSearchService.findInteractionWithFacet(query, detectionMethodFilter, interactionTypeFilter,hostOrganismFilter,isNegativeFilter,minMiscore,maxMiscore,species,interSpecies,
+        return this.interactionSearchService.findInteractionWithFacet(query, detectionMethodFilter,
+                interactionTypeFilter,hostOrganismFilter,isNegativeFilter,minMiscore,maxMiscore,species,interSpecies,
                 page, pageSize);
     }
 

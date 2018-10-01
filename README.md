@@ -1,5 +1,5 @@
 # intact-search-interactions
-Web Services for accessing interaction details from solr index.
+Web Services for accessing Interaction details from solr index.
 
 Has Following end points:
 

@@ -3,7 +3,7 @@ package uk.ac.ebi.intact.search.interactions.model;
 /**
  * Created by anjali on 10/07/18.
  */
-public class InteractionFields {
+public class SearchInteractionFields {
 
     public static final String AUTHOR = "author";
     public static final String INTERACTOR_IDA = "interactor_idA";
@@ -70,16 +70,16 @@ public class InteractionFields {
     public static final String CREATION_DATE = "creation_date";
     public static final String UPDATION_DATE = "updation_date";
     public static final String INTERACTION_CHECKSUM = "interaction_checksum";
-    public static final String INTERACTION_NEGATIVE="interaction_negative";
-    public static final String INTERACTION_TYPE="interaction_type";
-    public static final String INTERACTION_TYPE_STR="interaction_type_str";
-    public static final String HOST_ORGANISM="host_organism";
-    public static final String HOST_ORGANISM_STR="host_organism_str";
-    public static final String INTERACTION_AC="interaction_ac";
-    public static final String INTERACTION_AC_STR="interaction_ac_str";
-    public static final String EXPERIMENTAL_PREPARATIONS_A="experimental_preparations_A";
-    public static final String EXPERIMENTAL_PREPARATIONS_B="experimental_preparations_B";
-    public static final String RELEASE_DATE="release_date";
+    public static final String INTERACTION_NEGATIVE = "interaction_negative";
+    public static final String INTERACTION_TYPE = "interaction_type";
+    public static final String INTERACTION_TYPE_STR = "interaction_type_str";
+    public static final String HOST_ORGANISM = "host_organism";
+    public static final String HOST_ORGANISM_STR = "host_organism_str";
+    public static final String INTERACTION_AC = "interaction_ac";
+    public static final String INTERACTION_AC_STR = "interaction_ac_str";
+    public static final String EXPERIMENTAL_PREPARATIONS_A = "experimental_preparations_A";
+    public static final String EXPERIMENTAL_PREPARATIONS_B = "experimental_preparations_B";
+    public static final String RELEASE_DATE = "release_date";
 
     public static final String DEFAULT = "default"; //Copy field for general search
 

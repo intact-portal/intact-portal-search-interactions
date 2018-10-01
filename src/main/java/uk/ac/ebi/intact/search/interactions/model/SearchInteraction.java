@@ -4,7 +4,6 @@ import org.apache.solr.client.solrj.beans.Field;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.solr.core.mapping.Indexed;
 import org.springframework.data.solr.core.mapping.SolrDocument;
-import org.springframework.lang.Nullable;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -14,269 +13,220 @@ import java.util.Set;
 /**
  * @author Elisabet Barrera
  */
-@SolrDocument(solrCoreName =Interaction.INTERACTIONS)
-public class Interaction {
+@SolrDocument(solrCoreName =SearchInteraction.INTERACTIONS)
+public class SearchInteraction {
 
     public static final String INTERACTIONS = "interactions";
 
     @Id
-    @Field(InteractionFields.UNIQUE_KEY)
+    @Field(SearchInteractionFields.UNIQUE_KEY)
     @Indexed
     private String uniqueKey;
 
     @Field("interaction_count")
-    @Nullable
     private Integer interactionCount;
 
     @Field("interactions_ids")
-    @Nullable
     private Set<String> interactionIds;
 
-    @Field(InteractionFields.INTERACTOR_IDA)
-    @Nullable
+    @Field(SearchInteractionFields.INTERACTOR_IDA)
     private String idA;
 
-    @Field(InteractionFields.INTERACTOR_IDB)
-    @Nullable
+    @Field(SearchInteractionFields.INTERACTOR_IDB)
     private String idB;
 
-    @Field(InteractionFields.INTERACTOR_AC_A)
-    @Nullable
+    @Field(SearchInteractionFields.INTERACTOR_AC_A)
     private String interactorAAc;
 
-    @Field(InteractionFields.INTERACTOR_AC_B)
-    @Nullable
+    @Field(SearchInteractionFields.INTERACTOR_AC_B)
     private String interactorBAc;
 
-    @Field(InteractionFields.ALT_IDS_A)
-    @Nullable
+    @Field(SearchInteractionFields.ALT_IDS_A)
     private Set<String> altIdsA;
 
-    @Field(InteractionFields.ALT_IDS_B)
-    @Nullable
+    @Field(SearchInteractionFields.ALT_IDS_B)
     private Set<String> altIdsB;
 
-    @Field(InteractionFields.ALIASES_A)
-    @Nullable
+    @Field(SearchInteractionFields.ALIASES_A)
     private Set<String> aliasesA;
 
-    @Field(InteractionFields.ALIASES_B)
-    @Nullable
+    @Field(SearchInteractionFields.ALIASES_B)
     private Set<String> aliasesB;
 
-    @Field(InteractionFields.TAX_IDA)
-    @Nullable
+    @Field(SearchInteractionFields.TAX_IDA)
     private Integer taxIdA;
 
-    @Field(InteractionFields.TAX_IDB)
-    @Nullable
+    @Field(SearchInteractionFields.TAX_IDB)
     private Integer taxIdB;
 
-    @Field(InteractionFields.TYPE_A)
-    @Nullable
+    @Field(SearchInteractionFields.TYPE_A)
     private String typeA;
 
-    @Field(InteractionFields.TYPE_B)
-    @Nullable
+    @Field(SearchInteractionFields.TYPE_B)
     private String typeB;
 
-    @Field(InteractionFields.XREFS_A)
-    @Nullable
+    @Field(SearchInteractionFields.XREFS_A)
     private Set<String> xrefsA;
 
-    @Field(InteractionFields.XREFS_B)
-    @Nullable
+    @Field(SearchInteractionFields.XREFS_B)
     private Set<String> xrefsB;
 
-    @Field(InteractionFields.ANNOTATIONS_A)
-    @Nullable
+    @Field(SearchInteractionFields.ANNOTATIONS_A)
     private Set<String> annotationsA;
 
-    @Field(InteractionFields.ANNOTATIONS_B)
-    @Nullable
+    @Field(SearchInteractionFields.ANNOTATIONS_B)
     private Set<String> annotationsB;
 
-    @Field(InteractionFields.CHECKSUMS_A)
-    @Nullable
+    @Field(SearchInteractionFields.CHECKSUMS_A)
     private Set<String> checksumsA;
 
-    @Field(InteractionFields.CHECKSUMS_B)
-    @Nullable
+    @Field(SearchInteractionFields.CHECKSUMS_B)
     private Set<String> checksumsB;
 
-    @Field(InteractionFields.SPECIES_A)
-    @Nullable
+    @Field(SearchInteractionFields.SPECIES_A)
     private String speciesA;
 
-    @Field(InteractionFields.SPECIES_B)
-    @Nullable
+    @Field(SearchInteractionFields.SPECIES_B)
     private String speciesB;
 
     //participants
 
-    @Field(InteractionFields.BIOLOGICAL_ROLE_A)
-    @Nullable
+    @Field(SearchInteractionFields.BIOLOGICAL_ROLE_A)
     private String biologicalRoleA;
 
-    @Field(InteractionFields.BIOLOGICAL_ROLE_B)
-    @Nullable
+    @Field(SearchInteractionFields.BIOLOGICAL_ROLE_B)
     private String biologicalRoleB;
 
-    @Field(InteractionFields.EXPERIMENTAL_ROLE_A)
-    @Nullable
+    @Field(SearchInteractionFields.EXPERIMENTAL_ROLE_A)
     private String experimentalRoleA;
 
-    @Field(InteractionFields.EXPERIMENTAL_ROLE_B)
-    @Nullable
+    @Field(SearchInteractionFields.EXPERIMENTAL_ROLE_B)
     private String experimentalRoleB;
 
-    @Field(InteractionFields.FEATURE_A)
-    @Nullable
+    @Field(SearchInteractionFields.FEATURE_A)
     private Set<String> featureA;
 
-    @Field(InteractionFields.FEATURE_B)
-    @Nullable
+    @Field(SearchInteractionFields.FEATURE_B)
     private Set<String> featureB;
 
-    @Field(InteractionFields.FEATURE_SHORTLABEL_A)
-    @Nullable
+    @Field(SearchInteractionFields.FEATURE_SHORTLABEL_A)
     private Set<String> featureShortLabelA;
 
-    @Field(InteractionFields.FEATURE_SHORTLABEL_B)
-    @Nullable
+    @Field(SearchInteractionFields.FEATURE_SHORTLABEL_B)
     private Set<String> featureShortLabelB;
 
-    @Field(InteractionFields.STOICHIOMETRY_A)
-    @Nullable
+    @Field(SearchInteractionFields.STOICHIOMETRY_A)
     private String stoichiometryA;
 
-    @Field(InteractionFields.STOICHIOMETRY_B)
-    @Nullable
+    @Field(SearchInteractionFields.STOICHIOMETRY_B)
     private String stoichiometryB;
 
-    @Field(InteractionFields.IDENTIFICATION_METHOD_A)
-    @Nullable
+    @Field(SearchInteractionFields.IDENTIFICATION_METHOD_A)
     private Set<String> identificationMethodA;
 
-    @Field(InteractionFields.IDENTIFICATION_METHOD_B)
-    @Nullable
+    @Field(SearchInteractionFields.IDENTIFICATION_METHOD_B)
     private Set<String> identificationMethodB;
 
-    @Field(InteractionFields.INTERACTION_DETECTION_METHOD)
-    @Nullable
+    @Field(SearchInteractionFields.INTERACTION_DETECTION_METHOD)
     private String interactionDetectionMethod;
 
-    @Field(InteractionFields.PUBLICATION_AUTHORS)
-    @Nullable
+    @Field(SearchInteractionFields.PUBLICATION_AUTHORS)
     private LinkedHashSet<String> authors;
 
-    @Field(InteractionFields.PUBLICATION_ID)
-    @Nullable
+    @Field(SearchInteractionFields.PUBLICATION_ID)
     private String publicationId;
 
-    @Field(InteractionFields.SOURCE_DATABASE)
-    @Nullable
-    private String sourceDatabase;
+    @Field(SearchInteractionFields.SOURCE_DATABASE)
+    private Set<String> sourceDatabase;
 
-    @Field(InteractionFields.INTERACTION_IDENTIFIERS)
-    @Nullable
+    @Field(SearchInteractionFields.INTERACTION_IDENTIFIERS)
     private Set<String> interactionIdentifiers;
 
-    @Field(InteractionFields.CONFIDENCE_VALUES)
-    @Nullable
+    @Field(SearchInteractionFields.CONFIDENCE_VALUES)
     private Set<String> confidenceValues;
 
-    @Field(InteractionFields.EXPANSION_METHOD)
-    @Nullable
+    @Field(SearchInteractionFields.EXPANSION_METHOD)
     private String expansionMethod;
 
-    @Field(InteractionFields.INTERACTION_XREFS)
-    @Nullable
+    @Field(SearchInteractionFields.INTERACTION_XREFS)
     private Set<String> interactionXrefs;
 
-    @Field(InteractionFields.INTERACTION_ANNOTATIONS)
-    @Nullable
+    @Field(SearchInteractionFields.INTERACTION_ANNOTATIONS)
     private Set<String> interactionAnnotations;
 
-    @Field(InteractionFields.INTERACTION_PARAMETERS)
-    @Nullable
+    @Field(SearchInteractionFields.INTERACTION_PARAMETERS)
     private Set<String> interactionParameters;
 
-    @Field(InteractionFields.CREATION_DATE)
-    @Nullable
+    @Field(SearchInteractionFields.CREATION_DATE)
     private Date creationDate;
 
-    @Field(InteractionFields.UPDATION_DATE)
-    @Nullable
+    @Field(SearchInteractionFields.UPDATION_DATE)
     private Date updationDate;
 
-    @Field(InteractionFields.INTERACTION_CHECKSUM)
-    @Nullable
+    @Field(SearchInteractionFields.INTERACTION_CHECKSUM)
     private Set<String> interactionChecksums;
 
-    @Field(InteractionFields.INTERACTION_NEGATIVE)
-    @Nullable
+    @Field(SearchInteractionFields.INTERACTION_NEGATIVE)
     private boolean negative;
 
-    @Field(InteractionFields.INTERACTION_TYPE)
-    @Nullable
+    @Field(SearchInteractionFields.INTERACTION_TYPE)
     private String interactionType;
 
-    @Field(InteractionFields.INTERACTION_AC)
-    @Nullable
+    @Field(SearchInteractionFields.INTERACTION_AC)
     private String interactionAc;
 
-    @Field(InteractionFields.HOST_ORGANISM)
-    @Nullable
+    @Field(SearchInteractionFields.HOST_ORGANISM)
     private String hostOrganism;
 
-    @Field(InteractionFields.INTACT_MISCORE)
-    @Nullable
+    @Field(SearchInteractionFields.INTACT_MISCORE)
     private double intactMiscore;
 
-    @Field(InteractionFields.SPECIES_A_B)
-    @Nullable
-    private Set<String> speciesAB=new HashSet<String>();
+    @Field(SearchInteractionFields.SPECIES_A_B)
+    private Set<String> speciesAB = new HashSet<>();
 
-    @Field(InteractionFields.MOLECULE_A)
-    @Nullable
+    @Field(SearchInteractionFields.MOLECULE_A)
     private String moleculeA;
 
-    @Field(InteractionFields.MOLECULE_B)
-    @Nullable
+    @Field(SearchInteractionFields.MOLECULE_B)
     private String moleculeB;
 
-    @Field(InteractionFields.FIRST_AUTHOR)
-    @Nullable
+    @Field(SearchInteractionFields.FIRST_AUTHOR)
     private String firstAuthor;
 
-    @Field(InteractionFields.EXPERIMENTAL_PREPARATIONS_A)
-    @Nullable
+    @Field(SearchInteractionFields.EXPERIMENTAL_PREPARATIONS_A)
     private Set<String> experimentalPreparationsA;
 
-    @Field(InteractionFields.EXPERIMENTAL_PREPARATIONS_B)
-    @Nullable
+    @Field(SearchInteractionFields.EXPERIMENTAL_PREPARATIONS_B)
     private Set<String> experimentalPreparationsB;
 
-    @Field(InteractionFields.RELEASE_DATE)
-    @Nullable
+    @Field(SearchInteractionFields.RELEASE_DATE)
     private Date releaseDate;
 
-    @Field(InteractionFields.UNIQUE_ID_A)
-    @Nullable
+    @Field(SearchInteractionFields.UNIQUE_ID_A)
     private String uniqueIdA;
 
-    @Field(InteractionFields.UNIQUE_ID_B)
-    @Nullable
+    @Field(SearchInteractionFields.UNIQUE_ID_B)
     private String uniqueIdB;
 
-    @Field(InteractionFields.PUBLICATION_IDENTIFIERS)
-    @Nullable
+    @Field(SearchInteractionFields.PUBLICATION_IDENTIFIERS)
     private Set<String> publicationIdentifiers;
 
+    public SearchInteraction() {
+    }
 
-
-    public Interaction(String uniqueKey, Integer interactionCount, Set<String> interactionIds, String idA, String idB, Set<String> altIdsA, Set<String> altIdsB, Set<String> aliasesA, Set<String> aliasesB, Integer taxIdA, Integer taxIdB, String typeA, String typeB, Set<String> xrefsA, Set<String> xrefsB, Set<String> annotationsA, Set<String> annotationsB, Set<String> checksumsA, Set<String> checksumsB, String speciesA, String speciesB, String biologicalRoleA, String biologicalRoleB, String experimentalRoleA, String experimentalRoleB, Set<String> featureA, Set<String> featureB, String stoichiometryA, String stoichiometryB, Set<String> identificationMethodA, Set<String> identificationMethodB, String interactionDetectionMethod, LinkedHashSet<String> authors, String publicationId, Set<String> sourceDatabases, Set<String> interactionIdentifiers, Set<String> confidenceValues, String expansionMethod, Set<String> interactionXrefs, Set<String> interactionAnnotations, Set<String> interactionParameters, Date creationDate, Date updationDate, Set<String> interactionChecksums, boolean negative, String interactiontype) {
+    public SearchInteraction(String uniqueKey, Integer interactionCount, Set<String> interactionIds, String idA,
+                             String idB, Set<String> altIdsA, Set<String> altIdsB, Set<String> aliasesA,
+                             Set<String> aliasesB, Integer taxIdA, Integer taxIdB, String typeA, String typeB,
+                             Set<String> xrefsA, Set<String> xrefsB, Set<String> annotationsA, Set<String> annotationsB,
+                             Set<String> checksumsA, Set<String> checksumsB, String speciesA, String speciesB,
+                             String biologicalRoleA, String biologicalRoleB, String experimentalRoleA,
+                             String experimentalRoleB, Set<String> featureA, Set<String> featureB, String stoichiometryA,
+                             String stoichiometryB, Set<String> identificationMethodA, Set<String> identificationMethodB,
+                             String interactionDetectionMethod, LinkedHashSet<String> authors, String publicationId,
+                             Set<String> sourceDatabase, Set<String> interactionIdentifiers, Set<String> confidenceValues,
+                             String expansionMethod, Set<String> interactionXrefs, Set<String> interactionAnnotations,
+                             Set<String> interactionParameters, Date creationDate, Date updationDate,
+                             Set<String> interactionChecksums, boolean negative, String interactiontype) {
         this.uniqueKey = uniqueKey;
         this.interactionCount = interactionCount;
         this.interactionIds = interactionIds;
@@ -325,10 +275,8 @@ public class Interaction {
 
     }
 
-    public Interaction() {
-    }
-
-    public Interaction(LinkedHashSet<String> author, Integer interactionCount, Set<String> interactionIds, String publicationId) {
+    public SearchInteraction(LinkedHashSet<String> author, Integer interactionCount, Set<String> interactionIds,
+                             String publicationId) {
         this.setAuthors(author);
         this.interactionCount = interactionCount;
         this.interactionIds = interactionIds;
@@ -337,7 +285,7 @@ public class Interaction {
 
     @Override
     public String toString() {
-        return "Interaction{" +
+        return "SearchInteraction{" +
                 "uniqueKey='" + uniqueKey + '\'' +
                 ", interactionCount=" + interactionCount +
                 ", interactionIds=" + interactionIds +
@@ -816,11 +764,11 @@ public class Interaction {
         this.featureShortLabelB = featureShortLabelB;
     }
 
-    public String getSourceDatabase() {
+    public Set<String> getSourceDatabase() {
         return sourceDatabase;
     }
 
-    public void setSourceDatabase(String sourceDatabase) {
+    public void setSourceDatabase(Set<String> sourceDatabase) {
         this.sourceDatabase = sourceDatabase;
     }
 

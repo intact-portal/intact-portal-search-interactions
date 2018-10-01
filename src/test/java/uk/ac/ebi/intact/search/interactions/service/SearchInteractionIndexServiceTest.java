@@ -7,8 +7,8 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.test.context.junit4.SpringRunner;
-import uk.ac.ebi.intact.search.interactions.model.Interaction;
-import uk.ac.ebi.intact.search.interactions.model.InteractionResult;
+import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
+import uk.ac.ebi.intact.search.interactions.model.SearchInteractionResult;
 import uk.ac.ebi.intact.search.interactions.service.util.RequiresSolrServer;
 import uk.ac.ebi.intact.search.interactions.service.util.TestUtil;
 
@@ -25,12 +25,12 @@ import static org.junit.Assert.assertEquals;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class InteractionIndexServiceTest {
+public class SearchInteractionIndexServiceTest {
 
-    private Interaction interaction1;
-    private Interaction interaction2;
+    private SearchInteraction searchInteraction1;
+    private SearchInteraction searchInteraction2;
 
-    private Collection<Interaction> interactions;
+    private Collection<SearchInteraction> searchInteractions;
 
     @Resource
     private InteractionIndexService interactionIndexService;
@@ -43,7 +43,7 @@ public class InteractionIndexServiceTest {
     RequiresSolrServer requiresRunningServer = RequiresSolrServer.onLocalhost();
 
     /**
-     * Before any tests run, this cleans the solr index and creates a new index with stored interactions in an xml
+     * Before any tests run, this cleans the solr index and creates a new index with stored searchInteractions in an xml
      * @throws Exception
      */
     @Before
@@ -51,11 +51,11 @@ public class InteractionIndexServiceTest {
 
         //Delete all documents from solr core
         interactionIndexService.deleteAll();
-        /*Interactions are instantiated from saved interactions in an xml as instantiating it one by one in the code is cumbersome
+        /*Interactions are instantiated from saved searchInteractions in an xml as instantiating it one by one in the code is cumbersome
         * For ref. The Interactions.xml can be created with a method saveInteractioninDisc in CommonUtility in intact-portal-indexer*/
-        interactions = TestUtil.getInteractionObjFromXml("./src/test/resources/Interactions.xml");
-        interactionIndexService.save(interactions);
-        assertEquals(interactionSearchService.countDocuments(), 10);
+        searchInteractions = TestUtil.getInteractionObjFromXml("./src/test/resources/Interactions.xml");
+        interactionIndexService.save(searchInteractions);
+        assertEquals(searchInteractions.size(), 10);
     }
 
     @Test
@@ -63,7 +63,7 @@ public class InteractionIndexServiceTest {
      * Behaviour If the User types "Author name" in search box
      */
     public void findByAuthor() {
-        Page<Interaction> interactionOp = interactionSearchService.findInteractions("Shorter J.");
+        Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("Shorter J.");
         assertEquals(interactionOp.getNumberOfElements(), 4);
     }
 
@@ -72,25 +72,25 @@ public class InteractionIndexServiceTest {
      * Behaviour If the User types "Species Name" in search box
      */
     public void findBySpecies() {
-        Page<Interaction> interactionOp = interactionSearchService.findInteractions("Rattus norvegicus (Rat)");
+        Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("Rattus norvegicus (Rat)");
         assertEquals(interactionOp.getNumberOfElements(), 4);
     }
 
     @Test
     /**
-     * Behaviour If the User types "Interaction Type" in search box
+     * Behaviour If the User types "SearchInteraction Type" in search box
      */
     public void findByInteractionType() {
-        Page<Interaction> interactionOp = interactionSearchService.findInteractions("physical association");
+        Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("physical association");
         assertEquals(interactionOp.getNumberOfElements(), 10);
     }
 
     @Test
     /**
-     * Behaviour If the User types "Interaction Detection Method" in search box
+     * Behaviour If the User types "SearchInteraction Detection Method" in search box
      */
     public void findByIntDetMethod() {
-        Page<Interaction> interactionOp = interactionSearchService.findInteractions("molecular sieving");
+        Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("molecular sieving");
         assertEquals(interactionOp.getNumberOfElements(), 1);
     }
 
@@ -99,7 +99,7 @@ public class InteractionIndexServiceTest {
      * Behaviour If the User types "Host Organism" in search box
      */
     public void findByHostOrganism() {
-        Page<Interaction> interactionOp = interactionSearchService.findInteractions("\"In vitro\"");
+        Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("\"In vitro\"");
         assertEquals(interactionOp.getNumberOfElements(), 6);
     }
 
@@ -108,7 +108,7 @@ public class InteractionIndexServiceTest {
      * Expected Facet Results If the User types "physical association" and Hit Search Button
      */
     public void facetTest() {
-        InteractionResult interactionOp = interactionSearchService.findInteractionWithFacet("physical association", null, null, null, false, 0, 1, null, false, 0, 10);
+        SearchInteractionResult interactionOp = interactionSearchService.findInteractionWithFacet("physical association", null, null, null, false, 0, 1, null, false, 0, 10);
         Set<String> facetFields = interactionOp.getFacetResultPage().keySet();
         assertEquals(true, facetFields.contains("interaction_negative"));
         assertEquals(true, facetFields.contains("intact_miscore"));
@@ -119,8 +119,8 @@ public class InteractionIndexServiceTest {
 
         for (String facetField : interactionOp.getFacetResultPage().keySet()) {
             if (facetField.equals("interaction_negative")) {
-                List<InteractionResult.FacetCount> facetCounts = interactionOp.getFacetResultPage().get(facetField);
-                for (InteractionResult.FacetCount facetCount : facetCounts) {
+                List<SearchInteractionResult.FacetCount> facetCounts = interactionOp.getFacetResultPage().get(facetField);
+                for (SearchInteractionResult.FacetCount facetCount : facetCounts) {
                     if (facetCount.getValue().equals("false")) {
                         assertEquals(10, facetCount.getValueCount().longValue());
                     }
@@ -128,8 +128,8 @@ public class InteractionIndexServiceTest {
             }
 
             if (facetField.equals("intact_miscore")) {
-                List<InteractionResult.FacetCount> facetCounts = interactionOp.getFacetResultPage().get(facetField);
-                for (InteractionResult.FacetCount facetCount : facetCounts) {
+                List<SearchInteractionResult.FacetCount> facetCounts = interactionOp.getFacetResultPage().get(facetField);
+                for (SearchInteractionResult.FacetCount facetCount : facetCounts) {
                     if (facetCount.getValue().equals("0.39")) {
                         assertEquals(3, facetCount.getValueCount().longValue());
                     }
@@ -146,8 +146,8 @@ public class InteractionIndexServiceTest {
             }
 
             if (facetField.equals("interaction_detection_method_str")) {
-                List<InteractionResult.FacetCount> facetCounts = interactionOp.getFacetResultPage().get(facetField);
-                for (InteractionResult.FacetCount facetCount : facetCounts) {
+                List<SearchInteractionResult.FacetCount> facetCounts = interactionOp.getFacetResultPage().get(facetField);
+                for (SearchInteractionResult.FacetCount facetCount : facetCounts) {
                     if (facetCount.getValue().equals("anti bait coip")) {
                         assertEquals(4, facetCount.getValueCount().longValue());
                     }
@@ -164,8 +164,8 @@ public class InteractionIndexServiceTest {
             }
 
             if (facetField.equals("interaction_type_str")) {
-                List<InteractionResult.FacetCount> facetCounts = interactionOp.getFacetResultPage().get(facetField);
-                for (InteractionResult.FacetCount facetCount : facetCounts) {
+                List<SearchInteractionResult.FacetCount> facetCounts = interactionOp.getFacetResultPage().get(facetField);
+                for (SearchInteractionResult.FacetCount facetCount : facetCounts) {
                     if (facetCount.getValue().equals("physical association")) {
                         assertEquals(10, facetCount.getValueCount().longValue());
                     }
@@ -173,8 +173,8 @@ public class InteractionIndexServiceTest {
             }
 
             if (facetField.equals("host_organism_str")) {
-                List<InteractionResult.FacetCount> facetCounts = interactionOp.getFacetResultPage().get(facetField);
-                for (InteractionResult.FacetCount facetCount : facetCounts) {
+                List<SearchInteractionResult.FacetCount> facetCounts = interactionOp.getFacetResultPage().get(facetField);
+                for (SearchInteractionResult.FacetCount facetCount : facetCounts) {
                     if (facetCount.getValue().equals("In vitro")) {
                         assertEquals(6, facetCount.getValueCount().longValue());
                     }
@@ -185,8 +185,8 @@ public class InteractionIndexServiceTest {
             }
 
             if (facetField.equals("speciesA_B_str")) {
-                List<InteractionResult.FacetCount> facetCounts = interactionOp.getFacetResultPage().get(facetField);
-                for (InteractionResult.FacetCount facetCount : facetCounts) {
+                List<SearchInteractionResult.FacetCount> facetCounts = interactionOp.getFacetResultPage().get(facetField);
+                for (SearchInteractionResult.FacetCount facetCount : facetCounts) {
                     if (facetCount.getValue().equals("Homo sapiens")) {
                         assertEquals(6, facetCount.getValueCount().longValue());
                     }
@@ -232,7 +232,7 @@ public class InteractionIndexServiceTest {
 
         int size = 10;
 
-        InteractionResult interactionOp = interactionSearchService.
+        SearchInteractionResult interactionOp = interactionSearchService.
                 findInteractionWithFacet("physical association", detectionMethod, interactiontype, hostOrganism, isNegative, minMiscore, maxMiscore, species, false, page, size);
         assertEquals(1, interactionOp.getNumberOfElements());
 
@@ -271,7 +271,7 @@ public class InteractionIndexServiceTest {
 
         int size = 10;
 
-        InteractionResult interactionOp = interactionSearchService.
+        SearchInteractionResult interactionOp = interactionSearchService.
                 findInteractionWithFacet("physical association", detectionMethod, interactiontype, hostOrganism, isNegative, minMiscore, maxMiscore, species, interSpecies, page, size);
         assertEquals(0, interactionOp.getNumberOfElements());
 
@@ -281,8 +281,6 @@ public class InteractionIndexServiceTest {
     public void deleteCollection() {
         // empty collection
         interactionIndexService.deleteAll();
-        assertEquals(interactionSearchService.countDocuments(), 0);
-
     }
 
 }

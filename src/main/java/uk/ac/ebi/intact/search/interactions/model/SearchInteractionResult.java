@@ -14,11 +14,11 @@ import java.util.function.Function;
 /**
  * This class has all the methods/utils of a Page and one more customized method getFacetResultPage()
  */
-public class InteractionResult implements Page<Interaction> {
+public class SearchInteractionResult implements Page<SearchInteraction> {
 
-    private final FacetPage<Interaction> page;
+    private final FacetPage<SearchInteraction> page;
 
-    public InteractionResult(FacetPage<Interaction> page) {
+    public SearchInteractionResult(FacetPage<SearchInteraction> page) {
         this.page = page;
     }
 
@@ -48,7 +48,7 @@ public class InteractionResult implements Page<Interaction> {
     }
 
     @Override
-    public List<Interaction> getContent() {
+    public List<SearchInteraction> getContent() {
         return page.getContent();
     }
 
@@ -93,12 +93,12 @@ public class InteractionResult implements Page<Interaction> {
     }
 
     @Override
-    public <U> Page<U> map(Function<? super Interaction, ? extends U> converter) {
+    public <U> Page<U> map(Function<? super SearchInteraction, ? extends U> converter) {
         return page.map(converter);
     }
 
     @Override
-    public Iterator<Interaction> iterator() {
+    public Iterator<SearchInteraction> iterator() {
         return page.iterator();
     }
 
@@ -117,7 +117,7 @@ public class InteractionResult implements Page<Interaction> {
 
         for (Field field : page.getFacetFields()) {
             List<FacetCount> facet = new ArrayList<>();
-            if (field.getName().equals(InteractionFields.INTACT_MISCORE)) {
+            if (field.getName().equals(SearchInteractionFields.INTACT_MISCORE)) {
                 for (FacetFieldEntry facetFieldEntry : page.getRangeFacetResultPage(field).getContent()) {
                     DecimalFormat df = new DecimalFormat("####0.00");// inherently it is giving long decimal values
                     facet.add(new FacetCount(df.format(Double.parseDouble(facetFieldEntry.getValue())), facetFieldEntry.getValueCount()));

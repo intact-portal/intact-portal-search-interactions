@@ -1,6 +1,6 @@
 package uk.ac.ebi.intact.search.interactions.service.util;
 
-import uk.ac.ebi.intact.search.interactions.model.Interaction;
+import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 
 import java.beans.XMLDecoder;
 import java.io.BufferedInputStream;
@@ -13,7 +13,7 @@ import java.util.Collection;
  */
 public class TestUtil {
 
-    public static Collection<Interaction> getInteractionObjFromXml(String filePath){
+    public static Collection<SearchInteraction> getInteractionObjFromXml(String filePath){
 
         XMLDecoder decoder=null;
         try {
@@ -21,6 +21,6 @@ public class TestUtil {
         } catch (FileNotFoundException e) {
             System.out.println("ERROR: File dvd.xml not found");
         }
-        return (Collection<Interaction>)decoder.readObject();
+        return (Collection<SearchInteraction>)decoder.readObject();
     }
 }

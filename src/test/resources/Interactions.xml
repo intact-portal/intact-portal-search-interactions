@@ -2,7 +2,7 @@
 <java version="1.8.0_66" class="java.beans.XMLDecoder">
  <object class="java.util.ArrayList">
   <void method="add">
-   <object class="uk.ac.ebi.intact.search.interactions.model.Interaction" id="Interaction0">
+   <object class="uk.ac.ebi.intact.search.interactions.model.SearchInteraction" id="Interaction0">
     <void property="aliasesA">
      <object class="java.util.HashSet">
       <void method="add">
@@ -565,7 +565,7 @@
    </object>
   </void>
   <void method="add">
-   <object class="uk.ac.ebi.intact.search.interactions.model.Interaction" id="Interaction1">
+   <object class="uk.ac.ebi.intact.search.interactions.model.SearchInteraction" id="Interaction1">
     <void property="aliasesA">
      <object class="java.util.HashSet">
       <void method="add">
@@ -1028,7 +1028,7 @@
    </object>
   </void>
   <void method="add">
-   <object class="uk.ac.ebi.intact.search.interactions.model.Interaction" id="Interaction2">
+   <object class="uk.ac.ebi.intact.search.interactions.model.SearchInteraction" id="Interaction2">
     <void property="aliasesA">
      <object class="java.util.HashSet">
       <void method="add">
@@ -1584,7 +1584,7 @@
    </object>
   </void>
   <void method="add">
-   <object class="uk.ac.ebi.intact.search.interactions.model.Interaction" id="Interaction3">
+   <object class="uk.ac.ebi.intact.search.interactions.model.SearchInteraction" id="Interaction3">
     <void property="aliasesA">
      <object class="java.util.HashSet">
       <void method="add">
@@ -2122,7 +2122,7 @@
    </object>
   </void>
   <void method="add">
-   <object class="uk.ac.ebi.intact.search.interactions.model.Interaction" id="Interaction4">
+   <object class="uk.ac.ebi.intact.search.interactions.model.SearchInteraction" id="Interaction4">
     <void property="aliasesA">
      <object class="java.util.HashSet">
       <void method="add">
@@ -2681,7 +2681,7 @@
    </object>
   </void>
   <void method="add">
-   <object class="uk.ac.ebi.intact.search.interactions.model.Interaction" id="Interaction5">
+   <object class="uk.ac.ebi.intact.search.interactions.model.SearchInteraction" id="Interaction5">
     <void property="aliasesA">
      <object class="java.util.HashSet">
       <void method="add">
@@ -2870,7 +2870,7 @@
        <string>figure legend (Fig. 3a (lanes 4-6, 10-11, 13))</string>
       </void>
       <void method="add">
-       <string>comment (Addition of p115 CC2 domain peptide (lanes 10 &amp; 13) had no effect on the interaction.)</string>
+       <string>comment (Addition of p115 CC2 domain peptide (lanes 10 &amp; 13) had no effect on the searchInteraction.)</string>
       </void>
       <void method="add">
        <string>exp-modification (Golgi membranes were disassembled with NSF, a vesicle-fusing ATPase, and solubilized with Triton X-100 buffer. SNARE complexes were subsequently allowed to reassemble in the presence of tether proteins.)</string>
@@ -3108,7 +3108,7 @@
    </object>
   </void>
   <void method="add">
-   <object class="uk.ac.ebi.intact.search.interactions.model.Interaction" id="Interaction6">
+   <object class="uk.ac.ebi.intact.search.interactions.model.SearchInteraction" id="Interaction6">
     <void property="aliasesA">
      <object class="java.util.HashSet">
       <void method="add">
@@ -3275,7 +3275,7 @@
        <string>figure legend (Fig. 3a (lanes 4-6, 10-11, 13))</string>
       </void>
       <void method="add">
-       <string>comment (Addition of p115 CC2 domain peptide (lanes 10 &amp; 13) had no effect on the interaction.)</string>
+       <string>comment (Addition of p115 CC2 domain peptide (lanes 10 &amp; 13) had no effect on the searchInteraction.)</string>
       </void>
       <void method="add">
        <string>exp-modification (Golgi membranes were disassembled with NSF, a vesicle-fusing ATPase, and solubilized with Triton X-100 buffer. SNARE complexes were subsequently allowed to reassemble in the presence of tether proteins.)</string>
@@ -3550,7 +3550,7 @@
    </object>
   </void>
   <void method="add">
-   <object class="uk.ac.ebi.intact.search.interactions.model.Interaction" id="Interaction7">
+   <object class="uk.ac.ebi.intact.search.interactions.model.SearchInteraction" id="Interaction7">
     <void property="aliasesA">
      <object class="java.util.HashSet">
       <void method="add">
@@ -3723,7 +3723,7 @@
        <string>figure legend (Fig. 3a (lanes 4-6, 10-11, 13))</string>
       </void>
       <void method="add">
-       <string>comment (Addition of p115 CC2 domain peptide (lanes 10 &amp; 13) had no effect on the interaction.)</string>
+       <string>comment (Addition of p115 CC2 domain peptide (lanes 10 &amp; 13) had no effect on the searchInteraction.)</string>
       </void>
       <void method="add">
        <string>exp-modification (Golgi membranes were disassembled with NSF, a vesicle-fusing ATPase, and solubilized with Triton X-100 buffer. SNARE complexes were subsequently allowed to reassemble in the presence of tether proteins.)</string>
@@ -3989,7 +3989,7 @@
    </object>
   </void>
   <void method="add">
-   <object class="uk.ac.ebi.intact.search.interactions.model.Interaction" id="Interaction8">
+   <object class="uk.ac.ebi.intact.search.interactions.model.SearchInteraction" id="Interaction8">
     <void property="aliasesA">
      <object class="java.util.HashSet">
       <void method="add">
@@ -4165,7 +4165,7 @@
        <string>figure legend (Fig. 3a (lanes 4-6, 10-11, 13))</string>
       </void>
       <void method="add">
-       <string>comment (Addition of p115 CC2 domain peptide (lanes 10 &amp; 13) had no effect on the interaction.)</string>
+       <string>comment (Addition of p115 CC2 domain peptide (lanes 10 &amp; 13) had no effect on the searchInteraction.)</string>
       </void>
       <void method="add">
        <string>exp-modification (Golgi membranes were disassembled with NSF, a vesicle-fusing ATPase, and solubilized with Triton X-100 buffer. SNARE complexes were subsequently allowed to reassemble in the presence of tether proteins.)</string>
@@ -4419,7 +4419,7 @@
    </object>
   </void>
   <void method="add">
-   <object class="uk.ac.ebi.intact.search.interactions.model.Interaction" id="Interaction9">
+   <object class="uk.ac.ebi.intact.search.interactions.model.SearchInteraction" id="Interaction9">
     <void property="aliasesB">
      <object class="java.util.HashSet">
       <void method="add">
