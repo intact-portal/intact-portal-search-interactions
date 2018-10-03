@@ -5,7 +5,6 @@ package uk.ac.ebi.intact.search.interactions.model;
  */
 public class SearchInteractionFields {
 
-    public static final String AUTHOR = "author";
     public static final String INTERACTOR_IDA = "interactor_idA";
     public static final String INTERACTOR_IDB = "interactor_idB";
     public static final String INTERACTOR_AC_A = "interactor_acA";
@@ -56,7 +55,6 @@ public class SearchInteractionFields {
     public static final String INTERACTION_DETECTION_METHOD_STR = "interaction_detection_method_str";
     public static final String PUBLICATION_AUTHORS = "publication_authors";
     public static final String FIRST_AUTHOR="first_author";
-    public static final String PUBLICATION_ID = "publication_id";
     public static final String PUBLICATION_IDENTIFIERS = "publication_identifiers";
     public static final String SOURCE_DATABASE = "source_database";
     public static final String INTERACTION_IDENTIFIERS = "interaction_identifiers";

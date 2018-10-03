@@ -23,11 +23,9 @@ public class SearchInteraction {
     @Indexed
     private String uniqueKey;
 
+    //It will be used in the cluster index. Review in the future
     @Field("interaction_count")
     private Integer interactionCount;
-
-    @Field("interactions_ids")
-    private Set<String> interactionIds;
 
     @Field(SearchInteractionFields.INTERACTOR_IDA)
     private String idA;
@@ -133,9 +131,6 @@ public class SearchInteraction {
     @Field(SearchInteractionFields.PUBLICATION_AUTHORS)
     private LinkedHashSet<String> authors;
 
-    @Field(SearchInteractionFields.PUBLICATION_ID)
-    private String publicationId;
-
     @Field(SearchInteractionFields.SOURCE_DATABASE)
     private Set<String> sourceDatabase;
 
@@ -214,7 +209,7 @@ public class SearchInteraction {
     public SearchInteraction() {
     }
 
-    public SearchInteraction(String uniqueKey, Integer interactionCount, Set<String> interactionIds, String idA,
+    public SearchInteraction(String uniqueKey, Integer interactionCount, String idA,
                              String idB, Set<String> altIdsA, Set<String> altIdsB, Set<String> aliasesA,
                              Set<String> aliasesB, Integer taxIdA, Integer taxIdB, String typeA, String typeB,
                              Set<String> xrefsA, Set<String> xrefsB, Set<String> annotationsA, Set<String> annotationsB,
@@ -222,14 +217,13 @@ public class SearchInteraction {
                              String biologicalRoleA, String biologicalRoleB, String experimentalRoleA,
                              String experimentalRoleB, Set<String> featureA, Set<String> featureB, String stoichiometryA,
                              String stoichiometryB, Set<String> identificationMethodA, Set<String> identificationMethodB,
-                             String interactionDetectionMethod, LinkedHashSet<String> authors, String publicationId,
+                             String interactionDetectionMethod, LinkedHashSet<String> authors,
                              Set<String> sourceDatabase, Set<String> interactionIdentifiers, Set<String> confidenceValues,
                              String expansionMethod, Set<String> interactionXrefs, Set<String> interactionAnnotations,
                              Set<String> interactionParameters, Date creationDate, Date updationDate,
-                             Set<String> interactionChecksums, boolean negative, String interactiontype) {
+                             Set<String> interactionChecksums, boolean negative, String interactionType) {
         this.uniqueKey = uniqueKey;
         this.interactionCount = interactionCount;
-        this.interactionIds = interactionIds;
         this.idA = idA;
         this.idB = idB;
         this.altIdsA = altIdsA;
@@ -260,7 +254,6 @@ public class SearchInteraction {
         this.identificationMethodB = identificationMethodB;
         this.interactionDetectionMethod = interactionDetectionMethod;
         this.authors = authors;
-        this.publicationId = publicationId;
         this.sourceDatabase = sourceDatabase;
         this.interactionIdentifiers = interactionIdentifiers;
         this.confidenceValues = confidenceValues;
@@ -272,15 +265,7 @@ public class SearchInteraction {
         this.updationDate = updationDate;
         this.interactionChecksums = interactionChecksums;
         this.negative = negative;
-
-    }
-
-    public SearchInteraction(LinkedHashSet<String> author, Integer interactionCount, Set<String> interactionIds,
-                             String publicationId) {
-        this.setAuthors(author);
-        this.interactionCount = interactionCount;
-        this.interactionIds = interactionIds;
-        this.setPublicationId(publicationId);
+        this.interactionType = interactionType;
     }
 
     @Override
@@ -288,7 +273,6 @@ public class SearchInteraction {
         return "SearchInteraction{" +
                 "uniqueKey='" + uniqueKey + '\'' +
                 ", interactionCount=" + interactionCount +
-                ", interactionIds=" + interactionIds +
                 ", idA='" + idA + '\'' +
                 ", idB='" + idB + '\'' +
                 ", altIdsA=" + altIdsA +
@@ -319,7 +303,6 @@ public class SearchInteraction {
                 ", identificationMethodB=" + identificationMethodB +
                 ", interactionDetectionMethod='" + interactionDetectionMethod + '\'' +
                 ", authors=" + authors +
-                ", publicationId='" + publicationId + '\'' +
                 ", sourceDatabase=" + sourceDatabase +
                 ", interactionIdentifiers=" + interactionIdentifiers +
                 ", confidenceValues=" + confidenceValues +
@@ -341,14 +324,6 @@ public class SearchInteraction {
 
     public void setInteractionCount(Integer interactionCount) {
         this.interactionCount = interactionCount;
-    }
-
-    public Set<String> getInteractionIds() {
-        return interactionIds;
-    }
-
-    public void setInteractionIds(Set<String> interactionIds) {
-        this.interactionIds = interactionIds;
     }
 
     public String getIdA() {
@@ -599,14 +574,6 @@ public class SearchInteraction {
 
     public void setAuthors(LinkedHashSet<String> authors) {
         this.authors = authors;
-    }
-
-    public String getPublicationId() {
-        return publicationId;
-    }
-
-    public void setPublicationId(String publicationId) {
-        this.publicationId = publicationId;
     }
 
     public Set<String> getInteractionIdentifiers() {
