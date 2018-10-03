@@ -47,7 +47,9 @@ public class InteractionSearchService {
                                                             int page,
                                                             int pageSize) {
         PageRequest pageRequest = new PageRequest(page, pageSize);
-        return interactionRepository.findInteractionWithFacet(query, detectionMethodFilter, interactionTypeFilter, hostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, species, interSpecies, null, pageRequest);
+        return interactionRepository.findInteractionWithFacet(query, detectionMethodFilter, interactionTypeFilter,
+                hostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, species, interSpecies, null,
+                pageRequest);
     }
 
 }
