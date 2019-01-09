@@ -10,6 +10,8 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields.*;
+
 /**
  * @author Elisabet Barrera
  */
@@ -131,79 +133,79 @@ public class SearchInteraction {
     @Field(SearchInteractionFields.PUBLICATION_AUTHORS)
     private LinkedHashSet<String> authors;
 
-    @Field(SearchInteractionFields.SOURCE_DATABASE)
+    @Field(SOURCE_DATABASE)
     private Set<String> sourceDatabase;
 
-    @Field(SearchInteractionFields.INTERACTION_IDENTIFIERS)
+    @Field(INTERACTION_IDENTIFIERS)
     private Set<String> interactionIdentifiers;
 
-    @Field(SearchInteractionFields.CONFIDENCE_VALUES)
+    @Field(CONFIDENCE_VALUES)
     private Set<String> confidenceValues;
 
-    @Field(SearchInteractionFields.EXPANSION_METHOD)
+    @Field(EXPANSION_METHOD)
     private String expansionMethod;
 
-    @Field(SearchInteractionFields.INTERACTION_XREFS)
+    @Field(INTERACTION_XREFS)
     private Set<String> interactionXrefs;
 
-    @Field(SearchInteractionFields.INTERACTION_ANNOTATIONS)
+    @Field(INTERACTION_ANNOTATIONS)
     private Set<String> interactionAnnotations;
 
-    @Field(SearchInteractionFields.INTERACTION_PARAMETERS)
+    @Field(INTERACTION_PARAMETERS)
     private Set<String> interactionParameters;
 
-    @Field(SearchInteractionFields.CREATION_DATE)
+    @Field(CREATION_DATE)
     private Date creationDate;
 
-    @Field(SearchInteractionFields.UPDATION_DATE)
+    @Field(UPDATION_DATE)
     private Date updationDate;
 
-    @Field(SearchInteractionFields.INTERACTION_CHECKSUM)
+    @Field(INTERACTION_CHECKSUM)
     private Set<String> interactionChecksums;
 
-    @Field(SearchInteractionFields.INTERACTION_NEGATIVE)
+    @Field(INTERACTION_NEGATIVE)
     private boolean negative;
 
-    @Field(SearchInteractionFields.INTERACTION_TYPE)
+    @Field(INTERACTION_TYPE)
     private String interactionType;
 
-    @Field(SearchInteractionFields.INTERACTION_AC)
+    @Field(INTERACTION_AC)
     private String interactionAc;
 
-    @Field(SearchInteractionFields.HOST_ORGANISM)
+    @Field(HOST_ORGANISM)
     private String hostOrganism;
 
-    @Field(SearchInteractionFields.INTACT_MISCORE)
+    @Field(INTACT_MISCORE)
     private double intactMiscore;
 
-    @Field(SearchInteractionFields.SPECIES_A_B)
+    @Field(SPECIES_A_B)
     private Set<String> speciesAB = new HashSet<>();
 
-    @Field(SearchInteractionFields.MOLECULE_A)
+    @Field(MOLECULE_A)
     private String moleculeA;
 
-    @Field(SearchInteractionFields.MOLECULE_B)
+    @Field(MOLECULE_B)
     private String moleculeB;
 
-    @Field(SearchInteractionFields.FIRST_AUTHOR)
+    @Field(FIRST_AUTHOR)
     private String firstAuthor;
 
-    @Field(SearchInteractionFields.EXPERIMENTAL_PREPARATIONS_A)
+    @Field(EXPERIMENTAL_PREPARATIONS_A)
     private Set<String> experimentalPreparationsA;
 
-    @Field(SearchInteractionFields.EXPERIMENTAL_PREPARATIONS_B)
+    @Field(EXPERIMENTAL_PREPARATIONS_B)
     private Set<String> experimentalPreparationsB;
 
-    @Field(SearchInteractionFields.RELEASE_DATE)
+    @Field(RELEASE_DATE)
     private Date releaseDate;
 
-    @Field(SearchInteractionFields.UNIQUE_ID_A)
+    @Field(UNIQUE_ID_A)
     private String uniqueIdA;
 
-    @Field(SearchInteractionFields.UNIQUE_ID_B)
+    @Field(UNIQUE_ID_B)
     private String uniqueIdB;
 
-    @Field(SearchInteractionFields.PUBLICATION_IDENTIFIERS)
+    @Field(PUBLICATION_IDENTIFIERS)
     private Set<String> publicationIdentifiers;
 
     public SearchInteraction() {

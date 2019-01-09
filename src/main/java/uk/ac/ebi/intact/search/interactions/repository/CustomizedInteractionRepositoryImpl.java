@@ -8,13 +8,15 @@ import org.springframework.data.solr.core.SolrOperations;
 import org.springframework.data.solr.core.query.*;
 import org.springframework.stereotype.Repository;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
-import uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteractionResult;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+
+import static uk.ac.ebi.intact.search.interactions.model.SearchInteraction.*;
+import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields.*;
 
 /**
  * @author Elisabet Barrera
@@ -38,17 +40,16 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
     }
 
     /**
-     *
      * @param query
      * @param detectionMethodFilter (Optional)
      * @param interactionTypeFilter (Optional)
-     * @param hostOrganismFilter (Optional)
-     * @param isNegativeFilter (Optional)
+     * @param hostOrganismFilter    (Optional)
+     * @param isNegativeFilter      (Optional)
      * @param minMiScore
      * @param maxMiScore
-     * @param species (Optional)
-     * @param interSpecies: if true it expects two species and returned interactions should be between the given two species
-     *                      if false interactions should atleast have one of the given species
+     * @param species               (Optional)
+     * @param interSpecies:         if true it expects two species and returned interactions should be between the given two species
+     *                              if false interactions should atleast have one of the given species
      * @param sort
      * @param pageable
      * @return
@@ -77,20 +78,21 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         }
 
         // facet
-        FacetOptions facetOptions = new FacetOptions(SearchInteractionFields.INTERACTION_DETECTION_METHOD_STR,
-                SearchInteractionFields.INTERACTION_TYPE_STR, SearchInteractionFields.HOST_ORGANISM_STR,
-                SearchInteractionFields.INTERACTION_NEGATIVE, SearchInteractionFields.INTACT_MISCORE,
-                SearchInteractionFields.SPECIES_A_B_STR);
+        FacetOptions facetOptions = new FacetOptions(
+                INTERACTION_DETECTION_METHOD_STR,
+                INTERACTION_TYPE_STR, HOST_ORGANISM_STR,
+                INTERACTION_NEGATIVE, INTACT_MISCORE,
+                SPECIES_A_B_STR);
         facetOptions.setFacetLimit(FACET_MIN_COUNT);
         facetOptions.addFacetByRange(
-                new FacetOptions.FieldWithNumericRangeParameters(SearchInteractionFields.INTACT_MISCORE, 0d, 1d, 0.01d)
+                new FacetOptions.FieldWithNumericRangeParameters(INTACT_MISCORE, 0d, 1d, 0.01d)
                         .setHardEnd(true)
                         .setInclude(FacetParams.FacetRangeInclude.ALL)
 
 
         );
 
-        facetOptions.getFieldsWithParameters().add(new FacetOptions.FieldWithFacetParameters(SearchInteractionFields.SPECIES_A_B).setMethod("enum"));
+        facetOptions.getFieldsWithParameters().add(new FacetOptions.FieldWithFacetParameters(SPECIES_A_B).setMethod("enum"));
         /*facetOptions.setFacetSort(FacetOptions.FacetSort.COUNT);*/
         search.setFacetOptions(facetOptions);
 
@@ -100,15 +102,15 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         // sorting
         if (sort != null) {
             search.addSort(sort);
-        } else {
-//            search.addSort(DEFAULT_QUERY_SORT_WITH_QUERY);
         }
+//        else {
+//            search.addSort(DEFAULT_QUERY_SORT_WITH_QUERY);
+//        }
 
-        return new SearchInteractionResult(solrOperations.queryForFacetPage(SearchInteraction.INTERACTIONS, search, SearchInteraction.class));
+        return new SearchInteractionResult(solrOperations.queryForFacetPage(INTERACTIONS, search, SearchInteraction.class));
     }
 
     /**
-     *
      * @param searchTerms
      * @return Criteria
      */
@@ -122,11 +124,11 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
             for (String word : words) {
                 if (conditions == null) {
-                    conditions = new Criteria(SearchInteractionFields.DEFAULT).contains(word)
-                            .or(SearchInteractionFields.INTERACTION_AC_STR).is(word);
+                    conditions = new Criteria(DEFAULT).contains(word)
+                            .or(INTERACTION_AC_STR).is(word);
                 } else {
-                    conditions = conditions.or(SearchInteractionFields.DEFAULT).contains(word)
-                            .or(SearchInteractionFields.INTERACTION_AC_STR).is(word);
+                    conditions = conditions.or(DEFAULT).contains(word)
+                            .or(INTERACTION_AC_STR).is(word);
                 }
             }
         } else {
@@ -139,6 +141,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
     /**
      * Creates filter conditions for all the filters passed in.
+     *
      * @param detectionMethodFilter
      * @param interactionTypeFilter
      * @param hostOrganismFilter
@@ -155,28 +158,29 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         List<FilterQuery> filterQueries = new ArrayList<FilterQuery>();
 
         //SearchInteraction Detection Method filter
-        createFilterCriteria(detectionMethodFilter, SearchInteractionFields.INTERACTION_DETECTION_METHOD_STR, filterQueries);
+        createFilterCriteria(detectionMethodFilter, INTERACTION_DETECTION_METHOD_STR, filterQueries);
 
         //SearchInteraction Type filter
-        createFilterCriteria(interactionTypeFilter, SearchInteractionFields.INTERACTION_TYPE_STR, filterQueries);
+        createFilterCriteria(interactionTypeFilter, INTERACTION_TYPE_STR, filterQueries);
 
         //Host Organism filter
-        createFilterCriteria(hostOrganismFilter, SearchInteractionFields.HOST_ORGANISM_STR, filterQueries);
+        createFilterCriteria(hostOrganismFilter, HOST_ORGANISM_STR, filterQueries);
 
         //isNegative filter
-        createFilterCriteria(isNegativeFilter, SearchInteractionFields.INTERACTION_NEGATIVE, filterQueries);
+        createNegativeFilterCriteria(isNegativeFilter, filterQueries);
 
         //miscore filter
-        createFilterCriteria(minMiScore, maxMiScore, SearchInteractionFields.INTACT_MISCORE, filterQueries);
+        createMiScoreFilterCriteria(minMiScore, maxMiScore, filterQueries);
 
         //species filter
-        createFilterCriteriaForSpecies(species, interSpecies, filterQueries);
+        createSpeciesFilterCriteria(species, interSpecies, filterQueries);
 
         return filterQueries;
     }
 
     /**
      * Creates filter conditions in filterQueries for set of String values passed for a field
+     *
      * @param values
      * @param field
      * @param filterQueries
@@ -202,45 +206,40 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
     /**
      * Creates filter conditions in filterQueries for boolean value passed for a field
+     *
      * @param value
-     * @param field
      * @param filterQueries
      */
-    private void createFilterCriteria(boolean value, String field, List<FilterQuery> filterQueries) {
+    private void createNegativeFilterCriteria(boolean value, List<FilterQuery> filterQueries) {
 
-        Criteria conditions = null;
-        conditions = new Criteria(field).is(value);
+        Criteria conditions = new Criteria(INTERACTION_NEGATIVE).is(value);
 
-        if (conditions != null) {
-            filterQueries.add(new SimpleFilterQuery(conditions));
-        }
+        filterQueries.add(new SimpleFilterQuery(conditions));
     }
 
     /**
      * Creates filter conditions in filterQueries for a range of value passed for a field
+     *
      * @param minScore
      * @param maxScore
-     * @param field
      * @param filterQueries
      */
-    private void createFilterCriteria(double minScore, double maxScore, String field, List<FilterQuery> filterQueries) {
+    private void createMiScoreFilterCriteria(double minScore, double maxScore, List<FilterQuery> filterQueries) {
 
-        Criteria conditions = null;
-        conditions = new Criteria(field).between(minScore, maxScore);
+        Criteria conditions = new Criteria(INTACT_MISCORE).between(minScore, maxScore);
 
-        if (conditions != null) {
-            filterQueries.add(new SimpleFilterQuery(conditions));
-        }
+        filterQueries.add(new SimpleFilterQuery(conditions));
     }
 
     /**
      * Creates filter conditions in filterQueries for a set of species passed.
+     *
      * @param species
      * @param interSpecies: if true it creates 'and' condition between two species
      *                      if false it creates 'or' condition between set of species
      * @param filterQueries
      */
-    private void createFilterCriteriaForSpecies(Set<String> species, boolean interSpecies, List<FilterQuery> filterQueries) {
+    private void createSpeciesFilterCriteria(Set<String> species, boolean interSpecies, List<FilterQuery> filterQueries) {
 
         if (species != null) {
             Criteria conditions = null;
@@ -248,9 +247,11 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                 for (String value : species) {
 
                     if (conditions == null) {
-                        conditions = new Criteria(SearchInteractionFields.SPECIES_A_STR).is(value).or(new Criteria(SearchInteractionFields.SPECIES_B_STR).is(value));
+                        conditions = new Criteria(SPECIES_A_STR).is(value).or(
+                                new Criteria(SPECIES_B_STR).is(value));
                     } else {
-                        conditions = conditions.or(new Criteria(SearchInteractionFields.SPECIES_A_STR).is(value)).or(new Criteria(SearchInteractionFields.SPECIES_B_STR).is(value));
+                        conditions = conditions.or(new Criteria(SPECIES_A_STR).is(value)).or(
+                                new Criteria(SPECIES_B_STR).is(value));
                     }
                 }
             } else {
@@ -260,7 +261,8 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
                 speciesA = (iterator.hasNext()) ? (String) iterator.next() : "";
                 speciesB = (iterator.hasNext()) ? (String) iterator.next() : "";
-                conditions = new Criteria(SearchInteractionFields.SPECIES_A_B_STR).is(speciesA).and(new Criteria(SearchInteractionFields.SPECIES_A_B_STR).is(speciesB));
+                conditions = new Criteria(SPECIES_A_B_STR).is(speciesA).and(
+                        new Criteria(SPECIES_A_B_STR).is(speciesB));
             }
             if (conditions != null) {
                 filterQueries.add(new SimpleFilterQuery(conditions));
