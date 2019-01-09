@@ -15,7 +15,7 @@ import java.util.Set;
  */
 
 @RestController
-@RequestMapping("/interactions")
+@RequestMapping("/interaction")
 public class SearchInteractionController {
 
     private InteractionIndexService interactionIndexService;
@@ -39,9 +39,15 @@ public class SearchInteractionController {
         return this.interactionSearchService.findInteractions(query);
     }
 
-    @RequestMapping(value = "/findInteractionWithFacet/{query}")
+    @RequestMapping(value = "/findInteractionWithFacet",
+            params = {
+                    "query",
+                    "page",
+                    "pageSize"
+            },
+            method = RequestMethod.GET)
      public SearchInteractionResult findInteractionWithFacet(
-            @PathVariable String query,
+            @RequestParam(value = "query") String query,
             @RequestParam(value = "detectionMethodFilter", required = false) Set<String> detectionMethodFilter,
             @RequestParam(value = "interactionTypeFilter", required = false) Set<String> interactionTypeFilter,
             @RequestParam(value = "hostOrganismFilter", required = false) Set<String> hostOrganismFilter,
