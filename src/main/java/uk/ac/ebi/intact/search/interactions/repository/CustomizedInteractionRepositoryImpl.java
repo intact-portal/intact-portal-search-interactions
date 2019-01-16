@@ -125,9 +125,13 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
             for (String word : words) {
                 if (conditions == null) {
                     conditions = new Criteria(DEFAULT).contains(word)
+                            .or("interactor_acA_str").is(word)
+                            .or("interactor_acB_str").is(word)
                             .or(INTERACTION_AC_STR).is(word);
                 } else {
                     conditions = conditions.or(DEFAULT).contains(word)
+                            .or("interactor_acA_str").is(word)
+                            .or("interactor_acB_str").is(word)
                             .or(INTERACTION_AC_STR).is(word);
                 }
             }
