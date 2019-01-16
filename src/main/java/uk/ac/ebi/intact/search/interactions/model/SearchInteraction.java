@@ -134,7 +134,7 @@ public class SearchInteraction {
     private LinkedHashSet<String> authors;
 
     @Field(SOURCE_DATABASE)
-    private Set<String> sourceDatabase;
+    private String sourceDatabase;
 
     @Field(INTERACTION_IDENTIFIERS)
     private Set<String> interactionIdentifiers;
@@ -220,7 +220,7 @@ public class SearchInteraction {
                              String experimentalRoleB, Set<String> featureA, Set<String> featureB, String stoichiometryA,
                              String stoichiometryB, Set<String> identificationMethodA, Set<String> identificationMethodB,
                              String interactionDetectionMethod, LinkedHashSet<String> authors,
-                             Set<String> sourceDatabase, Set<String> interactionIdentifiers, Set<String> confidenceValues,
+                             String sourceDatabase, Set<String> interactionIdentifiers, Set<String> confidenceValues,
                              String expansionMethod, Set<String> interactionXrefs, Set<String> interactionAnnotations,
                              Set<String> interactionParameters, Date creationDate, Date updationDate,
                              Set<String> interactionChecksums, boolean negative, String interactionType) {
@@ -733,11 +733,11 @@ public class SearchInteraction {
         this.featureShortLabelB = featureShortLabelB;
     }
 
-    public Set<String> getSourceDatabase() {
+    public String getSourceDatabase() {
         return sourceDatabase;
     }
 
-    public void setSourceDatabase(Set<String> sourceDatabase) {
+    public void setSourceDatabase(String sourceDatabase) {
         this.sourceDatabase = sourceDatabase;
     }
 
