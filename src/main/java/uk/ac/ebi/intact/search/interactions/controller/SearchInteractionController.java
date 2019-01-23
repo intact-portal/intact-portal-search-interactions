@@ -63,4 +63,25 @@ public class SearchInteractionController {
                 page, pageSize);
     }
 
+    @RequestMapping(value = "/countInteractionResult",
+            params = {
+                    "query",
+                    "interactorAc"
+            },
+            method = RequestMethod.GET)
+    public long countInteractionResult(
+            @RequestParam(value = "query") String query,
+            @RequestParam(value = "interactorAc") String interactorAc,
+            @RequestParam(value = "detectionMethodFilter", required = false) Set<String> detectionMethodFilter,
+            @RequestParam(value = "interactionTypeFilter", required = false) Set<String> interactionTypeFilter,
+            @RequestParam(value = "hostOrganismFilter", required = false) Set<String> hostOrganismFilter,
+            @RequestParam(value = "isNegativeFilter", required = false) boolean isNegativeFilter,
+            @RequestParam(value = "minMiscore",defaultValue = "0", required = false) double minMiscore,
+            @RequestParam(value = "maxMiscore",defaultValue = "1", required = false) double maxMiscore,
+            @RequestParam(value = "species", required = false) Set<String> species,
+            @RequestParam(value = "interSpecies", required = false) boolean interSpecies) {
+        return this.interactionSearchService.countInteractionResult(query, interactorAc, detectionMethodFilter,
+                interactionTypeFilter,hostOrganismFilter,isNegativeFilter,minMiscore,maxMiscore,species,interSpecies);
+    }
+
 }

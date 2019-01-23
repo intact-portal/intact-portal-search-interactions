@@ -52,4 +52,18 @@ public class InteractionSearchService {
                 pageRequest);
     }
 
+    public long countInteractionResult(String query,
+                                       String interactorAc,
+                                       Set<String> detectionMethodFilter,
+                                       Set<String> interactionTypeFilter,
+                                       Set<String> hostOrganismFilter,
+                                       boolean isNegativeFilter,
+                                       double minMiScore,
+                                       double maxMiScore,
+                                       Set<String> species,
+                                       boolean interSpecies) {
+        return interactionRepository.countInteractionResult(query, interactorAc, detectionMethodFilter, interactionTypeFilter,
+                hostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, species, interSpecies);
+    }
+
 }

@@ -34,4 +34,8 @@ public interface CustomizedInteractionRepository {
                                                      boolean isNegativeFilter, double minMiScore, double maxMiScore,
                                                      Set<String> species, boolean interSpecies, Sort sort, Pageable pageable);
 
+    long countInteractionResult(String query, String interactorAc, Set<String> detectionMethodFilter,
+                                Set<String> interactionTypeFilter, Set<String> hostOrganismFilter,
+                                boolean isNegativeFilter, double minMiScore, double maxMiScore,
+                                Set<String> species, boolean interSpecies);
 }
