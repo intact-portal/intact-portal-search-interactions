@@ -110,6 +110,41 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         return new SearchInteractionResult(solrOperations.queryForFacetPage(INTERACTIONS, search, SearchInteraction.class));
     }
 
+    @Override
+    public long countInteractionResult(String query, String interactorAc, Set<String> detectionMethodFilter,
+                                       Set<String> interactionTypeFilter, Set<String> hostOrganismFilter,
+                                       boolean isNegativeFilter, double minMiScore, double maxMiScore, Set<String> species,
+                                       boolean interSpecies) {
+
+        // search query
+        SimpleQuery search = new SimpleQuery();
+
+        // search criterias
+        Criteria conditions = createSearchConditions(query);
+
+        // search query
+        search.addCriteria(conditions);
+
+        // filters
+        List<FilterQuery> filterQueries = createFilterQuery(detectionMethodFilter, interactionTypeFilter,
+                hostOrganismFilter, isNegativeFilter, species, interSpecies, minMiScore, maxMiScore);
+        if (filterQueries != null && !filterQueries.isEmpty()) {
+            for (FilterQuery filterQuery : filterQueries) {
+                search.addFilterQuery(filterQuery);
+            }
+
+            FilterQuery fq = new SimpleFilterQuery();
+
+            Criteria cond1 = Criteria.where("interactor_acA_str").is(interactorAc);
+            Criteria cond2 = Criteria.where("interactor_acB_str").is(interactorAc);
+            Criteria c = cond1.or(cond2);
+
+            fq.addCriteria(c);
+            search.addFilterQuery(fq);
+        }
+        return solrOperations.count(INTERACTIONS, SimpleQuery.fromQuery(search));
+    }
+
     /**
      * @param searchTerms
      * @return Criteria

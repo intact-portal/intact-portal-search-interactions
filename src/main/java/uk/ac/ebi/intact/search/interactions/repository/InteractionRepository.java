@@ -19,4 +19,6 @@ public interface InteractionRepository extends SolrCrudRepository<SearchInteract
     Page<SearchInteraction> findInteractions(String query, Pageable pageable);
 
 
+
+
 }
