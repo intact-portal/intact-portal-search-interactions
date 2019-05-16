@@ -1,8 +1,10 @@
 package uk.ac.ebi.intact.search.interactions.repository;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
+import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteractionResult;
 
 import java.util.Set;
@@ -33,6 +35,11 @@ public interface CustomizedInteractionRepository {
                                                      Set<String> interactionTypeFilter, Set<String> hostOrganismFilter,
                                                      boolean isNegativeFilter, double minMiScore, double maxMiScore,
                                                      Set<String> species, boolean interSpecies, Sort sort, Pageable pageable);
+
+    public Page<SearchInteraction> findInteractionForGraphJson(String query, Set<String> detectionMethodFilter,
+                                                             Set<String> interactionTypeFilter, Set<String> hostOrganismFilter,
+                                                             boolean isNegativeFilter, double minMiScore, double maxMiScore,
+                                                             Set<String> species, boolean interSpecies, Sort sort, Pageable pageable);
 
     long countInteractionResult(String query, String interactorAc, Set<String> detectionMethodFilter,
                                 Set<String> interactionTypeFilter, Set<String> hostOrganismFilter,

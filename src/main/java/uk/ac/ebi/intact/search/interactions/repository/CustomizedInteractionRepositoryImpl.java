@@ -2,6 +2,7 @@ package uk.ac.ebi.intact.search.interactions.repository;
 
 import org.apache.solr.common.params.FacetParams;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.solr.core.SolrOperations;
@@ -108,6 +109,60 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 //        }
 
         return new SearchInteractionResult(solrOperations.queryForFacetPage(INTERACTIONS, search, SearchInteraction.class));
+    }
+
+    /**
+     * @param query
+     * @param detectionMethodFilter (Optional)
+     * @param interactionTypeFilter (Optional)
+     * @param hostOrganismFilter    (Optional)
+     * @param isNegativeFilter      (Optional)
+     * @param minMiScore
+     * @param maxMiScore
+     * @param species               (Optional)
+     * @param interSpecies:         if true it expects two species and returned interactions should be between the given two species
+     *                              if false interactions should atleast have one of the given species
+     * @param sort
+     * @param pageable
+     * @return
+     */
+    @Override
+    public Page<SearchInteraction> findInteractionForGraphJson(String query, Set<String> detectionMethodFilter,
+                                                             Set<String> interactionTypeFilter, Set<String> hostOrganismFilter,
+                                                             boolean isNegativeFilter, double minMiScore, double maxMiScore,
+                                                             Set<String> species, boolean interSpecies, Sort sort, Pageable pageable) {
+
+        // search query
+        SimpleQuery search = new SimpleQuery();
+
+        // search criterias
+        Criteria conditions = createSearchConditions(query);
+        search.addCriteria(conditions);
+
+        // filters
+        List<FilterQuery> filterQueries = createFilterQuery(detectionMethodFilter, interactionTypeFilter,
+                hostOrganismFilter, isNegativeFilter, species, interSpecies, minMiScore, maxMiScore);
+        if (filterQueries != null && !filterQueries.isEmpty()) {
+            for (FilterQuery filterQuery : filterQueries) {
+                search.addFilterQuery(filterQuery);
+            }
+
+        }
+
+        // pagination
+        search.setPageRequest(pageable);
+
+        // sorting
+        if (sort != null) {
+            search.addSort(sort);
+        }
+
+        //projection
+        search.addProjectionOnField(new SimpleField(INTERACTION_AC));
+        search.addProjectionOnField(new SimpleField(INTERACTOR_AC_A));
+        search.addProjectionOnField(new SimpleField(INTERACTOR_AC_B));
+
+        return solrOperations.queryForPage(INTERACTIONS, search, SearchInteraction.class);
     }
 
     @Override
