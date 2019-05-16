@@ -5,7 +5,7 @@
 
     <groupId>uk.ac.ebi.intact.search</groupId>
     <artifactId>intact-search-interactions</artifactId>
-    <version>0.0.1-ANJALI-SNAPSHOT</version>
+    <version>0.0.2-GRAPH-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>intact-search-interactions</name>
