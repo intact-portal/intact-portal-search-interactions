@@ -165,6 +165,8 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         search.addProjectionOnField(new SimpleField(SPECIES_B));
         search.addProjectionOnField(new SimpleField(TAX_IDA));
         search.addProjectionOnField(new SimpleField(TAX_IDB));
+        search.addProjectionOnField(new SimpleField(INTERACTOR_IDA));
+        search.addProjectionOnField(new SimpleField(INTERACTOR_IDB));
 
         return solrOperations.queryForPage(INTERACTIONS, search, SearchInteraction.class);
     }
