@@ -7,9 +7,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.solr.core.SolrOperations;
 import org.springframework.data.solr.core.query.*;
+import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.stereotype.Repository;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
-import uk.ac.ebi.intact.search.interactions.model.SearchInteractionResult;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -49,17 +49,17 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
      * @param minMiScore
      * @param maxMiScore
      * @param species               (Optional)
-     * @param interSpecies:         if true it expects two species and returned interactions should be between the given two species
+     * @param interSpecies :         if true it expects two species and returned interactions should be between the given two species
      *                              if false interactions should atleast have one of the given species
      * @param sort
      * @param pageable
      * @return
      */
     @Override
-    public SearchInteractionResult findInteractionWithFacet(String query, Set<String> detectionMethodFilter,
-                                                            Set<String> interactionTypeFilter, Set<String> hostOrganismFilter,
-                                                            boolean isNegativeFilter, double minMiScore, double maxMiScore,
-                                                            Set<String> species, boolean interSpecies, Sort sort, Pageable pageable) {
+    public FacetPage<SearchInteraction> findInteractionWithFacet(String query, Set<String> detectionMethodFilter,
+                                                                 Set<String> interactionTypeFilter, Set<String> hostOrganismFilter,
+                                                                 boolean isNegativeFilter, double minMiScore, double maxMiScore,
+                                                                 Set<String> species, boolean interSpecies, Sort sort, Pageable pageable) {
 
         // search query
         SimpleFacetQuery search = new SimpleFacetQuery();
@@ -108,7 +108,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 //            search.addSort(DEFAULT_QUERY_SORT_WITH_QUERY);
 //        }
 
-        return new SearchInteractionResult(solrOperations.queryForFacetPage(INTERACTIONS, search, SearchInteraction.class));
+        return solrOperations.queryForFacetPage(INTERACTIONS, search, SearchInteraction.class);
     }
 
     /**
@@ -367,7 +367,6 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
             if (conditions != null) {
                 filterQueries.add(new SimpleFilterQuery(conditions));
             }
-
         }
     }
 }
