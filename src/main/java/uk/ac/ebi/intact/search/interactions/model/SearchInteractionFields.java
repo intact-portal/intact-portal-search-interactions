@@ -34,8 +34,6 @@ public class SearchInteractionFields {
     public static final String SPECIES_A_B = "speciesA_B";
     public static final String SPECIES_A_B_STR = "speciesA_B_str";
 
-    public static final String UNIQUE_KEY = "uniqueKey";
-
     //participants
 
     public static final String BIOLOGICAL_ROLE_A = "biological_role_A";
@@ -78,6 +76,8 @@ public class SearchInteractionFields {
     public static final String EXPERIMENTAL_PREPARATIONS_A = "experimental_preparations_A";
     public static final String EXPERIMENTAL_PREPARATIONS_B = "experimental_preparations_B";
     public static final String RELEASE_DATE = "release_date";
+
+    public static final String INTERACTION_COUNT = "interaction_count";
 
     public static final String DEFAULT = "default"; //Copy field for general search
 
