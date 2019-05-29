@@ -4,18 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
-import uk.ac.ebi.intact.search.interactions.model.SearchInteractionResult;
 import uk.ac.ebi.intact.search.interactions.service.InteractionIndexService;
 import uk.ac.ebi.intact.search.interactions.service.InteractionSearchService;
 
 import java.util.Set;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 /**
  * @author Elisabet Barrera
  */
 
 @RestController
-@RequestMapping("/interaction")
 public class SearchInteractionController {
 
     private InteractionIndexService interactionIndexService;
@@ -28,24 +28,18 @@ public class SearchInteractionController {
         this.interactionSearchService = interactionSearchService;
     }
 
-    @RequestMapping("/")
-    public String SpringBootSolrExample() {
-        return "Welcome to Spring Boot solr Example";
+    @GetMapping(value ="/interaction/findInteractions/{query}", produces = {APPLICATION_JSON_VALUE})
+    public Page<SearchInteraction> findInteractions( @PathVariable String query) {
+        return interactionSearchService.findInteractions(query);
     }
 
-    @RequestMapping("/findInteractions/{query}")
-    public Page<SearchInteraction> findInteractions(
-            @PathVariable String query) {
-        return this.interactionSearchService.findInteractions(query);
-    }
-
-    @RequestMapping(value = "/findInteractionWithFacet",
+    @GetMapping(value = "/interaction/findInteractionWithFacet",
             params = {
                     "query",
                     "page",
                     "pageSize"
             },
-            method = RequestMethod.GET)
+            produces = {APPLICATION_JSON_VALUE})
      public SearchInteractionResult findInteractionWithFacet(
             @RequestParam(value = "query") String query,
             @RequestParam(value = "detectionMethodFilter", required = false) Set<String> detectionMethodFilter,
@@ -58,17 +52,27 @@ public class SearchInteractionController {
             @RequestParam(value = "interSpecies", required = false) boolean interSpecies,
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
-        return this.interactionSearchService.findInteractionWithFacet(query, detectionMethodFilter,
-                interactionTypeFilter,hostOrganismFilter,isNegativeFilter,minMiscore,maxMiscore,species,interSpecies,
-                page, pageSize);
+
+        return new SearchInteractionResult(interactionSearchService.findInteractionWithFacet(
+                query,
+                detectionMethodFilter,
+                interactionTypeFilter,
+                hostOrganismFilter,
+                isNegativeFilter,
+                minMiscore,
+                maxMiscore,
+                species,
+                interSpecies,
+                page,
+                pageSize));
     }
 
-    @RequestMapping(value = "/countInteractionResult",
+    @GetMapping(value = "/interaction/countInteractionResult",
             params = {
                     "query",
                     "interactorAc"
             },
-            method = RequestMethod.GET)
+            produces = {APPLICATION_JSON_VALUE})
     public long countInteractionResult(
             @RequestParam(value = "query") String query,
             @RequestParam(value = "interactorAc") String interactorAc,
@@ -80,8 +84,22 @@ public class SearchInteractionController {
             @RequestParam(value = "maxMiscore",defaultValue = "1", required = false) double maxMiscore,
             @RequestParam(value = "species", required = false) Set<String> species,
             @RequestParam(value = "interSpecies", required = false) boolean interSpecies) {
-        return this.interactionSearchService.countInteractionResult(query, interactorAc, detectionMethodFilter,
-                interactionTypeFilter,hostOrganismFilter,isNegativeFilter,minMiscore,maxMiscore,species,interSpecies);
+        return interactionSearchService.countInteractionResult(
+                query,
+                interactorAc,
+                detectionMethodFilter,
+                interactionTypeFilter,
+                hostOrganismFilter,
+                isNegativeFilter,
+                minMiscore,
+                maxMiscore,
+                species,
+                interSpecies);
     }
 
+    @GetMapping(value = "/interaction/countTotal",
+            produces = {APPLICATION_JSON_VALUE})
+    public long countTotal() {
+        return interactionSearchService.countTotal();
+    }
 }
