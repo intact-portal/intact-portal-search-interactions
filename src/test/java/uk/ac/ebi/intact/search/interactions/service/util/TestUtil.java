@@ -19,7 +19,7 @@ public class TestUtil {
         try {
             decoder=new XMLDecoder(new BufferedInputStream(new FileInputStream(filePath)));
         } catch (FileNotFoundException e) {
-            System.out.println("ERROR: File dvd.xml not found");
+            System.out.println("ERROR: File Interactions.xml not found");
         }
         return (Collection<SearchInteraction>)decoder.readObject();
     }
