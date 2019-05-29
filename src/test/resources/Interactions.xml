@@ -291,9 +291,6 @@
     <void property="moleculeB">
      <string>NDC80</string>
     </void>
-    <void property="publicationId">
-     <string>15961401</string>
-    </void>
     <void property="publicationIdentifiers">
      <object class="java.util.HashSet">
       <void method="add">
@@ -728,8 +725,7 @@
      </object>
     </void>
     <void property="firstAuthor">
-     <string>Ciferri C. et al. (2005)	
-</string>
+     <string>Ciferri C. et al. (2005)</string>
     </void>
     <void property="hostOrganism">
      <string>In vitro</string>
@@ -806,9 +802,6 @@
     </void>
     <void property="moleculeB">
      <string>SPC25</string>
-    </void>
-    <void property="publicationId">
-     <string>15961401</string>
     </void>
     <void property="publicationIdentifiers">
      <object class="java.util.HashSet">
@@ -1311,9 +1304,6 @@
     </void>
     <void property="moleculeB">
      <string>SPC25</string>
-    </void>
-    <void property="publicationId">
-     <string>15961401</string>
     </void>
     <void property="publicationIdentifiers">
      <object class="java.util.HashSet">
@@ -1858,9 +1848,6 @@
     </void>
     <void property="moleculeB">
      <string>SPC24</string>
-    </void>
-    <void property="publicationId">
-     <string>15961401</string>
     </void>
     <void property="publicationIdentifiers">
      <object class="java.util.HashSet">
@@ -2409,9 +2396,6 @@
     <void property="moleculeB">
      <string>NUF2</string>
     </void>
-    <void property="publicationId">
-     <string>15961401</string>
-    </void>
     <void property="publicationIdentifiers">
      <object class="java.util.HashSet">
       <void method="add">
@@ -2918,9 +2902,6 @@
     <void property="moleculeB">
      <string>Gosr1</string>
     </void>
-    <void property="publicationId">
-     <string>11927603</string>
-    </void>
     <void property="publicationIdentifiers">
      <object class="java.util.HashSet">
       <void method="add">
@@ -3322,9 +3303,6 @@
     </void>
     <void property="moleculeB">
      <string>Ykt6</string>
-    </void>
-    <void property="publicationId">
-     <string>11927603</string>
     </void>
     <void property="publicationIdentifiers">
      <object class="java.util.HashSet">
@@ -3771,9 +3749,6 @@
     <void property="moleculeB">
      <string>Stx5</string>
     </void>
-    <void property="publicationId">
-     <string>11927603</string>
-    </void>
     <void property="publicationIdentifiers">
      <object class="java.util.HashSet">
       <void method="add">
@@ -4212,9 +4187,6 @@
     </void>
     <void property="moleculeB">
      <string>Uso1</string>
-    </void>
-    <void property="publicationId">
-     <string>11927603</string>
     </void>
     <void property="publicationIdentifiers">
      <object class="java.util.HashSet">
@@ -4657,9 +4629,6 @@
     </void>
     <void property="moleculeB">
      <string>RELA</string>
-    </void>
-    <void property="publicationId">
-     <string>18363837</string>
     </void>
     <void property="publicationIdentifiers">
      <object class="java.util.HashSet">
