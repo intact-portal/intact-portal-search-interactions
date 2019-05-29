@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
+import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.test.context.junit4.SpringRunner;
 import uk.ac.ebi.intact.search.interactions.controller.SearchInteractionResult;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
@@ -104,7 +105,7 @@ public class InteractionSearchServiceTest {
      */
     @Test
     public void facetTest() {
-        SearchInteractionResult interactionOp = interactionSearchService.findInteractionWithFacet(
+        FacetPage<SearchInteraction>  interaction = interactionSearchService.findInteractionWithFacet(
                 "physical association",
                 null,
                 null,
@@ -116,6 +117,10 @@ public class InteractionSearchServiceTest {
                 false,
                 0,
                 10);
+
+        //TODO This conversion and checking of the result maybe better in a test for the controller instead of the service
+        //TODO This is because SearchInteractionResult is now in the controller
+        SearchInteractionResult interactionOp = new SearchInteractionResult(interaction);
         Set<String> facetFields = interactionOp.getFacetResultPage().keySet();
         assertTrue(facetFields.contains(INTERACTION_NEGATIVE));
         assertTrue(facetFields.contains(INTACT_MISCORE));
@@ -232,7 +237,7 @@ public class InteractionSearchServiceTest {
         int page = 0;
         int size = 10;
 
-        SearchInteractionResult interactionOp = interactionSearchService.findInteractionWithFacet(
+        FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
                 "physical association",
                 detectionMethod,
                 interactionType,
@@ -275,7 +280,7 @@ public class InteractionSearchServiceTest {
 
         int size = 10;
 
-        SearchInteractionResult interactionOp = interactionSearchService.findInteractionWithFacet(
+        FacetPage<SearchInteraction>  interactionOp = interactionSearchService.findInteractionWithFacet(
                 "physical association",
                 detectionMethod,
                 interactionType,
