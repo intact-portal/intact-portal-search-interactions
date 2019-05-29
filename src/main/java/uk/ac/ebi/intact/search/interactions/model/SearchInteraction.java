@@ -15,19 +15,15 @@ import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields
 /**
  * @author Elisabet Barrera
  */
-@SolrDocument(solrCoreName =SearchInteraction.INTERACTIONS)
+@SolrDocument(collection =SearchInteraction.INTERACTIONS)
 public class SearchInteraction {
 
     public static final String INTERACTIONS = "interactions";
 
     @Id
-    @Field(SearchInteractionFields.UNIQUE_KEY)
+    @Field(INTERACTION_AC)
     @Indexed
-    private String uniqueKey;
-
-    //It will be used in the cluster index. Review in the future
-    @Field("interaction_count")
-    private Integer interactionCount;
+    private String interactionAc;
 
     @Field(SearchInteractionFields.INTERACTOR_IDA)
     private String idA;
@@ -131,7 +127,7 @@ public class SearchInteraction {
     private String interactionDetectionMethod;
 
     @Field(SearchInteractionFields.PUBLICATION_AUTHORS)
-    private LinkedHashSet<String> authors;
+    private Set<String> authors;
 
     @Field(SOURCE_DATABASE)
     private String sourceDatabase;
@@ -169,9 +165,6 @@ public class SearchInteraction {
     @Field(INTERACTION_TYPE)
     private String interactionType;
 
-    @Field(INTERACTION_AC)
-    private String interactionAc;
-
     @Field(HOST_ORGANISM)
     private String hostOrganism;
 
@@ -208,23 +201,25 @@ public class SearchInteraction {
     @Field(PUBLICATION_IDENTIFIERS)
     private Set<String> publicationIdentifiers;
 
+    //It will be used in the cluster index. Review in the future
+    @Field(INTERACTION_COUNT)
+    private Integer interactionCount;
+
     public SearchInteraction() {
     }
 
-    public SearchInteraction(String uniqueKey, Integer interactionCount, String idA,
-                             String idB, Set<String> altIdsA, Set<String> altIdsB, Set<String> aliasesA,
-                             Set<String> aliasesB, Integer taxIdA, Integer taxIdB, String typeA, String typeB,
-                             Set<String> xrefsA, Set<String> xrefsB, Set<String> annotationsA, Set<String> annotationsB,
-                             Set<String> checksumsA, Set<String> checksumsB, String speciesA, String speciesB,
-                             String biologicalRoleA, String biologicalRoleB, String experimentalRoleA,
+    public SearchInteraction(Integer interactionCount, String idA, String idB, Set<String> altIdsA, Set<String> altIdsB,
+                             Set<String> aliasesA, Set<String> aliasesB, Integer taxIdA, Integer taxIdB, String typeA,
+                             String typeB, Set<String> xrefsA, Set<String> xrefsB, Set<String> annotationsA,
+                             Set<String> annotationsB, Set<String> checksumsA, Set<String> checksumsB, String speciesA,
+                             String speciesB, String biologicalRoleA, String biologicalRoleB, String experimentalRoleA,
                              String experimentalRoleB, Set<String> featureA, Set<String> featureB, String stoichiometryA,
                              String stoichiometryB, Set<String> identificationMethodA, Set<String> identificationMethodB,
-                             String interactionDetectionMethod, LinkedHashSet<String> authors,
-                             String sourceDatabase, Set<String> interactionIdentifiers, Set<String> confidenceValues,
-                             String expansionMethod, Set<String> interactionXrefs, Set<String> interactionAnnotations,
+                             String interactionDetectionMethod, Set<String> authors, String sourceDatabase,
+                             Set<String> interactionIdentifiers, Set<String> confidenceValues, String expansionMethod,
+                             Set<String> interactionXrefs, Set<String> interactionAnnotations,
                              Set<String> interactionParameters, Date creationDate, Date updationDate,
                              Set<String> interactionChecksums, boolean negative, String interactionType) {
-        this.uniqueKey = uniqueKey;
         this.interactionCount = interactionCount;
         this.idA = idA;
         this.idB = idB;
@@ -273,7 +268,6 @@ public class SearchInteraction {
     @Override
     public String toString() {
         return "SearchInteraction{" +
-                "uniqueKey='" + uniqueKey + '\'' +
                 ", interactionCount=" + interactionCount +
                 ", idA='" + idA + '\'' +
                 ", idB='" + idB + '\'' +
@@ -474,14 +468,6 @@ public class SearchInteraction {
         this.speciesAB.add(speciesB);
     }
 
-    public String getUniqueKey() {
-        return uniqueKey;
-    }
-
-    public void setUniqueKey(String uniqueKey) {
-        this.uniqueKey = uniqueKey;
-    }
-
     public String getBiologicalRoleA() {
         return biologicalRoleA;
     }
@@ -570,7 +556,7 @@ public class SearchInteraction {
         this.interactionDetectionMethod = interactionDetectionMethod;
     }
 
-    public LinkedHashSet<String> getAuthors() {
+    public Set<String> getAuthors() {
         return authors;
     }
 
