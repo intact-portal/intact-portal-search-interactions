@@ -56,6 +56,7 @@ public interface CustomizedInteractionRepository {
 
     /**
      * @param query input used to retrieve the interaction
+     * @param interactorAc interactor accession e.g. EBI-XXXXXX
      * @param detectionMethodFilter (Optional) filter interactions by interaction detection method
      * @param interactionTypeFilter (Optional) filter interactions by interaction type
      * @param hostOrganismFilter (Optional) filter interactions by host organism
