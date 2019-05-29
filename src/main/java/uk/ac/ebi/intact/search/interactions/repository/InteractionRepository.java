@@ -7,6 +7,8 @@ import org.springframework.data.solr.repository.SolrCrudRepository;
 import org.springframework.stereotype.Repository;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 
+import java.util.Optional;
+
 /**
  * @author Elisabet Barrera
  */
@@ -17,8 +19,6 @@ public interface InteractionRepository extends SolrCrudRepository<SearchInteract
     @Query(value = "text:?0")
 //    @Query(value = DEFAULT + ":?0")
     Page<SearchInteraction> findInteractions(String query, Pageable pageable);
-
-
-
-
+    
+    Optional<SearchInteraction> findByInteractionAc(String ac);
 }
