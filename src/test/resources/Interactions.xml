@@ -339,9 +339,6 @@
     <void property="uniqueIdB">
      <string>O14777</string>
     </void>
-    <void property="uniqueKey">
-     <string>-1801643833</string>
-    </void>
     <void property="updationDate">
      <object class="java.util.Date">
       <long>1423749180000</long>
@@ -849,9 +846,6 @@
     <void property="uniqueIdB">
      <string>Q9HBM1</string>
     </void>
-    <void property="uniqueKey">
-     <string>2126506180</string>
-    </void>
     <void property="updationDate">
      <object class="java.util.Date">
       <long>1413450365000</long>
@@ -1350,9 +1344,6 @@
     </void>
     <void property="uniqueIdB">
      <string>Q9HBM1</string>
-    </void>
-    <void property="uniqueKey">
-     <string>8342537</string>
     </void>
     <void property="updationDate">
      <object class="java.util.Date">
@@ -1894,9 +1885,6 @@
     </void>
     <void property="uniqueIdB">
      <string>Q8NBT2</string>
-    </void>
-    <void property="uniqueKey">
-     <string>-1225197583</string>
     </void>
     <void property="updationDate">
      <object class="java.util.Date">
@@ -2442,9 +2430,6 @@
     <void property="uniqueIdB">
      <string>Q9BZD4</string>
     </void>
-    <void property="uniqueKey">
-     <string>674434491</string>
-    </void>
     <void property="updationDate">
      <object class="java.util.Date">
       <long>1423749180000</long>
@@ -2950,9 +2935,6 @@
     <void property="uniqueIdB">
      <string>Q62931</string>
     </void>
-    <void property="uniqueKey">
-     <string>218191332</string>
-    </void>
     <void property="updationDate">
      <object class="java.util.Date">
       <long>1418130222000</long>
@@ -3349,9 +3331,6 @@
     </void>
     <void property="uniqueIdB">
      <string>Q5EGY4</string>
-    </void>
-    <void property="uniqueKey">
-     <string>1954076241</string>
     </void>
     <void property="updationDate">
      <object class="java.util.Date">
@@ -3795,9 +3774,6 @@
     <void property="uniqueIdB">
      <string>Q08851</string>
     </void>
-    <void property="uniqueKey">
-     <string>958080513</string>
-    </void>
     <void property="updationDate">
      <object class="java.util.Date">
       <long>1418130222000</long>
@@ -4233,9 +4209,6 @@
     </void>
     <void property="uniqueIdB">
      <string>P41542</string>
-    </void>
-    <void property="uniqueKey">
-     <string>2072787644</string>
     </void>
     <void property="updationDate">
      <object class="java.util.Date">
@@ -4677,9 +4650,6 @@
     </void>
     <void property="uniqueIdB">
      <string>Q04206</string>
-    </void>
-    <void property="uniqueKey">
-     <string>541720369</string>
     </void>
     <void property="updationDate">
      <object class="java.util.Date">
