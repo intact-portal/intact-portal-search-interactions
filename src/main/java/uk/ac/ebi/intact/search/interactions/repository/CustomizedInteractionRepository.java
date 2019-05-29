@@ -3,9 +3,9 @@ package uk.ac.ebi.intact.search.interactions.repository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.stereotype.Repository;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
-import uk.ac.ebi.intact.search.interactions.controller.SearchInteractionResult;
 
 import java.util.Set;
 
@@ -30,10 +30,10 @@ public interface CustomizedInteractionRepository {
      * @param pageable  page number and size of the request
      * @return the interaction data matching all the criteria
      */
-    SearchInteractionResult findInteractionWithFacet(String query, Set<String> detectionMethodFilter,
-                                                     Set<String> interactionTypeFilter, Set<String> hostOrganismFilter,
-                                                     boolean isNegativeFilter, double minMiScore, double maxMiScore,
-                                                     Set<String> species, boolean interSpecies, Sort sort, Pageable pageable);
+    FacetPage<SearchInteraction> findInteractionWithFacet(String query, Set<String> detectionMethodFilter,
+                                                          Set<String> interactionTypeFilter, Set<String> hostOrganismFilter,
+                                                          boolean isNegativeFilter, double minMiScore, double maxMiScore,
+                                                          Set<String> species, boolean interSpecies, Sort sort, Pageable pageable);
 
     /**
      * @param query input used to retrieve the interaction
