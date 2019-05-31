@@ -53,6 +53,13 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <!-- Simple java library to work with json -->
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
         <!-- Dependency added for enable EmbeddedSolrServerFactory -->
         <dependency>
             <groupId>org.apache.solr</groupId>

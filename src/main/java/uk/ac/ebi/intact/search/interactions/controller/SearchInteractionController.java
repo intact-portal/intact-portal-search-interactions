@@ -1,12 +1,24 @@
 package uk.ac.ebi.intact.search.interactions.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.solr.core.query.result.FacetPage;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.service.InteractionIndexService;
 import uk.ac.ebi.intact.search.interactions.service.InteractionSearchService;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -97,9 +109,71 @@ public class SearchInteractionController {
                 interSpecies);
     }
 
+    @PostMapping(value = "/interaction/datatables/{query}",
+            produces = {APPLICATION_JSON_VALUE})
+    public ResponseEntity<String> getInteractionsDatatablesHandler(@PathVariable String query,
+                                                                   HttpServletRequest request) throws IOException {
+        Set<String> interactorTypeFilter = new HashSet<>();
+        Set<String> speciesFilter = new HashSet<>();
+        Set<String> interactionTypeFilter = new HashSet<>();
+        Set<String> detectionMethodFilter = new HashSet<>();
+        Set<String> hostOrganismFilter = new HashSet<>();
+
+        int page = Integer.parseInt(request.getParameter("page"));
+        int pageSize = Integer.parseInt(request.getParameter("pageSize"));
+
+        if (request.getParameterValues("interactorType") != null) {
+            interactorTypeFilter = new HashSet<>(Arrays.asList(request.getParameterValues("interactorType[]")));
+        }
+        if (request.getParameterValues("species") != null) {
+            speciesFilter = new HashSet<>(Arrays.asList(request.getParameterValues("species[]")));
+        }
+        if (request.getParameterValues("interactionType") != null) {
+            interactionTypeFilter = new HashSet<>(Arrays.asList(request.getParameterValues("interactionType[]")));
+        }
+        if (request.getParameterValues("detectionMethod") != null) {
+            detectionMethodFilter = new HashSet<>(Arrays.asList(request.getParameterValues("detectionMethod[]")));
+        }
+        if (request.getParameterValues("hostOrganism") != null) {
+            hostOrganismFilter = new HashSet<>(Arrays.asList(request.getParameterValues("hostOrganism[]")));
+        }
+        boolean negativeFilter = Boolean.parseBoolean(request.getParameter("negativeInteraction"));
+        double minMiScoreFilter = Double.parseDouble(request.getParameter("miScoreMin"));
+        double maxMiScoreFilter = Double.parseDouble(request.getParameter("miScoreMax"));
+
+        FacetPage<SearchInteraction> searchInteraction = interactionSearchService.findInteractionWithFacet(query,
+                detectionMethodFilter, interactionTypeFilter, hostOrganismFilter, negativeFilter, minMiScoreFilter, maxMiScoreFilter,
+                speciesFilter, false, page, pageSize);
+
+        SearchInteractionResult searchInteractionResult = new SearchInteractionResult(searchInteraction);
+
+        JSONObject result = new JSONObject();
+        result.put("draw", request.getParameter("draw"));
+        result.put("recordsTotal", searchInteractionResult.getTotalElements());
+        result.put("recordsFiltered", searchInteractionResult.getTotalElements());
+
+        JSONArray data = new JSONArray();
+
+        for (SearchInteraction interaction : searchInteractionResult.getContent()) {
+            StringWriter writer = new StringWriter();
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.writeValue(writer, interaction);
+            data.add(writer);
+        }
+
+        result.put("data", data);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", APPLICATION_JSON_VALUE);
+        headers.add("X-Clacks-Overhead", "headers");
+
+        return new ResponseEntity<>(result.toString(), headers, HttpStatus.OK);
+    }
+
     @GetMapping(value = "/interaction/countTotal",
             produces = {APPLICATION_JSON_VALUE})
     public long countTotal() {
         return interactionSearchService.countTotal();
     }
+
 }
