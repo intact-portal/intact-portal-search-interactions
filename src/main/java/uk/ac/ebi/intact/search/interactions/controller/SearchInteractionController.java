@@ -122,19 +122,19 @@ public class SearchInteractionController {
         int page = Integer.parseInt(request.getParameter("page"));
         int pageSize = Integer.parseInt(request.getParameter("pageSize"));
 
-        if (request.getParameterValues("interactorType") != null) {
+        if (request.getParameterValues("interactorType[]") != null) {
             interactorTypeFilter = new HashSet<>(Arrays.asList(request.getParameterValues("interactorType[]")));
         }
-        if (request.getParameterValues("species") != null) {
+        if (request.getParameterValues("species[]") != null) {
             speciesFilter = new HashSet<>(Arrays.asList(request.getParameterValues("species[]")));
         }
-        if (request.getParameterValues("interactionType") != null) {
+        if (request.getParameterValues("interactionType[]") != null) {
             interactionTypeFilter = new HashSet<>(Arrays.asList(request.getParameterValues("interactionType[]")));
         }
-        if (request.getParameterValues("detectionMethod") != null) {
+        if (request.getParameterValues("detectionMethod[]") != null) {
             detectionMethodFilter = new HashSet<>(Arrays.asList(request.getParameterValues("detectionMethod[]")));
         }
-        if (request.getParameterValues("hostOrganism") != null) {
+        if (request.getParameterValues("hostOrganism[]") != null) {
             hostOrganismFilter = new HashSet<>(Arrays.asList(request.getParameterValues("hostOrganism[]")));
         }
         boolean negativeFilter = Boolean.parseBoolean(request.getParameter("negativeInteraction"));
