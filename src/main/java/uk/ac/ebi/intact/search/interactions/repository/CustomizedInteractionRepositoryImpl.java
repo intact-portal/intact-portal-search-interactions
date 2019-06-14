@@ -156,7 +156,13 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         }
 
         //projection
+
+        //interaction details
         search.addProjectionOnField(new SimpleField(INTERACTION_AC));
+        search.addProjectionOnField(new SimpleField(INTERACTION_TYPE));
+        search.addProjectionOnField(new SimpleField(INTERACTION_DETECTION_METHOD));
+
+        //interactor details
         search.addProjectionOnField(new SimpleField(INTERACTOR_AC_A));
         search.addProjectionOnField(new SimpleField(INTERACTOR_AC_B));
         search.addProjectionOnField(new SimpleField(SPECIES_A));
@@ -165,6 +171,12 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         search.addProjectionOnField(new SimpleField(TAX_IDB));
         search.addProjectionOnField(new SimpleField(INTERACTOR_IDA));
         search.addProjectionOnField(new SimpleField(INTERACTOR_IDB));
+        search.addProjectionOnField(new SimpleField(TYPE_A));
+        search.addProjectionOnField(new SimpleField(TYPE_B));
+        search.addProjectionOnField(new SimpleField(MOLECULE_A));
+        search.addProjectionOnField(new SimpleField(MOLECULE_B));
+        search.addProjectionOnField(new SimpleField(UNIQUE_ID_A));
+        search.addProjectionOnField(new SimpleField(UNIQUE_ID_B));
 
         return solrOperations.queryForPage(INTERACTIONS, search, SearchInteraction.class);
     }
