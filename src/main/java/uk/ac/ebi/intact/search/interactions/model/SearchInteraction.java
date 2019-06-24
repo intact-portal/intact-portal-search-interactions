@@ -205,10 +205,13 @@ public class SearchInteraction {
     private Integer interactionCount;
 
     @Field(INTERACTOR_TYPE_A)
-    private String interactorAType;
+    private String interactorTypeA;
 
     @Field(INTERACTOR_TYPE_B)
-    private String interactorBType;
+    private String interactorTypeB;
+
+    @Field(INTERACTOR_TYPE_A_B)
+    private Set<String> interactorTypeAB = new HashSet<>();
 
     public SearchInteraction() {
     }
@@ -224,7 +227,8 @@ public class SearchInteraction {
                              Set<String> interactionIdentifiers, Set<String> confidenceValues, String expansionMethod,
                              Set<String> interactionXrefs, Set<String> interactionAnnotations,
                              Set<String> interactionParameters, Date creationDate, Date updationDate,
-                             Set<String> interactionChecksums, boolean negative, String interactionType) {
+                             Set<String> interactionChecksums, boolean negative, String interactionType,
+                             String interactorTypeA, String interactorTypeB) {
         this.interactionCount = interactionCount;
         this.idA = idA;
         this.idB = idB;
@@ -268,6 +272,8 @@ public class SearchInteraction {
         this.interactionChecksums = interactionChecksums;
         this.negative = negative;
         this.interactionType = interactionType;
+        this.interactorTypeA = interactorTypeA;
+        this.interactorTypeB = interactorTypeB;
     }
 
     @Override
@@ -315,6 +321,8 @@ public class SearchInteraction {
                 ", updationDate=" + updationDate +
                 ", interactionChecksums=" + interactionChecksums +
                 ", negative=" + negative +
+                ", interactorTypeA='" + interactorTypeA + '\'' +
+                ", interactorTypeB='" + interactorTypeB + '\'' +
 
                 '}';
     }
@@ -804,20 +812,21 @@ public class SearchInteraction {
         this.publicationIdentifiers = publicationIdentifiers;
     }
 
-    public void setInteractorAType(String interactorAType) {
-        this.interactorAType = interactorAType;
+    public String getInteractorTypeA() {
+        return interactorTypeA;
     }
 
-    public String getInteractorAType() {
-        return interactorAType;
+    public void setInteractorTypeA(String interactorTypeA) {
+        this.interactorTypeA = interactorTypeA;
+        this.interactorTypeAB.add(interactorTypeA);
     }
 
-
-    public void setInteractorBType(String interactorBType) {
-        this.interactorBType = interactorBType;
+    public String getInteractorTypeB() {
+        return interactorTypeB;
     }
 
-    public String getInteractorBType() {
-        return interactorBType;
+    public void setInteractorTypeB(String interactorTypeB) {
+        this.interactorTypeB = interactorTypeB;
+        this.interactorTypeAB.add(interactorTypeB);
     }
 }

@@ -76,7 +76,13 @@ public class SearchInteractionFields {
     public static final String EXPERIMENTAL_PREPARATIONS_A = "experimental_preparations_A";
     public static final String EXPERIMENTAL_PREPARATIONS_B = "experimental_preparations_B";
     public static final String INTERACTOR_TYPE_A = "interactor_type_A";
+    public static final String INTERACTOR_TYPE_A_STR = "interactor_type_A_str";
     public static final String INTERACTOR_TYPE_B = "interactor_type_B";
+    public static final String INTERACTOR_TYPE_B_STR = "interactor_type_B_str";
+    public static final String INTERACTOR_TYPE_A_B = "interactor_type_A_B";
+    public static final String INTERACTOR_TYPE_A_B_STR = "interactor_type_A_B_str";
+
+
 
     public static final String RELEASE_DATE = "release_date";
 
