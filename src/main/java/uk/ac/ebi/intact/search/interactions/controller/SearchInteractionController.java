@@ -58,26 +58,28 @@ public class SearchInteractionController {
             produces = {APPLICATION_JSON_VALUE})
      public SearchInteractionResult findInteractionWithFacet(
             @RequestParam(value = "query") String query,
+            @RequestParam(value = "speciesFilter", required = false) Set<String> speciesFilter,
+            @RequestParam(value = "interactorTypeFilter", required = false) Set<String> interactorTypeFilter,
             @RequestParam(value = "detectionMethodFilter", required = false) Set<String> detectionMethodFilter,
             @RequestParam(value = "interactionTypeFilter", required = false) Set<String> interactionTypeFilter,
             @RequestParam(value = "hostOrganismFilter", required = false) Set<String> hostOrganismFilter,
             @RequestParam(value = "isNegativeFilter", required = false) boolean isNegativeFilter,
             @RequestParam(value = "minMiscore",defaultValue = "0", required = false) double minMiscore,
             @RequestParam(value = "maxMiscore",defaultValue = "1", required = false) double maxMiscore,
-            @RequestParam(value = "species", required = false) Set<String> species,
             @RequestParam(value = "interSpecies", required = false) boolean interSpecies,
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
 
         return new SearchInteractionResult(interactionSearchService.findInteractionWithFacet(
                 query,
+                speciesFilter,
+                interactorTypeFilter,
                 detectionMethodFilter,
                 interactionTypeFilter,
                 hostOrganismFilter,
                 isNegativeFilter,
                 minMiscore,
                 maxMiscore,
-                species,
                 interSpecies,
                 page,
                 pageSize));
@@ -93,24 +95,27 @@ public class SearchInteractionController {
     public long countInteractionResult(
             @RequestParam(value = "query") String query,
             @RequestParam(value = "interactorAc") String interactorAc,
+            @RequestParam(value = "speciesFilter", required = false) Set<String> speciesFilter,
+            @RequestParam(value = "interactorTypeFilter", required = false) Set<String> interactorTypeFilter,
             @RequestParam(value = "detectionMethodFilter", required = false) Set<String> detectionMethodFilter,
             @RequestParam(value = "interactionTypeFilter", required = false) Set<String> interactionTypeFilter,
             @RequestParam(value = "hostOrganismFilter", required = false) Set<String> hostOrganismFilter,
             @RequestParam(value = "isNegativeFilter", required = false) boolean isNegativeFilter,
             @RequestParam(value = "minMiscore",defaultValue = "0", required = false) double minMiscore,
             @RequestParam(value = "maxMiscore",defaultValue = "1", required = false) double maxMiscore,
-            @RequestParam(value = "species", required = false) Set<String> species,
             @RequestParam(value = "interSpecies", required = false) boolean interSpecies) {
+
         return interactionSearchService.countInteractionResult(
                 query,
                 interactorAc,
+                speciesFilter,
+                interactorTypeFilter,
                 detectionMethodFilter,
                 interactionTypeFilter,
                 hostOrganismFilter,
                 isNegativeFilter,
                 minMiscore,
                 maxMiscore,
-                species,
                 interSpecies);
     }
 
@@ -147,9 +152,9 @@ public class SearchInteractionController {
         double minMiScoreFilter = Double.parseDouble(request.getParameter("miScoreMin"));
         double maxMiScoreFilter = Double.parseDouble(request.getParameter("miScoreMax"));
 
-        FacetPage<SearchInteraction> searchInteraction = interactionSearchService.findInteractionWithFacet(query,
-                detectionMethodFilter, interactionTypeFilter, hostOrganismFilter, negativeFilter, minMiScoreFilter, maxMiScoreFilter,
-                speciesFilter, false, page, pageSize);
+        FacetPage<SearchInteraction> searchInteraction = interactionSearchService.findInteractionWithFacet(query, speciesFilter,
+                interactorTypeFilter, detectionMethodFilter, interactionTypeFilter, hostOrganismFilter, negativeFilter, minMiScoreFilter, maxMiScoreFilter,
+                false, page, pageSize);
 
         SearchInteractionResult searchInteractionResult = new SearchInteractionResult(searchInteraction);
 
@@ -193,20 +198,21 @@ public class SearchInteractionController {
             produces = {APPLICATION_JSON_VALUE})
     public Page<SearchInteraction> findInteractionForGraphJson(
             @RequestParam(value = "query") String query,
+            @RequestParam(value = "speciesFilter", required = false) Set<String> speciesFilter,
+            @RequestParam(value = "interactorTypeFilter", required = false) Set<String> interactorTypeFilter,
             @RequestParam(value = "detectionMethodFilter", required = false) Set<String> detectionMethodFilter,
             @RequestParam(value = "interactionTypeFilter", required = false) Set<String> interactionTypeFilter,
             @RequestParam(value = "hostOrganismFilter", required = false) Set<String> hostOrganismFilter,
             @RequestParam(value = "isNegativeFilter", required = false) boolean isNegativeFilter,
             @RequestParam(value = "minMiscore", defaultValue = "0", required = false) double minMiscore,
             @RequestParam(value = "maxMiscore", defaultValue = "1", required = false) double maxMiscore,
-            @RequestParam(value = "species", required = false) Set<String> species,
             @RequestParam(value = "interSpecies", required = false) boolean interSpecies,
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
 
-        return this.interactionSearchService.findInteractionForGraphJson(query, detectionMethodFilter,
-                interactionTypeFilter, hostOrganismFilter, isNegativeFilter, minMiscore, maxMiscore, species, interSpecies,
-                page, pageSize);
+        return this.interactionSearchService.findInteractionForGraphJson(query, speciesFilter, interactorTypeFilter,
+                detectionMethodFilter, interactionTypeFilter, hostOrganismFilter, isNegativeFilter, minMiscore, maxMiscore,
+                interSpecies, page, pageSize);
     }
 
     @CrossOrigin(origins = "*")

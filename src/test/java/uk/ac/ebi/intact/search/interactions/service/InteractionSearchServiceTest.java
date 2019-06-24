@@ -111,12 +111,13 @@ public class InteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
-                0,
-                1,
+                null,
                 null,
                 false,
                 0,
+                1,
+                false,
+                1,
                 10);
 
         //TODO This conversion and checking of the result maybe better in a test for the controller instead of the service
@@ -235,18 +236,22 @@ public class InteractionSearchServiceTest {
         Set<String> species = new HashSet<>();
         species.add("Homo sapiens");
 
+        Set<String> interactorType = new HashSet<>();
+        interactorType.add("protein");
+
         int page = 0;
         int size = 10;
 
         FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
                 "physical association",
+                species,
+                interactorType,
                 detectionMethod,
                 interactionType,
                 hostOrganism,
                 false,
                 minMiscore,
                 maxMiscore,
-                species,
                 false,
                 page,
                 size);
@@ -277,19 +282,23 @@ public class InteractionSearchServiceTest {
         species.add("Homo sapiens");
         species.add("Rattus norvegicus (Rat)");
 
+        Set<String> interactorType = new HashSet<>();
+        interactorType.add("protein");
+
         int page = 0;
 
         int size = 10;
 
         FacetPage<SearchInteraction>  interactionOp = interactionSearchService.findInteractionWithFacet(
                 "physical association",
+                species,
+                interactorType,
                 detectionMethod,
                 interactionType,
                 hostOrganism,
                 false,
                 minMiscore,
                 maxMiscore,
-                species,
                 true,
                 page,
                 size);
