@@ -7,7 +7,6 @@ import org.springframework.data.solr.core.mapping.SolrDocument;
 
 import java.util.Date;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields.*;
@@ -25,108 +24,108 @@ public class SearchInteraction {
     @Indexed
     private String interactionAc;
 
-    @Field(SearchInteractionFields.INTERACTOR_IDA)
+    @Field(INTERACTOR_IDA)
     private String idA;
 
-    @Field(SearchInteractionFields.INTERACTOR_IDB)
+    @Field(INTERACTOR_IDB)
     private String idB;
 
-    @Field(SearchInteractionFields.INTERACTOR_AC_A)
+    @Field(INTERACTOR_AC_A)
     private String interactorAAc;
 
-    @Field(SearchInteractionFields.INTERACTOR_AC_B)
+    @Field(INTERACTOR_AC_B)
     private String interactorBAc;
 
-    @Field(SearchInteractionFields.ALT_IDS_A)
+    @Field(ALT_IDS_A)
     private Set<String> altIdsA;
 
-    @Field(SearchInteractionFields.ALT_IDS_B)
+    @Field(ALT_IDS_B)
     private Set<String> altIdsB;
 
-    @Field(SearchInteractionFields.ALIASES_A)
+    @Field(ALIASES_A)
     private Set<String> aliasesA;
 
-    @Field(SearchInteractionFields.ALIASES_B)
+    @Field(ALIASES_B)
     private Set<String> aliasesB;
 
-    @Field(SearchInteractionFields.TAX_IDA)
+    @Field(TAX_IDA)
     private Integer taxIdA;
 
-    @Field(SearchInteractionFields.TAX_IDB)
+    @Field(TAX_IDB)
     private Integer taxIdB;
 
-    @Field(SearchInteractionFields.TYPE_A)
+    @Field(TYPE_A)
     private String typeA;
 
-    @Field(SearchInteractionFields.TYPE_B)
+    @Field(TYPE_B)
     private String typeB;
 
-    @Field(SearchInteractionFields.XREFS_A)
+    @Field(XREFS_A)
     private Set<String> xrefsA;
 
-    @Field(SearchInteractionFields.XREFS_B)
+    @Field(XREFS_B)
     private Set<String> xrefsB;
 
-    @Field(SearchInteractionFields.ANNOTATIONS_A)
+    @Field(ANNOTATIONS_A)
     private Set<String> annotationsA;
 
-    @Field(SearchInteractionFields.ANNOTATIONS_B)
+    @Field(ANNOTATIONS_B)
     private Set<String> annotationsB;
 
-    @Field(SearchInteractionFields.CHECKSUMS_A)
+    @Field(CHECKSUMS_A)
     private Set<String> checksumsA;
 
-    @Field(SearchInteractionFields.CHECKSUMS_B)
+    @Field(CHECKSUMS_B)
     private Set<String> checksumsB;
 
-    @Field(SearchInteractionFields.SPECIES_A)
+    @Field(SPECIES_A)
     private String speciesA;
 
-    @Field(SearchInteractionFields.SPECIES_B)
+    @Field(SPECIES_B)
     private String speciesB;
 
     //participants
 
-    @Field(SearchInteractionFields.BIOLOGICAL_ROLE_A)
+    @Field(BIOLOGICAL_ROLE_A)
     private String biologicalRoleA;
 
-    @Field(SearchInteractionFields.BIOLOGICAL_ROLE_B)
+    @Field(BIOLOGICAL_ROLE_B)
     private String biologicalRoleB;
 
-    @Field(SearchInteractionFields.EXPERIMENTAL_ROLE_A)
+    @Field(EXPERIMENTAL_ROLE_A)
     private String experimentalRoleA;
 
-    @Field(SearchInteractionFields.EXPERIMENTAL_ROLE_B)
+    @Field(EXPERIMENTAL_ROLE_B)
     private String experimentalRoleB;
 
-    @Field(SearchInteractionFields.FEATURE_A)
+    @Field(FEATURE_A)
     private Set<String> featureA;
 
-    @Field(SearchInteractionFields.FEATURE_B)
+    @Field(FEATURE_B)
     private Set<String> featureB;
 
-    @Field(SearchInteractionFields.FEATURE_SHORTLABEL_A)
+    @Field(FEATURE_SHORTLABEL_A)
     private Set<String> featureShortLabelA;
 
-    @Field(SearchInteractionFields.FEATURE_SHORTLABEL_B)
+    @Field(FEATURE_SHORTLABEL_B)
     private Set<String> featureShortLabelB;
 
-    @Field(SearchInteractionFields.STOICHIOMETRY_A)
+    @Field(STOICHIOMETRY_A)
     private String stoichiometryA;
 
-    @Field(SearchInteractionFields.STOICHIOMETRY_B)
+    @Field(STOICHIOMETRY_B)
     private String stoichiometryB;
 
-    @Field(SearchInteractionFields.IDENTIFICATION_METHOD_A)
+    @Field(IDENTIFICATION_METHOD_A)
     private Set<String> identificationMethodA;
 
-    @Field(SearchInteractionFields.IDENTIFICATION_METHOD_B)
+    @Field(IDENTIFICATION_METHOD_B)
     private Set<String> identificationMethodB;
 
-    @Field(SearchInteractionFields.INTERACTION_DETECTION_METHOD)
+    @Field(INTERACTION_DETECTION_METHOD)
     private String interactionDetectionMethod;
 
-    @Field(SearchInteractionFields.PUBLICATION_AUTHORS)
+    @Field(PUBLICATION_AUTHORS)
     private Set<String> authors;
 
     @Field(SOURCE_DATABASE)
@@ -204,6 +203,12 @@ public class SearchInteraction {
     //It will be used in the cluster index. Review in the future
     @Field(INTERACTION_COUNT)
     private Integer interactionCount;
+
+    @Field(INTERACTOR_TYPE_A)
+    private String interactorAType;
+
+    @Field(INTERACTOR_TYPE_B)
+    private String interactorBType;
 
     public SearchInteraction() {
     }
@@ -560,7 +565,7 @@ public class SearchInteraction {
         return authors;
     }
 
-    public void setAuthors(LinkedHashSet<String> authors) {
+    public void setAuthors(Set<String> authors) {
         this.authors = authors;
     }
 
@@ -797,5 +802,22 @@ public class SearchInteraction {
 
     public void setPublicationIdentifiers(Set<String> publicationIdentifiers) {
         this.publicationIdentifiers = publicationIdentifiers;
+    }
+
+    public void setInteractorAType(String interactorAType) {
+        this.interactorAType = interactorAType;
+    }
+
+    public String getInteractorAType() {
+        return interactorAType;
+    }
+
+
+    public void setInteractorBType(String interactorBType) {
+        this.interactorBType = interactorBType;
+    }
+
+    public String getInteractorBType() {
+        return interactorBType;
     }
 }

@@ -75,11 +75,12 @@ public class SearchInteractionFields {
     public static final String INTERACTION_AC_STR = "interaction_ac_str";
     public static final String EXPERIMENTAL_PREPARATIONS_A = "experimental_preparations_A";
     public static final String EXPERIMENTAL_PREPARATIONS_B = "experimental_preparations_B";
+    public static final String INTERACTOR_TYPE_A = "interactor_type_A";
+    public static final String INTERACTOR_TYPE_B = "interactor_type_B";
+
     public static final String RELEASE_DATE = "release_date";
 
     public static final String INTERACTION_COUNT = "interaction_count";
 
     public static final String DEFAULT = "default"; //Copy field for general search
-
-
 }

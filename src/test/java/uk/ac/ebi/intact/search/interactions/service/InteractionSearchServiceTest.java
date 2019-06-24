@@ -8,11 +8,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.test.context.junit4.SpringRunner;
-import uk.ac.ebi.intact.search.interactions.controller.SearchInteractionResult;
+import uk.ac.ebi.intact.search.interactions.controller.result.SearchInteractionResult;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.service.util.TestUtil;
 
 import javax.annotation.Resource;
+import java.time.Duration;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -46,7 +47,7 @@ public class InteractionSearchServiceTest {
         /*Interactions are instantiated from saved searchInteractions in an xml as instantiating it one by one in the code is cumbersome
         * For ref. The Interactions.xml can be created with a method saveInteractioninDisc in CommonUtility in intact-portal-indexer*/
         Collection<SearchInteraction> searchInteractions = TestUtil.getInteractionObjFromXml("./src/test/resources/Interactions.xml");
-        interactionIndexService.save(searchInteractions);
+        interactionIndexService.save(searchInteractions, Duration.ofMillis(100));
         assertEquals(interactionSearchService.countTotal(), searchInteractions.size());
     }
 

@@ -7,6 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.repository.InteractionRepository;
 
+import java.time.Duration;
+
 /**
  * @author Elisabet Barrera
  */
@@ -33,6 +35,16 @@ public class InteractionIndexService {
     @Transactional
     public void save(Iterable<SearchInteraction> interactions) {
         this.interactionRepository.saveAll(interactions);
+    }
+
+    @Transactional
+    public void save(SearchInteraction searchInteraction, Duration commitWithin) {
+        this.interactionRepository.save(searchInteraction, commitWithin);
+    }
+
+    @Transactional
+    public void save(Iterable<SearchInteraction> interactions, Duration commitWithin) {
+        this.interactionRepository.saveAll(interactions, commitWithin);
     }
 
     @Transactional

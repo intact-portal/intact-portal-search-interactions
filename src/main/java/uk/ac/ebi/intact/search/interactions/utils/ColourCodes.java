@@ -1,4 +1,4 @@
-package uk.ac.ebi.intact.search.utils;
+package uk.ac.ebi.intact.search.interactions.utils;
 
 /**
  * Created by anjali on 13/06/19.

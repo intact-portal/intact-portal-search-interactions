@@ -1,4 +1,4 @@
-package uk.ac.ebi.intact.search.utils;
+package uk.ac.ebi.intact.search.interactions.utils;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

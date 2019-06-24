@@ -9,6 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 
 import javax.annotation.Resource;
+import java.time.Duration;
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
@@ -76,7 +77,7 @@ public class InteractionIndexServiceTest {
         // empty collection
         interactionIndexService.deleteAll();
 
-        interactionIndexService.save(Arrays.asList(searchInteraction1, searchInteraction2));
+        interactionIndexService.save(Arrays.asList(searchInteraction1, searchInteraction2), Duration.ofMillis(100));
         assertEquals(interactionSearchService.countTotal(), 2);
     }
 

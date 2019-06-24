@@ -10,6 +10,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import uk.ac.ebi.intact.search.interactions.controller.result.SearchGraphJson;
+import uk.ac.ebi.intact.search.interactions.controller.result.SearchInteractionResult;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.service.InteractionIndexService;
 import uk.ac.ebi.intact.search.interactions.service.InteractionSearchService;
@@ -40,12 +42,14 @@ public class SearchInteractionController {
         this.interactionSearchService = interactionSearchService;
     }
 
-    @GetMapping(value ="/interaction/findInteractions/{query}", produces = {APPLICATION_JSON_VALUE})
+    @CrossOrigin(origins = "*")
+    @GetMapping(value ="/findInteractions/{query}", produces = {APPLICATION_JSON_VALUE})
     public Page<SearchInteraction> findInteractions( @PathVariable String query) {
         return interactionSearchService.findInteractions(query);
     }
 
-    @GetMapping(value = "/interaction/findInteractionWithFacet",
+    @CrossOrigin(origins = "*")
+    @GetMapping(value = "/findInteractionWithFacet",
             params = {
                     "query",
                     "page",
@@ -79,7 +83,8 @@ public class SearchInteractionController {
                 pageSize));
     }
 
-    @GetMapping(value = "/interaction/countInteractionResult",
+    @CrossOrigin(origins = "*")
+    @GetMapping(value = "/countInteractionResult",
             params = {
                     "query",
                     "interactorAc"
@@ -109,7 +114,8 @@ public class SearchInteractionController {
                 interSpecies);
     }
 
-    @PostMapping(value = "/interaction/datatables/{query}",
+    @CrossOrigin(origins = "*")
+    @PostMapping(value = "/datatables/{query}",
             produces = {APPLICATION_JSON_VALUE})
     public ResponseEntity<String> getInteractionsDatatablesHandler(@PathVariable String query,
                                                                    HttpServletRequest request) throws IOException {
@@ -170,10 +176,61 @@ public class SearchInteractionController {
         return new ResponseEntity<>(result.toString(), headers, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/interaction/countTotal",
+    @CrossOrigin(origins = "*")
+    @GetMapping(value = "/countTotal",
             produces = {APPLICATION_JSON_VALUE})
     public long countTotal() {
         return interactionSearchService.countTotal();
     }
 
+    @CrossOrigin(origins = "*")
+    @GetMapping(value = "/graph/findInteractionForGraphJson",
+            params = {
+                    "query",
+                    "page",
+                    "pageSize"
+            },
+            produces = {APPLICATION_JSON_VALUE})
+    public Page<SearchInteraction> findInteractionForGraphJson(
+            @RequestParam(value = "query") String query,
+            @RequestParam(value = "detectionMethodFilter", required = false) Set<String> detectionMethodFilter,
+            @RequestParam(value = "interactionTypeFilter", required = false) Set<String> interactionTypeFilter,
+            @RequestParam(value = "hostOrganismFilter", required = false) Set<String> hostOrganismFilter,
+            @RequestParam(value = "isNegativeFilter", required = false) boolean isNegativeFilter,
+            @RequestParam(value = "minMiscore", defaultValue = "0", required = false) double minMiscore,
+            @RequestParam(value = "maxMiscore", defaultValue = "1", required = false) double maxMiscore,
+            @RequestParam(value = "species", required = false) Set<String> species,
+            @RequestParam(value = "interSpecies", required = false) boolean interSpecies,
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
+
+        return this.interactionSearchService.findInteractionForGraphJson(query, detectionMethodFilter,
+                interactionTypeFilter, hostOrganismFilter, isNegativeFilter, minMiscore, maxMiscore, species, interSpecies,
+                page, pageSize);
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping(value = "/graph/getGraphJson",
+            params = {
+                    "query",
+            },
+            produces = {APPLICATION_JSON_VALUE})
+    public SearchGraphJson getGraphJson(
+            @RequestParam(value = "query") String query,
+            @RequestParam(value = "speciesFilter", required = false) Set<String> speciesFilter,
+            @RequestParam(value = "interactorTypeFilter", required = false) Set<String> interactorTypeFilter,
+            @RequestParam(value = "detectionMethodFilter", required = false) Set<String> detectionMethodFilter,
+            @RequestParam(value = "interactionTypeFilter", required = false) Set<String> interactionTypeFilter,
+            @RequestParam(value = "interactionHostOrganismFilter", required = false) Set<String> interactionHostOrganismFilter,
+            @RequestParam(value = "isNegativeFilter", required = false) boolean isNegativeFilter,
+            @RequestParam(value = "minMiScore", defaultValue = "0", required = false) double minMiScore,
+            @RequestParam(value = "maxMiScore", defaultValue = "1", required = false) double maxMiScore,
+            @RequestParam(value = "interSpecies", required = false) boolean interSpecies,
+            @RequestParam(value = "page", defaultValue = "0", required = false) int page,
+            @RequestParam(value = "pageSize", defaultValue = Integer.MAX_VALUE + "", required = false) int pageSize) {
+
+        return this.interactionSearchService.getGraphJson(query, speciesFilter, interactorTypeFilter,
+                detectionMethodFilter, interactionTypeFilter, interactionHostOrganismFilter,
+                isNegativeFilter, minMiScore, maxMiScore, interSpecies, page, pageSize);
+    }
 }

@@ -1,4 +1,4 @@
-package uk.ac.ebi.intact.search.interactions.controller;
+package uk.ac.ebi.intact.search.interactions.controller.result;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
