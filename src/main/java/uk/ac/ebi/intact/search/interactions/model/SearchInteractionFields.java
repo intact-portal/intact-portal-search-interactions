@@ -52,7 +52,7 @@ public class SearchInteractionFields {
     public static final String INTERACTION_DETECTION_METHOD = "interaction_detection_method";
     public static final String INTERACTION_DETECTION_METHOD_STR = "interaction_detection_method_str";
     public static final String PUBLICATION_AUTHORS = "publication_authors";
-    public static final String FIRST_AUTHOR="first_author";
+    public static final String FIRST_AUTHOR = "first_author";
     public static final String PUBLICATION_IDENTIFIERS = "publication_identifiers";
     public static final String SOURCE_DATABASE = "source_database";
     public static final String INTERACTION_IDENTIFIERS = "interaction_identifiers";
@@ -79,9 +79,12 @@ public class SearchInteractionFields {
     public static final String INTERACTOR_TYPE_A_STR = "interactor_type_A_str";
     public static final String INTERACTOR_TYPE_B = "interactor_type_B";
     public static final String INTERACTOR_TYPE_B_STR = "interactor_type_B_str";
+    public static final String TYPE_MI_A = "type_MI_A";
+    public static final String TYPE_MI_A_STR = "type_MI_A_str";
+    public static final String TYPE_MI_B = "type_MI_B";
+    public static final String TYPE_MI_B_STR = "type_MI_B_str";
     public static final String INTERACTOR_TYPE_A_B = "interactor_type_A_B";
     public static final String INTERACTOR_TYPE_A_B_STR = "interactor_type_A_B_str";
-
 
 
     public static final String RELEASE_DATE = "release_date";

@@ -14,7 +14,7 @@ import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields
 /**
  * @author Elisabet Barrera
  */
-@SolrDocument(collection =SearchInteraction.INTERACTIONS)
+@SolrDocument(collection = SearchInteraction.INTERACTIONS)
 public class SearchInteraction {
 
     public static final String INTERACTIONS = "interactions";
@@ -210,6 +210,12 @@ public class SearchInteraction {
     @Field(INTERACTOR_TYPE_B)
     private String interactorTypeB;
 
+    @Field(TYPE_MI_A)
+    private String typeMIA;
+
+    @Field(TYPE_MI_B)
+    private String typeMIB;
+
     @Field(INTERACTOR_TYPE_A_B)
     private Set<String> interactorTypeAB = new HashSet<>();
 
@@ -228,7 +234,7 @@ public class SearchInteraction {
                              Set<String> interactionXrefs, Set<String> interactionAnnotations,
                              Set<String> interactionParameters, Date creationDate, Date updationDate,
                              Set<String> interactionChecksums, boolean negative, String interactionType,
-                             String interactorTypeA, String interactorTypeB) {
+                             String interactorTypeA, String typeMIA, String typeMIB, String interactorTypeB) {
         this.interactionCount = interactionCount;
         this.idA = idA;
         this.idB = idB;
@@ -274,58 +280,10 @@ public class SearchInteraction {
         this.interactionType = interactionType;
         this.interactorTypeA = interactorTypeA;
         this.interactorTypeB = interactorTypeB;
+        this.setTypeMIA(typeMIA);
+        this.setTypeMIB(typeMIB);
     }
 
-    @Override
-    public String toString() {
-        return "SearchInteraction{" +
-                ", interactionCount=" + interactionCount +
-                ", idA='" + idA + '\'' +
-                ", idB='" + idB + '\'' +
-                ", altIdsA=" + altIdsA +
-                ", altIdsB=" + altIdsB +
-                ", aliasesA=" + aliasesA +
-                ", aliasesB=" + aliasesB +
-                ", taxIdA=" + taxIdA +
-                ", taxIdB=" + taxIdB +
-                ", typeA='" + typeA + '\'' +
-                ", typeB='" + typeB + '\'' +
-                ", xrefsA=" + xrefsA +
-                ", xrefsB=" + xrefsB +
-                ", annotationsA=" + annotationsA +
-                ", annotationsB=" + annotationsB +
-                ", checksumsA=" + checksumsA +
-                ", checksumsB=" + checksumsB +
-                ", speciesA='" + speciesA + '\'' +
-                ", speciesB='" + speciesB + '\'' +
-                ", biologicalRoleA='" + biologicalRoleA + '\'' +
-                ", biologicalRoleB='" + biologicalRoleB + '\'' +
-                ", experimentalRoleA='" + experimentalRoleA + '\'' +
-                ", experimentalRoleB='" + experimentalRoleB + '\'' +
-                ", featureA=" + featureA +
-                ", featureB=" + featureB +
-                ", stoichiometryA='" + stoichiometryA + '\'' +
-                ", stoichiometryB='" + stoichiometryB + '\'' +
-                ", identificationMethodA=" + identificationMethodA +
-                ", identificationMethodB=" + identificationMethodB +
-                ", interactionDetectionMethod='" + interactionDetectionMethod + '\'' +
-                ", authors=" + authors +
-                ", sourceDatabase=" + sourceDatabase +
-                ", interactionIdentifiers=" + interactionIdentifiers +
-                ", confidenceValues=" + confidenceValues +
-                ", expansionMethod='" + expansionMethod + '\'' +
-                ", interactionXrefs=" + interactionXrefs +
-                ", interactionAnnotations=" + interactionAnnotations +
-                ", interactionParameters=" + interactionParameters +
-                ", creationDate=" + creationDate +
-                ", updationDate=" + updationDate +
-                ", interactionChecksums=" + interactionChecksums +
-                ", negative=" + negative +
-                ", interactorTypeA='" + interactorTypeA + '\'' +
-                ", interactorTypeB='" + interactorTypeB + '\'' +
-
-                '}';
-    }
 
     public Integer getInteractionCount() {
         return interactionCount;
@@ -821,6 +779,77 @@ public class SearchInteraction {
         this.interactorTypeAB.add(interactorTypeA);
     }
 
+    @Override
+    public String toString() {
+        return "SearchInteraction{" +
+                "interactionAc='" + interactionAc + '\'' +
+                ", idA='" + idA + '\'' +
+                ", idB='" + idB + '\'' +
+                ", interactorAAc='" + interactorAAc + '\'' +
+                ", interactorBAc='" + interactorBAc + '\'' +
+                ", altIdsA=" + altIdsA +
+                ", altIdsB=" + altIdsB +
+                ", aliasesA=" + aliasesA +
+                ", aliasesB=" + aliasesB +
+                ", taxIdA=" + taxIdA +
+                ", taxIdB=" + taxIdB +
+                ", typeA='" + typeA + '\'' +
+                ", typeB='" + typeB + '\'' +
+                ", xrefsA=" + xrefsA +
+                ", xrefsB=" + xrefsB +
+                ", annotationsA=" + annotationsA +
+                ", annotationsB=" + annotationsB +
+                ", checksumsA=" + checksumsA +
+                ", checksumsB=" + checksumsB +
+                ", speciesA='" + speciesA + '\'' +
+                ", speciesB='" + speciesB + '\'' +
+                ", biologicalRoleA='" + biologicalRoleA + '\'' +
+                ", biologicalRoleB='" + biologicalRoleB + '\'' +
+                ", experimentalRoleA='" + experimentalRoleA + '\'' +
+                ", experimentalRoleB='" + experimentalRoleB + '\'' +
+                ", featureA=" + featureA +
+                ", featureB=" + featureB +
+                ", featureShortLabelA=" + featureShortLabelA +
+                ", featureShortLabelB=" + featureShortLabelB +
+                ", stoichiometryA='" + stoichiometryA + '\'' +
+                ", stoichiometryB='" + stoichiometryB + '\'' +
+                ", identificationMethodA=" + identificationMethodA +
+                ", identificationMethodB=" + identificationMethodB +
+                ", interactionDetectionMethod='" + interactionDetectionMethod + '\'' +
+                ", authors=" + authors +
+                ", sourceDatabase='" + sourceDatabase + '\'' +
+                ", interactionIdentifiers=" + interactionIdentifiers +
+                ", confidenceValues=" + confidenceValues +
+                ", expansionMethod='" + expansionMethod + '\'' +
+                ", interactionXrefs=" + interactionXrefs +
+                ", interactionAnnotations=" + interactionAnnotations +
+                ", interactionParameters=" + interactionParameters +
+                ", creationDate=" + creationDate +
+                ", updationDate=" + updationDate +
+                ", interactionChecksums=" + interactionChecksums +
+                ", negative=" + negative +
+                ", interactionType='" + interactionType + '\'' +
+                ", hostOrganism='" + hostOrganism + '\'' +
+                ", intactMiscore=" + intactMiscore +
+                ", speciesAB=" + speciesAB +
+                ", moleculeA='" + moleculeA + '\'' +
+                ", moleculeB='" + moleculeB + '\'' +
+                ", firstAuthor='" + firstAuthor + '\'' +
+                ", experimentalPreparationsA=" + experimentalPreparationsA +
+                ", experimentalPreparationsB=" + experimentalPreparationsB +
+                ", releaseDate=" + releaseDate +
+                ", uniqueIdA='" + uniqueIdA + '\'' +
+                ", uniqueIdB='" + uniqueIdB + '\'' +
+                ", publicationIdentifiers=" + publicationIdentifiers +
+                ", interactionCount=" + interactionCount +
+                ", interactorTypeA='" + interactorTypeA + '\'' +
+                ", interactorTypeB='" + interactorTypeB + '\'' +
+                ", typeMIA='" + typeMIA + '\'' +
+                ", typeMIB='" + typeMIB + '\'' +
+                ", interactorTypeAB=" + interactorTypeAB +
+                '}';
+    }
+
     public String getInteractorTypeB() {
         return interactorTypeB;
     }
@@ -828,5 +857,22 @@ public class SearchInteraction {
     public void setInteractorTypeB(String interactorTypeB) {
         this.interactorTypeB = interactorTypeB;
         this.interactorTypeAB.add(interactorTypeB);
+    }
+
+
+    public String getTypeMIA() {
+        return typeMIA;
+    }
+
+    public void setTypeMIA(String typeMIA) {
+        this.typeMIA = typeMIA;
+    }
+
+    public String getTypeMIB() {
+        return typeMIB;
+    }
+
+    public void setTypeMIB(String typeMIB) {
+        this.typeMIB = typeMIB;
     }
 }

@@ -26,10 +26,9 @@ import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields
 @Repository
 public class CustomizedInteractionRepositoryImpl implements CustomizedInteractionRepository {
 
-    private SolrOperations solrOperations;
-
     // default minimum counts for faceting
     private static final int FACET_MIN_COUNT = 10000;
+    private SolrOperations solrOperations;
 
     // default sorting for the query results
     //TODO Solve problems with multivalue fields that are not allow to be sorted. Schema-less create all the fields as multivalues
@@ -189,7 +188,8 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         search.addProjectionOnField(new SimpleField(INTERACTOR_IDB));
         search.addProjectionOnField(new SimpleField(TYPE_A));
         search.addProjectionOnField(new SimpleField(TYPE_B));
-        search.addProjectionOnField(new SimpleField(MOLECULE_A));
+        search.addProjectionOnField(new SimpleField(TYPE_MI_A));
+        search.addProjectionOnField(new SimpleField(TYPE_MI_B));
         search.addProjectionOnField(new SimpleField(MOLECULE_B));
         search.addProjectionOnField(new SimpleField(UNIQUE_ID_A));
         search.addProjectionOnField(new SimpleField(UNIQUE_ID_B));
@@ -429,7 +429,6 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
     }
 
     /**
-     *
      * Creates filter conditions in filterQueries for a set of interactor types passed.
      *
      * @param interactorType
