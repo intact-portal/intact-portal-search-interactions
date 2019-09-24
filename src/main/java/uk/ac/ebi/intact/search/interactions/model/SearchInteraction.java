@@ -216,6 +216,9 @@ public class SearchInteraction {
     @Field(TYPE_MI_B)
     private String typeMIB;
 
+    @Field(INTERACTION_TYPE_MI_IDENTIFIER)
+    private String interactionTypeMIIdentifier;
+
     @Field(INTERACTOR_TYPE_A_B)
     private Set<String> interactorTypeAB = new HashSet<>();
 
@@ -234,7 +237,7 @@ public class SearchInteraction {
                              Set<String> interactionXrefs, Set<String> interactionAnnotations,
                              Set<String> interactionParameters, Date creationDate, Date updationDate,
                              Set<String> interactionChecksums, boolean negative, String interactionType,
-                             String interactorTypeA, String typeMIA, String typeMIB, String interactorTypeB) {
+                             String interactorTypeA, String typeMIA, String typeMIB, String interactorTypeB, String interactionTypeMIIdentifier) {
         this.interactionCount = interactionCount;
         this.idA = idA;
         this.idB = idB;
@@ -282,6 +285,7 @@ public class SearchInteraction {
         this.interactorTypeB = interactorTypeB;
         this.setTypeMIA(typeMIA);
         this.setTypeMIB(typeMIB);
+        this.interactionTypeMIIdentifier = interactionTypeMIIdentifier;
     }
 
 
@@ -846,6 +850,7 @@ public class SearchInteraction {
                 ", interactorTypeB='" + interactorTypeB + '\'' +
                 ", typeMIA='" + typeMIA + '\'' +
                 ", typeMIB='" + typeMIB + '\'' +
+                ", interactionTypeMIIdentifier='" + interactionTypeMIIdentifier + '\'' +
                 ", interactorTypeAB=" + interactorTypeAB +
                 '}';
     }
@@ -874,5 +879,13 @@ public class SearchInteraction {
 
     public void setTypeMIB(String typeMIB) {
         this.typeMIB = typeMIB;
+    }
+
+    public String getInteractionTypeMIIdentifier() {
+        return interactionTypeMIIdentifier;
+    }
+
+    public void setInteractionTypeMIIdentifier(String interactionTypeMIIdentifier) {
+        this.interactionTypeMIIdentifier = interactionTypeMIIdentifier;
     }
 }

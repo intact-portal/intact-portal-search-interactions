@@ -68,6 +68,8 @@ public class SearchInteractionFields {
     public static final String INTERACTION_CHECKSUM = "interaction_checksum";
     public static final String INTERACTION_NEGATIVE = "interaction_negative";
     public static final String INTERACTION_TYPE = "interaction_type";
+    public static final String INTERACTION_TYPE_MI_IDENTIFIER = "interaction_type_mi_identifier";
+    public static final String INTERACTION_TYPE_MI_IDENTIFIER_STR = "interaction_type_mi_identifier_str";
     public static final String INTERACTION_TYPE_STR = "interaction_type_str";
     public static final String HOST_ORGANISM = "host_organism";
     public static final String HOST_ORGANISM_STR = "host_organism_str";
