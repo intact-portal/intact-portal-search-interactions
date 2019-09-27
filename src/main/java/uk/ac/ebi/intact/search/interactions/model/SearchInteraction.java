@@ -219,6 +219,15 @@ public class SearchInteraction {
     @Field(INTERACTION_TYPE_MI_IDENTIFIER)
     private String interactionTypeMIIdentifier;
 
+    @Field(INTERACTION_DISRUPTED_BY_MUTATION)
+    private boolean interactionDisruptedByMutation;
+
+    @Field(DISRUPTED_BY_MUTATION_A)
+    private boolean disruptedByMutationA;
+
+    @Field(DISRUPTED_BY_MUTATION_B)
+    private boolean disruptedByMutationB;
+
     @Field(INTERACTOR_TYPE_A_B)
     private Set<String> interactorTypeAB = new HashSet<>();
 
@@ -237,7 +246,9 @@ public class SearchInteraction {
                              Set<String> interactionXrefs, Set<String> interactionAnnotations,
                              Set<String> interactionParameters, Date creationDate, Date updationDate,
                              Set<String> interactionChecksums, boolean negative, String interactionType,
-                             String interactorTypeA, String typeMIA, String typeMIB, String interactorTypeB, String interactionTypeMIIdentifier) {
+                             String interactorTypeA, String typeMIA, String typeMIB, String interactorTypeB,
+                             String interactionTypeMIIdentifier, boolean interactionDisruptedByMutation,
+                             boolean disruptedByMutationA, boolean disruptedByMutationB) {
         this.interactionCount = interactionCount;
         this.idA = idA;
         this.idB = idB;
@@ -283,9 +294,12 @@ public class SearchInteraction {
         this.interactionType = interactionType;
         this.interactorTypeA = interactorTypeA;
         this.interactorTypeB = interactorTypeB;
-        this.setTypeMIA(typeMIA);
-        this.setTypeMIB(typeMIB);
+        this.typeMIA = typeMIA;
+        this.typeMIB = typeMIB;
         this.interactionTypeMIIdentifier = interactionTypeMIIdentifier;
+        this.interactionDisruptedByMutation = interactionDisruptedByMutation;
+        this.disruptedByMutationA = disruptedByMutationA;
+        this.disruptedByMutationB = disruptedByMutationB;
     }
 
 
@@ -851,6 +865,9 @@ public class SearchInteraction {
                 ", typeMIA='" + typeMIA + '\'' +
                 ", typeMIB='" + typeMIB + '\'' +
                 ", interactionTypeMIIdentifier='" + interactionTypeMIIdentifier + '\'' +
+                ", interactionDisruptedByMutation=" + interactionDisruptedByMutation +
+                ", disruptedByMutationA=" + disruptedByMutationA +
+                ", disruptedByMutationB=" + disruptedByMutationB +
                 ", interactorTypeAB=" + interactorTypeAB +
                 '}';
     }
@@ -887,5 +904,29 @@ public class SearchInteraction {
 
     public void setInteractionTypeMIIdentifier(String interactionTypeMIIdentifier) {
         this.interactionTypeMIIdentifier = interactionTypeMIIdentifier;
+    }
+
+    public boolean isInteractionDisruptedByMutation() {
+        return interactionDisruptedByMutation;
+    }
+
+    public void setInteractionDisruptedByMutation(boolean interactionDisruptedByMutation) {
+        this.interactionDisruptedByMutation = interactionDisruptedByMutation;
+    }
+
+    public boolean isDisruptedByMutationA() {
+        return disruptedByMutationA;
+    }
+
+    public void setDisruptedByMutationA(boolean disruptedByMutationA) {
+        this.disruptedByMutationA = disruptedByMutationA;
+    }
+
+    public boolean isDisruptedByMutationB() {
+        return disruptedByMutationB;
+    }
+
+    public void setDisruptedByMutationB(boolean disruptedByMutationB) {
+        this.disruptedByMutationB = disruptedByMutationB;
     }
 }

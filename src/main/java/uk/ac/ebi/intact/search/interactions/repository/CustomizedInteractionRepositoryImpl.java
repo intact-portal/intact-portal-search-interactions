@@ -196,6 +196,9 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         search.addProjectionOnField(new SimpleField(EXPANSION_METHOD));
         search.addProjectionOnField(new SimpleField(INTACT_MISCORE));
         search.addProjectionOnField(new SimpleField(INTERACTION_TYPE_MI_IDENTIFIER));
+        search.addProjectionOnField(new SimpleField(INTERACTION_DISRUPTED_BY_MUTATION));
+        search.addProjectionOnField(new SimpleField(DISRUPTED_BY_MUTATION_A));
+        search.addProjectionOnField(new SimpleField(DISRUPTED_BY_MUTATION_B));
 
         return solrOperations.queryForPage(INTERACTIONS, search, SearchInteraction.class);
     }

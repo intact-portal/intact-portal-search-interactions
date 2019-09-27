@@ -87,6 +87,12 @@ public class SearchInteractionFields {
     public static final String TYPE_MI_B_STR = "type_MI_B_str";
     public static final String INTERACTOR_TYPE_A_B = "interactor_type_A_B";
     public static final String INTERACTOR_TYPE_A_B_STR = "interactor_type_A_B_str";
+    public static final String INTERACTION_DISRUPTED_BY_MUTATION = "interaction_contains_disrupted_mutation";
+    public static final String INTERACTION_DISRUPTED_BY_MUTATION_STR = "interaction_contains_disrupted_mutation_str";
+    public static final String DISRUPTED_BY_MUTATION_A = "disrupted_by_mutation_A";
+    public static final String DISRUPTED_BY_MUTATION_A_STR = "disrupted_by_mutation_A_str";
+    public static final String DISRUPTED_BY_MUTATION_B = "disrupted_by_mutation_B";
+    public static final String DISRUPTED_BY_MUTATION_B_STR = "disrupted_by_mutation_B_str";
 
 
     public static final String RELEASE_DATE = "release_date";
