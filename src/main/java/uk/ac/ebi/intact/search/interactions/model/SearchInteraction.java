@@ -222,11 +222,11 @@ public class SearchInteraction {
     @Field(INTERACTION_DISRUPTED_BY_MUTATION)
     private boolean interactionDisruptedByMutation;
 
-    @Field(DISRUPTED_BY_MUTATION_A)
-    private boolean disruptedByMutationA;
+    @Field(MUTATION_A)
+    private boolean mutationA;
 
-    @Field(DISRUPTED_BY_MUTATION_B)
-    private boolean disruptedByMutationB;
+    @Field(MUTATION_B)
+    private boolean mutationB;
 
     @Field(INTERACTOR_TYPE_A_B)
     private Set<String> interactorTypeAB = new HashSet<>();
@@ -248,7 +248,7 @@ public class SearchInteraction {
                              Set<String> interactionChecksums, boolean negative, String interactionType,
                              String interactorTypeA, String typeMIA, String typeMIB, String interactorTypeB,
                              String interactionTypeMIIdentifier, boolean interactionDisruptedByMutation,
-                             boolean disruptedByMutationA, boolean disruptedByMutationB) {
+                             boolean mutationA, boolean mutationB) {
         this.interactionCount = interactionCount;
         this.idA = idA;
         this.idB = idB;
@@ -298,8 +298,8 @@ public class SearchInteraction {
         this.typeMIB = typeMIB;
         this.interactionTypeMIIdentifier = interactionTypeMIIdentifier;
         this.interactionDisruptedByMutation = interactionDisruptedByMutation;
-        this.disruptedByMutationA = disruptedByMutationA;
-        this.disruptedByMutationB = disruptedByMutationB;
+        this.setMutationA(mutationA);
+        this.setMutationB(mutationB);
     }
 
 
@@ -866,8 +866,8 @@ public class SearchInteraction {
                 ", typeMIB='" + typeMIB + '\'' +
                 ", interactionTypeMIIdentifier='" + interactionTypeMIIdentifier + '\'' +
                 ", interactionDisruptedByMutation=" + interactionDisruptedByMutation +
-                ", disruptedByMutationA=" + disruptedByMutationA +
-                ", disruptedByMutationB=" + disruptedByMutationB +
+                ", mutationA=" + mutationA +
+                ", mutationB=" + mutationB +
                 ", interactorTypeAB=" + interactorTypeAB +
                 '}';
     }
@@ -914,19 +914,20 @@ public class SearchInteraction {
         this.interactionDisruptedByMutation = interactionDisruptedByMutation;
     }
 
-    public boolean isDisruptedByMutationA() {
-        return disruptedByMutationA;
+
+    public boolean isMutationA() {
+        return mutationA;
     }
 
-    public void setDisruptedByMutationA(boolean disruptedByMutationA) {
-        this.disruptedByMutationA = disruptedByMutationA;
+    public void setMutationA(boolean mutationA) {
+        this.mutationA = mutationA;
     }
 
-    public boolean isDisruptedByMutationB() {
-        return disruptedByMutationB;
+    public boolean isMutationB() {
+        return mutationB;
     }
 
-    public void setDisruptedByMutationB(boolean disruptedByMutationB) {
-        this.disruptedByMutationB = disruptedByMutationB;
+    public void setMutationB(boolean mutationB) {
+        this.mutationB = mutationB;
     }
 }
