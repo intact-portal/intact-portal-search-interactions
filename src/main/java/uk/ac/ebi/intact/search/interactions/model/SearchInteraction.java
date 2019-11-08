@@ -24,6 +24,10 @@ public class SearchInteraction {
     @Indexed
     private String interactionAc;
 
+    @Field(BINARY_INTERACTION_ID)
+    @Indexed
+    private int binaryInteractionId;
+
     @Field(INTERACTOR_IDA)
     private String idA;
 
@@ -248,7 +252,7 @@ public class SearchInteraction {
                              Set<String> interactionChecksums, boolean negative, String interactionType,
                              String interactorTypeA, String typeMIA, String typeMIB, String interactorTypeB,
                              String interactionTypeMIIdentifier, boolean interactionDisruptedByMutation,
-                             boolean mutationA, boolean mutationB) {
+                             boolean mutationA, boolean mutationB, int binaryInteractionId) {
         this.interactionCount = interactionCount;
         this.idA = idA;
         this.idB = idB;
@@ -298,8 +302,9 @@ public class SearchInteraction {
         this.typeMIB = typeMIB;
         this.interactionTypeMIIdentifier = interactionTypeMIIdentifier;
         this.interactionDisruptedByMutation = interactionDisruptedByMutation;
-        this.setMutationA(mutationA);
-        this.setMutationB(mutationB);
+        this.mutationA = mutationA;
+        this.mutationB = mutationB;
+        this.setBinaryInteractionId(binaryInteractionId);
     }
 
 
@@ -801,6 +806,7 @@ public class SearchInteraction {
     public String toString() {
         return "SearchInteraction{" +
                 "interactionAc='" + interactionAc + '\'' +
+                ", binaryInteractionId=" + getBinaryInteractionId() +
                 ", idA='" + idA + '\'' +
                 ", idB='" + idB + '\'' +
                 ", interactorAAc='" + interactorAAc + '\'' +
@@ -929,5 +935,13 @@ public class SearchInteraction {
 
     public void setMutationB(boolean mutationB) {
         this.mutationB = mutationB;
+    }
+
+    public int getBinaryInteractionId() {
+        return binaryInteractionId;
+    }
+
+    public void setBinaryInteractionId(int binaryInteractionId) {
+        this.binaryInteractionId = binaryInteractionId;
     }
 }

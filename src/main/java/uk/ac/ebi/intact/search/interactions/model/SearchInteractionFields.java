@@ -5,6 +5,7 @@ package uk.ac.ebi.intact.search.interactions.model;
  */
 public class SearchInteractionFields {
 
+    public static final String BINARY_INTERACTION_ID = "binary_interaction_id";
     public static final String INTERACTOR_IDA = "interactor_idA";
     public static final String INTERACTOR_IDB = "interactor_idB";
     public static final String INTERACTOR_AC_A = "interactor_acA";
