@@ -190,6 +190,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         search.addProjectionOnField(new SimpleField(TYPE_B));
         search.addProjectionOnField(new SimpleField(TYPE_MI_A));
         search.addProjectionOnField(new SimpleField(TYPE_MI_B));
+        search.addProjectionOnField(new SimpleField(MOLECULE_A));
         search.addProjectionOnField(new SimpleField(MOLECULE_B));
         search.addProjectionOnField(new SimpleField(UNIQUE_ID_A));
         search.addProjectionOnField(new SimpleField(UNIQUE_ID_B));
