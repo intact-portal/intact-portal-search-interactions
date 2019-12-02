@@ -437,6 +437,7 @@
   <field name="annotationsA" type="text_general"/>
   <field name="annotationsB" type="text_general"/>
   <field name="author" type="text_general"/>
+  <field name="binary_interaction_id" type="plongs"/>
   <field name="biological_role_A" type="text_general"/>
   <field name="biological_role_B" type="text_general"/>
   <field name="checksumsA" type="text_general"/>
@@ -444,6 +445,8 @@
   <field name="confidence_values" type="text_general"/>
   <field name="creation_date" type="pdates"/>
   <field name="default" type="text_general" multiValued="true" indexed="true" stored="true"/>
+  <field name="disrupted_by_mutation_A" type="booleans"/>
+  <field name="disrupted_by_mutation_B" type="booleans"/>
   <field name="expansion_method" type="text_general"/>
   <field name="experimental_preparations_A" type="text_general"/>
   <field name="experimental_preparations_B" type="text_general"/>
@@ -462,20 +465,27 @@
   <field name="interaction_ac" type="text_general"/>
   <field name="interaction_annotations" type="text_general"/>
   <field name="interaction_checksum" type="text_general"/>
+  <field name="interaction_contains_disrupted_mutation" type="booleans"/>
   <field name="interaction_count" type="plongs"/>
   <field name="interaction_detection_method" type="text_general"/>
   <field name="interaction_identifiers" type="text_general"/>
   <field name="interaction_negative" type="booleans"/>
   <field name="interaction_parameters" type="text_general"/>
   <field name="interaction_type" type="text_general"/>
+  <field name="interaction_type_mi_identifier" type="text_general"/>
   <field name="interaction_xrefs" type="text_general"/>
   <field name="interactions_ids" type="text_general"/>
   <field name="interactor_acA" type="text_general"/>
   <field name="interactor_acB" type="text_general"/>
   <field name="interactor_idA" type="text_general"/>
   <field name="interactor_idB" type="text_general"/>
+  <field name="interactor_type_A" type="text_general"/>
+  <field name="interactor_type_A_B" type="text_general"/>
+  <field name="interactor_type_B" type="text_general"/>
   <field name="moleculeA" type="text_general"/>
   <field name="moleculeB" type="text_general"/>
+  <field name="mutation_A" type="booleans"/>
+  <field name="mutation_B" type="booleans"/>
   <field name="publication_authors" type="text_general"/>
   <field name="publication_id" type="text_general"/>
   <field name="publication_identifiers" type="text_general"/>
@@ -493,6 +503,8 @@
   <field name="text2" type="text_en" multiValued="true" indexed="true" stored="true"/>
   <field name="typeA" type="text_general"/>
   <field name="typeB" type="text_general"/>
+  <field name="type_MI_A" type="text_general"/>
+  <field name="type_MI_B" type="text_general"/>
   <field name="uniqueIdA" type="text_general"/>
   <field name="uniqueIdB" type="text_general"/>
   <field name="uniqueKey" type="text_general"/>
@@ -624,4 +636,10 @@
   <copyField source="stoichiometry_B" dest="stoichiometry_B_str" maxChars="256"/>
   <copyField source="stoichiometry_A" dest="stoichiometry_A_str" maxChars="256"/>
   <copyField source="interaction_checksum" dest="interaction_checksum_str" maxChars="256"/>
+  <copyField source="interactor_type_A_B" dest="interactor_type_A_B_str" maxChars="256"/>
+  <copyField source="interactor_type_A" dest="interactor_type_A_str" maxChars="256"/>
+  <copyField source="interactor_type_B" dest="interactor_type_B_str" maxChars="256"/>
+  <copyField source="type_MI_A" dest="type_MI_A_str" maxChars="256"/>
+  <copyField source="type_MI_B" dest="type_MI_B_str" maxChars="256"/>
+  <copyField source="interaction_type_mi_identifier" dest="interaction_type_mi_identifier_str" maxChars="256"/>
 </schema>
