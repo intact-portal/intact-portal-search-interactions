@@ -5,6 +5,9 @@ package uk.ac.ebi.intact.search.interactions.model;
  */
 public class SearchInteractionFields {
 
+    /* Here Nomenclature is different from Interactor Index Fields.
+     * Reason being A and B at the end of interactor fields implicitly tell you they are interactor*/
+
     public static final String BINARY_INTERACTION_ID = "binary_interaction_id";
     public static final String INTERACTOR_IDA = "interactor_idA";
     public static final String INTERACTOR_IDB = "interactor_idB";
@@ -22,6 +25,8 @@ public class SearchInteractionFields {
     public static final String TAX_IDB = "taxIdB";
     public static final String TYPE_A = "typeA";
     public static final String TYPE_B = "typeB";
+    public static final String TYPE_A_STR = "typeA_str";
+    public static final String TYPE_B_STR = "typeB_str";
     public static final String XREFS_A = "xrefsA";
     public static final String XREFS_B = "xrefsB";
     public static final String ANNOTATIONS_A = "annotationsA";
@@ -78,10 +83,6 @@ public class SearchInteractionFields {
     public static final String INTERACTION_AC_STR = "interaction_ac_str";
     public static final String EXPERIMENTAL_PREPARATIONS_A = "experimental_preparations_A";
     public static final String EXPERIMENTAL_PREPARATIONS_B = "experimental_preparations_B";
-    public static final String INTERACTOR_TYPE_A = "interactor_type_A";
-    public static final String INTERACTOR_TYPE_A_STR = "interactor_type_A_str";
-    public static final String INTERACTOR_TYPE_B = "interactor_type_B";
-    public static final String INTERACTOR_TYPE_B_STR = "interactor_type_B_str";
     public static final String TYPE_MI_A = "type_MI_A";
     public static final String TYPE_MI_A_STR = "type_MI_A_str";
     public static final String TYPE_MI_B = "type_MI_B";

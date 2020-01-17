@@ -208,12 +208,6 @@ public class SearchInteraction {
     @Field(INTERACTION_COUNT)
     private Integer interactionCount;
 
-    @Field(INTERACTOR_TYPE_A)
-    private String interactorTypeA;
-
-    @Field(INTERACTOR_TYPE_B)
-    private String interactorTypeB;
-
     @Field(TYPE_MI_A)
     private String typeMIA;
 
@@ -296,8 +290,6 @@ public class SearchInteraction {
         this.interactionChecksums = interactionChecksums;
         this.negative = negative;
         this.interactionType = interactionType;
-        this.interactorTypeA = interactorTypeA;
-        this.interactorTypeB = interactorTypeB;
         this.typeMIA = typeMIA;
         this.typeMIB = typeMIB;
         this.interactionTypeMIIdentifier = interactionTypeMIIdentifier;
@@ -793,15 +785,6 @@ public class SearchInteraction {
         this.publicationIdentifiers = publicationIdentifiers;
     }
 
-    public String getInteractorTypeA() {
-        return interactorTypeA;
-    }
-
-    public void setInteractorTypeA(String interactorTypeA) {
-        this.interactorTypeA = interactorTypeA;
-        this.interactorTypeAB.add(interactorTypeA);
-    }
-
     @Override
     public String toString() {
         return "SearchInteraction{" +
@@ -866,8 +849,6 @@ public class SearchInteraction {
                 ", uniqueIdB='" + uniqueIdB + '\'' +
                 ", publicationIdentifiers=" + publicationIdentifiers +
                 ", interactionCount=" + interactionCount +
-                ", interactorTypeA='" + interactorTypeA + '\'' +
-                ", interactorTypeB='" + interactorTypeB + '\'' +
                 ", typeMIA='" + typeMIA + '\'' +
                 ", typeMIB='" + typeMIB + '\'' +
                 ", interactionTypeMIIdentifier='" + interactionTypeMIIdentifier + '\'' +
@@ -877,16 +858,6 @@ public class SearchInteraction {
                 ", interactorTypeAB=" + interactorTypeAB +
                 '}';
     }
-
-    public String getInteractorTypeB() {
-        return interactorTypeB;
-    }
-
-    public void setInteractorTypeB(String interactorTypeB) {
-        this.interactorTypeB = interactorTypeB;
-        this.interactorTypeAB.add(interactorTypeB);
-    }
-
 
     public String getTypeMIA() {
         return typeMIA;

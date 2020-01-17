@@ -451,11 +451,11 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
             for (String value : interactorType) {
 
                 if (conditions == null) {
-                    conditions = new Criteria(INTERACTOR_TYPE_A_STR).is(value).or(
-                            new Criteria(INTERACTOR_TYPE_B_STR).is(value));
+                    conditions = new Criteria(TYPE_A_STR).is(value).or(
+                            new Criteria(TYPE_B_STR).is(value));
                 } else {
-                    conditions = conditions.or(new Criteria(INTERACTOR_TYPE_A_STR).is(value)).or(
-                            new Criteria(INTERACTOR_TYPE_B_STR).is(value));
+                    conditions = conditions.or(new Criteria(TYPE_A_STR).is(value)).or(
+                            new Criteria(TYPE_B_STR).is(value));
                 }
             }
 
