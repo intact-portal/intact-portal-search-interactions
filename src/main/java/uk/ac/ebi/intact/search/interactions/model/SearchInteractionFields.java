@@ -9,10 +9,10 @@ public class SearchInteractionFields {
      * Reason being A and B at the end of interactor fields implicitly tell you they are interactor*/
 
     public static final String BINARY_INTERACTION_ID = "binary_interaction_id";
-    public static final String INTERACTOR_IDA = "interactor_idA";
-    public static final String INTERACTOR_IDB = "interactor_idB";
-    public static final String INTERACTOR_AC_A = "interactor_acA";
-    public static final String INTERACTOR_AC_B = "interactor_acB";
+    public static final String ID_A = "idA";
+    public static final String ID_B = "idB";
+    public static final String AC_A = "acA";
+    public static final String AC_B = "acB";
     public static final String MOLECULE_A = "moleculeA";
     public static final String MOLECULE_B = "moleculeB";
     public static final String ALT_IDS_A = "altIdsA";
@@ -67,7 +67,7 @@ public class SearchInteractionFields {
     public static final String CONFIDENCE_VALUES_STR = "confidence_values_str";
     public static final String EXPANSION_METHOD = "expansion_method";
     public static final String XREFS = "xrefs";
-    public static final String ANNOTATIONS = "annotations";
+    public static final String ALL_ANNOTATIONS = "all_annotations";
     public static final String PARAMETERS = "parameters";
     public static final String CREATION_DATE = "creation_date";
     public static final String UPDATION_DATE = "updation_date";
@@ -95,6 +95,7 @@ public class SearchInteractionFields {
     public static final String MUTATION_A_STR = "mutation_A_str";
     public static final String MUTATION_B = "mutation_B";
     public static final String MUTATION_B_STR = "mutation_B_str";
+    public static final String FEATURE_COUNT = "feature_count";
 
 
     public static final String RELEASE_DATE = "release_date";

@@ -28,17 +28,17 @@ public class SearchInteraction {
     @Indexed
     private int binaryInteractionId;
 
-    @Field(INTERACTOR_IDA)
+    @Field(ID_A)
     private String idA;
 
-    @Field(INTERACTOR_IDB)
+    @Field(ID_B)
     private String idB;
 
-    @Field(INTERACTOR_AC_A)
-    private String interactorAAc;
+    @Field(AC_A)
+    private String acA;
 
-    @Field(INTERACTOR_AC_B)
-    private String interactorBAc;
+    @Field(AC_B)
+    private String acB;
 
     @Field(ALT_IDS_A)
     private Set<String> altIdsA;
@@ -147,8 +147,8 @@ public class SearchInteraction {
     @Field(XREFS)
     private Set<String> xrefs;
 
-    @Field(ANNOTATIONS)
-    private Set<String> annotations;
+    @Field(ALL_ANNOTATIONS)
+    private Set<String> allAnnotations;
 
     @Field(PARAMETERS)
     private Set<String> parameters;
@@ -241,15 +241,17 @@ public class SearchInteraction {
                              String stoichiometryB, Set<String> identificationMethodA, Set<String> identificationMethodB,
                              String detectionMethod, Set<String> authors, String sourceDatabase,
                              Set<String> identifiers, Set<String> confidenceValues, String expansionMethod,
-                             Set<String> xrefs, Set<String> annotations,
+                             Set<String> xrefs, Set<String> allAnnotations,
                              Set<String> parameters, Date creationDate, Date updationDate,
                              Set<String> checksums, boolean negative, String type,
                              String interactorTypeA, String typeMIA, String typeMIB, String interactorTypeB,
                              String typeMIIdentifier, boolean disruptedByMutation,
-                             boolean mutationA, boolean mutationB, int binaryInteractionId) {
+                             boolean mutationA, boolean mutationB, int binaryInteractionId, String acA, String acB) {
         this.count = count;
         this.idA = idA;
         this.idB = idB;
+        this.acA = acA;
+        this.acB = acB;
         this.altIdsA = altIdsA;
         this.altIdsB = altIdsB;
         this.aliasesA = aliasesA;
@@ -283,7 +285,7 @@ public class SearchInteraction {
         this.confidenceValues = confidenceValues;
         this.expansionMethod = expansionMethod;
         this.xrefs = xrefs;
-        this.annotations = annotations;
+        this.allAnnotations = allAnnotations;
         this.parameters = parameters;
         this.creationDate = creationDate;
         this.updationDate = updationDate;
@@ -630,12 +632,12 @@ public class SearchInteraction {
         this.xrefs = xrefs;
     }
 
-    public Set<String> getAnnotations() {
-        return annotations;
+    public Set<String> getAllAnnotations() {
+        return allAnnotations;
     }
 
-    public void setAnnotations(Set<String> annotations) {
-        this.annotations = annotations;
+    public void setAllAnnotations(Set<String> allAnnotations) {
+        this.allAnnotations = allAnnotations;
     }
 
     public Set<String> getParameters() {
@@ -694,20 +696,20 @@ public class SearchInteraction {
         this.interactorTypeAB = interactorTypeAB;
     }
 
-    public String getInteractorAAc() {
-        return interactorAAc;
+    public String getAcA() {
+        return acA;
     }
 
-    public void setInteractorAAc(String interactorAAc) {
-        this.interactorAAc = interactorAAc;
+    public void setAcA(String acA) {
+        this.acA = acA;
     }
 
-    public String getInteractorBAc() {
-        return interactorBAc;
+    public String getAcB() {
+        return acB;
     }
 
-    public void setInteractorBAc(String interactorBAc) {
-        this.interactorBAc = interactorBAc;
+    public void setAcB(String acB) {
+        this.acB = acB;
     }
 
     public Set<String> getFeatureShortLabelA() {
@@ -854,8 +856,8 @@ public class SearchInteraction {
                 ", binaryInteractionId=" + binaryInteractionId +
                 ", idA='" + idA + '\'' +
                 ", idB='" + idB + '\'' +
-                ", interactorAAc='" + interactorAAc + '\'' +
-                ", interactorBAc='" + interactorBAc + '\'' +
+                ", acA='" + acA + '\'' +
+                ", acB='" + acB + '\'' +
                 ", altIdsA=" + altIdsA +
                 ", altIdsB=" + altIdsB +
                 ", aliasesA=" + aliasesA +
@@ -891,7 +893,7 @@ public class SearchInteraction {
                 ", confidenceValues=" + confidenceValues +
                 ", expansionMethod='" + expansionMethod + '\'' +
                 ", xrefs=" + xrefs +
-                ", annotations=" + annotations +
+                ", allAnnotations=" + allAnnotations +
                 ", parameters=" + parameters +
                 ", creationDate=" + creationDate +
                 ", updationDate=" + updationDate +

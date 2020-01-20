@@ -179,14 +179,14 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
         //interactor details
         search.addProjectionOnField(new SimpleField(BINARY_INTERACTION_ID));
-        search.addProjectionOnField(new SimpleField(INTERACTOR_AC_A));
-        search.addProjectionOnField(new SimpleField(INTERACTOR_AC_B));
+        search.addProjectionOnField(new SimpleField(AC_A));
+        search.addProjectionOnField(new SimpleField(AC_B));
         search.addProjectionOnField(new SimpleField(SPECIES_A));
         search.addProjectionOnField(new SimpleField(SPECIES_B));
         search.addProjectionOnField(new SimpleField(TAX_IDA));
         search.addProjectionOnField(new SimpleField(TAX_IDB));
-        search.addProjectionOnField(new SimpleField(INTERACTOR_IDA));
-        search.addProjectionOnField(new SimpleField(INTERACTOR_IDB));
+        search.addProjectionOnField(new SimpleField(ID_A));
+        search.addProjectionOnField(new SimpleField(ID_B));
         search.addProjectionOnField(new SimpleField(TYPE_A));
         search.addProjectionOnField(new SimpleField(TYPE_B));
         search.addProjectionOnField(new SimpleField(TYPE_MI_A));

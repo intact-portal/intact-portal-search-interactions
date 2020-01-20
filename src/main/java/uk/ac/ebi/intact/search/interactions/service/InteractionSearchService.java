@@ -131,16 +131,16 @@ public class InteractionSearchService {
         for (SearchInteraction searchInteraction : interactions) {
             try {
                 SearchGraphLink searchGraphLink = new SearchGraphLink();
-                searchGraphLink.setSource(searchInteraction.getInteractorAAc());
-                searchGraphLink.setTarget(searchInteraction.getInteractorBAc());
+                searchGraphLink.setSource(searchInteraction.getAcA());
+                searchGraphLink.setTarget(searchInteraction.getAcB());
                 searchGraphLink.setInteractionAc(searchInteraction.getAc());
                 searchGraphLink.setInteractionType(searchInteraction.getType());
                 searchGraphLink.setInteractionDetectionMethod(searchInteraction.getDetectionMethod());
                 searchGraphLink.setColor(GraphUtility.getColorForInteractionType(searchInteraction.getType()));
 
-                if (!interactorSet.contains(searchInteraction.getInteractorAAc())) {
+                if (!interactorSet.contains(searchInteraction.getAcA())) {
                     SearchGraphNode searchGraphNode = new SearchGraphNode();
-                    searchGraphNode.setId(searchInteraction.getInteractorAAc());
+                    searchGraphNode.setId(searchInteraction.getAcA());
                     searchGraphNode.setSpeciesName(searchInteraction.getSpeciesA());
                     searchGraphNode.setTaxId(searchInteraction.getTaxIdA());
                     searchGraphNode.setInteractorId(searchInteraction.getMoleculeA());
@@ -149,12 +149,12 @@ public class InteractionSearchService {
                     searchGraphNode.setInteractorName(searchInteraction.getMoleculeA());
                     searchGraphNode.setColor(GraphUtility.getColorForTaxId(searchInteraction.getTaxIdA()));
                     searchGraphNodes.add(searchGraphNode);
-                    interactorSet.add(searchInteraction.getInteractorAAc());
+                    interactorSet.add(searchInteraction.getAcA());
                 }
 
-                if (!interactorSet.contains(searchInteraction.getInteractorBAc())) {
+                if (!interactorSet.contains(searchInteraction.getAcB())) {
                     SearchGraphNode searchGraphNode = new SearchGraphNode();
-                    searchGraphNode.setId(searchInteraction.getInteractorBAc());
+                    searchGraphNode.setId(searchInteraction.getAcB());
                     searchGraphNode.setSpeciesName(searchInteraction.getSpeciesB());
                     searchGraphNode.setTaxId(searchInteraction.getTaxIdB());
                     searchGraphNode.setInteractorId(searchInteraction.getMoleculeB());
@@ -163,7 +163,7 @@ public class InteractionSearchService {
                     searchGraphNode.setInteractorName(searchInteraction.getMoleculeB());
                     searchGraphNode.setColor(GraphUtility.getColorForTaxId(searchInteraction.getTaxIdB()));
                     searchGraphNodes.add(searchGraphNode);
-                    interactorSet.add(searchInteraction.getInteractorBAc());
+                    interactorSet.add(searchInteraction.getAcB());
                 }
 
                 searchGraphLinks.add(searchGraphLink);
