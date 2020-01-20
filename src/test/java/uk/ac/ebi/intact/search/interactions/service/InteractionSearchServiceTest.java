@@ -106,7 +106,7 @@ public class InteractionSearchServiceTest {
      */
     @Test
     public void facetTest() {
-        FacetPage<SearchInteraction>  interaction = interactionSearchService.findInteractionWithFacet(
+        FacetPage<SearchInteraction> interaction = interactionSearchService.findInteractionWithFacet(
                 "physical association",
                 null,
                 null,
@@ -124,15 +124,15 @@ public class InteractionSearchServiceTest {
         //TODO This is because SearchInteractionResult is now in the controller
         SearchInteractionResult interactionOp = new SearchInteractionResult(interaction);
         Set<String> facetFields = interactionOp.getFacetResultPage().keySet();
-        assertTrue(facetFields.contains(INTERACTION_NEGATIVE));
+        assertTrue(facetFields.contains(NEGATIVE));
         assertTrue(facetFields.contains(INTACT_MISCORE));
-        assertTrue(facetFields.contains(INTERACTION_DETECTION_METHOD_STR));
-        assertTrue(facetFields.contains(INTERACTION_TYPE_STR));
+        assertTrue(facetFields.contains(DETECTION_METHOD_STR));
+        assertTrue(facetFields.contains(TYPE_STR));
         assertTrue(facetFields.contains(HOST_ORGANISM_STR));
         assertTrue(facetFields.contains(SPECIES_A_B_STR));
 
         for (String facetField : interactionOp.getFacetResultPage().keySet()) {
-            if (facetField.equals(INTERACTION_NEGATIVE)) {
+            if (facetField.equals(NEGATIVE)) {
                 List<SearchInteractionResult.FacetCount> facetCounts = interactionOp.getFacetResultPage().get(facetField);
                 for (SearchInteractionResult.FacetCount facetCount : facetCounts) {
                     if (facetCount.getValue().equals("false")) {
@@ -159,7 +159,7 @@ public class InteractionSearchServiceTest {
                 }
             }
 
-            if (facetField.equals(INTERACTION_DETECTION_METHOD_STR)) {
+            if (facetField.equals(DETECTION_METHOD_STR)) {
                 List<SearchInteractionResult.FacetCount> facetCounts = interactionOp.getFacetResultPage().get(facetField);
                 for (SearchInteractionResult.FacetCount facetCount : facetCounts) {
                     if (facetCount.getValue().equals("anti bait coip")) {
@@ -177,7 +177,7 @@ public class InteractionSearchServiceTest {
                 }
             }
 
-            if (facetField.equals(INTERACTION_TYPE_STR)) {
+            if (facetField.equals(TYPE_STR)) {
                 List<SearchInteractionResult.FacetCount> facetCounts = interactionOp.getFacetResultPage().get(facetField);
                 for (SearchInteractionResult.FacetCount facetCount : facetCounts) {
                     if (facetCount.getValue().equals("physical association")) {
@@ -289,7 +289,7 @@ public class InteractionSearchServiceTest {
 
         int size = 10;
 
-        FacetPage<SearchInteraction>  interactionOp = interactionSearchService.findInteractionWithFacet(
+        FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
                 "physical association",
                 species,
                 interactorType,

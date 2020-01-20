@@ -55,32 +55,32 @@ public class SearchInteractionFields {
     public static final String IDENTIFICATION_METHOD_A = "identification_method_A";
     public static final String IDENTIFICATION_METHOD_B = "identification_method_B";
 
-    public static final String INTERACTION_DETECTION_METHOD = "interaction_detection_method";
-    public static final String INTERACTION_DETECTION_METHOD_STR = "interaction_detection_method_str";
+    public static final String DETECTION_METHOD = "detection_method";
+    public static final String DETECTION_METHOD_STR = "detection_method_str";
     public static final String PUBLICATION_AUTHORS = "publication_authors";
     public static final String FIRST_AUTHOR = "first_author";
     public static final String PUBLICATION_IDENTIFIERS = "publication_identifiers";
     public static final String SOURCE_DATABASE = "source_database";
-    public static final String INTERACTION_IDENTIFIERS = "interaction_identifiers";
+    public static final String IDENTIFIERS = "identifiers";
     public static final String CONFIDENCE_VALUES = "confidence_values";
     public static final String INTACT_MISCORE = "intact_miscore";
     public static final String CONFIDENCE_VALUES_STR = "confidence_values_str";
     public static final String EXPANSION_METHOD = "expansion_method";
-    public static final String INTERACTION_XREFS = "interaction_xrefs";
-    public static final String INTERACTION_ANNOTATIONS = "interaction_annotations";
-    public static final String INTERACTION_PARAMETERS = "interaction_parameters";
+    public static final String XREFS = "xrefs";
+    public static final String ANNOTATIONS = "annotations";
+    public static final String PARAMETERS = "parameters";
     public static final String CREATION_DATE = "creation_date";
     public static final String UPDATION_DATE = "updation_date";
-    public static final String INTERACTION_CHECKSUM = "interaction_checksum";
-    public static final String INTERACTION_NEGATIVE = "interaction_negative";
-    public static final String INTERACTION_TYPE = "interaction_type";
-    public static final String INTERACTION_TYPE_MI_IDENTIFIER = "interaction_type_mi_identifier";
-    public static final String INTERACTION_TYPE_MI_IDENTIFIER_STR = "interaction_type_mi_identifier_str";
-    public static final String INTERACTION_TYPE_STR = "interaction_type_str";
+    public static final String CHECKSUM = "checksum";
+    public static final String NEGATIVE = "negative";
+    public static final String TYPE = "type";
+    public static final String TYPE_MI_IDENTIFIER = "type_mi_identifier";
+    public static final String TYPE_MI_IDENTIFIER_STR = "type_mi_identifier_str";
+    public static final String TYPE_STR = "type_str";
     public static final String HOST_ORGANISM = "host_organism";
     public static final String HOST_ORGANISM_STR = "host_organism_str";
-    public static final String INTERACTION_AC = "interaction_ac";
-    public static final String INTERACTION_AC_STR = "interaction_ac_str";
+    public static final String AC = "ac";
+    public static final String AC_STR = "ac_str";
     public static final String EXPERIMENTAL_PREPARATIONS_A = "experimental_preparations_A";
     public static final String EXPERIMENTAL_PREPARATIONS_B = "experimental_preparations_B";
     public static final String TYPE_MI_A = "type_MI_A";
@@ -89,8 +89,8 @@ public class SearchInteractionFields {
     public static final String TYPE_MI_B_STR = "type_MI_B_str";
     public static final String INTERACTOR_TYPE_A_B = "interactor_type_A_B";
     public static final String INTERACTOR_TYPE_A_B_STR = "interactor_type_A_B_str";
-    public static final String INTERACTION_DISRUPTED_BY_MUTATION = "interaction_contains_disrupted_mutation";
-    public static final String INTERACTION_DISRUPTED_BY_MUTATION_STR = "interaction_contains_disrupted_mutation_str";
+    public static final String DISRUPTED_BY_MUTATION = "disrupted_by_mutation";
+    public static final String DISRUPTED_BY_MUTATION_STR = "disrupted_by_mutation_str";
     public static final String MUTATION_A = "mutation_A";
     public static final String MUTATION_A_STR = "mutation_A_str";
     public static final String MUTATION_B = "mutation_B";
@@ -99,7 +99,7 @@ public class SearchInteractionFields {
 
     public static final String RELEASE_DATE = "release_date";
 
-    public static final String INTERACTION_COUNT = "interaction_count";
+    public static final String COUNT = "count";
 
     public static final String DEFAULT = "default"; //Copy field for general search
 }

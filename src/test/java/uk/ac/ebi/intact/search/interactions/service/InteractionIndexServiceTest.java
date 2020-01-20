@@ -36,10 +36,10 @@ public class InteractionIndexServiceTest {
         //Create new interactors documents
         searchInteraction1 = new SearchInteraction();
 
-        searchInteraction1.setInteractionAc("interaction_c1");
+        searchInteraction1.setAc("interaction_c1");
         searchInteraction1.setAuthors(new LinkedHashSet<>(Collections.singletonList("Pa et al.")));
-        searchInteraction1.setInteractionCount(50);
-        searchInteraction1.setInteractionIdentifiers(
+        searchInteraction1.setCount(50);
+        searchInteraction1.setIdentifiers(
                 new HashSet<>(Arrays.asList("interaction_id1", "interaction_id2", "interaction_id3")));
         searchInteraction1.setPublicationIdentifiers(
                 new HashSet<>(Collections.singletonList("publication_1")));
@@ -47,10 +47,10 @@ public class InteractionIndexServiceTest {
 
         searchInteraction2 = new SearchInteraction();
 
-        searchInteraction2.setInteractionAc("interaction_c2 ");
+        searchInteraction2.setAc("interaction_c2 ");
         searchInteraction2.setAuthors(new LinkedHashSet<>(Collections.singletonList("Ma et al.")));
-        searchInteraction2.setInteractionCount(50);
-        searchInteraction2.setInteractionIdentifiers(
+        searchInteraction2.setCount(50);
+        searchInteraction2.setIdentifiers(
                 new HashSet<>(Arrays.asList("interaction_id1", "interaction_id2", "interaction_id3")));
         searchInteraction2.setPublicationIdentifiers(
                 new HashSet<>(Collections.singletonList("publication_1")));
@@ -67,7 +67,7 @@ public class InteractionIndexServiceTest {
         interactionIndexService.save(searchInteraction1);
 
         Optional<SearchInteraction> interactionOp = interactionSearchService.findByInteractionAc("interaction_c1");
-        SearchInteraction interaction=interactionOp.get();
+        SearchInteraction interaction = interactionOp.get();
         assertEquals(interaction.getAuthors(), searchInteraction1.getAuthors());
         assertEquals(interactionSearchService.countTotal(), 1);
     }

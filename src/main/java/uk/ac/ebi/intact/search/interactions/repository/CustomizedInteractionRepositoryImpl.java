@@ -86,9 +86,9 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
         // facet
         FacetOptions facetOptions = new FacetOptions(
-                INTERACTION_DETECTION_METHOD_STR,
-                INTERACTION_TYPE_STR, HOST_ORGANISM_STR,
-                INTERACTION_NEGATIVE, INTACT_MISCORE,
+                DETECTION_METHOD_STR,
+                TYPE_STR, HOST_ORGANISM_STR,
+                NEGATIVE, INTACT_MISCORE,
                 SPECIES_A_B_STR);
         facetOptions.setFacetLimit(FACET_MIN_COUNT);
         facetOptions.addFacetByRange(
@@ -173,9 +173,9 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         //projection
 
         //interaction details
-        search.addProjectionOnField(new SimpleField(INTERACTION_AC));
-        search.addProjectionOnField(new SimpleField(INTERACTION_TYPE));
-        search.addProjectionOnField(new SimpleField(INTERACTION_DETECTION_METHOD));
+        search.addProjectionOnField(new SimpleField(AC));
+        search.addProjectionOnField(new SimpleField(TYPE));
+        search.addProjectionOnField(new SimpleField(DETECTION_METHOD));
 
         //interactor details
         search.addProjectionOnField(new SimpleField(BINARY_INTERACTION_ID));
@@ -197,8 +197,8 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         search.addProjectionOnField(new SimpleField(UNIQUE_ID_B));
         search.addProjectionOnField(new SimpleField(EXPANSION_METHOD));
         search.addProjectionOnField(new SimpleField(INTACT_MISCORE));
-        search.addProjectionOnField(new SimpleField(INTERACTION_TYPE_MI_IDENTIFIER));
-        search.addProjectionOnField(new SimpleField(INTERACTION_DISRUPTED_BY_MUTATION));
+        search.addProjectionOnField(new SimpleField(TYPE_MI_IDENTIFIER));
+        search.addProjectionOnField(new SimpleField(DISRUPTED_BY_MUTATION));
         search.addProjectionOnField(new SimpleField(MUTATION_A));
         search.addProjectionOnField(new SimpleField(MUTATION_B));
 
@@ -279,12 +279,12 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                     conditions = new Criteria(DEFAULT).contains(word)
                             .or("interactor_acA_str").is(word)
                             .or("interactor_acB_str").is(word)
-                            .or(INTERACTION_AC_STR).is(word);
+                            .or(AC_STR).is(word);
                 } else {
                     conditions = conditions.or(DEFAULT).contains(word)
                             .or("interactor_acA_str").is(word)
                             .or("interactor_acB_str").is(word)
-                            .or(INTERACTION_AC_STR).is(word);
+                            .or(AC_STR).is(word);
                 }
             }
         } else {
@@ -327,10 +327,10 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         createInteractorTypeFilterCriteria(interactorTypeFilter, filterQueries);
 
         //SearchInteraction Detection Method filter
-        createFilterCriteria(detectionMethodFilter, INTERACTION_DETECTION_METHOD_STR, filterQueries);
+        createFilterCriteria(detectionMethodFilter, DETECTION_METHOD_STR, filterQueries);
 
         //SearchInteraction Type filter
-        createFilterCriteria(interactionTypeFilter, INTERACTION_TYPE_STR, filterQueries);
+        createFilterCriteria(interactionTypeFilter, TYPE_STR, filterQueries);
 
         //Host Organism filter
         createFilterCriteria(hostOrganismFilter, HOST_ORGANISM_STR, filterQueries);
@@ -378,7 +378,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
      */
     private void createNegativeFilterCriteria(boolean value, List<FilterQuery> filterQueries) {
 
-        Criteria conditions = new Criteria(INTERACTION_NEGATIVE).is(value);
+        Criteria conditions = new Criteria(NEGATIVE).is(value);
 
         filterQueries.add(new SimpleFilterQuery(conditions));
     }

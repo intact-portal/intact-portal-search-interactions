@@ -20,9 +20,9 @@ public class SearchInteraction {
     public static final String INTERACTIONS = "interactions";
 
     @Id
-    @Field(INTERACTION_AC)
+    @Field(AC)
     @Indexed
-    private String interactionAc;
+    private String ac;
 
     @Field(BINARY_INTERACTION_ID)
     @Indexed
@@ -126,8 +126,8 @@ public class SearchInteraction {
     @Field(IDENTIFICATION_METHOD_B)
     private Set<String> identificationMethodB;
 
-    @Field(INTERACTION_DETECTION_METHOD)
-    private String interactionDetectionMethod;
+    @Field(DETECTION_METHOD)
+    private String detectionMethod;
 
     @Field(PUBLICATION_AUTHORS)
     private Set<String> authors;
@@ -135,8 +135,8 @@ public class SearchInteraction {
     @Field(SOURCE_DATABASE)
     private String sourceDatabase;
 
-    @Field(INTERACTION_IDENTIFIERS)
-    private Set<String> interactionIdentifiers;
+    @Field(IDENTIFIERS)
+    private Set<String> identifiers;
 
     @Field(CONFIDENCE_VALUES)
     private Set<String> confidenceValues;
@@ -144,14 +144,14 @@ public class SearchInteraction {
     @Field(EXPANSION_METHOD)
     private String expansionMethod;
 
-    @Field(INTERACTION_XREFS)
-    private Set<String> interactionXrefs;
+    @Field(XREFS)
+    private Set<String> xrefs;
 
-    @Field(INTERACTION_ANNOTATIONS)
-    private Set<String> interactionAnnotations;
+    @Field(ANNOTATIONS)
+    private Set<String> annotations;
 
-    @Field(INTERACTION_PARAMETERS)
-    private Set<String> interactionParameters;
+    @Field(PARAMETERS)
+    private Set<String> parameters;
 
     @Field(CREATION_DATE)
     private Date creationDate;
@@ -159,14 +159,14 @@ public class SearchInteraction {
     @Field(UPDATION_DATE)
     private Date updationDate;
 
-    @Field(INTERACTION_CHECKSUM)
-    private Set<String> interactionChecksums;
+    @Field(CHECKSUM)
+    private Set<String> checksums;
 
-    @Field(INTERACTION_NEGATIVE)
+    @Field(NEGATIVE)
     private boolean negative;
 
-    @Field(INTERACTION_TYPE)
-    private String interactionType;
+    @Field(TYPE)
+    private String type;
 
     @Field(HOST_ORGANISM)
     private String hostOrganism;
@@ -205,8 +205,8 @@ public class SearchInteraction {
     private Set<String> publicationIdentifiers;
 
     //It will be used in the cluster index. Review in the future
-    @Field(INTERACTION_COUNT)
-    private Integer interactionCount;
+    @Field(COUNT)
+    private Integer count;
 
     @Field(TYPE_MI_A)
     private String typeMIA;
@@ -214,11 +214,11 @@ public class SearchInteraction {
     @Field(TYPE_MI_B)
     private String typeMIB;
 
-    @Field(INTERACTION_TYPE_MI_IDENTIFIER)
-    private String interactionTypeMIIdentifier;
+    @Field(TYPE_MI_IDENTIFIER)
+    private String typeMIIdentifier;
 
-    @Field(INTERACTION_DISRUPTED_BY_MUTATION)
-    private boolean interactionDisruptedByMutation;
+    @Field(DISRUPTED_BY_MUTATION)
+    private boolean disruptedByMutation;
 
     @Field(MUTATION_A)
     private boolean mutationA;
@@ -232,22 +232,22 @@ public class SearchInteraction {
     public SearchInteraction() {
     }
 
-    public SearchInteraction(Integer interactionCount, String idA, String idB, Set<String> altIdsA, Set<String> altIdsB,
+    public SearchInteraction(Integer count, String idA, String idB, Set<String> altIdsA, Set<String> altIdsB,
                              Set<String> aliasesA, Set<String> aliasesB, Integer taxIdA, Integer taxIdB, String typeA,
                              String typeB, Set<String> xrefsA, Set<String> xrefsB, Set<String> annotationsA,
                              Set<String> annotationsB, Set<String> checksumsA, Set<String> checksumsB, String speciesA,
                              String speciesB, String biologicalRoleA, String biologicalRoleB, String experimentalRoleA,
                              String experimentalRoleB, Set<String> featureA, Set<String> featureB, String stoichiometryA,
                              String stoichiometryB, Set<String> identificationMethodA, Set<String> identificationMethodB,
-                             String interactionDetectionMethod, Set<String> authors, String sourceDatabase,
-                             Set<String> interactionIdentifiers, Set<String> confidenceValues, String expansionMethod,
-                             Set<String> interactionXrefs, Set<String> interactionAnnotations,
-                             Set<String> interactionParameters, Date creationDate, Date updationDate,
-                             Set<String> interactionChecksums, boolean negative, String interactionType,
+                             String detectionMethod, Set<String> authors, String sourceDatabase,
+                             Set<String> identifiers, Set<String> confidenceValues, String expansionMethod,
+                             Set<String> xrefs, Set<String> annotations,
+                             Set<String> parameters, Date creationDate, Date updationDate,
+                             Set<String> checksums, boolean negative, String type,
                              String interactorTypeA, String typeMIA, String typeMIB, String interactorTypeB,
-                             String interactionTypeMIIdentifier, boolean interactionDisruptedByMutation,
+                             String typeMIIdentifier, boolean disruptedByMutation,
                              boolean mutationA, boolean mutationB, int binaryInteractionId) {
-        this.interactionCount = interactionCount;
+        this.count = count;
         this.idA = idA;
         this.idB = idB;
         this.altIdsA = altIdsA;
@@ -276,37 +276,29 @@ public class SearchInteraction {
         this.stoichiometryB = stoichiometryB;
         this.identificationMethodA = identificationMethodA;
         this.identificationMethodB = identificationMethodB;
-        this.interactionDetectionMethod = interactionDetectionMethod;
+        this.detectionMethod = detectionMethod;
         this.authors = authors;
         this.sourceDatabase = sourceDatabase;
-        this.interactionIdentifiers = interactionIdentifiers;
+        this.identifiers = identifiers;
         this.confidenceValues = confidenceValues;
         this.expansionMethod = expansionMethod;
-        this.interactionXrefs = interactionXrefs;
-        this.interactionAnnotations = interactionAnnotations;
-        this.interactionParameters = interactionParameters;
+        this.xrefs = xrefs;
+        this.annotations = annotations;
+        this.parameters = parameters;
         this.creationDate = creationDate;
         this.updationDate = updationDate;
-        this.interactionChecksums = interactionChecksums;
+        this.checksums = checksums;
         this.negative = negative;
-        this.interactionType = interactionType;
+        this.type = type;
         this.typeMIA = typeMIA;
         this.typeMIB = typeMIB;
-        this.interactionTypeMIIdentifier = interactionTypeMIIdentifier;
-        this.interactionDisruptedByMutation = interactionDisruptedByMutation;
+        this.typeMIIdentifier = typeMIIdentifier;
+        this.disruptedByMutation = disruptedByMutation;
         this.mutationA = mutationA;
         this.mutationB = mutationB;
         this.setBinaryInteractionId(binaryInteractionId);
     }
 
-
-    public Integer getInteractionCount() {
-        return interactionCount;
-    }
-
-    public void setInteractionCount(Integer interactionCount) {
-        this.interactionCount = interactionCount;
-    }
 
     public String getIdA() {
         return idA;
@@ -534,28 +526,12 @@ public class SearchInteraction {
         this.identificationMethodB = identificationMethodB;
     }
 
-    public String getInteractionDetectionMethod() {
-        return interactionDetectionMethod;
-    }
-
-    public void setInteractionDetectionMethod(String interactionDetectionMethod) {
-        this.interactionDetectionMethod = interactionDetectionMethod;
-    }
-
     public Set<String> getAuthors() {
         return authors;
     }
 
     public void setAuthors(Set<String> authors) {
         this.authors = authors;
-    }
-
-    public Set<String> getInteractionIdentifiers() {
-        return interactionIdentifiers;
-    }
-
-    public void setInteractionIdentifiers(Set<String> interactionIdentifiers) {
-        this.interactionIdentifiers = interactionIdentifiers;
     }
 
     public Set<String> getConfidenceValues() {
@@ -574,22 +550,6 @@ public class SearchInteraction {
         this.expansionMethod = expansionMethod;
     }
 
-    public Set<String> getInteractionAnnotations() {
-        return interactionAnnotations;
-    }
-
-    public void setInteractionAnnotations(Set<String> interactionAnnotations) {
-        this.interactionAnnotations = interactionAnnotations;
-    }
-
-    public Set<String> getInteractionParameters() {
-        return interactionParameters;
-    }
-
-    public void setInteractionParameters(Set<String> interactionParameters) {
-        this.interactionParameters = interactionParameters;
-    }
-
     public Date getCreationDate() {
         return creationDate;
     }
@@ -606,15 +566,6 @@ public class SearchInteraction {
         this.updationDate = updationDate;
     }
 
-    public Set<String> getInteractionChecksums() {
-        return interactionChecksums;
-    }
-
-    public void setInteractionChecksums(Set<String> interactionChecksums) {
-        this.interactionChecksums = interactionChecksums;
-    }
-
-
     public boolean isNegative() {
         return negative;
     }
@@ -622,32 +573,6 @@ public class SearchInteraction {
     public void setNegative(boolean negative) {
         this.negative = negative;
     }
-
-    public Set<String> getInteractionXrefs() {
-        return interactionXrefs;
-    }
-
-    public void setInteractionXrefs(Set<String> interactionXrefs) {
-        this.interactionXrefs = interactionXrefs;
-    }
-
-
-    public String getInteractionType() {
-        return interactionType;
-    }
-
-    public void setInteractionType(String interactionType) {
-        this.interactionType = interactionType;
-    }
-
-    public String getInteractionAc() {
-        return interactionAc;
-    }
-
-    public void setInteractionAc(String interactionAc) {
-        this.interactionAc = interactionAc;
-    }
-
 
     public String getHostOrganism() {
         return hostOrganism;
@@ -671,6 +596,102 @@ public class SearchInteraction {
 
     public void setSpeciesAB(Set<String> speciesAB) {
         this.speciesAB = speciesAB;
+    }
+
+    public String getAc() {
+        return ac;
+    }
+
+    public void setAc(String ac) {
+        this.ac = ac;
+    }
+
+    public String getDetectionMethod() {
+        return detectionMethod;
+    }
+
+    public void setDetectionMethod(String detectionMethod) {
+        this.detectionMethod = detectionMethod;
+    }
+
+    public Set<String> getIdentifiers() {
+        return identifiers;
+    }
+
+    public void setIdentifiers(Set<String> identifiers) {
+        this.identifiers = identifiers;
+    }
+
+    public Set<String> getXrefs() {
+        return xrefs;
+    }
+
+    public void setXrefs(Set<String> xrefs) {
+        this.xrefs = xrefs;
+    }
+
+    public Set<String> getAnnotations() {
+        return annotations;
+    }
+
+    public void setAnnotations(Set<String> annotations) {
+        this.annotations = annotations;
+    }
+
+    public Set<String> getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(Set<String> parameters) {
+        this.parameters = parameters;
+    }
+
+    public Set<String> getChecksums() {
+        return checksums;
+    }
+
+    public void setChecksums(Set<String> checksums) {
+        this.checksums = checksums;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    public String getTypeMIIdentifier() {
+        return typeMIIdentifier;
+    }
+
+    public void setTypeMIIdentifier(String typeMIIdentifier) {
+        this.typeMIIdentifier = typeMIIdentifier;
+    }
+
+    public boolean isDisruptedByMutation() {
+        return disruptedByMutation;
+    }
+
+    public void setDisruptedByMutation(boolean disruptedByMutation) {
+        this.disruptedByMutation = disruptedByMutation;
+    }
+
+    public Set<String> getInteractorTypeAB() {
+        return interactorTypeAB;
+    }
+
+    public void setInteractorTypeAB(Set<String> interactorTypeAB) {
+        this.interactorTypeAB = interactorTypeAB;
     }
 
     public String getInteractorAAc() {
@@ -785,11 +806,52 @@ public class SearchInteraction {
         this.publicationIdentifiers = publicationIdentifiers;
     }
 
+
+    public String getTypeMIA() {
+        return typeMIA;
+    }
+
+    public void setTypeMIA(String typeMIA) {
+        this.typeMIA = typeMIA;
+    }
+
+    public String getTypeMIB() {
+        return typeMIB;
+    }
+
+    public void setTypeMIB(String typeMIB) {
+        this.typeMIB = typeMIB;
+    }
+
+    public boolean isMutationA() {
+        return mutationA;
+    }
+
+    public void setMutationA(boolean mutationA) {
+        this.mutationA = mutationA;
+    }
+
+    public boolean isMutationB() {
+        return mutationB;
+    }
+
+    public void setMutationB(boolean mutationB) {
+        this.mutationB = mutationB;
+    }
+
+    public int getBinaryInteractionId() {
+        return binaryInteractionId;
+    }
+
+    public void setBinaryInteractionId(int binaryInteractionId) {
+        this.binaryInteractionId = binaryInteractionId;
+    }
+
     @Override
     public String toString() {
         return "SearchInteraction{" +
-                "interactionAc='" + interactionAc + '\'' +
-                ", binaryInteractionId=" + getBinaryInteractionId() +
+                "ac='" + ac + '\'' +
+                ", binaryInteractionId=" + binaryInteractionId +
                 ", idA='" + idA + '\'' +
                 ", idB='" + idB + '\'' +
                 ", interactorAAc='" + interactorAAc + '\'' +
@@ -822,20 +884,20 @@ public class SearchInteraction {
                 ", stoichiometryB='" + stoichiometryB + '\'' +
                 ", identificationMethodA=" + identificationMethodA +
                 ", identificationMethodB=" + identificationMethodB +
-                ", interactionDetectionMethod='" + interactionDetectionMethod + '\'' +
+                ", detectionMethod='" + detectionMethod + '\'' +
                 ", authors=" + authors +
                 ", sourceDatabase='" + sourceDatabase + '\'' +
-                ", interactionIdentifiers=" + interactionIdentifiers +
+                ", identifiers=" + identifiers +
                 ", confidenceValues=" + confidenceValues +
                 ", expansionMethod='" + expansionMethod + '\'' +
-                ", interactionXrefs=" + interactionXrefs +
-                ", interactionAnnotations=" + interactionAnnotations +
-                ", interactionParameters=" + interactionParameters +
+                ", xrefs=" + xrefs +
+                ", annotations=" + annotations +
+                ", parameters=" + parameters +
                 ", creationDate=" + creationDate +
                 ", updationDate=" + updationDate +
-                ", interactionChecksums=" + interactionChecksums +
+                ", checksums=" + checksums +
                 ", negative=" + negative +
-                ", interactionType='" + interactionType + '\'' +
+                ", type='" + type + '\'' +
                 ", hostOrganism='" + hostOrganism + '\'' +
                 ", intactMiscore=" + intactMiscore +
                 ", speciesAB=" + speciesAB +
@@ -848,71 +910,14 @@ public class SearchInteraction {
                 ", uniqueIdA='" + uniqueIdA + '\'' +
                 ", uniqueIdB='" + uniqueIdB + '\'' +
                 ", publicationIdentifiers=" + publicationIdentifiers +
-                ", interactionCount=" + interactionCount +
+                ", count=" + count +
                 ", typeMIA='" + typeMIA + '\'' +
                 ", typeMIB='" + typeMIB + '\'' +
-                ", interactionTypeMIIdentifier='" + interactionTypeMIIdentifier + '\'' +
-                ", interactionDisruptedByMutation=" + interactionDisruptedByMutation +
+                ", typeMIIdentifier='" + typeMIIdentifier + '\'' +
+                ", disruptedByMutation=" + disruptedByMutation +
                 ", mutationA=" + mutationA +
                 ", mutationB=" + mutationB +
                 ", interactorTypeAB=" + interactorTypeAB +
                 '}';
-    }
-
-    public String getTypeMIA() {
-        return typeMIA;
-    }
-
-    public void setTypeMIA(String typeMIA) {
-        this.typeMIA = typeMIA;
-    }
-
-    public String getTypeMIB() {
-        return typeMIB;
-    }
-
-    public void setTypeMIB(String typeMIB) {
-        this.typeMIB = typeMIB;
-    }
-
-    public String getInteractionTypeMIIdentifier() {
-        return interactionTypeMIIdentifier;
-    }
-
-    public void setInteractionTypeMIIdentifier(String interactionTypeMIIdentifier) {
-        this.interactionTypeMIIdentifier = interactionTypeMIIdentifier;
-    }
-
-    public boolean isInteractionDisruptedByMutation() {
-        return interactionDisruptedByMutation;
-    }
-
-    public void setInteractionDisruptedByMutation(boolean interactionDisruptedByMutation) {
-        this.interactionDisruptedByMutation = interactionDisruptedByMutation;
-    }
-
-
-    public boolean isMutationA() {
-        return mutationA;
-    }
-
-    public void setMutationA(boolean mutationA) {
-        this.mutationA = mutationA;
-    }
-
-    public boolean isMutationB() {
-        return mutationB;
-    }
-
-    public void setMutationB(boolean mutationB) {
-        this.mutationB = mutationB;
-    }
-
-    public int getBinaryInteractionId() {
-        return binaryInteractionId;
-    }
-
-    public void setBinaryInteractionId(int binaryInteractionId) {
-        this.binaryInteractionId = binaryInteractionId;
     }
 }

@@ -13,12 +13,12 @@ import java.util.Optional;
  * @author Elisabet Barrera
  */
 @Repository
-public interface InteractionRepository extends SolrCrudRepository<SearchInteraction, String>,CustomizedInteractionRepository {
+public interface InteractionRepository extends SolrCrudRepository<SearchInteraction, String>, CustomizedInteractionRepository {
 
     //TODO Add this field as default. It has text_en as FieldType in solr and copy all the values for now
     @Query(value = "text:?0")
 //    @Query(value = DEFAULT + ":?0")
     Page<SearchInteraction> findInteractions(String query, Pageable pageable);
-    
-    Optional<SearchInteraction> findByInteractionAc(String ac);
+
+    Optional<SearchInteraction> findByAc(String ac);
 }

@@ -35,7 +35,7 @@ public class InteractionSearchService {
     }
 
     public Optional<SearchInteraction> findByInteractionAc(String ac) {
-        return this.interactionRepository.findByInteractionAc(ac);
+        return this.interactionRepository.findByAc(ac);
     }
 
     public Page<SearchInteraction> findInteractions(String query) {
@@ -133,10 +133,10 @@ public class InteractionSearchService {
                 SearchGraphLink searchGraphLink = new SearchGraphLink();
                 searchGraphLink.setSource(searchInteraction.getInteractorAAc());
                 searchGraphLink.setTarget(searchInteraction.getInteractorBAc());
-                searchGraphLink.setInteractionAc(searchInteraction.getInteractionAc());
-                searchGraphLink.setInteractionType(searchInteraction.getInteractionType());
-                searchGraphLink.setInteractionDetectionMethod(searchInteraction.getInteractionDetectionMethod());
-                searchGraphLink.setColor(GraphUtility.getColorForInteractionType(searchInteraction.getInteractionType()));
+                searchGraphLink.setInteractionAc(searchInteraction.getAc());
+                searchGraphLink.setInteractionType(searchInteraction.getType());
+                searchGraphLink.setInteractionDetectionMethod(searchInteraction.getDetectionMethod());
+                searchGraphLink.setColor(GraphUtility.getColorForInteractionType(searchInteraction.getType()));
 
                 if (!interactorSet.contains(searchInteraction.getInteractorAAc())) {
                     SearchGraphNode searchGraphNode = new SearchGraphNode();
@@ -168,7 +168,7 @@ public class InteractionSearchService {
 
                 searchGraphLinks.add(searchGraphLink);
             } catch (Exception e) {
-                log.info("Interaction with id: " + searchInteraction.getInteractionAc() + "failed to process" +
+                log.info("Interaction with id: " + searchInteraction.getAc() + "failed to process" +
                         "and therefore this interaction will not be in graph json");
                 //TODO... Uncomment following
                 //throw e;
