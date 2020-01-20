@@ -108,6 +108,9 @@ public class SearchInteraction {
     @Field(FEATURE_B)
     private Set<String> featureB;
 
+    @Field(FEATURE_COUNT)
+    private Integer featureCount;
+
     @Field(FEATURE_SHORTLABEL_A)
     private Set<String> featureShortLabelA;
 
@@ -149,6 +152,9 @@ public class SearchInteraction {
 
     @Field(ALL_ANNOTATIONS)
     private Set<String> allAnnotations;
+
+    @Field(ANNOTATIONS)
+    private Set<String> annotations;
 
     @Field(PARAMETERS)
     private Set<String> parameters;
@@ -241,12 +247,12 @@ public class SearchInteraction {
                              String stoichiometryB, Set<String> identificationMethodA, Set<String> identificationMethodB,
                              String detectionMethod, Set<String> authors, String sourceDatabase,
                              Set<String> identifiers, Set<String> confidenceValues, String expansionMethod,
-                             Set<String> xrefs, Set<String> allAnnotations,
+                             Set<String> xrefs, Set<String> allAnnotations, Set<String> annotations,
                              Set<String> parameters, Date creationDate, Date updationDate,
                              Set<String> checksums, boolean negative, String type,
                              String interactorTypeA, String typeMIA, String typeMIB, String interactorTypeB,
                              String typeMIIdentifier, boolean disruptedByMutation,
-                             boolean mutationA, boolean mutationB, int binaryInteractionId, String acA, String acB) {
+                             boolean mutationA, boolean mutationB, int binaryInteractionId, String acA, String acB, Integer featureCount) {
         this.count = count;
         this.idA = idA;
         this.idB = idB;
@@ -286,6 +292,7 @@ public class SearchInteraction {
         this.expansionMethod = expansionMethod;
         this.xrefs = xrefs;
         this.allAnnotations = allAnnotations;
+        this.annotations = annotations;
         this.parameters = parameters;
         this.creationDate = creationDate;
         this.updationDate = updationDate;
@@ -298,6 +305,7 @@ public class SearchInteraction {
         this.disruptedByMutation = disruptedByMutation;
         this.mutationA = mutationA;
         this.mutationB = mutationB;
+        this.featureCount = featureCount;
         this.setBinaryInteractionId(binaryInteractionId);
     }
 
@@ -849,6 +857,22 @@ public class SearchInteraction {
         this.binaryInteractionId = binaryInteractionId;
     }
 
+    public Set<String> getAnnotations() {
+        return annotations;
+    }
+
+    public void setAnnotations(Set<String> annotations) {
+        this.annotations = annotations;
+    }
+
+    public Integer getFeatureCount() {
+        return featureCount;
+    }
+
+    public void setFeatureCount(Integer featureCount) {
+        this.featureCount = featureCount;
+    }
+
     @Override
     public String toString() {
         return "SearchInteraction{" +
@@ -880,6 +904,7 @@ public class SearchInteraction {
                 ", experimentalRoleB='" + experimentalRoleB + '\'' +
                 ", featureA=" + featureA +
                 ", featureB=" + featureB +
+                ", featureCount=" + featureCount +
                 ", featureShortLabelA=" + featureShortLabelA +
                 ", featureShortLabelB=" + featureShortLabelB +
                 ", stoichiometryA='" + stoichiometryA + '\'' +
@@ -894,6 +919,7 @@ public class SearchInteraction {
                 ", expansionMethod='" + expansionMethod + '\'' +
                 ", xrefs=" + xrefs +
                 ", allAnnotations=" + allAnnotations +
+                ", annotations=" + annotations +
                 ", parameters=" + parameters +
                 ", creationDate=" + creationDate +
                 ", updationDate=" + updationDate +

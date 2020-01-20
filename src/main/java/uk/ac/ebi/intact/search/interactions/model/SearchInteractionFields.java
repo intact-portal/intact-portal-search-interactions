@@ -68,6 +68,7 @@ public class SearchInteractionFields {
     public static final String EXPANSION_METHOD = "expansion_method";
     public static final String XREFS = "xrefs";
     public static final String ALL_ANNOTATIONS = "all_annotations";
+    public static final String ANNOTATIONS = "annotations";
     public static final String PARAMETERS = "parameters";
     public static final String CREATION_DATE = "creation_date";
     public static final String UPDATION_DATE = "updation_date";
