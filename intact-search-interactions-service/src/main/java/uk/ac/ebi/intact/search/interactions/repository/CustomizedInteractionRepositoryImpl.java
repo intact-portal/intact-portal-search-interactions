@@ -2,6 +2,7 @@ package uk.ac.ebi.intact.search.interactions.repository;
 
 import org.apache.solr.common.params.FacetParams;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.solr.core.SolrOperations;
@@ -113,6 +114,95 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 //        }
 
         return solrOperations.queryForFacetPage(INTERACTIONS, search, SearchInteraction.class);
+    }
+
+    /**
+     * @param query                 input used to retrieve the interaction
+     * @param speciesFilter         (Optional) interactor speciesFilter of the interaction
+     * @param interactorTypeFilter  (Optional) filter interactions by interactor type
+     * @param detectionMethodFilter (Optional) filter interactions by interaction detection method
+     * @param interactionTypeFilter (Optional) filter interactions by interaction type
+     * @param hostOrganismFilter    (Optional) filter interactions by host organism
+     * @param isNegativeFilter      (Optional) filter interactions that are negative if true
+     * @param minMiScore            minimum value of mi-score for the interaction
+     * @param maxMiScore            minimum value of mi-score for the interaction
+     * @param interSpecies          boolean to restrict the result ot the same or different interactor species
+     * @param sort                  field to define the sort of the results
+     * @param pageable              page number and size of the request
+     * @return the interaction page matching all the criteria for graphical representation
+     */
+    @Override
+    public Page<SearchInteraction> findInteractionForGraphJson(String query,
+                                                               Set<String> speciesFilter,
+                                                               Set<String> interactorTypeFilter,
+                                                               Set<String> detectionMethodFilter,
+                                                               Set<String> interactionTypeFilter,
+                                                               Set<String> hostOrganismFilter,
+                                                               boolean isNegativeFilter,
+                                                               double minMiScore,
+                                                               double maxMiScore,
+                                                               boolean interSpecies, Sort sort, Pageable pageable) {
+
+        // search query
+        SimpleQuery search = new SimpleQuery();
+
+        // search criterias
+        Criteria conditions = createSearchConditions(query);
+        search.addCriteria(conditions);
+
+        // filters
+        List<FilterQuery> filterQueries = createFilterQuery(speciesFilter, interactorTypeFilter, detectionMethodFilter,
+                interactionTypeFilter, hostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, interSpecies);
+
+        if (filterQueries != null && !filterQueries.isEmpty()) {
+            for (FilterQuery filterQuery : filterQueries) {
+                search.addFilterQuery(filterQuery);
+            }
+
+        }
+
+        // pagination
+        search.setPageRequest(pageable);
+
+        // sorting
+        if (sort != null) {
+            search.addSort(sort);
+        }
+
+        //projection
+
+        //interaction details
+        search.addProjectionOnField(new SimpleField(INTERACTION_AC));
+        search.addProjectionOnField(new SimpleField(INTERACTION_TYPE));
+        search.addProjectionOnField(new SimpleField(INTERACTION_DETECTION_METHOD));
+        search.addProjectionOnField(new SimpleField(BINARY_INTERACTION_ID));
+        search.addProjectionOnField(new SimpleField(EXPANSION_METHOD));
+        search.addProjectionOnField(new SimpleField(INTACT_MISCORE));
+        search.addProjectionOnField(new SimpleField(INTERACTION_TYPE_MI_IDENTIFIER));
+        search.addProjectionOnField(new SimpleField(INTERACTION_DISRUPTED_BY_MUTATION));
+
+        //interactor details
+        search.addProjectionOnField(new SimpleField(INTERACTOR_AC_A));
+        search.addProjectionOnField(new SimpleField(INTERACTOR_AC_B));
+        search.addProjectionOnField(new SimpleField(SPECIES_A));
+        search.addProjectionOnField(new SimpleField(SPECIES_B));
+        search.addProjectionOnField(new SimpleField(TAX_IDA));
+        search.addProjectionOnField(new SimpleField(TAX_IDB));
+        search.addProjectionOnField(new SimpleField(INTERACTOR_IDA));
+        search.addProjectionOnField(new SimpleField(INTERACTOR_IDB));
+        search.addProjectionOnField(new SimpleField(TYPE_A));
+        search.addProjectionOnField(new SimpleField(TYPE_B));
+        search.addProjectionOnField(new SimpleField(TYPE_MI_A));
+        search.addProjectionOnField(new SimpleField(TYPE_MI_B));
+        search.addProjectionOnField(new SimpleField(MOLECULE_A));
+        search.addProjectionOnField(new SimpleField(MOLECULE_B));
+        search.addProjectionOnField(new SimpleField(UNIQUE_ID_A));
+        search.addProjectionOnField(new SimpleField(UNIQUE_ID_B));
+
+        search.addProjectionOnField(new SimpleField(MUTATION_A));
+        search.addProjectionOnField(new SimpleField(MUTATION_B));
+
+        return solrOperations.queryForPage(INTERACTIONS, search, SearchInteraction.class);
     }
 
     /**
