@@ -23,7 +23,6 @@ public class SolrTestConfiguration {
         EmbeddedSolrServerFactory factory = new EmbeddedSolrServerFactory("src/test/resources/solr.home.7.3.1");
         return factory.getSolrClient();
         //return new HttpSolrClient.Builder("http://localhost:8983/solr").build();
-
     }
 
     @Bean
