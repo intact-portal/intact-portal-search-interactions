@@ -88,8 +88,8 @@ public class SearchInteractionFields {
     public static final String TYPE_MI_A_STR = "type_MI_A_str";
     public static final String TYPE_MI_B = "type_MI_B";
     public static final String TYPE_MI_B_STR = "type_MI_B_str";
-    public static final String INTERACTOR_TYPE_A_B = "interactor_type_A_B";
-    public static final String INTERACTOR_TYPE_A_B_STR = "interactor_type_A_B_str";
+    public static final String TYPE_A_B = "type_A_B";
+    public static final String TYPE_A_B_STR = "type_A_B_str";
     public static final String DISRUPTED_BY_MUTATION = "disrupted_by_mutation";
     public static final String DISRUPTED_BY_MUTATION_STR = "disrupted_by_mutation_str";
     public static final String MUTATION_A = "mutation_A";
