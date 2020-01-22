@@ -5,7 +5,7 @@
 
     <groupId>uk.ac.ebi.intact.search</groupId>
     <artifactId>intact-search-interactions</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.3-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>IntAct Portal :: Search interactions module</name>

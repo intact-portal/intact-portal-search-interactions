@@ -80,7 +80,7 @@ public class InteractionSearchServiceTest {
     @Test
     public void findByInteractionType() {
         Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("physical association");
-        assertEquals(interactionOp.getNumberOfElements(), 10);
+        assertEquals(10, interactionOp.getNumberOfElements());
     }
 
     /**
@@ -98,7 +98,7 @@ public class InteractionSearchServiceTest {
     @Test
     public void findByHostOrganism() {
         Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("\"In vitro\"");
-        assertEquals(interactionOp.getNumberOfElements(), 6);
+        assertEquals(6, interactionOp.getNumberOfElements());
     }
 
     /**
@@ -117,7 +117,7 @@ public class InteractionSearchServiceTest {
                 0,
                 1,
                 false,
-                1,
+                0,
                 10);
 
         //TODO This conversion and checking of the result maybe better in a test for the controller instead of the service
@@ -145,13 +145,13 @@ public class InteractionSearchServiceTest {
                 List<SearchInteractionResult.FacetCount> facetCounts = interactionOp.getFacetResultPage().get(facetField);
                 for (SearchInteractionResult.FacetCount facetCount : facetCounts) {
                     if (facetCount.getValue().equals("0.39")) {
-                        assertEquals(3, facetCount.getValueCount().longValue());
+                        assertEquals(5, facetCount.getValueCount().longValue());
                     }
                     if (facetCount.getValue().equals("0.52")) {
                         assertEquals(1, facetCount.getValueCount().longValue());
                     }
                     if (facetCount.getValue().equals("0.55")) {
-                        assertEquals(3, facetCount.getValueCount().longValue());
+                        assertEquals(1, facetCount.getValueCount().longValue());
                     }
                     if (facetCount.getValue().equals("0.58")) {
                         assertEquals(3, facetCount.getValueCount().longValue());
@@ -231,7 +231,7 @@ public class InteractionSearchServiceTest {
         hostOrganism.add("In vitro");
 
         double minMiscore = 0;
-        double maxMiscore = 0.6;
+        double maxMiscore = 0.7;
 
         Set<String> species = new HashSet<>();
         species.add("Homo sapiens");

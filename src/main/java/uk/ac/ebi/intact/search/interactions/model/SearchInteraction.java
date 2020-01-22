@@ -232,8 +232,8 @@ public class SearchInteraction {
     @Field(MUTATION_B)
     private boolean mutationB;
 
-    @Field(TYPE_A_B)
-    private Set<String> typeAB = new HashSet<>();
+    /*@Field(TYPE_A_B)
+    private Set<String> interactorTypeAB = new HashSet<>();*/
 
     public SearchInteraction() {
     }
@@ -252,7 +252,7 @@ public class SearchInteraction {
                              Set<String> checksums, boolean negative, String type,
                              String interactorTypeA, String typeMIA, String typeMIB, String interactorTypeB,
                              String typeMIIdentifier, boolean disruptedByMutation,
-                             boolean mutationA, boolean mutationB, int binaryInteractionId, String acA, String acB, Integer featureCount,Set<String> typeAB) {
+                             boolean mutationA, boolean mutationB, int binaryInteractionId, String acA, String acB, Integer featureCount) {
         this.count = count;
         this.idA = idA;
         this.idB = idB;
@@ -305,7 +305,6 @@ public class SearchInteraction {
         this.disruptedByMutation = disruptedByMutation;
         this.mutationA = mutationA;
         this.mutationB = mutationB;
-        this.typeAB=typeAB;
         this.featureCount = featureCount;
         this.setBinaryInteractionId(binaryInteractionId);
     }
@@ -697,13 +696,13 @@ public class SearchInteraction {
         this.disruptedByMutation = disruptedByMutation;
     }
 
-    public Set<String> getTypeAB() {
-        return typeAB;
+/*    public Set<String> getInteractorTypeAB() {
+        return interactorTypeAB;
     }
 
-    public void setTypeAB(Set<String> typeAB) {
-        this.typeAB = typeAB;
-    }
+    public void setInteractorTypeAB(Set<String> interactorTypeAB) {
+        this.interactorTypeAB = interactorTypeAB;
+    }*/
 
     public String getAcA() {
         return acA;
@@ -946,7 +945,6 @@ public class SearchInteraction {
                 ", disruptedByMutation=" + disruptedByMutation +
                 ", mutationA=" + mutationA +
                 ", mutationB=" + mutationB +
-                ", typeAB=" + typeAB +
                 '}';
     }
 }

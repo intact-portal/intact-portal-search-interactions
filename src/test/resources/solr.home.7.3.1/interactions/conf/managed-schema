@@ -430,10 +430,15 @@
   <field name="_root_" type="string" docValues="false" indexed="true" stored="false"/>
   <field name="_text_" type="text_general" multiValued="true" indexed="true" stored="false"/>
   <field name="_version_" type="plong" indexed="false" stored="false"/>
+  <field name="ac" type="text_general"/>
+  <field name="acA" type="text_general"/>
+  <field name="acB" type="text_general"/>
   <field name="aliasesA" type="text_general"/>
   <field name="aliasesB" type="text_general"/>
+  <field name="all_annotations" type="text_general"/>
   <field name="altIdsA" type="text_general"/>
   <field name="altIdsB" type="text_general"/>
+  <field name="annotations" type="text_general"/>
   <field name="annotationsA" type="text_general"/>
   <field name="annotationsB" type="text_general"/>
   <field name="author" type="text_general"/>
@@ -443,8 +448,11 @@
   <field name="checksumsA" type="text_general"/>
   <field name="checksumsB" type="text_general"/>
   <field name="confidence_values" type="text_general"/>
+  <field name="count" type="plongs"/>
   <field name="creation_date" type="pdates"/>
   <field name="default" type="text_general" multiValued="true" indexed="true" stored="true"/>
+  <field name="detection_method" type="text_general"/>
+  <field name="disrupted_by_mutation" type="booleans"/>
   <field name="disrupted_by_mutation_A" type="booleans"/>
   <field name="disrupted_by_mutation_B" type="booleans"/>
   <field name="expansion_method" type="text_general"/>
@@ -454,13 +462,17 @@
   <field name="experimental_role_B" type="text_general"/>
   <field name="feature_A" type="text_general"/>
   <field name="feature_B" type="text_general"/>
+  <field name="feature_count" type="plongs"/>
   <field name="feature_shortlabel_A" type="text_general"/>
   <field name="feature_shortlabel_B" type="text_general"/>
   <field name="first_author" type="text_general"/>
   <field name="host_organism" type="text_general"/>
   <field name="id" type="string" multiValued="false" indexed="true" required="true" stored="true"/>
+  <field name="idA" type="text_general"/>
+  <field name="idB" type="text_general"/>
   <field name="identification_method_A" type="text_general"/>
   <field name="identification_method_B" type="text_general"/>
+  <field name="identifiers" type="text_general"/>
   <field name="intact_miscore" type="pdoubles"/>
   <field name="interaction_ac" type="text_general"/>
   <field name="interaction_annotations" type="text_general"/>
@@ -486,6 +498,8 @@
   <field name="moleculeB" type="text_general"/>
   <field name="mutation_A" type="booleans"/>
   <field name="mutation_B" type="booleans"/>
+  <field name="negative" type="booleans"/>
+  <field name="parameters" type="text_general"/>
   <field name="publication_authors" type="text_general"/>
   <field name="publication_id" type="text_general"/>
   <field name="publication_identifiers" type="text_general"/>
@@ -501,14 +515,17 @@
   <field name="taxIdB" type="plongs"/>
   <field name="text" type="text_en_splitting" multiValued="true" indexed="true" required="true" stored="false"/>
   <field name="text2" type="text_en" multiValued="true" indexed="true" stored="true"/>
+  <field name="type" type="text_general"/>
   <field name="typeA" type="text_general"/>
   <field name="typeB" type="text_general"/>
   <field name="type_MI_A" type="text_general"/>
   <field name="type_MI_B" type="text_general"/>
+  <field name="type_mi_identifier" type="text_general"/>
   <field name="uniqueIdA" type="text_general"/>
   <field name="uniqueIdB" type="text_general"/>
   <field name="uniqueKey" type="text_general"/>
   <field name="updation_date" type="pdates"/>
+  <field name="xrefs" type="text_general"/>
   <field name="xrefsA" type="text_general"/>
   <field name="xrefsB" type="text_general"/>
   <dynamicField name="*_txt_en_split_tight" type="text_en_splitting_tight" indexed="true" stored="true"/>
@@ -642,4 +659,17 @@
   <copyField source="type_MI_A" dest="type_MI_A_str" maxChars="256"/>
   <copyField source="type_MI_B" dest="type_MI_B_str" maxChars="256"/>
   <copyField source="interaction_type_mi_identifier" dest="interaction_type_mi_identifier_str" maxChars="256"/>
+  <copyField source="ac" dest="ac_str" maxChars="256"/>
+  <copyField source="identifiers" dest="identifiers_str" maxChars="256"/>
+  <copyField source="type_mi_identifier" dest="type_mi_identifier_str" maxChars="256"/>
+  <copyField source="annotations" dest="annotations_str" maxChars="256"/>
+  <copyField source="type" dest="type_str" maxChars="256"/>
+  <copyField source="xrefs" dest="xrefs_str" maxChars="256"/>
+  <copyField source="parameters" dest="parameters_str" maxChars="256"/>
+  <copyField source="detection_method" dest="detection_method_str" maxChars="256"/>
+  <copyField source="acB" dest="acB_str" maxChars="256"/>
+  <copyField source="all_annotations" dest="all_annotations_str" maxChars="256"/>
+  <copyField source="idB" dest="idB_str" maxChars="256"/>
+  <copyField source="idA" dest="idA_str" maxChars="256"/>
+  <copyField source="acA" dest="acA_str" maxChars="256"/>
 </schema>
