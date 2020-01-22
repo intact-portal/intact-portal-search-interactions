@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.service.InteractionSearchService;
-import uk.ac.ebi.intact.search.interactions.ws.controller.result.SearchInteractionResult;
+import uk.ac.ebi.intact.search.interactions.ws.controller.model.InteractionSearchResult;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -28,12 +28,12 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
  */
 
 @RestController
-public class InteractionsSearchController {
+public class InteractionSearchController {
 
     private InteractionSearchService interactionSearchService;
 
     @Autowired
-    public InteractionsSearchController(InteractionSearchService interactionSearchService) {
+    public InteractionSearchController(InteractionSearchService interactionSearchService) {
         this.interactionSearchService = interactionSearchService;
     }
 
@@ -51,7 +51,7 @@ public class InteractionsSearchController {
                     "pageSize"
             },
             produces = {APPLICATION_JSON_VALUE})
-     public SearchInteractionResult findInteractionWithFacet(
+     public InteractionSearchResult findInteractionWithFacet(
             @RequestParam(value = "query") String query,
             @RequestParam(value = "speciesFilter", required = false) Set<String> speciesFilter,
             @RequestParam(value = "interactorTypeFilter", required = false) Set<String> interactorTypeFilter,
@@ -65,7 +65,7 @@ public class InteractionsSearchController {
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
 
-        return new SearchInteractionResult(interactionSearchService.findInteractionWithFacet(
+        return new InteractionSearchResult(interactionSearchService.findInteractionWithFacet(
                 query,
                 speciesFilter,
                 interactorTypeFilter,
@@ -151,16 +151,16 @@ public class InteractionsSearchController {
                 interactorTypeFilter, detectionMethodFilter, interactionTypeFilter, hostOrganismFilter, negativeFilter, minMiScoreFilter, maxMiScoreFilter,
                 false, page, pageSize);
 
-        SearchInteractionResult searchInteractionResult = new SearchInteractionResult(searchInteraction);
+        InteractionSearchResult interactionSearchResult = new InteractionSearchResult(searchInteraction);
 
         JSONObject result = new JSONObject();
         result.put("draw", request.getParameter("draw"));
-        result.put("recordsTotal", searchInteractionResult.getTotalElements());
-        result.put("recordsFiltered", searchInteractionResult.getTotalElements());
+        result.put("recordsTotal", interactionSearchResult.getTotalElements());
+        result.put("recordsFiltered", interactionSearchResult.getTotalElements());
 
         JSONArray data = new JSONArray();
 
-        for (SearchInteraction interaction : searchInteractionResult.getContent()) {
+        for (SearchInteraction interaction : interactionSearchResult.getContent()) {
             StringWriter writer = new StringWriter();
             ObjectMapper mapper = new ObjectMapper();
             mapper.writeValue(writer, interaction);

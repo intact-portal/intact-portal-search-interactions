@@ -1,4 +1,4 @@
-package uk.ac.ebi.intact.search.interactions.ws.controller.result;
+package uk.ac.ebi.intact.search.interactions.ws.controller.model;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,11 +16,11 @@ import java.util.function.Function;
 /**
  * This class has all the methods/utils of a Page and one more customized method getFacetResultPage()
  */
-public class SearchInteractionResult implements Page<SearchInteraction> {
+public class InteractionSearchResult implements Page<SearchInteraction> {
 
     private final FacetPage<SearchInteraction> page;
 
-    public SearchInteractionResult(FacetPage<SearchInteraction> page) {
+    public InteractionSearchResult(FacetPage<SearchInteraction> page) {
         this.page = page;
     }
 
