@@ -7,6 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.solr.core.SolrOperations;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.repository.config.EnableSolrRepositories;
@@ -25,10 +26,12 @@ public class InteractionSearchServiceApplication extends SpringBootServletInitia
 		return application.sources(InteractionSearchServiceApplication.class);
 	}
 
+	@Bean
 	public SolrClient solrClient() {
 		return new HttpSolrClient.Builder(solrHost).build();
 	}
 
+	@Bean
 	public SolrOperations solrTemplate() {
 		return new SolrTemplate(solrClient());
 	}
