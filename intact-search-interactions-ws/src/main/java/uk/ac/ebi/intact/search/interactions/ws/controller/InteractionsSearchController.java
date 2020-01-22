@@ -10,10 +10,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uk.ac.ebi.intact.search.interactions.ws.controller.result.SearchInteractionResult;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
-import uk.ac.ebi.intact.search.interactions.service.InteractionIndexService;
 import uk.ac.ebi.intact.search.interactions.service.InteractionSearchService;
+import uk.ac.ebi.intact.search.interactions.ws.controller.result.SearchInteractionResult;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -28,16 +27,13 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
  * @author Elisabet Barrera
  */
 
-@RestController("interactions")
-public class SearchInteractionController {
+@RestController
+public class InteractionsSearchController {
 
-    private InteractionIndexService interactionIndexService;
     private InteractionSearchService interactionSearchService;
 
     @Autowired
-    public SearchInteractionController(InteractionIndexService interactionIndexService,
-                                       InteractionSearchService interactionSearchService) {
-        this.interactionIndexService = interactionIndexService;
+    public InteractionsSearchController(InteractionSearchService interactionSearchService) {
         this.interactionSearchService = interactionSearchService;
     }
 
