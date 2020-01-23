@@ -55,6 +55,12 @@ public class SearchInteraction {
     @Field(TAX_IDA)
     private Integer taxIdA;
 
+    @Field(DESCRIPTION_A)
+    private String descriptionA;
+
+    @Field(DESCRIPTION_B)
+    private String descriptionB;
+
     @Field(TAX_IDB)
     private Integer taxIdB;
 
@@ -252,7 +258,7 @@ public class SearchInteraction {
                              Set<String> checksums, boolean negative, String type,
                              String interactorTypeA, String typeMIA, String typeMIB, String interactorTypeB,
                              String typeMIIdentifier, boolean disruptedByMutation,
-                             boolean mutationA, boolean mutationB, int binaryInteractionId, String acA, String acB, Integer featureCount) {
+                             boolean mutationA, boolean mutationB, int binaryInteractionId, String acA, String acB, Integer featureCount,String descriptionA,String descriptionB) {
         this.count = count;
         this.idA = idA;
         this.idB = idB;
@@ -306,6 +312,8 @@ public class SearchInteraction {
         this.mutationA = mutationA;
         this.mutationB = mutationB;
         this.featureCount = featureCount;
+        this.descriptionA = descriptionA;
+        this.descriptionB = descriptionB;
         this.setBinaryInteractionId(binaryInteractionId);
     }
 
@@ -372,6 +380,22 @@ public class SearchInteraction {
 
     public void setTaxIdB(Integer taxIdB) {
         this.taxIdB = taxIdB;
+    }
+
+    public String getDescriptionA() {
+        return descriptionA;
+    }
+
+    public void setDescriptionA(String descriptionA) {
+        this.descriptionA = descriptionA;
+    }
+
+    public String getDescriptionB() {
+        return descriptionB;
+    }
+
+    public void setDescriptionB(String descriptionB) {
+        this.descriptionB = descriptionB;
     }
 
     public String getTypeA() {
@@ -887,6 +911,8 @@ public class SearchInteraction {
                 ", aliasesA=" + aliasesA +
                 ", aliasesB=" + aliasesB +
                 ", taxIdA=" + taxIdA +
+                ", descriptionA='" + descriptionA + '\'' +
+                ", descriptionB='" + descriptionB + '\'' +
                 ", taxIdB=" + taxIdB +
                 ", typeA='" + typeA + '\'' +
                 ", typeB='" + typeB + '\'' +
