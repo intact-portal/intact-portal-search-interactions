@@ -451,6 +451,8 @@
   <field name="count" type="plongs"/>
   <field name="creation_date" type="pdates"/>
   <field name="default" type="text_general" multiValued="true" indexed="true" stored="true"/>
+  <field name="descriptionA" type="text_general"/>
+  <field name="descriptionB" type="text_general"/>
   <field name="detection_method" type="text_general"/>
   <field name="disrupted_by_mutation" type="booleans"/>
   <field name="disrupted_by_mutation_A" type="booleans"/>
@@ -474,26 +476,7 @@
   <field name="identification_method_B" type="text_general"/>
   <field name="identifiers" type="text_general"/>
   <field name="intact_miscore" type="pdoubles"/>
-  <field name="interaction_ac" type="text_general"/>
-  <field name="interaction_annotations" type="text_general"/>
-  <field name="interaction_checksum" type="text_general"/>
-  <field name="interaction_contains_disrupted_mutation" type="booleans"/>
-  <field name="interaction_count" type="plongs"/>
-  <field name="interaction_detection_method" type="text_general"/>
-  <field name="interaction_identifiers" type="text_general"/>
-  <field name="interaction_negative" type="booleans"/>
-  <field name="interaction_parameters" type="text_general"/>
-  <field name="interaction_type" type="text_general"/>
-  <field name="interaction_type_mi_identifier" type="text_general"/>
-  <field name="interaction_xrefs" type="text_general"/>
   <field name="interactions_ids" type="text_general"/>
-  <field name="interactor_acA" type="text_general"/>
-  <field name="interactor_acB" type="text_general"/>
-  <field name="interactor_idA" type="text_general"/>
-  <field name="interactor_idB" type="text_general"/>
-  <field name="interactor_type_A" type="text_general"/>
-  <field name="interactor_type_A_B" type="text_general"/>
-  <field name="interactor_type_B" type="text_general"/>
   <field name="moleculeA" type="text_general"/>
   <field name="moleculeB" type="text_general"/>
   <field name="mutation_A" type="booleans"/>
@@ -597,14 +580,12 @@
   <copyField source="interactions_ids" dest="interactions_ids_str" maxChars="256"/>
   <copyField source="author" dest="author_str" maxChars="256"/>
   <copyField source="uniqueKey" dest="uniqueKey_str" maxChars="256"/>
-  <copyField source="interactor_idA" dest="interactor_idA_str" maxChars="256"/>
   <copyField source="altIdsA" dest="altIdsA_str" maxChars="256"/>
   <copyField source="aliasesA" dest="aliasesA_str" maxChars="256"/>
   <copyField source="annotationsA" dest="annotationsA_str" maxChars="256"/>
   <copyField source="checksumsA" dest="checksumsA_str" maxChars="256"/>
   <copyField source="typeA" dest="typeA_str" maxChars="256"/>
   <copyField source="typeB" dest="typeB_str" maxChars="256"/>
-  <copyField source="interactor_idB" dest="interactor_idB_str" maxChars="256"/>
   <copyField source="checksumsB" dest="checksumsB_str" maxChars="256"/>
   <copyField source="aliasesB" dest="aliasesB_str" maxChars="256"/>
   <copyField source="speciesB" dest="speciesB_str" maxChars="256"/>
@@ -619,19 +600,12 @@
   <copyField source="experimental_role_B" dest="experimental_role_B_str" maxChars="256"/>
   <copyField source="feature_B" dest="feature_B_str" maxChars="256"/>
   <copyField source="biological_role_B" dest="biological_role_B_str" maxChars="256"/>
-  <copyField source="interaction_detection_method" dest="interaction_detection_method_str" maxChars="256"/>
-  <copyField source="interaction_annotations" dest="interaction_annotations_str" maxChars="256"/>
-  <copyField source="interaction_identifiers" dest="interaction_identifiers_str" maxChars="256"/>
   <copyField source="source_databases" dest="source_databases_str" maxChars="256"/>
   <copyField source="expansion_method" dest="expansion_method_str" maxChars="256"/>
   <copyField source="confidence_values" dest="confidence_values_str" maxChars="256"/>
-  <copyField source="interaction_xrefs" dest="interaction_xrefs_str" maxChars="256"/>
-  <copyField source="interaction_type" dest="interaction_type_str" maxChars="256"/>
   <copyField source="host_organism" dest="host_organism_str" maxChars="256"/>
   <copyField source="xrefsB" dest="xrefsB_str" maxChars="256"/>
   <copyField source="xrefsA" dest="xrefsA_str" maxChars="256"/>
-  <copyField source="interaction_ac" dest="interaction_ac_str" maxChars="256"/>
-  <copyField source="interaction_parameters" dest="interaction_parameters_str" maxChars="256"/>
   <copyField source="publication_authors" dest="publication_authors_str" maxChars="256"/>
   <copyField source="*" dest="text"/>
   <copyField source="*" dest="text2"/>
@@ -640,9 +614,7 @@
   <copyField source="first_author" dest="first_author_str" maxChars="256"/>
   <copyField source="feature_shortlabel_B" dest="feature_shortlabel_B_str" maxChars="256"/>
   <copyField source="uniqueIdA" dest="uniqueIdA_str" maxChars="256"/>
-  <copyField source="interactor_acA" dest="interactor_acA_str" maxChars="256"/>
   <copyField source="feature_shortlabel_A" dest="feature_shortlabel_A_str" maxChars="256"/>
-  <copyField source="interactor_acB" dest="interactor_acB_str" maxChars="256"/>
   <copyField source="uniqueIdB" dest="uniqueIdB_str" maxChars="256"/>
   <copyField source="experimental_preparations_B" dest="experimental_preparations_B_str" maxChars="256"/>
   <copyField source="experimental_preparations_A" dest="experimental_preparations_A_str" maxChars="256"/>
@@ -652,13 +624,8 @@
   <copyField source="moleculeB" dest="moleculeB_str" maxChars="256"/>
   <copyField source="stoichiometry_B" dest="stoichiometry_B_str" maxChars="256"/>
   <copyField source="stoichiometry_A" dest="stoichiometry_A_str" maxChars="256"/>
-  <copyField source="interaction_checksum" dest="interaction_checksum_str" maxChars="256"/>
-  <copyField source="interactor_type_A_B" dest="interactor_type_A_B_str" maxChars="256"/>
-  <copyField source="interactor_type_A" dest="interactor_type_A_str" maxChars="256"/>
-  <copyField source="interactor_type_B" dest="interactor_type_B_str" maxChars="256"/>
   <copyField source="type_MI_A" dest="type_MI_A_str" maxChars="256"/>
   <copyField source="type_MI_B" dest="type_MI_B_str" maxChars="256"/>
-  <copyField source="interaction_type_mi_identifier" dest="interaction_type_mi_identifier_str" maxChars="256"/>
   <copyField source="ac" dest="ac_str" maxChars="256"/>
   <copyField source="identifiers" dest="identifiers_str" maxChars="256"/>
   <copyField source="type_mi_identifier" dest="type_mi_identifier_str" maxChars="256"/>
@@ -672,4 +639,6 @@
   <copyField source="idB" dest="idB_str" maxChars="256"/>
   <copyField source="idA" dest="idA_str" maxChars="256"/>
   <copyField source="acA" dest="acA_str" maxChars="256"/>
+  <copyField source="descriptionB" dest="descriptionB_str" maxChars="256"/>
+  <copyField source="descriptionA" dest="descriptionA_str" maxChars="256"/>
 </schema>
