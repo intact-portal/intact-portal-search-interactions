@@ -53,11 +53,11 @@ public class InteractionSearchController {
             produces = {APPLICATION_JSON_VALUE})
      public InteractionSearchResult findInteractionWithFacet(
             @RequestParam(value = "query") String query,
-            @RequestParam(value = "speciesFilter", required = false) Set<String> speciesFilter,
+            @RequestParam(value = "interactorSpeciesFilter", required = false) Set<String> interactorSpeciesFilter,
             @RequestParam(value = "interactorTypeFilter", required = false) Set<String> interactorTypeFilter,
-            @RequestParam(value = "detectionMethodFilter", required = false) Set<String> detectionMethodFilter,
+            @RequestParam(value = "interactionDetectionMethodFilter", required = false) Set<String> interactionDetectionMethodFilter,
             @RequestParam(value = "interactionTypeFilter", required = false) Set<String> interactionTypeFilter,
-            @RequestParam(value = "hostOrganismFilter", required = false) Set<String> hostOrganismFilter,
+            @RequestParam(value = "interactionHostOrganismFilter", required = false) Set<String> interactionHostOrganismFilter,
             @RequestParam(value = "isNegativeFilter", required = false) boolean isNegativeFilter,
             @RequestParam(value = "minMiscore",defaultValue = "0", required = false) double minMiscore,
             @RequestParam(value = "maxMiscore",defaultValue = "1", required = false) double maxMiscore,
@@ -66,12 +66,9 @@ public class InteractionSearchController {
             @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
 
         return new InteractionSearchResult(interactionSearchService.findInteractionWithFacet(
-                query,
-                speciesFilter,
-                interactorTypeFilter,
-                detectionMethodFilter,
-                interactionTypeFilter,
-                hostOrganismFilter,
+                query, interactorSpeciesFilter,
+                interactorTypeFilter, interactionDetectionMethodFilter,
+                interactionTypeFilter, interactionHostOrganismFilter,
                 isNegativeFilter,
                 minMiscore,
                 maxMiscore,
@@ -90,11 +87,11 @@ public class InteractionSearchController {
     public long countInteractionResult(
             @RequestParam(value = "query") String query,
             @RequestParam(value = "interactorAc") String interactorAc,
-            @RequestParam(value = "speciesFilter", required = false) Set<String> speciesFilter,
+            @RequestParam(value = "interactorSpeciesFilter", required = false) Set<String> interactorSpeciesFilter,
             @RequestParam(value = "interactorTypeFilter", required = false) Set<String> interactorTypeFilter,
-            @RequestParam(value = "detectionMethodFilter", required = false) Set<String> detectionMethodFilter,
+            @RequestParam(value = "interactionDetectionMethodFilter", required = false) Set<String> interactionDetectionMethodFilter,
             @RequestParam(value = "interactionTypeFilter", required = false) Set<String> interactionTypeFilter,
-            @RequestParam(value = "hostOrganismFilter", required = false) Set<String> hostOrganismFilter,
+            @RequestParam(value = "interactionHostOrganismFilter", required = false) Set<String> interactionHostOrganismFilter,
             @RequestParam(value = "isNegativeFilter", required = false) boolean isNegativeFilter,
             @RequestParam(value = "minMiscore",defaultValue = "0", required = false) double minMiscore,
             @RequestParam(value = "maxMiscore",defaultValue = "1", required = false) double maxMiscore,
@@ -103,11 +100,11 @@ public class InteractionSearchController {
         return interactionSearchService.countInteractionResult(
                 query,
                 interactorAc,
-                speciesFilter,
+                interactorSpeciesFilter,
                 interactorTypeFilter,
-                detectionMethodFilter,
+                interactionDetectionMethodFilter,
                 interactionTypeFilter,
-                hostOrganismFilter,
+                interactionHostOrganismFilter,
                 isNegativeFilter,
                 minMiscore,
                 maxMiscore,
@@ -120,10 +117,10 @@ public class InteractionSearchController {
     public ResponseEntity<String> getInteractionsDatatablesHandler(@PathVariable String query,
                                                                    HttpServletRequest request) throws IOException {
         Set<String> interactorTypeFilter = new HashSet<>();
-        Set<String> speciesFilter = new HashSet<>();
+        Set<String> interactorSpeciesFilter = new HashSet<>();
         Set<String> interactionTypeFilter = new HashSet<>();
-        Set<String> detectionMethodFilter = new HashSet<>();
-        Set<String> hostOrganismFilter = new HashSet<>();
+        Set<String> interactionDetectionMethodFilter = new HashSet<>();
+        Set<String> interactionHostOrganismFilter = new HashSet<>();
 
         int page = Integer.parseInt(request.getParameter("page"));
         int pageSize = Integer.parseInt(request.getParameter("pageSize"));
@@ -131,24 +128,24 @@ public class InteractionSearchController {
         if (request.getParameterValues("interactorType[]") != null) {
             interactorTypeFilter = new HashSet<>(Arrays.asList(request.getParameterValues("interactorType[]")));
         }
-        if (request.getParameterValues("species[]") != null) {
-            speciesFilter = new HashSet<>(Arrays.asList(request.getParameterValues("species[]")));
+        if (request.getParameterValues("interactorSpecies[]") != null) {
+            interactorSpeciesFilter = new HashSet<>(Arrays.asList(request.getParameterValues("interactorSpecies[]")));
         }
         if (request.getParameterValues("interactionType[]") != null) {
             interactionTypeFilter = new HashSet<>(Arrays.asList(request.getParameterValues("interactionType[]")));
         }
-        if (request.getParameterValues("detectionMethod[]") != null) {
-            detectionMethodFilter = new HashSet<>(Arrays.asList(request.getParameterValues("detectionMethod[]")));
+        if (request.getParameterValues("interactionDetectionMethod[]") != null) {
+            interactionDetectionMethodFilter = new HashSet<>(Arrays.asList(request.getParameterValues("interactionDetectionMethod[]")));
         }
-        if (request.getParameterValues("hostOrganism[]") != null) {
-            hostOrganismFilter = new HashSet<>(Arrays.asList(request.getParameterValues("hostOrganism[]")));
+        if (request.getParameterValues("interactionsHostOrganism[]") != null) {
+            interactionHostOrganismFilter = new HashSet<>(Arrays.asList(request.getParameterValues("interactionsHostOrganism[]")));
         }
         boolean negativeFilter = Boolean.parseBoolean(request.getParameter("negativeInteraction"));
         double minMiScoreFilter = Double.parseDouble(request.getParameter("miScoreMin"));
         double maxMiScoreFilter = Double.parseDouble(request.getParameter("miScoreMax"));
 
-        FacetPage<SearchInteraction> searchInteraction = interactionSearchService.findInteractionWithFacet(query, speciesFilter,
-                interactorTypeFilter, detectionMethodFilter, interactionTypeFilter, hostOrganismFilter, negativeFilter, minMiScoreFilter, maxMiScoreFilter,
+        FacetPage<SearchInteraction> searchInteraction = interactionSearchService.findInteractionWithFacet(query, interactorSpeciesFilter,
+                interactorTypeFilter, interactionDetectionMethodFilter, interactionTypeFilter, interactionHostOrganismFilter, negativeFilter, minMiScoreFilter, maxMiScoreFilter,
                 false, page, pageSize);
 
         InteractionSearchResult interactionSearchResult = new InteractionSearchResult(searchInteraction);
