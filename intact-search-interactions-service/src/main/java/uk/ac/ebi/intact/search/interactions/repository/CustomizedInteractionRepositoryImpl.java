@@ -251,8 +251,8 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
             FilterQuery fq = new SimpleFilterQuery();
 
-            Criteria cond1 = Criteria.where("interactor_acA_str").is(interactorAc);
-            Criteria cond2 = Criteria.where("interactor_acB_str").is(interactorAc);
+            Criteria cond1 = Criteria.where(AC_A_STR).is(interactorAc);
+            Criteria cond2 = Criteria.where(AC_B_STR).is(interactorAc);
             Criteria c = cond1.or(cond2);
 
             fq.addCriteria(c);
@@ -276,13 +276,13 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
             for (String word : words) {
                 if (conditions == null) {
                     conditions = new Criteria(DEFAULT).contains(word)
-                            .or("interactor_acA_str").is(word)
-                            .or("interactor_acB_str").is(word)
+                            .or(AC_A_STR).is(word)
+                            .or(AC_B_STR).is(word)
                             .or(AC_STR).is(word);
                 } else {
                     conditions = conditions.or(DEFAULT).contains(word)
-                            .or("interactor_acA_str").is(word)
-                            .or("interactor_acB_str").is(word)
+                            .or(AC_A_STR).is(word)
+                            .or(AC_B_STR).is(word)
                             .or(AC_STR).is(word);
                 }
             }
@@ -420,12 +420,12 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                     }
                 }
             } else {
-                Iterator iterator = species.iterator();
+                Iterator<String> iterator = species.iterator();
                 String speciesA;
                 String speciesB;
 
-                speciesA = (iterator.hasNext()) ? (String) iterator.next() : "";
-                speciesB = (iterator.hasNext()) ? (String) iterator.next() : "";
+                speciesA = (iterator.hasNext()) ? iterator.next() : "";
+                speciesB = (iterator.hasNext()) ? iterator.next() : "";
                 conditions = new Criteria(SPECIES_A_B_STR).is(speciesA).and(
                         new Criteria(SPECIES_A_B_STR).is(speciesB));
             }

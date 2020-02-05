@@ -13,6 +13,8 @@ public class SearchInteractionFields {
     public static final String ID_B = "idB";
     public static final String AC_A = "acA";
     public static final String AC_B = "acB";
+    public static final String AC_A_STR = "acA_str";
+    public static final String AC_B_STR = "acB_str";
     public static final String MOLECULE_A = "moleculeA";
     public static final String MOLECULE_B = "moleculeB";
     public static final String ALT_IDS_A = "altIdsA";
