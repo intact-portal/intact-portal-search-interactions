@@ -261,10 +261,6 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         return solrOperations.count(INTERACTIONS, SimpleQuery.fromQuery(search));
     }
 
-    /**
-     * @param searchTerms
-     * @return Criteria
-     */
     private Criteria createSearchConditions(String searchTerms) {
         Criteria conditions = null;
 
@@ -343,13 +339,6 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         return filterQueries;
     }
 
-    /**
-     * Creates filter conditions in filterQueries for set of String values passed for a field
-     *
-     * @param values
-     * @param field
-     * @param filterQueries
-     */
     private void createFilterCriteria(Set<String> values, String field, List<FilterQuery> filterQueries) {
 
         if (values != null) {
@@ -369,42 +358,22 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         }
     }
 
-    /**
-     * Creates filter conditions in filterQueries for boolean value passed for a field
-     *
-     * @param value
-     * @param filterQueries
-     */
     private void createNegativeFilterCriteria(boolean value, List<FilterQuery> filterQueries) {
 
         Criteria conditions = new Criteria(NEGATIVE).is(value);
-
         filterQueries.add(new SimpleFilterQuery(conditions));
     }
 
-    /**
-     * Creates filter conditions in filterQueries for a range of value passed for a field
-     *
-     * @param minScore
-     * @param maxScore
-     * @param filterQueries
-     */
     private void createMiScoreFilterCriteria(double minScore, double maxScore, List<FilterQuery> filterQueries) {
 
         Criteria conditions = new Criteria(INTACT_MISCORE).between(minScore, maxScore);
-
         filterQueries.add(new SimpleFilterQuery(conditions));
     }
 
-    /**
-     * Creates filter conditions in filterQueries for a set of species passed.
-     *
-     * @param species
-     * @param interSpecies: if true it creates 'and' condition between two species
-     *                      if false it creates 'or' condition between set of species
-     * @param filterQueries
-     */
-    private void createSpeciesFilterCriteria(Set<String> species, boolean interSpecies, List<FilterQuery> filterQueries) {
+
+    // interSpecies: if true it creates 'and' condition between two species
+    //               if false it creates 'or' condition between set of species
+    private void createInteractorSpeciesFilterCriteria(Set<String> species, boolean interSpecies, List<FilterQuery> filterQueries) {
 
         if (species != null) {
             Criteria conditions = null;
@@ -434,13 +403,6 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
             }
         }
     }
-
-    /**
-     * Creates filter conditions in filterQueries for a set of interactor types passed.
-     *
-     * @param interactorType
-     * @param filterQueries
-     */
 
     private void createInteractorTypeFilterCriteria(Set<String> interactorType, List<FilterQuery> filterQueries) {
 
