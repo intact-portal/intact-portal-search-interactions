@@ -40,27 +40,27 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
     }
 
     /**
-     * @param query                 input used to retrieve the interaction
-     * @param speciesFilter         (Optional) interactor speciesFilter of the interaction
-     * @param interactorTypeFilter  (Optional) filter interactions by interactor type
-     * @param detectionMethodFilter (Optional) filter interactions by interaction detection method
-     * @param interactionTypeFilter (Optional) filter interactions by interaction type
-     * @param hostOrganismFilter    (Optional) filter interactions by host organism
-     * @param isNegativeFilter      (Optional) filter interactions that are negative if true
-     * @param minMiScore            minimum value of mi-score for the interaction
-     * @param maxMiScore            minimum value of mi-score for the interaction
-     * @param interSpecies          boolean to restrict the result ot the same or different interactor speciesFilter
-     * @param sort                  field to define the sort of the results
-     * @param pageable              page number and size of the request
+     * @param query                   input used to retrieve the interaction
+     * @param interactorSpeciesFilter (Optional) filter interaction by interactor species
+     * @param interactorTypeFilter    (Optional) filter interactions by interactor type
+     * @param interactionDetectionMethodFilter   (Optional) filter interactions by interaction detection method
+     * @param interactionTypeFilter   (Optional) filter interactions by interaction type
+     * @param interactionHostOrganismFilter      (Optional) filter interactions by host organism
+     * @param isNegativeFilter        (Optional) filter interactions that are negative if true
+     * @param minMiScore              minimum value of mi-score for the interaction
+     * @param maxMiScore              maximum value of mi-score for the interaction
+     * @param interSpecies            boolean to restrict the result ot the same or different interactor species
+     * @param sort                    field to define the sort of the results
+     * @param pageable                page number and size of the request
      * @return the interaction data matching all the criteria
      */
     @Override
     public FacetPage<SearchInteraction> findInteractionWithFacet(String query,
-                                                                 Set<String> speciesFilter,
+                                                                 Set<String> interactorSpeciesFilter,
                                                                  Set<String> interactorTypeFilter,
-                                                                 Set<String> detectionMethodFilter,
+                                                                 Set<String> interactionDetectionMethodFilter,
                                                                  Set<String> interactionTypeFilter,
-                                                                 Set<String> hostOrganismFilter,
+                                                                 Set<String> interactionHostOrganismFilter,
                                                                  boolean isNegativeFilter,
                                                                  double minMiScore,
                                                                  double maxMiScore,
@@ -74,8 +74,8 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         search.addCriteria(conditions);
 
         // filters
-        List<FilterQuery> filterQueries = createFilterQuery(speciesFilter, interactorTypeFilter, detectionMethodFilter,
-                interactionTypeFilter, hostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, interSpecies);
+        List<FilterQuery> filterQueries = createFilterQuery(interactorSpeciesFilter, interactorTypeFilter, interactionDetectionMethodFilter,
+                interactionTypeFilter, interactionHostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, interSpecies);
 
         if (!filterQueries.isEmpty()) {
             for (FilterQuery filterQuery : filterQueries) {
@@ -117,27 +117,27 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
     }
 
     /**
-     * @param query                 input used to retrieve the interaction
-     * @param speciesFilter         (Optional) interactor speciesFilter of the interaction
-     * @param interactorTypeFilter  (Optional) filter interactions by interactor type
-     * @param detectionMethodFilter (Optional) filter interactions by interaction detection method
-     * @param interactionTypeFilter (Optional) filter interactions by interaction type
-     * @param hostOrganismFilter    (Optional) filter interactions by host organism
-     * @param isNegativeFilter      (Optional) filter interactions that are negative if true
-     * @param minMiScore            minimum value of mi-score for the interaction
-     * @param maxMiScore            minimum value of mi-score for the interaction
-     * @param interSpecies          boolean to restrict the result ot the same or different interactor species
-     * @param sort                  field to define the sort of the results
-     * @param pageable              page number and size of the request
+     * @param query                    input used to retrieve the interaction
+     * @param interactorSpeciesFilter  (Optional) filter interactions by interactor species
+     * @param interactorTypeFilter     (Optional) filter interactions by interactor type
+     * @param interactionDetectionMethodFilter    (Optional) filter interactions by interaction detection method
+     * @param interactionTypeFilter    (Optional) filter interactions by interaction type
+     * @param interactionHostOrganismFilter       (Optional) filter interactions by host organism
+     * @param isNegativeFilter         (Optional) filter interactions that are negative if true
+     * @param minMiScore               minimum value of mi-score for the interaction
+     * @param maxMiScore               maximum value of mi-score for the interaction
+     * @param interSpecies             boolean to restrict the result ot the same or different interactor species
+     * @param sort                     field to define the sort of the results
+     * @param pageable                 page number and size of the request
      * @return the interaction page matching all the criteria for graphical representation
      */
     @Override
     public Page<SearchInteraction> findInteractionForGraphJson(String query,
-                                                               Set<String> speciesFilter,
+                                                               Set<String> interactorSpeciesFilter,
                                                                Set<String> interactorTypeFilter,
-                                                               Set<String> detectionMethodFilter,
+                                                               Set<String> interactionDetectionMethodFilter,
                                                                Set<String> interactionTypeFilter,
-                                                               Set<String> hostOrganismFilter,
+                                                               Set<String> interactionHostOrganismFilter,
                                                                boolean isNegativeFilter,
                                                                double minMiScore,
                                                                double maxMiScore,
@@ -151,10 +151,10 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         search.addCriteria(conditions);
 
         // filters
-        List<FilterQuery> filterQueries = createFilterQuery(speciesFilter, interactorTypeFilter, detectionMethodFilter,
-                interactionTypeFilter, hostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, interSpecies);
+        List<FilterQuery> filterQueries = createFilterQuery(interactorSpeciesFilter, interactorTypeFilter, interactionDetectionMethodFilter,
+                interactionTypeFilter, interactionHostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, interSpecies);
 
-        if (filterQueries != null && !filterQueries.isEmpty()) {
+        if (!filterQueries.isEmpty()) {
             for (FilterQuery filterQuery : filterQueries) {
                 search.addFilterQuery(filterQuery);
             }
@@ -205,27 +205,27 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
     }
 
     /**
-     * @param query                 input used to retrieve the interaction
-     * @param interactorAc          interactor accession e.g. EBI-XXXXXX
-     * @param speciesFilter         (Optional) interactor speciesFilter of the interaction
-     * @param interactorTypeFilter  (Optional) filter interactions by interactor type
-     * @param detectionMethodFilter (Optional) filter interactions by interaction detection method
-     * @param interactionTypeFilter (Optional) filter interactions by interaction type
-     * @param hostOrganismFilter    (Optional) filter interactions by host organism
-     * @param isNegativeFilter      (Optional) filter interactions that are negative if true
-     * @param minMiScore            minimum value of mi-score for the interaction
-     * @param maxMiScore            minimum value of mi-score for the interaction
-     * @param interSpecies          boolean to restrict the result ot the same or different interactor species
+     * @param query                   input used to retrieve the interaction
+     * @param interactorAc            interactor accession e.g. EBI-XXXXXX
+     * @param interactorSpeciesFilter (Optional) filter interactions by interactor species
+     * @param interactorTypeFilter    (Optional) filter interactions by interactor type
+     * @param interactionDetectionMethodFilter   (Optional) filter interactions by interaction detection method
+     * @param interactionTypeFilter   (Optional) filter interactions by interaction type
+     * @param interactionHostOrganismFilter      (Optional) filter interactions by host organism
+     * @param isNegativeFilter        (Optional) filter interactions that are negative if true
+     * @param minMiScore              minimum value of mi-score for the interaction
+     * @param maxMiScore              maximum value of mi-score for the interaction
+     * @param interSpecies            boolean to restrict the result ot the same or different interactor species
      * @return the number of interactions matching all the criteria
      */
     @Override
     public long countInteractionResult(String query,
                                        String interactorAc,
-                                       Set<String> speciesFilter,
+                                       Set<String> interactorSpeciesFilter,
                                        Set<String> interactorTypeFilter,
-                                       Set<String> detectionMethodFilter,
+                                       Set<String> interactionDetectionMethodFilter,
                                        Set<String> interactionTypeFilter,
-                                       Set<String> hostOrganismFilter,
+                                       Set<String> interactionHostOrganismFilter,
                                        boolean isNegativeFilter,
                                        double minMiScore,
                                        double maxMiScore,
@@ -241,8 +241,8 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         search.addCriteria(conditions);
 
         // filters
-        List<FilterQuery> filterQueries = createFilterQuery(speciesFilter, interactorTypeFilter, detectionMethodFilter,
-                interactionTypeFilter, hostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, interSpecies);
+        List<FilterQuery> filterQueries = createFilterQuery(interactorSpeciesFilter, interactorTypeFilter, interactionDetectionMethodFilter,
+                interactionTypeFilter, interactionHostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, interSpecies);
 
         if (!filterQueries.isEmpty()) {
             for (FilterQuery filterQuery : filterQueries) {
@@ -290,24 +290,11 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         return conditions;
     }
 
-    /**
-     * Creates filter conditions for all the filters passed in.
-     *
-     * @param detectionMethodFilter
-     * @param interactionTypeFilter
-     * @param hostOrganismFilter
-     * @param isNegativeFilter
-     * @param speciesFilter
-     * @param interSpecies
-     * @param minMiScore
-     * @param maxMiScore
-     * @return
-     */
-    private List<FilterQuery> createFilterQuery(Set<String> speciesFilter,
+    private List<FilterQuery> createFilterQuery(Set<String> interactorSpeciesFilter,
                                                 Set<String> interactorTypeFilter,
-                                                Set<String> detectionMethodFilter,
+                                                Set<String> interactionDetectionMethodFilter,
                                                 Set<String> interactionTypeFilter,
-                                                Set<String> hostOrganismFilter,
+                                                Set<String> interactionHostOrganismFilter,
                                                 boolean isNegativeFilter,
                                                 double minMiScore,
                                                 double maxMiScore,
@@ -315,20 +302,20 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
         List<FilterQuery> filterQueries = new ArrayList<FilterQuery>();
 
-        //speciesFilter filter
-        createSpeciesFilterCriteria(speciesFilter, interSpecies, filterQueries);
+        //Interactor species filter
+        createInteractorSpeciesFilterCriteria(interactorSpeciesFilter, interSpecies, filterQueries);
 
         //Interactor type filter
         createInteractorTypeFilterCriteria(interactorTypeFilter, filterQueries);
 
-        //SearchInteraction Detection Method filter
-        createFilterCriteria(detectionMethodFilter, DETECTION_METHOD_STR, filterQueries);
+        //Interaction detection method filter
+        createFilterCriteria(interactionDetectionMethodFilter, DETECTION_METHOD_STR, filterQueries);
 
-        //SearchInteraction Type filter
+        //Interaction type filter
         createFilterCriteria(interactionTypeFilter, TYPE_STR, filterQueries);
 
-        //Host Organism filter
-        createFilterCriteria(hostOrganismFilter, HOST_ORGANISM_STR, filterQueries);
+        //Interaction host organism filter
+        createFilterCriteria(interactionHostOrganismFilter, HOST_ORGANISM_STR, filterQueries);
 
         //isNegative filter
         createNegativeFilterCriteria(isNegativeFilter, filterQueries);
