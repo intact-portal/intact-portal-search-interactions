@@ -9,15 +9,15 @@ import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 
 import java.util.Optional;
 
+import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields.DEFAULT;
+
 /**
  * @author Elisabet Barrera
  */
 @Repository
 public interface InteractionRepository extends SolrCrudRepository<SearchInteraction, String>, CustomizedInteractionRepository {
 
-    //TODO Add this field as default. It has text_en as FieldType in solr and copy all the values for now
-    @Query(value = "text:?0")
-//    @Query(value = DEFAULT + ":?0")
+    @Query(value = DEFAULT + ":?0")
     Page<SearchInteraction> findInteractions(String query, Pageable pageable);
 
     Optional<SearchInteraction> findByAc(String ac);
