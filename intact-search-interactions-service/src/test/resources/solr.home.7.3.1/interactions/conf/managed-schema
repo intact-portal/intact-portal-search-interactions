@@ -195,6 +195,30 @@
       <filter class="solr.RemoveDuplicatesTokenFilterFactory"/>
     </analyzer>
   </fieldType>
+  <fieldType name="text_en_splitting_tight_ngram" class="solr.TextField" autoGeneratePhraseQueries="true" positionIncrementGap="100">
+  <analyzer type="index">
+    <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+    <filter class="solr.SynonymGraphFilterFactory" expand="false" ignoreCase="true" synonyms="synonyms.txt"/>
+    <filter class="solr.StopFilterFactory" words="lang/stopwords_en.txt" ignoreCase="true"/>
+    <filter class="solr.WordDelimiterGraphFilterFactory" catenateNumbers="1" generateNumberParts="0" generateWordParts="0" catenateAll="0" catenateWords="1"/>
+    <filter class="solr.LowerCaseFilterFactory"/>
+    <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
+    <filter class="solr.EnglishMinimalStemFilterFactory"/>
+    <filter class="solr.RemoveDuplicatesTokenFilterFactory"/>
+    <filter class="solr.FlattenGraphFilterFactory"/>
+    <filter class="solr.NGramFilterFactory" minGramSize="3" maxGramSize="50"/>
+  </analyzer>
+  <analyzer type="query">
+    <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+    <filter class="solr.SynonymGraphFilterFactory" expand="false" ignoreCase="true" synonyms="synonyms.txt"/>
+    <filter class="solr.StopFilterFactory" words="lang/stopwords_en.txt" ignoreCase="true"/>
+    <filter class="solr.WordDelimiterGraphFilterFactory" catenateNumbers="1" generateNumberParts="0" generateWordParts="0" catenateAll="0" catenateWords="1"/>
+    <filter class="solr.LowerCaseFilterFactory"/>
+    <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
+    <filter class="solr.EnglishMinimalStemFilterFactory"/>
+    <filter class="solr.RemoveDuplicatesTokenFilterFactory"/>
+  </analyzer>
+  </fieldType>
   <fieldType name="text_es" class="solr.TextField" positionIncrementGap="100">
     <analyzer>
       <tokenizer class="solr.StandardTokenizerFactory"/>
@@ -450,7 +474,7 @@
   <field name="confidence_values" type="text_general"/>
   <field name="count" type="plongs"/>
   <field name="creation_date" type="pdates"/>
-  <field name="default" type="text_general" multiValued="true" indexed="true" stored="true"/>
+  <field name="default" type="text_en_splitting_tight_ngram" required="true" multiValued="true" indexed="true" stored="false"/>
   <field name="descriptionA" type="text_general"/>
   <field name="descriptionB" type="text_general"/>
   <field name="detection_method" type="text_general"/>
@@ -496,8 +520,6 @@
   <field name="stoichiometry_B" type="text_general"/>
   <field name="taxIdA" type="plongs"/>
   <field name="taxIdB" type="plongs"/>
-  <field name="text" type="text_en_splitting" multiValued="true" indexed="true" required="true" stored="false"/>
-  <field name="text2" type="text_en" multiValued="true" indexed="true" stored="true"/>
   <field name="type" type="text_general"/>
   <field name="typeA" type="text_general"/>
   <field name="typeB" type="text_general"/>
@@ -607,8 +629,6 @@
   <copyField source="xrefsB" dest="xrefsB_str" maxChars="256"/>
   <copyField source="xrefsA" dest="xrefsA_str" maxChars="256"/>
   <copyField source="publication_authors" dest="publication_authors_str" maxChars="256"/>
-  <copyField source="*" dest="text"/>
-  <copyField source="*" dest="text2"/>
   <copyField source="*" dest="default"/>
   <copyField source="speciesA_B" dest="speciesA_B_str" maxChars="256"/>
   <copyField source="first_author" dest="first_author_str" maxChars="256"/>
