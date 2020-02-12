@@ -9,6 +9,7 @@ public class SearchInteractionFields {
      * Reason being A and B at the end of interactor fields implicitly tell you they are interactor*/
 
     public static final String BINARY_INTERACTION_ID = "binary_interaction_id";
+    public static final String DOCUMENT_TYPE = "document_type";
     public static final String ID_A = "idA";
     public static final String ID_B = "idB";
     public static final String AC_A = "acA";

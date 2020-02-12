@@ -2,13 +2,16 @@ package uk.ac.ebi.intact.search.interactions.model;
 
 import org.apache.solr.client.solrj.beans.Field;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.solr.core.mapping.ChildDocument;
 import org.springframework.data.solr.core.mapping.Indexed;
 import org.springframework.data.solr.core.mapping.SolrDocument;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import static uk.ac.ebi.intact.search.interactions.model.SearchChildInteractorFields.DOCUMENT_TYPE;
 import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields.*;
 
 /**
@@ -27,6 +30,9 @@ public class SearchInteraction {
     @Field(BINARY_INTERACTION_ID)
     @Indexed
     private int binaryInteractionId;
+
+    @Field(DOCUMENT_TYPE)
+    private String documentType;
 
     //TODO Do we need idA and idB or ar the same than acA acB?
     @Field(ID_A)
@@ -240,6 +246,9 @@ public class SearchInteraction {
     @Field(MUTATION_B)
     private boolean mutationB;
 
+    @ChildDocument
+    private List<SearchChildInteractor> searchChildInteractors;
+
     public SearchInteraction() {
     }
 
@@ -256,7 +265,7 @@ public class SearchInteraction {
                              Set<String> parameters, Date creationDate, Date updationDate,
                              Set<String> checksums, boolean negative, String type, String typeMIA, String typeMIB,
                              String typeMIIdentifier, boolean disruptedByMutation,
-                             boolean mutationA, boolean mutationB, int binaryInteractionId, String acA, String acB, Integer featureCount,String descriptionA,String descriptionB) {
+                             boolean mutationA, boolean mutationB, int binaryInteractionId, String acA, String acB, Integer featureCount,String descriptionA,String descriptionB, List<SearchChildInteractor> searchChildInteractors,String documentType) {
         this.count = count;
         this.idA = idA;
         this.idB = idB;
@@ -313,8 +322,17 @@ public class SearchInteraction {
         this.descriptionA = descriptionA;
         this.descriptionB = descriptionB;
         this.binaryInteractionId = binaryInteractionId;
+        this.searchChildInteractors= searchChildInteractors;
+        this.documentType = documentType;
     }
 
+    public String getDocumentType() {
+        return documentType;
+    }
+
+    public void setDocumentType(String documentType) {
+        this.documentType = documentType;
+    }
 
     public String getIdA() {
         return idA;
@@ -887,11 +905,20 @@ public class SearchInteraction {
         this.featureCount = featureCount;
     }
 
+    public List<SearchChildInteractor> getSearchChildInteractors() {
+        return searchChildInteractors;
+    }
+
+    public void setSearchChildInteractors(List<SearchChildInteractor> searchChildInteractors) {
+        this.searchChildInteractors = searchChildInteractors;
+    }
+
     @Override
     public String toString() {
         return "SearchInteraction{" +
                 "ac='" + ac + '\'' +
                 ", binaryInteractionId=" + binaryInteractionId +
+                ", documentType='" + documentType + '\'' +
                 ", idA='" + idA + '\'' +
                 ", idB='" + idB + '\'' +
                 ", acA='" + acA + '\'' +
@@ -901,9 +928,9 @@ public class SearchInteraction {
                 ", aliasesA=" + aliasesA +
                 ", aliasesB=" + aliasesB +
                 ", taxIdA=" + taxIdA +
+                ", taxIdB=" + taxIdB +
                 ", descriptionA='" + descriptionA + '\'' +
                 ", descriptionB='" + descriptionB + '\'' +
-                ", taxIdB=" + taxIdB +
                 ", typeA='" + typeA + '\'' +
                 ", typeB='" + typeB + '\'' +
                 ", xrefsA=" + xrefsA +
@@ -920,9 +947,9 @@ public class SearchInteraction {
                 ", experimentalRoleB='" + experimentalRoleB + '\'' +
                 ", featureA=" + featureA +
                 ", featureB=" + featureB +
-                ", featureCount=" + featureCount +
                 ", featureShortLabelA=" + featureShortLabelA +
                 ", featureShortLabelB=" + featureShortLabelB +
+                ", featureCount=" + featureCount +
                 ", stoichiometryA='" + stoichiometryA + '\'' +
                 ", stoichiometryB='" + stoichiometryB + '\'' +
                 ", identificationMethodA=" + identificationMethodA +
@@ -961,6 +988,7 @@ public class SearchInteraction {
                 ", disruptedByMutation=" + disruptedByMutation +
                 ", mutationA=" + mutationA +
                 ", mutationB=" + mutationB +
+                ", searchChildInteractors=" + searchChildInteractors +
                 '}';
     }
 }
