@@ -1,13 +1,10 @@
 package uk.ac.ebi.intact.search.interactions.service;
 
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.data.solr.core.query.result.GroupPage;
 import org.springframework.stereotype.Service;
 import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
-import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.repository.ChildInteractorRepository;
-import uk.ac.ebi.intact.search.interactions.repository.InteractionRepository;
 
 import java.util.Set;
 

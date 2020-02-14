@@ -38,14 +38,14 @@ public class InteractionSearchController {
     private ChildIInteractorSearchService childIInteractorSearchService;
 
     @Autowired
-    public InteractionSearchController(InteractionSearchService interactionSearchService,ChildIInteractorSearchService childIInteractorSearchService) {
+    public InteractionSearchController(InteractionSearchService interactionSearchService, ChildIInteractorSearchService childIInteractorSearchService) {
         this.interactionSearchService = interactionSearchService;
         this.childIInteractorSearchService = childIInteractorSearchService;
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping(value ="/findInteractions/{query}", produces = {APPLICATION_JSON_VALUE})
-    public Page<SearchInteraction> findInteractions( @PathVariable String query) {
+    @GetMapping(value = "/findInteractions/{query}", produces = {APPLICATION_JSON_VALUE})
+    public Page<SearchInteraction> findInteractions(@PathVariable String query) {
         return interactionSearchService.findInteractions(query);
     }
 
@@ -57,7 +57,7 @@ public class InteractionSearchController {
                     "pageSize"
             },
             produces = {APPLICATION_JSON_VALUE})
-     public InteractionSearchResult findInteractionWithFacet(
+    public InteractionSearchResult findInteractionWithFacet(
             @RequestParam(value = "query") String query,
             @RequestParam(value = "interactorSpeciesFilter", required = false) Set<String> interactorSpeciesFilter,
             @RequestParam(value = "interactorTypeFilter", required = false) Set<String> interactorTypeFilter,
@@ -65,8 +65,8 @@ public class InteractionSearchController {
             @RequestParam(value = "interactionTypeFilter", required = false) Set<String> interactionTypeFilter,
             @RequestParam(value = "interactionHostOrganismFilter", required = false) Set<String> interactionHostOrganismFilter,
             @RequestParam(value = "isNegativeFilter", required = false) boolean isNegativeFilter,
-            @RequestParam(value = "minMiscore",defaultValue = "0", required = false) double minMiscore,
-            @RequestParam(value = "maxMiscore",defaultValue = "1", required = false) double maxMiscore,
+            @RequestParam(value = "minMiscore", defaultValue = "0", required = false) double minMiscore,
+            @RequestParam(value = "maxMiscore", defaultValue = "1", required = false) double maxMiscore,
             @RequestParam(value = "interSpecies", required = false) boolean interSpecies,
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
@@ -99,8 +99,8 @@ public class InteractionSearchController {
             @RequestParam(value = "interactionTypeFilter", required = false) Set<String> interactionTypeFilter,
             @RequestParam(value = "interactionHostOrganismFilter", required = false) Set<String> interactionHostOrganismFilter,
             @RequestParam(value = "isNegativeFilter", required = false) boolean isNegativeFilter,
-            @RequestParam(value = "minMiscore",defaultValue = "0", required = false) double minMiscore,
-            @RequestParam(value = "maxMiscore",defaultValue = "1", required = false) double maxMiscore,
+            @RequestParam(value = "minMiscore", defaultValue = "0", required = false) double minMiscore,
+            @RequestParam(value = "maxMiscore", defaultValue = "1", required = false) double maxMiscore,
             @RequestParam(value = "interSpecies", required = false) boolean interSpecies,
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
@@ -133,8 +133,8 @@ public class InteractionSearchController {
             @RequestParam(value = "interactionTypeFilter", required = false) Set<String> interactionTypeFilter,
             @RequestParam(value = "interactionHostOrganismFilter", required = false) Set<String> interactionHostOrganismFilter,
             @RequestParam(value = "isNegativeFilter", required = false) boolean isNegativeFilter,
-            @RequestParam(value = "minMiscore",defaultValue = "0", required = false) double minMiscore,
-            @RequestParam(value = "maxMiscore",defaultValue = "1", required = false) double maxMiscore,
+            @RequestParam(value = "minMiscore", defaultValue = "0", required = false) double minMiscore,
+            @RequestParam(value = "maxMiscore", defaultValue = "1", required = false) double maxMiscore,
             @RequestParam(value = "interSpecies", required = false) boolean interSpecies) {
 
         return interactionSearchService.countInteractionResult(

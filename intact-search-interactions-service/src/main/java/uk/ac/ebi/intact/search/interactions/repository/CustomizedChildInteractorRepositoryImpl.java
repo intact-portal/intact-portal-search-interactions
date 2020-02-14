@@ -1,17 +1,13 @@
 package uk.ac.ebi.intact.search.interactions.repository;
 
-import org.apache.solr.common.params.FacetParams;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.solr.core.SolrOperations;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.core.query.*;
-import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.data.solr.core.query.result.GroupPage;
 import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
-import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.utils.NestedCriteria;
 
 import java.util.ArrayList;
@@ -21,8 +17,6 @@ import java.util.Set;
 
 import static uk.ac.ebi.intact.search.interactions.model.SearchInteraction.INTERACTIONS;
 import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields.*;
-import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields.TYPE_A_STR;
-import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields.TYPE_B_STR;
 
 /**
  * Created by anjali on 13/02/20.
@@ -38,24 +32,24 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
 //    private static final Sort DEFAULT_QUERY_SORT_WITH_QUERY = new Sort(Sort.Direction.DESC, SearchInteractorFields.INTERACTION_COUNT);
 
     @Autowired
-    public CustomizedChildInteractorRepositoryImpl(SolrOperations solrOperations,SolrTemplate solrTemplate) {
+    public CustomizedChildInteractorRepositoryImpl(SolrOperations solrOperations, SolrTemplate solrTemplate) {
         this.solrOperations = solrOperations;
         this.solrTemplate = solrTemplate;
     }
 
     /**
-     * @param query                   input used to retrieve the interaction
-     * @param interactorSpeciesFilter (Optional) filter interaction by interactor species
-     * @param interactorTypeFilter    (Optional) filter interactions by interactor type
-     * @param interactionDetectionMethodFilter   (Optional) filter interactions by interaction detection method
-     * @param interactionTypeFilter   (Optional) filter interactions by interaction type
-     * @param interactionHostOrganismFilter      (Optional) filter interactions by host organism
-     * @param isNegativeFilter        (Optional) filter interactions that are negative if true
-     * @param minMiScore              minimum value of mi-score for the interaction
-     * @param maxMiScore              maximum value of mi-score for the interaction
-     * @param interSpecies            boolean to restrict the result ot the same or different interactor species
-     * @param sort                    field to define the sort of the results
-     * @param pageable                page number and size of the request
+     * @param query                            input used to retrieve the interaction
+     * @param interactorSpeciesFilter          (Optional) filter interaction by interactor species
+     * @param interactorTypeFilter             (Optional) filter interactions by interactor type
+     * @param interactionDetectionMethodFilter (Optional) filter interactions by interaction detection method
+     * @param interactionTypeFilter            (Optional) filter interactions by interaction type
+     * @param interactionHostOrganismFilter    (Optional) filter interactions by host organism
+     * @param isNegativeFilter                 (Optional) filter interactions that are negative if true
+     * @param minMiScore                       minimum value of mi-score for the interaction
+     * @param maxMiScore                       maximum value of mi-score for the interaction
+     * @param interSpecies                     boolean to restrict the result ot the same or different interactor species
+     * @param sort                             field to define the sort of the results
+     * @param pageable                         page number and size of the request
      * @return the interaction data matching all the criteria
      */
     @Override
@@ -70,24 +64,18 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
                                                                  double maxMiScore,
                                                                  boolean interSpecies, Sort sort, Pageable pageable) {
 
+        // filters
+        List<FilterQuery> filterQueries = createFilterQuery(interactorSpeciesFilter, interactorTypeFilter, interactionDetectionMethodFilter,
+                interactionTypeFilter, interactionHostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, interSpecies);
+
         // search query
         SimpleQuery search = new SimpleQuery();
 
         // search criterias
-        Criteria conditions = createSearchConditions(query);
+        Criteria conditions = createSearchConditions(query, filterQueries);
         search.addCriteria(conditions);
 
-        // filters
-        /*List<FilterQuery> filterQueries = createFilterQuery(interactorSpeciesFilter, interactorTypeFilter, interactionDetectionMethodFilter,
-                interactionTypeFilter, interactionHostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, interSpecies);
-
-        if (!filterQueries.isEmpty()) {
-            for (FilterQuery filterQuery : filterQueries) {
-                search.addFilterQuery(filterQuery);
-            }
-        }*/
-
-        /*// facet
+       /*// facet
         FacetOptions facetOptions = new FacetOptions(
                 DETECTION_METHOD_STR,
                 TYPE_STR, HOST_ORGANISM_STR,
@@ -127,18 +115,21 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
         return solrTemplate.queryForGroupPage(INTERACTIONS, search, SearchChildInteractor.class);
     }
 
-    private Criteria createSearchConditions(String searchTerms) {
-        Criteria conditions = null;
-
+    private Criteria createSearchConditions(String searchTerms, List<FilterQuery> filterQueries) {
+        Criteria conditions = new Criteria("document_type").is("interaction");
+        if (!filterQueries.isEmpty()) {
+            for (FilterQuery filterQuery : filterQueries) {
+                conditions.and(filterQuery.getCriteria());
+            }
+        }
         //Query
         //TODO Review query formation
         if (searchTerms != null && !searchTerms.isEmpty()) {
             String[] words = searchTerms.split(" ");
-
+            int wordCount = 1;
             for (String word : words) {
-                if (conditions == null) {
-                    conditions = new Criteria("document_type").is("interaction")
-                            .and(DEFAULT).contains(word)
+                if (wordCount == 1) {
+                    conditions = conditions.and(DEFAULT).contains(word)
                             .or(AC_A_STR).is(word)
                             .or(AC_B_STR).is(word)
                             .or(AC_STR).is(word);
@@ -148,6 +139,7 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
                             .or(AC_B_STR).is(word)
                             .or(AC_STR).is(word);
                 }
+                wordCount++;
             }
         } else {
             //Default Criteria
@@ -157,7 +149,7 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
         Criteria allParentsCriteria = new Criteria("document_type").is("interaction");
 
 
-        return new NestedCriteria(allParentsCriteria,conditions);
+        return new NestedCriteria(allParentsCriteria, conditions);
 
     }
 

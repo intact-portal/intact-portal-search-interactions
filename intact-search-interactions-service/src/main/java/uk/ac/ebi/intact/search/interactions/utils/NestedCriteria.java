@@ -7,7 +7,7 @@ import org.springframework.data.solr.core.query.QueryStringHolder;
 /**
  * Created by anjali on 14/02/20.
  */
-public class NestedCriteria  extends Criteria implements QueryStringHolder{
+public class NestedCriteria extends Criteria implements QueryStringHolder {
     private static DefaultQueryParser parser = new DefaultQueryParser(null);
 
     private Criteria parentCriteria;
@@ -23,6 +23,6 @@ public class NestedCriteria  extends Criteria implements QueryStringHolder{
         String parentQ = parser.createQueryStringFromNode(parentCriteria);
         String childrenQ = parser.createQueryStringFromNode(childrenCriteria);
 
-        return "{!child of="+parentQ+"} "+childrenQ+"";
+        return "{!child of=" + parentQ + "} " + childrenQ + "";
     }
 }
