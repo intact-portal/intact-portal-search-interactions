@@ -1,4 +1,6 @@
-/target/
+*target/
+intact-search-interactions-service/src/test/resources/solr.home.7.3.1/interactions/data/*
+src/test/*
 !.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###
