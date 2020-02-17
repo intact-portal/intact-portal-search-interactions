@@ -105,7 +105,7 @@ public class InteractionSearchController {
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
 
-        return childIInteractorSearchService.findInteractionWithFacet(
+        return childIInteractorSearchService.findInteractorsWithGroup(
                 query, interactorSpeciesFilter,
                 interactorTypeFilter, interactionDetectionMethodFilter,
                 interactionTypeFilter, interactionHostOrganismFilter,

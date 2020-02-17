@@ -17,7 +17,7 @@ import static uk.ac.ebi.intact.search.interactions.model.SearchChildInteractorFi
 public class SearchChildInteractor {
 
     @Id
-    @Field("id")
+    @Field(DOCUMENT_ID)
     private String interactorAc;
 
     @Field(DOCUMENT_TYPE)
@@ -86,12 +86,12 @@ public class SearchChildInteractor {
     }
 
     public SearchChildInteractor(String interactorAc, String interactorName, String description, Set<String> interactorAlias,
-                            Set<String> interactorAltIds, String interactorType, String species, Integer taxId,
-                            Set<String> interactorXrefs, Integer interactionCount, Long interactionSearchCount,
-                            Set<String> interactionIds, Set<String> interactionDetectionMethods, Set<String> interactionTypes,
-                            Set<String> interactionExpansionMethods, Set<Boolean> interactionNegatives,
-                            Set<Double> interactionMiScores, Set<String> interactionHostOrganisms,
-                            Set<String> interactorFeatureShortLabels,String documentType) {
+                                 Set<String> interactorAltIds, String interactorType, String species, Integer taxId,
+                                 Set<String> interactorXrefs, Integer interactionCount, Long interactionSearchCount,
+                                 Set<String> interactionIds, Set<String> interactionDetectionMethods, Set<String> interactionTypes,
+                                 Set<String> interactionExpansionMethods, Set<Boolean> interactionNegatives,
+                                 Set<Double> interactionMiScores, Set<String> interactionHostOrganisms,
+                                 Set<String> interactorFeatureShortLabels, String documentType) {
         this.interactorAc = interactorAc;
         this.documentType = documentType;
         this.interactorName = interactorName;

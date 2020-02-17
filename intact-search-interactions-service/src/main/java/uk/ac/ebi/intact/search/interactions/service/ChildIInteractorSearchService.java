@@ -20,7 +20,7 @@ public class ChildIInteractorSearchService {
         this.childInteractorRepository = childInteractorRepository;
     }
 
-    public GroupPage<SearchChildInteractor> findInteractionWithFacet(String query,
+    public GroupPage<SearchChildInteractor> findInteractorsWithGroup(String query,
                                                                      Set<String> interactorSpeciesFilter,
                                                                      Set<String> interactorTypeFilter,
                                                                      Set<String> interactionDetectionMethodFilter,

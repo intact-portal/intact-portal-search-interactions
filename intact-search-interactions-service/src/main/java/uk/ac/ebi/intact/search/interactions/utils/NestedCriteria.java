@@ -1,7 +1,11 @@
 package uk.ac.ebi.intact.search.interactions.utils;
 
 import org.springframework.data.solr.core.DefaultQueryParser;
-import org.springframework.data.solr.core.query.*;
+import org.springframework.data.solr.core.query.Criteria;
+import org.springframework.data.solr.core.query.FilterQuery;
+import org.springframework.data.solr.core.query.QueryStringHolder;
+import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
+import uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields;
 
 import java.util.List;
 
@@ -10,36 +14,31 @@ import java.util.List;
  */
 public class NestedCriteria extends Criteria implements QueryStringHolder {
     private static DefaultQueryParser parser = new DefaultQueryParser(null);
+    List<FilterQuery> interactionFilterQueries;
+    private Criteria interactionSearchCriteria;
 
-    private Criteria parentCriteria;
-    private Criteria childrenCriteria;
-    List<FilterQuery> filterQueries;
-
-    public NestedCriteria(Criteria parentCriteria, Criteria childrenCriteria, List<FilterQuery> filterQueries) {
-        this.parentCriteria = parentCriteria;
-        this.childrenCriteria = childrenCriteria;
-        this.filterQueries = filterQueries;
+    public NestedCriteria(Criteria interactionSearchCriteria, List<FilterQuery> interactionFilterQueries) {
+        this.interactionSearchCriteria = interactionSearchCriteria;
+        this.interactionFilterQueries = interactionFilterQueries;
     }
 
     @Override
     public String getQueryString() {
-        String parentQ = parser.createQueryStringFromNode(parentCriteria);
-        String childrenQ = parser.createQueryStringFromNode(childrenCriteria);
-        String filterQ="";
+        String interactionSearchQ = parser.createQueryStringFromNode(interactionSearchCriteria, SearchInteraction.class);
+        String interactionFilterQ = "";
 
-        if (!filterQueries.isEmpty()) {
-            int counter=1;
-            for (FilterQuery filterQuery : filterQueries) {
-                if(counter==1){
-                    filterQ="("+parser.createQueryStringFromNode((filterQuery.getCriteria()))+")";
-                }else {
-                    filterQ = filterQ + " AND (" + parser.createQueryStringFromNode((filterQuery.getCriteria())) + ")";
+        if (!interactionFilterQueries.isEmpty()) {
+            int counter = 1;
+            for (FilterQuery interactionFilterQuery : interactionFilterQueries) {
+                if (counter == 1) {
+                    interactionFilterQ = "(" + parser.createQueryStringFromNode(interactionFilterQuery.getCriteria(), SearchInteraction.class) + ")";
+                } else {
+                    interactionFilterQ = interactionFilterQ + " AND (" + parser.createQueryStringFromNode(interactionFilterQuery.getCriteria(), SearchInteraction.class) + ")";
                 }
                 counter++;
             }
-
         }
-
-        return "{!child of=" + parentQ + "} " + childrenQ + " fq="+filterQ;
+        return "{!child of= " + SearchInteractionFields.DOCUMENT_TYPE + ":" + Constants.INTERACTION_DOCUMENT_TYPE_VALUE + "} "
+                + SearchInteractionFields.DOCUMENT_TYPE + ":" + Constants.INTERACTION_DOCUMENT_TYPE_VALUE + " AND " + interactionSearchQ + " fq=" + interactionFilterQ;
     }
 }

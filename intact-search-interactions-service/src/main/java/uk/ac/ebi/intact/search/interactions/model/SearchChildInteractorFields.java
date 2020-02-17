@@ -2,12 +2,13 @@ package uk.ac.ebi.intact.search.interactions.model;
 
 public class SearchChildInteractorFields {
 
+    public static final String DOCUMENT_ID = "id";// this is needed in nested documents
+    public static final String DOCUMENT_TYPE = "document_type";// this is needed in nested documents
+
     public static final String INTERACTOR_AC = "interactor_ac";
     public static final String INTERACTOR_AC_STR = "interactor_ac_str";
 
     public static final String INTERACTOR_NAME = "interactor_name";
-
-    public static final String DOCUMENT_TYPE = "document_type";
 
     public static final String INTERACTOR_DESCRIPTION = "description";
 
