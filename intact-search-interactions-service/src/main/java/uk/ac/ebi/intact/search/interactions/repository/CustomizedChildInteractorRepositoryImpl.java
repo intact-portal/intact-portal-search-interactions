@@ -8,6 +8,7 @@ import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.core.query.*;
 import org.springframework.data.solr.core.query.result.GroupPage;
 import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
+import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractorFields;
 import uk.ac.ebi.intact.search.interactions.utils.NestedCriteria;
 
 import java.util.ArrayList;
@@ -75,6 +76,7 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
         Criteria conditions = createSearchConditions(query, filterQueries);
         search.addCriteria(conditions);
 
+
        /*// facet
         FacetOptions facetOptions = new FacetOptions(
                 DETECTION_METHOD_STR,
@@ -117,11 +119,11 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
 
     private Criteria createSearchConditions(String searchTerms, List<FilterQuery> filterQueries) {
         Criteria conditions = new Criteria("document_type").is("interaction");
-        if (!filterQueries.isEmpty()) {
+        /*if (!filterQueries.isEmpty()) {
             for (FilterQuery filterQuery : filterQueries) {
-                conditions.and(filterQuery.getCriteria());
+                conditions.(new Criteria(filterQuery.getCriteria().getField(),filterQuery));
             }
-        }
+        }*/
         //Query
         //TODO Review query formation
         if (searchTerms != null && !searchTerms.isEmpty()) {
@@ -149,7 +151,9 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
         Criteria allParentsCriteria = new Criteria("document_type").is("interaction");
 
 
-        return new NestedCriteria(allParentsCriteria, conditions);
+
+
+        return new NestedCriteria(allParentsCriteria, conditions,filterQueries);
 
     }
 
