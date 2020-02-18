@@ -6,15 +6,14 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.solr.core.query.result.FacetPage;
-import org.springframework.data.solr.core.query.result.GroupEntry;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.service.ChildIInteractorSearchService;
 import uk.ac.ebi.intact.search.interactions.service.InteractionSearchService;
+import uk.ac.ebi.intact.search.interactions.ws.controller.model.ChildInteractorSearchResult;
 import uk.ac.ebi.intact.search.interactions.ws.controller.model.InteractionSearchResult;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +21,6 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -91,7 +89,7 @@ public class InteractionSearchController {
                     "pageSize"
             },
             produces = {APPLICATION_JSON_VALUE})
-    public List<GroupEntry<SearchChildInteractor>> findChildInteractors(
+    public ChildInteractorSearchResult findChildInteractors(
             @RequestParam(value = "query") String query,
             @RequestParam(value = "interactorSpeciesFilter", required = false) Set<String> interactorSpeciesFilter,
             @RequestParam(value = "interactorTypeFilter", required = false) Set<String> interactorTypeFilter,
@@ -105,7 +103,7 @@ public class InteractionSearchController {
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
 
-        return childIInteractorSearchService.findInteractorsWithGroup(
+        return new ChildInteractorSearchResult(childIInteractorSearchService.findInteractorsWithGroup(
                 query, interactorSpeciesFilter,
                 interactorTypeFilter, interactionDetectionMethodFilter,
                 interactionTypeFilter, interactionHostOrganismFilter,
@@ -114,7 +112,7 @@ public class InteractionSearchController {
                 maxMiscore,
                 interSpecies,
                 page,
-                pageSize).getGroupResult("id").getGroupEntries().getContent();
+                pageSize));
     }
 
     @CrossOrigin(origins = "*")

@@ -81,6 +81,7 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
         GroupOptions groupOptions = new GroupOptions()
                 .addGroupByField(SearchChildInteractorFields.DOCUMENT_ID);
         groupOptions.setLimit(1);
+        groupOptions.setGroupMain(true);
         search.setGroupOptions(groupOptions);
 
         // pagination
