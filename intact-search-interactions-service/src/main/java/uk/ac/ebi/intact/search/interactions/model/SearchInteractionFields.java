@@ -109,4 +109,5 @@ public class SearchInteractionFields {
     public static final String COUNT = "count";
 
     public static final String DEFAULT = "default"; //Copy field for general search
+    public static final String DEFAULT_CHILD_INTERACTORS = "default_child_interactors";
 }

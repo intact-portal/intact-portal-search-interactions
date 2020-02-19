@@ -30,15 +30,16 @@ public class NestedCriteria extends Criteria implements QueryStringHolder {
         if (!interactionFilterQueries.isEmpty()) {
             int counter = 1;
             for (FilterQuery interactionFilterQuery : interactionFilterQueries) {
+                String parsedQuery = parser.createQueryStringFromNode(interactionFilterQuery.getCriteria(), SearchInteraction.class);
                 if (counter == 1) {
-                    interactionFilterQ = "(" + parser.createQueryStringFromNode(interactionFilterQuery.getCriteria(), SearchInteraction.class) + ")";
+                    interactionFilterQ = "(" + parsedQuery + ")";
                 } else {
-                    interactionFilterQ = interactionFilterQ + " AND (" + parser.createQueryStringFromNode(interactionFilterQuery.getCriteria(), SearchInteraction.class) + ")";
+                    interactionFilterQ = interactionFilterQ + " AND (" + parsedQuery + ")";
                 }
                 counter++;
             }
         }
         return "{!child of= " + SearchInteractionFields.DOCUMENT_TYPE + ":" + Constants.INTERACTION_DOCUMENT_TYPE_VALUE + "} "
-                + SearchInteractionFields.DOCUMENT_TYPE + ":" + Constants.INTERACTION_DOCUMENT_TYPE_VALUE + " AND " + interactionSearchQ + " fq=" + interactionFilterQ;
+                + interactionSearchQ + " fq=" + interactionFilterQ;
     }
 }

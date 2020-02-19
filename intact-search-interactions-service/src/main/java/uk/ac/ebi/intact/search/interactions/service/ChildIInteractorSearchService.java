@@ -5,6 +5,7 @@ import org.springframework.data.solr.core.query.result.GroupPage;
 import org.springframework.stereotype.Service;
 import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
 import uk.ac.ebi.intact.search.interactions.repository.ChildInteractorRepository;
+import uk.ac.ebi.intact.search.interactions.utils.Constants;
 
 import java.util.Set;
 
@@ -35,5 +36,9 @@ public class ChildIInteractorSearchService {
         return childInteractorRepository.findChildInteractors(query, interactorSpeciesFilter, interactorTypeFilter, interactionDetectionMethodFilter,
                 interactionTypeFilter, interactionHostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, interSpecies, null,
                 PageRequest.of(page, pageSize));
+    }
+
+    public long countTotal() {
+        return this.childInteractorRepository.countByDocumentType(Constants.INTERACTOR_DOCUMENT_TYPE_VALUE);
     }
 }

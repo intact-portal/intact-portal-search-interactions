@@ -21,7 +21,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
-import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields.*;
 
 /**
  * @author Elisabet Barrera
@@ -48,7 +47,7 @@ public class InteractionSearchServiceTest {
         * For ref. The Interactions.xml can be created with a method saveInteractioninDisc in CommonUtility in intact-portal-indexer*/
         Collection<SearchInteraction> searchInteractions = TestUtil.getInteractionObjFromXml("./src/test/resources/Interactions.xml");
         interactionIndexService.save(searchInteractions, Duration.ofMillis(100));
-        assertEquals(interactionSearchService.countTotal(), searchInteractions.size());
+        assertEquals(10, interactionSearchService.countTotal());
     }
 
     @After
@@ -62,7 +61,7 @@ public class InteractionSearchServiceTest {
     @Test
     public void findByAuthor() {
         Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("Shorter J.");
-        Assert.assertEquals(interactionOp.getTotalElements(), 4);
+        Assert.assertEquals(4, interactionOp.getTotalElements());
     }
 
     /**
@@ -71,7 +70,7 @@ public class InteractionSearchServiceTest {
     @Test
     public void findBySpecies() {
         Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("Rattus norvegicus (Rat)");
-        Assert.assertEquals(interactionOp.getTotalElements(), 4);
+        Assert.assertEquals(4, interactionOp.getTotalElements());
     }
 
     /**
@@ -80,7 +79,7 @@ public class InteractionSearchServiceTest {
     @Test
     public void findByInteractionType() {
         Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("physical association");
-        Assert.assertEquals(interactionOp.getTotalElements(), 10);
+        Assert.assertEquals(10, interactionOp.getTotalElements());
     }
 
     /**
@@ -89,7 +88,7 @@ public class InteractionSearchServiceTest {
     @Test
     public void findByIntDetMethod() {
         Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("molecular sieving");
-        Assert.assertEquals(interactionOp.getTotalElements(), 1);
+        Assert.assertEquals(1, interactionOp.getTotalElements());
     }
 
     /**
@@ -98,7 +97,7 @@ public class InteractionSearchServiceTest {
     @Test
     public void findByHostOrganism() {
         Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("\"In vitro\"");
-        Assert.assertEquals(interactionOp.getTotalElements(), 6);
+        Assert.assertEquals(6, interactionOp.getTotalElements());
     }
 
     /**
@@ -106,7 +105,7 @@ public class InteractionSearchServiceTest {
      */
     @Test
     public void facetTest() {
-        FacetPage<SearchInteraction>  interaction = interactionSearchService.findInteractionWithFacet(
+        FacetPage<SearchInteraction> interaction = interactionSearchService.findInteractionWithFacet(
                 "physical association",
                 null,
                 null,
@@ -124,7 +123,7 @@ public class InteractionSearchServiceTest {
         Assert.assertFalse(facetFieldEntryPage.getContent().isEmpty());
         for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage.getContent()) {
             final String value = facetFieldEntry.getValue();
-            if(value.equals("false")){
+            if (value.equals("false")) {
                 Assert.assertEquals(10, facetFieldEntry.getValueCount());
             }
         }
@@ -289,6 +288,51 @@ public class InteractionSearchServiceTest {
                 page,
                 size);
         Assert.assertEquals(0, interactionOp.getTotalElements());
+    }
+
+    /**
+     * Behaviour If the User types "Species Name" in search box and expects faceting in results page
+     */
+    @Test
+    public void findInteractionsBySpeciesWithFacet() {
+
+        FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
+                "Rattus norvegicus (Rat)",
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                0,
+                1,
+                false,
+                0,
+                10);
+        Assert.assertEquals(4, interactionOp.getTotalElements());
+    }
+
+    /*
+    * Expected interactions when queried by a interactor field
+    **/
+
+    @Test
+    public void findInteractionsByInteractorIndexedField() {
+        FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
+                "NF-kappaB-binding",
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                0,
+                1,
+                false,
+                0,
+                10);
+        Assert.assertEquals(1, interactionOp.getTotalElements());
+
     }
 
 }

@@ -8,6 +8,7 @@ import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.stereotype.Service;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.repository.InteractionRepository;
+import uk.ac.ebi.intact.search.interactions.utils.Constants;
 
 import java.util.Optional;
 import java.util.Set;
@@ -88,6 +89,6 @@ public class InteractionSearchService {
     }
 
     public long countTotal() {
-        return this.interactionRepository.count();
+        return this.interactionRepository.countByDocumentType(Constants.INTERACTION_DOCUMENT_TYPE_VALUE);
     }
 }

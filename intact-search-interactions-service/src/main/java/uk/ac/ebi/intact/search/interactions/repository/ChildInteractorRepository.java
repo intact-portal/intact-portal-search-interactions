@@ -10,4 +10,5 @@ import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
 @Repository
 public interface ChildInteractorRepository extends SolrCrudRepository<SearchChildInteractor, String>, CustomizedChildInteractorRepository {
 
+    long countByDocumentType(String interactions);
 }

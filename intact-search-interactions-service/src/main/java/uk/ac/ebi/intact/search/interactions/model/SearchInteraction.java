@@ -246,6 +246,9 @@ public class SearchInteraction {
     @Field(MUTATION_B)
     private boolean mutationB;
 
+    @Field(DEFAULT_CHILD_INTERACTORS)
+    private Set<String> defaultChildInteractors;
+
     @ChildDocument
     private List<SearchChildInteractor> searchChildInteractors;
 
@@ -265,7 +268,7 @@ public class SearchInteraction {
                              Set<String> parameters, Date creationDate, Date updationDate,
                              Set<String> checksums, boolean negative, String type, String typeMIA, String typeMIB,
                              String typeMIIdentifier, boolean disruptedByMutation,
-                             boolean mutationA, boolean mutationB, int binaryInteractionId, String acA, String acB, Integer featureCount,String descriptionA,String descriptionB, List<SearchChildInteractor> searchChildInteractors,String documentType) {
+                             boolean mutationA, boolean mutationB, int binaryInteractionId, String acA, String acB, Integer featureCount, String descriptionA, String descriptionB, List<SearchChildInteractor> searchChildInteractors, String documentType, Set<String> defaultChildInteractors) {
         this.count = count;
         this.idA = idA;
         this.idB = idB;
@@ -322,8 +325,17 @@ public class SearchInteraction {
         this.descriptionA = descriptionA;
         this.descriptionB = descriptionB;
         this.binaryInteractionId = binaryInteractionId;
-        this.searchChildInteractors= searchChildInteractors;
+        this.searchChildInteractors = searchChildInteractors;
+        this.defaultChildInteractors = defaultChildInteractors;
         this.documentType = documentType;
+    }
+
+    public Set<String> getDefaultChildInteractors() {
+        return defaultChildInteractors;
+    }
+
+    public void setDefaultChildInteractors(Set<String> defaultChildInteractors) {
+        this.defaultChildInteractors = defaultChildInteractors;
     }
 
     public String getDocumentType() {
