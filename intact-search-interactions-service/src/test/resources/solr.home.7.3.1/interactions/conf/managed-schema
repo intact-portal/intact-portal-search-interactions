@@ -475,8 +475,9 @@
   <field name="count" type="plongs"/>
   <field name="creation_date" type="pdates"/>
   <field name="default" type="text_en_splitting_tight_ngram" multiValued="true" indexed="true" required="true" stored="false"/>
-  <field name="default_child_interactors" type="text_general"/>
   <field name="description" type="text_general"/>
+  <field name="descriptionA" type="text_general"/>
+  <field name="descriptionB" type="text_general"/>
   <field name="detection_method" type="text_general"/>
   <field name="disrupted_by_mutation" type="booleans"/>
   <field name="disrupted_by_mutation_A" type="booleans"/>
@@ -501,6 +502,14 @@
   <field name="identification_method_B" type="text_general"/>
   <field name="identifiers" type="text_general"/>
   <field name="intact_miscore" type="pdoubles"/>
+  <field name="interaction_count" type="plongs"/>
+  <field name="interaction_detection_methods" type="text_general"/>
+  <field name="interaction_expansion_methods" type="text_general"/>
+  <field name="interaction_host_organisms" type="text_general"/>
+  <field name="interaction_ids" type="text_general"/>
+  <field name="interaction_miscores" type="pdoubles"/>
+  <field name="interaction_negatives" type="booleans"/>
+  <field name="interaction_types" type="text_general"/>
   <field name="interactions_ids" type="text_general"/>
   <field name="interactor_alias" type="text_general"/>
   <field name="interactor_alt_ids" type="text_general"/>
@@ -677,5 +686,11 @@
   <copyField source="interactor_alias" dest="interactor_alias_str" maxChars="256"/>
   <copyField source="interactor_alt_ids" dest="interactor_alt_ids_str" maxChars="256"/>
   <copyField source="document_type" dest="document_type_str" maxChars="256"/>
-  <copyField source="default_child_interactors" dest="default_child_interactors_str" maxChars="256"/>
+  <copyField source="descriptionB" dest="descriptionB_str" maxChars="256"/>
+  <copyField source="descriptionA" dest="descriptionA_str" maxChars="256"/>
+  <copyField source="interaction_ids" dest="interaction_ids_str" maxChars="256"/>
+  <copyField source="interaction_host_organisms" dest="interaction_host_organisms_str" maxChars="256"/>
+  <copyField source="interaction_detection_methods" dest="interaction_detection_methods_str" maxChars="256"/>
+  <copyField source="interaction_types" dest="interaction_types_str" maxChars="256"/>
+  <copyField source="interaction_expansion_methods" dest="interaction_expansion_methods_str" maxChars="256"/>
 </schema>

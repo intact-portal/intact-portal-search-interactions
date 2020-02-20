@@ -319,7 +319,7 @@ public class InteractionSearchServiceTest {
     @Test
     public void findInteractionsByInteractorIndexedField() {
         FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
-                "NF-kappaB-binding",
+                "kappaB",
                 null,
                 null,
                 null,
@@ -332,6 +332,52 @@ public class InteractionSearchServiceTest {
                 0,
                 10);
         Assert.assertEquals(1, interactionOp.getTotalElements());
+
+    }
+
+    /*
+     * Expected interactions when queried by empty string
+     **/
+
+    @Test
+    public void findInteractionsByEmptyString() {
+        FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
+                "",
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                0,
+                1,
+                false,
+                0,
+                10);
+        Assert.assertEquals(10, interactionOp.getNumberOfElements());
+
+    }
+
+    /*
+     * Expected interactions when queried by "*" character
+     **/
+
+    @Test
+    public void findInteractionsByStarString() {
+        FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
+                "*",
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                0,
+                1,
+                false,
+                0,
+                10);
+        Assert.assertEquals(10, interactionOp.getNumberOfElements());
 
     }
 

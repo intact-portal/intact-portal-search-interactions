@@ -17,28 +17,33 @@ import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields
 public class SearchInteractionUtility {
 
     public Criteria createSearchConditions(String searchTerms) {
-        Criteria conditions = new Criteria(DOCUMENT_TYPE).is(Constants.INTERACTION_DOCUMENT_TYPE_VALUE);
+        Criteria conditions = null;
+        Criteria userConditions = null;
+        Criteria documentConditions = new Criteria(DOCUMENT_TYPE).is(Constants.INTERACTION_DOCUMENT_TYPE_VALUE);
 
         //TODO Review query formation
-        if (searchTerms != null && !searchTerms.isEmpty()) {
+        if (searchTerms != null && !searchTerms.isEmpty() && !searchTerms.trim().equals("*")) {
             String[] words = searchTerms.split(" ");
             int wordCount = 1;
             for (String word : words) {
-                if (wordCount == 1) {
-                    conditions = conditions.and(DEFAULT).contains(word)
+                if (userConditions == null) {
+                    userConditions = new Criteria(DEFAULT).contains(word)
                             .or(AC_A_STR).is(word)
                             .or(AC_B_STR).is(word)
                             .or(AC_STR).is(word);
                 } else {
-                    conditions = conditions.or(DEFAULT).contains(word)
+                    userConditions = userConditions.or(DEFAULT).contains(word)
                             .or(AC_A_STR).is(word)
                             .or(AC_B_STR).is(word)
                             .or(AC_STR).is(word);
                 }
-                wordCount++;
             }
         }
-
+        if (userConditions != null) {
+            conditions = documentConditions.and(userConditions);
+        } else {
+            conditions = documentConditions;
+        }
         return conditions;
     }
 
