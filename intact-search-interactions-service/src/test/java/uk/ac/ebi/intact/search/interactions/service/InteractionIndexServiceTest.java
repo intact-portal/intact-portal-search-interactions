@@ -63,13 +63,6 @@ public class InteractionIndexServiceTest {
                 new HashSet<>(Arrays.asList("interactor1_xref1", "interactor1_xref2")),
                 2,
                 2L,
-                new HashSet<>(Arrays.asList("interaction1", "interaction2")),
-                new HashSet<>(Arrays.asList("detectionMethod1", "detectionMethod2")),
-                new HashSet<>(Arrays.asList("interactionType1", "interactionType2")),
-                new HashSet<>(Arrays.asList("expansionMethod1", "expansionMethod2")),
-                new HashSet<>(Arrays.asList(true, true, false)),
-                new HashSet<>(Arrays.asList(0.33, 0.52)),
-                new HashSet<>(Arrays.asList("in vitro", "Saccharomyces cerevisiae")),
                 new HashSet<>(Arrays.asList("featureShortLabel1", "featureShortLabel2")), Constants.INTERACTOR_DOCUMENT_TYPE_VALUE);
 
 
@@ -84,13 +77,6 @@ public class InteractionIndexServiceTest {
                 new HashSet<>(Arrays.asList("interactor2_xref1", "interactor2_xref2")),
                 2,
                 1L,
-                new HashSet<>(Arrays.asList("interaction1", "interaction2")),
-                new HashSet<>(Arrays.asList("detectionMethod1", "detectionMethod2")),
-                new HashSet<>(Arrays.asList("interactionType1", "interactionType2")),
-                new HashSet<>(Arrays.asList("expansionMethod1", "expansionMethod2")),
-                new HashSet<>(Arrays.asList(true, true, false)),
-                new HashSet<>(Arrays.asList(0.33, 0.52)),
-                new HashSet<>(Arrays.asList("in vitro", "Saccharomyces cerevisiae")),
                 new HashSet<>(Arrays.asList("featureshortlabel1", "featureshortlabel2")), Constants.INTERACTOR_DOCUMENT_TYPE_VALUE);
         searchChildInteractors1.add(searchChildInteractor1);
         searchChildInteractors1.add(searchChildInteractor2);
@@ -120,13 +106,6 @@ public class InteractionIndexServiceTest {
                 new HashSet<>(Arrays.asList("interactor3_xref1", "interactor3_xref2", "interactor3_xref3", "interactor3_xref4")),
                 5,
                 3L,
-                new HashSet<>(Arrays.asList("interaction1", "interaction2", "interaction3", "interaction4", "interaction5")),
-                new HashSet<>(Arrays.asList("detectionMethod1", "detectionMethod2")),
-                new HashSet<>(Arrays.asList("interactionType1", "interactionType2")),
-                new HashSet<>(Arrays.asList("expansionMethod1", "expansionMethod2")),
-                new HashSet<>(Arrays.asList(true, true, false)),
-                new HashSet<>(Arrays.asList(0.33, 0.52)),
-                new HashSet<>(Arrays.asList("Saccharomyces cerevisiae", "Homo sapiens")),
                 new HashSet<>(Arrays.asList("featureshortlabel1", "featureshortlabel2")), Constants.INTERACTOR_DOCUMENT_TYPE_VALUE);
 
         SearchChildInteractor searchChildInteractor4 = new SearchChildInteractor("Q13541",
@@ -140,13 +119,6 @@ public class InteractionIndexServiceTest {
                 new HashSet<>(Arrays.asList("interactor2_xref1", "interactor2_xref2")),
                 2,
                 1L,
-                new HashSet<>(Arrays.asList("interaction1", "interaction2")),
-                new HashSet<>(Arrays.asList("detectionMethod1", "detectionMethod2")),
-                new HashSet<>(Arrays.asList("interactionType1", "interactionType2")),
-                new HashSet<>(Arrays.asList("expansionMethod1", "expansionMethod2")),
-                new HashSet<>(Arrays.asList(true, true, false)),
-                new HashSet<>(Arrays.asList(0.33, 0.52)),
-                new HashSet<>(Arrays.asList("in vitro", "Saccharomyces cerevisiae")),
                 new HashSet<>(Arrays.asList("featureshortlabel1", "featureshortlabel2")), Constants.INTERACTOR_DOCUMENT_TYPE_VALUE);
 
         searchChildInteractors2.add(searchChildInteractor3);

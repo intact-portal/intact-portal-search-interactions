@@ -50,27 +50,6 @@ public class SearchChildInteractor {
     @Field(INTERACTION_COUNT)
     private Integer interactionCount;
 
-    @Field(INTERACTION_IDS)
-    private Set<String> interactionIds;
-
-    @Field(INTERACTION_DETECTION_METHODS)
-    private Set<String> interactionDetectionMethods;
-
-    @Field(INTERACTION_TYPES)
-    private Set<String> interactionTypes;
-
-    @Field(INTERACTION_EXPANSION_METHODS)
-    private Set<String> interactionExpansionMethods;
-
-    @Field(INTERACTION_NEGATIVES)
-    private Set<Boolean> interactionNegatives;
-
-    @Field(INTERACTION_MISCORES)
-    private Set<Double> interactionMiScores;
-
-    @Field(INTERACTION_HOST_ORGANISMS)
-    private Set<String> interactionHostOrganisms;
-
     @Field(INTERACTOR_FEATURE_SHORTLABELS)
     private Set<String> interactorFeatureShortLabels;
 
@@ -88,9 +67,6 @@ public class SearchChildInteractor {
     public SearchChildInteractor(String interactorAc, String interactorName, String description, Set<String> interactorAlias,
                                  Set<String> interactorAltIds, String interactorType, String species, Integer taxId,
                                  Set<String> interactorXrefs, Integer interactionCount, Long interactionSearchCount,
-                                 Set<String> interactionIds, Set<String> interactionDetectionMethods, Set<String> interactionTypes,
-                                 Set<String> interactionExpansionMethods, Set<Boolean> interactionNegatives,
-                                 Set<Double> interactionMiScores, Set<String> interactionHostOrganisms,
                                  Set<String> interactorFeatureShortLabels, String documentType) {
         this.interactorAc = interactorAc;
         this.documentType = documentType;
@@ -99,19 +75,12 @@ public class SearchChildInteractor {
         this.interactorAlias = interactorAlias;
         this.interactorAltIds = interactorAltIds;
         this.interactorType = interactorType;
-        this.setInteractorSpecies(species);
-        this.setInteractorTaxId(taxId);
+        this.interactorSpecies = species;
+        this.interactorTaxId = taxId;
         this.interactorXrefs = interactorXrefs;
         this.interactionCount = interactionCount;
         this.interactionSearchCount = interactionSearchCount;
-        this.interactionIds = interactionIds;
-        this.interactionDetectionMethods = interactionDetectionMethods;
-        this.interactionTypes = interactionTypes;
-        this.interactionExpansionMethods = interactionExpansionMethods;
-        this.interactionNegatives = interactionNegatives;
-        this.interactionMiScores = interactionMiScores;
-        this.interactionHostOrganisms = interactionHostOrganisms;
-        this.setInteractorFeatureShortLabels(interactorFeatureShortLabels);
+        this.interactorFeatureShortLabels = interactorFeatureShortLabels;
     }
 
     public String getInteractorAc() {
@@ -210,58 +179,6 @@ public class SearchChildInteractor {
         return interactorXrefs;
     }
 
-    public void setInteractionIds(Set<String> interactionIds) {
-        this.interactionIds = interactionIds;
-    }
-
-    public Set<String> getInteractionDetectionMethods() {
-        return interactionDetectionMethods;
-    }
-
-    public void setInteractionDetectionMethods(Set<String> interactionDetectionMethods) {
-        this.interactionDetectionMethods = interactionDetectionMethods;
-    }
-
-    public Set<String> getInteractionTypes() {
-        return interactionTypes;
-    }
-
-    public void setInteractionTypes(Set<String> interactionTypes) {
-        this.interactionTypes = interactionTypes;
-    }
-
-    public Set<String> getInteractionExpansionMethods() {
-        return interactionExpansionMethods;
-    }
-
-    public void setInteractionExpansionMethods(Set<String> interactionExpansionMethods) {
-        this.interactionExpansionMethods = interactionExpansionMethods;
-    }
-
-    public Set<Boolean> getInteractionNegatives() {
-        return interactionNegatives;
-    }
-
-    public void setInteractionNegatives(Set<Boolean> interactionNegatives) {
-        this.interactionNegatives = interactionNegatives;
-    }
-
-    public Set<Double> getInteractionMiScores() {
-        return interactionMiScores;
-    }
-
-    public void setInteractionMiScores(Set<Double> interactionMiScores) {
-        this.interactionMiScores = interactionMiScores;
-    }
-
-    public Set<String> getInteractionHostOrganisms() {
-        return interactionHostOrganisms;
-    }
-
-    public void setInteractionHostOrganisms(Set<String> interactionHostOrganisms) {
-        this.interactionHostOrganisms = interactionHostOrganisms;
-    }
-
     public String getInteractorSpecies() {
         return interactorSpecies;
     }
@@ -303,13 +220,6 @@ public class SearchChildInteractor {
                 ", interactorTaxId=" + interactorTaxId +
                 ", interactorXrefs=" + interactorXrefs +
                 ", interactionCount=" + interactionCount +
-                ", interactionIds=" + interactionIds +
-                ", interactionDetectionMethods=" + interactionDetectionMethods +
-                ", interactionTypes=" + interactionTypes +
-                ", interactionExpansionMethods=" + interactionExpansionMethods +
-                ", interactionNegatives=" + interactionNegatives +
-                ", interactionMiScores=" + interactionMiScores +
-                ", interactionHostOrganisms=" + interactionHostOrganisms +
                 ", interactorFeatureShortLabels=" + interactorFeatureShortLabels +
                 ", interactionSearchCount=" + interactionSearchCount +
                 '}';
