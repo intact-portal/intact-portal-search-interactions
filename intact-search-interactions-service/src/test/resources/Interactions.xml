@@ -332,6 +332,9 @@
         <void property="documentType">
          <string>interactor</string>
         </void>
+        <void property="interactionCount">
+         <int>4</int>
+        </void>
         <void property="interactionIds">
          <void method="add">
           <string>Q9BZD4 (mint)</string>
@@ -490,6 +493,9 @@
         </void>
         <void property="documentType">
          <string>interactor</string>
+        </void>
+        <void property="interactionCount">
+         <int>29</int>
         </void>
         <void property="interactionIds">
          <void method="add">
@@ -1259,6 +1265,9 @@
         <void property="documentType">
          <string>interactor</string>
         </void>
+        <void property="interactionCount">
+         <int>5</int>
+        </void>
         <void property="interactionIds">
          <void method="add">
           <string>IPR013252 (interpro)</string>
@@ -1384,6 +1393,9 @@
         </void>
         <void property="documentType">
          <string>interactor</string>
+        </void>
+        <void property="interactionCount">
+         <int>8</int>
         </void>
         <void property="interactionIds">
          <void method="add">
@@ -2056,6 +2068,9 @@
         <void property="documentType">
          <string>interactor</string>
         </void>
+        <void property="interactionCount">
+         <int>29</int>
+        </void>
         <void property="interactionIds">
          <void method="add">
           <string>O14777 (mint)</string>
@@ -2265,6 +2280,9 @@
         </void>
         <void property="documentType">
          <string>interactor</string>
+        </void>
+        <void property="interactionCount">
+         <int>8</int>
         </void>
         <void property="interactionIds">
          <void method="add">
@@ -2986,6 +3004,9 @@
         <void property="documentType">
          <string>interactor</string>
         </void>
+        <void property="interactionCount">
+         <int>29</int>
+        </void>
         <void property="interactionIds">
          <void method="add">
           <string>O14777 (mint)</string>
@@ -3195,6 +3216,9 @@
         </void>
         <void property="documentType">
          <string>interactor</string>
+        </void>
+        <void property="interactionCount">
+         <int>5</int>
         </void>
         <void property="interactionIds">
          <void method="add">
@@ -3904,6 +3928,9 @@
         <void property="documentType">
          <string>interactor</string>
         </void>
+        <void property="interactionCount">
+         <int>29</int>
+        </void>
         <void property="interactionIds">
          <void method="add">
           <string>O14777 (mint)</string>
@@ -4113,6 +4140,9 @@
         </void>
         <void property="documentType">
          <string>interactor</string>
+        </void>
+        <void property="interactionCount">
+         <int>4</int>
         </void>
         <void property="interactionIds">
          <void method="add">
@@ -4828,6 +4858,9 @@
         <void property="documentType">
          <string>interactor</string>
         </void>
+        <void property="interactionCount">
+         <int>11</int>
+        </void>
         <void property="interactionIds">
          <void method="add">
           <string>GO:0005829 (go)</string>
@@ -4930,6 +4963,9 @@
         </void>
         <void property="documentType">
          <string>interactor</string>
+        </void>
+        <void property="interactionCount">
+         <int>22</int>
         </void>
         <void property="interactionIds">
          <void method="add">
@@ -5492,6 +5528,9 @@
         <void property="documentType">
          <string>interactor</string>
         </void>
+        <void property="interactionCount">
+         <int>11</int>
+        </void>
         <void property="interactionIds">
          <void method="add">
           <string>GO:0005829 (go)</string>
@@ -5594,6 +5633,9 @@
         </void>
         <void property="documentType">
          <string>interactor</string>
+        </void>
+        <void property="interactionCount">
+         <int>9</int>
         </void>
         <void property="interactionIds">
          <void method="add">
@@ -6202,6 +6244,9 @@
         <void property="documentType">
          <string>interactor</string>
         </void>
+        <void property="interactionCount">
+         <int>11</int>
+        </void>
         <void property="interactionIds">
          <void method="add">
           <string>GO:0005829 (go)</string>
@@ -6304,6 +6349,9 @@
         </void>
         <void property="documentType">
          <string>interactor</string>
+        </void>
+        <void property="interactionCount">
+         <int>27</int>
         </void>
         <void property="interactionIds">
          <void method="add">
@@ -6950,6 +6998,9 @@
         <void property="documentType">
          <string>interactor</string>
         </void>
+        <void property="interactionCount">
+         <int>11</int>
+        </void>
         <void property="interactionIds">
          <void method="add">
           <string>GO:0005829 (go)</string>
@@ -7052,6 +7103,9 @@
         </void>
         <void property="documentType">
          <string>interactor</string>
+        </void>
+        <void property="interactionCount">
+         <int>10</int>
         </void>
         <void property="interactionIds">
          <void method="add">
@@ -7701,6 +7755,9 @@
         <void property="documentType">
          <string>interactor</string>
         </void>
+        <void property="interactionCount">
+         <int>2</int>
+        </void>
         <void property="interactionIds">
          <void method="add">
           <string>ENSG00000065534 (ensembl)</string>
@@ -7740,6 +7797,9 @@
         </void>
         <void property="documentType">
          <string>interactor</string>
+        </void>
+        <void property="interactionCount">
+         <int>66</int>
         </void>
         <void property="interactionIds">
          <void method="add">

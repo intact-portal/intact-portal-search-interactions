@@ -6,10 +6,12 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.solr.core.query.result.FacetPage;
+import org.springframework.data.solr.core.query.result.GroupPage;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.service.ChildIInteractorSearchService;
 import uk.ac.ebi.intact.search.interactions.service.InteractionSearchService;
@@ -103,7 +105,7 @@ public class InteractionSearchController {
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
 
-        return new ChildInteractorSearchResult(childIInteractorSearchService.findInteractorsWithGroup(
+        GroupPage<SearchChildInteractor> childInteractorResult = childIInteractorSearchService.findInteractorsWithGroup(
                 query, interactorSpeciesFilter,
                 interactorTypeFilter, interactionDetectionMethodFilter,
                 interactionTypeFilter, interactionHostOrganismFilter,
@@ -112,7 +114,19 @@ public class InteractionSearchController {
                 maxMiscore,
                 interSpecies,
                 page,
-                pageSize));
+                pageSize);
+
+        for (SearchChildInteractor searchChildInteractor : childInteractorResult.getContent()) {
+
+            /* TODO: Pass the interSpecies from the top, it can change the result of the query */
+            Long interactionCount = interactionSearchService.countInteractionResult(query, searchChildInteractor.getInteractorAc(), interactorSpeciesFilter,
+                    interactorTypeFilter, interactionDetectionMethodFilter, interactionTypeFilter, interactionHostOrganismFilter,
+                    isNegativeFilter, minMiscore, maxMiscore, false);
+
+            searchChildInteractor.setInteractionSearchCount(interactionCount);
+        }
+
+        return new ChildInteractorSearchResult(childInteractorResult);
     }
 
     @CrossOrigin(origins = "*")
