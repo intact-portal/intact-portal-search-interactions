@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.data.solr.core.query.result.GroupPage;
@@ -11,16 +12,17 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.service.ChildIInteractorSearchService;
 import uk.ac.ebi.intact.search.interactions.service.InteractionSearchService;
+import uk.ac.ebi.intact.search.interactions.utils.Constants;
 import uk.ac.ebi.intact.search.interactions.ws.controller.model.ChildInteractorSearchResult;
 import uk.ac.ebi.intact.search.interactions.ws.controller.model.InteractionSearchResult;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.io.StringWriter;
+import java.io.*;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -34,6 +36,8 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 public class InteractionSearchController {
 
+    @Value("${server.upload.batch.file.path}")
+    private String uploadBatchFilePath;
     private InteractionSearchService interactionSearchService;
     private ChildIInteractorSearchService childIInteractorSearchService;
 
@@ -235,6 +239,47 @@ public class InteractionSearchController {
             produces = {APPLICATION_JSON_VALUE})
     public long countTotal() {
         return interactionSearchService.countTotal();
+    }
+
+    @CrossOrigin(origins = "*")
+    @PostMapping(value = "/uploadBatchFile",
+            produces = {APPLICATION_JSON_VALUE})
+    public ResponseEntity<String> uploadBatchFile(@RequestParam(value = "file", required = true) MultipartFile file) {
+        String rootPath = uploadBatchFilePath;
+        String uploadBatchFileName = null;
+        HttpStatus httpStatus = HttpStatus.OK;
+        if (file != null && !file.isEmpty()) {
+            try {
+                byte[] bytes = file.getBytes();
+                // Creating the directory to store file
+                File dir = new File(rootPath);
+                if (!dir.exists())
+                    dir.mkdirs();
+
+                // Create the file on server
+                uploadBatchFileName = Constants.UPLOADED_BATCH_FILE_PREFIX + this.hashCode();
+                File serverFile = new File(dir.getAbsolutePath()
+                        + File.separator + uploadBatchFileName);
+                BufferedOutputStream stream = new BufferedOutputStream(
+                        new FileOutputStream(serverFile));
+                stream.write(bytes);
+                stream.close();
+            } catch (IOException ioe) {
+                httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+                ioe.printStackTrace();
+            }
+        } else {
+            httpStatus = HttpStatus.EXPECTATION_FAILED;
+        }
+
+        JSONObject result = new JSONObject();
+        result.put("data", uploadBatchFileName);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", APPLICATION_JSON_VALUE);
+        headers.add("X-Clacks-Overhead", "headers");
+
+        return new ResponseEntity<String>(result.toString(), headers, httpStatus);
     }
 
 }
