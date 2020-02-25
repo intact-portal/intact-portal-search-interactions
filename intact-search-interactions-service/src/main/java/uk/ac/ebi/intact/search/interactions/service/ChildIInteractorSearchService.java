@@ -22,6 +22,7 @@ public class ChildIInteractorSearchService {
     }
 
     public GroupPage<SearchChildInteractor> findInteractorsWithGroup(String query,
+                                                                     boolean batchSearch,
                                                                      Set<String> interactorSpeciesFilter,
                                                                      Set<String> interactorTypeFilter,
                                                                      Set<String> interactionDetectionMethodFilter,
@@ -33,7 +34,7 @@ public class ChildIInteractorSearchService {
                                                                      boolean interSpecies,
                                                                      int page,
                                                                      int pageSize) {
-        return childInteractorRepository.findChildInteractors(query, interactorSpeciesFilter, interactorTypeFilter, interactionDetectionMethodFilter,
+        return childInteractorRepository.findChildInteractors(query, batchSearch, interactorSpeciesFilter, interactorTypeFilter, interactionDetectionMethodFilter,
                 interactionTypeFilter, interactionHostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, interSpecies, null,
                 PageRequest.of(page, pageSize));
     }

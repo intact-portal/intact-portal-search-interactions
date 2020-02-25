@@ -59,6 +59,7 @@ public class InteractionSearchController {
             produces = {APPLICATION_JSON_VALUE})
     public InteractionSearchResult findInteractionWithFacet(
             @RequestParam(value = "query") String query,
+            @RequestParam(value = "batchSearch", required = false) boolean batchSearch,
             @RequestParam(value = "interactorSpeciesFilter", required = false) Set<String> interactorSpeciesFilter,
             @RequestParam(value = "interactorTypeFilter", required = false) Set<String> interactorTypeFilter,
             @RequestParam(value = "interactionDetectionMethodFilter", required = false) Set<String> interactionDetectionMethodFilter,
@@ -72,7 +73,7 @@ public class InteractionSearchController {
             @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
 
         return new InteractionSearchResult(interactionSearchService.findInteractionWithFacet(
-                query, interactorSpeciesFilter,
+                query, batchSearch, interactorSpeciesFilter,
                 interactorTypeFilter, interactionDetectionMethodFilter,
                 interactionTypeFilter, interactionHostOrganismFilter,
                 isNegativeFilter,
@@ -93,6 +94,7 @@ public class InteractionSearchController {
             produces = {APPLICATION_JSON_VALUE})
     public ChildInteractorSearchResult findChildInteractors(
             @RequestParam(value = "query") String query,
+            @RequestParam(value = "batchSearch", required = false) boolean batchSearch,
             @RequestParam(value = "interactorSpeciesFilter", required = false) Set<String> interactorSpeciesFilter,
             @RequestParam(value = "interactorTypeFilter", required = false) Set<String> interactorTypeFilter,
             @RequestParam(value = "interactionDetectionMethodFilter", required = false) Set<String> interactionDetectionMethodFilter,
@@ -106,7 +108,7 @@ public class InteractionSearchController {
             @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
 
         GroupPage<SearchChildInteractor> childInteractorResult = childIInteractorSearchService.findInteractorsWithGroup(
-                query, interactorSpeciesFilter,
+                query, batchSearch, interactorSpeciesFilter,
                 interactorTypeFilter, interactionDetectionMethodFilter,
                 interactionTypeFilter, interactionHostOrganismFilter,
                 isNegativeFilter,
@@ -119,7 +121,7 @@ public class InteractionSearchController {
         for (SearchChildInteractor searchChildInteractor : childInteractorResult.getContent()) {
 
             /* TODO: Pass the interSpecies from the top, it can change the result of the query */
-            Long interactionCount = interactionSearchService.countInteractionResult(query, searchChildInteractor.getInteractorAc(), interactorSpeciesFilter,
+            Long interactionCount = interactionSearchService.countInteractionResult(query, batchSearch, searchChildInteractor.getInteractorAc(), interactorSpeciesFilter,
                     interactorTypeFilter, interactionDetectionMethodFilter, interactionTypeFilter, interactionHostOrganismFilter,
                     isNegativeFilter, minMiscore, maxMiscore, false);
 
@@ -138,6 +140,7 @@ public class InteractionSearchController {
             produces = {APPLICATION_JSON_VALUE})
     public long countInteractionResult(
             @RequestParam(value = "query") String query,
+            @RequestParam(value = "batchSearch", required = false) boolean batchSearch,
             @RequestParam(value = "interactorAc") String interactorAc,
             @RequestParam(value = "interactorSpeciesFilter", required = false) Set<String> interactorSpeciesFilter,
             @RequestParam(value = "interactorTypeFilter", required = false) Set<String> interactorTypeFilter,
@@ -151,6 +154,7 @@ public class InteractionSearchController {
 
         return interactionSearchService.countInteractionResult(
                 query,
+                batchSearch,
                 interactorAc,
                 interactorSpeciesFilter,
                 interactorTypeFilter,
@@ -167,6 +171,7 @@ public class InteractionSearchController {
     @PostMapping(value = "/datatables/{query}",
             produces = {APPLICATION_JSON_VALUE})
     public ResponseEntity<String> getInteractionsDatatablesHandler(@PathVariable String query,
+                                                                   @RequestParam(value = "batchSearch", required = false) boolean batchSearch,
                                                                    HttpServletRequest request) throws IOException {
         Set<String> interactorTypeFilter = new HashSet<>();
         Set<String> interactorSpeciesFilter = new HashSet<>();
@@ -196,7 +201,7 @@ public class InteractionSearchController {
         double minMiScoreFilter = Double.parseDouble(request.getParameter("miScoreMin"));
         double maxMiScoreFilter = Double.parseDouble(request.getParameter("miScoreMax"));
 
-        FacetPage<SearchInteraction> searchInteraction = interactionSearchService.findInteractionWithFacet(query, interactorSpeciesFilter,
+        FacetPage<SearchInteraction> searchInteraction = interactionSearchService.findInteractionWithFacet(query, batchSearch, interactorSpeciesFilter,
                 interactorTypeFilter, interactionDetectionMethodFilter, interactionTypeFilter, interactionHostOrganismFilter, negativeFilter, minMiScoreFilter, maxMiScoreFilter,
                 false, page, pageSize);
 

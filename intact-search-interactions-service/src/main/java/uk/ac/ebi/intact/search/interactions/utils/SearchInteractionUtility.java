@@ -16,26 +16,31 @@ import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields
  */
 public class SearchInteractionUtility {
 
-    public Criteria createSearchConditions(String searchTerms) {
+    public Criteria createSearchConditions(String searchTerms, boolean batchSearch) {
         Criteria conditions = null;
         Criteria userConditions = null;
         Criteria documentConditions = new Criteria(DOCUMENT_TYPE).is(Constants.INTERACTION_DOCUMENT_TYPE_VALUE);
 
-        //TODO Review query formation
-        if (searchTerms != null && !searchTerms.isEmpty() && !searchTerms.trim().equals("*")) {
-            String[] words = searchTerms.split(" ");
-            int wordCount = 1;
-            for (String word : words) {
-                if (userConditions == null) {
-                    userConditions = new Criteria(DEFAULT).contains(word)
-                            .or(AC_A_STR).is(word)
-                            .or(AC_B_STR).is(word)
-                            .or(AC_STR).is(word);
-                } else {
-                    userConditions = userConditions.or(DEFAULT).contains(word)
-                            .or(AC_A_STR).is(word)
-                            .or(AC_B_STR).is(word)
-                            .or(AC_STR).is(word);
+        if (batchSearch) {
+            String[] batchStrings = searchTerms.split(",");
+            userConditions = batchSearchConditions(searchTerms);
+        } else {
+            //TODO Review query formation
+            if (searchTerms != null && !searchTerms.isEmpty() && !searchTerms.trim().equals("*")) {
+                String[] words = searchTerms.split(" ");
+                int wordCount = 1;
+                for (String word : words) {
+                    if (userConditions == null) {
+                        userConditions = new Criteria(DEFAULT).contains(word)
+                                .or(AC_A_STR).is(word)
+                                .or(AC_B_STR).is(word)
+                                .or(AC_STR).is(word);
+                    } else {
+                        userConditions = userConditions.or(DEFAULT).contains(word)
+                                .or(AC_A_STR).is(word)
+                                .or(AC_B_STR).is(word)
+                                .or(AC_STR).is(word);
+                    }
                 }
             }
         }
@@ -45,6 +50,18 @@ public class SearchInteractionUtility {
             conditions = documentConditions;
         }
         return conditions;
+    }
+
+    public Criteria batchSearchConditions(String batchStrings) {
+        Criteria userConditions = null;
+
+        //TODO Review query formation
+        if (batchStrings != null && !batchStrings.isEmpty()) {
+            String[] words = batchStrings.split(",");
+            userConditions = new Criteria(INTERACTOR_DEFAULT).in(words);
+        }
+
+        return userConditions;
     }
 
     public List<FilterQuery> createFilterQuery(Set<String> interactorSpeciesFilter,

@@ -54,6 +54,7 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
      */
     @Override
     public GroupPage<SearchChildInteractor> findChildInteractors(String query,
+                                                                 boolean batchSearch,
                                                                  Set<String> interactorSpeciesFilter,
                                                                  Set<String> interactorTypeFilter,
                                                                  Set<String> interactionDetectionMethodFilter,
@@ -72,7 +73,7 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
         SimpleQuery search = new SimpleQuery();
 
         // search criterias
-        Criteria interactionSearchCriteria = searchInteractionUtility.createSearchConditions(query);
+        Criteria interactionSearchCriteria = searchInteractionUtility.createSearchConditions(query, batchSearch);
         Criteria interactorCriteria = new NestedCriteria(interactionSearchCriteria, interactionFilterQueries);
 
         search.addCriteria(interactorCriteria);

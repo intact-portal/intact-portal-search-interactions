@@ -475,6 +475,7 @@
   <field name="count" type="plongs"/>
   <field name="creation_date" type="pdates"/>
   <field name="default" type="text_en_splitting_tight_ngram" multiValued="true" indexed="true" required="true" stored="false"/>
+  <field name="interactordefault" type="text_general" multiValued="true" indexed="true" stored="true"/>
   <field name="description" type="text_general"/>
   <field name="descriptionA" type="text_general"/>
   <field name="descriptionB" type="text_general"/>
@@ -503,13 +504,6 @@
   <field name="identifiers" type="text_general"/>
   <field name="intact_miscore" type="pdoubles"/>
   <field name="interaction_count" type="plongs"/>
-  <field name="interaction_detection_methods" type="text_general"/>
-  <field name="interaction_expansion_methods" type="text_general"/>
-  <field name="interaction_host_organisms" type="text_general"/>
-  <field name="interaction_ids" type="text_general"/>
-  <field name="interaction_miscores" type="pdoubles"/>
-  <field name="interaction_negatives" type="booleans"/>
-  <field name="interaction_types" type="text_general"/>
   <field name="interactions_ids" type="text_general"/>
   <field name="interactor_alias" type="text_general"/>
   <field name="interactor_alt_ids" type="text_general"/>
@@ -648,6 +642,12 @@
   <copyField source="xrefsA" dest="xrefsA_str" maxChars="256"/>
   <copyField source="publication_authors" dest="publication_authors_str" maxChars="256"/>
   <copyField source="*" dest="default"/>
+  <copyField source="altIdsA" dest="interactordefault"/>
+  <copyField source="altIdsB" dest="interactordefault"/>
+  <copyField source="aliasesA" dest="interactordefault"/>
+  <copyField source="aliasesB" dest="interactordefault"/>
+  <copyField source="idA" dest="interactordefault"/>
+  <copyField source="idB" dest="interactordefault"/>
   <copyField source="speciesA_B" dest="speciesA_B_str" maxChars="256"/>
   <copyField source="first_author" dest="first_author_str" maxChars="256"/>
   <copyField source="feature_shortlabel_B" dest="feature_shortlabel_B_str" maxChars="256"/>
@@ -688,9 +688,4 @@
   <copyField source="document_type" dest="document_type_str" maxChars="256"/>
   <copyField source="descriptionB" dest="descriptionB_str" maxChars="256"/>
   <copyField source="descriptionA" dest="descriptionA_str" maxChars="256"/>
-  <copyField source="interaction_ids" dest="interaction_ids_str" maxChars="256"/>
-  <copyField source="interaction_host_organisms" dest="interaction_host_organisms_str" maxChars="256"/>
-  <copyField source="interaction_detection_methods" dest="interaction_detection_methods_str" maxChars="256"/>
-  <copyField source="interaction_types" dest="interaction_types_str" maxChars="256"/>
-  <copyField source="interaction_expansion_methods" dest="interaction_expansion_methods_str" maxChars="256"/>
 </schema>

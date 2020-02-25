@@ -30,6 +30,7 @@ public interface CustomizedChildInteractorRepository {
      * @return the interaction data matching all the criteria
      */
     GroupPage<SearchChildInteractor> findChildInteractors(String query,
+                                                          boolean batchSearch,
                                                           Set<String> interactorSpeciesFilter,
                                                           Set<String> interactorTypeFilter,
                                                           Set<String> interactionDetectionMethodFilter,

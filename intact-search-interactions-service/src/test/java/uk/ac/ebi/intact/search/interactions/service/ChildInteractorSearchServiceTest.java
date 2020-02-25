@@ -62,6 +62,7 @@ public class ChildInteractorSearchServiceTest {
     @Test
     public void getUniqueChildInteractorsFromInteractionQuery() {
         GroupPage<SearchChildInteractor> page = childIInteractorSearchService.findInteractorsWithGroup("Rattus norvegicus (Rat)",
+                false,
                 null,
                 null,
                 null,
@@ -106,6 +107,7 @@ public class ChildInteractorSearchServiceTest {
 
         GroupPage<SearchChildInteractor> childInteractorsOp = childIInteractorSearchService.findInteractorsWithGroup(
                 "physical association",
+                false,
                 species,
                 interactorType,
                 detectionMethod,
@@ -143,6 +145,7 @@ public class ChildInteractorSearchServiceTest {
 
         //Interactors
         GroupPage<SearchChildInteractor> childInteractorsOp = childIInteractorSearchService.findInteractorsWithGroup("Rattus norvegicus (Rat)",
+                false,
                 null,
                 null,
                 null,
@@ -173,6 +176,7 @@ public class ChildInteractorSearchServiceTest {
 
         //Interactions
         FacetPage<SearchInteraction> searchInteractionsOp = interactionSearchService.findInteractionWithFacet("Rattus norvegicus (Rat)",
+                false,
                 null,
                 null,
                 null,
@@ -205,6 +209,7 @@ public class ChildInteractorSearchServiceTest {
     public void findInteractorsByEmptyString() {
         GroupPage<SearchChildInteractor> childInteractorsOp = childIInteractorSearchService.findInteractorsWithGroup(
                 "",
+                false,
                 null,
                 null,
                 null,
@@ -228,6 +233,7 @@ public class ChildInteractorSearchServiceTest {
     public void findInteractionsByStarString() {
         GroupPage<SearchChildInteractor> childInteractorsOp = childIInteractorSearchService.findInteractorsWithGroup(
                 "*",
+                false,
                 null,
                 null,
                 null,

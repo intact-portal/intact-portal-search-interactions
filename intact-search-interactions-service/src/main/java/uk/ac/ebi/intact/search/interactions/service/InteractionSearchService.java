@@ -40,6 +40,7 @@ public class InteractionSearchService {
     }
 
     public FacetPage<SearchInteraction> findInteractionWithFacet(String query,
+                                                                 boolean batchSearch,
                                                                  Set<String> interactorSpeciesFilter,
                                                                  Set<String> interactorTypeFilter,
                                                                  Set<String> interactionDetectionMethodFilter,
@@ -51,12 +52,13 @@ public class InteractionSearchService {
                                                                  boolean interSpecies,
                                                                  int page,
                                                                  int pageSize) {
-        return interactionRepository.findInteractionWithFacet(query, interactorSpeciesFilter, interactorTypeFilter, interactionDetectionMethodFilter,
+        return interactionRepository.findInteractionWithFacet(query, batchSearch, interactorSpeciesFilter, interactorTypeFilter, interactionDetectionMethodFilter,
                 interactionTypeFilter, interactionHostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, interSpecies, null,
                 PageRequest.of(page, pageSize));
     }
 
     public Page<SearchInteraction> findInteractionForGraphJson(String query,
+                                                               boolean batchSearch,
                                                                Set<String> interactorSpeciesFilter,
                                                                Set<String> interactorTypeFilter,
                                                                Set<String> interactionDetectionMethodFilter,
@@ -68,12 +70,13 @@ public class InteractionSearchService {
                                                                boolean interSpecies,
                                                                int page,
                                                                int pageSize) {
-        return interactionRepository.findInteractionForGraphJson(query, interactorSpeciesFilter, interactorTypeFilter, interactionDetectionMethodFilter,
+        return interactionRepository.findInteractionForGraphJson(query, batchSearch, interactorSpeciesFilter, interactorTypeFilter, interactionDetectionMethodFilter,
                 interactionTypeFilter, interactionHostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, interSpecies, null,
                 PageRequest.of(page, pageSize));
     }
 
     public long countInteractionResult(String query,
+                                       boolean batchSearch,
                                        String interactorAc,
                                        Set<String> interactorSpeciesFilter,
                                        Set<String> interactorTypeFilter,
@@ -84,7 +87,7 @@ public class InteractionSearchService {
                                        double minMiScore,
                                        double maxMiScore,
                                        boolean interSpecies) {
-        return interactionRepository.countInteractionResult(query, interactorAc, interactorSpeciesFilter, interactorTypeFilter,
+        return interactionRepository.countInteractionResult(query, batchSearch, interactorAc, interactorSpeciesFilter, interactorTypeFilter,
                 interactionDetectionMethodFilter, interactionTypeFilter, interactionHostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, interSpecies);
     }
 
