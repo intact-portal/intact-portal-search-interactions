@@ -257,7 +257,7 @@ public class InteractionSearchController {
                     dir.mkdirs();
 
                 // Create the file on server
-                uploadBatchFileName = Constants.UPLOADED_BATCH_FILE_PREFIX + this.hashCode();
+                uploadBatchFileName = Constants.UPLOADED_BATCH_FILE_PREFIX + file.hashCode();
                 File serverFile = new File(dir.getAbsolutePath()
                         + File.separator + uploadBatchFileName);
                 BufferedOutputStream stream = new BufferedOutputStream(
@@ -295,7 +295,7 @@ public class InteractionSearchController {
                     int count = 0;
                     while ((line = bufferedReader.readLine()) != null) {
                         if (count > 0) {
-                            searchTerms = "," + line;
+                            searchTerms = searchTerms + "," + line;
                         } else {
                             searchTerms = line;
                         }
