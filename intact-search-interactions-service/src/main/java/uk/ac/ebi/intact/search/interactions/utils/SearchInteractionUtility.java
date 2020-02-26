@@ -1,14 +1,9 @@
 package uk.ac.ebi.intact.search.interactions.utils;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.solr.core.query.Criteria;
 import org.springframework.data.solr.core.query.FilterQuery;
 import org.springframework.data.solr.core.query.SimpleFilterQuery;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.*;
 
 import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields.*;
@@ -18,16 +13,13 @@ import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields
  */
 public class SearchInteractionUtility {
 
-    @Value("${server.upload.batch.file.path}")
-    private String uploadBatchFilePath;
-
     public Criteria createSearchConditions(String searchTerms, boolean batchSearch) {
         Criteria conditions = null;
         Criteria userConditions = null;
         Criteria documentConditions = new Criteria(DOCUMENT_TYPE).is(Constants.INTERACTION_DOCUMENT_TYPE_VALUE);
 
         if (batchSearch) {
-            userConditions = batchSearchConditions(extractBatchSearchTerms(searchTerms));
+            userConditions = batchSearchConditions(Arrays.asList(searchTerms.split(",")));
         } else {
             //TODO Review query formation
             if (searchTerms != null && !searchTerms.isEmpty() && !searchTerms.trim().equals("*")) {
@@ -188,29 +180,5 @@ public class SearchInteractionUtility {
                 filterQueries.add(new SimpleFilterQuery(conditions));
             }
         }
-    }
-
-    private List<String> extractBatchSearchTerms(String batchSearch) {
-
-        List<String> batchSearchTerms = new ArrayList<>();
-
-        if (batchSearch.startsWith(Constants.UPLOADED_BATCH_FILE_PREFIX)) {
-            File uploadedBatchFile = new File(uploadBatchFilePath + batchSearch);
-            if (uploadedBatchFile.exists()) {
-                try {
-                    BufferedReader bufferedReader = new BufferedReader(new FileReader(uploadedBatchFile));
-                    String line;
-                    while ((line = bufferedReader.readLine()) != null) {
-                        batchSearchTerms.add(line);
-                    }
-                } catch (IOException exception) {
-                    exception.printStackTrace();
-                }
-            }
-        } else {
-            batchSearchTerms = Arrays.asList(batchSearch.split(","));
-        }
-
-        return batchSearchTerms;
     }
 }

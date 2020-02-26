@@ -77,7 +77,7 @@ public class InteractionSearchController {
             @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
 
         return new InteractionSearchResult(interactionSearchService.findInteractionWithFacet(
-                query, batchSearch, interactorSpeciesFilter,
+                extractSearchTerms(query), batchSearch, interactorSpeciesFilter,
                 interactorTypeFilter, interactionDetectionMethodFilter,
                 interactionTypeFilter, interactionHostOrganismFilter,
                 isNegativeFilter,
@@ -112,7 +112,7 @@ public class InteractionSearchController {
             @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
 
         GroupPage<SearchChildInteractor> childInteractorResult = childIInteractorSearchService.findInteractorsWithGroup(
-                query, batchSearch, interactorSpeciesFilter,
+                extractSearchTerms(query), batchSearch, interactorSpeciesFilter,
                 interactorTypeFilter, interactionDetectionMethodFilter,
                 interactionTypeFilter, interactionHostOrganismFilter,
                 isNegativeFilter,
@@ -157,7 +157,7 @@ public class InteractionSearchController {
             @RequestParam(value = "interSpecies", required = false) boolean interSpecies) {
 
         return interactionSearchService.countInteractionResult(
-                query,
+                extractSearchTerms(query),
                 batchSearch,
                 interactorAc,
                 interactorSpeciesFilter,
@@ -205,7 +205,7 @@ public class InteractionSearchController {
         double minMiScoreFilter = Double.parseDouble(request.getParameter("miScoreMin"));
         double maxMiScoreFilter = Double.parseDouble(request.getParameter("miScoreMax"));
 
-        FacetPage<SearchInteraction> searchInteraction = interactionSearchService.findInteractionWithFacet(query, batchSearch, interactorSpeciesFilter,
+        FacetPage<SearchInteraction> searchInteraction = interactionSearchService.findInteractionWithFacet(extractSearchTerms(query), batchSearch, interactorSpeciesFilter,
                 interactorTypeFilter, interactionDetectionMethodFilter, interactionTypeFilter, interactionHostOrganismFilter, negativeFilter, minMiScoreFilter, maxMiScoreFilter,
                 false, page, pageSize);
 
@@ -280,6 +280,36 @@ public class InteractionSearchController {
         headers.add("X-Clacks-Overhead", "headers");
 
         return new ResponseEntity<String>(result.toString(), headers, httpStatus);
+    }
+
+    private String extractSearchTerms(String query) {
+
+        String searchTerms = "";
+
+        if (query.startsWith(Constants.UPLOADED_BATCH_FILE_PREFIX)) {
+            File uploadedBatchFile = new File(uploadBatchFilePath + query);
+            if (uploadedBatchFile.exists()) {
+                try {
+                    BufferedReader bufferedReader = new BufferedReader(new FileReader(uploadedBatchFile));
+                    String line;
+                    int count = 0;
+                    while ((line = bufferedReader.readLine()) != null) {
+                        if (count > 0) {
+                            searchTerms = "," + line;
+                        } else {
+                            searchTerms = line;
+                        }
+                        count++;
+                    }
+                } catch (IOException exception) {
+                    exception.printStackTrace();
+                }
+            }
+        } else {
+            searchTerms = query;
+        }
+
+        return searchTerms;
     }
 
 }

@@ -435,30 +435,4 @@ public class InteractionSearchServiceTest {
         Assert.assertEquals(3, interactionOp.getNumberOfElements());
 
     }
-
-    /*
-     * Expected interactions when queried by "comma separated interactor aliases"
-     **/
-
-    @Test
-    public void findInteractionsByUploadedBatchFile() {
-        FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
-                "file_1231355024",
-                true,
-                null,
-                null,
-                null,
-                null,
-                null,
-                false,
-                0,
-                1,
-                false,
-                0,
-                10);
-        Assert.assertEquals(4, interactionOp.getNumberOfElements());
-
-    }
-
-
 }
