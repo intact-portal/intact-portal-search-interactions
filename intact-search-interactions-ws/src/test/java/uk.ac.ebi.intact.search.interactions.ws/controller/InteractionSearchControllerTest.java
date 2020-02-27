@@ -38,7 +38,7 @@ public class InteractionSearchControllerTest {
     }
 
     @Test
-    public void uploadBatchFileAndSearchFuntionality() {
+    public void uploadBatchFileAndSearchFunctionality() {
 
         LinkedMultiValueMap<String, Object> parameters = new LinkedMultiValueMap<String, Object>();
         parameters.add("file", new org.springframework.core.io.ClassPathResource("batchfiles/2_interactors.txt"));
@@ -48,9 +48,9 @@ public class InteractionSearchControllerTest {
 
         HttpEntity<LinkedMultiValueMap<String, Object>> entity =
                 new HttpEntity<LinkedMultiValueMap<String, Object>>(parameters, headers);
-        String serverUrl = "http://localhost:" + port + "/intact/ws/interaction/uploadBatchFile";
+        String uploadFileUrl = "http://localhost:" + port + "/intact/ws/interaction/uploadBatchFile";
 
-        ResponseEntity<String> response = restTemplate.exchange(serverUrl, HttpMethod.POST, entity, String.class, "");
+        ResponseEntity<String> response = restTemplate.exchange(uploadFileUrl, HttpMethod.POST, entity, String.class, "");
 
         // Expect Ok
         assertEquals(response.getStatusCode(), HttpStatus.OK);
@@ -63,6 +63,19 @@ public class InteractionSearchControllerTest {
             assertEquals(true, false);
         }
         assertNotNull(jsonResponse);
-        assertEquals(true, ((String) jsonResponse.get("data")).startsWith("file_"));
+
+        String uploadedBatchFileName = (String) jsonResponse.get("data");
+        assertEquals(true, uploadedBatchFileName.startsWith("file_"));
+
+        String searchWithFileUrl = "http://localhost:" + port + "/intact/ws/interaction/findInteractionWithFacet" +
+                "?query=" + uploadedBatchFileName
+                + "&batchSearch=" + true
+                + "&page=0"
+                + "&pageSize=10";
+
+        ResponseEntity<String> response2 = restTemplate.getForEntity(searchWithFileUrl, String.class);
+        System.out.println();
+
+
     }
 }
