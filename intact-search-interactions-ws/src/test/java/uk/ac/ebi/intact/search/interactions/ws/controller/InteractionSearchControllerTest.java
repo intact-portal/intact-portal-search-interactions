@@ -3,6 +3,7 @@ package uk.ac.ebi.intact.search.interactions.ws.controller;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.LinkedMultiValueMap;
+import uk.ac.ebi.intact.search.interactions.ws.RequiresSolrServer;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -23,9 +25,10 @@ import static org.junit.Assert.assertNotNull;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class InteractionSearchControllerTest {
 
+    @ClassRule
+    public static RequiresSolrServer requiresRunningServer = RequiresSolrServer.onLocalhost();
     @LocalServerPort
     private int port;
-
     @Autowired
     private InteractionSearchController controller;
 
