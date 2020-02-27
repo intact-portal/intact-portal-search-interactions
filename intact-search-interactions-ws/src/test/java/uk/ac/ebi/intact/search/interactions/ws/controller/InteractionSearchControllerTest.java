@@ -7,6 +7,7 @@ import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -27,13 +28,18 @@ public class InteractionSearchControllerTest {
 
     @ClassRule
     public static RequiresSolrServer requiresRunningServer = RequiresSolrServer.onLocalhost();
+
     @LocalServerPort
     private int port;
+
     @Autowired
     private InteractionSearchController controller;
 
     @Autowired
     private TestRestTemplate restTemplate;
+
+    @Value("${server.servlet.context-path}")
+    private String wsContextPath;
 
     @Test
     public void contexLoads() {
@@ -51,7 +57,7 @@ public class InteractionSearchControllerTest {
 
         HttpEntity<LinkedMultiValueMap<String, Object>> entity =
                 new HttpEntity<LinkedMultiValueMap<String, Object>>(parameters, headers);
-        String uploadFileUrl = "http://localhost:" + port + "/intact/ws/interaction/uploadBatchFile";
+        String uploadFileUrl = "http://localhost:" + port + wsContextPath + "/uploadBatchFile";
 
         ResponseEntity<String> response = restTemplate.exchange(uploadFileUrl, HttpMethod.POST, entity, String.class, "");
 
@@ -70,7 +76,7 @@ public class InteractionSearchControllerTest {
         String uploadedBatchFileName = (String) jsonResponse.get("data");
         assertEquals(true, uploadedBatchFileName.startsWith("file_"));
 
-        String searchWithFileUrl = "http://localhost:" + port + "/intact/ws/interaction/findInteractionWithFacet" +
+        String searchWithFileUrl = "http://localhost:" + port + wsContextPath + "/findInteractionWithFacet" +
                 "?query=" + uploadedBatchFileName
                 + "&batchSearch=" + true
                 + "&page=0"
