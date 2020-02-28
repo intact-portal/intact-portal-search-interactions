@@ -64,16 +64,16 @@ public class InteractionSearchControllerTest {
         // Expect Ok
         assertEquals(response.getStatusCode(), HttpStatus.OK);
 
-        JSONObject jsonResponse = null;
+        JSONObject fileUploadResponse = null;
         try {
             JSONParser parser = new JSONParser();
-            jsonResponse = (JSONObject) parser.parse(response.getBody());
+            fileUploadResponse = (JSONObject) parser.parse(response.getBody());
         } catch (Exception e) {
             assertEquals(true, false);
         }
-        assertNotNull(jsonResponse);
+        assertNotNull(fileUploadResponse);
 
-        String uploadedBatchFileName = (String) jsonResponse.get("data");
+        String uploadedBatchFileName = (String) fileUploadResponse.get("data");
         assertEquals(true, uploadedBatchFileName.startsWith("file_"));
 
         String searchWithFileUrl = "http://localhost:" + port + wsContextPath + "/findInteractionWithFacet" +
@@ -82,9 +82,37 @@ public class InteractionSearchControllerTest {
                 + "&page=0"
                 + "&pageSize=10";
 
-        ResponseEntity<String> response2 = restTemplate.getForEntity(searchWithFileUrl, String.class);
-        System.out.println();
+        ResponseEntity<String> fileSearchResponse = restTemplate.getForEntity(searchWithFileUrl, String.class);
+        assertNotNull(fileSearchResponse);
+        assertNotNull(fileSearchResponse.getBody());
 
+        try {
+            JSONParser parser = new JSONParser();
+            JSONObject fileSearchJson = (JSONObject) parser.parse(fileSearchResponse.getBody());
+            assertNotNull(fileSearchJson);
+            assertEquals(9l, fileSearchJson.get("numberOfElements"));
 
+        } catch (Exception e) {
+            assertEquals(true, false);
+        }
+    }
+
+    @Test
+    public void emptyFileUploadTest() {
+
+        LinkedMultiValueMap<String, Object> parameters = new LinkedMultiValueMap<String, Object>();
+        parameters.add("file", new org.springframework.core.io.ClassPathResource("batchfiles/empty_file.txt"));
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+        HttpEntity<LinkedMultiValueMap<String, Object>> entity =
+                new HttpEntity<LinkedMultiValueMap<String, Object>>(parameters, headers);
+        String uploadFileUrl = "http://localhost:" + port + wsContextPath + "/uploadBatchFile";
+
+        ResponseEntity<String> response = restTemplate.exchange(uploadFileUrl, HttpMethod.POST, entity, String.class, "");
+
+        // Expectation failed
+        assertEquals(response.getStatusCode(), HttpStatus.EXPECTATION_FAILED);
     }
 }
