@@ -84,11 +84,13 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         }
 
         // facet
+        // Adds exclude tags in solr to allow calculate properly the facets for multiselection in species and interactor type
         FacetOptions facetOptions = new FacetOptions(
+                "{!ex=SPECIES}"+SPECIES_A_B_STR,
+                "{!ex=TYPE}"+TYPE_A_B_STR,
                 DETECTION_METHOD_STR,
                 TYPE_STR, HOST_ORGANISM_STR,
-                NEGATIVE, INTACT_MISCORE,
-                SPECIES_A_B_STR);
+                NEGATIVE, INTACT_MISCORE);
         facetOptions.setFacetLimit(FACET_MIN_COUNT);
         facetOptions.addFacetByRange(
                 new FacetOptions.FieldWithNumericRangeParameters(INTACT_MISCORE, 0d, 1d, 0.01d)
@@ -98,7 +100,9 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
         );
 
-        facetOptions.getFieldsWithParameters().add(new FacetOptions.FieldWithFacetParameters(SPECIES_A_B).setMethod("enum"));
+        facetOptions.getFieldsWithParameters().add(new FacetOptions.FieldWithFacetParameters(SPECIES_A_B_STR).setMethod("enum"));
+        facetOptions.getFieldsWithParameters().add(new FacetOptions.FieldWithFacetParameters(TYPE_A_B_STR).setMethod("enum"));
+
         /*facetOptions.setFacetSort(FacetOptions.FacetSort.COUNT);*/
         search.setFacetOptions(facetOptions);
 
@@ -158,7 +162,6 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
             for (FilterQuery filterQuery : filterQueries) {
                 search.addFilterQuery(filterQuery);
             }
-
         }
 
         // pagination
@@ -260,6 +263,4 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         }
         return solrOperations.count(INTERACTIONS, SimpleQuery.fromQuery(search));
     }
-
-
 }

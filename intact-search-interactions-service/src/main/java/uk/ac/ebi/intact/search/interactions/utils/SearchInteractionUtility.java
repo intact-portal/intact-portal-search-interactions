@@ -17,9 +17,9 @@ import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields
 public class SearchInteractionUtility {
 
     public Criteria createSearchConditions(String searchTerms) {
-        Criteria conditions = null;
+        Criteria conditions;
         Criteria userConditions = null;
-        Criteria documentConditions = new Criteria(DOCUMENT_TYPE).is(Constants.INTERACTION_DOCUMENT_TYPE_VALUE);
+        Criteria documentConditions = new Criteria(DOCUMENT_TYPE).is(DocumentType.INTERACTION);
 
         //TODO Review query formation
         if (searchTerms != null && !searchTerms.isEmpty() && !searchTerms.trim().equals("*")) {
@@ -27,7 +27,7 @@ public class SearchInteractionUtility {
             int wordCount = 1;
             for (String word : words) {
                 if (userConditions == null) {
-                    userConditions = new Criteria(DEFAULT).contains(word)
+                    userConditions = new Criteria(DEFAULT).is(word)
                             .or(AC_A_STR).is(word)
                             .or(AC_B_STR).is(word)
                             .or(AC_STR).is(word);
@@ -117,56 +117,37 @@ public class SearchInteractionUtility {
 
     // interSpecies: if true it creates 'and' condition between two species
     //               if false it creates 'or' condition between set of species
+    // Adds tags in solr to allow calculate properly the facets for multiselection in species and interactor type
     private void createInteractorSpeciesFilterCriteria(Set<String> species, boolean interSpecies, List<FilterQuery> filterQueries) {
 
-        if (species != null) {
-            Criteria conditions = null;
+        if (species != null && !species.isEmpty()) {
+            Criteria conditions;
             if (!interSpecies) {
-                for (String value : species) {
-
-                    if (conditions == null) {
-                        conditions = new Criteria(SPECIES_A_STR).is(value).or(
-                                new Criteria(SPECIES_B_STR).is(value));
-                    } else {
-                        conditions = conditions.or(new Criteria(SPECIES_A_STR).is(value)).or(
-                                new Criteria(SPECIES_B_STR).is(value));
-                    }
-                }
-            } else {
+                conditions = new Criteria("{!tag=SPECIES}" + SPECIES_A_B_STR).in(species);
+                conditions.isOr();
+            } else { //TODO check if this case still works for the multiselection
                 Iterator<String> iterator = species.iterator();
                 String speciesA;
                 String speciesB;
 
                 speciesA = (iterator.hasNext()) ? iterator.next() : "";
                 speciesB = (iterator.hasNext()) ? iterator.next() : "";
-                conditions = new Criteria(SPECIES_A_B_STR).is(speciesA).and(
-                        new Criteria(SPECIES_A_B_STR).is(speciesB));
+                conditions = new Criteria(SPECIES_A_B_STR).is(speciesA).and(new Criteria(SPECIES_A_B_STR).is(speciesB));
             }
-            if (conditions != null) {
-                filterQueries.add(new SimpleFilterQuery(conditions));
-            }
+            filterQueries.add(new SimpleFilterQuery(conditions));
         }
     }
 
-    private void createInteractorTypeFilterCriteria(Set<String> interactorType, List<FilterQuery> filterQueries) {
+    // Adds tags in solr to allow calculate properly the facets for multiselection in species and interactor type
+    private void createInteractorTypeFilterCriteria(Set<String> interactorTypes, List<FilterQuery> filterQueries) {
 
-        if (interactorType != null) {
+        if (interactorTypes != null && !interactorTypes.isEmpty()) {
             Criteria conditions = null;
 
-            for (String value : interactorType) {
+            conditions = new Criteria("{!tag=TYPE}" + TYPE_A_B_STR).in(interactorTypes);
+            conditions.isOr();
 
-                if (conditions == null) {
-                    conditions = new Criteria(TYPE_A_STR).is(value).or(
-                            new Criteria(TYPE_B_STR).is(value));
-                } else {
-                    conditions = conditions.or(new Criteria(TYPE_A_STR).is(value)).or(
-                            new Criteria(TYPE_B_STR).is(value));
-                }
-            }
-
-            if (conditions != null) {
-                filterQueries.add(new SimpleFilterQuery(conditions));
-            }
+            filterQueries.add(new SimpleFilterQuery(conditions));
         }
     }
 }
