@@ -8,7 +8,7 @@ import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.stereotype.Service;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.repository.InteractionRepository;
-import uk.ac.ebi.intact.search.interactions.utils.Constants;
+import uk.ac.ebi.intact.search.interactions.utils.DocumentType;
 
 import java.util.Optional;
 import java.util.Set;
@@ -17,7 +17,7 @@ import java.util.Set;
  * @author Elisabet Barrera
  */
 @Service
-public class InteractionSearchService {
+public class  InteractionSearchService {
 
     private static final Log log = LogFactory.getLog(InteractionSearchService.class);
 
@@ -89,6 +89,6 @@ public class InteractionSearchService {
     }
 
     public long countTotal() {
-        return this.interactionRepository.countByDocumentType(Constants.INTERACTION_DOCUMENT_TYPE_VALUE);
+        return this.interactionRepository.countByDocumentType(DocumentType.INTERACTION);
     }
 }

@@ -18,16 +18,22 @@ public class SearchChildInteractor {
 
     @Id
     @Field(DOCUMENT_ID)
+    /* IntAct Identifier */
     private String interactorAc;
 
     @Field(DOCUMENT_TYPE)
     private String documentType;
 
     @Field(INTERACTOR_NAME)
+    /* Prefer name of the interactor */
     private String interactorName;
 
+    @Field(INTERACTOR_PREFERRED_ID)
+    /* Prefer identifier of the interactor */
+    private String interactorPreferredIdentifier;
+
     @Field(INTERACTOR_DESCRIPTION)
-    private String description;
+    private String interactorDescription;
 
     @Field(INTERACTOR_ALIAS)
     private Set<String> interactorAlias;
@@ -64,23 +70,24 @@ public class SearchChildInteractor {
     public SearchChildInteractor() {
     }
 
-    public SearchChildInteractor(String interactorAc, String interactorName, String description, Set<String> interactorAlias,
-                                 Set<String> interactorAltIds, String interactorType, String species, Integer taxId,
+    public SearchChildInteractor(String interactorAc, String interactorName, String interactorPreferredIdentifier, String interactorDescription, Set<String> interactorAlias,
+                                 Set<String> interactorAltIds, String interactorType, String interactorSpecies, Integer interactorTaxId,
                                  Set<String> interactorXrefs, Integer interactionCount, Long interactionSearchCount,
                                  Set<String> interactorFeatureShortLabels, String documentType) {
         this.interactorAc = interactorAc;
-        this.documentType = documentType;
         this.interactorName = interactorName;
-        this.description = description;
+        this.interactorPreferredIdentifier = interactorPreferredIdentifier;
+        this.interactorDescription = interactorDescription;
         this.interactorAlias = interactorAlias;
         this.interactorAltIds = interactorAltIds;
         this.interactorType = interactorType;
-        this.interactorSpecies = species;
-        this.interactorTaxId = taxId;
+        this.interactorSpecies = interactorSpecies;
+        this.interactorTaxId = interactorTaxId;
         this.interactorXrefs = interactorXrefs;
         this.interactionCount = interactionCount;
         this.interactionSearchCount = interactionSearchCount;
         this.interactorFeatureShortLabels = interactorFeatureShortLabels;
+        this.documentType = documentType;
     }
 
     public String getInteractorAc() {
@@ -99,12 +106,12 @@ public class SearchChildInteractor {
         this.documentType = documentType;
     }
 
-    public String getDescription() {
-        return description;
+    public String getInteractorDescription() {
+        return interactorDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setInteractorDescription(String interactorDescription) {
+        this.interactorDescription = interactorDescription;
     }
 
     public String getInteractorName() {
@@ -113,6 +120,14 @@ public class SearchChildInteractor {
 
     public void setInteractorName(String interactorName) {
         this.interactorName = interactorName;
+    }
+
+    public String getInteractorPreferredIdentifier() {
+        return interactorPreferredIdentifier;
+    }
+
+    public void setInteractorPreferredIdentifier(String interactorPreferredIdentifier) {
+        this.interactorPreferredIdentifier = interactorPreferredIdentifier;
     }
 
     public Set<String> getInteractorAlias() {
@@ -172,13 +187,6 @@ public class SearchChildInteractor {
         this.interactionSearchCount = interactionSearchCount;
     }
 
-    public Set<String> getInteractionIds() {
-        if (this.interactorXrefs == null) {
-            this.interactorXrefs = new HashSet<>();
-        }
-        return interactorXrefs;
-    }
-
     public String getInteractorSpecies() {
         return interactorSpecies;
     }
@@ -212,7 +220,8 @@ public class SearchChildInteractor {
                 "interactorAc='" + interactorAc + '\'' +
                 ", documentType='" + documentType + '\'' +
                 ", interactorName='" + interactorName + '\'' +
-                ", description='" + description + '\'' +
+                ", interactorDescription='" + interactorDescription + '\'' +
+                ", interactorPreferredIDentifier='" + interactorPreferredIdentifier + '\'' +
                 ", interactorAlias=" + interactorAlias +
                 ", interactorAltIds=" + interactorAltIds +
                 ", interactorType='" + interactorType + '\'' +

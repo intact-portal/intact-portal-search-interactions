@@ -326,7 +326,7 @@
      <object class="java.util.ArrayList">
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor0">
-        <void property="description">
+        <void property="interactorDescription">
          <string>Kinetochore protein Nuf2</string>
         </void>
         <void property="documentType">
@@ -488,7 +488,7 @@
       </void>
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor1">
-        <void property="description">
+        <void property="interactorDescription">
          <string>Kinetochore protein NDC80 homolog</string>
         </void>
         <void property="documentType">
@@ -1259,7 +1259,7 @@
      <object class="java.util.ArrayList">
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor2">
-        <void property="description">
+        <void property="interactorDescription">
          <string>Kinetochore protein Spc24</string>
         </void>
         <void property="documentType">
@@ -1388,7 +1388,7 @@
       </void>
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor3">
-        <void property="description">
+        <void property="interactorDescription">
          <string>Kinetochore protein Spc25</string>
         </void>
         <void property="documentType">
@@ -2062,7 +2062,7 @@
      <object class="java.util.ArrayList">
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor4">
-        <void property="description">
+        <void property="interactorDescription">
          <string>Kinetochore protein NDC80 homolog</string>
         </void>
         <void property="documentType">
@@ -2275,7 +2275,7 @@
       </void>
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor5">
-        <void property="description">
+        <void property="interactorDescription">
          <string>Kinetochore protein Spc25</string>
         </void>
         <void property="documentType">
@@ -2998,7 +2998,7 @@
      <object class="java.util.ArrayList">
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor6">
-        <void property="description">
+        <void property="interactorDescription">
          <string>Kinetochore protein NDC80 homolog</string>
         </void>
         <void property="documentType">
@@ -3211,7 +3211,7 @@
       </void>
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor7">
-        <void property="description">
+        <void property="interactorDescription">
          <string>Kinetochore protein Spc24</string>
         </void>
         <void property="documentType">
@@ -3922,7 +3922,7 @@
      <object class="java.util.ArrayList">
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor8">
-        <void property="description">
+        <void property="interactorDescription">
          <string>Kinetochore protein NDC80 homolog</string>
         </void>
         <void property="documentType">
@@ -4135,7 +4135,7 @@
       </void>
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor9">
-        <void property="description">
+        <void property="interactorDescription">
          <string>Kinetochore protein Nuf2</string>
         </void>
         <void property="documentType">
@@ -4852,7 +4852,7 @@
      <object class="java.util.ArrayList">
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor10">
-        <void property="description">
+        <void property="interactorDescription">
          <string>BET1-like protein</string>
         </void>
         <void property="documentType">
@@ -4958,7 +4958,7 @@
       </void>
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor11">
-        <void property="description">
+        <void property="interactorDescription">
          <string>Golgi SNAP receptor complex member 1</string>
         </void>
         <void property="documentType">
@@ -5522,7 +5522,7 @@
      <object class="java.util.ArrayList">
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor12">
-        <void property="description">
+        <void property="interactorDescription">
          <string>BET1-like protein</string>
         </void>
         <void property="documentType">
@@ -5628,7 +5628,7 @@
       </void>
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor13">
-        <void property="description">
+        <void property="interactorDescription">
          <string>Synaptobrevin homolog YKT6</string>
         </void>
         <void property="documentType">
@@ -6238,7 +6238,7 @@
      <object class="java.util.ArrayList">
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor14">
-        <void property="description">
+        <void property="interactorDescription">
          <string>BET1-like protein</string>
         </void>
         <void property="documentType">
@@ -6344,7 +6344,7 @@
       </void>
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor15">
-        <void property="description">
+        <void property="interactorDescription">
          <string>Syntaxin-5</string>
         </void>
         <void property="documentType">
@@ -6992,7 +6992,7 @@
      <object class="java.util.ArrayList">
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor16">
-        <void property="description">
+        <void property="interactorDescription">
          <string>BET1-like protein</string>
         </void>
         <void property="documentType">
@@ -7098,7 +7098,7 @@
       </void>
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor17">
-        <void property="description">
+        <void property="interactorDescription">
          <string>General vesicular transport factor p115</string>
         </void>
         <void property="documentType">
@@ -7749,7 +7749,7 @@
      <object class="java.util.ArrayList">
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor18">
-        <void property="description">
+        <void property="interactorDescription">
          <string>Human MYLK gene promoter NF-kappaB-binding site 1 DNA probe</string>
         </void>
         <void property="documentType">
@@ -7792,7 +7792,7 @@
       </void>
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor19">
-        <void property="description">
+        <void property="interactorDescription">
          <string>Transcription factor p65</string>
         </void>
         <void property="documentType">

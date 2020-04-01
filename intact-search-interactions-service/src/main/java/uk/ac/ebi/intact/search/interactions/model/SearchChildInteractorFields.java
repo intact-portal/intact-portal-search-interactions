@@ -9,8 +9,9 @@ public class SearchChildInteractorFields {
     public static final String INTERACTOR_AC_STR = "interactor_ac_str";
 
     public static final String INTERACTOR_NAME = "interactor_name";
+    public static final String INTERACTOR_PREFERRED_ID = "interactor_preferred_id";
 
-    public static final String INTERACTOR_DESCRIPTION = "description";
+    public static final String INTERACTOR_DESCRIPTION = "interactor_description";
 
     public static final String INTERACTOR_ALIAS = "interactor_alias";
 
@@ -31,6 +32,5 @@ public class SearchChildInteractorFields {
     public static final String DEFAULT = "default"; //Copy field for general search
 
     public static final String INTERACTOR_FEATURE_SHORTLABELS = "interactor_feature_shortlabels";
-
 
 }

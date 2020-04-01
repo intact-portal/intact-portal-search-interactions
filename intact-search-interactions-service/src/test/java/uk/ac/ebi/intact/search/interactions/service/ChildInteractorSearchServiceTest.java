@@ -31,7 +31,7 @@ public class ChildInteractorSearchServiceTest {
     private InteractionIndexService interactionIndexService;
 
     @Resource
-    private ChildIInteractorSearchService childIInteractorSearchService;
+    private ChildInteractorSearchService childInteractorSearchService;
 
     @Resource
     private InteractionSearchService interactionSearchService;
@@ -48,7 +48,7 @@ public class ChildInteractorSearchServiceTest {
         * For ref. The Interactions.xml can be created with a method saveInteractioninDisc in CommonUtility in intact-portal-indexer*/
         Collection<SearchInteraction> searchInteractions = TestUtil.getInteractionObjFromXml("./src/test/resources/Interactions.xml");
         interactionIndexService.save(searchInteractions, Duration.ofMillis(100));
-        assertEquals(20, childIInteractorSearchService.countTotal());// includes duplicated records
+        assertEquals(20, childInteractorSearchService.countTotal());// includes duplicated records
     }
 
     @After
@@ -61,7 +61,7 @@ public class ChildInteractorSearchServiceTest {
      */
     @Test
     public void getUniqueChildInteractorsFromInteractionQuery() {
-        GroupPage<SearchChildInteractor> page = childIInteractorSearchService.findInteractorsWithGroup("Rattus norvegicus (Rat)",
+        GroupPage<SearchChildInteractor> page = childInteractorSearchService.findInteractorsWithGroup("Rattus norvegicus (Rat)",
                 null,
                 null,
                 null,
@@ -104,7 +104,7 @@ public class ChildInteractorSearchServiceTest {
         int page = 0;
         int size = 10;
 
-        GroupPage<SearchChildInteractor> childInteractorsOp = childIInteractorSearchService.findInteractorsWithGroup(
+        GroupPage<SearchChildInteractor> childInteractorsOp = childInteractorSearchService.findInteractorsWithGroup(
                 "physical association",
                 species,
                 interactorType,
@@ -142,7 +142,7 @@ public class ChildInteractorSearchServiceTest {
     public void checkInteractionAndChildInteractorsSync() {
 
         //Interactors
-        GroupPage<SearchChildInteractor> childInteractorsOp = childIInteractorSearchService.findInteractorsWithGroup("Rattus norvegicus (Rat)",
+        GroupPage<SearchChildInteractor> childInteractorsOp = childInteractorSearchService.findInteractorsWithGroup("Rattus norvegicus (Rat)",
                 null,
                 null,
                 null,
@@ -203,7 +203,7 @@ public class ChildInteractorSearchServiceTest {
 
     @Test
     public void findInteractorsByEmptyString() {
-        GroupPage<SearchChildInteractor> childInteractorsOp = childIInteractorSearchService.findInteractorsWithGroup(
+        GroupPage<SearchChildInteractor> childInteractorsOp = childInteractorSearchService.findInteractorsWithGroup(
                 "",
                 null,
                 null,
@@ -226,7 +226,7 @@ public class ChildInteractorSearchServiceTest {
 
     @Test
     public void findInteractionsByStarString() {
-        GroupPage<SearchChildInteractor> childInteractorsOp = childIInteractorSearchService.findInteractorsWithGroup(
+        GroupPage<SearchChildInteractor> childInteractorsOp = childInteractorSearchService.findInteractorsWithGroup(
                 "*",
                 null,
                 null,

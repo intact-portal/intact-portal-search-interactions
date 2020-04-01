@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
-import uk.ac.ebi.intact.search.interactions.utils.Constants;
+import uk.ac.ebi.intact.search.interactions.utils.DocumentType;
 
 import javax.annotation.Resource;
 import java.time.Duration;
@@ -33,7 +33,7 @@ public class InteractionIndexServiceTest {
     private InteractionSearchService interactionSearchService;
 
     @Resource
-    private ChildIInteractorSearchService childIInteractorSearchService;
+    private ChildInteractorSearchService childInteractorSearchService;
 
     @Before
     public void setUp() {
@@ -43,7 +43,7 @@ public class InteractionIndexServiceTest {
         List<SearchChildInteractor> searchChildInteractors1 = new ArrayList<>();
 
         searchInteraction1.setAc("interaction_c1");
-        searchInteraction1.setDocumentType(Constants.INTERACTION_DOCUMENT_TYPE_VALUE);
+        searchInteraction1.setDocumentType(DocumentType.INTERACTION);
         searchInteraction1.setAuthors(new LinkedHashSet<>(Collections.singletonList("Pa et al.")));
         searchInteraction1.setCount(50);
         searchInteraction1.setIdentifiers(
@@ -52,9 +52,9 @@ public class InteractionIndexServiceTest {
                 new HashSet<>(Collections.singletonList("publication_1")));
 
         //Create new child interactors documents
-        SearchChildInteractor searchChildInteractor1 = new SearchChildInteractor("P06730",
+        SearchChildInteractor searchChildInteractor1 = new SearchChildInteractor("EBI-TEST1", "EIF4E",
+                " P06730",
                 "Eukaryotic translation initiation factor 4E",
-                "EIF4E",
                 new HashSet<>(Arrays.asList("interactor1_alias1", "interactor1_alias2", "interactor1_alias3")),
                 new HashSet<>(Arrays.asList("interactor1_alt1", "interactor1_alt2", "interactor1_alt3")),
                 "protein",
@@ -63,12 +63,13 @@ public class InteractionIndexServiceTest {
                 new HashSet<>(Arrays.asList("interactor1_xref1", "interactor1_xref2")),
                 2,
                 2L,
-                new HashSet<>(Arrays.asList("featureShortLabel1", "featureShortLabel2")), Constants.INTERACTOR_DOCUMENT_TYPE_VALUE);
+                new HashSet<>(Arrays.asList("featureShortLabel1", "featureShortLabel2")), DocumentType.INTERACTOR);
 
 
-        SearchChildInteractor searchChildInteractor2 = new SearchChildInteractor("Q13541",
-                "Eukaryotic translation initiation factor 4E-binding protein 1",
+        SearchChildInteractor searchChildInteractor2 = new SearchChildInteractor("EBI-TEST2",
                 "4EBP1",
+                "Q13541",
+                "Eukaryotic translation initiation factor 4E-binding protein 1",
                 new HashSet<>(Arrays.asList("interactor2_alias1", "interactor2_alias1", "interactor2_alias3")),
                 new HashSet<>(Arrays.asList("interactor2_alt1", "interactor2_alt1")),
                 "protein",
@@ -77,7 +78,7 @@ public class InteractionIndexServiceTest {
                 new HashSet<>(Arrays.asList("interactor2_xref1", "interactor2_xref2")),
                 2,
                 1L,
-                new HashSet<>(Arrays.asList("featureshortlabel1", "featureshortlabel2")), Constants.INTERACTOR_DOCUMENT_TYPE_VALUE);
+                new HashSet<>(Arrays.asList("featureshortlabel1", "featureshortlabel2")), DocumentType.INTERACTOR);
         searchChildInteractors1.add(searchChildInteractor1);
         searchChildInteractors1.add(searchChildInteractor2);
 
@@ -87,7 +88,7 @@ public class InteractionIndexServiceTest {
         List<SearchChildInteractor> searchChildInteractors2 = new ArrayList<>();
 
         searchInteraction2.setAc("interaction_c2 ");
-        searchInteraction2.setDocumentType(Constants.INTERACTION_DOCUMENT_TYPE_VALUE);
+        searchInteraction2.setDocumentType(DocumentType.INTERACTION);
         searchInteraction2.setAuthors(new LinkedHashSet<>(Collections.singletonList("Ma et al.")));
         searchInteraction2.setCount(50);
         searchInteraction2.setIdentifiers(
@@ -95,9 +96,10 @@ public class InteractionIndexServiceTest {
         searchInteraction2.setPublicationIdentifiers(
                 new HashSet<>(Collections.singletonList("publication_1")));
 
-        SearchChildInteractor searchChildInteractor3 = new SearchChildInteractor("P63165",
-                "Small ubiquitin-related modifier 1",
+        SearchChildInteractor searchChildInteractor3 = new SearchChildInteractor("EBI-TEST3",
                 "SUMO1",
+                "P63165",
+                "Small ubiquitin-related modifier 1",
                 new HashSet<>(Arrays.asList("interactor3_alias1", "interactor3_alias1", "interactor3_alias3")),
                 new HashSet<>(Arrays.asList("interactor3_alt1", "interactor3_alt1")),
                 "protein",
@@ -106,11 +108,12 @@ public class InteractionIndexServiceTest {
                 new HashSet<>(Arrays.asList("interactor3_xref1", "interactor3_xref2", "interactor3_xref3", "interactor3_xref4")),
                 5,
                 3L,
-                new HashSet<>(Arrays.asList("featureshortlabel1", "featureshortlabel2")), Constants.INTERACTOR_DOCUMENT_TYPE_VALUE);
+                new HashSet<>(Arrays.asList("featureshortlabel1", "featureshortlabel2")), DocumentType.INTERACTOR);
 
-        SearchChildInteractor searchChildInteractor4 = new SearchChildInteractor("Q13541",
-                "Eukaryotic translation initiation factor 4E-binding protein 1",
+        SearchChildInteractor searchChildInteractor4 = new SearchChildInteractor("EBI-TEST4",
                 "4EBP1",
+                "Q13541",
+                "Eukaryotic translation initiation factor 4E-binding protein 1",
                 new HashSet<>(Arrays.asList("interactor2_alias1", "interactor2_alias1", "interactor2_alias3")),
                 new HashSet<>(Arrays.asList("interactor2_alt1", "interactor2_alt1")),
                 "protein",
@@ -119,7 +122,7 @@ public class InteractionIndexServiceTest {
                 new HashSet<>(Arrays.asList("interactor2_xref1", "interactor2_xref2")),
                 2,
                 1L,
-                new HashSet<>(Arrays.asList("featureshortlabel1", "featureshortlabel2")), Constants.INTERACTOR_DOCUMENT_TYPE_VALUE);
+                new HashSet<>(Arrays.asList("featureshortlabel1", "featureshortlabel2")), DocumentType.INTERACTOR);
 
         searchChildInteractors2.add(searchChildInteractor3);
         searchChildInteractors2.add(searchChildInteractor4);
@@ -141,7 +144,7 @@ public class InteractionIndexServiceTest {
         SearchInteraction interaction = interactionOp.get();
         assertEquals(interaction.getAuthors(), searchInteraction1.getAuthors());
         assertEquals(1, interactionSearchService.countTotal());
-        assertEquals(2, childIInteractorSearchService.countTotal());
+        assertEquals(2, childInteractorSearchService.countTotal());
     }
 
     @Test
@@ -151,7 +154,7 @@ public class InteractionIndexServiceTest {
 
         interactionIndexService.save(Arrays.asList(searchInteraction1, searchInteraction2), Duration.ofMillis(100));
         assertEquals(2, interactionSearchService.countTotal());
-        assertEquals(4, childIInteractorSearchService.countTotal());
+        assertEquals(4, childInteractorSearchService.countTotal());
     }
 
     @Test
