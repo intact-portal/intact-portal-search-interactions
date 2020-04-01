@@ -1,6 +1,7 @@
 package uk.ac.ebi.intact.search.interactions.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.solr.core.SolrOperations;
@@ -96,5 +97,47 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
 //        }
 
         return solrOperations.queryForGroupPage(INTERACTIONS, search, SearchChildInteractor.class);
+    }
+
+    // By default the numCount return by solr when group.main=true is the total documents instead of the number of groups.
+    // To make the pagination of interactors working we need to ask solr the number of groups for that group.main=false and
+    // group.ngroups=true (setTotalCount(true) in spring-data-solr)
+    @Override
+    public long countChildInteractors(String query,
+                                      Set<String> interactorSpeciesFilter,
+                                      Set<String> interactorTypeFilter,
+                                      Set<String> interactionDetectionMethodFilter,
+                                      Set<String> interactionTypeFilter,
+                                      Set<String> interactionHostOrganismFilter,
+                                      boolean isNegativeFilter,
+                                      double minMiScore,
+                                      double maxMiScore,
+                                      boolean interSpecies) {
+        // filters
+        List<FilterQuery> interactionFilterQueries = searchInteractionUtility.createFilterQuery(interactorSpeciesFilter, interactorTypeFilter, interactionDetectionMethodFilter,
+                interactionTypeFilter, interactionHostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, interSpecies);
+
+        // search query
+        SimpleQuery search = new SimpleQuery();
+
+        // search criterias
+        Criteria interactionSearchCriteria = searchInteractionUtility.createSearchConditions(query);
+        Criteria interactorCriteria = new NestedCriteria(interactionSearchCriteria, interactionFilterQueries);
+
+        search.addCriteria(interactorCriteria);
+
+        //group
+        GroupOptions groupOptions = new GroupOptions()
+                .addGroupByField(SearchChildInteractorFields.DOCUMENT_ID);
+        groupOptions.setLimit(1);
+        groupOptions.setGroupMain(false);
+        groupOptions.setTotalCount(true);
+        search.setGroupOptions(groupOptions);
+
+        // pagination
+        search.setPageRequest(PageRequest.of(0,1));
+
+        GroupPage<SearchChildInteractor> groupPage = solrOperations.queryForGroupPage(INTERACTIONS, search, SearchChildInteractor.class);
+        return groupPage.getGroupResult(SearchChildInteractorFields.DOCUMENT_ID).getGroupsCount();
     }
 }

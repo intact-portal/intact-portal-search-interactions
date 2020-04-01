@@ -3,10 +3,7 @@ package uk.ac.ebi.intact.search.interactions.ws.controller.model;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.solr.core.query.Field;
-import org.springframework.data.solr.core.query.Query;
 import org.springframework.data.solr.core.query.result.GroupPage;
-import org.springframework.data.solr.core.query.result.GroupResult;
 import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
 
 import java.util.Iterator;
@@ -16,22 +13,24 @@ import java.util.function.Function;
 /**
  * Created by anjali on 17/02/20.
  */
-public class ChildInteractorSearchResult implements GroupPage<SearchChildInteractor> {
+public class ChildInteractorSearchResult implements Page<SearchChildInteractor> {
 
     private final GroupPage<SearchChildInteractor> groupPage;
+    private final long numGroups;
 
-    public ChildInteractorSearchResult(GroupPage<SearchChildInteractor> page) {
+    public ChildInteractorSearchResult(GroupPage<SearchChildInteractor> page, long numGroups) {
         this.groupPage = page;
+        this.numGroups = numGroups;
     }
 
     @Override
     public int getTotalPages() {
-        return groupPage.getTotalPages();
+        return getSize() == 0 ? 1 : (int) Math.ceil((double) numGroups / (double) getSize());
     }
 
     @Override
     public long getTotalElements() {
-        return groupPage.getTotalElements();
+        return numGroups;
     }
 
     @Override
@@ -104,24 +103,4 @@ public class ChildInteractorSearchResult implements GroupPage<SearchChildInterac
         return groupPage.iterator();
     }
 
-
-    @Override
-    public GroupResult<SearchChildInteractor> getGroupResult(Field field) {
-        return groupPage.getGroupResult(field);
-    }
-
-    @Override
-    public GroupResult<SearchChildInteractor> getGroupResult(org.springframework.data.solr.core.query.Function function) {
-        return groupPage.getGroupResult(function);
-    }
-
-    @Override
-    public GroupResult<SearchChildInteractor> getGroupResult(Query query) {
-        return groupPage.getGroupResult(query);
-    }
-
-    @Override
-    public GroupResult<SearchChildInteractor> getGroupResult(String s) {
-        return groupPage.getGroupResult(s);
-    }
 }
