@@ -16,26 +16,30 @@ import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields
  */
 public class SearchInteractionUtility {
 
-    public Criteria createSearchConditions(String searchTerms) {
-        Criteria conditions;
+    public Criteria createSearchConditions(String searchTerms, boolean batchSearch) {
+        Criteria conditions = null;
         Criteria userConditions = null;
         Criteria documentConditions = new Criteria(DOCUMENT_TYPE).is(DocumentType.INTERACTION);
 
-        //TODO Review query formation
-        if (searchTerms != null && !searchTerms.isEmpty() && !searchTerms.trim().equals("*")) {
-            String[] words = searchTerms.split(" ");
-            int wordCount = 1;
-            for (String word : words) {
-                if (userConditions == null) {
-                    userConditions = new Criteria(DEFAULT).is(word)
-                            .or(AC_A_STR).is(word)
-                            .or(AC_B_STR).is(word)
-                            .or(AC_STR).is(word);
-                } else {
-                    userConditions = userConditions.or(DEFAULT).contains(word)
-                            .or(AC_A_STR).is(word)
-                            .or(AC_B_STR).is(word)
-                            .or(AC_STR).is(word);
+        if (batchSearch) {
+            userConditions = batchSearchConditions(Arrays.asList(searchTerms.split(",")));
+        } else {
+            //TODO Review query formation
+            if (searchTerms != null && !searchTerms.isEmpty() && !searchTerms.trim().equals("*")) {
+                String[] words = searchTerms.split(" ");
+                int wordCount = 1;
+                for (String word : words) {
+                    if (userConditions == null) {
+                        userConditions = new Criteria(DEFAULT).is(word)
+                                .or(AC_A_STR).is(word)
+                                .or(AC_B_STR).is(word)
+                                .or(AC_STR).is(word);
+                    } else {
+                        userConditions = userConditions.or(DEFAULT).contains(word)
+                                .or(AC_A_STR).is(word)
+                                .or(AC_B_STR).is(word)
+                                .or(AC_STR).is(word);
+                    }
                 }
             }
         }
@@ -45,6 +49,17 @@ public class SearchInteractionUtility {
             conditions = documentConditions;
         }
         return conditions;
+    }
+
+    public Criteria batchSearchConditions(List<String> batchSearchTerms) {
+        Criteria userConditions = null;
+
+        //TODO Review query formation
+        if (batchSearchTerms != null && !batchSearchTerms.isEmpty()) {
+            userConditions = new Criteria(INTERACTOR_DEFAULT).in(batchSearchTerms);
+        }
+
+        return userConditions;
     }
 
     public List<FilterQuery> createFilterQuery(Set<String> interactorSpeciesFilter,

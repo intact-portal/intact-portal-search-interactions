@@ -107,6 +107,7 @@ public class InteractionSearchServiceTest {
     public void facetTest() {
         FacetPage<SearchInteraction> interaction = interactionSearchService.findInteractionWithFacet(
                 "physical association",
+                false,
                 null,
                 null,
                 null,
@@ -229,6 +230,7 @@ public class InteractionSearchServiceTest {
 
         FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
                 "physical association",
+                false,
                 species,
                 interactorType,
                 detectionMethod,
@@ -276,6 +278,7 @@ public class InteractionSearchServiceTest {
 
         FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
                 "physical association",
+                false,
                 species,
                 interactorType,
                 detectionMethod,
@@ -298,6 +301,7 @@ public class InteractionSearchServiceTest {
 
         FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
                 "Rattus norvegicus (Rat)",
+                false,
                 null,
                 null,
                 null,
@@ -320,6 +324,7 @@ public class InteractionSearchServiceTest {
     public void findInteractionsByInteractorIndexedField() {
         FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
                 "kappaB",
+                false,
                 null,
                 null,
                 null,
@@ -343,6 +348,7 @@ public class InteractionSearchServiceTest {
     public void findInteractionsByEmptyString() {
         FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
                 "",
+                false,
                 null,
                 null,
                 null,
@@ -366,6 +372,7 @@ public class InteractionSearchServiceTest {
     public void findInteractionsByStarString() {
         FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
                 "*",
+                false,
                 null,
                 null,
                 null,
@@ -381,4 +388,51 @@ public class InteractionSearchServiceTest {
 
     }
 
+    /*
+     * Expected interactions when queried by "comma separated interactor preferred Ids"
+     **/
+
+    @Test
+    public void findInteractionsByCommaSeparatedInteractorPreferredIdString() {
+        FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
+                "Q96Q78,C9JGC4",
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                0,
+                1,
+                false,
+                0,
+                10);
+        Assert.assertEquals(4, interactionOp.getNumberOfElements());
+
+    }
+
+    /*
+     * Expected interactions when queried by "comma separated interactor aliases"
+     **/
+
+    @Test
+    public void findInteractionsByCommaSeparatedInteractorAliasesString() {
+        FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
+                "NFKB3,NUF2R",
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                0,
+                1,
+                false,
+                0,
+                10);
+        Assert.assertEquals(3, interactionOp.getNumberOfElements());
+
+    }
 }
