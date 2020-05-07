@@ -504,14 +504,6 @@
   <field name="identifiers" type="text_general"/>
   <field name="intact_miscore" type="pdoubles"/>
   <field name="interaction_count" type="plongs"/>
-  <field name="interaction_detection_methods" type="text_general"/>
-  <field name="interaction_expansion_methods" type="text_general"/>
-  <field name="interaction_host_organisms" type="text_general"/>
-  <field name="interaction_ids" type="text_general"/>
-  <field name="interaction_miscores" type="pdoubles"/>
-  <field name="interaction_negatives" type="booleans"/>
-  <field name="interaction_types" type="text_general"/>
-  <field name="interactions_ids" type="text_general"/>
   <field name="interactor_alias" type="text_general"/>
   <field name="interactor_alt_ids" type="text_general"/>
   <field name="interactor_description" type="text_general"/>
@@ -620,7 +612,6 @@
   <dynamicField name="*_d" type="pdouble" indexed="true" stored="true"/>
   <dynamicField name="*_p" type="location" indexed="true" stored="true"/>
   <copyField source="publication_id" dest="publication_id_str" maxChars="256"/>
-  <copyField source="interactions_ids" dest="interactions_ids_str" maxChars="256"/>
   <copyField source="author" dest="author_str" maxChars="256"/>
   <copyField source="uniqueKey" dest="uniqueKey_str" maxChars="256"/>
   <copyField source="altIdsA" dest="altIdsA_str" maxChars="256"/>
@@ -629,10 +620,12 @@
   <copyField source="checksumsA" dest="checksumsA_str" maxChars="256"/>
   <copyField source="typeA" dest="typeA_str" maxChars="256"/>
   <copyField source="typeB" dest="typeB_str" maxChars="256"/>
+  <copyField source="typeA" dest="typeA_B_str"/>
+  <copyField source="typeB" dest="typeA_B_str"/>
   <copyField source="checksumsB" dest="checksumsB_str" maxChars="256"/>
   <copyField source="aliasesB" dest="aliasesB_str" maxChars="256"/>
-  <copyField source="speciesB" dest="speciesB_str" maxChars="256"/>
   <copyField source="speciesA" dest="speciesA_str" maxChars="256"/>
+  <copyField source="speciesB" dest="speciesB_str" maxChars="256"/>
   <copyField source="altIdsB" dest="altIdsB_str" maxChars="256"/>
   <copyField source="annotationsB" dest="annotationsB_str" maxChars="256"/>
   <copyField source="identification_method_A" dest="identification_method_A_str" maxChars="256"/>
@@ -697,10 +690,5 @@
   <copyField source="document_type" dest="document_type_str" maxChars="256"/>
   <copyField source="descriptionB" dest="descriptionB_str" maxChars="256"/>
   <copyField source="descriptionA" dest="descriptionA_str" maxChars="256"/>
-  <copyField source="interaction_ids" dest="interaction_ids_str" maxChars="256"/>
-  <copyField source="interaction_host_organisms" dest="interaction_host_organisms_str" maxChars="256"/>
-  <copyField source="interaction_detection_methods" dest="interaction_detection_methods_str" maxChars="256"/>
-  <copyField source="interaction_types" dest="interaction_types_str" maxChars="256"/>
-  <copyField source="interaction_expansion_methods" dest="interaction_expansion_methods_str" maxChars="256"/>
   <copyField source="interactor_preferred_id" dest="interactor_preferred_id_str" maxChars="256"/>
 </schema>
