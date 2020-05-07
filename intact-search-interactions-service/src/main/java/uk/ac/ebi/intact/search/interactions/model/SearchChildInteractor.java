@@ -221,7 +221,7 @@ public class SearchChildInteractor {
                 ", documentType='" + documentType + '\'' +
                 ", interactorName='" + interactorName + '\'' +
                 ", interactorDescription='" + interactorDescription + '\'' +
-                ", interactorPreferredIDentifier='" + interactorPreferredIdentifier + '\'' +
+                ", interactorPreferredIdentifier='" + interactorPreferredIdentifier + '\'' +
                 ", interactorAlias=" + interactorAlias +
                 ", interactorAltIds=" + interactorAltIds +
                 ", interactorType='" + interactorType + '\'' +
