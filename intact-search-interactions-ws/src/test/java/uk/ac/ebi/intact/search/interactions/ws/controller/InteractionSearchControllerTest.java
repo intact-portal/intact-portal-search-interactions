@@ -16,8 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.LinkedMultiValueMap;
 import uk.ac.ebi.intact.search.interactions.ws.RequiresSolrServer;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 /**
  * Created by anjali on 26/03/19.
@@ -55,29 +54,26 @@ public class InteractionSearchControllerTest {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
-        HttpEntity<LinkedMultiValueMap<String, Object>> entity =
-                new HttpEntity<LinkedMultiValueMap<String, Object>>(parameters, headers);
-        String uploadFileUrl = "http://localhost:" + port + wsContextPath + "/uploadBatchFile";
+        HttpEntity<LinkedMultiValueMap<String, Object>> entity = new HttpEntity<LinkedMultiValueMap<String, Object>>(parameters, headers);
+        String uploadFileUrl = "http://localhost:" + port + wsContextPath + "/uploadFile";
 
         ResponseEntity<String> response = restTemplate.exchange(uploadFileUrl, HttpMethod.POST, entity, String.class, "");
 
         // Expect Ok
         assertEquals(response.getStatusCode(), HttpStatus.OK);
 
-        JSONObject fileUploadResponse = null;
+        String fileName = null;
         try {
-            JSONParser parser = new JSONParser();
-            fileUploadResponse = (JSONObject) parser.parse(response.getBody());
+            fileName = response.getBody();
         } catch (Exception e) {
-            assertEquals(true, false);
+            fail();
         }
-        assertNotNull(fileUploadResponse);
+        assertNotNull(fileName);
 
-        String uploadedBatchFileName = (String) fileUploadResponse.get("data");
-        assertEquals(true, uploadedBatchFileName.startsWith("file_"));
+        assertTrue(fileName.startsWith("file_"));
 
         String searchWithFileUrl = "http://localhost:" + port + wsContextPath + "/findInteractionWithFacet" +
-                "?query=" + uploadedBatchFileName
+                "?query=" + fileName
                 + "&batchSearch=" + true
                 + "&page=0"
                 + "&pageSize=10";
@@ -93,7 +89,7 @@ public class InteractionSearchControllerTest {
             assertEquals(9l, fileSearchJson.get("numberOfElements"));
 
         } catch (Exception e) {
-            assertEquals(true, false);
+            fail();
         }
     }
 
@@ -108,7 +104,7 @@ public class InteractionSearchControllerTest {
 
         HttpEntity<LinkedMultiValueMap<String, Object>> entity =
                 new HttpEntity<LinkedMultiValueMap<String, Object>>(parameters, headers);
-        String uploadFileUrl = "http://localhost:" + port + wsContextPath + "/uploadBatchFile";
+        String uploadFileUrl = "http://localhost:" + port + wsContextPath + "/uploadFile";
 
         ResponseEntity<String> response = restTemplate.exchange(uploadFileUrl, HttpMethod.POST, entity, String.class, "");
 

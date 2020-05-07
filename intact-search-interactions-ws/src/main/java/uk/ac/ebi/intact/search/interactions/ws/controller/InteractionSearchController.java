@@ -36,6 +36,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 public class InteractionSearchController {
 
+    //TODO temporary?
     @Value("${server.upload.batch.file.path}")
     private String uploadBatchFilePath;
 
@@ -78,9 +79,13 @@ public class InteractionSearchController {
             @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
 
         return new InteractionSearchResult(interactionSearchService.findInteractionWithFacet(
-                extractSearchTerms(query), batchSearch, interactorSpeciesFilter,
-                interactorTypeFilter, interactionDetectionMethodFilter,
-                interactionTypeFilter, interactionHostOrganismFilter,
+                extractSearchTerms(query),
+                batchSearch,
+                interactorSpeciesFilter,
+                interactorTypeFilter,
+                interactionDetectionMethodFilter,
+                interactionTypeFilter,
+                interactionHostOrganismFilter,
                 isNegativeFilter,
                 minMiscore,
                 maxMiscore,
@@ -93,7 +98,6 @@ public class InteractionSearchController {
     @PostMapping(value = "/list/{query}",
             produces = {APPLICATION_JSON_VALUE})
     public ResponseEntity<String> getInteractionsDatatablesHandler(@PathVariable String query,
-                                                                   @RequestParam(value = "batchSearch", required = false) boolean batchSearch,
                                                                    HttpServletRequest request) throws IOException {
         Set<String> interactorTypeFilter = new HashSet<>();
         Set<String> interactorSpeciesFilter = new HashSet<>();
@@ -104,17 +108,19 @@ public class InteractionSearchController {
         int page = Integer.parseInt(request.getParameter("page"));
         int pageSize = Integer.parseInt(request.getParameter("pageSize"));
 
-        if (request.getParameterValues("interactorType[]") != null) {
-            interactorTypeFilter = new HashSet<>(Arrays.asList(request.getParameterValues("interactorType[]")));
-        }
+        boolean batchSearch = Boolean.parseBoolean(request.getParameter("batchSearch"));
+
         if (request.getParameterValues("interactorSpecies[]") != null) {
             interactorSpeciesFilter = new HashSet<>(Arrays.asList(request.getParameterValues("interactorSpecies[]")));
         }
-        if (request.getParameterValues("interactionType[]") != null) {
-            interactionTypeFilter = new HashSet<>(Arrays.asList(request.getParameterValues("interactionType[]")));
+        if (request.getParameterValues("interactorType[]") != null) {
+            interactorTypeFilter = new HashSet<>(Arrays.asList(request.getParameterValues("interactorType[]")));
         }
         if (request.getParameterValues("interactionDetectionMethod[]") != null) {
             interactionDetectionMethodFilter = new HashSet<>(Arrays.asList(request.getParameterValues("interactionDetectionMethod[]")));
+        }
+        if (request.getParameterValues("interactionType[]") != null) {
+            interactionTypeFilter = new HashSet<>(Arrays.asList(request.getParameterValues("interactionType[]")));
         }
         if (request.getParameterValues("interactionHostOrganism[]") != null) {
             interactionHostOrganismFilter = new HashSet<>(Arrays.asList(request.getParameterValues("interactionHostOrganism[]")));
@@ -122,10 +128,11 @@ public class InteractionSearchController {
         boolean negativeFilter = Boolean.parseBoolean(request.getParameter("negativeInteraction"));
         double minMiScoreFilter = Double.parseDouble(request.getParameter("miScoreMin"));
         double maxMiScoreFilter = Double.parseDouble(request.getParameter("miScoreMax"));
+        boolean intraSpeciesFilter = Boolean.parseBoolean(request.getParameter("intraSpecies"));
 
         FacetPage<SearchInteraction> searchInteraction = interactionSearchService.findInteractionWithFacet(extractSearchTerms(query), batchSearch, interactorSpeciesFilter,
                 interactorTypeFilter, interactionDetectionMethodFilter, interactionTypeFilter, interactionHostOrganismFilter, negativeFilter, minMiScoreFilter, maxMiScoreFilter,
-                false, page, pageSize);
+                intraSpeciesFilter, page, pageSize);
 
         InteractionSearchResult interactionSearchResult = new InteractionSearchResult(searchInteraction);
 
@@ -166,40 +173,42 @@ public class InteractionSearchController {
         int page = Integer.parseInt(request.getParameter("page"));
         int pageSize = Integer.parseInt(request.getParameter("pageSize"));
 
-        if (request.getParameterValues("interactorType[]") != null) {
-            interactorTypeFilter = new HashSet<>(Arrays.asList(request.getParameterValues("interactorType[]")));
-        }
+        boolean batchSearch = Boolean.parseBoolean(request.getParameter("batchSearch"));
+
         if (request.getParameterValues("interactorSpecies[]") != null) {
             interactorSpeciesFilter = new HashSet<>(Arrays.asList(request.getParameterValues("interactorSpecies[]")));
         }
-        if (request.getParameterValues("interactionType[]") != null) {
-            interactionTypeFilter = new HashSet<>(Arrays.asList(request.getParameterValues("interactionType[]")));
+        if (request.getParameterValues("interactorType[]") != null) {
+            interactorTypeFilter = new HashSet<>(Arrays.asList(request.getParameterValues("interactorType[]")));
         }
         if (request.getParameterValues("interactionDetectionMethod[]") != null) {
             interactionDetectionMethodFilter = new HashSet<>(Arrays.asList(request.getParameterValues("interactionDetectionMethod[]")));
         }
+        if (request.getParameterValues("interactionType[]") != null) {
+            interactionTypeFilter = new HashSet<>(Arrays.asList(request.getParameterValues("interactionType[]")));
+        }
         if (request.getParameterValues("interactionHostOrganism[]") != null) {
             interactionHostOrganismFilter = new HashSet<>(Arrays.asList(request.getParameterValues("interactionHostOrganism[]")));
         }
-
-        /* TODO: Pass the interSpecies from the top, it can change the result of the query */
         boolean negativeFilter = Boolean.parseBoolean(request.getParameter("negativeInteraction"));
         double minMiScoreFilter = Double.parseDouble(request.getParameter("miScoreMin"));
         double maxMiScoreFilter = Double.parseDouble(request.getParameter("miScoreMax"));
+        boolean intraSpeciesFilter = Boolean.parseBoolean(request.getParameter("intraSpecies"));
 
-        GroupPage<SearchChildInteractor> searchInteractors = childInteractorSearchService.findInteractorsWithGroup(query, interactorSpeciesFilter,
-                interactorTypeFilter, interactionDetectionMethodFilter, interactionTypeFilter, interactionHostOrganismFilter, negativeFilter,
-                minMiScoreFilter, maxMiScoreFilter, false, page, pageSize);
 
-        long numGroups = childInteractorSearchService.countInteractorsWithGroup(query, interactorSpeciesFilter,
+        GroupPage<SearchChildInteractor> searchInteractors = childInteractorSearchService.findInteractorsWithGroup(extractSearchTerms(query), batchSearch, interactorSpeciesFilter,
                 interactorTypeFilter, interactionDetectionMethodFilter, interactionTypeFilter, interactionHostOrganismFilter, negativeFilter,
-                minMiScoreFilter, maxMiScoreFilter, false);
+                minMiScoreFilter, maxMiScoreFilter, intraSpeciesFilter, page, pageSize);
+
+        long numGroups = childInteractorSearchService.countInteractorsWithGroup(extractSearchTerms(query), batchSearch, interactorSpeciesFilter,
+                interactorTypeFilter, interactionDetectionMethodFilter, interactionTypeFilter, interactionHostOrganismFilter, negativeFilter,
+                minMiScoreFilter, maxMiScoreFilter, intraSpeciesFilter);
 
         for (SearchChildInteractor searchInteractor : searchInteractors.getContent()) {
 
-            Long interactionCount = interactionSearchService.countInteractionResult(query,searchInteractor.getInteractorAc(), interactorSpeciesFilter,
+            Long interactionCount = interactionSearchService.countInteractionResult(extractSearchTerms(query), batchSearch, searchInteractor.getInteractorAc(), interactorSpeciesFilter,
                     interactorTypeFilter, interactionDetectionMethodFilter, interactionTypeFilter, interactionHostOrganismFilter,
-                    negativeFilter, minMiScoreFilter, maxMiScoreFilter, false);
+                    negativeFilter, minMiScoreFilter, maxMiScoreFilter, intraSpeciesFilter);
 
             searchInteractor.setInteractionSearchCount(interactionCount);
         }
@@ -239,6 +248,7 @@ public class InteractionSearchController {
             produces = {APPLICATION_JSON_VALUE})
     public long countInteractionResult(
             @RequestParam(value = "query") String query,
+            @RequestParam(value = "batchSearch", required = false) boolean batchSearch,
             @RequestParam(value = "interactorAc") String interactorAc,
             @RequestParam(value = "interactorSpeciesFilter", required = false) Set<String> interactorSpeciesFilter,
             @RequestParam(value = "interactorTypeFilter", required = false) Set<String> interactorTypeFilter,
@@ -251,7 +261,8 @@ public class InteractionSearchController {
             @RequestParam(value = "interSpecies", required = false) boolean interSpecies) {
 
         return interactionSearchService.countInteractionResult(
-                query,
+                extractSearchTerms(query),
+                batchSearch,
                 interactorAc,
                 interactorSpeciesFilter,
                 interactorTypeFilter,
@@ -265,7 +276,7 @@ public class InteractionSearchController {
     }
 
     @CrossOrigin(origins = "*")
-    @PostMapping(value = "/uploadBatchFile",
+    @PostMapping(value = "/uploadFile",
             produces = {APPLICATION_JSON_VALUE})
     public ResponseEntity<String> uploadBatchFile(@RequestParam(value = "file", required = true) MultipartFile file) {
         String rootPath = uploadBatchFilePath;
@@ -295,14 +306,14 @@ public class InteractionSearchController {
             httpStatus = HttpStatus.EXPECTATION_FAILED;
         }
 
-        JSONObject result = new JSONObject();
-        result.put("data", uploadBatchFileName);
+//        JSONObject result = new JSONObject();
+//        result.put("data", uploadBatchFileName);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", APPLICATION_JSON_VALUE);
         headers.add("X-Clacks-Overhead", "headers");
 
-        return new ResponseEntity<String>(result.toString(), headers, httpStatus);
+        return new ResponseEntity<String>(uploadBatchFileName, headers, httpStatus);
     }
 
     @CrossOrigin(origins = "*")
@@ -314,7 +325,7 @@ public class InteractionSearchController {
 
     private String extractSearchTerms(String query) {
 
-        String searchTerms = "";
+        StringBuilder searchTerms = new StringBuilder();
 
         if (query.startsWith(Constants.UPLOADED_BATCH_FILE_PREFIX)) {
             File uploadedBatchFile = new File(uploadBatchFilePath + query);
@@ -325,9 +336,9 @@ public class InteractionSearchController {
                     int count = 0;
                     while ((line = bufferedReader.readLine()) != null) {
                         if (count > 0) {
-                            searchTerms = searchTerms + "," + line;
+                            searchTerms.append(",").append(line);
                         } else {
-                            searchTerms = line;
+                            searchTerms = new StringBuilder(line);
                         }
                         count++;
                     }
@@ -336,10 +347,10 @@ public class InteractionSearchController {
                 }
             }
         } else {
-            searchTerms = query;
+            searchTerms = new StringBuilder(query);
         }
 
-        return searchTerms;
+        return searchTerms.toString();
     }
 
 }
