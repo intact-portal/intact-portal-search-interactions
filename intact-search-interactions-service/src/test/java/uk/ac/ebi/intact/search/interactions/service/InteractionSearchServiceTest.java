@@ -312,7 +312,7 @@ public class InteractionSearchServiceTest {
                 false,
                 0,
                 10);
-        Assert.assertEquals(4, interactionOp.getTotalElements());
+        assertEquals(5, interactionOp.getTotalElements());
     }
 
     /*
@@ -359,7 +359,8 @@ public class InteractionSearchServiceTest {
                 false,
                 0,
                 10);
-        Assert.assertEquals(10, interactionOp.getNumberOfElements());
+        assertEquals(10, interactionOp.getTotalElements());
+        assertEquals(10, interactionOp.getNumberOfElements());
 
     }
 
@@ -383,7 +384,8 @@ public class InteractionSearchServiceTest {
                 false,
                 0,
                 10);
-        Assert.assertEquals(10, interactionOp.getNumberOfElements());
+        assertEquals(10, interactionOp.getTotalElements());
+        assertEquals(10, interactionOp.getNumberOfElements());
 
     }
 
@@ -407,7 +409,8 @@ public class InteractionSearchServiceTest {
                 false,
                 0,
                 10);
-        Assert.assertEquals(4, interactionOp.getNumberOfElements());
+        assertEquals(4, interactionOp.getTotalElements());
+        assertEquals(4, interactionOp.getNumberOfElements());
 
     }
 
@@ -431,6 +434,7 @@ public class InteractionSearchServiceTest {
                 false,
                 0,
                 10);
+        assertEquals(3, interactionOp.getTotalElements());
         assertEquals(3, interactionOp.getNumberOfElements());
     }
 }
