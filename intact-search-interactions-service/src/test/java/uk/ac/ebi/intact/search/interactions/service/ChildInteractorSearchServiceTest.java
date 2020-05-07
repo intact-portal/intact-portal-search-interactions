@@ -57,11 +57,13 @@ public class ChildInteractorSearchServiceTest {
     }
 
     /**
-     * Expected number of interactors when interactions are queried by species
+     * Expected number of interactors when interactions are queried by species. Returns total documents found in the groups
+     * instead the number of unique groups
      */
     @Test
     public void getUniqueChildInteractorsFromInteractionQuery() {
-        GroupPage<SearchChildInteractor> page = childInteractorSearchService.findInteractorsWithGroup("Rattus norvegicus (Rat)",
+        GroupPage<SearchChildInteractor> page = childInteractorSearchService.findInteractorsWithGroup(
+                "Rattus norvegicus (Rat)",
                 false,
                 null,
                 null,
@@ -74,7 +76,29 @@ public class ChildInteractorSearchServiceTest {
                 false,
                 0,
                 10);
-        assertEquals(5, page.getTotalElements());
+        assertEquals(10, page.getTotalElements()); //Total documents found before grouping
+        assertEquals(7, page.getNumberOfElements()); //Elements in the page
+    }
+
+    /**
+     * Expected number of interactors when interactions are queried by species. Returns the number of groups
+     */
+    @Test
+    public void countUniqueChildInteractorsFromInteractionQuery() {
+        long numInteractors = childInteractorSearchService.countInteractorsWithGroup(
+                "Rattus norvegicus (Rat)",
+                false,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                0,
+                1,
+                false);
+
+        assertEquals(7, numInteractors);
     }
 
     /**
@@ -119,22 +143,33 @@ public class ChildInteractorSearchServiceTest {
                 false,
                 page,
                 size);
-        Assert.assertEquals(2, childInteractorsOp.getTotalElements());
+        assertEquals(2, childInteractorsOp.getTotalElements()); //Total documents found before grouping
+        assertEquals(2, childInteractorsOp.getNumberOfElements()); //Elements in the page
+
+        long numInteractors = childInteractorSearchService.countInteractorsWithGroup(
+                "physical association",
+                false,
+                species,
+                interactorType,
+                detectionMethod,
+                interactionType,
+                hostOrganism,
+                false,
+                minMiscore,
+                maxMiscore,
+                false);
+        assertEquals(2, numInteractors);
 
         List<String> interactorAcs = new ArrayList<>();
-        boolean correctChildInteractors = true;
         interactorAcs.add("EBI-724102");
         interactorAcs.add("EBI-715849");
 
 
         for (SearchChildInteractor searchChildInteractor : childInteractorsOp.getContent()) {
             if (!interactorAcs.contains(searchChildInteractor.getInteractorAc())) {
-                correctChildInteractors = false;
+                Assert.fail("The interactor is not in the list of interactors expected");
             }
         }
-
-        Assert.assertEquals(true, correctChildInteractors);
-
     }
 
     /**
@@ -157,22 +192,38 @@ public class ChildInteractorSearchServiceTest {
                 false,
                 0,
                 10);
-        assertEquals(5, childInteractorsOp.getTotalElements());
+        assertEquals(10, childInteractorsOp.getTotalElements());  //Total documents found before grouping
+        assertEquals(7, childInteractorsOp.getNumberOfElements()); //Elements in the page
+
+
+        long numInteractors = childInteractorSearchService.countInteractorsWithGroup(
+                "Rattus norvegicus (Rat)",
+                false,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                0,
+                1,
+                false);
+        assertEquals(7, numInteractors);
 
         List<String> interactorAcs = new ArrayList<>();
-        boolean correctChildInteractors = true;
         interactorAcs.add("EBI-7837133");
         interactorAcs.add("EBI-915507");
         interactorAcs.add("EBI-2028244");
         interactorAcs.add("EBI-4423297");
         interactorAcs.add("EBI-9997695");
+        interactorAcs.add("EBI-10000824");
+        interactorAcs.add("EBI-73886");
 
         for (SearchChildInteractor searchChildInteractor : childInteractorsOp.getContent()) {
             if (!interactorAcs.contains(searchChildInteractor.getInteractorAc())) {
-                correctChildInteractors = false;
+                Assert.fail("The interactor is not in the list of interactors expected");
             }
         }
-        Assert.assertEquals(true, correctChildInteractors);
 
         //Interactions
         FacetPage<SearchInteraction> searchInteractionsOp = interactionSearchService.findInteractionWithFacet("Rattus norvegicus (Rat)",
@@ -188,17 +239,20 @@ public class ChildInteractorSearchServiceTest {
                 false,
                 0,
                 10);
-        assertEquals(4, searchInteractionsOp.getTotalElements());
+        assertEquals(5, searchInteractionsOp.getTotalElements());
+        assertEquals(5, searchInteractionsOp.getNumberOfElements()); //Elements in the page
 
-        boolean correctInteractions = true;
-        String interactionAc = "EBI-10000796";
+
+        //5 binaries 2 interactions
+        List<String> interactionAcs = new ArrayList<>();
+        interactionAcs.add("EBI-10000796");
+        interactionAcs.add("EBI-10000862");
 
         for (SearchInteraction searchInteraction : searchInteractionsOp.getContent()) {
-            if (!interactionAc.equals(searchInteraction.getAc())) {
-                correctInteractions = false;
+            if (!interactionAcs.contains(searchInteraction.getAc())) {
+                Assert.fail("The interaction is not in the list of interactions expected");
             }
         }
-        Assert.assertEquals(true, correctInteractions);
     }
 
     /*
@@ -221,8 +275,22 @@ public class ChildInteractorSearchServiceTest {
                 false,
                 0,
                 10);
-        Assert.assertEquals(10, childInteractorsOp.getNumberOfElements());
+        assertEquals(20, childInteractorsOp.getTotalElements()); //Total documents found before grouping
+        assertEquals(10, childInteractorsOp.getNumberOfElements()); //Elements in the first page
 
+        long numInteractors = childInteractorSearchService.countInteractorsWithGroup(
+                "",
+                false,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                0,
+                1,
+                false);
+        assertEquals(11, numInteractors);
     }
 
      /*
@@ -245,8 +313,21 @@ public class ChildInteractorSearchServiceTest {
                 false,
                 0,
                 10);
-        Assert.assertEquals(10, childInteractorsOp.getNumberOfElements());
+        assertEquals(20, childInteractorsOp.getTotalElements()); //Total documents found before grouping
+        assertEquals(10, childInteractorsOp.getNumberOfElements()); //Elements in the first page
 
+        long numInteractors = childInteractorSearchService.countInteractorsWithGroup(
+                "*",
+                false,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                0,
+                1,
+                false);
+        assertEquals(11, numInteractors);
     }
-
 }
