@@ -41,6 +41,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
     /**
      * @param query                            input used to retrieve the interaction
+     * @param batchSearch                      establish the type of query
      * @param interactorSpeciesFilter          (Optional) filter interaction by interactor species
      * @param interactorTypeFilter             (Optional) filter interactions by interactor type
      * @param interactionDetectionMethodFilter (Optional) filter interactions by interaction detection method
@@ -123,6 +124,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
     /**
      * @param query                            input used to retrieve the interaction
+     * @param batchSearch                      (optional) true if que query needs to be treated as a batch search
      * @param interactorSpeciesFilter          (Optional) filter interactions by interactor species
      * @param interactorTypeFilter             (Optional) filter interactions by interactor type
      * @param interactionDetectionMethodFilter (Optional) filter interactions by interaction detection method
@@ -211,6 +213,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
     /**
      * @param query                            input used to retrieve the interaction
+     * @param batchSearch                      (optional) true if que query needs to be treated as a batch search
      * @param interactorAc                     interactor accession e.g. EBI-XXXXXX
      * @param interactorSpeciesFilter          (Optional) filter interactions by interactor species
      * @param interactorTypeFilter             (Optional) filter interactions by interactor type
@@ -224,7 +227,8 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
      * @return the number of interactions matching all the criteria
      */
     @Override
-    public long countInteractionResult(String query, boolean batchSearch,
+    public long countInteractionResult(String query,
+                                       boolean batchSearch,
                                        String interactorAc,
                                        Set<String> interactorSpeciesFilter,
                                        Set<String> interactorTypeFilter,

@@ -16,6 +16,7 @@ public interface CustomizedChildInteractorRepository {
 
     /**
      * @param query                            input used to retrieve the interactors contained in the interaction
+     * @param batchSearch                      (optional) true if que query needs to be treated as a batch search
      * @param interactorSpeciesFilter          (Optional) interactor species of the interaction
      * @param interactorTypeFilter             (Optional) filter interactions by interactor type
      * @param interactionDetectionMethodFilter (Optional) filter interactions by interaction detection method
@@ -43,6 +44,7 @@ public interface CustomizedChildInteractorRepository {
 
     /**
      * @param query                            input used to retrieve the interactors contained in the interaction
+     * @param batchSearch                      (optional) true if que query needs to be treated as a batch search
      * @param interactorSpeciesFilter          (Optional) interactor species of the interaction
      * @param interactorTypeFilter             (Optional) filter interactions by interactor type
      * @param interactionDetectionMethodFilter (Optional) filter interactions by interaction detection method
@@ -55,6 +57,7 @@ public interface CustomizedChildInteractorRepository {
      * @return the number of interactors matching all the criteria
      */
     long countChildInteractors(String query,
+                               boolean batchSearch,
                                Set<String> interactorSpeciesFilter,
                                Set<String> interactorTypeFilter,
                                Set<String> interactionDetectionMethodFilter,

@@ -39,8 +39,9 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
     }
 
     /**
-     * @param query                            input used to retrieve the interaction
-     * @param interactorSpeciesFilter          (Optional) filter interaction by interactor species
+     * @param query                            input used to retrieve the interactors contained in the interaction
+     * @param batchSearch                      (optional) true if que query needs to be treated as a batch search
+     * @param interactorSpeciesFilter          (Optional) interactor species of the interaction
      * @param interactorTypeFilter             (Optional) filter interactions by interactor type
      * @param interactionDetectionMethodFilter (Optional) filter interactions by interaction detection method
      * @param interactionTypeFilter            (Optional) filter interactions by interaction type
@@ -51,7 +52,7 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
      * @param interSpecies                     boolean to restrict the result ot the same or different interactor species
      * @param sort                             field to define the sort of the results
      * @param pageable                         page number and size of the request
-     * @return the interaction data matching all the criteria
+     * @return the interactors matching all the criteria
      */
     @Override
     public GroupPage<SearchChildInteractor> findChildInteractors(String query,
@@ -100,11 +101,26 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
         return solrOperations.queryForGroupPage(INTERACTIONS, search, SearchChildInteractor.class);
     }
 
+    /**
+     * @param query                            input used to retrieve the interactors contained in the interaction
+     * @param batchSearch                      (optional) true if que query needs to be treated as a batch search
+     * @param interactorSpeciesFilter          (Optional) interactor species of the interaction
+     * @param interactorTypeFilter             (Optional) filter interactions by interactor type
+     * @param interactionDetectionMethodFilter (Optional) filter interactions by interaction detection method
+     * @param interactionTypeFilter            (Optional) filter interactions by interaction type
+     * @param interactionHostOrganismFilter    (Optional) filter interactions by host organism
+     * @param isNegativeFilter                 (Optional) filter interactions that are negative if true
+     * @param minMiScore                       minimun value of mi-score for the interaction
+     * @param maxMiScore                       maximum value of mi-score for the interaction
+     * @param interSpecies                     boolean to restrict the result ot the same or different interactor species
+     * @return the number of interactors matching all the criteria
+     */
     // By default the numCount return by solr when group.main=true is the total documents instead of the number of groups.
     // To make the pagination of interactors working we need to ask solr the number of groups for that group.main=false and
     // group.ngroups=true (setTotalCount(true) in spring-data-solr)
     @Override
     public long countChildInteractors(String query,
+                                      boolean batchSearch,
                                       Set<String> interactorSpeciesFilter,
                                       Set<String> interactorTypeFilter,
                                       Set<String> interactionDetectionMethodFilter,
@@ -122,7 +138,7 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
         SimpleQuery search = new SimpleQuery();
 
         // search criterias
-        Criteria interactionSearchCriteria = searchInteractionUtility.createSearchConditions(query);
+        Criteria interactionSearchCriteria = searchInteractionUtility.createSearchConditions(query, batchSearch);
         Criteria interactorCriteria = new NestedCriteria(interactionSearchCriteria, interactionFilterQueries);
 
         search.addCriteria(interactorCriteria);

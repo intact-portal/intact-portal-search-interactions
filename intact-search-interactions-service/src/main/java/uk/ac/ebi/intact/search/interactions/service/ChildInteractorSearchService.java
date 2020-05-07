@@ -40,6 +40,7 @@ public class ChildInteractorSearchService {
     }
 
     public long countInteractorsWithGroup(String query,
+                                          boolean batchSearch,
                                           Set<String> interactorSpeciesFilter,
                                           Set<String> interactorTypeFilter,
                                           Set<String> interactionDetectionMethodFilter,
@@ -49,7 +50,7 @@ public class ChildInteractorSearchService {
                                           double minMiScore,
                                           double maxMiScore,
                                           boolean interSpecies) {
-        return childInteractorRepository.countChildInteractors(query, interactorSpeciesFilter, interactorTypeFilter, interactionDetectionMethodFilter,
+        return childInteractorRepository.countChildInteractors(query, batchSearch, interactorSpeciesFilter, interactorTypeFilter, interactionDetectionMethodFilter,
                 interactionTypeFilter, interactionHostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, interSpecies);
     }
 

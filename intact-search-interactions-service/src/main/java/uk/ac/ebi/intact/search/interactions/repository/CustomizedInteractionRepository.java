@@ -18,6 +18,7 @@ public interface CustomizedInteractionRepository {
 
     /**
      * @param query                            input used to retrieve the interaction
+     * @param batchSearch                      (optional) true if que query needs to be treated as a batch search
      * @param interactorSpeciesFilter          (Optional) interactor species of the interaction
      * @param interactorTypeFilter             (Optional) filter interactions by interactor type
      * @param interactionDetectionMethodFilter (Optional) filter interactions by interaction detection method
@@ -45,6 +46,7 @@ public interface CustomizedInteractionRepository {
 
     /**
      * @param query                            input used to retrieve the interaction
+     * @param batchSearch                      (optional) true if que query needs to be treated as a batch search
      * @param interactorSpeciesFilter          (Optional) interactor species of the interaction
      * @param interactorTypeFilter             (Optional) filter interactions by interactor type
      * @param interactionDetectionMethodFilter (Optional) filter interactions by interaction detection method
@@ -72,6 +74,7 @@ public interface CustomizedInteractionRepository {
 
     /**
      * @param query                            input used to retrieve the interaction
+     * @param batchSearch                      (optional) true if que query needs to be treated as a batch search
      * @param interactorAc                     interactor accession e.g. EBI-XXXXXX
      * @param interactorSpeciesFilter          (Optional) interactor species of the interaction
      * @param interactorTypeFilter             (Optional) filter interactions by interactor type            *
