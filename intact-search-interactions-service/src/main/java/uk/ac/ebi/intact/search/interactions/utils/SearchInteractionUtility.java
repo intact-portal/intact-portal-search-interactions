@@ -132,9 +132,10 @@ public class SearchInteractionUtility {
     }
 
 
-    // interSpecies: if true it creates 'and' condition between two species
-    //               if false it creates 'or' condition between set of species
+    // interSpecies: if false it creates 'and' condition between two species
+    //               if true it creates 'or' condition between set of species
     // Adds tags in solr to allow calculate properly the facets for multiselection in species and interactor type
+    //TODO rename variable creates confusion
     private void createInteractorSpeciesFilterCriteria(Set<String> species, boolean interSpecies, List<FilterQuery> filterQueries) {
 
         if (species != null && !species.isEmpty()) {
@@ -142,14 +143,11 @@ public class SearchInteractionUtility {
             if (!interSpecies) {
                 conditions = new Criteria("{!tag=SPECIES}" + SPECIES_A_B_STR).in(species);
                 conditions.isOr();
-            } else { //TODO check if this case still works for the multiselection
+            } else { // Return only interactions from exactly the same species in both interactors.
+                // If more than one we keep only the first one
                 Iterator<String> iterator = species.iterator();
-                String speciesA;
-                String speciesB;
-
-                speciesA = (iterator.hasNext()) ? iterator.next() : "";
-                speciesB = (iterator.hasNext()) ? iterator.next() : "";
-                conditions = new Criteria(SPECIES_A_B_STR).is(speciesA).and(new Criteria(SPECIES_A_B_STR).is(speciesB));
+                String intraSpecies = iterator.next();
+                conditions = new Criteria(SPECIES_A_STR).is(intraSpecies).and(new Criteria(SPECIES_B_STR).is(intraSpecies));
             }
             filterQueries.add(new SimpleFilterQuery(conditions));
         }
