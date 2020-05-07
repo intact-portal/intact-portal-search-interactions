@@ -4,10 +4,7 @@ import org.springframework.data.solr.core.query.Criteria;
 import org.springframework.data.solr.core.query.FilterQuery;
 import org.springframework.data.solr.core.query.SimpleFilterQuery;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields.*;
 
@@ -17,28 +14,33 @@ import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields
 public class SearchInteractionUtility {
 
     public Criteria createSearchConditions(String searchTerms, boolean batchSearch) {
-        Criteria conditions = null;
+        Criteria conditions;
         Criteria userConditions = null;
         Criteria documentConditions = new Criteria(DOCUMENT_TYPE).is(DocumentType.INTERACTION);
+        List<String> words;
 
-        if (batchSearch) {
-            userConditions = batchSearchConditions(Arrays.asList(searchTerms.split(",")));
-        } else {
-            //TODO Review query formation
-            if (searchTerms != null && !searchTerms.isEmpty() && !searchTerms.trim().equals("*")) {
-                String[] words = searchTerms.split(" ");
-                int wordCount = 1;
-                for (String word : words) {
-                    if (userConditions == null) {
-                        userConditions = new Criteria(DEFAULT).is(word)
-                                .or(AC_A_STR).is(word)
-                                .or(AC_B_STR).is(word)
-                                .or(AC_STR).is(word);
-                    } else {
-                        userConditions = userConditions.or(DEFAULT).contains(word)
-                                .or(AC_A_STR).is(word)
-                                .or(AC_B_STR).is(word)
-                                .or(AC_STR).is(word);
+        //We prepare the term to split by several characters
+
+        if(searchTerms != null && !searchTerms.isEmpty()) {
+            words = Arrays.asList(searchTerms.split("[\\s,\\n]"));
+
+            if (batchSearch) {
+                userConditions = batchSearchConditions(words);
+            } else {
+                //TODO Review query formation
+                if (!searchTerms.trim().equals("*")) {
+                    for (String word : words) {
+                        if (userConditions == null) {
+                            userConditions = new Criteria(DEFAULT).is(word)
+                                    .or(AC_A_STR).is(word)
+                                    .or(AC_B_STR).is(word)
+                                    .or(AC_STR).is(word);
+                        } else {
+                            userConditions = userConditions.or(DEFAULT).is(word)
+                                    .or(AC_A_STR).is(word)
+                                    .or(AC_B_STR).is(word)
+                                    .or(AC_STR).is(word);
+                        }
                     }
                 }
             }
