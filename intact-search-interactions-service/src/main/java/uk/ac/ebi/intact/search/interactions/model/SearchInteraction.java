@@ -265,7 +265,9 @@ public class SearchInteraction {
                              Set<String> parameters, Date creationDate, Date updationDate,
                              Set<String> checksums, boolean negative, String type, String typeMIA, String typeMIB,
                              String typeMIIdentifier, boolean disruptedByMutation,
-                             boolean mutationA, boolean mutationB, int binaryInteractionId, String acA, String acB, Integer featureCount, String descriptionA, String descriptionB, List<SearchChildInteractor> searchChildInteractors, String documentType) {
+                             boolean mutationA, boolean mutationB, int binaryInteractionId, String acA, String acB,
+                             Integer featureCount, String descriptionA, String descriptionB,
+                             List<SearchChildInteractor> searchChildInteractors, String documentType) {
         this.count = count;
         this.idA = idA;
         this.idB = idB;

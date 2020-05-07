@@ -1,7 +1,6 @@
 package uk.ac.ebi.intact.search.interactions.service;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +19,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 /**
  * @author Elisabet Barrera
@@ -61,7 +60,7 @@ public class InteractionSearchServiceTest {
     @Test
     public void findByAuthor() {
         Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("Shorter J.");
-        Assert.assertEquals(4, interactionOp.getTotalElements());
+        assertEquals(4, interactionOp.getTotalElements());
     }
 
     /**
@@ -70,7 +69,7 @@ public class InteractionSearchServiceTest {
     @Test
     public void findBySpecies() {
         Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("Rattus norvegicus (Rat)");
-        Assert.assertEquals(4, interactionOp.getTotalElements());
+        assertEquals(4, interactionOp.getTotalElements());
     }
 
     /**
@@ -79,7 +78,7 @@ public class InteractionSearchServiceTest {
     @Test
     public void findByInteractionType() {
         Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("physical association");
-        Assert.assertEquals(10, interactionOp.getTotalElements());
+        assertEquals(10, interactionOp.getTotalElements());
     }
 
     /**
@@ -88,7 +87,7 @@ public class InteractionSearchServiceTest {
     @Test
     public void findByIntDetMethod() {
         Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("molecular sieving");
-        Assert.assertEquals(1, interactionOp.getTotalElements());
+        assertEquals(1, interactionOp.getTotalElements());
     }
 
     /**
@@ -97,7 +96,7 @@ public class InteractionSearchServiceTest {
     @Test
     public void findByHostOrganism() {
         Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("\"In vitro\"");
-        Assert.assertEquals(6, interactionOp.getTotalElements());
+        assertEquals(6, interactionOp.getTotalElements());
     }
 
     /**
@@ -121,84 +120,84 @@ public class InteractionSearchServiceTest {
                 10);
 
         Page<FacetFieldEntry> facetFieldEntryPage = interaction.getFacetResultPage(SearchInteractionFields.NEGATIVE);
-        Assert.assertFalse(facetFieldEntryPage.getContent().isEmpty());
+        assertFalse(facetFieldEntryPage.getContent().isEmpty());
         for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage.getContent()) {
             final String value = facetFieldEntry.getValue();
             if (value.equals("false")) {
-                Assert.assertEquals(10, facetFieldEntry.getValueCount());
+                assertEquals(10, facetFieldEntry.getValueCount());
             }
         }
 
         facetFieldEntryPage = interaction.getFacetResultPage(SearchInteractionFields.INTACT_MISCORE);
-        Assert.assertFalse(facetFieldEntryPage.getContent().isEmpty());
+        assertFalse(facetFieldEntryPage.getContent().isEmpty());
         for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage.getContent()) {
             final String value = facetFieldEntry.getValue();
             if (value.equals("0.39")) {
-                Assert.assertEquals(3, facetFieldEntry.getValueCount());
+                assertEquals(3, facetFieldEntry.getValueCount());
             }
             if (value.equals("0.52")) {
-                Assert.assertEquals(1, facetFieldEntry.getValueCount());
+                assertEquals(1, facetFieldEntry.getValueCount());
             }
             if (value.equals("0.55")) {
-                Assert.assertEquals(3, facetFieldEntry.getValueCount());
+                assertEquals(3, facetFieldEntry.getValueCount());
             }
             if (value.equals("0.58")) {
-                Assert.assertEquals(3, facetFieldEntry.getValueCount());
+                assertEquals(3, facetFieldEntry.getValueCount());
             }
         }
 
         facetFieldEntryPage = interaction.getFacetResultPage(SearchInteractionFields.DETECTION_METHOD_STR);
-        Assert.assertFalse(facetFieldEntryPage.getContent().isEmpty());
+        assertFalse(facetFieldEntryPage.getContent().isEmpty());
         for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage.getContent()) {
             final String value = facetFieldEntry.getValue();
             if (value.equals("anti bait coip")) {
-                Assert.assertEquals(4, facetFieldEntry.getValueCount());
+                assertEquals(4, facetFieldEntry.getValueCount());
             }
             if (value.equals("density sedimentatio")) {
-                Assert.assertEquals(3, facetFieldEntry.getValueCount());
+                assertEquals(3, facetFieldEntry.getValueCount());
             }
             if (value.equals("affinity chrom")) {
-                Assert.assertEquals(1, facetFieldEntry.getValueCount());
+                assertEquals(1, facetFieldEntry.getValueCount());
             }
             if (value.equals("elisa")) {
-                Assert.assertEquals(1, facetFieldEntry.getValueCount());
+                assertEquals(1, facetFieldEntry.getValueCount());
             }
         }
 
         facetFieldEntryPage = interaction.getFacetResultPage(SearchInteractionFields.TYPE_STR);
-        Assert.assertFalse(facetFieldEntryPage.getContent().isEmpty());
+        assertFalse(facetFieldEntryPage.getContent().isEmpty());
         for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage.getContent()) {
             final String value = facetFieldEntry.getValue();
             if (value.equals("physical association")) {
-                Assert.assertEquals(10, facetFieldEntry.getValueCount());
+                assertEquals(10, facetFieldEntry.getValueCount());
             }
         }
 
         facetFieldEntryPage = interaction.getFacetResultPage(SearchInteractionFields.HOST_ORGANISM_STR);
-        Assert.assertFalse(facetFieldEntryPage.getContent().isEmpty());
+        assertFalse(facetFieldEntryPage.getContent().isEmpty());
         for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage.getContent()) {
             final String value = facetFieldEntry.getValue();
             if (value.equals("In vitro")) {
-                Assert.assertEquals(6, facetFieldEntry.getValueCount());
+                assertEquals(6, facetFieldEntry.getValueCount());
             }
             if (value.equals("rattus norvegicus liver")) {
-                Assert.assertEquals(4, facetFieldEntry.getValueCount());
+                assertEquals(4, facetFieldEntry.getValueCount());
             }
         }
 
         facetFieldEntryPage = interaction.getFacetResultPage(SearchInteractionFields.SPECIES_A_B_STR);
-        Assert.assertFalse(facetFieldEntryPage.getContent().isEmpty());
+        assertFalse(facetFieldEntryPage.getContent().isEmpty());
         for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage.getContent()) {
             final String value = facetFieldEntry.getValue();
             if (value.equals("Homo sapiens")) {
-                Assert.assertEquals(6, facetFieldEntry.getValueCount());
+                assertEquals(6, facetFieldEntry.getValueCount());
             }
             if (value.equals("Rattus norvegicus (Rat)")) {
-                Assert.assertEquals(4, facetFieldEntry.getValueCount());
+                assertEquals(4, facetFieldEntry.getValueCount());
             }
         }
 
-        Assert.assertEquals(10, interaction.getTotalElements());
+        assertEquals(10, interaction.getTotalElements());
     }
 
     /**
@@ -242,7 +241,7 @@ public class InteractionSearchServiceTest {
                 false,
                 page,
                 size);
-        Assert.assertEquals(1, interactionOp.getTotalElements());
+        assertEquals(1, interactionOp.getTotalElements());
 
     }
 
@@ -290,7 +289,7 @@ public class InteractionSearchServiceTest {
                 true,
                 page,
                 size);
-        Assert.assertEquals(0, interactionOp.getTotalElements());
+        assertEquals(0, interactionOp.getTotalElements());
     }
 
     /**
@@ -336,7 +335,7 @@ public class InteractionSearchServiceTest {
                 false,
                 0,
                 10);
-        Assert.assertEquals(1, interactionOp.getTotalElements());
+        assertEquals(1, interactionOp.getTotalElements());
 
     }
 
@@ -432,7 +431,6 @@ public class InteractionSearchServiceTest {
                 false,
                 0,
                 10);
-        Assert.assertEquals(3, interactionOp.getNumberOfElements());
-
+        assertEquals(3, interactionOp.getNumberOfElements());
     }
 }

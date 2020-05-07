@@ -52,8 +52,9 @@ public class InteractionIndexServiceTest {
                 new HashSet<>(Collections.singletonList("publication_1")));
 
         //Create new child interactors documents
-        SearchChildInteractor searchChildInteractor1 = new SearchChildInteractor("EBI-TEST1", "EIF4E",
-                " P06730",
+        SearchChildInteractor searchChildInteractor1 = new SearchChildInteractor("EBI-TEST1",
+                "EIF4E",
+                "P06730",
                 "Eukaryotic translation initiation factor 4E",
                 new HashSet<>(Arrays.asList("interactor1_alias1", "interactor1_alias2", "interactor1_alias3")),
                 new HashSet<>(Arrays.asList("interactor1_alt1", "interactor1_alt2", "interactor1_alt3")),
