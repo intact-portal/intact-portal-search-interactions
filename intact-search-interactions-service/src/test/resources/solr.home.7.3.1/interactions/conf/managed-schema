@@ -39,6 +39,22 @@
       <tokenizer class="solr.KeywordTokenizerFactory"/>
     </analyzer>
   </fieldType>
+  <fieldType name="intact_identifier" class="solr.TextField" positionIncrementGap="100" multiValued="true">
+    <analyzer type="index">
+      <charFilter class="solr.PatternReplaceFilterFactory" pattern="[\:\-\(\)]" replacement=""/>
+      <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+      <filter class="solr.TrimFilterFactory"/>
+      <filter class="solr.StopFilterFactory" words="stopwords.txt" ignoreCase="true"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+    </analyzer>
+    <analyzer type="query">
+      <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="[\:\-\(\)]" replacement=""/>
+      <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+      <filter class="solr.TrimFilterFactory"/>
+      <filter class="solr.StopFilterFactory" words="stopwords.txt" ignoreCase="true"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+    </analyzer>
+  </fieldType>
   <fieldType name="location" class="solr.LatLonPointSpatialField" docValues="true"/>
   <fieldType name="location_rpt" class="solr.SpatialRecursivePrefixTreeFieldType" geo="true" maxDistErr="0.001" distErrPct="0.025" distanceUnits="kilometers"/>
   <fieldType name="lowercase" class="solr.TextField" positionIncrementGap="100">
@@ -156,7 +172,7 @@
     <analyzer type="index">
       <tokenizer class="solr.WhitespaceTokenizerFactory"/>
       <filter class="solr.StopFilterFactory" words="lang/stopwords_en.txt" ignoreCase="true"/>
-      <filter class="solr.WordDelimiterGraphFilterFactory" catenateNumbers="1" generateNumberParts="0" splitOnCaseChange="1" generateWordParts="0" catenateAll="0" catenateWords="1" splitOnNumerics="0" preserveOriginal="1"/>
+      <filter class="solr.WordDelimiterGraphFilterFactory" catenateNumbers="1" generateNumberParts="0" splitOnCaseChange="1" generateWordParts="0" splitOnNumerics="0" preserveOriginal="1" catenateAll="0" catenateWords="1"/>
       <filter class="solr.LowerCaseFilterFactory"/>
       <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
       <filter class="solr.PorterStemFilterFactory"/>
@@ -166,7 +182,7 @@
       <tokenizer class="solr.WhitespaceTokenizerFactory"/>
       <filter class="solr.SynonymGraphFilterFactory" expand="true" ignoreCase="true" synonyms="synonyms.txt"/>
       <filter class="solr.StopFilterFactory" words="lang/stopwords_en.txt" ignoreCase="true"/>
-      <filter class="solr.WordDelimiterGraphFilterFactory" catenateNumbers="1" generateNumberParts="0" splitOnCaseChange="1" generateWordParts="0" catenateAll="0" catenateWords="1" splitOnNumerics="0" preserveOriginal="1"/>
+      <filter class="solr.WordDelimiterGraphFilterFactory" catenateNumbers="1" generateNumberParts="0" splitOnCaseChange="1" generateWordParts="0" splitOnNumerics="0" preserveOriginal="1" catenateAll="0" catenateWords="1"/>
       <filter class="solr.LowerCaseFilterFactory"/>
       <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
       <filter class="solr.PorterStemFilterFactory"/>
@@ -217,22 +233,6 @@
       <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
       <filter class="solr.EnglishMinimalStemFilterFactory"/>
       <filter class="solr.RemoveDuplicatesTokenFilterFactory"/>
-    </analyzer>
-  </fieldType>
-  <fieldType name="intact_identifier" class="solr.TextField" positionIncrementGap="100" multiValued="true">
-    <analyzer type="index">
-      <charFilter class="solr.PatternReplaceFilterFactory" pattern="[\:\-\(\)]" replacement=""/>
-      <tokenizer class="solr.WhitespaceTokenizerFactory"/>
-      <filter class="solr.TrimFilterFactory"/>
-      <filter class="solr.StopFilterFactory" words="stopwords.txt" ignoreCase="true"/>
-      <filter class="solr.LowerCaseFilterFactory"/>
-    </analyzer>
-    <analyzer type="query">
-      <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="[\:\-\(\)]" replacement=""/>
-      <tokenizer class="solr.WhitespaceTokenizerFactory"/>
-      <filter class="solr.TrimFilterFactory"/>
-      <filter class="solr.StopFilterFactory" words="stopwords.txt" ignoreCase="true"/>
-      <filter class="solr.LowerCaseFilterFactory"/>
     </analyzer>
   </fieldType>
   <fieldType name="text_es" class="solr.TextField" positionIncrementGap="100">
@@ -491,7 +491,6 @@
   <field name="count" type="plongs"/>
   <field name="creation_date" type="pdates"/>
   <field name="default" type="text_en_splitting_tight_ngram" multiValued="true" indexed="true" required="true" stored="false"/>
-  <field name="interactor_default" type="text_general" multiValued="true" indexed="true" stored="true"/>
   <field name="description" type="text_general"/>
   <field name="descriptionA" type="text_general"/>
   <field name="descriptionB" type="text_general"/>
@@ -523,6 +522,7 @@
   <!-- interactor_* fields are likely to be only stored, currently we are not using them for searching  -->
   <field name="interactor_alias" type="text_general"/>
   <field name="interactor_alt_ids" type="text_general"/>
+  <field name="interactor_default" type="text_general" multiValued="true" indexed="true" stored="true"/>
   <field name="interactor_description" type="text_general"/>
   <field name="interactor_feature_shortlabels" type="text_general"/>
   <field name="interactor_name" type="text_general"/>
@@ -565,6 +565,7 @@
   <dynamicField name="*_descendent_path" type="descendent_path" indexed="true" stored="true"/>
   <dynamicField name="*_ancestor_path" type="ancestor_path" indexed="true" stored="true"/>
   <dynamicField name="*_txt_en_split" type="text_en_splitting" indexed="true" stored="true"/>
+  <dynamicField name="*_identifiers" type="intact_identifier" indexed="true" stored="false"/>
   <dynamicField name="*_txt_sort" type="text_gen_sort" indexed="true" stored="true"/>
   <dynamicField name="*_txt_rev" type="text_general_rev" indexed="true" stored="true"/>
   <dynamicField name="*_phon_en" type="phonetic_en" indexed="true" stored="true"/>
@@ -626,7 +627,14 @@
   <dynamicField name="*_f" type="pfloat" indexed="true" stored="true"/>
   <dynamicField name="*_d" type="pdouble" indexed="true" stored="true"/>
   <dynamicField name="*_p" type="location" indexed="true" stored="true"/>
-  <dynamicField name="*_identifiers" type="intact_identifier" indexed="true" stored="false"/>
+  <!-- interactor_default can be replace in a query by interactor_identifiers or aliasesA or aliasesB
+ and can simplify problems of identifiers with '-' or numbers -->
+  <copyField source="aliasesA" dest="interactor_default"/>
+  <copyField source="aliasesB" dest="interactor_default"/>
+  <copyField source="altIdsA" dest="interactor_default"/>
+  <copyField source="altIdsB" dest="interactor_default"/>
+  <copyField source="idA" dest="interactor_default"/>
+  <copyField source="idB" dest="interactor_default"/>
   <copyField source="ac" dest="interaction_identifiers" maxChars="256"/>
   <copyField source="acA" dest="interactor_identifiers" maxChars="256"/>
   <copyField source="acB" dest="interactor_identifiers" maxChars="256"/>
@@ -642,90 +650,31 @@
   <copyField source="xrefs" dest="interaction_identifiers" maxChars="256"/>
   <copyField source="xrefsA" dest="interactor_identifiers" maxChars="256"/>
   <copyField source="xrefsB" dest="interactor_identifiers" maxChars="256"/>
-<!--  <copyField source="publication_id" dest="publication_id_str" maxChars="256"/>-->
-<!--  <copyField source="author" dest="author_str" maxChars="256"/>-->
-<!--  <copyField source="uniqueKey" dest="uniqueKey_str" maxChars="256"/>-->
-<!--  <copyField source="altIdsA" dest="altIdsA_str" maxChars="256"/>-->
-<!--  <copyField source="aliasesA" dest="aliasesA_str" maxChars="256"/>-->
-<!--  <copyField source="annotationsA" dest="annotationsA_str" maxChars="256"/>-->
-<!--  <copyField source="checksumsA" dest="checksumsA_str" maxChars="256"/>-->
   <copyField source="typeA" dest="typeA_str" maxChars="256"/>
   <copyField source="typeB" dest="typeB_str" maxChars="256"/>
   <copyField source="typeA" dest="typeA_B_str"/>
   <copyField source="typeB" dest="typeA_B_str"/>
-<!--  <copyField source="checksumsB" dest="checksumsB_str" maxChars="256"/>-->
-<!--  <copyField source="aliasesB" dest="aliasesB_str" maxChars="256"/>-->
   <copyField source="speciesA" dest="speciesA_str" maxChars="256"/>
   <copyField source="speciesB" dest="speciesB_str" maxChars="256"/>
   <copyField source="speciesA" dest="speciesA_B_str"/>
   <copyField source="speciesB" dest="speciesA_B_str"/>
-<!--  <copyField source="altIdsB" dest="altIdsB_str" maxChars="256"/>-->
-<!--  <copyField source="annotationsB" dest="annotationsB_str" maxChars="256"/>-->
   <copyField source="identification_method_A" dest="identification_method_A_str" maxChars="256"/>
   <copyField source="biological_role_A" dest="biological_role_A_str" maxChars="256"/>
-<!--  <copyField source="feature_A" dest="feature_A_str" maxChars="256"/>-->
   <copyField source="experimental_role_A" dest="experimental_role_A_str" maxChars="256"/>
   <copyField source="identification_method_B" dest="identification_method_B_str" maxChars="256"/>
   <copyField source="experimental_role_B" dest="experimental_role_B_str" maxChars="256"/>
-<!--  <copyField source="feature_B" dest="feature_B_str" maxChars="256"/>-->
   <copyField source="biological_role_B" dest="biological_role_B_str" maxChars="256"/>
-<!--  <copyField source="source_databases" dest="source_databases_str" maxChars="256"/>-->
   <copyField source="expansion_method" dest="expansion_method_str" maxChars="256"/>
-<!--  <copyField source="confidence_values" dest="confidence_values_str" maxChars="256"/>-->
   <copyField source="host_organism" dest="host_organism_str" maxChars="256"/>
-<!--  <copyField source="xrefsB" dest="xrefsB_str" maxChars="256"/>-->
-<!--  <copyField source="xrefsA" dest="xrefsA_str" maxChars="256"/>-->
   <copyField source="publication_authors" dest="publication_authors_str" maxChars="256"/>
   <!-- Check if you need to remove fields from default, like identifiers -->
   <copyField source="*" dest="default"/>
-  <!-- interactor_default can be replace in a query by interactor_identifiers or aliasesA or aliasesB
-   and can simplify problems of identifiers with '-' or numbers -->
-  <copyField source="altIdsA" dest="interactor_default"/>
-  <copyField source="altIdsB" dest="interactor_default"/>
-  <copyField source="aliasesA" dest="interactor_default"/>
-  <copyField source="aliasesB" dest="interactor_default"/>
-  <copyField source="idA" dest="interactor_default"/>
-  <copyField source="idB" dest="interactor_default"/>
-
-<!--  <copyField source="first_author" dest="first_author_str" maxChars="256"/>-->
-<!--  <copyField source="feature_shortlabel_B" dest="feature_shortlabel_B_str" maxChars="256"/>-->
-<!--  <copyField source="uniqueIdA" dest="uniqueIdA_str" maxChars="256"/>-->
-<!--  <copyField source="feature_shortlabel_A" dest="feature_shortlabel_A_str" maxChars="256"/>-->
-<!--  <copyField source="uniqueIdB" dest="uniqueIdB_str" maxChars="256"/>-->
-<!--  <copyField source="experimental_preparations_B" dest="experimental_preparations_B_str" maxChars="256"/>-->
-<!--  <copyField source="experimental_preparations_A" dest="experimental_preparations_A_str" maxChars="256"/>-->
   <copyField source="source_database" dest="source_database_str" maxChars="256"/>
-<!--  <copyField source="publication_identifiers" dest="publication_identifiers_str" maxChars="256"/>-->
-<!--  <copyField source="moleculeA" dest="moleculeA_str" maxChars="256"/>-->
-<!--  <copyField source="moleculeB" dest="moleculeB_str" maxChars="256"/>-->
-<!--  <copyField source="stoichiometry_B" dest="stoichiometry_B_str" maxChars="256"/>-->
-<!--  <copyField source="stoichiometry_A" dest="stoichiometry_A_str" maxChars="256"/>-->
-<!--  <copyField source="type_MI_A" dest="type_MI_A_str" maxChars="256"/>-->
-<!--  <copyField source="type_MI_B" dest="type_MI_B_str" maxChars="256"/>-->
   <copyField source="ac" dest="ac_str" maxChars="256"/>
-<!--  <copyField source="identifiers" dest="identifiers_str" maxChars="256"/>-->
-<!--  <copyField source="type_mi_identifier" dest="type_mi_identifier_str" maxChars="256"/>-->
-<!--  <copyField source="annotations" dest="annotations_str" maxChars="256"/>-->
   <copyField source="type" dest="type_str" maxChars="256"/>
-<!--  <copyField source="xrefs" dest="xrefs_str" maxChars="256"/>-->
-<!--  <copyField source="parameters" dest="parameters_str" maxChars="256"/>-->
   <copyField source="detection_method" dest="detection_method_str" maxChars="256"/>
-<!--  <copyField source="all_annotations" dest="all_annotations_str" maxChars="256"/>-->
   <copyField source="idB" dest="idB_str" maxChars="256"/>
   <copyField source="idA" dest="idA_str" maxChars="256"/>
   <copyField source="acA" dest="acA_str" maxChars="256"/>
   <copyField source="acB" dest="acB_str" maxChars="256"/>
-
-<!--  <copyField source="interactor_species_name" dest="interactor_species_name_str" maxChars="256"/>-->
-<!--  <copyField source="interactor_name" dest="interactor_name_str" maxChars="256"/>-->
-<!--  <copyField source="interactor_type" dest="interactor_type_str" maxChars="256"/>-->
-<!--  <copyField source="interactor_description" dest="interactor_description_str" maxChars="256"/>-->
-<!--  <copyField source="interactor_xrefs" dest="interactor_xrefs_str" maxChars="256"/>-->
-<!--  <copyField source="interactor_feature_shortlabels" dest="interactor_feature_shortlabels_str" maxChars="256"/>-->
-<!--  <copyField source="interactor_alias" dest="interactor_alias_str" maxChars="256"/>-->
-<!--  <copyField source="interactor_alt_ids" dest="interactor_alt_ids_str" maxChars="256"/>-->
-<!--  <copyField source="document_type" dest="document_type_str" maxChars="256"/>-->
-<!--  <copyField source="descriptionB" dest="descriptionB_str" maxChars="256"/>-->
-<!--  <copyField source="descriptionA" dest="descriptionA_str" maxChars="256"/>-->
-<!--  <copyField source="interactor_preferred_id" dest="interactor_preferred_id_str" maxChars="256"/>-->
 </schema>

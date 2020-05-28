@@ -487,12 +487,6 @@
     <void property="speciesA">
      <string>Homo sapiens</string>
     </void>
-    <void property="speciesAB">
-     <void method="clear"/>
-     <void method="add">
-      <string>Homo sapiens</string>
-     </void>
-    </void>
     <void property="speciesB">
      <string>Homo sapiens</string>
     </void>
@@ -1166,12 +1160,6 @@
     </void>
     <void property="speciesA">
      <string>Homo sapiens</string>
-    </void>
-    <void property="speciesAB">
-     <void method="clear"/>
-     <void method="add">
-      <string>Homo sapiens</string>
-     </void>
     </void>
     <void property="speciesB">
      <string>Homo sapiens</string>
@@ -1848,12 +1836,6 @@
     </void>
     <void property="speciesA">
      <string>Homo sapiens</string>
-    </void>
-    <void property="speciesAB">
-     <void method="clear"/>
-     <void method="add">
-      <string>Homo sapiens</string>
-     </void>
     </void>
     <void property="speciesB">
      <string>Homo sapiens</string>
@@ -2567,12 +2549,6 @@
     </void>
     <void property="speciesA">
      <string>Homo sapiens</string>
-    </void>
-    <void property="speciesAB">
-     <void method="clear"/>
-     <void method="add">
-      <string>Homo sapiens</string>
-     </void>
     </void>
     <void property="speciesB">
      <string>Homo sapiens</string>
@@ -3305,12 +3281,6 @@
     <void property="speciesA">
      <string>Homo sapiens</string>
     </void>
-    <void property="speciesAB">
-     <void method="clear"/>
-     <void method="add">
-      <string>Homo sapiens</string>
-     </void>
-    </void>
     <void property="speciesB">
      <string>Homo sapiens</string>
     </void>
@@ -3977,12 +3947,6 @@
     <void property="speciesA">
      <string>Rattus norvegicus (Rat)</string>
     </void>
-    <void property="speciesAB">
-     <void method="clear"/>
-     <void method="add">
-      <string>Rattus norvegicus (Rat)</string>
-     </void>
-    </void>
     <void property="speciesB">
      <string>Rattus norvegicus (Rat)</string>
     </void>
@@ -4505,12 +4469,6 @@
     </void>
     <void property="speciesA">
      <string>Rattus norvegicus (Rat)</string>
-    </void>
-    <void property="speciesAB">
-     <void method="clear"/>
-     <void method="add">
-      <string>Rattus norvegicus (Rat)</string>
-     </void>
     </void>
     <void property="speciesB">
      <string>Rattus norvegicus (Rat)</string>
@@ -5087,12 +5045,6 @@
     </void>
     <void property="speciesA">
      <string>Rattus norvegicus (Rat)</string>
-    </void>
-    <void property="speciesAB">
-     <void method="clear"/>
-     <void method="add">
-      <string>Rattus norvegicus (Rat)</string>
-     </void>
     </void>
     <void property="speciesB">
      <string>Rattus norvegicus (Rat)</string>
@@ -5678,12 +5630,6 @@
     </void>
     <void property="speciesA">
      <string>Rattus norvegicus (Rat)</string>
-    </void>
-    <void property="speciesAB">
-     <void method="clear"/>
-     <void method="add">
-      <string>Rattus norvegicus (Rat)</string>
-     </void>
     </void>
     <void property="speciesB">
      <string>Rattus norvegicus (Rat)</string>
@@ -6296,12 +6242,6 @@
     </void>
     <void property="speciesA">
      <string>Homo sapiens</string>
-    </void>
-    <void property="speciesAB">
-     <void method="clear"/>
-     <void method="add">
-      <string>Homo sapiens</string>
-     </void>
     </void>
     <void property="speciesB">
      <string>Homo sapiens</string>

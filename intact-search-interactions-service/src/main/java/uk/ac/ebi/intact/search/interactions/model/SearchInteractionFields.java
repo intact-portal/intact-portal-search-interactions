@@ -30,8 +30,6 @@ public class SearchInteractionFields {
     public static final String TAX_IDB = "taxIdB";
     public static final String TYPE_A = "typeA";
     public static final String TYPE_B = "typeB";
-    public static final String TYPE_A_STR = "typeA_str";
-    public static final String TYPE_B_STR = "typeB_str";
     public static final String XREFS_A = "xrefsA";
     public static final String XREFS_B = "xrefsB";
     public static final String ANNOTATIONS_A = "annotationsA";
@@ -42,7 +40,6 @@ public class SearchInteractionFields {
     public static final String SPECIES_A_STR = "speciesA_str";
     public static final String SPECIES_B = "speciesB";
     public static final String SPECIES_B_STR = "speciesB_str";
-    public static final String SPECIES_A_B = "speciesA_B";
     public static final String SPECIES_A_B_STR = "speciesA_B_str";
 
     //participants
@@ -69,7 +66,6 @@ public class SearchInteractionFields {
     public static final String IDENTIFIERS = "identifiers";
     public static final String CONFIDENCE_VALUES = "confidence_values";
     public static final String INTACT_MISCORE = "intact_miscore";
-    public static final String CONFIDENCE_VALUES_STR = "confidence_values_str";
     public static final String EXPANSION_METHOD = "expansion_method";
     public static final String XREFS = "xrefs";
     public static final String ALL_ANNOTATIONS = "all_annotations";
@@ -81,7 +77,6 @@ public class SearchInteractionFields {
     public static final String NEGATIVE = "negative";
     public static final String TYPE = "type";
     public static final String TYPE_MI_IDENTIFIER = "type_mi_identifier";
-    public static final String TYPE_MI_IDENTIFIER_STR = "type_mi_identifier_str";
     public static final String TYPE_STR = "type_str";
     public static final String HOST_ORGANISM = "host_organism";
     public static final String HOST_ORGANISM_STR = "host_organism_str";
@@ -90,17 +85,11 @@ public class SearchInteractionFields {
     public static final String EXPERIMENTAL_PREPARATIONS_A = "experimental_preparations_A";
     public static final String EXPERIMENTAL_PREPARATIONS_B = "experimental_preparations_B";
     public static final String TYPE_MI_A = "type_MI_A";
-    public static final String TYPE_MI_A_STR = "type_MI_A_str";
     public static final String TYPE_MI_B = "type_MI_B";
-    public static final String TYPE_MI_B_STR = "type_MI_B_str";
-    public static final String TYPE_A_B = "typeA_B";
     public static final String TYPE_A_B_STR = "typeA_B_str";
     public static final String DISRUPTED_BY_MUTATION = "disrupted_by_mutation";
-    public static final String DISRUPTED_BY_MUTATION_STR = "disrupted_by_mutation_str";
     public static final String MUTATION_A = "mutation_A";
-    public static final String MUTATION_A_STR = "mutation_A_str";
     public static final String MUTATION_B = "mutation_B";
-    public static final String MUTATION_B_STR = "mutation_B_str";
     public static final String FEATURE_COUNT = "feature_count";
 
 

@@ -7,7 +7,6 @@ import org.springframework.data.solr.core.mapping.Indexed;
 import org.springframework.data.solr.core.mapping.SolrDocument;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -193,9 +192,6 @@ public class SearchInteraction {
 
     @Field(INTACT_MISCORE)
     private double intactMiscore;
-
-    @Field(SPECIES_A_B)
-    private Set<String> speciesAB = new HashSet<>();
 
     @Field(MOLECULE_A)
     private String moleculeA;
@@ -486,7 +482,6 @@ public class SearchInteraction {
 
     public void setSpeciesA(String speciesA) {
         this.speciesA = speciesA;
-        this.speciesAB.add(speciesA);
     }
 
     public String getSpeciesB() {
@@ -495,7 +490,6 @@ public class SearchInteraction {
 
     public void setSpeciesB(String speciesB) {
         this.speciesB = speciesB;
-        this.speciesAB.add(speciesB);
     }
 
     public String getBiologicalRoleA() {
@@ -640,14 +634,6 @@ public class SearchInteraction {
 
     public void setIntactMiscore(double intactMiscore) {
         this.intactMiscore = intactMiscore;
-    }
-
-    public Set<String> getSpeciesAB() {
-        return speciesAB;
-    }
-
-    public void setSpeciesAB(Set<String> speciesAB) {
-        this.speciesAB = speciesAB;
     }
 
     public String getAc() {
@@ -973,7 +959,6 @@ public class SearchInteraction {
                 ", type='" + type + '\'' +
                 ", hostOrganism='" + hostOrganism + '\'' +
                 ", intactMiscore=" + intactMiscore +
-                ", speciesAB=" + speciesAB +
                 ", moleculeA='" + moleculeA + '\'' +
                 ", moleculeB='" + moleculeB + '\'' +
                 ", firstAuthor='" + firstAuthor + '\'' +
