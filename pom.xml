@@ -30,9 +30,9 @@
     </modules>
 
     <scm>
-        <connection>scm:git:https://github.com/EBI-IntAct/intact-search-interactions.git</connection>
-        <developerConnection>scm:git:https://github.com/EBI-IntAct/intact-search-interactions.git</developerConnection>
-        <url>https://github.com/EBI-IntAct/intact-search-interactions</url>
+        <connection>scm:git:https://github.com/intact-portal/intact-portal-search-interactions.git</connection>
+        <developerConnection>scm:git:https://github.com/intact-portal/intact-portal-search-interactions.git</developerConnection>
+        <url>https://github.com/intact-portal/intact-portal-search-interactions</url>
         <tag>HEAD</tag>
     </scm>
 
