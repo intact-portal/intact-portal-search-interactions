@@ -29,17 +29,16 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
  * @author Elisabet Barrera
  */
 
+@CrossOrigin(origins = "*")
 @RestController
 public class InteractionSearchController {
 
     //TODO temporary?
     public static final String UPLOADED_BATCH_FILE_PREFIX = "file_";
-
-    @Value("${server.upload.batch.file.path}")
-    private String uploadBatchFilePath;
-
     private final InteractionSearchService interactionSearchService;
     private final ChildInteractorSearchService childInteractorSearchService;
+    @Value("${server.upload.batch.file.path}")
+    private String uploadBatchFilePath;
 
     @Autowired
     public InteractionSearchController(InteractionSearchService interactionSearchService,
@@ -280,7 +279,7 @@ public class InteractionSearchController {
                 interSpecies);
     }
 
-    @CrossOrigin(origins = "*")
+
     @PostMapping(value = "/uploadFile",
             produces = {APPLICATION_JSON_VALUE})
     public ResponseEntity<String> uploadBatchFile(
