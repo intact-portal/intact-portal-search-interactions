@@ -212,28 +212,28 @@
     </analyzer>
   </fieldType>
   <fieldType name="text_en_splitting_tight_ngram" class="solr.TextField" autoGeneratePhraseQueries="true" positionIncrementGap="100">
-    <analyzer type="index">
-      <tokenizer class="solr.WhitespaceTokenizerFactory"/>
-      <filter class="solr.SynonymGraphFilterFactory" expand="false" ignoreCase="true" synonyms="synonyms.txt"/>
-      <filter class="solr.StopFilterFactory" words="lang/stopwords_en.txt" ignoreCase="true"/>
-      <filter class="solr.WordDelimiterGraphFilterFactory" catenateNumbers="1" generateNumberParts="0" generateWordParts="0" catenateAll="0" catenateWords="1"/>
-      <filter class="solr.LowerCaseFilterFactory"/>
-      <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
-      <filter class="solr.EnglishMinimalStemFilterFactory"/>
-      <filter class="solr.RemoveDuplicatesTokenFilterFactory"/>
-      <filter class="solr.FlattenGraphFilterFactory"/>
-      <filter class="solr.NGramFilterFactory" maxGramSize="50" minGramSize="3"/>
-    </analyzer>
-    <analyzer type="query">
-      <tokenizer class="solr.WhitespaceTokenizerFactory"/>
-      <filter class="solr.SynonymGraphFilterFactory" expand="false" ignoreCase="true" synonyms="synonyms.txt"/>
-      <filter class="solr.StopFilterFactory" words="lang/stopwords_en.txt" ignoreCase="true"/>
-      <filter class="solr.WordDelimiterGraphFilterFactory" catenateNumbers="1" generateNumberParts="0" generateWordParts="0" catenateAll="0" catenateWords="1"/>
-      <filter class="solr.LowerCaseFilterFactory"/>
-      <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
-      <filter class="solr.EnglishMinimalStemFilterFactory"/>
-      <filter class="solr.RemoveDuplicatesTokenFilterFactory"/>
-    </analyzer>
+     <analyzer type="index">
+       <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+       <filter class="solr.SynonymGraphFilterFactory" expand="false" ignoreCase="true" synonyms="synonyms.txt"/>
+       <filter class="solr.StopFilterFactory" words="lang/stopwords_en.txt" ignoreCase="true"/>
+       <filter class="solr.WordDelimiterGraphFilterFactory" catenateNumbers="1" generateNumberParts="0" generateWordParts="0" splitOnNumerics="0" preserveOriginal="1" catenateAll="0" catenateWords="1"/>
+       <filter class="solr.LowerCaseFilterFactory"/>
+       <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
+       <filter class="solr.EnglishMinimalStemFilterFactory"/>
+       <filter class="solr.RemoveDuplicatesTokenFilterFactory"/>
+       <filter class="solr.FlattenGraphFilterFactory"/>
+       <filter class="solr.NGramFilterFactory" maxGramSize="50" minGramSize="3"/>
+     </analyzer>
+     <analyzer type="query">
+       <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+       <filter class="solr.SynonymGraphFilterFactory" expand="false" ignoreCase="true" synonyms="synonyms.txt"/>
+       <filter class="solr.StopFilterFactory" words="lang/stopwords_en.txt" ignoreCase="true"/>
+       <filter class="solr.WordDelimiterGraphFilterFactory" catenateNumbers="1" generateNumberParts="0" generateWordParts="0" splitOnNumerics="0" preserveOriginal="1" catenateAll="0" catenateWords="1"/>
+       <filter class="solr.LowerCaseFilterFactory"/>
+       <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
+       <filter class="solr.EnglishMinimalStemFilterFactory"/>
+       <filter class="solr.RemoveDuplicatesTokenFilterFactory"/>
+     </analyzer>
   </fieldType>
   <fieldType name="text_es" class="solr.TextField" positionIncrementGap="100">
     <analyzer>
