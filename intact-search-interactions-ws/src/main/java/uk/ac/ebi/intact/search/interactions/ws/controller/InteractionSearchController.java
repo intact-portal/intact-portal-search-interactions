@@ -333,7 +333,7 @@ public class InteractionSearchController {
         StringBuilder searchTerms = new StringBuilder();
 
         if (query.startsWith(UPLOADED_BATCH_FILE_PREFIX)) {
-            File uploadedBatchFile = new File(uploadBatchFilePath + query);
+            File uploadedBatchFile = new File(uploadBatchFilePath + File.separator + query);
             if (uploadedBatchFile.exists()) {
                 try {
                     BufferedReader bufferedReader = new BufferedReader(new FileReader(uploadedBatchFile));
