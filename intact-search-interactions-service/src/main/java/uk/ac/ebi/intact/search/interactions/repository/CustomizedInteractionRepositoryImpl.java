@@ -88,8 +88,8 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         // facet
         // Adds exclude tags in solr to allow calculate properly the facets for multiselection in species and interactor type
         FacetOptions facetOptions = new FacetOptions(
-                "{!ex=SPECIES}"+SPECIES_A_B_STR,
-                "{!ex=TYPE}"+TYPE_A_B_STR,
+                "{!ex=SPECIES}" + SPECIES_A_B_STR,
+                "{!ex=TYPE}" + TYPE_A_B_STR,
                 DETECTION_METHOD_STR,
                 TYPE_STR, HOST_ORGANISM_STR,
                 NEGATIVE, INTACT_MISCORE);
@@ -209,6 +209,52 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         search.addProjectionOnField(new SimpleField(MUTATION_B));
 
         return solrOperations.queryForPage(INTERACTIONS, search, SearchInteraction.class);
+    }
+
+    /**
+     * @param query                            input used to retrieve the interaction
+     * @param batchSearch                      (optional) true if que query needs to be treated as a batch search
+     * @param interactorSpeciesFilter          (Optional) filter interactions by interactor species
+     * @param interactorTypeFilter             (Optional) filter interactions by interactor type
+     * @param interactionDetectionMethodFilter (Optional) filter interactions by interaction detection method
+     * @param interactionTypeFilter            (Optional) filter interactions by interaction type
+     * @param interactionHostOrganismFilter    (Optional) filter interactions by host organism
+     * @param isNegativeFilter                 (Optional) filter interactions that are negative if true
+     * @param minMiScore                       minimum value of mi-score for the interaction
+     * @param maxMiScore                       maximum value of mi-score for the interaction
+     * @param interSpecies                     boolean to restrict the result ot the same or different interactor species
+     * @return the number of interactions all the criteria for graphical representation
+     */
+    @Override
+    public long countInteractionsForGraphJson(String query, boolean batchSearch,
+                                              Set<String> interactorSpeciesFilter,
+                                              Set<String> interactorTypeFilter,
+                                              Set<String> interactionDetectionMethodFilter,
+                                              Set<String> interactionTypeFilter,
+                                              Set<String> interactionHostOrganismFilter,
+                                              boolean isNegativeFilter,
+                                              double minMiScore,
+                                              double maxMiScore,
+                                              boolean interSpecies) {
+
+        // search query
+        SimpleQuery search = new SimpleQuery();
+
+        // search criterias
+        Criteria conditions = searchInteractionUtility.createSearchConditions(query, batchSearch);
+        search.addCriteria(conditions);
+
+        // filters
+        List<FilterQuery> filterQueries = searchInteractionUtility.createFilterQuery(interactorSpeciesFilter, interactorTypeFilter, interactionDetectionMethodFilter,
+                interactionTypeFilter, interactionHostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, interSpecies);
+
+        if (!filterQueries.isEmpty()) {
+            for (FilterQuery filterQuery : filterQueries) {
+                search.addFilterQuery(filterQuery);
+            }
+        }
+
+        return solrOperations.count(INTERACTIONS, SimpleQuery.fromQuery(search));
     }
 
     /**

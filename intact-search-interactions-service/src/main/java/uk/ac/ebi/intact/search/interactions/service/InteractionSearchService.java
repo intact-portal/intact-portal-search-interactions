@@ -17,7 +17,7 @@ import java.util.Set;
  * @author Elisabet Barrera
  */
 @Service
-public class  InteractionSearchService {
+public class InteractionSearchService {
 
     private static final Log log = LogFactory.getLog(InteractionSearchService.class);
 
@@ -73,6 +73,21 @@ public class  InteractionSearchService {
         return interactionRepository.findInteractionForGraphJson(query, batchSearch, interactorSpeciesFilter, interactorTypeFilter, interactionDetectionMethodFilter,
                 interactionTypeFilter, interactionHostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, interSpecies, null,
                 PageRequest.of(page, pageSize));
+    }
+
+    public long countInteractionsForGraphJson(String query,
+                                              boolean batchSearch,
+                                              Set<String> interactorSpeciesFilter,
+                                              Set<String> interactorTypeFilter,
+                                              Set<String> interactionDetectionMethodFilter,
+                                              Set<String> interactionTypeFilter,
+                                              Set<String> interactionHostOrganismFilter,
+                                              boolean isNegativeFilter,
+                                              double minMiScore,
+                                              double maxMiScore,
+                                              boolean interSpecies) {
+        return interactionRepository.countInteractionsForGraphJson(query, batchSearch, interactorSpeciesFilter, interactorTypeFilter, interactionDetectionMethodFilter,
+                interactionTypeFilter, interactionHostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, interSpecies);
     }
 
     public long countInteractionResult(String query,
