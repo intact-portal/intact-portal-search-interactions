@@ -2,7 +2,7 @@
 <java version="1.8.0_181" class="java.beans.XMLDecoder">
  <object class="java.util.ArrayList">
   <void method="add">
-   <object class="uk.ac.ebi.intact.search.interactions.model.SearchInteraction" id="SearchInteraction0">
+   <object class="uk.ac.ebi.intact.search.interactions.model.SearchInteraction">
     <void property="ac">
      <string>EBI-1000008</string>
     </void>
@@ -326,9 +326,6 @@
      <object class="java.util.ArrayList">
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor0">
-        <void property="interactorDescription">
-         <string>Kinetochore protein Nuf2</string>
-        </void>
         <void property="documentType">
          <string>interactor</string>
         </void>
@@ -369,6 +366,9 @@
           <string>Q96HJ4 (uniprotkb)</string>
          </void>
         </void>
+        <void property="interactorDescription">
+         <string>Kinetochore protein Nuf2</string>
+        </void>
         <void property="interactorFeatureShortLabels">
          <void method="add">
           <string>c-terminal</string>
@@ -378,6 +378,9 @@
          </void>
         </void>
         <void property="interactorName">
+         <string>NUF2</string>
+        </void>
+        <void property="interactorPreferredIdentifier">
          <string>Q9BZD4</string>
         </void>
         <void property="interactorSpecies">
@@ -389,13 +392,108 @@
         <void property="interactorType">
          <string>protein</string>
         </void>
+        <void property="interactorXrefs">
+         <void method="add">
+          <string>Q9BZD4 (mint)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005829 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005654 (go)</string>
+         </void>
+         <void method="add">
+          <string>NP_663735.2 (refseq)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-2500257 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>ENSG00000143228 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>GO:0051301 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-68877 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>2VE7 (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005623 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-5663220 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-141444 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>ENSP00000271452 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>GO:0007052 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0044877 (go)</string>
+         </void>
+         <void method="add">
+          <string>3IZ0 (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>DIP-36119N (dip)</string>
+         </void>
+         <void method="add">
+          <string>IPR038275 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>GO:0016020 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0007059 (go)</string>
+         </void>
+         <void method="add">
+          <string>ENST00000367900 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>GO:0045132 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0051315 (go)</string>
+         </void>
+         <void method="add">
+          <string>IPR005549 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>ENSP00000356875 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>GO:0031262 (go)</string>
+         </void>
+         <void method="add">
+          <string>NP_113611.2 (refseq)</string>
+         </void>
+         <void method="add">
+          <string>ENST00000271452 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-2467813 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:0051383 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000778 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000775 (go)</string>
+         </void>
+        </void>
        </object>
       </void>
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor1">
-        <void property="interactorDescription">
-         <string>Kinetochore protein NDC80 homolog</string>
-        </void>
         <void property="documentType">
          <string>interactor</string>
         </void>
@@ -442,6 +540,9 @@
           <string>O14777 (uniprotkb)</string>
          </void>
         </void>
+        <void property="interactorDescription">
+         <string>Kinetochore protein NDC80 homolog</string>
+        </void>
         <void property="interactorFeatureShortLabels">
          <void method="add">
           <string>n-terminus</string>
@@ -466,6 +567,9 @@
          </void>
         </void>
         <void property="interactorName">
+         <string>NDC80</string>
+        </void>
+        <void property="interactorPreferredIdentifier">
          <string>O14777</string>
         </void>
         <void property="interactorSpecies">
@@ -476,6 +580,134 @@
         </void>
         <void property="interactorType">
          <string>protein</string>
+        </void>
+        <void property="interactorXrefs">
+         <void method="add">
+          <string>O14777 (mint)</string>
+         </void>
+         <void method="add">
+          <string>IPR040967 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005829 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005654 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0042802 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000278 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-2500257 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:0051301 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:1905342 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-68877 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>IPR005550 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>2VE7 (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005623 (go)</string>
+         </void>
+         <void method="add">
+          <string>ENST00000261597 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-5663220 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-141444 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005634 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0007052 (go)</string>
+         </void>
+         <void method="add">
+          <string>NP_006092.1 (refseq)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000070 (go)</string>
+         </void>
+         <void method="add">
+          <string>3IZ0 (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>GO:0090267 (go)</string>
+         </void>
+         <void method="add">
+          <string>ENSG00000080986 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000777 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0016020 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0007059 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000132 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0051315 (go)</string>
+         </void>
+         <void method="add">
+          <string>IPR038273 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000942 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0031262 (go)</string>
+         </void>
+         <void method="add">
+          <string>2IGP (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>DIP-35100N (dip)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-2467813 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:0051383 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0008608 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000776 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0051310 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000778 (go)</string>
+         </void>
+         <void method="add">
+          <string>ENSP00000261597 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000775 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005813 (go)</string>
+         </void>
         </void>
        </object>
       </void>
@@ -540,6 +772,9 @@
        <string>GO:0005829 (go)</string>
       </void>
       <void method="add">
+       <string>GO:0005654 (go)</string>
+      </void>
+      <void method="add">
        <string>NP_663735.2 (refseq)</string>
       </void>
       <void method="add">
@@ -558,13 +793,13 @@
        <string>2VE7 (rcsb pdb)</string>
       </void>
       <void method="add">
+       <string>GO:0005623 (go)</string>
+      </void>
+      <void method="add">
        <string>R-HSA-5663220 (reactome)</string>
       </void>
       <void method="add">
        <string>R-HSA-141444 (reactome)</string>
-      </void>
-      <void method="add">
-       <string>GO:0005634 (go)</string>
       </void>
       <void method="add">
        <string>ENSP00000271452 (ensembl)</string>
@@ -667,6 +902,9 @@
        <string>2VE7 (rcsb pdb)</string>
       </void>
       <void method="add">
+       <string>GO:0005623 (go)</string>
+      </void>
+      <void method="add">
        <string>ENST00000261597 (ensembl)</string>
       </void>
       <void method="add">
@@ -758,7 +996,7 @@
    </object>
   </void>
   <void method="add">
-   <object class="uk.ac.ebi.intact.search.interactions.model.SearchInteraction" id="SearchInteraction1">
+   <object class="uk.ac.ebi.intact.search.interactions.model.SearchInteraction">
     <void property="ac">
      <string>EBI-1000026</string>
     </void>
@@ -1033,9 +1271,6 @@
      <object class="java.util.ArrayList">
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor2">
-        <void property="interactorDescription">
-         <string>Kinetochore protein Spc24</string>
-        </void>
         <void property="documentType">
          <string>interactor</string>
         </void>
@@ -1067,12 +1302,18 @@
           <string>Q8NBT2 (uniprotkb)</string>
          </void>
         </void>
+        <void property="interactorDescription">
+         <string>Kinetochore protein Spc24</string>
+        </void>
         <void property="interactorFeatureShortLabels">
          <void method="add">
           <string>c-terminal</string>
          </void>
         </void>
         <void property="interactorName">
+         <string>SPC24</string>
+        </void>
+        <void property="interactorPreferredIdentifier">
          <string>Q8NBT2</string>
         </void>
         <void property="interactorSpecies">
@@ -1084,13 +1325,84 @@
         <void property="interactorType">
          <string>protein</string>
         </void>
+        <void property="interactorXrefs">
+         <void method="add">
+          <string>IPR013252 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005829 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0031262 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0007049 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005654 (go)</string>
+         </void>
+         <void method="add">
+          <string>ENST00000592540 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005730 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-2500257 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:0051301 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-68877 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>2VE7 (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-2467813 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>NP_001303962.1 (refseq)</string>
+         </void>
+         <void method="add">
+          <string>ENSP00000465075 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-5663220 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-141444 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>XP_005259810.1 (refseq)</string>
+         </void>
+         <void method="add">
+          <string>NP_001303960.1 (refseq)</string>
+         </void>
+         <void method="add">
+          <string>DIP-35754N (dip)</string>
+         </void>
+         <void method="add">
+          <string>3IZ0 (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>ENSG00000161888 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000777 (go)</string>
+         </void>
+         <void method="add">
+          <string>Q8NBT2 (mint)</string>
+         </void>
+         <void method="add">
+          <string>NP_872319.1 (refseq)</string>
+         </void>
+        </void>
        </object>
       </void>
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor3">
-        <void property="interactorDescription">
-         <string>Kinetochore protein Spc25</string>
-        </void>
         <void property="documentType">
          <string>interactor</string>
         </void>
@@ -1128,6 +1440,9 @@
           <string>Q9HBM1 (uniprotkb)</string>
          </void>
         </void>
+        <void property="interactorDescription">
+         <string>Kinetochore protein Spc25</string>
+        </void>
         <void property="interactorFeatureShortLabels">
          <void method="add">
           <string>c-terminal</string>
@@ -1140,6 +1455,9 @@
          </void>
         </void>
         <void property="interactorName">
+         <string>SPC25</string>
+        </void>
+        <void property="interactorPreferredIdentifier">
          <string>Q9HBM1</string>
         </void>
         <void property="interactorSpecies">
@@ -1150,6 +1468,86 @@
         </void>
         <void property="interactorType">
          <string>protein</string>
+        </void>
+        <void property="interactorXrefs">
+         <void method="add">
+          <string>GO:0005829 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-2500257 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:0051301 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-68877 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>2VE7 (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>ENSP00000282074 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>ENSP00000483050 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-5663220 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>ENST00000611144 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-141444 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>ENSP00000481354 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005634 (go)</string>
+         </void>
+         <void method="add">
+          <string>Q9HBM1 (mint)</string>
+         </void>
+         <void method="add">
+          <string>GO:0007052 (go)</string>
+         </void>
+         <void method="add">
+          <string>3IZ0 (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>IPR013255 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000777 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0007059 (go)</string>
+         </void>
+         <void method="add">
+          <string>ENST00000282074 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>NP_065726.1 (refseq)</string>
+         </void>
+         <void method="add">
+          <string>GO:0031262 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-2467813 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>ENSG00000277909 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>ENST00000616584 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>DIP-35753N (dip)</string>
+         </void>
+         <void method="add">
+          <string>ENSG00000152253 (ensembl)</string>
+         </void>
         </void>
        </object>
       </void>
@@ -1220,6 +1618,9 @@
        <string>GO:0007049 (go)</string>
       </void>
       <void method="add">
+       <string>GO:0005654 (go)</string>
+      </void>
+      <void method="add">
        <string>ENST00000592540 (ensembl)</string>
       </void>
       <void method="add">
@@ -1251,9 +1652,6 @@
       </void>
       <void method="add">
        <string>R-HSA-141444 (reactome)</string>
-      </void>
-      <void method="add">
-       <string>GO:0005634 (go)</string>
       </void>
       <void method="add">
        <string>XP_005259810.1 (refseq)</string>
@@ -1366,7 +1764,7 @@
    </object>
   </void>
   <void method="add">
-   <object class="uk.ac.ebi.intact.search.interactions.model.SearchInteraction" id="SearchInteraction2">
+   <object class="uk.ac.ebi.intact.search.interactions.model.SearchInteraction">
     <void property="ac">
      <string>EBI-1000048</string>
     </void>
@@ -1676,9 +2074,6 @@
      <object class="java.util.ArrayList">
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor4">
-        <void property="interactorDescription">
-         <string>Kinetochore protein NDC80 homolog</string>
-        </void>
         <void property="documentType">
          <string>interactor</string>
         </void>
@@ -1725,6 +2120,9 @@
           <string>O14777 (uniprotkb)</string>
          </void>
         </void>
+        <void property="interactorDescription">
+         <string>Kinetochore protein NDC80 homolog</string>
+        </void>
         <void property="interactorFeatureShortLabels">
          <void method="add">
           <string>n-terminus</string>
@@ -1749,6 +2147,9 @@
          </void>
         </void>
         <void property="interactorName">
+         <string>NDC80</string>
+        </void>
+        <void property="interactorPreferredIdentifier">
          <string>O14777</string>
         </void>
         <void property="interactorSpecies">
@@ -1760,13 +2161,138 @@
         <void property="interactorType">
          <string>protein</string>
         </void>
+        <void property="interactorXrefs">
+         <void method="add">
+          <string>O14777 (mint)</string>
+         </void>
+         <void method="add">
+          <string>IPR040967 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005829 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005654 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0042802 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000278 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-2500257 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:0051301 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:1905342 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-68877 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>IPR005550 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>2VE7 (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005623 (go)</string>
+         </void>
+         <void method="add">
+          <string>ENST00000261597 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-5663220 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-141444 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005634 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0007052 (go)</string>
+         </void>
+         <void method="add">
+          <string>NP_006092.1 (refseq)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000070 (go)</string>
+         </void>
+         <void method="add">
+          <string>3IZ0 (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>GO:0090267 (go)</string>
+         </void>
+         <void method="add">
+          <string>ENSG00000080986 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000777 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0016020 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0007059 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000132 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0051315 (go)</string>
+         </void>
+         <void method="add">
+          <string>IPR038273 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000942 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0031262 (go)</string>
+         </void>
+         <void method="add">
+          <string>2IGP (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>DIP-35100N (dip)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-2467813 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:0051383 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0008608 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000776 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0051310 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000778 (go)</string>
+         </void>
+         <void method="add">
+          <string>ENSP00000261597 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000775 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005813 (go)</string>
+         </void>
+        </void>
        </object>
       </void>
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor5">
-        <void property="interactorDescription">
-         <string>Kinetochore protein Spc25</string>
-        </void>
         <void property="documentType">
          <string>interactor</string>
         </void>
@@ -1804,6 +2330,9 @@
           <string>Q9HBM1 (uniprotkb)</string>
          </void>
         </void>
+        <void property="interactorDescription">
+         <string>Kinetochore protein Spc25</string>
+        </void>
         <void property="interactorFeatureShortLabels">
          <void method="add">
           <string>c-terminal</string>
@@ -1816,6 +2345,9 @@
          </void>
         </void>
         <void property="interactorName">
+         <string>SPC25</string>
+        </void>
+        <void property="interactorPreferredIdentifier">
          <string>Q9HBM1</string>
         </void>
         <void property="interactorSpecies">
@@ -1826,6 +2358,86 @@
         </void>
         <void property="interactorType">
          <string>protein</string>
+        </void>
+        <void property="interactorXrefs">
+         <void method="add">
+          <string>GO:0005829 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-2500257 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:0051301 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-68877 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>2VE7 (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>ENSP00000282074 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>ENSP00000483050 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-5663220 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>ENST00000611144 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-141444 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>ENSP00000481354 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005634 (go)</string>
+         </void>
+         <void method="add">
+          <string>Q9HBM1 (mint)</string>
+         </void>
+         <void method="add">
+          <string>GO:0007052 (go)</string>
+         </void>
+         <void method="add">
+          <string>3IZ0 (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>IPR013255 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000777 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0007059 (go)</string>
+         </void>
+         <void method="add">
+          <string>ENST00000282074 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>NP_065726.1 (refseq)</string>
+         </void>
+         <void method="add">
+          <string>GO:0031262 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-2467813 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>ENSG00000277909 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>ENST00000616584 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>DIP-35753N (dip)</string>
+         </void>
+         <void method="add">
+          <string>ENSG00000152253 (ensembl)</string>
+         </void>
         </void>
        </object>
       </void>
@@ -1925,6 +2537,9 @@
       </void>
       <void method="add">
        <string>2VE7 (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005623 (go)</string>
       </void>
       <void method="add">
        <string>ENST00000261597 (ensembl)</string>
@@ -2100,7 +2715,7 @@
    </object>
   </void>
   <void method="add">
-   <object class="uk.ac.ebi.intact.search.interactions.model.SearchInteraction" id="SearchInteraction3">
+   <object class="uk.ac.ebi.intact.search.interactions.model.SearchInteraction">
     <void property="ac">
      <string>EBI-1000048</string>
     </void>
@@ -2401,9 +3016,6 @@
      <object class="java.util.ArrayList">
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor6">
-        <void property="interactorDescription">
-         <string>Kinetochore protein NDC80 homolog</string>
-        </void>
         <void property="documentType">
          <string>interactor</string>
         </void>
@@ -2450,6 +3062,9 @@
           <string>O14777 (uniprotkb)</string>
          </void>
         </void>
+        <void property="interactorDescription">
+         <string>Kinetochore protein NDC80 homolog</string>
+        </void>
         <void property="interactorFeatureShortLabels">
          <void method="add">
           <string>n-terminus</string>
@@ -2474,6 +3089,9 @@
          </void>
         </void>
         <void property="interactorName">
+         <string>NDC80</string>
+        </void>
+        <void property="interactorPreferredIdentifier">
          <string>O14777</string>
         </void>
         <void property="interactorSpecies">
@@ -2485,13 +3103,138 @@
         <void property="interactorType">
          <string>protein</string>
         </void>
+        <void property="interactorXrefs">
+         <void method="add">
+          <string>O14777 (mint)</string>
+         </void>
+         <void method="add">
+          <string>IPR040967 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005829 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005654 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0042802 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000278 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-2500257 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:0051301 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:1905342 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-68877 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>IPR005550 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>2VE7 (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005623 (go)</string>
+         </void>
+         <void method="add">
+          <string>ENST00000261597 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-5663220 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-141444 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005634 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0007052 (go)</string>
+         </void>
+         <void method="add">
+          <string>NP_006092.1 (refseq)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000070 (go)</string>
+         </void>
+         <void method="add">
+          <string>3IZ0 (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>GO:0090267 (go)</string>
+         </void>
+         <void method="add">
+          <string>ENSG00000080986 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000777 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0016020 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0007059 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000132 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0051315 (go)</string>
+         </void>
+         <void method="add">
+          <string>IPR038273 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000942 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0031262 (go)</string>
+         </void>
+         <void method="add">
+          <string>2IGP (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>DIP-35100N (dip)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-2467813 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:0051383 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0008608 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000776 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0051310 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000778 (go)</string>
+         </void>
+         <void method="add">
+          <string>ENSP00000261597 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000775 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005813 (go)</string>
+         </void>
+        </void>
        </object>
       </void>
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor7">
-        <void property="interactorDescription">
-         <string>Kinetochore protein Spc24</string>
-        </void>
         <void property="documentType">
          <string>interactor</string>
         </void>
@@ -2523,12 +3266,18 @@
           <string>Q8NBT2 (uniprotkb)</string>
          </void>
         </void>
+        <void property="interactorDescription">
+         <string>Kinetochore protein Spc24</string>
+        </void>
         <void property="interactorFeatureShortLabels">
          <void method="add">
           <string>c-terminal</string>
          </void>
         </void>
         <void property="interactorName">
+         <string>SPC24</string>
+        </void>
+        <void property="interactorPreferredIdentifier">
          <string>Q8NBT2</string>
         </void>
         <void property="interactorSpecies">
@@ -2539,6 +3288,80 @@
         </void>
         <void property="interactorType">
          <string>protein</string>
+        </void>
+        <void property="interactorXrefs">
+         <void method="add">
+          <string>IPR013252 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005829 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0031262 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0007049 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005654 (go)</string>
+         </void>
+         <void method="add">
+          <string>ENST00000592540 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005730 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-2500257 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:0051301 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-68877 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>2VE7 (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-2467813 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>NP_001303962.1 (refseq)</string>
+         </void>
+         <void method="add">
+          <string>ENSP00000465075 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-5663220 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-141444 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>XP_005259810.1 (refseq)</string>
+         </void>
+         <void method="add">
+          <string>NP_001303960.1 (refseq)</string>
+         </void>
+         <void method="add">
+          <string>DIP-35754N (dip)</string>
+         </void>
+         <void method="add">
+          <string>3IZ0 (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>ENSG00000161888 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000777 (go)</string>
+         </void>
+         <void method="add">
+          <string>Q8NBT2 (mint)</string>
+         </void>
+         <void method="add">
+          <string>NP_872319.1 (refseq)</string>
+         </void>
         </void>
        </object>
       </void>
@@ -2638,6 +3461,9 @@
       </void>
       <void method="add">
        <string>2VE7 (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005623 (go)</string>
       </void>
       <void method="add">
        <string>ENST00000261597 (ensembl)</string>
@@ -2743,6 +3569,9 @@
        <string>GO:0007049 (go)</string>
       </void>
       <void method="add">
+       <string>GO:0005654 (go)</string>
+      </void>
+      <void method="add">
        <string>ENST00000592540 (ensembl)</string>
       </void>
       <void method="add">
@@ -2776,9 +3605,6 @@
        <string>R-HSA-141444 (reactome)</string>
       </void>
       <void method="add">
-       <string>GO:0005634 (go)</string>
-      </void>
-      <void method="add">
        <string>XP_005259810.1 (refseq)</string>
       </void>
       <void method="add">
@@ -2807,7 +3633,7 @@
    </object>
   </void>
   <void method="add">
-   <object class="uk.ac.ebi.intact.search.interactions.model.SearchInteraction" id="SearchInteraction4">
+   <object class="uk.ac.ebi.intact.search.interactions.model.SearchInteraction">
     <void property="ac">
      <string>EBI-1000048</string>
     </void>
@@ -3120,9 +3946,6 @@
      <object class="java.util.ArrayList">
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor8">
-        <void property="interactorDescription">
-         <string>Kinetochore protein NDC80 homolog</string>
-        </void>
         <void property="documentType">
          <string>interactor</string>
         </void>
@@ -3169,6 +3992,9 @@
           <string>O14777 (uniprotkb)</string>
          </void>
         </void>
+        <void property="interactorDescription">
+         <string>Kinetochore protein NDC80 homolog</string>
+        </void>
         <void property="interactorFeatureShortLabels">
          <void method="add">
           <string>n-terminus</string>
@@ -3193,6 +4019,9 @@
          </void>
         </void>
         <void property="interactorName">
+         <string>NDC80</string>
+        </void>
+        <void property="interactorPreferredIdentifier">
          <string>O14777</string>
         </void>
         <void property="interactorSpecies">
@@ -3204,13 +4033,138 @@
         <void property="interactorType">
          <string>protein</string>
         </void>
+        <void property="interactorXrefs">
+         <void method="add">
+          <string>O14777 (mint)</string>
+         </void>
+         <void method="add">
+          <string>IPR040967 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005829 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005654 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0042802 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000278 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-2500257 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:0051301 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:1905342 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-68877 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>IPR005550 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>2VE7 (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005623 (go)</string>
+         </void>
+         <void method="add">
+          <string>ENST00000261597 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-5663220 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-141444 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005634 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0007052 (go)</string>
+         </void>
+         <void method="add">
+          <string>NP_006092.1 (refseq)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000070 (go)</string>
+         </void>
+         <void method="add">
+          <string>3IZ0 (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>GO:0090267 (go)</string>
+         </void>
+         <void method="add">
+          <string>ENSG00000080986 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000777 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0016020 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0007059 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000132 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0051315 (go)</string>
+         </void>
+         <void method="add">
+          <string>IPR038273 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000942 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0031262 (go)</string>
+         </void>
+         <void method="add">
+          <string>2IGP (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>DIP-35100N (dip)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-2467813 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:0051383 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0008608 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000776 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0051310 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000778 (go)</string>
+         </void>
+         <void method="add">
+          <string>ENSP00000261597 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000775 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005813 (go)</string>
+         </void>
+        </void>
        </object>
       </void>
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor9">
-        <void property="interactorDescription">
-         <string>Kinetochore protein Nuf2</string>
-        </void>
         <void property="documentType">
          <string>interactor</string>
         </void>
@@ -3251,6 +4205,9 @@
           <string>Q96HJ4 (uniprotkb)</string>
          </void>
         </void>
+        <void property="interactorDescription">
+         <string>Kinetochore protein Nuf2</string>
+        </void>
         <void property="interactorFeatureShortLabels">
          <void method="add">
           <string>c-terminal</string>
@@ -3260,6 +4217,9 @@
          </void>
         </void>
         <void property="interactorName">
+         <string>NUF2</string>
+        </void>
+        <void property="interactorPreferredIdentifier">
          <string>Q9BZD4</string>
         </void>
         <void property="interactorSpecies">
@@ -3270,6 +4230,104 @@
         </void>
         <void property="interactorType">
          <string>protein</string>
+        </void>
+        <void property="interactorXrefs">
+         <void method="add">
+          <string>Q9BZD4 (mint)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005829 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005654 (go)</string>
+         </void>
+         <void method="add">
+          <string>NP_663735.2 (refseq)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-2500257 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>ENSG00000143228 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>GO:0051301 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-68877 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>2VE7 (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005623 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-5663220 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-141444 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>ENSP00000271452 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>GO:0007052 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0044877 (go)</string>
+         </void>
+         <void method="add">
+          <string>3IZ0 (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>DIP-36119N (dip)</string>
+         </void>
+         <void method="add">
+          <string>IPR038275 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>GO:0016020 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0007059 (go)</string>
+         </void>
+         <void method="add">
+          <string>ENST00000367900 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>GO:0045132 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0051315 (go)</string>
+         </void>
+         <void method="add">
+          <string>IPR005549 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>ENSP00000356875 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>GO:0031262 (go)</string>
+         </void>
+         <void method="add">
+          <string>NP_113611.2 (refseq)</string>
+         </void>
+         <void method="add">
+          <string>ENST00000271452 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-2467813 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:0051383 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000778 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000775 (go)</string>
+         </void>
         </void>
        </object>
       </void>
@@ -3371,6 +4429,9 @@
        <string>2VE7 (rcsb pdb)</string>
       </void>
       <void method="add">
+       <string>GO:0005623 (go)</string>
+      </void>
+      <void method="add">
        <string>ENST00000261597 (ensembl)</string>
       </void>
       <void method="add">
@@ -3468,6 +4529,9 @@
        <string>GO:0005829 (go)</string>
       </void>
       <void method="add">
+       <string>GO:0005654 (go)</string>
+      </void>
+      <void method="add">
        <string>NP_663735.2 (refseq)</string>
       </void>
       <void method="add">
@@ -3486,13 +4550,13 @@
        <string>2VE7 (rcsb pdb)</string>
       </void>
       <void method="add">
+       <string>GO:0005623 (go)</string>
+      </void>
+      <void method="add">
        <string>R-HSA-5663220 (reactome)</string>
       </void>
       <void method="add">
        <string>R-HSA-141444 (reactome)</string>
-      </void>
-      <void method="add">
-       <string>GO:0005634 (go)</string>
       </void>
       <void method="add">
        <string>ENSP00000271452 (ensembl)</string>
@@ -3559,7 +4623,7 @@
    </object>
   </void>
   <void method="add">
-   <object class="uk.ac.ebi.intact.search.interactions.model.SearchInteraction" id="SearchInteraction5">
+   <object class="uk.ac.ebi.intact.search.interactions.model.SearchInteraction">
     <void property="ac">
      <string>EBI-10000796</string>
     </void>
@@ -3824,9 +4888,6 @@
      <object class="java.util.ArrayList">
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor10">
-        <void property="interactorDescription">
-         <string>BET1-like protein</string>
-        </void>
         <void property="documentType">
          <string>interactor</string>
         </void>
@@ -3861,7 +4922,13 @@
           <string>Q6PCU6 (uniprotkb)</string>
          </void>
         </void>
+        <void property="interactorDescription">
+         <string>BET1-like protein</string>
+        </void>
         <void property="interactorName">
+         <string>Bet1l</string>
+        </void>
+        <void property="interactorPreferredIdentifier">
          <string>O35152</string>
         </void>
         <void property="interactorSpecies">
@@ -3873,13 +4940,78 @@
         <void property="interactorType">
          <string>protein</string>
         </void>
+        <void property="interactorXrefs">
+         <void method="add">
+          <string>GO:0005829 (go)</string>
+         </void>
+         <void method="add">
+          <string>IPR039897 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>XP_006230636.1 (refseq)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005768 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005802 (go)</string>
+         </void>
+         <void method="add">
+          <string>NP_062241.2 (refseq)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005484 (go)</string>
+         </void>
+         <void method="add">
+          <string>IPR039899 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>GO:0030173 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000139 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005794 (go)</string>
+         </void>
+         <void method="add">
+          <string>71051 (rgd)</string>
+         </void>
+         <void method="add">
+          <string>GO:0015031 (go)</string>
+         </void>
+         <void method="add">
+          <string>IPR000727 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000138 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0031201 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0042147 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005795 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-RNO-6811438 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>R-RNO-6807878 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:2000156 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005798 (go)</string>
+         </void>
+        </void>
        </object>
       </void>
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor11">
-        <void property="interactorDescription">
-         <string>Golgi SNAP receptor complex member 1</string>
-        </void>
         <void property="documentType">
          <string>interactor</string>
         </void>
@@ -3917,6 +5049,9 @@
           <string>Q62931 (uniprotkb)</string>
          </void>
         </void>
+        <void property="interactorDescription">
+         <string>Golgi SNAP receptor complex member 1</string>
+        </void>
         <void property="interactorFeatureShortLabels">
          <void method="add">
           <string>his tag</string>
@@ -3926,6 +5061,9 @@
          </void>
         </void>
         <void property="interactorName">
+         <string>Gosr1</string>
+        </void>
+        <void property="interactorPreferredIdentifier">
          <string>Q62931</string>
         </void>
         <void property="interactorSpecies">
@@ -3936,6 +5074,74 @@
         </void>
         <void property="interactorType">
          <string>protein</string>
+        </void>
+        <void property="interactorXrefs">
+         <void method="add">
+          <string>GO:0005829 (go)</string>
+         </void>
+         <void method="add">
+          <string>NP_446036.1 (refseq)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005484 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005801 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005797 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0016021 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005794 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000139 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0015031 (go)</string>
+         </void>
+         <void method="add">
+          <string>IPR023601 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>GO:0042147 (go)</string>
+         </void>
+         <void method="add">
+          <string>ENSRNOG00000003971 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>GO:0031201 (go)</string>
+         </void>
+         <void method="add">
+          <string>ENSRNOP00000068434 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>71093 (rgd)</string>
+         </void>
+         <void method="add">
+          <string>ENSRNOT00000077063 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>GO:0006906 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0048209 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-RNO-6811438 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>R-RNO-6807878 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:0006888 (go)</string>
+         </void>
+         <void method="add">
+          <string>Q62931 (mint)</string>
+         </void>
         </void>
        </object>
       </void>
@@ -4010,6 +5216,12 @@
        <string>XP_006230636.1 (refseq)</string>
       </void>
       <void method="add">
+       <string>GO:0005768 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005802 (go)</string>
+      </void>
+      <void method="add">
        <string>NP_062241.2 (refseq)</string>
       </void>
       <void method="add">
@@ -4023,6 +5235,9 @@
       </void>
       <void method="add">
        <string>GO:0000139 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005794 (go)</string>
       </void>
       <void method="add">
        <string>71051 (rgd)</string>
@@ -4043,6 +5258,9 @@
        <string>GO:0042147 (go)</string>
       </void>
       <void method="add">
+       <string>GO:0005795 (go)</string>
+      </void>
+      <void method="add">
        <string>R-RNO-6811438 (reactome)</string>
       </void>
       <void method="add">
@@ -4050,6 +5268,9 @@
       </void>
       <void method="add">
        <string>GO:2000156 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005798 (go)</string>
       </void>
      </object>
     </void>
@@ -4126,7 +5347,7 @@
    </object>
   </void>
   <void method="add">
-   <object class="uk.ac.ebi.intact.search.interactions.model.SearchInteraction" id="SearchInteraction6">
+   <object class="uk.ac.ebi.intact.search.interactions.model.SearchInteraction">
     <void property="ac">
      <string>EBI-10000796</string>
     </void>
@@ -4367,9 +5588,6 @@
      <object class="java.util.ArrayList">
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor12">
-        <void property="interactorDescription">
-         <string>BET1-like protein</string>
-        </void>
         <void property="documentType">
          <string>interactor</string>
         </void>
@@ -4404,7 +5622,13 @@
           <string>Q6PCU6 (uniprotkb)</string>
          </void>
         </void>
+        <void property="interactorDescription">
+         <string>BET1-like protein</string>
+        </void>
         <void property="interactorName">
+         <string>Bet1l</string>
+        </void>
+        <void property="interactorPreferredIdentifier">
          <string>O35152</string>
         </void>
         <void property="interactorSpecies">
@@ -4416,13 +5640,78 @@
         <void property="interactorType">
          <string>protein</string>
         </void>
+        <void property="interactorXrefs">
+         <void method="add">
+          <string>GO:0005829 (go)</string>
+         </void>
+         <void method="add">
+          <string>IPR039897 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>XP_006230636.1 (refseq)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005768 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005802 (go)</string>
+         </void>
+         <void method="add">
+          <string>NP_062241.2 (refseq)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005484 (go)</string>
+         </void>
+         <void method="add">
+          <string>IPR039899 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>GO:0030173 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000139 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005794 (go)</string>
+         </void>
+         <void method="add">
+          <string>71051 (rgd)</string>
+         </void>
+         <void method="add">
+          <string>GO:0015031 (go)</string>
+         </void>
+         <void method="add">
+          <string>IPR000727 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000138 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0031201 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0042147 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005795 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-RNO-6811438 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>R-RNO-6807878 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:2000156 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005798 (go)</string>
+         </void>
+        </void>
        </object>
       </void>
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor13">
-        <void property="interactorDescription">
-         <string>Synaptobrevin homolog YKT6</string>
-        </void>
         <void property="documentType">
          <string>interactor</string>
         </void>
@@ -4448,7 +5737,13 @@
           <string>Q5EGY4 (uniprotkb)</string>
          </void>
         </void>
+        <void property="interactorDescription">
+         <string>Synaptobrevin homolog YKT6</string>
+        </void>
         <void property="interactorName">
+         <string>Ykt6</string>
+        </void>
+        <void property="interactorPreferredIdentifier">
          <string>Q5EGY4</string>
         </void>
         <void property="interactorSpecies">
@@ -4459,6 +5754,113 @@
         </void>
         <void property="interactorType">
          <string>protein</string>
+        </void>
+        <void property="interactorXrefs">
+         <void method="add">
+          <string>ENSRNOG00000014785 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005829 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0097440 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005768 (go)</string>
+         </void>
+         <void method="add">
+          <string>ENSRNOP00000020693 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>GO:0043025 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005623 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000139 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0015031 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005887 (go)</string>
+         </void>
+         <void method="add">
+          <string>IPR010908 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>GO:0042147 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0031201 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0006903 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0016020 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005737 (go)</string>
+         </void>
+         <void method="add">
+          <string>ENSRNOT00000020693 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>70897 (rgd)</string>
+         </void>
+         <void method="add">
+          <string>NP_113880.2 (refseq)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005739 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005484 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0030659 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005783 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0019706 (go)</string>
+         </void>
+         <void method="add">
+          <string>3KYQ (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005794 (go)</string>
+         </void>
+         <void method="add">
+          <string>IPR011012 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>R-RNO-204005 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>IPR042855 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>IPR001388 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>GO:0006904 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0097441 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-RNO-6811438 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:0006888 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-RNO-6807878 (reactome)</string>
+         </void>
         </void>
        </object>
       </void>
@@ -4533,6 +5935,12 @@
        <string>XP_006230636.1 (refseq)</string>
       </void>
       <void method="add">
+       <string>GO:0005768 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005802 (go)</string>
+      </void>
+      <void method="add">
        <string>NP_062241.2 (refseq)</string>
       </void>
       <void method="add">
@@ -4546,6 +5954,9 @@
       </void>
       <void method="add">
        <string>GO:0000139 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005794 (go)</string>
       </void>
       <void method="add">
        <string>71051 (rgd)</string>
@@ -4566,6 +5977,9 @@
        <string>GO:0042147 (go)</string>
       </void>
       <void method="add">
+       <string>GO:0005795 (go)</string>
+      </void>
+      <void method="add">
        <string>R-RNO-6811438 (reactome)</string>
       </void>
       <void method="add">
@@ -4573,6 +5987,9 @@
       </void>
       <void method="add">
        <string>GO:2000156 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005798 (go)</string>
       </void>
      </object>
     </void>
@@ -4595,6 +6012,9 @@
       </void>
       <void method="add">
        <string>GO:0043025 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005623 (go)</string>
       </void>
       <void method="add">
        <string>GO:0000139 (go)</string>
@@ -4651,10 +6071,16 @@
        <string>3KYQ (rcsb pdb)</string>
       </void>
       <void method="add">
+       <string>GO:0005794 (go)</string>
+      </void>
+      <void method="add">
        <string>IPR011012 (interpro)</string>
       </void>
       <void method="add">
        <string>R-RNO-204005 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>IPR042855 (interpro)</string>
       </void>
       <void method="add">
        <string>IPR001388 (interpro)</string>
@@ -4679,7 +6105,7 @@
    </object>
   </void>
   <void method="add">
-   <object class="uk.ac.ebi.intact.search.interactions.model.SearchInteraction" id="SearchInteraction7">
+   <object class="uk.ac.ebi.intact.search.interactions.model.SearchInteraction">
     <void property="ac">
      <string>EBI-10000796</string>
     </void>
@@ -4926,9 +6352,6 @@
      <object class="java.util.ArrayList">
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor14">
-        <void property="interactorDescription">
-         <string>BET1-like protein</string>
-        </void>
         <void property="documentType">
          <string>interactor</string>
         </void>
@@ -4963,7 +6386,13 @@
           <string>Q6PCU6 (uniprotkb)</string>
          </void>
         </void>
+        <void property="interactorDescription">
+         <string>BET1-like protein</string>
+        </void>
         <void property="interactorName">
+         <string>Bet1l</string>
+        </void>
+        <void property="interactorPreferredIdentifier">
          <string>O35152</string>
         </void>
         <void property="interactorSpecies">
@@ -4975,13 +6404,78 @@
         <void property="interactorType">
          <string>protein</string>
         </void>
+        <void property="interactorXrefs">
+         <void method="add">
+          <string>GO:0005829 (go)</string>
+         </void>
+         <void method="add">
+          <string>IPR039897 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>XP_006230636.1 (refseq)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005768 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005802 (go)</string>
+         </void>
+         <void method="add">
+          <string>NP_062241.2 (refseq)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005484 (go)</string>
+         </void>
+         <void method="add">
+          <string>IPR039899 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>GO:0030173 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000139 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005794 (go)</string>
+         </void>
+         <void method="add">
+          <string>71051 (rgd)</string>
+         </void>
+         <void method="add">
+          <string>GO:0015031 (go)</string>
+         </void>
+         <void method="add">
+          <string>IPR000727 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000138 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0031201 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0042147 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005795 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-RNO-6811438 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>R-RNO-6807878 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:2000156 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005798 (go)</string>
+         </void>
+        </void>
        </object>
       </void>
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor15">
-        <void property="interactorDescription">
-         <string>Syntaxin-5</string>
-        </void>
         <void property="documentType">
          <string>interactor</string>
         </void>
@@ -5013,6 +6507,9 @@
           <string>EBI-2028244 (intact)</string>
          </void>
         </void>
+        <void property="interactorDescription">
+         <string>Syntaxin-5</string>
+        </void>
         <void property="interactorFeatureShortLabels">
          <void method="add">
           <string>gst tag</string>
@@ -5025,6 +6522,9 @@
          </void>
         </void>
         <void property="interactorName">
+         <string>Stx5</string>
+        </void>
+        <void property="interactorPreferredIdentifier">
          <string>Q08851</string>
         </void>
         <void property="interactorSpecies">
@@ -5035,6 +6535,119 @@
         </void>
         <void property="interactorType">
          <string>protein</string>
+        </void>
+        <void property="interactorXrefs">
+         <void method="add">
+          <string>GO:0048280 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005829 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0033116 (go)</string>
+         </void>
+         <void method="add">
+          <string>IPR006012 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000139 (go)</string>
+         </void>
+         <void method="add">
+          <string>NP_113892.2 (refseq)</string>
+         </void>
+         <void method="add">
+          <string>ENSRNOG00000018847 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>GO:0090166 (go)</string>
+         </void>
+         <void method="add">
+          <string>IPR000727 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>GO:0047485 (go)</string>
+         </void>
+         <void method="add">
+          <string>ENSRNOP00000025664 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>GO:0031201 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0042147 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0006906 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0031982 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0012505 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:1903358 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0045732 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0006886 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-RNO-5694530 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:0034498 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-RNO-9609523 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005484 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005783 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000149 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0016021 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005794 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-RNO-204005 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>IPR010989 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>ENSRNOT00000025664 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>IPR021538 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>GO:0048278 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-RNO-6811438 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:0006888 (go)</string>
+         </void>
+         <void method="add">
+          <string>68426 (rgd)</string>
+         </void>
+         <void method="add">
+          <string>R-RNO-6807878 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>XP_006231059.1 (refseq)</string>
+         </void>
         </void>
        </object>
       </void>
@@ -5109,6 +6722,12 @@
        <string>XP_006230636.1 (refseq)</string>
       </void>
       <void method="add">
+       <string>GO:0005768 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005802 (go)</string>
+      </void>
+      <void method="add">
        <string>NP_062241.2 (refseq)</string>
       </void>
       <void method="add">
@@ -5122,6 +6741,9 @@
       </void>
       <void method="add">
        <string>GO:0000139 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005794 (go)</string>
       </void>
       <void method="add">
        <string>71051 (rgd)</string>
@@ -5142,6 +6764,9 @@
        <string>GO:0042147 (go)</string>
       </void>
       <void method="add">
+       <string>GO:0005795 (go)</string>
+      </void>
+      <void method="add">
        <string>R-RNO-6811438 (reactome)</string>
       </void>
       <void method="add">
@@ -5149,6 +6774,9 @@
       </void>
       <void method="add">
        <string>GO:2000156 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005798 (go)</string>
       </void>
      </object>
     </void>
@@ -5191,6 +6819,9 @@
        <string>GO:0031201 (go)</string>
       </void>
       <void method="add">
+       <string>GO:0042147 (go)</string>
+      </void>
+      <void method="add">
        <string>GO:0006906 (go)</string>
       </void>
       <void method="add">
@@ -5230,6 +6861,9 @@
        <string>GO:0016021 (go)</string>
       </void>
       <void method="add">
+       <string>GO:0005794 (go)</string>
+      </void>
+      <void method="add">
        <string>R-RNO-204005 (reactome)</string>
       </void>
       <void method="add">
@@ -5264,7 +6898,7 @@
    </object>
   </void>
   <void method="add">
-   <object class="uk.ac.ebi.intact.search.interactions.model.SearchInteraction" id="SearchInteraction8">
+   <object class="uk.ac.ebi.intact.search.interactions.model.SearchInteraction">
     <void property="ac">
      <string>EBI-10000796</string>
     </void>
@@ -5514,9 +7148,6 @@
      <object class="java.util.ArrayList">
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor16">
-        <void property="interactorDescription">
-         <string>BET1-like protein</string>
-        </void>
         <void property="documentType">
          <string>interactor</string>
         </void>
@@ -5551,7 +7182,13 @@
           <string>Q6PCU6 (uniprotkb)</string>
          </void>
         </void>
+        <void property="interactorDescription">
+         <string>BET1-like protein</string>
+        </void>
         <void property="interactorName">
+         <string>Bet1l</string>
+        </void>
+        <void property="interactorPreferredIdentifier">
          <string>O35152</string>
         </void>
         <void property="interactorSpecies">
@@ -5563,13 +7200,78 @@
         <void property="interactorType">
          <string>protein</string>
         </void>
+        <void property="interactorXrefs">
+         <void method="add">
+          <string>GO:0005829 (go)</string>
+         </void>
+         <void method="add">
+          <string>IPR039897 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>XP_006230636.1 (refseq)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005768 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005802 (go)</string>
+         </void>
+         <void method="add">
+          <string>NP_062241.2 (refseq)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005484 (go)</string>
+         </void>
+         <void method="add">
+          <string>IPR039899 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>GO:0030173 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000139 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005794 (go)</string>
+         </void>
+         <void method="add">
+          <string>71051 (rgd)</string>
+         </void>
+         <void method="add">
+          <string>GO:0015031 (go)</string>
+         </void>
+         <void method="add">
+          <string>IPR000727 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000138 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0031201 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0042147 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005795 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-RNO-6811438 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>R-RNO-6807878 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:2000156 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005798 (go)</string>
+         </void>
+        </void>
        </object>
       </void>
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor17">
-        <void property="interactorDescription">
-         <string>General vesicular transport factor p115</string>
-        </void>
         <void property="documentType">
          <string>interactor</string>
         </void>
@@ -5604,12 +7306,18 @@
           <string>EBI-4423297 (intact)</string>
          </void>
         </void>
+        <void property="interactorDescription">
+         <string>General vesicular transport factor p115</string>
+        </void>
         <void property="interactorFeatureShortLabels">
          <void method="add">
           <string>tail domain</string>
          </void>
         </void>
         <void property="interactorName">
+         <string>Uso1</string>
+        </void>
+        <void property="interactorPreferredIdentifier">
          <string>P41542</string>
         </void>
         <void property="interactorSpecies">
@@ -5620,6 +7328,101 @@
         </void>
         <void property="interactorType">
          <string>protein</string>
+        </void>
+        <void property="interactorXrefs">
+         <void method="add">
+          <string>GO:0048280 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005829 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0032252 (go)</string>
+         </void>
+         <void method="add">
+          <string>IPR041209 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>621604 (rgd)</string>
+         </void>
+         <void method="add">
+          <string>GO:0061025 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000139 (go)</string>
+         </void>
+         <void method="add">
+          <string>ENSRNOG00000002301 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>IPR006953 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>IPR000225 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>IPR016024 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>ENSRNOP00000003277 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>GO:0006891 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005795 (go)</string>
+         </void>
+         <void method="add">
+          <string>IPR011989 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>GO:0007030 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0006886 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0007264 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0012507 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0001650 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005783 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:1900076 (go)</string>
+         </void>
+         <void method="add">
+          <string>IPR006955 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>R-RNO-204005 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:0048211 (go)</string>
+         </void>
+         <void method="add">
+          <string>NP_062252.1 (refseq)</string>
+         </void>
+         <void method="add">
+          <string>GO:0048471 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0045056 (go)</string>
+         </void>
+         <void method="add">
+          <string>ENSRNOT00000003277 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>R-RNO-6807878 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:0006888 (go)</string>
+         </void>
         </void>
        </object>
       </void>
@@ -5694,6 +7497,12 @@
        <string>XP_006230636.1 (refseq)</string>
       </void>
       <void method="add">
+       <string>GO:0005768 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005802 (go)</string>
+      </void>
+      <void method="add">
        <string>NP_062241.2 (refseq)</string>
       </void>
       <void method="add">
@@ -5707,6 +7516,9 @@
       </void>
       <void method="add">
        <string>GO:0000139 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005794 (go)</string>
       </void>
       <void method="add">
        <string>71051 (rgd)</string>
@@ -5727,6 +7539,9 @@
        <string>GO:0042147 (go)</string>
       </void>
       <void method="add">
+       <string>GO:0005795 (go)</string>
+      </void>
+      <void method="add">
        <string>R-RNO-6811438 (reactome)</string>
       </void>
       <void method="add">
@@ -5734,6 +7549,9 @@
       </void>
       <void method="add">
        <string>GO:2000156 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005798 (go)</string>
       </void>
      </object>
     </void>
@@ -5837,7 +7655,7 @@
    </object>
   </void>
   <void method="add">
-   <object class="uk.ac.ebi.intact.search.interactions.model.SearchInteraction" id="SearchInteraction9">
+   <object class="uk.ac.ebi.intact.search.interactions.model.SearchInteraction">
     <void property="ac">
      <string>EBI-10000862</string>
     </void>
@@ -6117,9 +7935,6 @@
      <object class="java.util.ArrayList">
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor18">
-        <void property="interactorDescription">
-         <string>Human MYLK gene promoter NF-kappaB-binding site 1 DNA probe</string>
-        </void>
         <void property="documentType">
          <string>interactor</string>
         </void>
@@ -6134,12 +7949,18 @@
           <string>EBI-10000824 (intact)</string>
          </void>
         </void>
+        <void property="interactorDescription">
+         <string>Human MYLK gene promoter NF-kappaB-binding site 1 DNA probe</string>
+        </void>
         <void property="interactorFeatureShortLabels">
          <void method="add">
           <string>region</string>
          </void>
         </void>
         <void property="interactorName">
+         <string>mylk_human_nfkb-site1_dna-probe</string>
+        </void>
+        <void property="interactorPreferredIdentifier">
          <string>EBI-10000824</string>
         </void>
         <void property="interactorSpecies">
@@ -6151,13 +7972,15 @@
         <void property="interactorType">
          <string>dna</string>
         </void>
+        <void property="interactorXrefs">
+         <void method="add">
+          <string>ENSG00000065534 (ensembl)</string>
+         </void>
+        </void>
        </object>
       </void>
       <void method="add">
        <object class="uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor" id="SearchChildInteractor19">
-        <void property="interactorDescription">
-         <string>Transcription factor p65</string>
-        </void>
         <void property="documentType">
          <string>interactor</string>
         </void>
@@ -6198,6 +8021,9 @@
           <string>EBI-73886 (intact)</string>
          </void>
         </void>
+        <void property="interactorDescription">
+         <string>Transcription factor p65</string>
+        </void>
         <void property="interactorFeatureShortLabels">
          <void method="add">
           <string>possible acetyllys-310</string>
@@ -6222,6 +8048,9 @@
          </void>
         </void>
         <void property="interactorName">
+         <string>RELA</string>
+        </void>
+        <void property="interactorPreferredIdentifier">
          <string>Q04206</string>
         </void>
         <void property="interactorSpecies">
@@ -6232,6 +8061,500 @@
         </void>
         <void property="interactorType">
          <string>protein</string>
+        </void>
+        <void property="interactorXrefs">
+         <void method="add">
+          <string>GO:0005829 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0007568 (go)</string>
+         </void>
+         <void method="add">
+          <string>Q04206 (mint)</string>
+         </void>
+         <void method="add">
+          <string>GO:2001237 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000122 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0043200 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0042802 (go)</string>
+         </void>
+         <void method="add">
+          <string>IPR008967 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>ENST00000406246 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>GO:0045084 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:1901224 (go)</string>
+         </void>
+         <void method="add">
+          <string>IPR000451 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>IPR002909 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>IPR032397 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>GO:0042803 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-4755510 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>ENST00000308639 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>GO:0010033 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:1901522 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0042277 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0071532 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0032570 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-844456 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:0044212 (go)</string>
+         </void>
+         <void method="add">
+          <string>ENSP00000311508 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>GO:0001889 (go)</string>
+         </void>
+         <void method="add">
+          <string>5URN (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>GO:0070301 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000978 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0031625 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:1902895 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0035924 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:1901223 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0071316 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0050852 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0006954 (go)</string>
+         </void>
+         <void method="add">
+          <string>IPR013783 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-5607764 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>IPR033926 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000977 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0003682 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-5607761 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>ENSG00000173039 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>NP_001138610.1 (refseq)</string>
+         </void>
+         <void method="add">
+          <string>GO:0019899 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0033590 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0047485 (go)</string>
+         </void>
+         <void method="add">
+          <string>NP_068810.3 (refseq)</string>
+         </void>
+         <void method="add">
+          <string>GO:2000630 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0032868 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:1904385 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-1810476 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-2559582 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:0032332 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0001227 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-209560 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>1NFI (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-5660668 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:0046627 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0045893 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0014040 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0045416 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0071356 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0051607 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:1902894 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000981 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0035525 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0071224 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0033234 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0051092 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0002223 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0043066 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0032481 (go)</string>
+         </void>
+         <void method="add">
+          <string>ENSP00000384273 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>GO:0033256 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0016032 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0098978 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0042177 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0001942 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0006355 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0071347 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0008284 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0043620 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0003677 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0050862 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-3134963 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005654 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0035729 (go)</string>
+         </void>
+         <void method="add">
+          <string>IPR030492 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>GO:0045944 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-202424 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:0071223 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:1904996 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0071222 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000790 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0044877 (go)</string>
+         </void>
+         <void method="add">
+          <string>3QXY (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-448706 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-9020702 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005737 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0031293 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0033209 (go)</string>
+         </void>
+         <void method="add">
+          <string>3GUT (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>GO:0010224 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0070491 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005667 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0051059 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0042826 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0035994 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0003700 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0038095 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0045892 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0045087 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0071354 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0099527 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0070555 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0034097 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0019221 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0043123 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0019901 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0009887 (go)</string>
+         </void>
+         <void method="add">
+          <string>NP_001230913.1 (refseq)</string>
+         </void>
+         <void method="add">
+          <string>GO:0042805 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0070431 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0007249 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0043278 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0033613 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0006968 (go)</string>
+         </void>
+         <void method="add">
+          <string>3RC0 (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>GO:0005634 (go)</string>
+         </void>
+         <void method="add">
+          <string>2LSP (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-5603029 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:0050727 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-445989 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>2O61 (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>GO:0031490 (go)</string>
+         </void>
+         <void method="add">
+          <string>IPR011539 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>4KV4 (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>GO:0070498 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0006325 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-381340 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:1901222 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0006117 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0038061 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0032495 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000979 (go)</string>
+         </void>
+         <void method="add">
+          <string>5U4K (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>GO:0061614 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-193692 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>DIP-24238N (dip)</string>
+         </void>
+         <void method="add">
+          <string>4KV1 (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-1169091 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-3214841 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-5621575 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-2871837 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-933542 (reactome)</string>
+         </void>
+         <void method="add">
+          <string>GO:0008134 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0001225 (go)</string>
+         </void>
+         <void method="add">
+          <string>IPR030495 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>GO:0051591 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0001228 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0042301 (go)</string>
+         </void>
+         <void method="add">
+          <string>IPR037059 (interpro)</string>
+         </void>
+         <void method="add">
+          <string>IPR014756 (interpro)</string>
+         </void>
         </void>
        </object>
       </void>
@@ -6361,6 +8684,9 @@
        <string>GO:1901522 (go)</string>
       </void>
       <void method="add">
+       <string>GO:0042277 (go)</string>
+      </void>
+      <void method="add">
        <string>GO:0071532 (go)</string>
       </void>
       <void method="add">
@@ -6410,9 +8736,6 @@
       </void>
       <void method="add">
        <string>IPR013783 (interpro)</string>
-      </void>
-      <void method="add">
-       <string>GO:0000980 (go)</string>
       </void>
       <void method="add">
        <string>R-HSA-5607764 (reactome)</string>
@@ -6487,6 +8810,9 @@
        <string>GO:0014040 (go)</string>
       </void>
       <void method="add">
+       <string>GO:0045416 (go)</string>
+      </void>
+      <void method="add">
        <string>GO:0071356 (go)</string>
       </void>
       <void method="add">
@@ -6521,6 +8847,9 @@
       </void>
       <void method="add">
        <string>ENSP00000384273 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>GO:0033256 (go)</string>
       </void>
       <void method="add">
        <string>GO:0016032 (go)</string>
@@ -6634,6 +8963,9 @@
        <string>GO:0045892 (go)</string>
       </void>
       <void method="add">
+       <string>GO:0045087 (go)</string>
+      </void>
+      <void method="add">
        <string>GO:0071354 (go)</string>
       </void>
       <void method="add">
@@ -6694,9 +9026,6 @@
        <string>GO:0050727 (go)</string>
       </void>
       <void method="add">
-       <string>GO:0046982 (go)</string>
-      </void>
-      <void method="add">
        <string>R-HSA-445989 (reactome)</string>
       </void>
       <void method="add">
@@ -6731,6 +9060,9 @@
       </void>
       <void method="add">
        <string>GO:0032495 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000979 (go)</string>
       </void>
       <void method="add">
        <string>5U4K (rcsb pdb)</string>
