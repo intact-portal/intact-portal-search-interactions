@@ -9,6 +9,7 @@ public class SearchChildInteractorFields {
     public static final String INTERACTOR_AC_STR = "interactor_ac_str";
 
     public static final String INTERACTOR_NAME = "interactor_name";
+    public static final String INTERACTOR_INTACT_NAME = "interactor_intact_name";
     public static final String INTERACTOR_PREFERRED_ID = "interactor_preferred_id";
 
     public static final String INTERACTOR_DESCRIPTION = "interactor_description";

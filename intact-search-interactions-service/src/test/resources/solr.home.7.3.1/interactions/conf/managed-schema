@@ -526,6 +526,7 @@
   <field name="interactor_description" type="text_general"/>
   <field name="interactor_feature_shortlabels" type="text_general"/>
   <field name="interactor_name" type="text_general"/>
+  <field name="interactor_intact_name" type="text_general"/>
   <field name="interactor_preferred_id" type="text_general"/>
   <field name="interactor_species_name" type="text_general"/>
   <field name="interactor_tax_id" type="plongs"/>

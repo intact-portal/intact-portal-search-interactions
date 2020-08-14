@@ -64,7 +64,7 @@ public class InteractionIndexServiceTest {
                 new HashSet<>(Arrays.asList("interactor1_xref1", "interactor1_xref2")),
                 2,
                 2L,
-                new HashSet<>(Arrays.asList("featureShortLabel1", "featureShortLabel2")), DocumentType.INTERACTOR);
+                new HashSet<>(Arrays.asList("featureShortLabel1", "featureShortLabel2")), "interactor1_intact_name", DocumentType.INTERACTOR);
 
 
         SearchChildInteractor searchChildInteractor2 = new SearchChildInteractor("EBI-TEST2",
@@ -79,7 +79,7 @@ public class InteractionIndexServiceTest {
                 new HashSet<>(Arrays.asList("interactor2_xref1", "interactor2_xref2")),
                 2,
                 1L,
-                new HashSet<>(Arrays.asList("featureshortlabel1", "featureshortlabel2")), DocumentType.INTERACTOR);
+                new HashSet<>(Arrays.asList("featureshortlabel1", "featureshortlabel2")), "interactor2_intact_name", DocumentType.INTERACTOR);
         searchChildInteractors1.add(searchChildInteractor1);
         searchChildInteractors1.add(searchChildInteractor2);
 
@@ -109,7 +109,7 @@ public class InteractionIndexServiceTest {
                 new HashSet<>(Arrays.asList("interactor3_xref1", "interactor3_xref2", "interactor3_xref3", "interactor3_xref4")),
                 5,
                 3L,
-                new HashSet<>(Arrays.asList("featureshortlabel1", "featureshortlabel2")), DocumentType.INTERACTOR);
+                new HashSet<>(Arrays.asList("featureshortlabel1", "featureshortlabel2")), "interactor3_intact_name", DocumentType.INTERACTOR);
 
         SearchChildInteractor searchChildInteractor4 = new SearchChildInteractor("EBI-TEST4",
                 "4EBP1",
@@ -123,7 +123,7 @@ public class InteractionIndexServiceTest {
                 new HashSet<>(Arrays.asList("interactor2_xref1", "interactor2_xref2")),
                 2,
                 1L,
-                new HashSet<>(Arrays.asList("featureshortlabel1", "featureshortlabel2")), DocumentType.INTERACTOR);
+                new HashSet<>(Arrays.asList("featureshortlabel1", "featureshortlabel2")), "interactor4_intact_name", DocumentType.INTERACTOR);
 
         searchChildInteractors2.add(searchChildInteractor3);
         searchChildInteractors2.add(searchChildInteractor4);

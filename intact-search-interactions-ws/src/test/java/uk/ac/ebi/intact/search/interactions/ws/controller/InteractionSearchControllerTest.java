@@ -86,7 +86,7 @@ public class InteractionSearchControllerTest {
             JSONParser parser = new JSONParser();
             JSONObject fileSearchJson = (JSONObject) parser.parse(fileSearchResponse.getBody());
             assertNotNull(fileSearchJson);
-            assertEquals(10l, fileSearchJson.get("numberOfElements"));
+            assertEquals(9l, fileSearchJson.get("numberOfElements"));
 
         } catch (Exception e) {
             fail();

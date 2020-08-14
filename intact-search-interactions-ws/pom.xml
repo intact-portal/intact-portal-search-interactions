@@ -7,7 +7,7 @@
     <parent>
         <groupId>uk.ac.ebi.intact.search.interactions</groupId>
         <artifactId>intact-search-interactions-module</artifactId>
-        <version>1.0.5-SNAPSHOT</version>
+        <version>1.0.6-SNAPSHOT</version>
     </parent>
 
     <artifactId>intact-search-interactions-ws</artifactId>
