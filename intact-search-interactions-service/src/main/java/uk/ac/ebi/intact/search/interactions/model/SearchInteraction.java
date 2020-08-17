@@ -199,6 +199,12 @@ public class SearchInteraction {
     @Field(MOLECULE_B)
     private String moleculeB;
 
+    @Field(INTACT_NAME_A)
+    private String intactNameA;
+
+    @Field(INTACT_NAME_B)
+    private String intactNameB;
+
     @Field(FIRST_AUTHOR)
     private String firstAuthor;
 
@@ -263,7 +269,7 @@ public class SearchInteraction {
                              String typeMIIdentifier, boolean disruptedByMutation,
                              boolean mutationA, boolean mutationB, int binaryInteractionId, String acA, String acB,
                              Integer featureCount, String descriptionA, String descriptionB,
-                             List<SearchChildInteractor> searchChildInteractors, String documentType) {
+                             List<SearchChildInteractor> searchChildInteractors, String intactNameA, String intactNameB, String documentType) {
         this.count = count;
         this.idA = idA;
         this.idB = idB;
@@ -321,6 +327,8 @@ public class SearchInteraction {
         this.descriptionB = descriptionB;
         this.binaryInteractionId = binaryInteractionId;
         this.searchChildInteractors = searchChildInteractors;
+        this.intactNameA = intactNameA;
+        this.intactNameB = intactNameB;
         this.documentType = documentType;
     }
 
@@ -901,6 +909,22 @@ public class SearchInteraction {
         this.searchChildInteractors = searchChildInteractors;
     }
 
+    public String getIntactNameA() {
+        return intactNameA;
+    }
+
+    public void setIntactNameA(String intactNameA) {
+        this.intactNameA = intactNameA;
+    }
+
+    public String getIntactNameB() {
+        return intactNameB;
+    }
+
+    public void setIntactNameB(String intactNameB) {
+        this.intactNameB = intactNameB;
+    }
+
     @Override
     public String toString() {
         return "SearchInteraction{" +
@@ -961,6 +985,8 @@ public class SearchInteraction {
                 ", intactMiscore=" + intactMiscore +
                 ", moleculeA='" + moleculeA + '\'' +
                 ", moleculeB='" + moleculeB + '\'' +
+                ", intactNameA='" + intactNameA + '\'' +
+                ", intactNameB='" + intactNameB + '\'' +
                 ", firstAuthor='" + firstAuthor + '\'' +
                 ", experimentalPreparationsA=" + experimentalPreparationsA +
                 ", experimentalPreparationsB=" + experimentalPreparationsB +

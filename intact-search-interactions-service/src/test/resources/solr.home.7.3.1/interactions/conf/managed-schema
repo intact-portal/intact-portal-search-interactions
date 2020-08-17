@@ -534,6 +534,8 @@
   <field name="interactor_xrefs" type="text_general"/>
   <field name="moleculeA" type="text_general"/>
   <field name="moleculeB" type="text_general"/>
+  <field name="intactNameA" type="text_general"/>
+  <field name="intactNameB" type="text_general"/>
   <field name="mutation_A" type="booleans"/>
   <field name="mutation_B" type="booleans"/>
   <field name="negative" type="booleans"/>
