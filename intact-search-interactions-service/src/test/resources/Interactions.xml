@@ -301,6 +301,12 @@
     <void property="intactMiscore">
      <double>0.64</double>
     </void>
+    <void property="intactNameA">
+     <string>nuf2_human</string>
+    </void>
+    <void property="intactNameB">
+     <string>ndc80_human</string>
+    </void>
     <void property="moleculeA">
      <string>NUF2</string>
     </void>
@@ -376,6 +382,9 @@
          <void method="add">
           <string>region</string>
          </void>
+        </void>
+        <void property="interactorIntactName">
+         <string>nuf2_human</string>
         </void>
         <void property="interactorName">
          <string>NUF2</string>
@@ -565,6 +574,9 @@
          <void method="add">
           <string>region</string>
          </void>
+        </void>
+        <void property="interactorIntactName">
+         <string>ndc80_human</string>
         </void>
         <void property="interactorName">
          <string>NDC80</string>
@@ -1248,6 +1260,12 @@
     <void property="intactMiscore">
      <double>0.53</double>
     </void>
+    <void property="intactNameA">
+     <string>spc24_human</string>
+    </void>
+    <void property="intactNameB">
+     <string>spc25_human</string>
+    </void>
     <void property="moleculeA">
      <string>SPC24</string>
     </void>
@@ -1309,6 +1327,9 @@
          <void method="add">
           <string>c-terminal</string>
          </void>
+        </void>
+        <void property="interactorIntactName">
+         <string>spc24_human</string>
         </void>
         <void property="interactorName">
          <string>SPC24</string>
@@ -1453,6 +1474,9 @@
          <void method="add">
           <string>region</string>
          </void>
+        </void>
+        <void property="interactorIntactName">
+         <string>spc25_human</string>
         </void>
         <void property="interactorName">
          <string>SPC25</string>
@@ -2051,6 +2075,12 @@
     <void property="intactMiscore">
      <double>0.69</double>
     </void>
+    <void property="intactNameA">
+     <string>ndc80_human</string>
+    </void>
+    <void property="intactNameB">
+     <string>spc25_human</string>
+    </void>
     <void property="moleculeA">
      <string>NDC80</string>
     </void>
@@ -2145,6 +2175,9 @@
          <void method="add">
           <string>region</string>
          </void>
+        </void>
+        <void property="interactorIntactName">
+         <string>ndc80_human</string>
         </void>
         <void property="interactorName">
          <string>NDC80</string>
@@ -2343,6 +2376,9 @@
          <void method="add">
           <string>region</string>
          </void>
+        </void>
+        <void property="interactorIntactName">
+         <string>spc25_human</string>
         </void>
         <void property="interactorName">
          <string>SPC25</string>
@@ -2993,6 +3029,12 @@
     <void property="intactMiscore">
      <double>0.56</double>
     </void>
+    <void property="intactNameA">
+     <string>ndc80_human</string>
+    </void>
+    <void property="intactNameB">
+     <string>spc24_human</string>
+    </void>
     <void property="moleculeA">
      <string>NDC80</string>
     </void>
@@ -3087,6 +3129,9 @@
          <void method="add">
           <string>region</string>
          </void>
+        </void>
+        <void property="interactorIntactName">
+         <string>ndc80_human</string>
         </void>
         <void property="interactorName">
          <string>NDC80</string>
@@ -3273,6 +3318,9 @@
          <void method="add">
           <string>c-terminal</string>
          </void>
+        </void>
+        <void property="interactorIntactName">
+         <string>spc24_human</string>
         </void>
         <void property="interactorName">
          <string>SPC24</string>
@@ -3923,6 +3971,12 @@
     <void property="intactMiscore">
      <double>0.64</double>
     </void>
+    <void property="intactNameA">
+     <string>ndc80_human</string>
+    </void>
+    <void property="intactNameB">
+     <string>nuf2_human</string>
+    </void>
     <void property="moleculeA">
      <string>NDC80</string>
     </void>
@@ -4017,6 +4071,9 @@
          <void method="add">
           <string>region</string>
          </void>
+        </void>
+        <void property="interactorIntactName">
+         <string>ndc80_human</string>
         </void>
         <void property="interactorName">
          <string>NDC80</string>
@@ -4215,6 +4272,9 @@
          <void method="add">
           <string>region</string>
          </void>
+        </void>
+        <void property="interactorIntactName">
+         <string>nuf2_human</string>
         </void>
         <void property="interactorName">
          <string>NUF2</string>
@@ -4863,6 +4923,12 @@
     <void property="intactMiscore">
      <double>0.4</double>
     </void>
+    <void property="intactNameA">
+     <string>bet1l_rat</string>
+    </void>
+    <void property="intactNameB">
+     <string>gosr1_rat</string>
+    </void>
     <void property="moleculeA">
      <string>Bet1l</string>
     </void>
@@ -4924,6 +4990,9 @@
         </void>
         <void property="interactorDescription">
          <string>BET1-like protein</string>
+        </void>
+        <void property="interactorIntactName">
+         <string>bet1l_rat</string>
         </void>
         <void property="interactorName">
          <string>Bet1l</string>
@@ -5059,6 +5128,9 @@
          <void method="add">
           <string>cytoplasmic domain</string>
          </void>
+        </void>
+        <void property="interactorIntactName">
+         <string>gosr1_rat</string>
         </void>
         <void property="interactorName">
          <string>Gosr1</string>
@@ -5565,6 +5637,12 @@
     <void property="intactMiscore">
      <double>0.4</double>
     </void>
+    <void property="intactNameA">
+     <string>bet1l_rat</string>
+    </void>
+    <void property="intactNameB">
+     <string>ykt6_rat</string>
+    </void>
     <void property="moleculeA">
      <string>Bet1l</string>
     </void>
@@ -5624,6 +5702,9 @@
         </void>
         <void property="interactorDescription">
          <string>BET1-like protein</string>
+        </void>
+        <void property="interactorIntactName">
+         <string>bet1l_rat</string>
         </void>
         <void property="interactorName">
          <string>Bet1l</string>
@@ -5739,6 +5820,9 @@
         </void>
         <void property="interactorDescription">
          <string>Synaptobrevin homolog YKT6</string>
+        </void>
+        <void property="interactorIntactName">
+         <string>ykt6_rat</string>
         </void>
         <void property="interactorName">
          <string>Ykt6</string>
@@ -6329,6 +6413,12 @@
     <void property="intactMiscore">
      <double>0.4</double>
     </void>
+    <void property="intactNameA">
+     <string>bet1l_rat</string>
+    </void>
+    <void property="intactNameB">
+     <string>stx5_rat</string>
+    </void>
     <void property="moleculeA">
      <string>Bet1l</string>
     </void>
@@ -6388,6 +6478,9 @@
         </void>
         <void property="interactorDescription">
          <string>BET1-like protein</string>
+        </void>
+        <void property="interactorIntactName">
+         <string>bet1l_rat</string>
         </void>
         <void property="interactorName">
          <string>Bet1l</string>
@@ -6520,6 +6613,9 @@
          <void method="add">
           <string>cytoplasmic domain</string>
          </void>
+        </void>
+        <void property="interactorIntactName">
+         <string>stx5_rat</string>
         </void>
         <void property="interactorName">
          <string>Stx5</string>
@@ -7125,6 +7221,12 @@
     <void property="intactMiscore">
      <double>0.4</double>
     </void>
+    <void property="intactNameA">
+     <string>bet1l_rat</string>
+    </void>
+    <void property="intactNameB">
+     <string>uso1_rat</string>
+    </void>
     <void property="moleculeA">
      <string>Bet1l</string>
     </void>
@@ -7184,6 +7286,9 @@
         </void>
         <void property="interactorDescription">
          <string>BET1-like protein</string>
+        </void>
+        <void property="interactorIntactName">
+         <string>bet1l_rat</string>
         </void>
         <void property="interactorName">
          <string>Bet1l</string>
@@ -7313,6 +7418,9 @@
          <void method="add">
           <string>tail domain</string>
          </void>
+        </void>
+        <void property="interactorIntactName">
+         <string>uso1_rat</string>
         </void>
         <void property="interactorName">
          <string>Uso1</string>
@@ -7910,6 +8018,12 @@
     <void property="intactMiscore">
      <double>0.4</double>
     </void>
+    <void property="intactNameA">
+     <string>mylk_human_nfkb-site1_dna-probe</string>
+    </void>
+    <void property="intactNameB">
+     <string>tf65_human</string>
+    </void>
     <void property="moleculeA">
      <string>mylk_human_nfkb-site1_dna-probe</string>
     </void>
@@ -7956,6 +8070,9 @@
          <void method="add">
           <string>region</string>
          </void>
+        </void>
+        <void property="interactorIntactName">
+         <string>mylk_human_nfkb-site1_dna-probe</string>
         </void>
         <void property="interactorName">
          <string>mylk_human_nfkb-site1_dna-probe</string>
@@ -8046,6 +8163,9 @@
          <void method="add">
           <string>region</string>
          </void>
+        </void>
+        <void property="interactorIntactName">
+         <string>tf65_human</string>
         </void>
         <void property="interactorName">
          <string>RELA</string>
