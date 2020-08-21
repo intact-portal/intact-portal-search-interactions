@@ -50,6 +50,7 @@ public class InteractionIndexServiceTest {
                 new HashSet<>(Arrays.asList("interaction_id1", "interaction_id2", "interaction_id3")));
         searchInteraction1.setPublicationIdentifiers(
                 new HashSet<>(Collections.singletonList("publication_1")));
+        searchInteraction1.setPublicationPubmedIdentifier("unassigned1");
 
         //Create new child interactors documents
         SearchChildInteractor searchChildInteractor1 = new SearchChildInteractor("EBI-TEST1",
@@ -96,6 +97,7 @@ public class InteractionIndexServiceTest {
                 new HashSet<>(Arrays.asList("interaction_id1", "interaction_id2", "interaction_id3")));
         searchInteraction2.setPublicationIdentifiers(
                 new HashSet<>(Collections.singletonList("publication_1")));
+        searchInteraction2.setPublicationPubmedIdentifier("unassigned1");
 
         SearchChildInteractor searchChildInteractor3 = new SearchChildInteractor("EBI-TEST3",
                 "SUMO1",

@@ -301,7 +301,7 @@
       <filter class="solr.LowerCaseFilterFactory"/>
     </analyzer>
   </fieldType>
-  <fieldType name="text_general" class="solr.TextField" positionIncrementGap="100" multiValued="true">
+  <fieldType name="text_general" class="solr.TextField" positionIncrementGap="100">
     <analyzer type="index">
       <tokenizer class="solr.StandardTokenizerFactory"/>
       <filter class="solr.StopFilterFactory" words="stopwords.txt" ignoreCase="true"/>
@@ -473,21 +473,21 @@
   <field name="ac" type="text_general"/>
   <field name="acA" type="text_general"/>
   <field name="acB" type="text_general"/>
-  <field name="aliasesA" type="text_general"/>
-  <field name="aliasesB" type="text_general"/>
-  <field name="all_annotations" type="text_general"/>
-  <field name="altIdsA" type="text_general"/>
-  <field name="altIdsB" type="text_general"/>
-  <field name="annotations" type="text_general"/>
-  <field name="annotationsA" type="text_general"/>
-  <field name="annotationsB" type="text_general"/>
+  <field name="aliasesA" type="text_general" multiValued="true"/>
+  <field name="aliasesB" type="text_general" multiValued="true"/>
+  <field name="all_annotations" type="text_general" multiValued="true"/>
+  <field name="altIdsA" type="text_general" multiValued="true"/>
+  <field name="altIdsB" type="text_general" multiValued="true"/>
+  <field name="annotations" type="text_general" multiValued="true"/>
+  <field name="annotationsA" type="text_general" multiValued="true"/>
+  <field name="annotationsB" type="text_general" multiValued="true"/>
   <field name="author" type="text_general"/>
   <field name="binary_interaction_id" type="plongs"/>
   <field name="biological_role_A" type="text_general"/>
   <field name="biological_role_B" type="text_general"/>
-  <field name="checksumsA" type="text_general"/>
-  <field name="checksumsB" type="text_general"/>
-  <field name="confidence_values" type="text_general"/>
+  <field name="checksumsA" type="text_general" multiValued="true"/>
+  <field name="checksumsB" type="text_general" multiValued="true"/>
+  <field name="confidence_values" type="text_general" multiValued="true"/>
   <field name="count" type="plongs"/>
   <field name="creation_date" type="pdates"/>
   <field name="default" type="text_en_splitting_tight_ngram" multiValued="true" indexed="true" required="true" stored="false"/>
@@ -500,38 +500,38 @@
   <field name="disrupted_by_mutation_B" type="booleans"/>
   <field name="document_type" type="text_general"/>
   <field name="expansion_method" type="text_general"/>
-  <field name="experimental_preparations_A" type="text_general"/>
-  <field name="experimental_preparations_B" type="text_general"/>
+  <field name="experimental_preparations_A" type="text_general" multiValued="true"/>
+  <field name="experimental_preparations_B" type="text_general" multiValued="true"/>
   <field name="experimental_role_A" type="text_general"/>
   <field name="experimental_role_B" type="text_general"/>
-  <field name="feature_A" type="text_general"/>
-  <field name="feature_B" type="text_general"/>
+  <field name="feature_A" type="text_general" multiValued="true"/>
+  <field name="feature_B" type="text_general" multiValued="true"/>
   <field name="feature_count" type="plongs"/>
-  <field name="feature_shortlabel_A" type="text_general"/>
-  <field name="feature_shortlabel_B" type="text_general"/>
+  <field name="feature_shortlabel_A" type="text_general" multiValued="true"/>
+  <field name="feature_shortlabel_B" type="text_general" multiValued="true"/>
   <field name="first_author" type="text_general"/>
   <field name="host_organism" type="text_general"/>
   <field name="id" type="string" multiValued="false" indexed="true" required="true" stored="true"/>
   <field name="idA" type="text_general"/>
   <field name="idB" type="text_general"/>
-  <field name="identification_method_A" type="text_general"/>
-  <field name="identification_method_B" type="text_general"/>
-  <field name="identifiers" type="text_general"/>
+  <field name="identification_method_A" type="text_general" multiValued="true"/>
+  <field name="identification_method_B" type="text_general" multiValued="true"/>
+  <field name="identifiers" type="text_general" multiValued="true"/>
   <field name="intact_miscore" type="pdoubles"/>
   <field name="interaction_count" type="plongs"/>
   <!-- interactor_* fields are likely to be only stored, currently we are not using them for searching  -->
-  <field name="interactor_alias" type="text_general"/>
-  <field name="interactor_alt_ids" type="text_general"/>
+  <field name="interactor_alias" type="text_general" multiValued="true"/>
+  <field name="interactor_alt_ids" type="text_general" multiValued="true"/>
   <field name="interactor_default" type="text_general" multiValued="true" indexed="true" stored="true"/>
   <field name="interactor_description" type="text_general"/>
-  <field name="interactor_feature_shortlabels" type="text_general"/>
+  <field name="interactor_feature_shortlabels" type="text_general" multiValued="true"/>
   <field name="interactor_name" type="text_general"/>
   <field name="interactor_intact_name" type="text_general"/>
   <field name="interactor_preferred_id" type="text_general"/>
   <field name="interactor_species_name" type="text_general"/>
   <field name="interactor_tax_id" type="plongs"/>
   <field name="interactor_type" type="text_general"/>
-  <field name="interactor_xrefs" type="text_general"/>
+  <field name="interactor_xrefs" type="text_general" multiValued="true"/>
   <field name="moleculeA" type="text_general"/>
   <field name="moleculeB" type="text_general"/>
   <field name="intactNameA" type="text_general"/>
@@ -539,10 +539,10 @@
   <field name="mutation_A" type="booleans"/>
   <field name="mutation_B" type="booleans"/>
   <field name="negative" type="booleans"/>
-  <field name="parameters" type="text_general"/>
-  <field name="publication_authors" type="text_general"/>
+  <field name="parameters" type="text_general" multiValued="true"/>
+  <field name="publication_authors" type="text_general" multiValued="true"/>
   <field name="publication_id" type="text_general"/>
-  <field name="publication_identifiers" type="text_general"/>
+  <field name="publication_identifiers" type="text_general" multiValued="true"/>
   <field name="release_date" type="pdates"/>
   <field name="source_database" type="text_general"/>
   <field name="speciesA" type="text_general"/>
@@ -561,9 +561,9 @@
   <field name="uniqueIdB" type="text_general"/>
   <field name="uniqueKey" type="text_general"/>
   <field name="updation_date" type="pdates"/>
-  <field name="xrefs" type="text_general"/>
-  <field name="xrefsA" type="text_general"/>
-  <field name="xrefsB" type="text_general"/>
+  <field name="xrefs" type="text_general" multiValued="true"/>
+  <field name="xrefsA" type="text_general" multiValued="true"/>
+  <field name="xrefsB" type="text_general" multiValued="true"/>
   <dynamicField name="*_txt_en_split_tight" type="text_en_splitting_tight" indexed="true" stored="true"/>
   <dynamicField name="*_descendent_path" type="descendent_path" indexed="true" stored="true"/>
   <dynamicField name="*_ancestor_path" type="ancestor_path" indexed="true" stored="true"/>

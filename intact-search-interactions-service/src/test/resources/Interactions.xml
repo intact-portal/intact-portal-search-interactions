@@ -323,6 +323,9 @@
       </void>
      </object>
     </void>
+    <void property="publicationPubmedIdentifier">
+     <string>15961401</string>
+    </void>
     <void property="releaseDate">
      <object class="java.util.Date" id="Date0">
       <long>1160697600000</long>
@@ -1282,6 +1285,9 @@
       </void>
      </object>
     </void>
+    <void property="publicationPubmedIdentifier">
+     <string>15961401</string>
+    </void>
     <void property="releaseDate">
      <object idref="Date0"/>
     </void>
@@ -2096,6 +2102,9 @@
        <string>15961401 (pubmed)</string>
       </void>
      </object>
+    </void>
+    <void property="publicationPubmedIdentifier">
+     <string>15961401</string>
     </void>
     <void property="releaseDate">
      <object idref="Date0"/>
@@ -3051,6 +3060,9 @@
       </void>
      </object>
     </void>
+    <void property="publicationPubmedIdentifier">
+     <string>15961401</string>
+    </void>
     <void property="releaseDate">
      <object idref="Date0"/>
     </void>
@@ -3992,6 +4004,9 @@
        <string>15961401 (pubmed)</string>
       </void>
      </object>
+    </void>
+    <void property="publicationPubmedIdentifier">
+     <string>15961401</string>
     </void>
     <void property="releaseDate">
      <object idref="Date0"/>
@@ -4945,6 +4960,9 @@
       </void>
      </object>
     </void>
+    <void property="publicationPubmedIdentifier">
+     <string>11927603</string>
+    </void>
     <void property="releaseDate">
      <object class="java.util.Date" id="Date1">
       <long>1421924490820</long>
@@ -5658,6 +5676,9 @@
        <string>11927603 (pubmed)</string>
       </void>
      </object>
+    </void>
+    <void property="publicationPubmedIdentifier">
+     <string>11927603</string>
     </void>
     <void property="releaseDate">
      <object idref="Date1"/>
@@ -6434,6 +6455,9 @@
        <string>11927603 (pubmed)</string>
       </void>
      </object>
+    </void>
+    <void property="publicationPubmedIdentifier">
+     <string>11927603</string>
     </void>
     <void property="releaseDate">
      <object idref="Date1"/>
@@ -7243,6 +7267,9 @@
       </void>
      </object>
     </void>
+    <void property="publicationPubmedIdentifier">
+     <string>11927603</string>
+    </void>
     <void property="releaseDate">
      <object idref="Date1"/>
     </void>
@@ -8039,6 +8066,9 @@
        <string>EBI-9999090 (intact)</string>
       </void>
      </object>
+    </void>
+    <void property="publicationPubmedIdentifier">
+     <string>18363837</string>
     </void>
     <void property="releaseDate">
      <object class="java.util.Date">

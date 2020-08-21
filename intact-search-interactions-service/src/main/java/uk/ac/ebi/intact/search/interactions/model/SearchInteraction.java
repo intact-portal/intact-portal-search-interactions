@@ -226,6 +226,9 @@ public class SearchInteraction {
     @Field(PUBLICATION_IDENTIFIERS)
     private Set<String> publicationIdentifiers;
 
+    @Field(PUBLICATION_PUBMED_IDENTIFIER)
+    private String publicationPubmedIdentifier;
+
     //It will be used in the cluster index. Review in the future
     @Field(COUNT)
     private Integer count;
@@ -269,7 +272,7 @@ public class SearchInteraction {
                              String typeMIIdentifier, boolean disruptedByMutation,
                              boolean mutationA, boolean mutationB, int binaryInteractionId, String acA, String acB,
                              Integer featureCount, String descriptionA, String descriptionB,
-                             List<SearchChildInteractor> searchChildInteractors, String intactNameA, String intactNameB, String documentType) {
+                             List<SearchChildInteractor> searchChildInteractors, String intactNameA, String intactNameB, String publicationPubmedIdentifier, String documentType) {
         this.count = count;
         this.idA = idA;
         this.idB = idB;
@@ -329,7 +332,16 @@ public class SearchInteraction {
         this.searchChildInteractors = searchChildInteractors;
         this.intactNameA = intactNameA;
         this.intactNameB = intactNameB;
+        this.publicationPubmedIdentifier = publicationPubmedIdentifier;
         this.documentType = documentType;
+    }
+
+    public String getPublicationPubmedIdentifier() {
+        return publicationPubmedIdentifier;
+    }
+
+    public void setPublicationPubmedIdentifier(String publicationPubmedIdentifier) {
+        this.publicationPubmedIdentifier = publicationPubmedIdentifier;
     }
 
     public String getDocumentType() {
@@ -994,6 +1006,7 @@ public class SearchInteraction {
                 ", uniqueIdA='" + uniqueIdA + '\'' +
                 ", uniqueIdB='" + uniqueIdB + '\'' +
                 ", publicationIdentifiers=" + publicationIdentifiers +
+                ", publicationPubmedIdentifier=" + publicationPubmedIdentifier +
                 ", count=" + count +
                 ", typeMIA='" + typeMIA + '\'' +
                 ", typeMIB='" + typeMIB + '\'' +

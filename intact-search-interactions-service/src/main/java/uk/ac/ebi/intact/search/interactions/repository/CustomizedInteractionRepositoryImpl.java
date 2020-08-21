@@ -106,6 +106,13 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         // sorting
         if (sort != null) {
             search.addSort(sort);
+        } else {
+            //order is important to give clustering effect
+            search.addSort(Sort.by(Sort.Direction.DESC, INTACT_MISCORE));
+            search.addSort(Sort.by(Sort.Direction.ASC, MOLECULE_A));
+            search.addSort(Sort.by(Sort.Direction.ASC, MOLECULE_B));
+            search.addSort(Sort.by(Sort.Direction.ASC, PUBLICATION_PUBMED_IDENTIFIER));
+            search.addSort(Sort.by(Sort.Direction.ASC, DETECTION_METHOD));
         }
 //        else {
 //            search.addSort(DEFAULT_QUERY_SORT_WITH_QUERY);
