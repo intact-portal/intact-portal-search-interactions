@@ -117,7 +117,7 @@ public class SearchInteractionUtility {
                 if (conditions == null) {
                     conditions = new Criteria(field).is(value);
                 } else {
-                    conditions = conditions.and(new Criteria(field).is(value));
+                    conditions = conditions.or(new Criteria(field).is(value));
                 }
             }
 
