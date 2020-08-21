@@ -1,6 +1,5 @@
 package uk.ac.ebi.intact.search.interactions.repository;
 
-import org.apache.solr.common.params.FacetParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -94,13 +93,6 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                 TYPE_STR, HOST_ORGANISM_STR,
                 NEGATIVE, INTACT_MISCORE);
         facetOptions.setFacetLimit(FACET_MIN_COUNT);
-        facetOptions.addFacetByRange(
-                new FacetOptions.FieldWithNumericRangeParameters(INTACT_MISCORE, 0d, 1d, 0.01d)
-                        .setHardEnd(true)
-                        .setInclude(FacetParams.FacetRangeInclude.ALL)
-
-
-        );
 
         facetOptions.getFieldsWithParameters().add(new FacetOptions.FieldWithFacetParameters(SPECIES_A_B_STR).setMethod("enum"));
         facetOptions.getFieldsWithParameters().add(new FacetOptions.FieldWithFacetParameters(TYPE_A_B_STR).setMethod("enum"));

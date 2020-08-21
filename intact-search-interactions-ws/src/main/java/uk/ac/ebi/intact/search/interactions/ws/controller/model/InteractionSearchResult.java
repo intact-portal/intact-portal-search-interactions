@@ -7,9 +7,7 @@ import org.springframework.data.solr.core.query.Field;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
-import uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields;
 
-import java.text.DecimalFormat;
 import java.util.*;
 import java.util.function.Function;
 
@@ -112,6 +110,7 @@ public class InteractionSearchResult implements Page<SearchInteraction> {
      * Gives map of facet fields and List of FacetCount,
      * where List of FacetCount contains List of facet field values and their respective counts.
      * This was implemented to save client from complexity of calculating facets from page.
+     *
      * @return
      */
     public Map<String, List<FacetCount>> getFacetResultPage() {
@@ -119,16 +118,10 @@ public class InteractionSearchResult implements Page<SearchInteraction> {
 
         for (Field field : page.getFacetFields()) {
             List<FacetCount> facet = new ArrayList<>();
-            if (field.getName().equals(SearchInteractionFields.INTACT_MISCORE)) {
-                for (FacetFieldEntry facetFieldEntry : page.getRangeFacetResultPage(field).getContent()) {
-                    DecimalFormat df = new DecimalFormat("####0.00");// inherently it is giving long decimal values
-                    facet.add(new FacetCount(df.format(Double.parseDouble(facetFieldEntry.getValue())), facetFieldEntry.getValueCount()));
-                }
-            } else {
-                for (FacetFieldEntry facetFieldEntry : page.getFacetResultPage(field).getContent()) {
-                    facet.add(new FacetCount(facetFieldEntry.getValue(), facetFieldEntry.getValueCount()));
-                }
+            for (FacetFieldEntry facetFieldEntry : page.getFacetResultPage(field).getContent()) {
+                facet.add(new FacetCount(facetFieldEntry.getValue(), facetFieldEntry.getValueCount()));
             }
+
             facetPerFieldMap.put(field.getName(), facet);
         }
 
