@@ -19,7 +19,8 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 /**
  * @author Elisabet Barrera
@@ -43,7 +44,7 @@ public class InteractionSearchServiceTest {
         //Delete all documents from solr core
         interactionIndexService.deleteAll();
         /*Interactions are instantiated from saved searchInteractions in an xml as instantiating it one by one in the code is cumbersome
-        * For ref. The Interactions.xml can be created with a method saveInteractioninDisc in CommonUtility in intact-portal-indexer*/
+         * For ref. The Interactions.xml can be created with a method saveInteractioninDisc in CommonUtility in intact-portal-indexer*/
         Collection<SearchInteraction> searchInteractions = TestUtil.getInteractionObjFromXml("./src/test/resources/Interactions.xml");
         interactionIndexService.save(searchInteractions, Duration.ofMillis(100));
         assertEquals(10, interactionSearchService.countTotal());
@@ -312,12 +313,12 @@ public class InteractionSearchServiceTest {
                 false,
                 0,
                 10);
-        assertEquals(5, interactionOp.getTotalElements());
+        assertEquals(4, interactionOp.getTotalElements());
     }
 
     /*
-    * Expected interactions when queried by a interactor field
-    **/
+     * Expected interactions when queried by a interactor field
+     **/
 
     @Test
     public void findInteractionsByInteractorIndexedField() {

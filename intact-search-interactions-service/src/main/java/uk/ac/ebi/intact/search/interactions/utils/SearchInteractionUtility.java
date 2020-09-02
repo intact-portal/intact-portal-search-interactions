@@ -19,12 +19,16 @@ public class SearchInteractionUtility {
         Criteria conditions;
         Criteria userConditions = null;
         Criteria documentConditions = new Criteria(DOCUMENT_TYPE).is(DocumentType.INTERACTION);
-        List<String> words;
+        List<String> words = new ArrayList<>();
 
         //We prepare the term to split by several characters
 
         if (searchTerms != null && !searchTerms.isEmpty()) {
-            words = Arrays.asList(searchTerms.split("[\\s,\\n]"));
+            if (searchTerms.startsWith("\"") && searchTerms.endsWith("\"")) {
+                words.add(searchTerms);
+            } else {
+                words = Arrays.asList(searchTerms.split("[\\s,\\n]"));
+            }
 
             if (batchSearch) {
                 userConditions = batchSearchConditions(words);
@@ -38,7 +42,7 @@ public class SearchInteractionUtility {
                                         .or(AC_B_STR).is(word)
                                         .or(AC_STR).is(word);
                             } else {
-                                userConditions = new Criteria(DEFAULT).is(word);
+                                userConditions = new Criteria(DEFAULT).expression(word);
                             }
                         } else {
                             if (isEBIAc(word)) {
@@ -46,7 +50,7 @@ public class SearchInteractionUtility {
                                         .or(AC_B_STR).is(word)
                                         .or(AC_STR).is(word);
                             } else {
-                                userConditions = userConditions.or(DEFAULT).is(word);
+                                userConditions = userConditions.or(DEFAULT).expression(word);
                             }
                         }
                     }
