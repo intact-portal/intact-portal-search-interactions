@@ -54,6 +54,8 @@ public class SearchInteractionFields {
     public static final String FEATURE_B = "feature_B";
     public static final String FEATURE_SHORTLABEL_A = "feature_shortlabel_A";
     public static final String FEATURE_SHORTLABEL_B = "feature_shortlabel_B";
+    public static final String FEATURE_TYPE_A = "feature_type_A";
+    public static final String FEATURE_TYPE_B = "feature_type_B";
     public static final String STOICHIOMETRY_A = "stoichiometry_A";
     public static final String STOICHIOMETRY_B = "stoichiometry_B";
     public static final String IDENTIFICATION_METHOD_A = "identification_method_A";
@@ -74,6 +76,7 @@ public class SearchInteractionFields {
     public static final String ALL_ANNOTATIONS = "all_annotations";
     public static final String ANNOTATIONS = "annotations";
     public static final String PARAMETERS = "parameters";
+    public static final String PARAMETER_TYPES = "parameter_types";
     public static final String CREATION_DATE = "creation_date";
     public static final String UPDATION_DATE = "updation_date";
     public static final String CHECKSUM = "checksum";

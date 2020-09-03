@@ -126,6 +126,12 @@ public class SearchInteraction {
     @Field(FEATURE_SHORTLABEL_B)
     private Set<String> featureShortLabelB;
 
+    @Field(FEATURE_TYPE_A)
+    private Set<String> featureTypesA;
+
+    @Field(FEATURE_TYPE_B)
+    private Set<String> featureTypesB;
+
     @Field(FEATURE_COUNT)
     private Integer featureCount;
 
@@ -171,6 +177,9 @@ public class SearchInteraction {
 
     @Field(PARAMETERS)
     private Set<String> parameters;
+
+    @Field(PARAMETER_TYPES)
+    private Set<String> parameterTypes;
 
     @Field(CREATION_DATE)
     private Date creationDate;
@@ -272,7 +281,7 @@ public class SearchInteraction {
                              String typeMIIdentifier, boolean disruptedByMutation,
                              boolean mutationA, boolean mutationB, int binaryInteractionId, String acA, String acB,
                              Integer featureCount, String descriptionA, String descriptionB,
-                             List<SearchChildInteractor> searchChildInteractors, String intactNameA, String intactNameB, String publicationPubmedIdentifier, String documentType) {
+                             List<SearchChildInteractor> searchChildInteractors, String intactNameA, String intactNameB, String publicationPubmedIdentifier, Set<String> featureTypesA, Set<String> featureTypesB, Set<String> parameterTypes, String documentType) {
         this.count = count;
         this.idA = idA;
         this.idB = idB;
@@ -333,7 +342,34 @@ public class SearchInteraction {
         this.intactNameA = intactNameA;
         this.intactNameB = intactNameB;
         this.publicationPubmedIdentifier = publicationPubmedIdentifier;
+        this.featureTypesA = featureTypesA;
+        this.featureTypesB = featureTypesB;
+        this.parameterTypes = parameterTypes;
         this.documentType = documentType;
+    }
+
+    public Set<String> getFeatureTypesA() {
+        return featureTypesA;
+    }
+
+    public void setFeatureTypesA(Set<String> featureTypesA) {
+        this.featureTypesA = featureTypesA;
+    }
+
+    public Set<String> getFeatureTypesB() {
+        return featureTypesB;
+    }
+
+    public void setFeatureTypesB(Set<String> featureTypesB) {
+        this.featureTypesB = featureTypesB;
+    }
+
+    public Set<String> getParameterTypes() {
+        return parameterTypes;
+    }
+
+    public void setParameterTypes(Set<String> parameterTypes) {
+        this.parameterTypes = parameterTypes;
     }
 
     public String getPublicationPubmedIdentifier() {
@@ -973,6 +1009,8 @@ public class SearchInteraction {
                 ", featureB=" + featureB +
                 ", featureShortLabelA=" + featureShortLabelA +
                 ", featureShortLabelB=" + featureShortLabelB +
+                ", featureTypesA=" + featureTypesA +
+                ", featureTypesB=" + featureTypesB +
                 ", featureCount=" + featureCount +
                 ", stoichiometryA='" + stoichiometryA + '\'' +
                 ", stoichiometryB='" + stoichiometryB + '\'' +
@@ -988,6 +1026,7 @@ public class SearchInteraction {
                 ", allAnnotations=" + allAnnotations +
                 ", annotations=" + annotations +
                 ", parameters=" + parameters +
+                ", parameterTypes=" + parameterTypes +
                 ", creationDate=" + creationDate +
                 ", updationDate=" + updationDate +
                 ", checksums=" + checksums +
@@ -1006,7 +1045,7 @@ public class SearchInteraction {
                 ", uniqueIdA='" + uniqueIdA + '\'' +
                 ", uniqueIdB='" + uniqueIdB + '\'' +
                 ", publicationIdentifiers=" + publicationIdentifiers +
-                ", publicationPubmedIdentifier=" + publicationPubmedIdentifier +
+                ", publicationPubmedIdentifier='" + publicationPubmedIdentifier + '\'' +
                 ", count=" + count +
                 ", typeMIA='" + typeMIA + '\'' +
                 ", typeMIB='" + typeMIB + '\'' +

@@ -504,7 +504,7 @@
   <field name="confidence_values" type="text_general" multiValued="true"/>
   <field name="count" type="plongs"/>
   <field name="creation_date" type="pdates"/>
-  <field name="default" type="text_en_splitting_tight_ngram" multiValued="true" indexed="true" required="true" stored="false"/>
+  <field name="default" type="text_en_splitting_tight_ngram" multiValued="true" indexed="true" stored="false"/>
   <field name="search" type="text_search" multiValued="true" indexed="true" stored="false"/>
   <field name="description" type="text_general"/>
   <field name="descriptionA" type="text_general"/>
@@ -521,6 +521,8 @@
   <field name="experimental_role_B" type="text_general"/>
   <field name="feature_A" type="text_general" multiValued="true"/>
   <field name="feature_B" type="text_general" multiValued="true"/>
+  <field name="feature_type_A" type="text_general" multiValued="true" indexed="true" stored="true"/>
+  <field name="feature_type_B" type="text_general" multiValued="true" indexed="true" stored="true"/>
   <field name="feature_count" type="plongs"/>
   <field name="feature_shortlabel_A" type="text_general" multiValued="true"/>
   <field name="feature_shortlabel_B" type="text_general" multiValued="true"/>
@@ -555,6 +557,7 @@
   <field name="mutation_B" type="booleans"/>
   <field name="negative" type="booleans"/>
   <field name="parameters" type="text_general" multiValued="true"/>
+  <field name="parameter_types" type="text_general" multiValued="true" indexed="true" stored="true"/>
   <field name="publication_authors" type="text_general" multiValued="true"/>
   <field name="publication_id" type="text_general"/>
   <field name="publication_identifiers" type="text_general" multiValued="true"/>
@@ -686,7 +689,6 @@
   <copyField source="host_organism" dest="host_organism_str" maxChars="256"/>
   <copyField source="publication_authors" dest="publication_authors_str" maxChars="256"/>
   <!-- Check if you need to remove fields from default, like identifiers -->
-  <copyField source="*" dest="default"/>
   <copyField source="source_database" dest="source_database_str" maxChars="256"/>
   <copyField source="ac" dest="ac_str" maxChars="256"/>
   <copyField source="type" dest="type_str" maxChars="256"/>
@@ -696,4 +698,38 @@
   <copyField source="acA" dest="acA_str" maxChars="256"/>
   <copyField source="acB" dest="acB_str" maxChars="256"/>
   <copyField source="*" dest="search"/>
+
+  <!--copy selected fields into default-->
+
+  <copyField source="moleculeA" dest="default"/>
+  <copyField source="moleculeB" dest="default"/>
+  <copyField source="intactNameA" dest="default"/>
+  <copyField source="intactNameB" dest="default"/>
+  <copyField source="altIdsA" dest="default" />
+  <copyField source="altIdsB" dest="default" />
+  <copyField source="idA" dest="default" />
+  <copyField source="idB" dest="default" />
+  <copyField source="identifiers" dest="default" />
+  <copyField source="publication_identifiers" dest="default" />
+  <copyField source="uniqueIdA" dest="default" />
+  <copyField source="uniqueIdB" dest="default" />
+  <copyField source="xrefs" dest="default" />
+  <copyField source="xrefsA" dest="default" />
+  <copyField source="xrefsB" dest="default" />
+  <copyField source="aliasesA" dest="default"/>
+  <copyField source="aliasesB" dest="default"/>
+  <copyField source="detection_method" dest="default"/>
+  <copyField source="identification_method_A" dest="default" />
+  <copyField source="identification_method_B" dest="default" />
+  <copyField source="type" dest="default"/>
+  <copyField source="publication_authors" dest="default" />
+  <copyField source="first_author" dest="default"/>
+  <copyField source="feature_shortlabel_A" dest="default" />
+  <copyField source="feature_shortlabel_B" dest="default" />
+  <copyField source="feature_shortlabel_A" dest="default" />
+  <copyField source="feature_type_A" dest="default" />
+  <copyField source="feature_type_B" dest="default" />
+  <copyField source="parameter_types" dest="default" />
+  <copyField source="descriptionA" dest="default" />
+  <copyField source="descriptionB" dest="default" />
 </schema>
