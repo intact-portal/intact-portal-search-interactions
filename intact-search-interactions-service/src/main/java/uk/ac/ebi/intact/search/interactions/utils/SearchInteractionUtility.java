@@ -15,11 +15,29 @@ import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields
  */
 public class SearchInteractionUtility {
 
+    //Custom version of ClientUtils.escapeQueryChars from solrJ
+    public static String escapeQueryChars(String s) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            // These characters are part of the query syntax and must be escaped
+            if (c == '\\' || c == '+' || c == '-' || c == '!' || c == '(' || c == ')' || c == ':'
+                    || c == '^' || c == '[' || c == ']' || c == '{' || c == '}' || c == '~'
+                    || c == '?' || c == '|' || c == '&' || c == ';' || c == '/'
+                    || Character.isWhitespace(c)) {
+                sb.append('\\');
+            }
+            sb.append(c);
+        }
+        return sb.toString();
+    }
+
     public Criteria createSearchConditions(String searchTerms, boolean batchSearch) {
         Criteria conditions;
         Criteria userConditions = null;
         Criteria documentConditions = new Criteria(DOCUMENT_TYPE).is(DocumentType.INTERACTION);
         List<String> words = new ArrayList<>();
+        searchTerms = escapeQueryChars(searchTerms);
 
         //We prepare the term to split by several characters
 
@@ -142,7 +160,6 @@ public class SearchInteractionUtility {
         Criteria conditions = new Criteria(INTACT_MISCORE).between(minScore, maxScore);
         filterQueries.add(new SimpleFilterQuery(conditions));
     }
-
 
     // interSpecies: if false it creates 'and' condition between two species
     //               if true it creates 'or' condition between set of species

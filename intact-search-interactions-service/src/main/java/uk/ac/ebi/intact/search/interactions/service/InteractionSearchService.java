@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.repository.InteractionRepository;
 import uk.ac.ebi.intact.search.interactions.utils.DocumentType;
+import uk.ac.ebi.intact.search.interactions.utils.SearchInteractionUtility;
 
 import java.util.Optional;
 import java.util.Set;
@@ -36,6 +37,7 @@ public class InteractionSearchService {
     }
 
     public Page<SearchInteraction> findInteractions(String query) {
+        query = SearchInteractionUtility.escapeQueryChars(query);
         return interactionRepository.findInteractions(query, PageRequest.of(0, 10));
     }
 
