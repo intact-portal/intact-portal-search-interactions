@@ -147,8 +147,17 @@ public class SearchInteraction {
     @Field(IDENTIFICATION_METHOD_B)
     private Set<String> identificationMethodB;
 
+    @Field(IDENTIFICATION_METHOD_MI_IDENTIFIER_A)
+    private Set<String> identificationMethodMIIdentifierA;
+
+    @Field(IDENTIFICATION_METHOD_MI_IDENTIFIER_B)
+    private Set<String> identificationMethodMIIdentifierB;
+
     @Field(DETECTION_METHOD)
     private String detectionMethod;
+
+    @Field(DETECTION_METHOD_MI_IDENTIFIER)
+    private String detectionMethodMIIdentifier;
 
     @Field(PUBLICATION_AUTHORS)
     private Set<String> authors;
@@ -281,7 +290,11 @@ public class SearchInteraction {
                              String typeMIIdentifier, boolean disruptedByMutation,
                              boolean mutationA, boolean mutationB, int binaryInteractionId, String acA, String acB,
                              Integer featureCount, String descriptionA, String descriptionB,
-                             List<SearchChildInteractor> searchChildInteractors, String intactNameA, String intactNameB, String publicationPubmedIdentifier, Set<String> featureTypesA, Set<String> featureTypesB, Set<String> parameterTypes, String documentType) {
+                             List<SearchChildInteractor> searchChildInteractors, String intactNameA, String intactNameB,
+                             String publicationPubmedIdentifier, Set<String> featureTypesA, Set<String> featureTypesB,
+                             Set<String> parameterTypes, String detectionMethodMIIdentifier,
+                             Set<String> identificationMethodMIIdentifierA, Set<String> identificationMethodMIIdentifierB,
+                             String documentType) {
         this.count = count;
         this.idA = idA;
         this.idB = idB;
@@ -313,7 +326,10 @@ public class SearchInteraction {
         this.stoichiometryB = stoichiometryB;
         this.identificationMethodA = identificationMethodA;
         this.identificationMethodB = identificationMethodB;
+        this.identificationMethodMIIdentifierA = identificationMethodMIIdentifierA;
+        this.identificationMethodMIIdentifierB = identificationMethodMIIdentifierB;
         this.detectionMethod = detectionMethod;
+        this.detectionMethodMIIdentifier = detectionMethodMIIdentifier;
         this.authors = authors;
         this.sourceDatabase = sourceDatabase;
         this.identifiers = identifiers;
@@ -346,6 +362,30 @@ public class SearchInteraction {
         this.featureTypesB = featureTypesB;
         this.parameterTypes = parameterTypes;
         this.documentType = documentType;
+    }
+
+    public Set<String> getIdentificationMethodMIIdentifierA() {
+        return identificationMethodMIIdentifierA;
+    }
+
+    public void setIdentificationMethodMIIdentifierA(Set<String> identificationMethodMIIdentifierA) {
+        this.identificationMethodMIIdentifierA = identificationMethodMIIdentifierA;
+    }
+
+    public Set<String> getIdentificationMethodMIIdentifierB() {
+        return identificationMethodMIIdentifierB;
+    }
+
+    public void setIdentificationMethodMIIdentifierB(Set<String> identificationMethodMIIdentifierB) {
+        this.identificationMethodMIIdentifierB = identificationMethodMIIdentifierB;
+    }
+
+    public String getDetectionMethodMIIdentifier() {
+        return detectionMethodMIIdentifier;
+    }
+
+    public void setDetectionMethodMIIdentifier(String detectionMethodMIIdentifier) {
+        this.detectionMethodMIIdentifier = detectionMethodMIIdentifier;
     }
 
     public Set<String> getFeatureTypesA() {
@@ -1016,7 +1056,10 @@ public class SearchInteraction {
                 ", stoichiometryB='" + stoichiometryB + '\'' +
                 ", identificationMethodA=" + identificationMethodA +
                 ", identificationMethodB=" + identificationMethodB +
+                ", identificationMethodMIIdentifierA=" + identificationMethodMIIdentifierA +
+                ", identificationMethodMIIdentifierB=" + identificationMethodMIIdentifierB +
                 ", detectionMethod='" + detectionMethod + '\'' +
+                ", detectionMethodMIIdentifier='" + detectionMethodMIIdentifier + '\'' +
                 ", authors=" + authors +
                 ", sourceDatabase='" + sourceDatabase + '\'' +
                 ", identifiers=" + identifiers +

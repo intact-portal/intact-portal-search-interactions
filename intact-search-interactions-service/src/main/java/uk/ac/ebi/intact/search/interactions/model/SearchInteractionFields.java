@@ -60,9 +60,12 @@ public class SearchInteractionFields {
     public static final String STOICHIOMETRY_B = "stoichiometry_B";
     public static final String IDENTIFICATION_METHOD_A = "identification_method_A";
     public static final String IDENTIFICATION_METHOD_B = "identification_method_B";
+    public static final String IDENTIFICATION_METHOD_MI_IDENTIFIER_A = "identification_method_mi_identifier_A";
+    public static final String IDENTIFICATION_METHOD_MI_IDENTIFIER_B = "identification_method_mi_identifier_B";
 
     public static final String DETECTION_METHOD = "detection_method";
     public static final String DETECTION_METHOD_STR = "detection_method_str";
+    public static final String DETECTION_METHOD_MI_IDENTIFIER = "detection_method_mi_identifier";
     public static final String PUBLICATION_AUTHORS = "publication_authors";
     public static final String FIRST_AUTHOR = "first_author";
     public static final String PUBLICATION_IDENTIFIERS = "publication_identifiers";
