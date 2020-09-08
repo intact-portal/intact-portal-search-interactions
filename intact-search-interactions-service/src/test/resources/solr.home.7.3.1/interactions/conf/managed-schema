@@ -720,19 +720,4 @@
   <copyField source="feature_type_B" dest="default" />
   <copyField source="descriptionA" dest="default" />
   <copyField source="descriptionB" dest="default" />
-
-  <!-- To be decided to be kept or not -->
-
-    <copyField source="speciesA" dest="default"/>
-    <copyField source="speciesB" dest="default"/>
-    <copyField source="taxIdA" dest="default"/>
-    <copyField source="taxIdB" dest="default"/>
-    <copyField source="parameter_types" dest="default" />
-    <copyField source="host_organism" dest="default"/>
-    <copyField source="typeA" dest="default"/>
-    <copyField source="typeB" dest="default"/>
-    <copyField source="type_MI_A" dest="default"/>
-    <copyField source="type_MI_B" dest="default"/>
-    <!--feature range need to be added in index and then here, just have featureA and featureB and remove feature shortlabel and feature type from above default -->
-    <!--publication annotations need to be added in index and then here -->
 </schema>
