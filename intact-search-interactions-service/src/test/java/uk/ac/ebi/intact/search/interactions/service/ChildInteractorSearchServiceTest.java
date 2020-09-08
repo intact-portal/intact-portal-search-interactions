@@ -63,7 +63,7 @@ public class ChildInteractorSearchServiceTest {
     @Test
     public void getUniqueChildInteractorsFromInteractionQuery() {
         GroupPage<SearchChildInteractor> page = childInteractorSearchService.findInteractorsWithGroup(
-                "Rattus norvegicus (Rat)",
+                "rat",
                 false,
                 null,
                 null,
@@ -157,7 +157,7 @@ public class ChildInteractorSearchServiceTest {
     public void checkInteractionAndChildInteractorsSync() {
 
         //Interactors
-        GroupPage<SearchChildInteractor> childInteractorsOp = childInteractorSearchService.findInteractorsWithGroup("Rattus norvegicus (Rat)",
+        GroupPage<SearchChildInteractor> childInteractorsOp = childInteractorSearchService.findInteractorsWithGroup("rat",
                 false,
                 null,
                 null,
@@ -175,7 +175,7 @@ public class ChildInteractorSearchServiceTest {
 
 
         long numInteractors = childInteractorSearchService.countInteractorsWithGroup(
-                "Rattus norvegicus (Rat)",
+                "rat",
                 false,
                 null,
                 null,
@@ -202,7 +202,7 @@ public class ChildInteractorSearchServiceTest {
         }
 
         //Interactions
-        FacetPage<SearchInteraction> searchInteractionsOp = interactionSearchService.findInteractionWithFacet("Rattus norvegicus (Rat)",
+        FacetPage<SearchInteraction> searchInteractionsOp = interactionSearchService.findInteractionWithFacet("rat",
                 false,
                 null,
                 null,

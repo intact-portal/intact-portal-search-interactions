@@ -212,6 +212,9 @@
     <void property="detectionMethod">
      <string>molecular sieving</string>
     </void>
+    <void property="detectionMethodMIIdentifier">
+     <string>MI:0071</string>
+    </void>
     <void property="documentType">
      <string>interaction</string>
     </void>
@@ -264,6 +267,26 @@
       </void>
      </object>
     </void>
+    <void property="featureTypesA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>gst tag</string>
+      </void>
+      <void method="add">
+       <string>sufficient to bind</string>
+      </void>
+     </object>
+    </void>
+    <void property="featureTypesB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>sufficient to bind</string>
+      </void>
+      <void method="add">
+       <string>his tag</string>
+      </void>
+     </object>
+    </void>
     <void property="firstAuthor">
      <string>Ciferri C. et al. (2005)	
 </string>
@@ -288,6 +311,20 @@
      <object class="java.util.HashSet">
       <void method="add">
        <string>predetermined</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifierA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0396</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifierB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0396</string>
       </void>
      </object>
     </void>
@@ -1200,6 +1237,9 @@
     <void property="detectionMethod">
      <string>affinity chrom</string>
     </void>
+    <void property="detectionMethodMIIdentifier">
+     <string>MI:0004</string>
+    </void>
     <void property="documentType">
      <string>interaction</string>
     </void>
@@ -1223,6 +1263,13 @@
      <object class="java.util.HashSet">
       <void method="add">
        <string>c-terminal</string>
+      </void>
+     </object>
+    </void>
+    <void property="featureTypesA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>his tag</string>
       </void>
      </object>
     </void>
@@ -1250,6 +1297,20 @@
      <object class="java.util.HashSet">
       <void method="add">
        <string>predetermined</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifierA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0396</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifierB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0396</string>
       </void>
      </object>
     </void>
@@ -2001,6 +2062,9 @@
     <void property="detectionMethod">
      <string>density sedimentation</string>
     </void>
+    <void property="detectionMethodMIIdentifier">
+     <string>MI:0029</string>
+    </void>
     <void property="documentType">
      <string>interaction</string>
     </void>
@@ -2044,6 +2108,20 @@
       </void>
      </object>
     </void>
+    <void property="featureTypesA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>his tag</string>
+      </void>
+     </object>
+    </void>
+    <void property="featureTypesB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>his tag</string>
+      </void>
+     </object>
+    </void>
     <void property="firstAuthor">
      <string>Ciferri C. et al. (2005)	
 </string>
@@ -2068,6 +2146,20 @@
      <object class="java.util.HashSet">
       <void method="add">
        <string>predetermined</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifierA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0396</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifierB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0396</string>
       </void>
      </object>
     </void>
@@ -2958,6 +3050,9 @@
     <void property="detectionMethod">
      <string>density sedimentation</string>
     </void>
+    <void property="detectionMethodMIIdentifier">
+     <string>MI:0029</string>
+    </void>
     <void property="documentType">
      <string>interaction</string>
     </void>
@@ -3001,6 +3096,20 @@
       </void>
      </object>
     </void>
+    <void property="featureTypesA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>his tag</string>
+      </void>
+     </object>
+    </void>
+    <void property="featureTypesB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>gst tag</string>
+      </void>
+     </object>
+    </void>
     <void property="firstAuthor">
      <string>Ciferri C. et al. (2005)	
 </string>
@@ -3025,6 +3134,20 @@
      <object class="java.util.HashSet">
       <void method="add">
        <string>predetermined</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifierA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0396</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifierB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0396</string>
       </void>
      </object>
     </void>
@@ -3903,6 +4026,9 @@
     <void property="detectionMethod">
      <string>density sedimentation</string>
     </void>
+    <void property="detectionMethodMIIdentifier">
+     <string>MI:0029</string>
+    </void>
     <void property="documentType">
      <string>interaction</string>
     </void>
@@ -3946,6 +4072,20 @@
       </void>
      </object>
     </void>
+    <void property="featureTypesA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>his tag</string>
+      </void>
+     </object>
+    </void>
+    <void property="featureTypesB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>gst tag</string>
+      </void>
+     </object>
+    </void>
     <void property="firstAuthor">
      <string>Ciferri C. et al. (2005)	
 </string>
@@ -3970,6 +4110,20 @@
      <object class="java.util.HashSet">
       <void method="add">
        <string>predetermined</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifierA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0396</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifierB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0396</string>
       </void>
      </object>
     </void>
@@ -4886,6 +5040,9 @@
     <void property="detectionMethod">
      <string>anti bait coip</string>
     </void>
+    <void property="detectionMethodMIIdentifier">
+     <string>MI:0006</string>
+    </void>
     <void property="documentType">
      <string>interaction</string>
     </void>
@@ -4925,6 +5082,20 @@
      <object class="java.util.HashSet">
       <void method="add">
        <string>western blot</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifierA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0113</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifierB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0113</string>
       </void>
      </object>
     </void>
@@ -5603,6 +5774,9 @@
     <void property="detectionMethod">
      <string>anti bait coip</string>
     </void>
+    <void property="detectionMethodMIIdentifier">
+     <string>MI:0006</string>
+    </void>
     <void property="documentType">
      <string>interaction</string>
     </void>
@@ -5642,6 +5816,20 @@
      <object class="java.util.HashSet">
       <void method="add">
        <string>western blot</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifierA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0113</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifierB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0113</string>
       </void>
      </object>
     </void>
@@ -6382,6 +6570,9 @@
     <void property="detectionMethod">
      <string>anti bait coip</string>
     </void>
+    <void property="detectionMethodMIIdentifier">
+     <string>MI:0006</string>
+    </void>
     <void property="documentType">
      <string>interaction</string>
     </void>
@@ -6421,6 +6612,20 @@
      <object class="java.util.HashSet">
       <void method="add">
        <string>western blot</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifierA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0113</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifierB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0113</string>
       </void>
      </object>
     </void>
@@ -7193,6 +7398,9 @@
     <void property="detectionMethod">
      <string>anti bait coip</string>
     </void>
+    <void property="detectionMethodMIIdentifier">
+     <string>MI:0006</string>
+    </void>
     <void property="documentType">
      <string>interaction</string>
     </void>
@@ -7232,6 +7440,20 @@
      <object class="java.util.HashSet">
       <void method="add">
        <string>western blot</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifierA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0113</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifierB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0113</string>
       </void>
      </object>
     </void>
@@ -7982,6 +8204,9 @@
     <void property="detectionMethod">
      <string>elisa</string>
     </void>
+    <void property="detectionMethodMIIdentifier">
+     <string>MI:0411</string>
+    </void>
     <void property="documentType">
      <string>interaction</string>
     </void>
@@ -8005,6 +8230,13 @@
      <object class="java.util.HashSet">
       <void method="add">
        <string>region</string>
+      </void>
+     </object>
+    </void>
+    <void property="featureTypesA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>biotin tag</string>
       </void>
      </object>
     </void>
@@ -8032,6 +8264,20 @@
      <object class="java.util.HashSet">
       <void method="add">
        <string>tag perox activity</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifierA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0981</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifierB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0981</string>
       </void>
      </object>
     </void>

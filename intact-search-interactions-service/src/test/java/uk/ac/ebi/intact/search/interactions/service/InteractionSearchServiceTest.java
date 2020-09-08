@@ -2,6 +2,7 @@ package uk.ac.ebi.intact.search.interactions.service;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -60,14 +61,15 @@ public class InteractionSearchServiceTest {
      */
     @Test
     public void findByAuthor() {
-        Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("Shorter J.");
+        Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("\"Shorter J\"");
         assertEquals(4, interactionOp.getTotalElements());
     }
 
     /**
      * Behaviour If the User types "Species Name" in search box
+     * TODO...Depending on whether we index species in future, we include/exclude this
      */
-    @Test
+    @Ignore
     public void findBySpecies() {
         Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("Rattus norvegicus (Rat)");
         assertEquals(4, interactionOp.getTotalElements());
@@ -78,8 +80,26 @@ public class InteractionSearchServiceTest {
      */
     @Test
     public void findByInteractionType() {
-        Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("physical association");
+        Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("\"physical association\"");
         assertEquals(10, interactionOp.getTotalElements());
+    }
+
+    /**
+     * Behaviour If the User types "SearchInteraction Type MI identifier" in search box
+     */
+    @Test
+    public void findByInteractionTypeMIIdentifier() {
+        Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("MI:0915");
+        assertEquals(10, interactionOp.getTotalElements());
+    }
+
+    /**
+     * Behaviour If the User types "SearchInteraction Interaction identifier" in search box
+     */
+    @Test
+    public void findByInteractionIdentifier() {
+        Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("EBI-10000862");
+        assertEquals(1, interactionOp.getTotalElements());
     }
 
     /**
@@ -87,17 +107,118 @@ public class InteractionSearchServiceTest {
      */
     @Test
     public void findByIntDetMethod() {
-        Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("molecular sieving");
+        Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("\"molecular sieving\"");
+        assertEquals(1, interactionOp.getTotalElements());
+    }
+
+    /**
+     * Behaviour If the User types "SearchInteraction Participant Detection Method" in search box
+     */
+    @Test
+    public void findByParticipantDetMethod() {
+        Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("predetermined");
+        assertEquals(5, interactionOp.getTotalElements());
+    }
+
+    /**
+     * Behaviour If the User types "SearchInteraction Interactor Xref" in search box
+     * includes identifier test
+     */
+    @Test
+    public void findByInteractorXref() {
+        Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("IPR023601");
+        assertEquals(1, interactionOp.getTotalElements());
+    }
+
+    /**
+     * Behaviour If the User types "SearchInteraction Interactor Intact name" in search box
+     */
+    @Test
+    public void findByInteractorIntactName() {
+        Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("bet1l_rat");
+        assertEquals(4, interactionOp.getTotalElements());
+    }
+
+    /**
+     * Behaviour If the User types "SearchInteraction Interactor Full name" in search box
+     */
+    @Test
+    public void findByInteractorFullName() {
+        Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("\"Transcription factor p65\"");
+        assertEquals(1, interactionOp.getTotalElements());
+    }
+
+    /**
+     * Behaviour If the User types "SearchInteraction Interaction Xref" in search box
+     */
+    @Test
+    public void findByInteractionXref() {
+        Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("IM-23550-1");
+        assertEquals(4, interactionOp.getTotalElements());
+    }
+
+    /**
+     * Behaviour If the User types "SearchInteraction Interactor Aliases" in search box
+     */
+    @Test
+    public void findByInteractorAliases() {
+        Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("NFKB3");
         assertEquals(1, interactionOp.getTotalElements());
     }
 
     /**
      * Behaviour If the User types "Host Organism" in search box
+     * TODO...Depending on whether we index host organism in future, we include/exclude this
      */
-    @Test
+    @Ignore
     public void findByHostOrganism() {
         Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("\"In vitro\"");
         assertEquals(6, interactionOp.getTotalElements());
+    }
+
+    /**
+     * Behaviour If the User types "SearchInteraction Feature ShortLabel" in search box
+     */
+    @Test
+    public void findByfeatureShortLabel() {
+        Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("c-terminal");
+        assertEquals(5, interactionOp.getTotalElements());
+    }
+
+    /**
+     * Behaviour If the User types "SearchInteraction Feature Type" in search box
+     */
+    @Test
+    public void findByfeatureType() {
+        Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("\"gst tag\"");
+        assertEquals(3, interactionOp.getTotalElements());
+    }
+
+    /**
+     * Behaviour If the User types "SearchInteraction Publication Identifier" in search box
+     */
+    @Test
+    public void findByPublicationIdentifier() {
+        Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("15961401");
+        assertEquals(5, interactionOp.getTotalElements());
+    }
+
+    /**
+     * Behaviour If the User types middle chunk of a word with delimiter in search box
+     */
+    @Test
+    public void edgeNGramsTest1() {
+        Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("F-kap");
+        assertEquals(0, interactionOp.getTotalElements());
+    }
+
+    /**
+     * Behaviour If the User types middle chunk of a word in search box
+     */
+    @Test
+    public void edgeNGramsTest2() {
+        Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("FKB3");
+        assertEquals(0, interactionOp.getTotalElements());
     }
 
     /**
@@ -300,7 +421,7 @@ public class InteractionSearchServiceTest {
     public void findInteractionsBySpeciesWithFacet() {
 
         FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
-                "Rattus norvegicus (Rat)",
+                "rat",
                 false,
                 null,
                 null,
