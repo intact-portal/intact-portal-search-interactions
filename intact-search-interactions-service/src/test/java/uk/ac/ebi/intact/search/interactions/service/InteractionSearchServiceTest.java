@@ -58,6 +58,7 @@ public class InteractionSearchServiceTest {
 
     /**
      * Behaviour If the User types "Author name" in search box
+     * includes min gram size check
      */
     @Test
     public void findByAuthor() {
@@ -178,6 +179,7 @@ public class InteractionSearchServiceTest {
 
     /**
      * Behaviour If the User types "SearchInteraction Feature ShortLabel" in search box
+     * includes preserve original index Test
      */
     @Test
     public void findByfeatureShortLabel() {
@@ -204,7 +206,7 @@ public class InteractionSearchServiceTest {
     }
 
     /**
-     * Behaviour If the User types middle chunk of a word with delimiter in search box
+     * Behaviour If the User types "middle chunk of a word with delimiter" in search box
      */
     @Test
     public void edgeNGramsTest1() {
@@ -213,12 +215,30 @@ public class InteractionSearchServiceTest {
     }
 
     /**
-     * Behaviour If the User types middle chunk of a word in search box
+     * Behaviour If the User types "middle chunk of a word "in search box
      */
     @Test
     public void edgeNGramsTest2() {
         Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("FKB3");
         assertEquals(0, interactionOp.getTotalElements());
+    }
+
+    /**
+     * Behaviour If the User types "word separated by delimiter" in search box
+     */
+    @Test
+    public void wordPartIndexTimeGeneration() {
+        Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("kappaB");
+        assertEquals(1, interactionOp.getTotalElements());
+    }
+
+    /**
+     * Behaviour If the User types "concatenation after removing delimiter" in search box
+     */
+    @Test
+    public void concatenationOfDelimitedTerm() {
+        Page<SearchInteraction> interactionOp = interactionSearchService.findInteractions("NFkappaB");
+        assertEquals(1, interactionOp.getTotalElements());
     }
 
     /**
