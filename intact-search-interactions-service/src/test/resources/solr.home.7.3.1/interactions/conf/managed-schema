@@ -718,7 +718,6 @@
   <copyField source="feature_shortlabel_B" dest="default" />
   <copyField source="feature_type_A" dest="default" />
   <copyField source="feature_type_B" dest="default" />
-  <copyField source="parameter_types" dest="default" />
   <copyField source="descriptionA" dest="default" />
   <copyField source="descriptionB" dest="default" />
 </schema>
