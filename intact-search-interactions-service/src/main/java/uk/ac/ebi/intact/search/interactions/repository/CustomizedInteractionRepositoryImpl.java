@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.solr.core.RequestMethod;
 import org.springframework.data.solr.core.SolrOperations;
 import org.springframework.data.solr.core.query.*;
 import org.springframework.data.solr.core.query.result.FacetPage;
@@ -118,7 +119,8 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 //            search.addSort(DEFAULT_QUERY_SORT_WITH_QUERY);
 //        }
 
-        return solrOperations.queryForFacetPage(INTERACTIONS, search, SearchInteraction.class);
+        return solrOperations.queryForFacetPage(INTERACTIONS, search, SearchInteraction.class,
+                (batchSearch ? RequestMethod.POST : RequestMethod.GET));
     }
 
     /**
@@ -207,7 +209,8 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         search.addProjectionOnField(new SimpleField(MUTATION_A));
         search.addProjectionOnField(new SimpleField(MUTATION_B));
 
-        return solrOperations.queryForPage(INTERACTIONS, search, SearchInteraction.class);
+        return solrOperations.queryForPage(INTERACTIONS, search, SearchInteraction.class,
+                (batchSearch ? RequestMethod.POST : RequestMethod.GET));
     }
 
     /**
@@ -253,7 +256,8 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
             }
         }
 
-        return solrOperations.count(INTERACTIONS, SimpleQuery.fromQuery(search));
+        return solrOperations.count(INTERACTIONS, SimpleQuery.fromQuery(search),
+                (batchSearch ? RequestMethod.POST : RequestMethod.GET));
     }
 
     /**
@@ -312,6 +316,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
             fq.addCriteria(c);
             search.addFilterQuery(fq);
         }
-        return solrOperations.count(INTERACTIONS, SimpleQuery.fromQuery(search));
+        return solrOperations.count(INTERACTIONS, SimpleQuery.fromQuery(search),
+                (batchSearch ? RequestMethod.POST : RequestMethod.GET));
     }
 }

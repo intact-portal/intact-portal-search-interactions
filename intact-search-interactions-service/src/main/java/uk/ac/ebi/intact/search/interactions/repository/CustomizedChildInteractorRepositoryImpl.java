@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.solr.core.RequestMethod;
 import org.springframework.data.solr.core.SolrOperations;
 import org.springframework.data.solr.core.query.Criteria;
 import org.springframework.data.solr.core.query.FilterQuery;
@@ -98,7 +99,8 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
 //            search.addSort(DEFAULT_QUERY_SORT_WITH_QUERY);
 //        }
 
-        return solrOperations.queryForGroupPage(INTERACTIONS, search, SearchChildInteractor.class);
+        return solrOperations.queryForGroupPage(INTERACTIONS, search, SearchChildInteractor.class,
+                (batchSearch ? RequestMethod.POST : RequestMethod.GET));
     }
 
     /**
@@ -152,9 +154,10 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
         search.setGroupOptions(groupOptions);
 
         // pagination
-        search.setPageRequest(PageRequest.of(0,1));
+        search.setPageRequest(PageRequest.of(0, 1));
 
-        GroupPage<SearchChildInteractor> groupPage = solrOperations.queryForGroupPage(INTERACTIONS, search, SearchChildInteractor.class);
+        GroupPage<SearchChildInteractor> groupPage = solrOperations.queryForGroupPage(INTERACTIONS, search, SearchChildInteractor.class,
+                (batchSearch ? RequestMethod.POST : RequestMethod.GET));
         return groupPage.getGroupResult(SearchChildInteractorFields.DOCUMENT_ID).getGroupsCount();
     }
 }
