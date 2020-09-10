@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.utils.SearchInteractionUtility;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Set;
 
@@ -29,6 +30,8 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
     private static final int FACET_MIN_COUNT = 10000;
     private SolrOperations solrOperations;
     private SearchInteractionUtility searchInteractionUtility = new SearchInteractionUtility();
+    @Resource
+    private boolean isEmbeddedSolr;
 
     // default sorting for the query results
     //TODO Solve problems with multivalue fields that are not allow to be sorted. Schema-less create all the fields as multivalues
@@ -119,8 +122,10 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 //            search.addSort(DEFAULT_QUERY_SORT_WITH_QUERY);
 //        }
 
+        // isEmbeddedSolr parameter is needed for the batch search tests to work
+        // check https://issues.apache.org/jira/browse/SOLR-12858 for embedded POST request issue
         return solrOperations.queryForFacetPage(INTERACTIONS, search, SearchInteraction.class,
-                (batchSearch ? RequestMethod.POST : RequestMethod.GET));
+                ((batchSearch && !isEmbeddedSolr) ? RequestMethod.POST : RequestMethod.GET));
     }
 
     /**

@@ -26,7 +26,15 @@ public class SolrTestConfiguration {
     }
 
     @Bean
-    public SolrOperations solrTemplate(SolrClient client)  {
+    public SolrOperations solrTemplate(SolrClient client) {
         return new SolrTemplate(client);
+    }
+
+    /*
+     * Hack for https://issues.apache.org/jira/browse/SOLR-12858 for embedded POST request issue
+     * */
+    @Bean
+    public boolean isEmbeddedSolr() {
+        return true;
     }
 }

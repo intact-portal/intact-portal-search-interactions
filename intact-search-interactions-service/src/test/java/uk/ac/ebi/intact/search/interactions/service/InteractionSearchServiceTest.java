@@ -20,7 +20,8 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 /**
  * @author Elisabet Barrera
@@ -536,10 +537,7 @@ public class InteractionSearchServiceTest {
 
     @Test
     public void findInteractionsByCommaSeparatedInteractorPreferredIdString() {
-        // check https://issues.apache.org/jira/browse/SOLR-12858 for below issue
-        assertTrue("This test case has to be run manually, because embedded solr does not execute POST Solr request" +
-                "For this test, Comment this line and Change CustomizedInteractionRepositoryImpl.findInteractionWithFacet method" +
-                "line solrOperations.queryForFacetPage 'Request Method' to GET and revert later after test", false);
+        // check https://issues.apache.org/jira/browse/SOLR-12858 for embedded POST request issue
         FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
                 "Q96Q78,C9JGC4",
                 true,
@@ -565,10 +563,7 @@ public class InteractionSearchServiceTest {
 
     @Test
     public void findInteractionsByCommaSeparatedInteractorAliasesString() {
-        // check https://issues.apache.org/jira/browse/SOLR-12858 for below issue
-        assertTrue("This test case has to be run manually, because embedded solr does not execute POST Solr request" +
-                "For this test, Comment this line and Change CustomizedInteractionRepositoryImpl.findInteractionWithFacet method" +
-                "line solrOperations.queryForFacetPage 'Request Method' to GET and revert later after test", false);
+        // check https://issues.apache.org/jira/browse/SOLR-12858 for embedded POST request issue
         FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
                 "NFKB3,NUF2R",
                 true,
