@@ -258,6 +258,8 @@ public class InteractionSearchServiceTest {
                 0,
                 1,
                 false,
+                null,
+                null,
                 0,
                 10);
 
@@ -381,6 +383,8 @@ public class InteractionSearchServiceTest {
                 minMiscore,
                 maxMiscore,
                 false,
+                null,
+                null,
                 page,
                 size);
         assertEquals(1, interactionOp.getTotalElements());
@@ -429,6 +433,8 @@ public class InteractionSearchServiceTest {
                 minMiscore,
                 maxMiscore,
                 true,
+                null,
+                null,
                 page,
                 size);
         assertEquals(0, interactionOp.getTotalElements());
@@ -452,6 +458,8 @@ public class InteractionSearchServiceTest {
                 0,
                 1,
                 false,
+                null,
+                null,
                 0,
                 10);
         assertEquals(4, interactionOp.getTotalElements());
@@ -475,6 +483,8 @@ public class InteractionSearchServiceTest {
                 0,
                 1,
                 false,
+                null,
+                null,
                 0,
                 10);
         assertEquals(1, interactionOp.getTotalElements());
@@ -499,6 +509,8 @@ public class InteractionSearchServiceTest {
                 0,
                 1,
                 false,
+                null,
+                null,
                 0,
                 10);
         assertEquals(10, interactionOp.getTotalElements());
@@ -524,6 +536,8 @@ public class InteractionSearchServiceTest {
                 0,
                 1,
                 false,
+                null,
+                null,
                 0,
                 10);
         assertEquals(10, interactionOp.getTotalElements());
@@ -550,6 +564,8 @@ public class InteractionSearchServiceTest {
                 0,
                 1,
                 false,
+                null,
+                null,
                 0,
                 10);
         assertEquals(4, interactionOp.getTotalElements());
@@ -576,6 +592,8 @@ public class InteractionSearchServiceTest {
                 0,
                 1,
                 false,
+                null,
+                null,
                 0,
                 10);
         assertEquals(3, interactionOp.getTotalElements());

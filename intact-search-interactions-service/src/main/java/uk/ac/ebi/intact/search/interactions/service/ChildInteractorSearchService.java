@@ -32,10 +32,12 @@ public class ChildInteractorSearchService {
                                                                      double minMiScore,
                                                                      double maxMiScore,
                                                                      boolean interSpecies,
+                                                                     Set<Integer> binaryInteractionIdFilter,
+                                                                     Set<String> interactorAcFilter,
                                                                      int page,
                                                                      int pageSize) {
         return childInteractorRepository.findChildInteractors(query, batchSearch, interactorSpeciesFilter, interactorTypeFilter, interactionDetectionMethodFilter,
-                interactionTypeFilter, interactionHostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, interSpecies, null,
+                interactionTypeFilter, interactionHostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, interSpecies, binaryInteractionIdFilter, interactorAcFilter, null,
                 PageRequest.of(page, pageSize));
     }
 
@@ -49,9 +51,11 @@ public class ChildInteractorSearchService {
                                           boolean isNegativeFilter,
                                           double minMiScore,
                                           double maxMiScore,
-                                          boolean interSpecies) {
+                                          boolean interSpecies,
+                                          Set<Integer> binaryInteractionIdFilter,
+                                          Set<String> interactorAcFilter) {
         return childInteractorRepository.countChildInteractors(query, batchSearch, interactorSpeciesFilter, interactorTypeFilter, interactionDetectionMethodFilter,
-                interactionTypeFilter, interactionHostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, interSpecies);
+                interactionTypeFilter, interactionHostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, interSpecies, binaryInteractionIdFilter, interactorAcFilter);
     }
 
     public long countTotal() {

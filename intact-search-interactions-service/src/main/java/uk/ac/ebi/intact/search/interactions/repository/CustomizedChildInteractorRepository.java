@@ -40,7 +40,10 @@ public interface CustomizedChildInteractorRepository {
                                                           boolean isNegativeFilter,
                                                           double minMiScore,
                                                           double maxMiScore,
-                                                          boolean interSpecies, Sort sort, Pageable pageable);
+                                                          boolean interSpecies,
+                                                          Set<Integer> binaryInteractionIdFilter,
+                                                          Set<String> interactorAcFilter,
+                                                          Sort sort, Pageable pageable);
 
     /**
      * @param query                            input used to retrieve the interactors contained in the interaction
@@ -66,5 +69,7 @@ public interface CustomizedChildInteractorRepository {
                                boolean isNegativeFilter,
                                double minMiScore,
                                double maxMiScore,
-                               boolean interSpecies);
+                               boolean interSpecies,
+                               Set<Integer> binaryInteractionIdFilter,
+                               Set<String> interactorAcFilter);
 }

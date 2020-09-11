@@ -66,11 +66,14 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
                                                                  boolean isNegativeFilter,
                                                                  double minMiScore,
                                                                  double maxMiScore,
-                                                                 boolean interSpecies, Sort sort, Pageable pageable) {
+                                                                 boolean interSpecies,
+                                                                 Set<Integer> binaryInteractionIdFilter,
+                                                                 Set<String> interactorAcFilter,
+                                                                 Sort sort, Pageable pageable) {
 
         // filters
         List<FilterQuery> interactionFilterQueries = searchInteractionUtility.createFilterQuery(interactorSpeciesFilter, interactorTypeFilter, interactionDetectionMethodFilter,
-                interactionTypeFilter, interactionHostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, interSpecies);
+                interactionTypeFilter, interactionHostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, interSpecies, binaryInteractionIdFilter, interactorAcFilter);
 
         // search query
         SimpleQuery search = new SimpleQuery();
@@ -131,10 +134,12 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
                                       boolean isNegativeFilter,
                                       double minMiScore,
                                       double maxMiScore,
-                                      boolean interSpecies) {
+                                      boolean interSpecies,
+                                      Set<Integer> binaryInteractionIdFilter,
+                                      Set<String> interactorAcFilter) {
         // filters
         List<FilterQuery> interactionFilterQueries = searchInteractionUtility.createFilterQuery(interactorSpeciesFilter, interactorTypeFilter, interactionDetectionMethodFilter,
-                interactionTypeFilter, interactionHostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, interSpecies);
+                interactionTypeFilter, interactionHostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, interSpecies, binaryInteractionIdFilter, interactorAcFilter);
 
         // search query
         SimpleQuery search = new SimpleQuery();

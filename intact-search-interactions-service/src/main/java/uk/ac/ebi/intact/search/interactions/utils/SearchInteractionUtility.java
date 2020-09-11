@@ -102,7 +102,9 @@ public class SearchInteractionUtility {
                                                boolean isNegativeFilter,
                                                double minMiScore,
                                                double maxMiScore,
-                                               boolean interSpecies) {
+                                               boolean interSpecies,
+                                               Set<Integer> binaryInteractionIdFilter,
+                                               Set<String> interactorAcFilter) {
 
         List<FilterQuery> filterQueries = new ArrayList<FilterQuery>();
 
@@ -113,13 +115,13 @@ public class SearchInteractionUtility {
         createInteractorTypeFilterCriteria(interactorTypeFilter, filterQueries);
 
         //Interaction detection method filter
-        createFilterCriteria(interactionDetectionMethodFilter, DETECTION_METHOD_STR, filterQueries);
+        createFilterCriteriaForStringValues(interactionDetectionMethodFilter, DETECTION_METHOD_STR, filterQueries);
 
         //Interaction type filter
-        createFilterCriteria(interactionTypeFilter, TYPE_STR, filterQueries);
+        createFilterCriteriaForStringValues(interactionTypeFilter, TYPE_STR, filterQueries);
 
         //Interaction host organism filter
-        createFilterCriteria(interactionHostOrganismFilter, HOST_ORGANISM_STR, filterQueries);
+        createFilterCriteriaForStringValues(interactionHostOrganismFilter, HOST_ORGANISM_STR, filterQueries);
 
         //isNegative filter
         createNegativeFilterCriteria(isNegativeFilter, filterQueries);
@@ -127,10 +129,16 @@ public class SearchInteractionUtility {
         //miscore filter
         createMiScoreFilterCriteria(minMiScore, maxMiScore, filterQueries);
 
+        //binaryInteractionIdFilter filter
+        createFilterCriteriaForIntegerValues(binaryInteractionIdFilter, BINARY_INTERACTION_ID, filterQueries);
+
+        //interactorAcFilter filter
+        createInteractorAcsFilter(interactorAcFilter, filterQueries);
+
         return filterQueries;
     }
 
-    private void createFilterCriteria(Set<String> values, String field, List<FilterQuery> filterQueries) {
+    private void createFilterCriteriaForStringValues(Set<String> values, String field, List<FilterQuery> filterQueries) {
 
         if (values != null) {
             Criteria conditions = null;
@@ -140,6 +148,45 @@ public class SearchInteractionUtility {
                     conditions = new Criteria(field).is(value);
                 } else {
                     conditions = conditions.or(new Criteria(field).is(value));
+                }
+            }
+
+            if (conditions != null) {
+                filterQueries.add(new SimpleFilterQuery(conditions));
+            }
+        }
+    }
+
+    private void createFilterCriteriaForIntegerValues(Set<Integer> values, String field, List<FilterQuery> filterQueries) {
+
+        if (values != null) {
+            Criteria conditions = null;
+
+            for (Integer value : values) {
+                if (conditions == null) {
+                    conditions = new Criteria(field).is(value);
+                } else {
+                    conditions = conditions.or(new Criteria(field).is(value));
+                }
+            }
+
+            if (conditions != null) {
+                filterQueries.add(new SimpleFilterQuery(conditions));
+            }
+        }
+    }
+
+    private void createInteractorAcsFilter(Set<String> values, List<FilterQuery> filterQueries) {
+        if (values != null) {
+            Criteria conditions = null;
+
+            for (String value : values) {
+                if (conditions == null) {
+                    conditions = new Criteria(AC_A_STR).is(value)
+                            .or(AC_B_STR).is(value);
+                } else {
+                    conditions = conditions.or(new Criteria(AC_A_STR).is(value)
+                            .or(AC_B_STR).is(value));
                 }
             }
 

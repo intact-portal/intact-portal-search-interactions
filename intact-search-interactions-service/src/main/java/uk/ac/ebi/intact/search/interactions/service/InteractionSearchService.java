@@ -52,10 +52,12 @@ public class InteractionSearchService {
                                                                  double minMiScore,
                                                                  double maxMiScore,
                                                                  boolean interSpecies,
+                                                                 Set<Integer> binaryInteractionIdFilter,
+                                                                 Set<String> interactorAcFilter,
                                                                  int page,
                                                                  int pageSize) {
         return interactionRepository.findInteractionWithFacet(query, batchSearch, interactorSpeciesFilter, interactorTypeFilter, interactionDetectionMethodFilter,
-                interactionTypeFilter, interactionHostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, interSpecies, null,
+                interactionTypeFilter, interactionHostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, interSpecies, binaryInteractionIdFilter, interactorAcFilter, null,
                 PageRequest.of(page, pageSize));
     }
 
@@ -103,9 +105,14 @@ public class InteractionSearchService {
                                        boolean isNegativeFilter,
                                        double minMiScore,
                                        double maxMiScore,
-                                       boolean interSpecies) {
-        return interactionRepository.countInteractionResult(query, batchSearch, interactorAc, interactorSpeciesFilter, interactorTypeFilter,
-                interactionDetectionMethodFilter, interactionTypeFilter, interactionHostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, interSpecies);
+                                       boolean interSpecies,
+                                       Set<Integer> binaryInteractionIdFilter,
+                                       Set<String> interactorAcFilter
+    ) {
+        return interactionRepository.countInteractionResult(query, batchSearch, interactorAc, interactorSpeciesFilter,
+                interactorTypeFilter, interactionDetectionMethodFilter, interactionTypeFilter,
+                interactionHostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, interSpecies,
+                binaryInteractionIdFilter, interactorAcFilter);
     }
 
     public long countTotal() {

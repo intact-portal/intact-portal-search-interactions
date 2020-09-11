@@ -42,7 +42,10 @@ public interface CustomizedInteractionRepository {
                                                           boolean isNegativeFilter,
                                                           double minMiScore,
                                                           double maxMiScore,
-                                                          boolean interSpecies, Sort sort, Pageable pageable);
+                                                          boolean interSpecies,
+                                                          Set<Integer> binaryInteractionIdFilter,
+                                                          Set<String> interactorAcFilter,
+                                                          Sort sort, Pageable pageable);
 
     /**
      * @param query                            input used to retrieve the interaction
@@ -124,5 +127,7 @@ public interface CustomizedInteractionRepository {
                                 boolean isNegativeFilter,
                                 double minMiScore,
                                 double maxMiScore,
-                                boolean interSpecies);
+                                boolean interSpecies,
+                                Set<Integer> binaryInteractionIdFilter,
+                                Set<String> interactorAcFilter);
 }

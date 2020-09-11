@@ -74,6 +74,8 @@ public class ChildInteractorSearchServiceTest {
                 0,
                 1,
                 false,
+                null,
+                null,
                 0,
                 10);
         assertEquals(5, page.getTotalElements());
@@ -119,6 +121,8 @@ public class ChildInteractorSearchServiceTest {
                 minMiscore,
                 maxMiscore,
                 false,
+                null,
+                null,
                 page,
                 size);
         assertEquals(2, childInteractorsOp.getTotalElements()); //Total documents found before grouping
@@ -135,7 +139,9 @@ public class ChildInteractorSearchServiceTest {
                 false,
                 minMiscore,
                 maxMiscore,
-                false);
+                false,
+                null
+                , null);
         assertEquals(2, numInteractors);
 
         List<String> interactorAcs = new ArrayList<>();
@@ -168,6 +174,8 @@ public class ChildInteractorSearchServiceTest {
                 0,
                 1,
                 false,
+                null,
+                null,
                 0,
                 10);
         assertEquals(5, childInteractorsOp.getTotalElements());  //Total documents found before grouping
@@ -185,7 +193,9 @@ public class ChildInteractorSearchServiceTest {
                 false,
                 0,
                 1,
-                false);
+                false,
+                null
+                , null);
         assertEquals(5, numInteractors);
 
         List<String> interactorAcs = new ArrayList<>();
@@ -213,8 +223,11 @@ public class ChildInteractorSearchServiceTest {
                 0,
                 1,
                 false,
+                null,
+                null,
                 0,
-                10);
+                10
+        );
         assertEquals(4, searchInteractionsOp.getTotalElements());
 
 
@@ -247,6 +260,8 @@ public class ChildInteractorSearchServiceTest {
                 0,
                 1,
                 false,
+                null,
+                null,
                 0,
                 10);
         assertEquals(20, childInteractorsOp.getTotalElements()); //Total documents found before grouping
@@ -263,7 +278,9 @@ public class ChildInteractorSearchServiceTest {
                 false,
                 0,
                 1,
-                false);
+                false,
+                null,
+                null);
         assertEquals(11, numInteractors);
     }
 
@@ -285,6 +302,8 @@ public class ChildInteractorSearchServiceTest {
                 0,
                 1,
                 false,
+                null,
+                null,
                 0,
                 10);
         //TODO... Check later why total elements is 20 here, the earlier
@@ -304,7 +323,9 @@ public class ChildInteractorSearchServiceTest {
                 false,
                 0,
                 1,
-                false);
+                false,
+                null,
+                null);
         assertEquals(11, numInteractors);
     }
 
