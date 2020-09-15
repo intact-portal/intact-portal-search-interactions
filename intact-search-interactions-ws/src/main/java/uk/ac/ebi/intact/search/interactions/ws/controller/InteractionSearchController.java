@@ -73,8 +73,8 @@ public class InteractionSearchController {
             @RequestParam(value = "minMiscore", defaultValue = "0", required = false) double minMiscore,
             @RequestParam(value = "maxMiscore", defaultValue = "1", required = false) double maxMiscore,
             @RequestParam(value = "interSpecies", required = false) boolean interSpecies,
-            @RequestParam(value = "binaryInteractionIdFilter", required = false) Set<Integer> binaryInteractionIdFilter,
-            @RequestParam(value = "interactorAcFilter", required = false) Set<String> interactorAcFilter,
+            @RequestParam(value = "binaryInteractionId[]", required = false) Set<Integer> binaryInteractionIdFilter,
+            @RequestParam(value = "interactorAc[]", required = false) Set<String> interactorAcFilter,
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
 
@@ -111,8 +111,8 @@ public class InteractionSearchController {
             @RequestParam(value = "miScoreMin", defaultValue = "0", required = false) double minMiscore,
             @RequestParam(value = "miScoreMax", defaultValue = "1", required = false) double maxMiscore,
             @RequestParam(value = "intraSpecies", required = false) boolean interSpecies,
-            @RequestParam(value = "binaryInteractionIdFilter", required = false) Set<Integer> binaryInteractionIdFilter,
-            @RequestParam(value = "interactorAcFilter", required = false) Set<String> interactorAcFilter,
+            @RequestParam(value = "binaryInteractionId[]", required = false) Set<Integer> binaryInteractionIdFilter,
+            @RequestParam(value = "interactorAc[]", required = false) Set<String> interactorAcFilter,
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
             @RequestParam(value = "draw") int draw) throws IOException {
@@ -174,8 +174,8 @@ public class InteractionSearchController {
             @RequestParam(value = "miScoreMin", defaultValue = "0", required = false) double minMiscore,
             @RequestParam(value = "miScoreMax", defaultValue = "1", required = false) double maxMiscore,
             @RequestParam(value = "intraSpecies", required = false) boolean interSpecies,
-            @RequestParam(value = "binaryInteractionIdFilter", required = false) Set<Integer> binaryInteractionIdFilter,
-            @RequestParam(value = "interactorAcFilter", required = false) Set<String> interactorAcFilter,
+            @RequestParam(value = "binaryInteractionId[]", required = false) Set<Integer> binaryInteractionIdFilter,
+            @RequestParam(value = "interactorAc[]", required = false) Set<String> interactorAcFilter,
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
             @RequestParam(value = "draw") int draw) throws IOException {
