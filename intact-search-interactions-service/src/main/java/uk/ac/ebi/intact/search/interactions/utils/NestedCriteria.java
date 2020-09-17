@@ -42,9 +42,9 @@ public class NestedCriteria extends Criteria implements QueryStringHolder {
 
                 parsedQuery = parsedQuery.replaceAll("^\\{.*\\}", "");
                 if (counter == 1) {
-                    interactionFilterQ = new StringBuilder(" +" + parsedQuery);
+                    interactionFilterQ = new StringBuilder(" +" + "(" + parsedQuery + ")");
                 } else {
-                    interactionFilterQ.append(" +").append(parsedQuery);
+                    interactionFilterQ.append(" +").append("(" + parsedQuery + ")");
                 }
                 counter++;
             }

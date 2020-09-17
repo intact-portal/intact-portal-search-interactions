@@ -20,8 +20,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 /**
  * @author Elisabet Barrera
@@ -598,5 +597,48 @@ public class InteractionSearchServiceTest {
                 10);
         assertEquals(3, interactionOp.getTotalElements());
         assertEquals(3, interactionOp.getNumberOfElements());
+    }
+
+    /*
+     * Expected interactions when queried and filtered by species and interactorAc
+     **/
+
+    @Test
+    public void filterByInteractorAcs() {
+        Set<String> species = new HashSet<>();
+        species.add("Homo sapiens");
+
+        Set<String> interactorAcs = new HashSet<>();
+        interactorAcs.add("EBI-715849");
+        interactorAcs.add("EBI-10000824");
+        FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
+                "physical association",
+                false,
+                species,
+                null,
+                null,
+                null,
+                null,
+                false,
+                0,
+                1,
+                false,
+                null,
+                interactorAcs,
+                0,
+                10);
+        assertEquals(5, interactionOp.getTotalElements());
+
+        Set<Integer> binariesExpected = new HashSet<>();
+        binariesExpected.add(5);
+        binariesExpected.add(3);
+        binariesExpected.add(4);
+        binariesExpected.add(1);
+        binariesExpected.add(10);
+
+        for (SearchInteraction interaction : interactionOp.getContent()) {
+            assertTrue(binariesExpected.contains(interaction.getBinaryInteractionId()));
+        }
+
     }
 }

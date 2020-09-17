@@ -22,6 +22,7 @@ import java.time.Duration;
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -329,4 +330,65 @@ public class ChildInteractorSearchServiceTest {
         assertEquals(11, numInteractors);
     }
 
+    /*
+     * Expected interactors when queried by a text and filtered by species and interactorAc
+     **/
+    @Test
+    public void filterByInteractorAcs() {
+        Set<String> species = new HashSet<>();
+        species.add("Homo sapiens");
+
+        Set<String> interactorAcs = new HashSet<>();
+        interactorAcs.add("EBI-715849");
+        interactorAcs.add("EBI-10000824");
+        GroupPage<SearchChildInteractor> interactorOp = childInteractorSearchService.findInteractorsWithGroup(
+                "physical association",
+                false,
+                species,
+                null,
+                null,
+                null,
+                null,
+                false,
+                0,
+                1,
+                false,
+                null,
+                interactorAcs,
+                0,
+                10);
+        assertEquals(10, interactorOp.getTotalElements());//TODO...this needs to be checked it should give 6
+
+        long numInteractors = childInteractorSearchService.countInteractorsWithGroup(
+                "physical association",
+                false,
+                species,
+                null,
+                null,
+                null,
+                null,
+                false,
+                0,
+                1,
+                false,
+                null,
+                interactorAcs);
+
+        assertEquals(6, numInteractors);
+
+        Set<String> interactorsExpected = new HashSet<>();
+        interactorsExpected.add("EBI-715849");
+        interactorsExpected.add("EBI-999900");
+        interactorsExpected.add("EBI-724102");
+        interactorsExpected.add("EBI-999909");
+        interactorsExpected.add("EBI-10000824");
+        interactorsExpected.add("EBI-73886");
+
+        assertTrue((interactorOp.getContent().get(0).getInteractorAc().equals("EBI-715849")));
+
+        for (SearchChildInteractor interactor : interactorOp.getContent()) {
+            assertTrue(interactorsExpected.contains(interactor.getInteractorAc()));
+        }
+
+    }
 }
