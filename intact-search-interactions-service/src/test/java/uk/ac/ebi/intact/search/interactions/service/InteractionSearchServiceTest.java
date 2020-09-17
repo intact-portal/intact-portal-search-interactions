@@ -680,4 +680,42 @@ public class InteractionSearchServiceTest {
         }
 
     }
+
+    /*
+     * Expected interactions when queried and filtered by multiple interaction detection method
+     **/
+    @Test
+    public void filterByMultipleDetectionMethods() {
+
+
+        Set<String> detectionMethods = new HashSet<>();
+        detectionMethods.add("density sedimentation");
+        detectionMethods.add("molecular sieving");
+        FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
+                "physical association",
+                false,
+                null,
+                null,
+                detectionMethods,
+                null,
+                null,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+        assertEquals(4, interactionOp.getTotalElements());
+
+        Set<String> interactionsExpected = new HashSet<>();
+        interactionsExpected.add("EBI-1000048");
+        interactionsExpected.add("EBI-1000008");
+
+        for (SearchInteraction interaction : interactionOp.getContent()) {
+            assertTrue(interactionsExpected.contains(interaction.getAc()));
+        }
+
+    }
 }

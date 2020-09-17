@@ -450,4 +450,61 @@ public class ChildInteractorSearchServiceTest {
         }
 
     }
+
+    /*
+     * Expected interactors when queried and filtered by multiple interaction detection method
+     **/
+    @Test
+    public void filterByMultipleDetectionMethods() {
+
+
+        Set<String> detectionMethods = new HashSet<>();
+        detectionMethods.add("density sedimentation");
+        detectionMethods.add("molecular sieving");
+        GroupPage<SearchChildInteractor> interactorOp = childInteractorSearchService.findInteractorsWithGroup(
+                "physical association",
+                false,
+                null,
+                null,
+                detectionMethods,
+                null,
+                null,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+        assertEquals(4, interactorOp.getTotalElements());
+
+        long numInteractors = childInteractorSearchService.countInteractorsWithGroup(
+                "physical association",
+                false,
+                null,
+                null,
+                detectionMethods,
+                null,
+                null,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null);
+
+        assertEquals(4, numInteractors);
+
+        Set<String> interactorsExpected = new HashSet<>();
+        interactorsExpected.add("EBI-715849");
+        interactorsExpected.add("EBI-724102");
+        interactorsExpected.add("EBI-999909");
+        interactorsExpected.add("EBI-999900");
+
+        for (SearchChildInteractor interactor : interactorOp.getContent()) {
+            assertTrue(interactorsExpected.contains(interactor.getInteractorAc()));
+        }
+
+    }
 }
