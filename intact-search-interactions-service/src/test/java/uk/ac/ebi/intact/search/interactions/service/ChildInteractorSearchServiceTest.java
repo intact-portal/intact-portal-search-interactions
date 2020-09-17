@@ -391,4 +391,63 @@ public class ChildInteractorSearchServiceTest {
         }
 
     }
+
+    /*
+     * Expected interactors when queried by a text and filtered by species and binaryIds
+     **/
+    @Test
+    public void filterByBinaryIds() {
+        Set<String> species = new HashSet<>();
+        species.add("Homo sapiens");
+
+        Set<Integer> binaryIds = new HashSet<>();
+        binaryIds.add(10);
+        binaryIds.add(1);
+        GroupPage<SearchChildInteractor> interactorOp = childInteractorSearchService.findInteractorsWithGroup(
+                "physical association",
+                false,
+                species,
+                null,
+                null,
+                null,
+                null,
+                false,
+                0,
+                1,
+                false,
+                binaryIds,
+                null,
+                0,
+                10);
+        assertEquals(4, interactorOp.getTotalElements());
+
+        long numInteractors = childInteractorSearchService.countInteractorsWithGroup(
+                "physical association",
+                false,
+                species,
+                null,
+                null,
+                null,
+                null,
+                false,
+                0,
+                1,
+                false,
+                binaryIds,
+                null
+        );
+
+        assertEquals(4, numInteractors);
+
+        Set<String> interactorsExpected = new HashSet<>();
+        interactorsExpected.add("EBI-715849");
+        interactorsExpected.add("EBI-724102");
+        interactorsExpected.add("EBI-10000824");
+        interactorsExpected.add("EBI-73886");
+
+        for (SearchChildInteractor interactor : interactorOp.getContent()) {
+            assertTrue(interactorsExpected.contains(interactor.getInteractorAc()));
+        }
+
+    }
 }

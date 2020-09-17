@@ -641,4 +641,43 @@ public class InteractionSearchServiceTest {
         }
 
     }
+
+    /*
+     * Expected interactions when queried and filtered by species and binaryIds
+     **/
+    @Test
+    public void filterByBinaryIds() {
+        Set<String> species = new HashSet<>();
+        species.add("Homo sapiens");
+
+        Set<Integer> binaryIds = new HashSet<>();
+        binaryIds.add(10);
+        binaryIds.add(1);
+        FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
+                "physical association",
+                false,
+                species,
+                null,
+                null,
+                null,
+                null,
+                false,
+                0,
+                1,
+                false,
+                binaryIds,
+                null,
+                0,
+                10);
+        assertEquals(2, interactionOp.getTotalElements());
+
+        Set<Integer> binariesExpected = new HashSet<>();
+        binariesExpected.add(1);
+        binariesExpected.add(10);
+
+        for (SearchInteraction interaction : interactionOp.getContent()) {
+            assertTrue(binariesExpected.contains(interaction.getBinaryInteractionId()));
+        }
+
+    }
 }
