@@ -19,7 +19,7 @@ import java.time.Duration;
 import java.util.*;
 
 import static org.junit.Assert.*;
-import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields.DETECTION_METHOD_STR;
+import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields.*;
 
 /**
  * @author Elisabet Barrera
@@ -599,7 +599,7 @@ public class InteractionSearchServiceTest {
     }
 
     /*
-     * Expected interactions when queried and filtered by species and interactorAc
+     * Expected interactions/facet when queried and filtered by species and interactorAc
      **/
 
     @Test
@@ -639,10 +639,109 @@ public class InteractionSearchServiceTest {
             assertTrue(binariesExpected.contains(interaction.getBinaryInteractionId()));
         }
 
+        //specie facet checking
+        HashMap<String, Long> specieFacetsExpected = new HashMap<>();
+        specieFacetsExpected.put("Homo sapiens", 6l);
+        specieFacetsExpected.put("Rattus norvegicus (Rat)", 4l);
+        {
+            Iterator<FacetFieldEntry> facetFieldIterator = interactionOp.getFacetResultPage(SPECIES_A_B_STR).iterator();
+
+            while (facetFieldIterator.hasNext()) {
+                FacetFieldEntry facetFieldEntry = facetFieldIterator.next();
+                assertEquals(specieFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+            }
+        }
+
+        //interactor type facet checking
+        HashMap<String, Long> interactorTypeFacetsExpected = new HashMap<>();
+        interactorTypeFacetsExpected.put("dna", 1l);
+        interactorTypeFacetsExpected.put("protein", 6l);
+
+        {
+            Iterator<FacetFieldEntry> facetFieldIterator = interactionOp.getFacetResultPage(TYPE_A_B_STR).iterator();
+
+            while (facetFieldIterator.hasNext()) {
+                FacetFieldEntry facetFieldEntry = facetFieldIterator.next();
+                assertEquals(interactorTypeFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+            }
+        }
+
+        //detection method facet checking
+        HashMap<String, Long> detectionMethodsFacetsExpected = new HashMap<>();
+        detectionMethodsFacetsExpected.put("density sedimentation", 3l);
+        detectionMethodsFacetsExpected.put("molecular sieving", 1l);
+        detectionMethodsFacetsExpected.put("elisa", 1l);
+        detectionMethodsFacetsExpected.put("affinity chrom", 1l);
+
+        {
+            Iterator<FacetFieldEntry> facetFieldIterator = interactionOp.getFacetResultPage(DETECTION_METHOD_STR).iterator();
+
+            while (facetFieldIterator.hasNext()) {
+                FacetFieldEntry facetFieldEntry = facetFieldIterator.next();
+                assertEquals(detectionMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+            }
+        }
+
+        //interaction type facet checking
+        HashMap<String, Long> interactionTypeFacetsExpected = new HashMap<>();
+        interactionTypeFacetsExpected.put("physical association", 6l);
+
+        {
+            Iterator<FacetFieldEntry> facetFieldIterator = interactionOp.getFacetResultPage(TYPE_STR).iterator();
+
+            while (facetFieldIterator.hasNext()) {
+                FacetFieldEntry facetFieldEntry = facetFieldIterator.next();
+                assertEquals(interactionTypeFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+            }
+        }
+
+        //host organism facet checking
+        HashMap<String, Long> hostOrganismFacetsExpected = new HashMap<>();
+        hostOrganismFacetsExpected.put("In vitro", 6l);
+
+        {
+            Iterator<FacetFieldEntry> facetFieldIterator = interactionOp.getFacetResultPage(HOST_ORGANISM_STR).iterator();
+
+            while (facetFieldIterator.hasNext()) {
+                FacetFieldEntry facetFieldEntry = facetFieldIterator.next();
+                assertEquals(hostOrganismFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+            }
+        }
+
+        //Negative facet checking
+        HashMap<String, Long> negativeFacetsExpected = new HashMap<>();
+        negativeFacetsExpected.put("false", 6l);
+
+        {
+            Iterator<FacetFieldEntry> facetFieldIterator = interactionOp.getFacetResultPage(NEGATIVE).iterator();
+
+            while (facetFieldIterator.hasNext()) {
+                FacetFieldEntry facetFieldEntry = facetFieldIterator.next();
+                assertEquals(negativeFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+            }
+        }
+
+        //MIscore facet checking
+        HashMap<String, Long> miScoreFacetsExpected = new HashMap<>();
+        miScoreFacetsExpected.put("0.4", 1l);
+        miScoreFacetsExpected.put("0.64", 2l);
+        miScoreFacetsExpected.put("0.53", 1l);
+        miScoreFacetsExpected.put("0.56", 1l);
+        miScoreFacetsExpected.put("0.69", 1l);
+
+        {
+            Iterator<FacetFieldEntry> facetFieldIterator = interactionOp.getFacetResultPage(INTACT_MISCORE).iterator();
+
+            while (facetFieldIterator.hasNext()) {
+                FacetFieldEntry facetFieldEntry = facetFieldIterator.next();
+                assertEquals(miScoreFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+            }
+        }
+
     }
 
     /*
-     * Expected interactions when queried and filtered by species and binaryIds
+     * Expected interactions/facets when queried and filtered by species and binaryIds
      **/
     @Test
     public void filterByBinaryIds() {
@@ -678,10 +777,109 @@ public class InteractionSearchServiceTest {
             assertTrue(binariesExpected.contains(interaction.getBinaryInteractionId()));
         }
 
+        //specie facet checking
+        HashMap<String, Long> specieFacetsExpected = new HashMap<>();
+        specieFacetsExpected.put("Homo sapiens", 6l);
+        specieFacetsExpected.put("Rattus norvegicus (Rat)", 4l);
+        {
+            Iterator<FacetFieldEntry> facetFieldIterator = interactionOp.getFacetResultPage(SPECIES_A_B_STR).iterator();
+
+            while (facetFieldIterator.hasNext()) {
+                FacetFieldEntry facetFieldEntry = facetFieldIterator.next();
+                assertEquals(specieFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+            }
+        }
+
+        //interactor type facet checking
+        HashMap<String, Long> interactorTypeFacetsExpected = new HashMap<>();
+        interactorTypeFacetsExpected.put("dna", 1l);
+        interactorTypeFacetsExpected.put("protein", 6l);
+
+        {
+            Iterator<FacetFieldEntry> facetFieldIterator = interactionOp.getFacetResultPage(TYPE_A_B_STR).iterator();
+
+            while (facetFieldIterator.hasNext()) {
+                FacetFieldEntry facetFieldEntry = facetFieldIterator.next();
+                assertEquals(interactorTypeFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+            }
+        }
+
+        //detection method facet checking
+        HashMap<String, Long> detectionMethodsFacetsExpected = new HashMap<>();
+        detectionMethodsFacetsExpected.put("density sedimentation", 3l);
+        detectionMethodsFacetsExpected.put("molecular sieving", 1l);
+        detectionMethodsFacetsExpected.put("elisa", 1l);
+        detectionMethodsFacetsExpected.put("affinity chrom", 1l);
+
+        {
+            Iterator<FacetFieldEntry> facetFieldIterator = interactionOp.getFacetResultPage(DETECTION_METHOD_STR).iterator();
+
+            while (facetFieldIterator.hasNext()) {
+                FacetFieldEntry facetFieldEntry = facetFieldIterator.next();
+                assertEquals(detectionMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+            }
+        }
+
+        //interaction type facet checking
+        HashMap<String, Long> interactionTypeFacetsExpected = new HashMap<>();
+        interactionTypeFacetsExpected.put("physical association", 6l);
+
+        {
+            Iterator<FacetFieldEntry> facetFieldIterator = interactionOp.getFacetResultPage(TYPE_STR).iterator();
+
+            while (facetFieldIterator.hasNext()) {
+                FacetFieldEntry facetFieldEntry = facetFieldIterator.next();
+                assertEquals(interactionTypeFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+            }
+        }
+
+        //host organism facet checking
+        HashMap<String, Long> hostOrganismFacetsExpected = new HashMap<>();
+        hostOrganismFacetsExpected.put("In vitro", 6l);
+
+        {
+            Iterator<FacetFieldEntry> facetFieldIterator = interactionOp.getFacetResultPage(HOST_ORGANISM_STR).iterator();
+
+            while (facetFieldIterator.hasNext()) {
+                FacetFieldEntry facetFieldEntry = facetFieldIterator.next();
+                assertEquals(hostOrganismFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+            }
+        }
+
+        //Negative facet checking
+        HashMap<String, Long> negativeFacetsExpected = new HashMap<>();
+        negativeFacetsExpected.put("false", 6l);
+
+        {
+            Iterator<FacetFieldEntry> facetFieldIterator = interactionOp.getFacetResultPage(NEGATIVE).iterator();
+
+            while (facetFieldIterator.hasNext()) {
+                FacetFieldEntry facetFieldEntry = facetFieldIterator.next();
+                assertEquals(negativeFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+            }
+        }
+
+        //MIscore facet checking
+        HashMap<String, Long> miScoreFacetsExpected = new HashMap<>();
+        miScoreFacetsExpected.put("0.4", 1l);
+        miScoreFacetsExpected.put("0.64", 2l);
+        miScoreFacetsExpected.put("0.53", 1l);
+        miScoreFacetsExpected.put("0.56", 1l);
+        miScoreFacetsExpected.put("0.69", 1l);
+
+        {
+            Iterator<FacetFieldEntry> facetFieldIterator = interactionOp.getFacetResultPage(INTACT_MISCORE).iterator();
+
+            while (facetFieldIterator.hasNext()) {
+                FacetFieldEntry facetFieldEntry = facetFieldIterator.next();
+                assertEquals(miScoreFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+            }
+        }
+
     }
 
     /*
-     * Expected interactions when queried and filtered by multiple interaction detection method
+     * Expected interactions/facets when queried and filtered by multiple interaction detection method
      **/
     @Test
     public void filterByMultipleDetectionMethods() {
