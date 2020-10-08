@@ -16,11 +16,10 @@ import uk.ac.ebi.intact.search.interactions.service.util.TestUtil;
 
 import javax.annotation.Resource;
 import java.time.Duration;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.Assert.*;
+import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields.DETECTION_METHOD_STR;
 
 /**
  * @author Elisabet Barrera
@@ -715,6 +714,21 @@ public class InteractionSearchServiceTest {
 
         for (SearchInteraction interaction : interactionOp.getContent()) {
             assertTrue(interactionsExpected.contains(interaction.getAc()));
+        }
+
+        //facet checking
+        HashMap<String, Long> detectionMethodsFacetsExpected = new HashMap<>();
+        detectionMethodsFacetsExpected.put("density sedimentation", 3l);
+        detectionMethodsFacetsExpected.put("molecular sieving", 1l);
+        detectionMethodsFacetsExpected.put("elisa", 1l);
+        detectionMethodsFacetsExpected.put("affinity chrom", 1l);
+        detectionMethodsFacetsExpected.put("anti bait coip", 4l);
+
+        Iterator<FacetFieldEntry> facetFieldIterator = interactionOp.getFacetResultPage(DETECTION_METHOD_STR).iterator();
+
+        while (facetFieldIterator.hasNext()) {
+            FacetFieldEntry facetFieldEntry = facetFieldIterator.next();
+            assertEquals(detectionMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
         }
 
     }
