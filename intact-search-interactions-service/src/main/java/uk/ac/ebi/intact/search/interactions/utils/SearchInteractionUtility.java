@@ -109,102 +109,72 @@ public class SearchInteractionUtility {
         List<FilterQuery> filterQueries = new ArrayList<FilterQuery>();
 
         //Interactor species filter
-        createInteractorSpeciesFilterCriteria(interactorSpeciesFilter, interSpecies, filterQueries);
+        createInteractorSpeciesFilterCriteria("{!tag=SPECIES}", interactorSpeciesFilter, interSpecies, filterQueries);
 
         //Interactor type filter
-        createInteractorTypeFilterCriteria(interactorTypeFilter, filterQueries);
+        createInteractorTypeFilterCriteria("{!tag=TYPE}", interactorTypeFilter, filterQueries);
 
         //Interaction detection method filter
-        createFilterCriteriaForStringValues(interactionDetectionMethodFilter, DETECTION_METHOD_STR, filterQueries);
+        createFilterCriteriaForStringValues("{!tag=DETECTION_METHOD}", interactionDetectionMethodFilter, DETECTION_METHOD_STR, filterQueries);
 
         //Interaction type filter
-        createFilterCriteriaForStringValues(interactionTypeFilter, TYPE_STR, filterQueries);
+        createFilterCriteriaForStringValues("{!tag=INTERACTION_TYPE}", interactionTypeFilter, TYPE_STR, filterQueries);
 
         //Interaction host organism filter
-        createFilterCriteriaForStringValues(interactionHostOrganismFilter, HOST_ORGANISM_STR, filterQueries);
+        createFilterCriteriaForStringValues("{!tag=HOST_ORGANISM}", interactionHostOrganismFilter, HOST_ORGANISM_STR, filterQueries);
 
         //isNegative filter
-        createNegativeFilterCriteria(isNegativeFilter, filterQueries);
+        createNegativeFilterCriteria("{!tag=NEGATIVE_INTERACTION}", isNegativeFilter, filterQueries);
 
         //miscore filter
-        createMiScoreFilterCriteria(minMiScore, maxMiScore, filterQueries);
+        createMiScoreFilterCriteria("{!tag=MI_SCORE}", minMiScore, maxMiScore, filterQueries);
 
         //binaryInteractionIdFilter filter
-        createFilterCriteriaForIntegerValues(binaryInteractionIdFilter, BINARY_INTERACTION_ID, filterQueries);
+        createFilterCriteriaForIntegerValues("{!tag=GRAPH_FILTER}", binaryInteractionIdFilter, BINARY_INTERACTION_ID, filterQueries);
 
         //interactorAcFilter filter
-        createInteractorAcsFilter(interactorAcFilter, filterQueries);
+        createInteractorAcsFilter("{!tag=GRAPH_FILTER}", interactorAcFilter, filterQueries);
 
         return filterQueries;
     }
 
-    private void createFilterCriteriaForStringValues(Set<String> values, String field, List<FilterQuery> filterQueries) {
+    private void createFilterCriteriaForStringValues(String tagForExcludingFacets, Set<String> values, String field, List<FilterQuery> filterQueries) {
 
-        if (values != null) {
-            Criteria conditions = null;
+        if (values != null && !values.isEmpty()) {
+            Criteria conditions = new Criteria(tagForExcludingFacets + field).in(values);
+            conditions.isOr();
+            filterQueries.add(new SimpleFilterQuery(conditions));
 
-            for (String value : values) {
-                if (conditions == null) {
-                    conditions = new Criteria(field).is(value);
-                } else {
-                    conditions = conditions.or(new Criteria(field).is(value));
-                }
-            }
-
-            if (conditions != null) {
-                filterQueries.add(new SimpleFilterQuery(conditions));
-            }
         }
     }
 
-    private void createFilterCriteriaForIntegerValues(Set<Integer> values, String field, List<FilterQuery> filterQueries) {
+    private void createFilterCriteriaForIntegerValues(String tagForExcludingFacets, Set<Integer> values, String field, List<FilterQuery> filterQueries) {
 
-        if (values != null) {
-            Criteria conditions = null;
-
-            for (Integer value : values) {
-                if (conditions == null) {
-                    conditions = new Criteria(field).is(value);
-                } else {
-                    conditions = conditions.or(new Criteria(field).is(value));
-                }
-            }
-
-            if (conditions != null) {
-                filterQueries.add(new SimpleFilterQuery(conditions));
-            }
+        if (values != null && !values.isEmpty()) {
+            Criteria conditions = new Criteria(tagForExcludingFacets + field).in(values);
+            conditions.isOr();
+            filterQueries.add(new SimpleFilterQuery(conditions));
         }
     }
 
-    private void createInteractorAcsFilter(Set<String> values, List<FilterQuery> filterQueries) {
-        if (values != null) {
-            Criteria conditions = null;
+    private void createInteractorAcsFilter(String tagForExcludingFacets, Set<String> values, List<FilterQuery> filterQueries) {
+        if (values != null && !values.isEmpty()) {
+            Criteria conditions = new Criteria(tagForExcludingFacets + AC_A_STR).in(values)
+                    .or(AC_B_STR).in(values);
+            filterQueries.add(new SimpleFilterQuery(conditions));
 
-            for (String value : values) {
-                if (conditions == null) {
-                    conditions = new Criteria(AC_A_STR).is(value)
-                            .or(AC_B_STR).is(value);
-                } else {
-                    conditions = conditions.or(new Criteria(AC_A_STR).is(value)
-                            .or(AC_B_STR).is(value));
-                }
-            }
-
-            if (conditions != null) {
-                filterQueries.add(new SimpleFilterQuery(conditions));
-            }
         }
     }
 
-    private void createNegativeFilterCriteria(boolean value, List<FilterQuery> filterQueries) {
+    private void createNegativeFilterCriteria(String tagForExcludingFacets, boolean value, List<FilterQuery> filterQueries) {
 
-        Criteria conditions = new Criteria(NEGATIVE).is(value);
+        Criteria conditions = new Criteria(tagForExcludingFacets + NEGATIVE).is(value);
         filterQueries.add(new SimpleFilterQuery(conditions));
     }
 
-    private void createMiScoreFilterCriteria(double minScore, double maxScore, List<FilterQuery> filterQueries) {
+    private void createMiScoreFilterCriteria(String tagForExcludingFacets, double minScore, double maxScore, List<FilterQuery> filterQueries) {
 
-        Criteria conditions = new Criteria(INTACT_MISCORE).between(minScore, maxScore);
+        Criteria conditions = new Criteria(tagForExcludingFacets + INTACT_MISCORE).between(minScore, maxScore);
         filterQueries.add(new SimpleFilterQuery(conditions));
     }
 
@@ -212,12 +182,12 @@ public class SearchInteractionUtility {
     //               if true it creates 'or' condition between set of species
     // Adds tags in solr to allow calculate properly the facets for multiselection in species and interactor type
     //TODO rename variable creates confusion
-    private void createInteractorSpeciesFilterCriteria(Set<String> species, boolean interSpecies, List<FilterQuery> filterQueries) {
+    private void createInteractorSpeciesFilterCriteria(String tagForExcludingFacets, Set<String> species, boolean interSpecies, List<FilterQuery> filterQueries) {
 
         if (species != null && !species.isEmpty()) {
             Criteria conditions;
             if (!interSpecies) {
-                conditions = new Criteria("{!tag=SPECIES}" + SPECIES_A_B_STR).in(species);
+                conditions = new Criteria(tagForExcludingFacets + SPECIES_A_B_STR).in(species);
                 conditions.isOr();
             } else { // Return only interactions from exactly the same species in both interactors.
                 // If more than one we keep only the first one
@@ -230,12 +200,12 @@ public class SearchInteractionUtility {
     }
 
     // Adds tags in solr to allow calculate properly the facets for multiselection in species and interactor type
-    private void createInteractorTypeFilterCriteria(Set<String> interactorTypes, List<FilterQuery> filterQueries) {
+    private void createInteractorTypeFilterCriteria(String tagForExcludingFacets, Set<String> interactorTypes, List<FilterQuery> filterQueries) {
 
         if (interactorTypes != null && !interactorTypes.isEmpty()) {
             Criteria conditions = null;
 
-            conditions = new Criteria("{!tag=TYPE}" + TYPE_A_B_STR).in(interactorTypes);
+            conditions = new Criteria(tagForExcludingFacets + TYPE_A_B_STR).in(interactorTypes);
             conditions.isOr();
 
             filterQueries.add(new SimpleFilterQuery(conditions));
