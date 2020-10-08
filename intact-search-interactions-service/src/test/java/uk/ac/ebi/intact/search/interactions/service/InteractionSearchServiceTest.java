@@ -883,8 +883,6 @@ public class InteractionSearchServiceTest {
      **/
     @Test
     public void filterByMultipleDetectionMethods() {
-
-
         Set<String> detectionMethods = new HashSet<>();
         detectionMethods.add("density sedimentation");
         detectionMethods.add("molecular sieving");
@@ -930,4 +928,107 @@ public class InteractionSearchServiceTest {
         }
 
     }
+
+    /*
+     * Expected interactions/facets when queried and filtered by multiple host organism
+     **/
+    @Test
+    public void filterByMultipleHostOrganism() {
+        Set<String> hostOrganisms = new HashSet<>();
+        hostOrganisms.add("In vitro");
+        hostOrganisms.add("rattus norvegicus liver");
+        FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
+                "physical association",
+                false,
+                null,
+                null,
+                null,
+                null,
+                hostOrganisms,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+        assertEquals(10, interactionOp.getTotalElements());
+
+        Set<String> hostOrganismsForFacetTest = new HashSet<>();
+        hostOrganismsForFacetTest.add("In vitro");
+        FacetPage<SearchInteraction> interactionOpForFacetTest = interactionSearchService.findInteractionWithFacet(
+                "physical association",
+                false,
+                null,
+                null,
+                null,
+                null,
+                hostOrganismsForFacetTest,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+        assertEquals(6, interactionOpForFacetTest.getTotalElements());
+
+
+        //facet checking
+        HashMap<String, Long> hostOrganismFacetsExpected = new HashMap<>();
+        hostOrganismFacetsExpected.put("In vitro", 6l);
+        hostOrganismFacetsExpected.put("rattus norvegicus liver", 4l);
+
+        Iterator<FacetFieldEntry> facetFieldIterator = interactionOpForFacetTest.getFacetResultPage(HOST_ORGANISM_STR).iterator();
+
+        while (facetFieldIterator.hasNext()) {
+            FacetFieldEntry facetFieldEntry = facetFieldIterator.next();
+            assertEquals(hostOrganismFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+        }
+
+    }
+
+    /*
+     * Expected interactions/facets when queried and filtered by multiple host organism
+     **/
+    @Test
+    public void filterByMultipleInteractionType() {
+        Set<String> interactionTypes = new HashSet<>();
+        interactionTypes.add("physical association");
+        FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
+                "*",
+                false,
+                null,
+                null,
+                null,
+                interactionTypes,
+                null,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+        assertEquals(10, interactionOp.getTotalElements());
+
+        //facet checking
+        //interaction type facet checking
+        HashMap<String, Long> interactionTypeFacetsExpected = new HashMap<>();
+        interactionTypeFacetsExpected.put("physical association", 10l);
+
+        {
+            Iterator<FacetFieldEntry> facetFieldIterator = interactionOp.getFacetResultPage(TYPE_STR).iterator();
+
+            while (facetFieldIterator.hasNext()) {
+                FacetFieldEntry facetFieldEntry = facetFieldIterator.next();
+                assertEquals(interactionTypeFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+            }
+        }
+
+    }
+
 }
