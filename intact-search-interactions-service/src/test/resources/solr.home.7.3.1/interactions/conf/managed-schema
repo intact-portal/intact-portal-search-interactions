@@ -535,6 +535,7 @@
   <field name="interactor_species_name" type="text_general"/>
   <field name="interactor_tax_id" type="plongs"/>
   <field name="interactor_type" type="text_general"/>
+  <field name="interactor_type_mi_identifier" type="text_general"/>
   <field name="interactor_xrefs" type="text_general" multiValued="true"/>
   <field name="moleculeA" type="text_general"/>
   <field name="moleculeB" type="text_general"/>

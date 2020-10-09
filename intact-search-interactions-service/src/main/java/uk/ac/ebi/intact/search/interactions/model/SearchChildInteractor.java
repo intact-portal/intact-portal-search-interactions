@@ -48,6 +48,9 @@ public class SearchChildInteractor {
     @Field(INTERACTOR_TYPE)
     private String interactorType;
 
+    @Field(INTERACTOR_TYPE_MI_IDENTIFIER)
+    private String interactorTypeMIIdentifier;
+
     @Field(INTERACTOR_SPECIES_NAME)
     private String interactorSpecies;
 
@@ -63,6 +66,7 @@ public class SearchChildInteractor {
     @Field(INTERACTOR_FEATURE_SHORTLABELS)
     private Set<String> interactorFeatureShortLabels;
 
+
     /**
      * This field is not part of the solr doc.
      * it is being added after a second call to interactions search service
@@ -77,7 +81,7 @@ public class SearchChildInteractor {
     public SearchChildInteractor(String interactorAc, String interactorName, String interactorPreferredIdentifier, String interactorDescription, Set<String> interactorAlias,
                                  Set<String> interactorAltIds, String interactorType, String interactorSpecies, Integer interactorTaxId,
                                  Set<String> interactorXrefs, Integer interactionCount, Long interactionSearchCount,
-                                 Set<String> interactorFeatureShortLabels, String interactorIntactName, String documentType) {
+                                 Set<String> interactorFeatureShortLabels, String interactorIntactName, String interactorTypeMIIdentifier, String documentType) {
         this.interactorAc = interactorAc;
         this.interactorName = interactorName;
         this.interactorPreferredIdentifier = interactorPreferredIdentifier;
@@ -91,8 +95,17 @@ public class SearchChildInteractor {
         this.interactionCount = interactionCount;
         this.interactionSearchCount = interactionSearchCount;
         this.interactorFeatureShortLabels = interactorFeatureShortLabels;
-        this.documentType = documentType;
         this.interactorIntactName = interactorIntactName;
+        this.interactorTypeMIIdentifier = interactorTypeMIIdentifier;
+        this.documentType = documentType;
+    }
+
+    public String getInteractorTypeMIIdentifier() {
+        return interactorTypeMIIdentifier;
+    }
+
+    public void setInteractorTypeMIIdentifier(String interactorTypeMIIdentifier) {
+        this.interactorTypeMIIdentifier = interactorTypeMIIdentifier;
     }
 
     public String getInteractorIntactName() {
@@ -239,6 +252,7 @@ public class SearchChildInteractor {
                 ", interactorAlias=" + interactorAlias +
                 ", interactorAltIds=" + interactorAltIds +
                 ", interactorType='" + interactorType + '\'' +
+                ", interactorTypeMIIdentifier='" + interactorTypeMIIdentifier + '\'' +
                 ", interactorSpecies='" + interactorSpecies + '\'' +
                 ", interactorTaxId=" + interactorTaxId +
                 ", interactorXrefs=" + interactorXrefs +

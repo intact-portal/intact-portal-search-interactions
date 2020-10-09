@@ -24,6 +24,7 @@ public class SearchChildInteractorFields {
 
     public static final String INTERACTOR_TYPE = "interactor_type";
     public static final String INTERACTOR_TYPE_STR = "interactor_type_str";
+    public static final String INTERACTOR_TYPE_MI_IDENTIFIER = "interactor_type_mi_identifier";
 
     public static final String INTERACTOR_SPECIES_NAME = "interactor_species_name";
     public static final String INTERACTOR_SPECIES_NAME_STR = "interactor_species_name_str";
