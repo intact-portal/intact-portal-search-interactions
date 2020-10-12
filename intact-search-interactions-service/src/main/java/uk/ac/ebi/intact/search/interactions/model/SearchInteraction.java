@@ -114,6 +114,18 @@ public class SearchInteraction {
     @Field(EXPERIMENTAL_ROLE_B)
     private String experimentalRoleB;
 
+    @Field(BIOLOGICAL_ROLE_MI_IDENTIFIER_A)
+    private String biologicalRoleMIIdentifierA;
+
+    @Field(BIOLOGICAL_ROLE_MI_IDENTIFIER_B)
+    private String biologicalRoleMIIdentifierB;
+
+    @Field(EXPERIMENTAL_ROLE_MI_IDENTIFIER_A)
+    private String experimentalRoleMIIdentifierA;
+
+    @Field(EXPERIMENTAL_ROLE_MI_IDENTIFIER_B)
+    private String experimentalRoleMIIdentifierB;
+
     @Field(FEATURE_A)
     private Set<String> featureA;
 
@@ -294,7 +306,8 @@ public class SearchInteraction {
                              String publicationPubmedIdentifier, Set<String> featureTypesA, Set<String> featureTypesB,
                              Set<String> parameterTypes, String detectionMethodMIIdentifier,
                              Set<String> identificationMethodMIIdentifierA, Set<String> identificationMethodMIIdentifierB,
-                             String documentType) {
+                             String biologicalRoleMIIdentifierA, String biologicalRoleMIIdentifierB, String experimentalRoleMIIdentifierA,
+                             String experimentalRoleMIIdentifierB, String documentType) {
         this.count = count;
         this.idA = idA;
         this.idB = idB;
@@ -361,7 +374,43 @@ public class SearchInteraction {
         this.featureTypesA = featureTypesA;
         this.featureTypesB = featureTypesB;
         this.parameterTypes = parameterTypes;
+        this.biologicalRoleMIIdentifierA = biologicalRoleMIIdentifierA;
+        this.biologicalRoleMIIdentifierB = biologicalRoleMIIdentifierB;
+        this.experimentalRoleMIIdentifierA = experimentalRoleMIIdentifierA;
+        this.experimentalRoleMIIdentifierB = experimentalRoleMIIdentifierB;
         this.documentType = documentType;
+    }
+
+    public String getBiologicalRoleMIIdentifierA() {
+        return biologicalRoleMIIdentifierA;
+    }
+
+    public void setBiologicalRoleMIIdentifierA(String biologicalRoleMIIdentifierA) {
+        this.biologicalRoleMIIdentifierA = biologicalRoleMIIdentifierA;
+    }
+
+    public String getBiologicalRoleMIIdentifierB() {
+        return biologicalRoleMIIdentifierB;
+    }
+
+    public void setBiologicalRoleMIIdentifierB(String biologicalRoleMIIdentifierB) {
+        this.biologicalRoleMIIdentifierB = biologicalRoleMIIdentifierB;
+    }
+
+    public String getExperimentalRoleMIIdentifierA() {
+        return experimentalRoleMIIdentifierA;
+    }
+
+    public void setExperimentalRoleMIIdentifierA(String experimentalRoleMIIdentifierA) {
+        this.experimentalRoleMIIdentifierA = experimentalRoleMIIdentifierA;
+    }
+
+    public String getExperimentalRoleMIIdentifierB() {
+        return experimentalRoleMIIdentifierB;
+    }
+
+    public void setExperimentalRoleMIIdentifierB(String experimentalRoleMIIdentifierB) {
+        this.experimentalRoleMIIdentifierB = experimentalRoleMIIdentifierB;
     }
 
     public Set<String> getIdentificationMethodMIIdentifierA() {
@@ -1045,6 +1094,10 @@ public class SearchInteraction {
                 ", biologicalRoleB='" + biologicalRoleB + '\'' +
                 ", experimentalRoleA='" + experimentalRoleA + '\'' +
                 ", experimentalRoleB='" + experimentalRoleB + '\'' +
+                ", biologicalRoleMIIdentifierA='" + biologicalRoleMIIdentifierA + '\'' +
+                ", biologicalRoleMIIdentifierB='" + biologicalRoleMIIdentifierB + '\'' +
+                ", experimentalRoleMIIdentifierA='" + experimentalRoleMIIdentifierA + '\'' +
+                ", experimentalRoleMIIdentifierB='" + experimentalRoleMIIdentifierB + '\'' +
                 ", featureA=" + featureA +
                 ", featureB=" + featureB +
                 ", featureShortLabelA=" + featureShortLabelA +

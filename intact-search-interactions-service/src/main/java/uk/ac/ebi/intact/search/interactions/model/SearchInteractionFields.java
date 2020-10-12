@@ -50,6 +50,10 @@ public class SearchInteractionFields {
     public static final String BIOLOGICAL_ROLE_B = "biological_role_B";
     public static final String EXPERIMENTAL_ROLE_A = "experimental_role_A";
     public static final String EXPERIMENTAL_ROLE_B = "experimental_role_B";
+    public static final String BIOLOGICAL_ROLE_MI_IDENTIFIER_A = "biological_role_mi_identifier_A";
+    public static final String BIOLOGICAL_ROLE_MI_IDENTIFIER_B = "biological_role_mi_identifier_B";
+    public static final String EXPERIMENTAL_ROLE_MI_IDENTIFIER_A = "experimental_role_mi_identifier_A";
+    public static final String EXPERIMENTAL_ROLE_MI_IDENTIFIER_B = "experimental_role_mi_identifier_B";
     public static final String FEATURE_A = "feature_A";
     public static final String FEATURE_B = "feature_B";
     public static final String FEATURE_SHORTLABEL_A = "feature_shortlabel_A";

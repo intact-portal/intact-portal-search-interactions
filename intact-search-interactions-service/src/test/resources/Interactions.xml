@@ -177,6 +177,12 @@
     <void property="biologicalRoleB">
      <string>unspecified role</string>
     </void>
+    <void property="biologicalRoleMIIdentifierA">
+     <string>MI:0499</string>
+    </void>
+    <void property="biologicalRoleMIIdentifierB">
+     <string>MI:0499</string>
+    </void>
     <void property="checksumsA">
      <object class="java.util.HashSet">
       <void method="add">
@@ -223,6 +229,12 @@
     </void>
     <void property="experimentalRoleB">
      <string>neutral component</string>
+    </void>
+    <void property="experimentalRoleMIIdentifierA">
+     <string>MI:0497</string>
+    </void>
+    <void property="experimentalRoleMIIdentifierB">
+     <string>MI:0497</string>
     </void>
     <void property="featureA">
      <object class="java.util.HashSet">
@@ -441,6 +453,9 @@
         <void property="interactorType">
          <string>protein</string>
         </void>
+        <void property="interactorTypeMIIdentifier">
+         <string>MI:0326</string>
+        </void>
         <void property="interactorXrefs">
          <void method="add">
           <string>Q9BZD4 (mint)</string>
@@ -632,6 +647,9 @@
         </void>
         <void property="interactorType">
          <string>protein</string>
+        </void>
+        <void property="interactorTypeMIIdentifier">
+         <string>MI:0326</string>
         </void>
         <void property="interactorXrefs">
          <void method="add">
@@ -1202,6 +1220,12 @@
     <void property="biologicalRoleB">
      <string>unspecified role</string>
     </void>
+    <void property="biologicalRoleMIIdentifierA">
+     <string>MI:0499</string>
+    </void>
+    <void property="biologicalRoleMIIdentifierB">
+     <string>MI:0499</string>
+    </void>
     <void property="checksumsA">
      <object class="java.util.HashSet">
       <void method="add">
@@ -1248,6 +1272,12 @@
     </void>
     <void property="experimentalRoleB">
      <string>prey</string>
+    </void>
+    <void property="experimentalRoleMIIdentifierA">
+     <string>MI:0496</string>
+    </void>
+    <void property="experimentalRoleMIIdentifierB">
+     <string>MI:0498</string>
     </void>
     <void property="featureA">
      <object class="java.util.HashSet">
@@ -1413,6 +1443,9 @@
         <void property="interactorType">
          <string>protein</string>
         </void>
+        <void property="interactorTypeMIIdentifier">
+         <string>MI:0326</string>
+        </void>
         <void property="interactorXrefs">
          <void method="add">
           <string>IPR013252 (interpro)</string>
@@ -1559,6 +1592,9 @@
         </void>
         <void property="interactorType">
          <string>protein</string>
+        </void>
+        <void property="interactorTypeMIIdentifier">
+         <string>MI:0326</string>
         </void>
         <void property="interactorXrefs">
          <void method="add">
@@ -2027,6 +2063,12 @@
     <void property="biologicalRoleB">
      <string>unspecified role</string>
     </void>
+    <void property="biologicalRoleMIIdentifierA">
+     <string>MI:0499</string>
+    </void>
+    <void property="biologicalRoleMIIdentifierB">
+     <string>MI:0499</string>
+    </void>
     <void property="checksumsA">
      <object class="java.util.HashSet">
       <void method="add">
@@ -2076,6 +2118,12 @@
     </void>
     <void property="experimentalRoleB">
      <string>neutral component</string>
+    </void>
+    <void property="experimentalRoleMIIdentifierA">
+     <string>MI:0497</string>
+    </void>
+    <void property="experimentalRoleMIIdentifierB">
+     <string>MI:0497</string>
     </void>
     <void property="featureA">
      <object class="java.util.HashSet">
@@ -2295,6 +2343,9 @@
         <void property="interactorType">
          <string>protein</string>
         </void>
+        <void property="interactorTypeMIIdentifier">
+         <string>MI:0326</string>
+        </void>
         <void property="interactorXrefs">
          <void method="add">
           <string>O14777 (mint)</string>
@@ -2495,6 +2546,9 @@
         </void>
         <void property="interactorType">
          <string>protein</string>
+        </void>
+        <void property="interactorTypeMIIdentifier">
+         <string>MI:0326</string>
         </void>
         <void property="interactorXrefs">
          <void method="add">
@@ -3015,6 +3069,12 @@
     <void property="biologicalRoleB">
      <string>unspecified role</string>
     </void>
+    <void property="biologicalRoleMIIdentifierA">
+     <string>MI:0499</string>
+    </void>
+    <void property="biologicalRoleMIIdentifierB">
+     <string>MI:0499</string>
+    </void>
     <void property="checksumsA">
      <object class="java.util.HashSet">
       <void method="add">
@@ -3064,6 +3124,12 @@
     </void>
     <void property="experimentalRoleB">
      <string>neutral component</string>
+    </void>
+    <void property="experimentalRoleMIIdentifierA">
+     <string>MI:0497</string>
+    </void>
+    <void property="experimentalRoleMIIdentifierB">
+     <string>MI:0497</string>
     </void>
     <void property="featureA">
      <object class="java.util.HashSet">
@@ -3283,6 +3349,9 @@
         <void property="interactorType">
          <string>protein</string>
         </void>
+        <void property="interactorTypeMIIdentifier">
+         <string>MI:0326</string>
+        </void>
         <void property="interactorXrefs">
          <void method="add">
           <string>O14777 (mint)</string>
@@ -3471,6 +3540,9 @@
         </void>
         <void property="interactorType">
          <string>protein</string>
+        </void>
+        <void property="interactorTypeMIIdentifier">
+         <string>MI:0326</string>
         </void>
         <void property="interactorXrefs">
          <void method="add">
@@ -3991,6 +4063,12 @@
     <void property="biologicalRoleB">
      <string>unspecified role</string>
     </void>
+    <void property="biologicalRoleMIIdentifierA">
+     <string>MI:0499</string>
+    </void>
+    <void property="biologicalRoleMIIdentifierB">
+     <string>MI:0499</string>
+    </void>
     <void property="checksumsA">
      <object class="java.util.HashSet">
       <void method="add">
@@ -4040,6 +4118,12 @@
     </void>
     <void property="experimentalRoleB">
      <string>neutral component</string>
+    </void>
+    <void property="experimentalRoleMIIdentifierA">
+     <string>MI:0497</string>
+    </void>
+    <void property="experimentalRoleMIIdentifierB">
+     <string>MI:0497</string>
     </void>
     <void property="featureA">
      <object class="java.util.HashSet">
@@ -4259,6 +4343,9 @@
         <void property="interactorType">
          <string>protein</string>
         </void>
+        <void property="interactorTypeMIIdentifier">
+         <string>MI:0326</string>
+        </void>
         <void property="interactorXrefs">
          <void method="add">
           <string>O14777 (mint)</string>
@@ -4459,6 +4546,9 @@
         </void>
         <void property="interactorType">
          <string>protein</string>
+        </void>
+        <void property="interactorTypeMIIdentifier">
+         <string>MI:0326</string>
         </void>
         <void property="interactorXrefs">
          <void method="add">
@@ -5005,6 +5095,12 @@
     <void property="biologicalRoleB">
      <string>unspecified role</string>
     </void>
+    <void property="biologicalRoleMIIdentifierA">
+     <string>MI:0499</string>
+    </void>
+    <void property="biologicalRoleMIIdentifierB">
+     <string>MI:0499</string>
+    </void>
     <void property="checksumsA">
      <object class="java.util.HashSet">
       <void method="add">
@@ -5054,6 +5150,12 @@
     </void>
     <void property="experimentalRoleB">
      <string>prey</string>
+    </void>
+    <void property="experimentalRoleMIIdentifierA">
+     <string>MI:0496</string>
+    </void>
+    <void property="experimentalRoleMIIdentifierB">
+     <string>MI:0498</string>
     </void>
     <void property="featureCount">
      <int>0</int>
@@ -5198,6 +5300,9 @@
         <void property="interactorType">
          <string>protein</string>
         </void>
+        <void property="interactorTypeMIIdentifier">
+         <string>MI:0326</string>
+        </void>
         <void property="interactorXrefs">
          <void method="add">
           <string>GO:0005829 (go)</string>
@@ -5335,6 +5440,9 @@
         </void>
         <void property="interactorType">
          <string>protein</string>
+        </void>
+        <void property="interactorTypeMIIdentifier">
+         <string>MI:0326</string>
         </void>
         <void property="interactorXrefs">
          <void method="add">
@@ -5739,6 +5847,12 @@
     <void property="biologicalRoleB">
      <string>unspecified role</string>
     </void>
+    <void property="biologicalRoleMIIdentifierA">
+     <string>MI:0499</string>
+    </void>
+    <void property="biologicalRoleMIIdentifierB">
+     <string>MI:0499</string>
+    </void>
     <void property="checksumsA">
      <object class="java.util.HashSet">
       <void method="add">
@@ -5788,6 +5902,12 @@
     </void>
     <void property="experimentalRoleB">
      <string>prey</string>
+    </void>
+    <void property="experimentalRoleMIIdentifierA">
+     <string>MI:0496</string>
+    </void>
+    <void property="experimentalRoleMIIdentifierB">
+     <string>MI:0498</string>
     </void>
     <void property="featureCount">
      <int>0</int>
@@ -5930,6 +6050,9 @@
         <void property="interactorType">
          <string>protein</string>
         </void>
+        <void property="interactorTypeMIIdentifier">
+         <string>MI:0326</string>
+        </void>
         <void property="interactorXrefs">
          <void method="add">
           <string>GO:0005829 (go)</string>
@@ -6047,6 +6170,9 @@
         </void>
         <void property="interactorType">
          <string>protein</string>
+        </void>
+        <void property="interactorTypeMIIdentifier">
+         <string>MI:0326</string>
         </void>
         <void property="interactorXrefs">
          <void method="add">
@@ -6535,6 +6661,12 @@
     <void property="biologicalRoleB">
      <string>unspecified role</string>
     </void>
+    <void property="biologicalRoleMIIdentifierA">
+     <string>MI:0499</string>
+    </void>
+    <void property="biologicalRoleMIIdentifierB">
+     <string>MI:0499</string>
+    </void>
     <void property="checksumsA">
      <object class="java.util.HashSet">
       <void method="add">
@@ -6584,6 +6716,12 @@
     </void>
     <void property="experimentalRoleB">
      <string>prey</string>
+    </void>
+    <void property="experimentalRoleMIIdentifierA">
+     <string>MI:0496</string>
+    </void>
+    <void property="experimentalRoleMIIdentifierB">
+     <string>MI:0498</string>
     </void>
     <void property="featureCount">
      <int>0</int>
@@ -6726,6 +6864,9 @@
         <void property="interactorType">
          <string>protein</string>
         </void>
+        <void property="interactorTypeMIIdentifier">
+         <string>MI:0326</string>
+        </void>
         <void property="interactorXrefs">
          <void method="add">
           <string>GO:0005829 (go)</string>
@@ -6860,6 +7001,9 @@
         </void>
         <void property="interactorType">
          <string>protein</string>
+        </void>
+        <void property="interactorTypeMIIdentifier">
+         <string>MI:0326</string>
         </void>
         <void property="interactorXrefs">
          <void method="add">
@@ -7363,6 +7507,12 @@
     <void property="biologicalRoleB">
      <string>unspecified role</string>
     </void>
+    <void property="biologicalRoleMIIdentifierA">
+     <string>MI:0499</string>
+    </void>
+    <void property="biologicalRoleMIIdentifierB">
+     <string>MI:0499</string>
+    </void>
     <void property="checksumsA">
      <object class="java.util.HashSet">
       <void method="add">
@@ -7412,6 +7562,12 @@
     </void>
     <void property="experimentalRoleB">
      <string>prey</string>
+    </void>
+    <void property="experimentalRoleMIIdentifierA">
+     <string>MI:0496</string>
+    </void>
+    <void property="experimentalRoleMIIdentifierB">
+     <string>MI:0498</string>
     </void>
     <void property="featureCount">
      <int>0</int>
@@ -7554,6 +7710,9 @@
         <void property="interactorType">
          <string>protein</string>
         </void>
+        <void property="interactorTypeMIIdentifier">
+         <string>MI:0326</string>
+        </void>
         <void property="interactorXrefs">
          <void method="add">
           <string>GO:0005829 (go)</string>
@@ -7685,6 +7844,9 @@
         </void>
         <void property="interactorType">
          <string>protein</string>
+        </void>
+        <void property="interactorTypeMIIdentifier">
+         <string>MI:0326</string>
         </void>
         <void property="interactorXrefs">
          <void method="add">
@@ -8176,6 +8338,12 @@
     <void property="biologicalRoleB">
      <string>unspecified role</string>
     </void>
+    <void property="biologicalRoleMIIdentifierA">
+     <string>MI:0499</string>
+    </void>
+    <void property="biologicalRoleMIIdentifierB">
+     <string>MI:0499</string>
+    </void>
     <void property="checksumsB">
      <object class="java.util.HashSet">
       <void method="add">
@@ -8215,6 +8383,12 @@
     </void>
     <void property="experimentalRoleB">
      <string>prey</string>
+    </void>
+    <void property="experimentalRoleMIIdentifierA">
+     <string>MI:0496</string>
+    </void>
+    <void property="experimentalRoleMIIdentifierB">
+     <string>MI:0498</string>
     </void>
     <void property="featureA">
      <object class="java.util.HashSet">
@@ -8365,6 +8539,9 @@
         <void property="interactorType">
          <string>dna</string>
         </void>
+        <void property="interactorTypeMIIdentifier">
+         <string>MI:0319</string>
+        </void>
         <void property="interactorXrefs">
          <void method="add">
           <string>ENSG00000065534 (ensembl)</string>
@@ -8457,6 +8634,9 @@
         </void>
         <void property="interactorType">
          <string>protein</string>
+        </void>
+        <void property="interactorTypeMIIdentifier">
+         <string>MI:0326</string>
         </void>
         <void property="interactorXrefs">
          <void method="add">

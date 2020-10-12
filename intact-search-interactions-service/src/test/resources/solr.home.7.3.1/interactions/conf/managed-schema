@@ -484,6 +484,8 @@
   <field name="binary_interaction_id" type="plongs"/>
   <field name="biological_role_A" type="text_general"/>
   <field name="biological_role_B" type="text_general"/>
+  <field name="biological_role_mi_identifier_A" type="text_general"/>
+  <field name="biological_role_mi_identifier_B" type="text_general"/>
   <field name="checksumsA" type="text_general" multiValued="true"/>
   <field name="checksumsB" type="text_general" multiValued="true"/>
   <field name="confidence_values" type="text_general" multiValued="true"/>
@@ -504,6 +506,8 @@
   <field name="experimental_preparations_B" type="text_general" multiValued="true"/>
   <field name="experimental_role_A" type="text_general"/>
   <field name="experimental_role_B" type="text_general"/>
+  <field name="experimental_role_mi_identifier_A" type="text_general"/>
+  <field name="experimental_role_mi_identifier_B" type="text_general"/>
   <field name="feature_A" type="text_general" multiValued="true"/>
   <field name="feature_B" type="text_general" multiValued="true"/>
   <field name="feature_type_A" type="text_general" multiValued="true" indexed="true" stored="true"/>
