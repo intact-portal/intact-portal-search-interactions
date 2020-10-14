@@ -37,7 +37,6 @@ public class SearchInteractionUtility {
         Criteria userConditions = null;
         Criteria documentConditions = new Criteria(DOCUMENT_TYPE).is(DocumentType.INTERACTION);
         List<String> words = new ArrayList<>();
-        searchTerms = escapeQueryChars(searchTerms);
 
         //We prepare the term to split by several characters
 
@@ -60,6 +59,7 @@ public class SearchInteractionUtility {
                                         .or(AC_B_STR).is(word)
                                         .or(AC_STR).is(word);
                             } else {
+                                word = escapeQueryChars(word);
                                 userConditions = new Criteria(DEFAULT).expression(word);
                             }
                         } else {
@@ -68,6 +68,7 @@ public class SearchInteractionUtility {
                                         .or(AC_B_STR).is(word)
                                         .or(AC_STR).is(word);
                             } else {
+                                word = escapeQueryChars(word);
                                 userConditions = userConditions.or(DEFAULT).expression(word);
                             }
                         }
