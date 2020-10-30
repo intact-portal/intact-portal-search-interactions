@@ -259,6 +259,26 @@
     <void property="featureCount">
      <int>4</int>
     </void>
+    <void property="featureRangesA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>c-c</string>
+      </void>
+      <void method="add">
+       <string>386-464</string>
+      </void>
+     </object>
+    </void>
+    <void property="featureRangesB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>446-642</string>
+      </void>
+      <void method="add">
+       <string>c-c</string>
+      </void>
+     </object>
+    </void>
     <void property="featureShortLabelA">
      <object class="java.util.HashSet">
       <void method="add">
@@ -305,6 +325,9 @@
     </void>
     <void property="hostOrganism">
      <string>In vitro</string>
+    </void>
+    <void property="hostOrganismTaxId">
+     <int>-1</int>
     </void>
     <void property="idA">
      <string>Q9BZD4 (uniprotkb)</string>
@@ -361,6 +384,13 @@
     </void>
     <void property="moleculeB">
      <string>NDC80</string>
+    </void>
+    <void property="publicationAnnotations">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>contact-email (andrea.musacchi@ifomieo-campus.it)</string>
+      </void>
+     </object>
     </void>
     <void property="publicationIdentifiers">
      <object class="java.util.HashSet">
@@ -442,7 +472,7 @@
          <string>NUF2</string>
         </void>
         <void property="interactorPreferredIdentifier">
-         <string>Q9BZD4</string>
+         <string>Q9BZD4 (uniprotkb)</string>
         </void>
         <void property="interactorSpecies">
          <string>Homo sapiens</string>
@@ -637,7 +667,7 @@
          <string>NDC80</string>
         </void>
         <void property="interactorPreferredIdentifier">
-         <string>O14777</string>
+         <string>O14777 (uniprotkb)</string>
         </void>
         <void property="interactorSpecies">
          <string>Homo sapiens</string>
@@ -1289,6 +1319,13 @@
     <void property="featureCount">
      <int>1</int>
     </void>
+    <void property="featureRangesA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>c-c</string>
+      </void>
+     </object>
+    </void>
     <void property="featureShortLabelA">
      <object class="java.util.HashSet">
       <void method="add">
@@ -1309,6 +1346,9 @@
     </void>
     <void property="hostOrganism">
      <string>In vitro</string>
+    </void>
+    <void property="hostOrganismTaxId">
+     <int>-1</int>
     </void>
     <void property="idA">
      <string>Q8NBT2 (uniprotkb)</string>
@@ -1365,6 +1405,13 @@
     </void>
     <void property="moleculeB">
      <string>SPC25</string>
+    </void>
+    <void property="publicationAnnotations">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>contact-email (andrea.musacchi@ifomieo-campus.it)</string>
+      </void>
+     </object>
     </void>
     <void property="publicationIdentifiers">
      <object class="java.util.HashSet">
@@ -1432,7 +1479,7 @@
          <string>SPC24</string>
         </void>
         <void property="interactorPreferredIdentifier">
-         <string>Q8NBT2</string>
+         <string>Q8NBT2 (uniprotkb)</string>
         </void>
         <void property="interactorSpecies">
          <string>Homo sapiens</string>
@@ -1582,7 +1629,7 @@
          <string>SPC25</string>
         </void>
         <void property="interactorPreferredIdentifier">
-         <string>Q9HBM1</string>
+         <string>Q9HBM1 (uniprotkb)</string>
         </void>
         <void property="interactorSpecies">
          <string>Homo sapiens</string>
@@ -2142,6 +2189,20 @@
     <void property="featureCount">
      <int>2</int>
     </void>
+    <void property="featureRangesA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>c-c</string>
+      </void>
+     </object>
+    </void>
+    <void property="featureRangesB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>c-c</string>
+      </void>
+     </object>
+    </void>
     <void property="featureShortLabelA">
      <object class="java.util.HashSet">
       <void method="add">
@@ -2176,6 +2237,9 @@
     </void>
     <void property="hostOrganism">
      <string>In vitro</string>
+    </void>
+    <void property="hostOrganismTaxId">
+     <int>-1</int>
     </void>
     <void property="idA">
      <string>O14777 (uniprotkb)</string>
@@ -2232,6 +2296,13 @@
     </void>
     <void property="moleculeB">
      <string>SPC25</string>
+    </void>
+    <void property="publicationAnnotations">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>contact-email (andrea.musacchi@ifomieo-campus.it)</string>
+      </void>
+     </object>
     </void>
     <void property="publicationIdentifiers">
      <object class="java.util.HashSet">
@@ -2332,7 +2403,7 @@
          <string>NDC80</string>
         </void>
         <void property="interactorPreferredIdentifier">
-         <string>O14777</string>
+         <string>O14777 (uniprotkb)</string>
         </void>
         <void property="interactorSpecies">
          <string>Homo sapiens</string>
@@ -2536,7 +2607,7 @@
          <string>SPC25</string>
         </void>
         <void property="interactorPreferredIdentifier">
-         <string>Q9HBM1</string>
+         <string>Q9HBM1 (uniprotkb)</string>
         </void>
         <void property="interactorSpecies">
          <string>Homo sapiens</string>
@@ -3148,6 +3219,20 @@
     <void property="featureCount">
      <int>2</int>
     </void>
+    <void property="featureRangesA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>c-c</string>
+      </void>
+     </object>
+    </void>
+    <void property="featureRangesB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>c-c</string>
+      </void>
+     </object>
+    </void>
     <void property="featureShortLabelA">
      <object class="java.util.HashSet">
       <void method="add">
@@ -3182,6 +3267,9 @@
     </void>
     <void property="hostOrganism">
      <string>In vitro</string>
+    </void>
+    <void property="hostOrganismTaxId">
+     <int>-1</int>
     </void>
     <void property="idA">
      <string>O14777 (uniprotkb)</string>
@@ -3238,6 +3326,13 @@
     </void>
     <void property="moleculeB">
      <string>SPC24</string>
+    </void>
+    <void property="publicationAnnotations">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>contact-email (andrea.musacchi@ifomieo-campus.it)</string>
+      </void>
+     </object>
     </void>
     <void property="publicationIdentifiers">
      <object class="java.util.HashSet">
@@ -3338,7 +3433,7 @@
          <string>NDC80</string>
         </void>
         <void property="interactorPreferredIdentifier">
-         <string>O14777</string>
+         <string>O14777 (uniprotkb)</string>
         </void>
         <void property="interactorSpecies">
          <string>Homo sapiens</string>
@@ -3530,7 +3625,7 @@
          <string>SPC24</string>
         </void>
         <void property="interactorPreferredIdentifier">
-         <string>Q8NBT2</string>
+         <string>Q8NBT2 (uniprotkb)</string>
         </void>
         <void property="interactorSpecies">
          <string>Homo sapiens</string>
@@ -4142,6 +4237,20 @@
     <void property="featureCount">
      <int>2</int>
     </void>
+    <void property="featureRangesA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>c-c</string>
+      </void>
+     </object>
+    </void>
+    <void property="featureRangesB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>c-c</string>
+      </void>
+     </object>
+    </void>
     <void property="featureShortLabelA">
      <object class="java.util.HashSet">
       <void method="add">
@@ -4176,6 +4285,9 @@
     </void>
     <void property="hostOrganism">
      <string>In vitro</string>
+    </void>
+    <void property="hostOrganismTaxId">
+     <int>-1</int>
     </void>
     <void property="idA">
      <string>O14777 (uniprotkb)</string>
@@ -4232,6 +4344,13 @@
     </void>
     <void property="moleculeB">
      <string>NUF2</string>
+    </void>
+    <void property="publicationAnnotations">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>contact-email (andrea.musacchi@ifomieo-campus.it)</string>
+      </void>
+     </object>
     </void>
     <void property="publicationIdentifiers">
      <object class="java.util.HashSet">
@@ -4332,7 +4451,7 @@
          <string>NDC80</string>
         </void>
         <void property="interactorPreferredIdentifier">
-         <string>O14777</string>
+         <string>O14777 (uniprotkb)</string>
         </void>
         <void property="interactorSpecies">
          <string>Homo sapiens</string>
@@ -4536,7 +4655,7 @@
          <string>NUF2</string>
         </void>
         <void property="interactorPreferredIdentifier">
-         <string>Q9BZD4</string>
+         <string>Q9BZD4 (uniprotkb)</string>
         </void>
         <void property="interactorSpecies">
          <string>Homo sapiens</string>
@@ -5167,6 +5286,9 @@
     <void property="hostOrganism">
      <string>rattus norvegicus liver</string>
     </void>
+    <void property="hostOrganismTaxId">
+     <int>10116</int>
+    </void>
     <void property="idA">
      <string>O35152 (uniprotkb)</string>
     </void>
@@ -5222,6 +5344,19 @@
     </void>
     <void property="moleculeB">
      <string>Gosr1</string>
+    </void>
+    <void property="publicationAnnotations">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>contact-email (graham.warren@yale.edu)</string>
+      </void>
+      <void method="add">
+       <string>full coverage (Only protein-protein interactions)</string>
+      </void>
+      <void method="add">
+       <string>imex curation (null)</string>
+      </void>
+     </object>
     </void>
     <void property="publicationIdentifiers">
      <object class="java.util.HashSet">
@@ -5289,7 +5424,7 @@
          <string>Bet1l</string>
         </void>
         <void property="interactorPreferredIdentifier">
-         <string>O35152</string>
+         <string>O35152 (uniprotkb)</string>
         </void>
         <void property="interactorSpecies">
          <string>Rattus norvegicus (Rat)</string>
@@ -5430,7 +5565,7 @@
          <string>Gosr1</string>
         </void>
         <void property="interactorPreferredIdentifier">
-         <string>Q62931</string>
+         <string>Q62931 (uniprotkb)</string>
         </void>
         <void property="interactorSpecies">
          <string>Rattus norvegicus (Rat)</string>
@@ -5919,6 +6054,9 @@
     <void property="hostOrganism">
      <string>rattus norvegicus liver</string>
     </void>
+    <void property="hostOrganismTaxId">
+     <int>10116</int>
+    </void>
     <void property="idA">
      <string>O35152 (uniprotkb)</string>
     </void>
@@ -5974,6 +6112,19 @@
     </void>
     <void property="moleculeB">
      <string>Ykt6</string>
+    </void>
+    <void property="publicationAnnotations">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>contact-email (graham.warren@yale.edu)</string>
+      </void>
+      <void method="add">
+       <string>full coverage (Only protein-protein interactions)</string>
+      </void>
+      <void method="add">
+       <string>imex curation (null)</string>
+      </void>
+     </object>
     </void>
     <void property="publicationIdentifiers">
      <object class="java.util.HashSet">
@@ -6039,7 +6190,7 @@
          <string>Bet1l</string>
         </void>
         <void property="interactorPreferredIdentifier">
-         <string>O35152</string>
+         <string>O35152 (uniprotkb)</string>
         </void>
         <void property="interactorSpecies">
          <string>Rattus norvegicus (Rat)</string>
@@ -6160,7 +6311,7 @@
          <string>Ykt6</string>
         </void>
         <void property="interactorPreferredIdentifier">
-         <string>Q5EGY4</string>
+         <string>Q5EGY4 (uniprotkb)</string>
         </void>
         <void property="interactorSpecies">
          <string>Rattus norvegicus (Rat)</string>
@@ -6733,6 +6884,9 @@
     <void property="hostOrganism">
      <string>rattus norvegicus liver</string>
     </void>
+    <void property="hostOrganismTaxId">
+     <int>10116</int>
+    </void>
     <void property="idA">
      <string>O35152 (uniprotkb)</string>
     </void>
@@ -6788,6 +6942,19 @@
     </void>
     <void property="moleculeB">
      <string>Stx5</string>
+    </void>
+    <void property="publicationAnnotations">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>contact-email (graham.warren@yale.edu)</string>
+      </void>
+      <void method="add">
+       <string>full coverage (Only protein-protein interactions)</string>
+      </void>
+      <void method="add">
+       <string>imex curation (null)</string>
+      </void>
+     </object>
     </void>
     <void property="publicationIdentifiers">
      <object class="java.util.HashSet">
@@ -6853,7 +7020,7 @@
          <string>Bet1l</string>
         </void>
         <void property="interactorPreferredIdentifier">
-         <string>O35152</string>
+         <string>O35152 (uniprotkb)</string>
         </void>
         <void property="interactorSpecies">
          <string>Rattus norvegicus (Rat)</string>
@@ -6991,7 +7158,7 @@
          <string>Stx5</string>
         </void>
         <void property="interactorPreferredIdentifier">
-         <string>Q08851</string>
+         <string>Q08851 (uniprotkb)</string>
         </void>
         <void property="interactorSpecies">
          <string>Rattus norvegicus (Rat)</string>
@@ -7579,6 +7746,9 @@
     <void property="hostOrganism">
      <string>rattus norvegicus liver</string>
     </void>
+    <void property="hostOrganismTaxId">
+     <int>10116</int>
+    </void>
     <void property="idA">
      <string>O35152 (uniprotkb)</string>
     </void>
@@ -7634,6 +7804,19 @@
     </void>
     <void property="moleculeB">
      <string>Uso1</string>
+    </void>
+    <void property="publicationAnnotations">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>contact-email (graham.warren@yale.edu)</string>
+      </void>
+      <void method="add">
+       <string>full coverage (Only protein-protein interactions)</string>
+      </void>
+      <void method="add">
+       <string>imex curation (null)</string>
+      </void>
+     </object>
     </void>
     <void property="publicationIdentifiers">
      <object class="java.util.HashSet">
@@ -7699,7 +7882,7 @@
          <string>Bet1l</string>
         </void>
         <void property="interactorPreferredIdentifier">
-         <string>O35152</string>
+         <string>O35152 (uniprotkb)</string>
         </void>
         <void property="interactorSpecies">
          <string>Rattus norvegicus (Rat)</string>
@@ -7834,7 +8017,7 @@
          <string>Uso1</string>
         </void>
         <void property="interactorPreferredIdentifier">
-         <string>P41542</string>
+         <string>P41542 (uniprotkb)</string>
         </void>
         <void property="interactorSpecies">
          <string>Rattus norvegicus (Rat)</string>
@@ -8400,6 +8583,13 @@
     <void property="featureCount">
      <int>1</int>
     </void>
+    <void property="featureRangesA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>?-?</string>
+      </void>
+     </object>
+    </void>
     <void property="featureShortLabelA">
      <object class="java.util.HashSet">
       <void method="add">
@@ -8420,6 +8610,9 @@
     </void>
     <void property="hostOrganism">
      <string>In vitro</string>
+    </void>
+    <void property="hostOrganismTaxId">
+     <int>-1</int>
     </void>
     <void property="idA">
      <string>EBI-10000824 (intact)</string>
@@ -8477,6 +8670,22 @@
     <void property="moleculeB">
      <string>RELA</string>
     </void>
+    <void property="publicationAnnotations">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>contact-email (tma@salud.unm.edu)</string>
+      </void>
+      <void method="add">
+       <string>dataset (IBD - Inflammatory bowel disease)</string>
+      </void>
+      <void method="add">
+       <string>full coverage (Only protein-protein interactions)</string>
+      </void>
+      <void method="add">
+       <string>imex curation (null)</string>
+      </void>
+     </object>
+    </void>
     <void property="publicationIdentifiers">
      <object class="java.util.HashSet">
       <void method="add">
@@ -8528,7 +8737,7 @@
          <string>mylk_human_nfkb-site1_dna-probe</string>
         </void>
         <void property="interactorPreferredIdentifier">
-         <string>EBI-10000824</string>
+         <string>EBI-10000824 (intact)</string>
         </void>
         <void property="interactorSpecies">
          <string>Homo sapiens</string>
@@ -8624,7 +8833,7 @@
          <string>RELA</string>
         </void>
         <void property="interactorPreferredIdentifier">
-         <string>Q04206</string>
+         <string>Q04206 (uniprotkb)</string>
         </void>
         <void property="interactorSpecies">
          <string>Homo sapiens</string>

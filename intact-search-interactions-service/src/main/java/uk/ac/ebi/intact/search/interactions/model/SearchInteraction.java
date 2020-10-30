@@ -144,6 +144,12 @@ public class SearchInteraction {
     @Field(FEATURE_TYPE_B)
     private Set<String> featureTypesB;
 
+    @Field(FEATURE_RANGES_A)
+    private Set<String> featureRangesA;
+
+    @Field(FEATURE_RANGES_B)
+    private Set<String> featureRangesB;
+
     @Field(FEATURE_COUNT)
     private Integer featureCount;
 
@@ -220,6 +226,9 @@ public class SearchInteraction {
     @Field(HOST_ORGANISM)
     private String hostOrganism;
 
+    @Field(HOST_ORGANISM_TAX_ID)
+    private Integer hostOrganismTaxId;
+
     @Field(INTACT_MISCORE)
     private double intactMiscore;
 
@@ -255,6 +264,9 @@ public class SearchInteraction {
 
     @Field(PUBLICATION_IDENTIFIERS)
     private Set<String> publicationIdentifiers;
+
+    @Field(PUBLICATION_ANNOTATIONS)
+    private Set<String> publicationAnnotations;
 
     @Field(PUBLICATION_PUBMED_IDENTIFIER)
     private String publicationPubmedIdentifier;
@@ -307,7 +319,8 @@ public class SearchInteraction {
                              Set<String> parameterTypes, String detectionMethodMIIdentifier,
                              Set<String> identificationMethodMIIdentifierA, Set<String> identificationMethodMIIdentifierB,
                              String biologicalRoleMIIdentifierA, String biologicalRoleMIIdentifierB, String experimentalRoleMIIdentifierA,
-                             String experimentalRoleMIIdentifierB, String documentType) {
+                             String experimentalRoleMIIdentifierB, Set<String> featureRangesA, Set<String> featureRangesB,
+                             Set<String> publicationAnnotations, Integer hostOrganismTaxId, String documentType) {
         this.count = count;
         this.idA = idA;
         this.idB = idB;
@@ -378,7 +391,43 @@ public class SearchInteraction {
         this.biologicalRoleMIIdentifierB = biologicalRoleMIIdentifierB;
         this.experimentalRoleMIIdentifierA = experimentalRoleMIIdentifierA;
         this.experimentalRoleMIIdentifierB = experimentalRoleMIIdentifierB;
+        this.featureRangesA = featureRangesA;
+        this.featureRangesB = featureRangesB;
+        this.publicationAnnotations = publicationAnnotations;
+        this.hostOrganismTaxId = hostOrganismTaxId;
         this.documentType = documentType;
+    }
+
+    public Integer getHostOrganismTaxId() {
+        return hostOrganismTaxId;
+    }
+
+    public void setHostOrganismTaxId(Integer hostOrganismTaxId) {
+        this.hostOrganismTaxId = hostOrganismTaxId;
+    }
+
+    public Set<String> getFeatureRangesA() {
+        return featureRangesA;
+    }
+
+    public void setFeatureRangesA(Set<String> featureRangesA) {
+        this.featureRangesA = featureRangesA;
+    }
+
+    public Set<String> getFeatureRangesB() {
+        return featureRangesB;
+    }
+
+    public void setFeatureRangesB(Set<String> featureRangesB) {
+        this.featureRangesB = featureRangesB;
+    }
+
+    public Set<String> getPublicationAnnotations() {
+        return publicationAnnotations;
+    }
+
+    public void setPublicationAnnotations(Set<String> publicationAnnotations) {
+        this.publicationAnnotations = publicationAnnotations;
     }
 
     public String getBiologicalRoleMIIdentifierA() {
@@ -1104,6 +1153,8 @@ public class SearchInteraction {
                 ", featureShortLabelB=" + featureShortLabelB +
                 ", featureTypesA=" + featureTypesA +
                 ", featureTypesB=" + featureTypesB +
+                ", featureRangesA=" + featureRangesA +
+                ", featureRangesB=" + featureRangesB +
                 ", featureCount=" + featureCount +
                 ", stoichiometryA='" + stoichiometryA + '\'' +
                 ", stoichiometryB='" + stoichiometryB + '\'' +
@@ -1129,6 +1180,7 @@ public class SearchInteraction {
                 ", negative=" + negative +
                 ", type='" + type + '\'' +
                 ", hostOrganism='" + hostOrganism + '\'' +
+                ", hostOrganismTaxId=" + hostOrganismTaxId +
                 ", intactMiscore=" + intactMiscore +
                 ", moleculeA='" + moleculeA + '\'' +
                 ", moleculeB='" + moleculeB + '\'' +
@@ -1141,6 +1193,7 @@ public class SearchInteraction {
                 ", uniqueIdA='" + uniqueIdA + '\'' +
                 ", uniqueIdB='" + uniqueIdB + '\'' +
                 ", publicationIdentifiers=" + publicationIdentifiers +
+                ", publicationAnnotations=" + publicationAnnotations +
                 ", publicationPubmedIdentifier='" + publicationPubmedIdentifier + '\'' +
                 ", count=" + count +
                 ", typeMIA='" + typeMIA + '\'' +

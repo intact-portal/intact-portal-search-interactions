@@ -169,8 +169,10 @@ public class SearchInteractionUtility {
 
     private void createNegativeFilterCriteria(String tagForExcludingFacets, boolean value, List<FilterQuery> filterQueries) {
 
-        Criteria conditions = new Criteria(tagForExcludingFacets + NEGATIVE).is(value);
-        filterQueries.add(new SimpleFilterQuery(conditions));
+        if (value) {
+            Criteria conditions = new Criteria(tagForExcludingFacets + NEGATIVE).is(value);
+            filterQueries.add(new SimpleFilterQuery(conditions));
+        }
     }
 
     private void createMiScoreFilterCriteria(String tagForExcludingFacets, double minScore, double maxScore, List<FilterQuery> filterQueries) {

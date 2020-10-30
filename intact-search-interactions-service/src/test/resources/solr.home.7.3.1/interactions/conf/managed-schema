@@ -515,8 +515,11 @@
   <field name="feature_count" type="plongs"/>
   <field name="feature_shortlabel_A" type="text_general" multiValued="true"/>
   <field name="feature_shortlabel_B" type="text_general" multiValued="true"/>
+  <field name="feature_ranges_A" type="text_general" multiValued="true"/>
+  <field name="feature_ranges_B" type="text_general" multiValued="true"/>
   <field name="first_author" type="text_general"/>
   <field name="host_organism" type="text_general"/>
+  <field name="host_organism_taxId" type="plongs"/>
   <field name="id" type="string" multiValued="false" indexed="true" required="true" stored="true"/>
   <field name="idA" type="text_general"/>
   <field name="idB" type="text_general"/>
@@ -553,6 +556,7 @@
   <field name="publication_authors" type="text_general" multiValued="true"/>
   <field name="publication_id" type="text_general"/>
   <field name="publication_identifiers" type="text_general" multiValued="true"/>
+  <field name="publication_annotations" type="text_general" multiValued="true"/>
   <field name="release_date" type="pdates"/>
   <field name="source_database" type="text_general"/>
   <field name="speciesA" type="text_general"/>
@@ -725,4 +729,22 @@
   <copyField source="feature_type_B" dest="default" />
   <copyField source="descriptionA" dest="default" />
   <copyField source="descriptionB" dest="default" />
+
+  <!-- To be decided to be kept or not -->
+
+    <copyField source="speciesA" dest="default"/>
+    <copyField source="speciesB" dest="default"/>
+    <copyField source="taxIdA" dest="default"/>
+    <copyField source="taxIdB" dest="default"/>
+    <copyField source="parameter_types" dest="default" />
+    <copyField source="host_organism" dest="default"/>
+    <copyField source="host_organism_taxId" dest="default"/>
+    <copyField source="typeA" dest="default"/>
+    <copyField source="typeB" dest="default"/>
+    <copyField source="type_MI_A" dest="default"/>
+    <copyField source="type_MI_B" dest="default"/>
+    <!--feature range need to be added in index and then here, just have featureA and featureB and remove feature shortlabel and feature type from above default -->
+    <copyField source="feature_ranges_A" dest="default"/>
+    <copyField source="feature_ranges_B" dest="default"/>
+    <copyField source="publication_annotations" dest="default"/>
 </schema>

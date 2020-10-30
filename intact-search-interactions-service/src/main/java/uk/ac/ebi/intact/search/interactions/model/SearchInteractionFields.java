@@ -92,6 +92,7 @@ public class SearchInteractionFields {
     public static final String TYPE_MI_IDENTIFIER = "type_mi_identifier";
     public static final String TYPE_STR = "type_str";
     public static final String HOST_ORGANISM = "host_organism";
+    public static final String HOST_ORGANISM_TAX_ID = "host_organism_taxId";
     public static final String HOST_ORGANISM_STR = "host_organism_str";
     public static final String AC = "ac";
     public static final String AC_STR = "ac_str";
@@ -104,6 +105,9 @@ public class SearchInteractionFields {
     public static final String MUTATION_A = "mutation_A";
     public static final String MUTATION_B = "mutation_B";
     public static final String FEATURE_COUNT = "feature_count";
+    public static final String PUBLICATION_ANNOTATIONS = "publication_annotations";
+    public static final String FEATURE_RANGES_A = "feature_ranges_A";
+    public static final String FEATURE_RANGES_B = "feature_ranges_B";
 
 
     public static final String RELEASE_DATE = "release_date";
