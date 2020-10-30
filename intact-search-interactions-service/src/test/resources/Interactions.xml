@@ -388,7 +388,7 @@
     <void property="publicationAnnotations">
      <object class="java.util.HashSet">
       <void method="add">
-       <string>contact-email (andrea.musacchi@ifomieo-campus.it)</string>
+       <string>andrea.musacchi@ifomieo-campus.it</string>
       </void>
      </object>
     </void>
@@ -1409,7 +1409,7 @@
     <void property="publicationAnnotations">
      <object class="java.util.HashSet">
       <void method="add">
-       <string>contact-email (andrea.musacchi@ifomieo-campus.it)</string>
+       <string>andrea.musacchi@ifomieo-campus.it</string>
       </void>
      </object>
     </void>
@@ -2300,7 +2300,7 @@
     <void property="publicationAnnotations">
      <object class="java.util.HashSet">
       <void method="add">
-       <string>contact-email (andrea.musacchi@ifomieo-campus.it)</string>
+       <string>andrea.musacchi@ifomieo-campus.it</string>
       </void>
      </object>
     </void>
@@ -3330,7 +3330,7 @@
     <void property="publicationAnnotations">
      <object class="java.util.HashSet">
       <void method="add">
-       <string>contact-email (andrea.musacchi@ifomieo-campus.it)</string>
+       <string>andrea.musacchi@ifomieo-campus.it</string>
       </void>
      </object>
     </void>
@@ -4348,7 +4348,7 @@
     <void property="publicationAnnotations">
      <object class="java.util.HashSet">
       <void method="add">
-       <string>contact-email (andrea.musacchi@ifomieo-campus.it)</string>
+       <string>andrea.musacchi@ifomieo-campus.it</string>
       </void>
      </object>
     </void>
@@ -5348,13 +5348,13 @@
     <void property="publicationAnnotations">
      <object class="java.util.HashSet">
       <void method="add">
-       <string>contact-email (graham.warren@yale.edu)</string>
+       <null/>
       </void>
       <void method="add">
-       <string>full coverage (Only protein-protein interactions)</string>
+       <string>graham.warren@yale.edu</string>
       </void>
       <void method="add">
-       <string>imex curation (null)</string>
+       <string>Only protein-protein interactions</string>
       </void>
      </object>
     </void>
@@ -6116,13 +6116,13 @@
     <void property="publicationAnnotations">
      <object class="java.util.HashSet">
       <void method="add">
-       <string>contact-email (graham.warren@yale.edu)</string>
+       <null/>
       </void>
       <void method="add">
-       <string>full coverage (Only protein-protein interactions)</string>
+       <string>graham.warren@yale.edu</string>
       </void>
       <void method="add">
-       <string>imex curation (null)</string>
+       <string>Only protein-protein interactions</string>
       </void>
      </object>
     </void>
@@ -6946,13 +6946,13 @@
     <void property="publicationAnnotations">
      <object class="java.util.HashSet">
       <void method="add">
-       <string>contact-email (graham.warren@yale.edu)</string>
+       <null/>
       </void>
       <void method="add">
-       <string>full coverage (Only protein-protein interactions)</string>
+       <string>graham.warren@yale.edu</string>
       </void>
       <void method="add">
-       <string>imex curation (null)</string>
+       <string>Only protein-protein interactions</string>
       </void>
      </object>
     </void>
@@ -7808,13 +7808,13 @@
     <void property="publicationAnnotations">
      <object class="java.util.HashSet">
       <void method="add">
-       <string>contact-email (graham.warren@yale.edu)</string>
+       <null/>
       </void>
       <void method="add">
-       <string>full coverage (Only protein-protein interactions)</string>
+       <string>graham.warren@yale.edu</string>
       </void>
       <void method="add">
-       <string>imex curation (null)</string>
+       <string>Only protein-protein interactions</string>
       </void>
      </object>
     </void>
@@ -8673,16 +8673,16 @@
     <void property="publicationAnnotations">
      <object class="java.util.HashSet">
       <void method="add">
-       <string>contact-email (tma@salud.unm.edu)</string>
+       <null/>
       </void>
       <void method="add">
-       <string>dataset (IBD - Inflammatory bowel disease)</string>
+       <string>tma@salud.unm.edu</string>
       </void>
       <void method="add">
-       <string>full coverage (Only protein-protein interactions)</string>
+       <string>Only protein-protein interactions</string>
       </void>
       <void method="add">
-       <string>imex curation (null)</string>
+       <string>IBD - Inflammatory bowel disease</string>
       </void>
      </object>
     </void>
