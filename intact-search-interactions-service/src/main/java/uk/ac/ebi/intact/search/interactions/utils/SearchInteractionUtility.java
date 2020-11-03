@@ -32,6 +32,10 @@ public class SearchInteractionUtility {
         return sb.toString();
     }
 
+    public static String lowerCaseWord(String s) {
+        return s.toLowerCase();
+    }
+
     public Criteria createSearchConditions(String searchTerms, boolean batchSearch) {
         Criteria conditions;
         Criteria userConditions = null;
@@ -53,6 +57,9 @@ public class SearchInteractionUtility {
                 //TODO Review query formation
                 if (!searchTerms.trim().equals("*")) {
                     for (String word : words) {
+                        if (word.equals("AND") || word.equals("OR") || word.equals("NOT")) {// solr treats these Capital words as logical words
+                            word = lowerCaseWord(word);
+                        }
                         if (userConditions == null) {
                             if (isEBIAc(word)) {
                                 userConditions = new Criteria(AC_A_STR).is(word)
