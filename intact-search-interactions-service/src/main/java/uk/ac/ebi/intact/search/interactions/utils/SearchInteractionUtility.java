@@ -44,6 +44,7 @@ public class SearchInteractionUtility {
 
         //We prepare the term to split by several characters
 
+        searchTerms = searchTerms.trim();
         if (searchTerms != null && !searchTerms.isEmpty()) {
             if (searchTerms.startsWith("\"") && searchTerms.endsWith("\"")) {
                 words.add(searchTerms);
@@ -57,27 +58,30 @@ public class SearchInteractionUtility {
                 //TODO Review query formation
                 if (!searchTerms.trim().equals("*")) {
                     for (String word : words) {
-                        if (word.equals("AND") || word.equals("OR") || word.equals("NOT")) {// solr treats these Capital words as logical words
-                            word = lowerCaseWord(word);
-                        }
-                        if (userConditions == null) {
-                            if (isEBIAc(word)) {
-                                userConditions = new Criteria(AC_A_STR).is(word)
-                                        .or(AC_B_STR).is(word)
-                                        .or(AC_STR).is(word);
-                            } else {
-                                word = escapeQueryChars(word);
-                                userConditions = new Criteria(DEFAULT).expression(word);
+                        word = word.trim();
+                        if (!word.isEmpty()) {
+                            if (word.equals("AND") || word.equals("OR") || word.equals("NOT")) {// solr treats these Capital words as logical words
+                                word = lowerCaseWord(word);
                             }
-                        } else {
-                            if (isEBIAc(word)) {
-                                Criteria criteria = new Criteria(AC_A_STR).is(word)
-                                        .or(AC_B_STR).is(word)
-                                        .or(AC_STR).is(word);
-                                userConditions.or(criteria);
+                            if (userConditions == null) {
+                                if (isEBIAc(word)) {
+                                    userConditions = new Criteria(AC_A_STR).is(word)
+                                            .or(AC_B_STR).is(word)
+                                            .or(AC_STR).is(word);
+                                } else {
+                                    word = escapeQueryChars(word);
+                                    userConditions = new Criteria(DEFAULT).expression(word);
+                                }
                             } else {
-                                word = escapeQueryChars(word);
-                                userConditions = userConditions.or(DEFAULT).expression(word);
+                                if (isEBIAc(word)) {
+                                    Criteria criteria = new Criteria(AC_A_STR).is(word)
+                                            .or(AC_B_STR).is(word)
+                                            .or(AC_STR).is(word);
+                                    userConditions.or(criteria);
+                                } else {
+                                    word = escapeQueryChars(word);
+                                    userConditions = userConditions.or(DEFAULT).expression(word);
+                                }
                             }
                         }
                     }
