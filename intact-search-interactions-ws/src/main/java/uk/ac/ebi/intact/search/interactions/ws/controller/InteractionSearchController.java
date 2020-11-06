@@ -97,12 +97,11 @@ public class InteractionSearchController {
 
         JSONArray data = new JSONArray();
 
-        for (SearchInteraction interaction : interactionSearchResult.getContent()) {
-            StringWriter writer = new StringWriter();
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.writeValue(writer, interaction);
-            data.add(writer);
-        }
+        StringWriter writer = new StringWriter();
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.writeValue(writer, interactionSearchResult);
+        data.add(writer);
+
 
         result.put("data", data);
 
