@@ -544,14 +544,13 @@ public class InteractionSearchServiceTest {
     }
 
     /*
-     * Expected interactions when queried by "comma separated interactor preferred Ids"
+     * Expected interactions when queried by "list of interactor acs" for batch search
      **/
-
     @Test
-    public void findInteractionsByCommaSeparatedInteractorPreferredIdString() {
+    public void findInteractionsByCommaSeparatedInteractorAcsString() {
         // check https://issues.apache.org/jira/browse/SOLR-12858 for embedded POST request issue
         FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
-                "Q96Q78,C9JGC4",
+                "EBI-715849,EBI-724102",
                 true,
                 null,
                 null,
@@ -569,33 +568,6 @@ public class InteractionSearchServiceTest {
         assertEquals(4, interactionOp.getTotalElements());
         assertEquals(4, interactionOp.getNumberOfElements());
 
-    }
-
-    /*
-     * Expected interactions when queried by "comma separated interactor aliases"
-     **/
-
-    @Test
-    public void findInteractionsByCommaSeparatedInteractorAliasesString() {
-        // check https://issues.apache.org/jira/browse/SOLR-12858 for embedded POST request issue
-        FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
-                "NFKB3,NUF2R",
-                true,
-                null,
-                null,
-                null,
-                null,
-                null,
-                false,
-                0,
-                1,
-                false,
-                null,
-                null,
-                0,
-                10);
-        assertEquals(3, interactionOp.getTotalElements());
-        assertEquals(3, interactionOp.getNumberOfElements());
     }
 
     /*

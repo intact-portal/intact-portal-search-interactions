@@ -54,14 +54,9 @@ public class InteractionSearchController {
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping(value = "/findInteractionWithFacet",
-            params = {
-                    "query",
-                    "page",
-                    "pageSize"
-            },
+    @PostMapping(value = "/findInteractionWithFacet",
             produces = {APPLICATION_JSON_VALUE})
-    public InteractionSearchResult findInteractionWithFacet(
+    public ResponseEntity<String> findInteractionWithFacet(
             @RequestParam(value = "query") String query,
             @RequestParam(value = "batchSearch", required = false) boolean batchSearch,
             @RequestParam(value = "interactorSpeciesFilter", required = false) Set<String> interactorSpeciesFilter,
@@ -76,9 +71,9 @@ public class InteractionSearchController {
             @RequestParam(value = "binaryInteractionId[]", required = false) Set<Integer> binaryInteractionIdFilter,
             @RequestParam(value = "interactorAc[]", required = false) Set<String> interactorAcFilter,
             @RequestParam(value = "page", defaultValue = "0") int page,
-            @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
+            @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) throws IOException {
 
-        return new InteractionSearchResult(interactionSearchService.findInteractionWithFacet(
+        InteractionSearchResult interactionSearchResult = new InteractionSearchResult(interactionSearchService.findInteractionWithFacet(
                 extractSearchTerms(query),
                 batchSearch,
                 interactorSpeciesFilter,
@@ -94,6 +89,28 @@ public class InteractionSearchController {
                 interactorAcFilter,
                 page,
                 pageSize));
+
+        JSONObject result = new JSONObject();
+
+        result.put("recordsTotal", interactionSearchResult.getTotalElements());
+        result.put("recordsFiltered", interactionSearchResult.getTotalElements());
+
+        JSONArray data = new JSONArray();
+
+        for (SearchInteraction interaction : interactionSearchResult.getContent()) {
+            StringWriter writer = new StringWriter();
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.writeValue(writer, interaction);
+            data.add(writer);
+        }
+
+        result.put("data", data);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", APPLICATION_JSON_VALUE);
+        headers.add("X-Clacks-Overhead", "headers");
+
+        return new ResponseEntity<>(result.toString(), headers, HttpStatus.OK);
     }
 
     @CrossOrigin(origins = "*")

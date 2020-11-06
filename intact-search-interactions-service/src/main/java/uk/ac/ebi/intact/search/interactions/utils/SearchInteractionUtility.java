@@ -71,9 +71,10 @@ public class SearchInteractionUtility {
                             }
                         } else {
                             if (isEBIAc(word)) {
-                                userConditions = userConditions.or(AC_A_STR).is(word)
+                                Criteria criteria = new Criteria(AC_A_STR).is(word)
                                         .or(AC_B_STR).is(word)
                                         .or(AC_STR).is(word);
+                                userConditions.or(criteria);
                             } else {
                                 word = escapeQueryChars(word);
                                 userConditions = userConditions.or(DEFAULT).expression(word);
@@ -96,7 +97,8 @@ public class SearchInteractionUtility {
 
         //TODO Review query formation
         if (batchSearchTerms != null && !batchSearchTerms.isEmpty()) {
-            userConditions = new Criteria(INTERACTOR_DEFAULT).in(batchSearchTerms);
+            userConditions = new Criteria(AC_A_STR).in(batchSearchTerms)
+                    .or(AC_B_STR).in(batchSearchTerms);
         }
 
         return userConditions;
