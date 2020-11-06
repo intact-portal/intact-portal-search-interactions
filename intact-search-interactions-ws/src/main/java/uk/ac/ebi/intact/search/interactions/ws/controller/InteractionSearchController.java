@@ -95,15 +95,11 @@ public class InteractionSearchController {
         result.put("recordsTotal", interactionSearchResult.getTotalElements());
         result.put("recordsFiltered", interactionSearchResult.getTotalElements());
 
-        JSONArray data = new JSONArray();
-
         StringWriter writer = new StringWriter();
         ObjectMapper mapper = new ObjectMapper();
         mapper.writeValue(writer, interactionSearchResult);
-        data.add(writer);
 
-
-        result.put("data", data);
+        result.put("data", writer);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", APPLICATION_JSON_VALUE);
