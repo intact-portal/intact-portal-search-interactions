@@ -116,4 +116,5 @@ public class SearchInteractionFields {
 
     public static final String DEFAULT = "default"; //Copy field for general search
     public static final String INTERACTOR_DEFAULT = "interactor_default"; //Copy field for interactor search
+    public static final String INTERACTOR_IDENTIFIERS = "interactor_identifiers";
 }

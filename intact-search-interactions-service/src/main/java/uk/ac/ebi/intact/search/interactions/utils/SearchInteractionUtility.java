@@ -101,8 +101,7 @@ public class SearchInteractionUtility {
 
         //TODO Review query formation
         if (batchSearchTerms != null && !batchSearchTerms.isEmpty()) {
-            userConditions = new Criteria(AC_A_STR).in(batchSearchTerms)
-                    .or(AC_B_STR).in(batchSearchTerms);
+            userConditions = new Criteria(INTERACTOR_IDENTIFIERS).in(batchSearchTerms);
         }
 
         return userConditions;
