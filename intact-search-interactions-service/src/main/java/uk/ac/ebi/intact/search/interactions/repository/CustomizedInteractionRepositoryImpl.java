@@ -282,9 +282,9 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         // facet
         // Adds exclude tags in solr to allow calculate properly the facets for multiselection in species and interactor type
         FacetOptions facetOptions = new FacetOptions(
-                "{!ex=SPECIES,GRAPH_FILTER}" + SPECIES_A_B_STR,
-                "{!ex=TYPE,GRAPH_FILTER}" + TYPE_A_B_STR,
-                "{!ex=INTERACTION_TYPE,GRAPH_FILTER}" + TYPE_STR);
+                "{!ex=SPECIES,GRAPH_FILTER}" + SPECIES_A_B_STR, //TODO replace by taxids of A and B
+                "{!ex=TYPE,GRAPH_FILTER}" + TYPE_A_B_STR, //TODO replace by MI ID
+                "{!ex=INTERACTION_TYPE,GRAPH_FILTER}" + TYPE_STR); //TODO replace by MI ID
         facetOptions.setFacetLimit(FACET_MIN_COUNT);
 
         facetOptions.getFieldsWithParameters().add(new FacetOptions.FieldWithFacetParameters(SPECIES_A_B_STR).setMethod("enum"));

@@ -79,7 +79,7 @@ public class InteractionSearchService {
                 PageRequest.of(page, pageSize));
     }
 
-    public Page<SearchInteraction> findInteractionForGraphJsonWithFacet(String query,
+    public FacetPage<SearchInteraction> findInteractionForGraphJsonWithFacet(String query,
                                                                boolean batchSearch,
                                                                Set<String> interactorSpeciesFilter,
                                                                Set<String> interactorTypeFilter,
@@ -92,7 +92,7 @@ public class InteractionSearchService {
                                                                boolean interSpecies,
                                                                int page,
                                                                int pageSize) {
-        return interactionRepository.findInteractionForGraphJson(query, batchSearch, interactorSpeciesFilter, interactorTypeFilter, interactionDetectionMethodFilter,
+        return interactionRepository.findInteractionForGraphJsonWithFacet(query, batchSearch, interactorSpeciesFilter, interactorTypeFilter, interactionDetectionMethodFilter,
                 interactionTypeFilter, interactionHostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, interSpecies, null,
                 PageRequest.of(page, pageSize));
     }
