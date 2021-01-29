@@ -27,6 +27,7 @@ public class InteractionSearchServiceApplication extends SpringBootServletInitia
     //This enables the option to pack the app as a .war for external tomcats
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        System.out.println("remove this sout");
         return application.sources(InteractionSearchServiceApplication.class);
     }
 
