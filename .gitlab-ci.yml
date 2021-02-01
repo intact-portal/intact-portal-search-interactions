@@ -51,7 +51,7 @@ kubernetes-staging-deploy:
     - kubectl rollout restart deployment/intact-portal-search-interactions-deployment
     - kubectl get nodes
   environment:
-    name: test
+    name: Test
     url: https://test.com
   when: manual
 
