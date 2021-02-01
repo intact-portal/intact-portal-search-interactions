@@ -33,7 +33,7 @@ docker-build:
     - docker rmi ${CONTAINER_IMAGE}
     - docker logout "$CI_REGISTRY"
 
-kubernetes-deploy:
+kubernetes-staging-deploy:
   stage: kubernetes-deploy
   image: alpine
   script:
@@ -50,4 +50,8 @@ kubernetes-deploy:
     - kubectl apply -f k8s_deploy.yml
     - kubectl rollout restart deployment/intact-portal-search-interactions-deployment
     - kubectl get nodes
+  environment:
+    name: test
+    url: https://test.com
+  when: manual
 
