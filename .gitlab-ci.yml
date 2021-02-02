@@ -52,6 +52,6 @@ kubernetes-staging-deploy:
     - kubectl get nodes
   environment:
     name: Test
-    url: https://test.com
+    url: https://hx-wp-webadmin-24.wp-k8s.ebi.ac.uk:30041
   when: manual
 
