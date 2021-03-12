@@ -37,6 +37,7 @@ public class InteractionSearchController {
     public static final String UPLOADED_BATCH_FILE_PREFIX = "file_";
     private final InteractionSearchService interactionSearchService;
     private final ChildInteractorSearchService childInteractorSearchService;
+
     @Value("${server.upload.batch.file.path}")
     private String uploadBatchFilePath;
 
@@ -340,9 +341,6 @@ public class InteractionSearchController {
         } else {
             httpStatus = HttpStatus.EXPECTATION_FAILED;
         }
-
-//        JSONObject result = new JSONObject();
-//        result.put("data", uploadBatchFileName);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", APPLICATION_JSON_VALUE);

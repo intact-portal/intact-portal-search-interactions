@@ -343,6 +343,49 @@ public class InteractionSearchServiceTest {
     }
 
     /**
+     * Expected Facet Results If the User types "physical association" and Hit Search Button
+     */
+    @Test
+    public void findInteractionIdentifiersTest() {
+        Page<SearchInteraction> interactions = interactionSearchService.findInteractionIdentifiers(
+                "physical association",
+                false,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        assertEquals(10, interactions.getTotalElements());
+
+        Set<String> acs = new TreeSet<>();
+        Set<String> expectedAcs = new TreeSet<>(Arrays.asList("EBI-1000008", "EBI-1000026", "EBI-1000048", "EBI-10000796", "EBI-10000862"));
+
+        for (SearchInteraction searchInteraction : interactions) {
+            acs.add(searchInteraction.getAc());
+        }
+        assertEquals(expectedAcs, acs);
+
+        Set<Integer> binaryIds = new TreeSet<>();
+        Set<Integer> expectedBinaryIds = new TreeSet<>(Arrays.asList(1,2,3,4,5,6,7,8,9,10));
+
+        for (SearchInteraction searchInteraction : interactions) {
+            binaryIds.add(searchInteraction.getBinaryInteractionId());
+        }
+
+        assertEquals(binaryIds, expectedBinaryIds);
+
+    }
+
+    /**
      * Expected behaviour when filter elements are passed
      */
     @Test
@@ -1000,7 +1043,6 @@ public class InteractionSearchServiceTest {
                 assertEquals(interactionTypeFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
             }
         }
-
     }
 
 }

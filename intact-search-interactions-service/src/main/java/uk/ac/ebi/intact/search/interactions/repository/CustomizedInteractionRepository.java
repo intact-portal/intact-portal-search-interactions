@@ -132,6 +132,38 @@ public interface CustomizedInteractionRepository {
     /**
      * @param query                            input used to retrieve the interaction
      * @param batchSearch                      (optional) true if que query needs to be treated as a batch search
+     * @param interactorSpeciesFilter          (Optional) interactor species of the interaction
+     * @param interactorTypeFilter             (Optional) filter interactions by interactor type
+     * @param interactionDetectionMethodFilter (Optional) filter interactions by interaction detection method
+     * @param interactionTypeFilter            (Optional) filter interactions by interaction type
+     * @param interactionHostOrganismFilter    (Optional) filter interactions by host organism
+     * @param isNegativeFilter                 (Optional) filter interactions that are negative if true
+     * @param minMiScore                       minimum value of mi-score for the interaction
+     * @param maxMiScore                       maximum value of mi-score for the interaction
+     * @param interSpecies                     boolean to restrict the result ot the same or different interactor species
+     * @param sort                             field to define the sort of the results
+     * @param pageable                         page number and size of the request
+     * @return the interaction data matching all the criteria
+     */
+    Page<SearchInteraction> findInteractionIdentifiers(String query,
+                                    boolean batchSearch,
+                                    Set<String> interactorSpeciesFilter,
+                                    Set<String> interactorTypeFilter,
+                                    Set<String> interactionDetectionMethodFilter,
+                                    Set<String> interactionTypeFilter,
+                                    Set<String> interactionHostOrganismFilter,
+                                    boolean isNegativeFilter,
+                                    double minMiScore,
+                                    double maxMiScore,
+                                    boolean interSpecies,
+                                    Set<Integer> binaryInteractionIdFilter,
+                                    Set<String> interactorAcFilter,
+                                    Sort sort, Pageable pageable);
+
+
+    /**
+     * @param query                            input used to retrieve the interaction
+     * @param batchSearch                      (optional) true if que query needs to be treated as a batch search
      * @param interactorAc                     interactor accession e.g. EBI-XXXXXX
      * @param interactorSpeciesFilter          (Optional) interactor species of the interaction
      * @param interactorTypeFilter             (Optional) filter interactions by interactor type            *
@@ -147,6 +179,20 @@ public interface CustomizedInteractionRepository {
     long countInteractionResult(String query,
                                 boolean batchSearch,
                                 String interactorAc,
+                                Set<String> interactorSpeciesFilter,
+                                Set<String> interactorTypeFilter,
+                                Set<String> interactionDetectionMethodFilter,
+                                Set<String> interactionTypeFilter,
+                                Set<String> interactionHostOrganismFilter,
+                                boolean isNegativeFilter,
+                                double minMiScore,
+                                double maxMiScore,
+                                boolean interSpecies,
+                                Set<Integer> binaryInteractionIdFilter,
+                                Set<String> interactorAcFilter);
+
+    long countInteractionResult(String query,
+                                boolean batchSearch,
                                 Set<String> interactorSpeciesFilter,
                                 Set<String> interactorTypeFilter,
                                 Set<String> interactionDetectionMethodFilter,
