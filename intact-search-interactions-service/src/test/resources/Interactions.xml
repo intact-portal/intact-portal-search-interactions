@@ -114,26 +114,6 @@
       </void>
      </object>
     </void>
-    <void property="annotationsA">
-     <object class="java.util.HashSet">
-      <void method="add">
-       <string>comment (DIP protein Q9BZD4 original sequence version: 119)</string>
-      </void>
-      <void method="add">
-       <string>comment (DIP protein Q9BZD4 original sequence version: 113)</string>
-      </void>
-     </object>
-    </void>
-    <void property="annotationsB">
-     <object class="java.util.HashSet">
-      <void method="add">
-       <string>comment (DIP protein O14777 original sequence version: 132)</string>
-      </void>
-      <void method="add">
-       <string>comment (DIP protein O14777 original sequence version: 126)</string>
-      </void>
-     </object>
-    </void>
     <void property="authors">
      <object class="java.util.LinkedHashSet">
       <void method="add">
@@ -497,13 +477,13 @@
           <string>GO:0005654 (go)</string>
          </void>
          <void method="add">
-          <string>NP_663735.2 (refseq)</string>
-         </void>
-         <void method="add">
           <string>R-HSA-2500257 (reactome)</string>
          </void>
          <void method="add">
           <string>ENSG00000143228 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>NP_663735.2 (refseq)</string>
          </void>
          <void method="add">
           <string>GO:0051301 (go)</string>
@@ -557,10 +537,10 @@
           <string>GO:0051315 (go)</string>
          </void>
          <void method="add">
-          <string>IPR005549 (interpro)</string>
+          <string>ENSP00000356875 (ensembl)</string>
          </void>
          <void method="add">
-          <string>ENSP00000356875 (ensembl)</string>
+          <string>IPR005549 (interpro)</string>
          </void>
          <void method="add">
           <string>GO:0031262 (go)</string>
@@ -683,10 +663,10 @@
         </void>
         <void property="interactorXrefs">
          <void method="add">
-          <string>IPR040967 (interpro)</string>
+          <string>O14777 (mint)</string>
          </void>
          <void method="add">
-          <string>O14777 (mint)</string>
+          <string>IPR040967 (interpro)</string>
          </void>
          <void method="add">
           <string>GO:0005829 (go)</string>
@@ -704,10 +684,10 @@
           <string>R-HSA-2500257 (reactome)</string>
          </void>
          <void method="add">
-          <string>GO:0051301 (go)</string>
+          <string>GO:1905342 (go)</string>
          </void>
          <void method="add">
-          <string>GO:1905342 (go)</string>
+          <string>GO:0051301 (go)</string>
          </void>
          <void method="add">
           <string>R-HSA-9648025 (reactome)</string>
@@ -782,19 +762,16 @@
           <string>DIP-35100N (dip)</string>
          </void>
          <void method="add">
-          <string>R-HSA-2467813 (reactome)</string>
-         </void>
-         <void method="add">
           <string>GO:0051383 (go)</string>
          </void>
          <void method="add">
-          <string>GO:0051298 (go)</string>
-         </void>
-         <void method="add">
-          <string>GO:0008608 (go)</string>
+          <string>R-HSA-2467813 (reactome)</string>
          </void>
          <void method="add">
           <string>GO:0000776 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0008608 (go)</string>
          </void>
          <void method="add">
           <string>GO:0051310 (go)</string>
@@ -803,10 +780,10 @@
           <string>GO:0000778 (go)</string>
          </void>
          <void method="add">
-          <string>ENSP00000261597 (ensembl)</string>
+          <string>GO:0000775 (go)</string>
          </void>
          <void method="add">
-          <string>GO:0000775 (go)</string>
+          <string>ENSP00000261597 (ensembl)</string>
          </void>
          <void method="add">
           <string>GO:0005813 (go)</string>
@@ -878,13 +855,13 @@
        <string>GO:0005654 (go)</string>
       </void>
       <void method="add">
-       <string>NP_663735.2 (refseq)</string>
-      </void>
-      <void method="add">
        <string>R-HSA-2500257 (reactome)</string>
       </void>
       <void method="add">
        <string>ENSG00000143228 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>NP_663735.2 (refseq)</string>
       </void>
       <void method="add">
        <string>GO:0051301 (go)</string>
@@ -938,10 +915,10 @@
        <string>GO:0051315 (go)</string>
       </void>
       <void method="add">
-       <string>IPR005549 (interpro)</string>
+       <string>ENSP00000356875 (ensembl)</string>
       </void>
       <void method="add">
-       <string>ENSP00000356875 (ensembl)</string>
+       <string>IPR005549 (interpro)</string>
       </void>
       <void method="add">
        <string>GO:0031262 (go)</string>
@@ -969,10 +946,10 @@
     <void property="xrefsB">
      <object class="java.util.HashSet">
       <void method="add">
-       <string>IPR040967 (interpro)</string>
+       <string>O14777 (mint)</string>
       </void>
       <void method="add">
-       <string>O14777 (mint)</string>
+       <string>IPR040967 (interpro)</string>
       </void>
       <void method="add">
        <string>GO:0005829 (go)</string>
@@ -990,10 +967,10 @@
        <string>R-HSA-2500257 (reactome)</string>
       </void>
       <void method="add">
-       <string>GO:0051301 (go)</string>
+       <string>GO:1905342 (go)</string>
       </void>
       <void method="add">
-       <string>GO:1905342 (go)</string>
+       <string>GO:0051301 (go)</string>
       </void>
       <void method="add">
        <string>R-HSA-9648025 (reactome)</string>
@@ -1068,19 +1045,16 @@
        <string>DIP-35100N (dip)</string>
       </void>
       <void method="add">
-       <string>R-HSA-2467813 (reactome)</string>
-      </void>
-      <void method="add">
        <string>GO:0051383 (go)</string>
       </void>
       <void method="add">
-       <string>GO:0051298 (go)</string>
-      </void>
-      <void method="add">
-       <string>GO:0008608 (go)</string>
+       <string>R-HSA-2467813 (reactome)</string>
       </void>
       <void method="add">
        <string>GO:0000776 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0008608 (go)</string>
       </void>
       <void method="add">
        <string>GO:0051310 (go)</string>
@@ -1089,10 +1063,10 @@
        <string>GO:0000778 (go)</string>
       </void>
       <void method="add">
-       <string>ENSP00000261597 (ensembl)</string>
+       <string>GO:0000775 (go)</string>
       </void>
       <void method="add">
-       <string>GO:0000775 (go)</string>
+       <string>ENSP00000261597 (ensembl)</string>
       </void>
       <void method="add">
        <string>GO:0005813 (go)</string>
@@ -1157,10 +1131,10 @@
     <void property="altIdsA">
      <object class="java.util.HashSet">
       <void method="add">
-       <string>C9JGC4 (uniprotkb)</string>
+       <string>B4DZZ7 (uniprotkb)</string>
       </void>
       <void method="add">
-       <string>B4DZZ7 (uniprotkb)</string>
+       <string>C9JGC4 (uniprotkb)</string>
       </void>
       <void method="add">
        <string>EBI-999900 (intact)</string>
@@ -1193,23 +1167,6 @@
      <object class="java.util.HashSet">
       <void method="add">
        <string>figure legend (Fig. 3A)</string>
-      </void>
-     </object>
-    </void>
-    <void property="annotationsA">
-     <object class="java.util.HashSet">
-      <void method="add">
-       <string>comment (DIP protein Q8NBT2 original sequence version: 102)</string>
-      </void>
-     </object>
-    </void>
-    <void property="annotationsB">
-     <object class="java.util.HashSet">
-      <void method="add">
-       <string>comment (DIP protein Q9HBM1 original sequence version: 110)</string>
-      </void>
-      <void method="add">
-       <string>comment (DIP protein Q9HBM1 original sequence version: 126)</string>
       </void>
      </object>
     </void>
@@ -1458,10 +1415,10 @@
         </void>
         <void property="interactorAltIds">
          <void method="add">
-          <string>C9JGC4 (uniprotkb)</string>
+          <string>B4DZZ7 (uniprotkb)</string>
          </void>
          <void method="add">
-          <string>B4DZZ7 (uniprotkb)</string>
+          <string>C9JGC4 (uniprotkb)</string>
          </void>
          <void method="add">
           <string>EBI-999900 (intact)</string>
@@ -1501,10 +1458,10 @@
         </void>
         <void property="interactorXrefs">
          <void method="add">
-          <string>GO:0005829 (go)</string>
+          <string>GO:0007049 (go)</string>
          </void>
          <void method="add">
-          <string>GO:0007049 (go)</string>
+          <string>GO:0005829 (go)</string>
          </void>
          <void method="add">
           <string>GO:0005654 (go)</string>
@@ -1675,10 +1632,10 @@
           <string>ENSP00000282074 (ensembl)</string>
          </void>
          <void method="add">
-          <string>ENSP00000483050 (ensembl)</string>
+          <string>R-HSA-5663220 (reactome)</string>
          </void>
          <void method="add">
-          <string>R-HSA-5663220 (reactome)</string>
+          <string>ENSP00000483050 (ensembl)</string>
          </void>
          <void method="add">
           <string>ENST00000611144 (ensembl)</string>
@@ -1792,10 +1749,10 @@
     <void property="xrefsA">
      <object class="java.util.HashSet">
       <void method="add">
-       <string>GO:0005829 (go)</string>
+       <string>GO:0007049 (go)</string>
       </void>
       <void method="add">
-       <string>GO:0007049 (go)</string>
+       <string>GO:0005829 (go)</string>
       </void>
       <void method="add">
        <string>GO:0005654 (go)</string>
@@ -1892,10 +1849,10 @@
        <string>ENSP00000282074 (ensembl)</string>
       </void>
       <void method="add">
-       <string>ENSP00000483050 (ensembl)</string>
+       <string>R-HSA-5663220 (reactome)</string>
       </void>
       <void method="add">
-       <string>R-HSA-5663220 (reactome)</string>
+       <string>ENSP00000483050 (ensembl)</string>
       </void>
       <void method="add">
        <string>ENST00000611144 (ensembl)</string>
@@ -2062,26 +2019,6 @@
      <object class="java.util.HashSet">
       <void method="add">
        <string>figure legend (Fig. 3E)</string>
-      </void>
-     </object>
-    </void>
-    <void property="annotationsA">
-     <object class="java.util.HashSet">
-      <void method="add">
-       <string>comment (DIP protein O14777 original sequence version: 132)</string>
-      </void>
-      <void method="add">
-       <string>comment (DIP protein O14777 original sequence version: 126)</string>
-      </void>
-     </object>
-    </void>
-    <void property="annotationsB">
-     <object class="java.util.HashSet">
-      <void method="add">
-       <string>comment (DIP protein Q9HBM1 original sequence version: 110)</string>
-      </void>
-      <void method="add">
-       <string>comment (DIP protein Q9HBM1 original sequence version: 126)</string>
       </void>
      </object>
     </void>
@@ -2437,10 +2374,10 @@
         </void>
         <void property="interactorXrefs">
          <void method="add">
-          <string>IPR040967 (interpro)</string>
+          <string>O14777 (mint)</string>
          </void>
          <void method="add">
-          <string>O14777 (mint)</string>
+          <string>IPR040967 (interpro)</string>
          </void>
          <void method="add">
           <string>GO:0005829 (go)</string>
@@ -2458,10 +2395,10 @@
           <string>R-HSA-2500257 (reactome)</string>
          </void>
          <void method="add">
-          <string>GO:0051301 (go)</string>
+          <string>GO:1905342 (go)</string>
          </void>
          <void method="add">
-          <string>GO:1905342 (go)</string>
+          <string>GO:0051301 (go)</string>
          </void>
          <void method="add">
           <string>R-HSA-9648025 (reactome)</string>
@@ -2536,19 +2473,16 @@
           <string>DIP-35100N (dip)</string>
          </void>
          <void method="add">
-          <string>R-HSA-2467813 (reactome)</string>
-         </void>
-         <void method="add">
           <string>GO:0051383 (go)</string>
          </void>
          <void method="add">
-          <string>GO:0051298 (go)</string>
-         </void>
-         <void method="add">
-          <string>GO:0008608 (go)</string>
+          <string>R-HSA-2467813 (reactome)</string>
          </void>
          <void method="add">
           <string>GO:0000776 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0008608 (go)</string>
          </void>
          <void method="add">
           <string>GO:0051310 (go)</string>
@@ -2557,10 +2491,10 @@
           <string>GO:0000778 (go)</string>
          </void>
          <void method="add">
-          <string>ENSP00000261597 (ensembl)</string>
+          <string>GO:0000775 (go)</string>
          </void>
          <void method="add">
-          <string>GO:0000775 (go)</string>
+          <string>ENSP00000261597 (ensembl)</string>
          </void>
          <void method="add">
           <string>GO:0005813 (go)</string>
@@ -2665,10 +2599,10 @@
           <string>ENSP00000282074 (ensembl)</string>
          </void>
          <void method="add">
-          <string>ENSP00000483050 (ensembl)</string>
+          <string>R-HSA-5663220 (reactome)</string>
          </void>
          <void method="add">
-          <string>R-HSA-5663220 (reactome)</string>
+          <string>ENSP00000483050 (ensembl)</string>
          </void>
          <void method="add">
           <string>ENST00000611144 (ensembl)</string>
@@ -2789,10 +2723,10 @@
     <void property="xrefsA">
      <object class="java.util.HashSet">
       <void method="add">
-       <string>IPR040967 (interpro)</string>
+       <string>O14777 (mint)</string>
       </void>
       <void method="add">
-       <string>O14777 (mint)</string>
+       <string>IPR040967 (interpro)</string>
       </void>
       <void method="add">
        <string>GO:0005829 (go)</string>
@@ -2810,10 +2744,10 @@
        <string>R-HSA-2500257 (reactome)</string>
       </void>
       <void method="add">
-       <string>GO:0051301 (go)</string>
+       <string>GO:1905342 (go)</string>
       </void>
       <void method="add">
-       <string>GO:1905342 (go)</string>
+       <string>GO:0051301 (go)</string>
       </void>
       <void method="add">
        <string>R-HSA-9648025 (reactome)</string>
@@ -2888,19 +2822,16 @@
        <string>DIP-35100N (dip)</string>
       </void>
       <void method="add">
-       <string>R-HSA-2467813 (reactome)</string>
-      </void>
-      <void method="add">
        <string>GO:0051383 (go)</string>
       </void>
       <void method="add">
-       <string>GO:0051298 (go)</string>
-      </void>
-      <void method="add">
-       <string>GO:0008608 (go)</string>
+       <string>R-HSA-2467813 (reactome)</string>
       </void>
       <void method="add">
        <string>GO:0000776 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0008608 (go)</string>
       </void>
       <void method="add">
        <string>GO:0051310 (go)</string>
@@ -2909,10 +2840,10 @@
        <string>GO:0000778 (go)</string>
       </void>
       <void method="add">
-       <string>ENSP00000261597 (ensembl)</string>
+       <string>GO:0000775 (go)</string>
       </void>
       <void method="add">
-       <string>GO:0000775 (go)</string>
+       <string>ENSP00000261597 (ensembl)</string>
       </void>
       <void method="add">
        <string>GO:0005813 (go)</string>
@@ -2943,10 +2874,10 @@
        <string>ENSP00000282074 (ensembl)</string>
       </void>
       <void method="add">
-       <string>ENSP00000483050 (ensembl)</string>
+       <string>R-HSA-5663220 (reactome)</string>
       </void>
       <void method="add">
-       <string>R-HSA-5663220 (reactome)</string>
+       <string>ENSP00000483050 (ensembl)</string>
       </void>
       <void method="add">
        <string>ENST00000611144 (ensembl)</string>
@@ -3090,10 +3021,10 @@
     <void property="altIdsB">
      <object class="java.util.HashSet">
       <void method="add">
-       <string>C9JGC4 (uniprotkb)</string>
+       <string>B4DZZ7 (uniprotkb)</string>
       </void>
       <void method="add">
-       <string>B4DZZ7 (uniprotkb)</string>
+       <string>C9JGC4 (uniprotkb)</string>
       </void>
       <void method="add">
        <string>EBI-999900 (intact)</string>
@@ -3107,23 +3038,6 @@
      <object class="java.util.HashSet">
       <void method="add">
        <string>figure legend (Fig. 3E)</string>
-      </void>
-     </object>
-    </void>
-    <void property="annotationsA">
-     <object class="java.util.HashSet">
-      <void method="add">
-       <string>comment (DIP protein O14777 original sequence version: 132)</string>
-      </void>
-      <void method="add">
-       <string>comment (DIP protein O14777 original sequence version: 126)</string>
-      </void>
-     </object>
-    </void>
-    <void property="annotationsB">
-     <object class="java.util.HashSet">
-      <void method="add">
-       <string>comment (DIP protein Q8NBT2 original sequence version: 102)</string>
       </void>
      </object>
     </void>
@@ -3479,10 +3393,10 @@
         </void>
         <void property="interactorXrefs">
          <void method="add">
-          <string>IPR040967 (interpro)</string>
+          <string>O14777 (mint)</string>
          </void>
          <void method="add">
-          <string>O14777 (mint)</string>
+          <string>IPR040967 (interpro)</string>
          </void>
          <void method="add">
           <string>GO:0005829 (go)</string>
@@ -3500,10 +3414,10 @@
           <string>R-HSA-2500257 (reactome)</string>
          </void>
          <void method="add">
-          <string>GO:0051301 (go)</string>
+          <string>GO:1905342 (go)</string>
          </void>
          <void method="add">
-          <string>GO:1905342 (go)</string>
+          <string>GO:0051301 (go)</string>
          </void>
          <void method="add">
           <string>R-HSA-9648025 (reactome)</string>
@@ -3578,19 +3492,16 @@
           <string>DIP-35100N (dip)</string>
          </void>
          <void method="add">
-          <string>R-HSA-2467813 (reactome)</string>
-         </void>
-         <void method="add">
           <string>GO:0051383 (go)</string>
          </void>
          <void method="add">
-          <string>GO:0051298 (go)</string>
-         </void>
-         <void method="add">
-          <string>GO:0008608 (go)</string>
+          <string>R-HSA-2467813 (reactome)</string>
          </void>
          <void method="add">
           <string>GO:0000776 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0008608 (go)</string>
          </void>
          <void method="add">
           <string>GO:0051310 (go)</string>
@@ -3599,10 +3510,10 @@
           <string>GO:0000778 (go)</string>
          </void>
          <void method="add">
-          <string>ENSP00000261597 (ensembl)</string>
+          <string>GO:0000775 (go)</string>
          </void>
          <void method="add">
-          <string>GO:0000775 (go)</string>
+          <string>ENSP00000261597 (ensembl)</string>
          </void>
          <void method="add">
           <string>GO:0005813 (go)</string>
@@ -3631,10 +3542,10 @@
         </void>
         <void property="interactorAltIds">
          <void method="add">
-          <string>C9JGC4 (uniprotkb)</string>
+          <string>B4DZZ7 (uniprotkb)</string>
          </void>
          <void method="add">
-          <string>B4DZZ7 (uniprotkb)</string>
+          <string>C9JGC4 (uniprotkb)</string>
          </void>
          <void method="add">
           <string>EBI-999900 (intact)</string>
@@ -3674,10 +3585,10 @@
         </void>
         <void property="interactorXrefs">
          <void method="add">
-          <string>GO:0005829 (go)</string>
+          <string>GO:0007049 (go)</string>
          </void>
          <void method="add">
-          <string>GO:0007049 (go)</string>
+          <string>GO:0005829 (go)</string>
          </void>
          <void method="add">
           <string>GO:0005654 (go)</string>
@@ -3813,10 +3724,10 @@
     <void property="xrefsA">
      <object class="java.util.HashSet">
       <void method="add">
-       <string>IPR040967 (interpro)</string>
+       <string>O14777 (mint)</string>
       </void>
       <void method="add">
-       <string>O14777 (mint)</string>
+       <string>IPR040967 (interpro)</string>
       </void>
       <void method="add">
        <string>GO:0005829 (go)</string>
@@ -3834,10 +3745,10 @@
        <string>R-HSA-2500257 (reactome)</string>
       </void>
       <void method="add">
-       <string>GO:0051301 (go)</string>
+       <string>GO:1905342 (go)</string>
       </void>
       <void method="add">
-       <string>GO:1905342 (go)</string>
+       <string>GO:0051301 (go)</string>
       </void>
       <void method="add">
        <string>R-HSA-9648025 (reactome)</string>
@@ -3912,19 +3823,16 @@
        <string>DIP-35100N (dip)</string>
       </void>
       <void method="add">
-       <string>R-HSA-2467813 (reactome)</string>
-      </void>
-      <void method="add">
        <string>GO:0051383 (go)</string>
       </void>
       <void method="add">
-       <string>GO:0051298 (go)</string>
-      </void>
-      <void method="add">
-       <string>GO:0008608 (go)</string>
+       <string>R-HSA-2467813 (reactome)</string>
       </void>
       <void method="add">
        <string>GO:0000776 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0008608 (go)</string>
       </void>
       <void method="add">
        <string>GO:0051310 (go)</string>
@@ -3933,10 +3841,10 @@
        <string>GO:0000778 (go)</string>
       </void>
       <void method="add">
-       <string>ENSP00000261597 (ensembl)</string>
+       <string>GO:0000775 (go)</string>
       </void>
       <void method="add">
-       <string>GO:0000775 (go)</string>
+       <string>ENSP00000261597 (ensembl)</string>
       </void>
       <void method="add">
        <string>GO:0005813 (go)</string>
@@ -3946,10 +3854,10 @@
     <void property="xrefsB">
      <object class="java.util.HashSet">
       <void method="add">
-       <string>GO:0005829 (go)</string>
+       <string>GO:0007049 (go)</string>
       </void>
       <void method="add">
-       <string>GO:0007049 (go)</string>
+       <string>GO:0005829 (go)</string>
       </void>
       <void method="add">
        <string>GO:0005654 (go)</string>
@@ -4134,26 +4042,6 @@
      <object class="java.util.HashSet">
       <void method="add">
        <string>figure legend (Fig. 3E)</string>
-      </void>
-     </object>
-    </void>
-    <void property="annotationsA">
-     <object class="java.util.HashSet">
-      <void method="add">
-       <string>comment (DIP protein O14777 original sequence version: 132)</string>
-      </void>
-      <void method="add">
-       <string>comment (DIP protein O14777 original sequence version: 126)</string>
-      </void>
-     </object>
-    </void>
-    <void property="annotationsB">
-     <object class="java.util.HashSet">
-      <void method="add">
-       <string>comment (DIP protein Q9BZD4 original sequence version: 119)</string>
-      </void>
-      <void method="add">
-       <string>comment (DIP protein Q9BZD4 original sequence version: 113)</string>
       </void>
      </object>
     </void>
@@ -4509,10 +4397,10 @@
         </void>
         <void property="interactorXrefs">
          <void method="add">
-          <string>IPR040967 (interpro)</string>
+          <string>O14777 (mint)</string>
          </void>
          <void method="add">
-          <string>O14777 (mint)</string>
+          <string>IPR040967 (interpro)</string>
          </void>
          <void method="add">
           <string>GO:0005829 (go)</string>
@@ -4530,10 +4418,10 @@
           <string>R-HSA-2500257 (reactome)</string>
          </void>
          <void method="add">
-          <string>GO:0051301 (go)</string>
+          <string>GO:1905342 (go)</string>
          </void>
          <void method="add">
-          <string>GO:1905342 (go)</string>
+          <string>GO:0051301 (go)</string>
          </void>
          <void method="add">
           <string>R-HSA-9648025 (reactome)</string>
@@ -4608,19 +4496,16 @@
           <string>DIP-35100N (dip)</string>
          </void>
          <void method="add">
-          <string>R-HSA-2467813 (reactome)</string>
-         </void>
-         <void method="add">
           <string>GO:0051383 (go)</string>
          </void>
          <void method="add">
-          <string>GO:0051298 (go)</string>
-         </void>
-         <void method="add">
-          <string>GO:0008608 (go)</string>
+          <string>R-HSA-2467813 (reactome)</string>
          </void>
          <void method="add">
           <string>GO:0000776 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0008608 (go)</string>
          </void>
          <void method="add">
           <string>GO:0051310 (go)</string>
@@ -4629,10 +4514,10 @@
           <string>GO:0000778 (go)</string>
          </void>
          <void method="add">
-          <string>ENSP00000261597 (ensembl)</string>
+          <string>GO:0000775 (go)</string>
          </void>
          <void method="add">
-          <string>GO:0000775 (go)</string>
+          <string>ENSP00000261597 (ensembl)</string>
          </void>
          <void method="add">
           <string>GO:0005813 (go)</string>
@@ -4725,13 +4610,13 @@
           <string>GO:0005654 (go)</string>
          </void>
          <void method="add">
-          <string>NP_663735.2 (refseq)</string>
-         </void>
-         <void method="add">
           <string>R-HSA-2500257 (reactome)</string>
          </void>
          <void method="add">
           <string>ENSG00000143228 (ensembl)</string>
+         </void>
+         <void method="add">
+          <string>NP_663735.2 (refseq)</string>
          </void>
          <void method="add">
           <string>GO:0051301 (go)</string>
@@ -4785,10 +4670,10 @@
           <string>GO:0051315 (go)</string>
          </void>
          <void method="add">
-          <string>IPR005549 (interpro)</string>
+          <string>ENSP00000356875 (ensembl)</string>
          </void>
          <void method="add">
-          <string>ENSP00000356875 (ensembl)</string>
+          <string>IPR005549 (interpro)</string>
          </void>
          <void method="add">
           <string>GO:0031262 (go)</string>
@@ -4876,10 +4761,10 @@
     <void property="xrefsA">
      <object class="java.util.HashSet">
       <void method="add">
-       <string>IPR040967 (interpro)</string>
+       <string>O14777 (mint)</string>
       </void>
       <void method="add">
-       <string>O14777 (mint)</string>
+       <string>IPR040967 (interpro)</string>
       </void>
       <void method="add">
        <string>GO:0005829 (go)</string>
@@ -4897,10 +4782,10 @@
        <string>R-HSA-2500257 (reactome)</string>
       </void>
       <void method="add">
-       <string>GO:0051301 (go)</string>
+       <string>GO:1905342 (go)</string>
       </void>
       <void method="add">
-       <string>GO:1905342 (go)</string>
+       <string>GO:0051301 (go)</string>
       </void>
       <void method="add">
        <string>R-HSA-9648025 (reactome)</string>
@@ -4975,19 +4860,16 @@
        <string>DIP-35100N (dip)</string>
       </void>
       <void method="add">
-       <string>R-HSA-2467813 (reactome)</string>
-      </void>
-      <void method="add">
        <string>GO:0051383 (go)</string>
       </void>
       <void method="add">
-       <string>GO:0051298 (go)</string>
-      </void>
-      <void method="add">
-       <string>GO:0008608 (go)</string>
+       <string>R-HSA-2467813 (reactome)</string>
       </void>
       <void method="add">
        <string>GO:0000776 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0008608 (go)</string>
       </void>
       <void method="add">
        <string>GO:0051310 (go)</string>
@@ -4996,10 +4878,10 @@
        <string>GO:0000778 (go)</string>
       </void>
       <void method="add">
-       <string>ENSP00000261597 (ensembl)</string>
+       <string>GO:0000775 (go)</string>
       </void>
       <void method="add">
-       <string>GO:0000775 (go)</string>
+       <string>ENSP00000261597 (ensembl)</string>
       </void>
       <void method="add">
        <string>GO:0005813 (go)</string>
@@ -5018,13 +4900,13 @@
        <string>GO:0005654 (go)</string>
       </void>
       <void method="add">
-       <string>NP_663735.2 (refseq)</string>
-      </void>
-      <void method="add">
        <string>R-HSA-2500257 (reactome)</string>
       </void>
       <void method="add">
        <string>ENSG00000143228 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>NP_663735.2 (refseq)</string>
       </void>
       <void method="add">
        <string>GO:0051301 (go)</string>
@@ -5078,10 +4960,10 @@
        <string>GO:0051315 (go)</string>
       </void>
       <void method="add">
-       <string>IPR005549 (interpro)</string>
+       <string>ENSP00000356875 (ensembl)</string>
       </void>
       <void method="add">
-       <string>ENSP00000356875 (ensembl)</string>
+       <string>IPR005549 (interpro)</string>
       </void>
       <void method="add">
        <string>GO:0031262 (go)</string>
@@ -5638,10 +5520,10 @@
           <string>GO:0005484 (go)</string>
          </void>
          <void method="add">
-          <string>GO:0005801 (go)</string>
+          <string>GO:0005797 (go)</string>
          </void>
          <void method="add">
-          <string>GO:0005797 (go)</string>
+          <string>GO:0005801 (go)</string>
          </void>
          <void method="add">
           <string>GO:0016021 (go)</string>
@@ -5659,19 +5541,16 @@
           <string>IPR023601 (interpro)</string>
          </void>
          <void method="add">
-          <string>GO:0042147 (go)</string>
-         </void>
-         <void method="add">
           <string>ENSRNOG00000003971 (ensembl)</string>
          </void>
          <void method="add">
           <string>GO:0031201 (go)</string>
          </void>
          <void method="add">
-          <string>ENSRNOP00000068434 (ensembl)</string>
+          <string>GO:0042147 (go)</string>
          </void>
          <void method="add">
-          <string>71093 (rgd)</string>
+          <string>ENSRNOP00000068434 (ensembl)</string>
          </void>
          <void method="add">
           <string>ENSRNOT00000077063 (ensembl)</string>
@@ -5680,19 +5559,22 @@
           <string>GO:0006906 (go)</string>
          </void>
          <void method="add">
+          <string>71093 (rgd)</string>
+         </void>
+         <void method="add">
           <string>GO:0048209 (go)</string>
          </void>
          <void method="add">
           <string>R-RNO-6811438 (reactome)</string>
          </void>
          <void method="add">
+          <string>Q62931 (mint)</string>
+         </void>
+         <void method="add">
           <string>R-RNO-6807878 (reactome)</string>
          </void>
          <void method="add">
           <string>GO:0006888 (go)</string>
-         </void>
-         <void method="add">
-          <string>Q62931 (mint)</string>
          </void>
         </void>
        </object>
@@ -5838,10 +5720,10 @@
        <string>GO:0005484 (go)</string>
       </void>
       <void method="add">
-       <string>GO:0005801 (go)</string>
+       <string>GO:0005797 (go)</string>
       </void>
       <void method="add">
-       <string>GO:0005797 (go)</string>
+       <string>GO:0005801 (go)</string>
       </void>
       <void method="add">
        <string>GO:0016021 (go)</string>
@@ -5859,19 +5741,16 @@
        <string>IPR023601 (interpro)</string>
       </void>
       <void method="add">
-       <string>GO:0042147 (go)</string>
-      </void>
-      <void method="add">
        <string>ENSRNOG00000003971 (ensembl)</string>
       </void>
       <void method="add">
        <string>GO:0031201 (go)</string>
       </void>
       <void method="add">
-       <string>ENSRNOP00000068434 (ensembl)</string>
+       <string>GO:0042147 (go)</string>
       </void>
       <void method="add">
-       <string>71093 (rgd)</string>
+       <string>ENSRNOP00000068434 (ensembl)</string>
       </void>
       <void method="add">
        <string>ENSRNOT00000077063 (ensembl)</string>
@@ -5880,19 +5759,22 @@
        <string>GO:0006906 (go)</string>
       </void>
       <void method="add">
+       <string>71093 (rgd)</string>
+      </void>
+      <void method="add">
        <string>GO:0048209 (go)</string>
       </void>
       <void method="add">
        <string>R-RNO-6811438 (reactome)</string>
       </void>
       <void method="add">
+       <string>Q62931 (mint)</string>
+      </void>
+      <void method="add">
        <string>R-RNO-6807878 (reactome)</string>
       </void>
       <void method="add">
        <string>GO:0006888 (go)</string>
-      </void>
-      <void method="add">
-       <string>Q62931 (mint)</string>
       </void>
      </object>
     </void>
@@ -7231,10 +7113,10 @@
           <string>GO:0000139 (go)</string>
          </void>
          <void method="add">
-          <string>NP_113892.2 (refseq)</string>
+          <string>ENSRNOG00000018847 (ensembl)</string>
          </void>
          <void method="add">
-          <string>ENSRNOG00000018847 (ensembl)</string>
+          <string>NP_113892.2 (refseq)</string>
          </void>
          <void method="add">
           <string>GO:0090166 (go)</string>
@@ -7249,10 +7131,10 @@
           <string>ENSRNOP00000025664 (ensembl)</string>
          </void>
          <void method="add">
-          <string>GO:0031201 (go)</string>
+          <string>GO:0042147 (go)</string>
          </void>
          <void method="add">
-          <string>GO:0042147 (go)</string>
+          <string>GO:0031201 (go)</string>
          </void>
          <void method="add">
           <string>GO:0006906 (go)</string>
@@ -7270,10 +7152,10 @@
           <string>GO:0045732 (go)</string>
          </void>
          <void method="add">
-          <string>GO:0006886 (go)</string>
+          <string>R-RNO-5694530 (reactome)</string>
          </void>
          <void method="add">
-          <string>R-RNO-5694530 (reactome)</string>
+          <string>GO:0006886 (go)</string>
          </void>
          <void method="add">
           <string>GO:0034498 (go)</string>
@@ -7291,10 +7173,10 @@
           <string>GO:0000149 (go)</string>
          </void>
          <void method="add">
-          <string>GO:0016021 (go)</string>
+          <string>GO:0005794 (go)</string>
          </void>
          <void method="add">
-          <string>GO:0005794 (go)</string>
+          <string>GO:0016021 (go)</string>
          </void>
          <void method="add">
           <string>R-RNO-204005 (reactome)</string>
@@ -7315,13 +7197,13 @@
           <string>R-RNO-6811438 (reactome)</string>
          </void>
          <void method="add">
+          <string>R-RNO-6807878 (reactome)</string>
+         </void>
+         <void method="add">
           <string>GO:0006888 (go)</string>
          </void>
          <void method="add">
           <string>68426 (rgd)</string>
-         </void>
-         <void method="add">
-          <string>R-RNO-6807878 (reactome)</string>
          </void>
          <void method="add">
           <string>XP_006231059.1 (refseq)</string>
@@ -7476,10 +7358,10 @@
        <string>GO:0000139 (go)</string>
       </void>
       <void method="add">
-       <string>NP_113892.2 (refseq)</string>
+       <string>ENSRNOG00000018847 (ensembl)</string>
       </void>
       <void method="add">
-       <string>ENSRNOG00000018847 (ensembl)</string>
+       <string>NP_113892.2 (refseq)</string>
       </void>
       <void method="add">
        <string>GO:0090166 (go)</string>
@@ -7494,10 +7376,10 @@
        <string>ENSRNOP00000025664 (ensembl)</string>
       </void>
       <void method="add">
-       <string>GO:0031201 (go)</string>
+       <string>GO:0042147 (go)</string>
       </void>
       <void method="add">
-       <string>GO:0042147 (go)</string>
+       <string>GO:0031201 (go)</string>
       </void>
       <void method="add">
        <string>GO:0006906 (go)</string>
@@ -7515,10 +7397,10 @@
        <string>GO:0045732 (go)</string>
       </void>
       <void method="add">
-       <string>GO:0006886 (go)</string>
+       <string>R-RNO-5694530 (reactome)</string>
       </void>
       <void method="add">
-       <string>R-RNO-5694530 (reactome)</string>
+       <string>GO:0006886 (go)</string>
       </void>
       <void method="add">
        <string>GO:0034498 (go)</string>
@@ -7536,10 +7418,10 @@
        <string>GO:0000149 (go)</string>
       </void>
       <void method="add">
-       <string>GO:0016021 (go)</string>
+       <string>GO:0005794 (go)</string>
       </void>
       <void method="add">
-       <string>GO:0005794 (go)</string>
+       <string>GO:0016021 (go)</string>
       </void>
       <void method="add">
        <string>R-RNO-204005 (reactome)</string>
@@ -7560,13 +7442,13 @@
        <string>R-RNO-6811438 (reactome)</string>
       </void>
       <void method="add">
+       <string>R-RNO-6807878 (reactome)</string>
+      </void>
+      <void method="add">
        <string>GO:0006888 (go)</string>
       </void>
       <void method="add">
        <string>68426 (rgd)</string>
-      </void>
-      <void method="add">
-       <string>R-RNO-6807878 (reactome)</string>
       </void>
       <void method="add">
        <string>XP_006231059.1 (refseq)</string>
@@ -8093,10 +7975,10 @@
           <string>GO:0061025 (go)</string>
          </void>
          <void method="add">
-          <string>GO:0000139 (go)</string>
+          <string>ENSRNOG00000002301 (ensembl)</string>
          </void>
          <void method="add">
-          <string>ENSRNOG00000002301 (ensembl)</string>
+          <string>GO:0000139 (go)</string>
          </void>
          <void method="add">
           <string>IPR006953 (interpro)</string>
@@ -8156,16 +8038,16 @@
           <string>GO:0048471 (go)</string>
          </void>
          <void method="add">
-          <string>GO:0045056 (go)</string>
-         </void>
-         <void method="add">
           <string>ENSRNOT00000003277 (ensembl)</string>
          </void>
          <void method="add">
-          <string>R-RNO-6807878 (reactome)</string>
+          <string>GO:0045056 (go)</string>
          </void>
          <void method="add">
           <string>GO:0006888 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-RNO-6807878 (reactome)</string>
          </void>
         </void>
        </object>
@@ -8320,10 +8202,10 @@
        <string>GO:0061025 (go)</string>
       </void>
       <void method="add">
-       <string>GO:0000139 (go)</string>
+       <string>ENSRNOG00000002301 (ensembl)</string>
       </void>
       <void method="add">
-       <string>ENSRNOG00000002301 (ensembl)</string>
+       <string>GO:0000139 (go)</string>
       </void>
       <void method="add">
        <string>IPR006953 (interpro)</string>
@@ -8383,16 +8265,16 @@
        <string>GO:0048471 (go)</string>
       </void>
       <void method="add">
-       <string>GO:0045056 (go)</string>
-      </void>
-      <void method="add">
        <string>ENSRNOT00000003277 (ensembl)</string>
       </void>
       <void method="add">
-       <string>R-RNO-6807878 (reactome)</string>
+       <string>GO:0045056 (go)</string>
       </void>
       <void method="add">
        <string>GO:0006888 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-RNO-6807878 (reactome)</string>
       </void>
      </object>
     </void>
@@ -8504,43 +8386,6 @@
       </void>
       <void method="add">
        <string>figure legend (Fig. 9b)</string>
-      </void>
-     </object>
-    </void>
-    <void property="annotationsB">
-     <object class="java.util.HashSet">
-      <void method="add">
-       <string>comment (DIP protein Q04206 original sequence version: 168)</string>
-      </void>
-      <void method="add">
-       <string>comment (DIP protein Q04206 original sequence version: 99)</string>
-      </void>
-      <void method="add">
-       <string>comment (DIP protein Q04206 original sequence version: 128)</string>
-      </void>
-      <void method="add">
-       <string>comment (DIP protein Q04206 original sequence version: 185)</string>
-      </void>
-      <void method="add">
-       <string>comment (DIP protein Q04206 original sequence version: 173)</string>
-      </void>
-      <void method="add">
-       <string>comment (DIP protein Q04206 original sequence version: 183)</string>
-      </void>
-      <void method="add">
-       <string>comment (DIP protein Q04206 original sequence version: 181)</string>
-      </void>
-      <void method="add">
-       <string>comment (DIP protein Q04206 original sequence version: 170)</string>
-      </void>
-      <void method="add">
-       <string>comment (DIP protein Q04206 original sequence version: 153)</string>
-      </void>
-      <void method="add">
-       <string>comment (DIP protein Q04206 original sequence version: 131)</string>
-      </void>
-      <void method="add">
-       <string>comment (DIP protein Q04206-1 original sequence version: 99)</string>
       </void>
      </object>
     </void>
@@ -8909,13 +8754,13 @@
           <string>GO:2001237 (go)</string>
          </void>
          <void method="add">
-          <string>GO:0000122 (go)</string>
-         </void>
-         <void method="add">
           <string>GO:0043200 (go)</string>
          </void>
          <void method="add">
           <string>GO:0042802 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000122 (go)</string>
          </void>
          <void method="add">
           <string>IPR008967 (interpro)</string>
@@ -8999,10 +8844,10 @@
           <string>GO:1901223 (go)</string>
          </void>
          <void method="add">
-          <string>GO:0071316 (go)</string>
+          <string>GO:0050852 (go)</string>
          </void>
          <void method="add">
-          <string>GO:0050852 (go)</string>
+          <string>GO:0071316 (go)</string>
          </void>
          <void method="add">
           <string>GO:0006954 (go)</string>
@@ -9026,10 +8871,10 @@
           <string>GO:0003682 (go)</string>
          </void>
          <void method="add">
-          <string>R-HSA-5607761 (reactome)</string>
+          <string>ENSG00000173039 (ensembl)</string>
          </void>
          <void method="add">
-          <string>ENSG00000173039 (ensembl)</string>
+          <string>R-HSA-5607761 (reactome)</string>
          </void>
          <void method="add">
           <string>6QHM (rcsb pdb)</string>
@@ -9044,16 +8889,16 @@
           <string>GO:0033590 (go)</string>
          </void>
          <void method="add">
-          <string>GO:0047485 (go)</string>
-         </void>
-         <void method="add">
           <string>NP_068810.3 (refseq)</string>
          </void>
          <void method="add">
-          <string>GO:2000630 (go)</string>
+          <string>GO:0047485 (go)</string>
          </void>
          <void method="add">
           <string>GO:0032868 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:2000630 (go)</string>
          </void>
          <void method="add">
           <string>GO:1904385 (go)</string>
@@ -9062,31 +8907,31 @@
           <string>R-HSA-1810476 (reactome)</string>
          </void>
          <void method="add">
-          <string>R-HSA-2559582 (reactome)</string>
+          <string>GO:0032332 (go)</string>
          </void>
          <void method="add">
-          <string>GO:0032332 (go)</string>
+          <string>R-HSA-2559582 (reactome)</string>
          </void>
          <void method="add">
           <string>GO:0001227 (go)</string>
          </void>
          <void method="add">
-          <string>R-HSA-209560 (reactome)</string>
-         </void>
-         <void method="add">
           <string>1NFI (rcsb pdb)</string>
          </void>
          <void method="add">
-          <string>R-HSA-5660668 (reactome)</string>
+          <string>R-HSA-209560 (reactome)</string>
          </void>
          <void method="add">
           <string>GO:0046627 (go)</string>
          </void>
          <void method="add">
-          <string>GO:0045893 (go)</string>
+          <string>R-HSA-5660668 (reactome)</string>
          </void>
          <void method="add">
           <string>GO:0014040 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0045893 (go)</string>
          </void>
          <void method="add">
           <string>GO:0071356 (go)</string>
@@ -9098,13 +8943,13 @@
           <string>GO:1902894 (go)</string>
          </void>
          <void method="add">
-          <string>GO:0000981 (go)</string>
-         </void>
-         <void method="add">
           <string>GO:0035525 (go)</string>
          </void>
          <void method="add">
           <string>GO:0071224 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0000981 (go)</string>
          </void>
          <void method="add">
           <string>GO:0033234 (go)</string>
@@ -9113,13 +8958,13 @@
           <string>GO:0051092 (go)</string>
          </void>
          <void method="add">
-          <string>GO:0002223 (go)</string>
-         </void>
-         <void method="add">
           <string>GO:0043066 (go)</string>
          </void>
          <void method="add">
           <string>GO:0032481 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0002223 (go)</string>
          </void>
          <void method="add">
           <string>ENSP00000384273 (ensembl)</string>
@@ -9149,16 +8994,16 @@
           <string>GO:0043620 (go)</string>
          </void>
          <void method="add">
-          <string>GO:0003677 (go)</string>
-         </void>
-         <void method="add">
           <string>GO:0050862 (go)</string>
          </void>
          <void method="add">
-          <string>R-HSA-3134963 (reactome)</string>
+          <string>GO:0003677 (go)</string>
          </void>
          <void method="add">
           <string>GO:0005654 (go)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-3134963 (reactome)</string>
          </void>
          <void method="add">
           <string>GO:0035729 (go)</string>
@@ -9197,9 +9042,6 @@
           <string>R-HSA-448706 (reactome)</string>
          </void>
          <void method="add">
-          <string>GO:0042025 (go)</string>
-         </void>
-         <void method="add">
           <string>R-HSA-9020702 (reactome)</string>
          </void>
          <void method="add">
@@ -9218,10 +9060,10 @@
           <string>GO:0010224 (go)</string>
          </void>
          <void method="add">
-          <string>GO:0070491 (go)</string>
+          <string>GO:0005667 (go)</string>
          </void>
          <void method="add">
-          <string>GO:0005667 (go)</string>
+          <string>GO:0070491 (go)</string>
          </void>
          <void method="add">
           <string>GO:0051059 (go)</string>
@@ -9260,13 +9102,10 @@
           <string>GO:0034097 (go)</string>
          </void>
          <void method="add">
-          <string>GO:0019221 (go)</string>
-         </void>
-         <void method="add">
           <string>GO:0043123 (go)</string>
          </void>
          <void method="add">
-          <string>GO:0019901 (go)</string>
+          <string>GO:0019221 (go)</string>
          </void>
          <void method="add">
           <string>GO:0009887 (go)</string>
@@ -9275,10 +9114,13 @@
           <string>NP_001230913.1 (refseq)</string>
          </void>
          <void method="add">
-          <string>GO:0042805 (go)</string>
+          <string>GO:0019901 (go)</string>
          </void>
          <void method="add">
           <string>GO:0070431 (go)</string>
+         </void>
+         <void method="add">
+          <string>GO:0042805 (go)</string>
          </void>
          <void method="add">
           <string>GO:0007249 (go)</string>
@@ -9296,22 +9138,22 @@
           <string>3RC0 (rcsb pdb)</string>
          </void>
          <void method="add">
-          <string>GO:0005634 (go)</string>
-         </void>
-         <void method="add">
           <string>2LSP (rcsb pdb)</string>
          </void>
          <void method="add">
-          <string>R-HSA-5603029 (reactome)</string>
+          <string>GO:0005634 (go)</string>
          </void>
          <void method="add">
           <string>GO:0050727 (go)</string>
          </void>
          <void method="add">
-          <string>R-HSA-445989 (reactome)</string>
+          <string>R-HSA-5603029 (reactome)</string>
          </void>
          <void method="add">
           <string>2O61 (rcsb pdb)</string>
+         </void>
+         <void method="add">
+          <string>R-HSA-445989 (reactome)</string>
          </void>
          <void method="add">
           <string>GO:0031490 (go)</string>
@@ -9332,10 +9174,10 @@
           <string>GO:0006325 (go)</string>
          </void>
          <void method="add">
-          <string>R-HSA-381340 (reactome)</string>
+          <string>GO:1901222 (go)</string>
          </void>
          <void method="add">
-          <string>GO:1901222 (go)</string>
+          <string>R-HSA-381340 (reactome)</string>
          </void>
          <void method="add">
           <string>GO:0006117 (go)</string>
@@ -9350,10 +9192,10 @@
           <string>GO:0032495 (go)</string>
          </void>
          <void method="add">
-          <string>5U4K (rcsb pdb)</string>
+          <string>GO:0000979 (go)</string>
          </void>
          <void method="add">
-          <string>GO:0000979 (go)</string>
+          <string>5U4K (rcsb pdb)</string>
          </void>
          <void method="add">
           <string>R-HSA-193692 (reactome)</string>
@@ -9386,10 +9228,10 @@
           <string>GO:0001225 (go)</string>
          </void>
          <void method="add">
-          <string>IPR030495 (interpro)</string>
+          <string>GO:0051591 (go)</string>
          </void>
          <void method="add">
-          <string>GO:0051591 (go)</string>
+          <string>IPR030495 (interpro)</string>
          </void>
          <void method="add">
           <string>GO:0001228 (go)</string>
@@ -9493,13 +9335,13 @@
        <string>GO:2001237 (go)</string>
       </void>
       <void method="add">
-       <string>GO:0000122 (go)</string>
-      </void>
-      <void method="add">
        <string>GO:0043200 (go)</string>
       </void>
       <void method="add">
        <string>GO:0042802 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000122 (go)</string>
       </void>
       <void method="add">
        <string>IPR008967 (interpro)</string>
@@ -9583,10 +9425,10 @@
        <string>GO:1901223 (go)</string>
       </void>
       <void method="add">
-       <string>GO:0071316 (go)</string>
+       <string>GO:0050852 (go)</string>
       </void>
       <void method="add">
-       <string>GO:0050852 (go)</string>
+       <string>GO:0071316 (go)</string>
       </void>
       <void method="add">
        <string>GO:0006954 (go)</string>
@@ -9610,10 +9452,10 @@
        <string>GO:0003682 (go)</string>
       </void>
       <void method="add">
-       <string>R-HSA-5607761 (reactome)</string>
+       <string>ENSG00000173039 (ensembl)</string>
       </void>
       <void method="add">
-       <string>ENSG00000173039 (ensembl)</string>
+       <string>R-HSA-5607761 (reactome)</string>
       </void>
       <void method="add">
        <string>6QHM (rcsb pdb)</string>
@@ -9628,16 +9470,16 @@
        <string>GO:0033590 (go)</string>
       </void>
       <void method="add">
-       <string>GO:0047485 (go)</string>
-      </void>
-      <void method="add">
        <string>NP_068810.3 (refseq)</string>
       </void>
       <void method="add">
-       <string>GO:2000630 (go)</string>
+       <string>GO:0047485 (go)</string>
       </void>
       <void method="add">
        <string>GO:0032868 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:2000630 (go)</string>
       </void>
       <void method="add">
        <string>GO:1904385 (go)</string>
@@ -9646,31 +9488,31 @@
        <string>R-HSA-1810476 (reactome)</string>
       </void>
       <void method="add">
-       <string>R-HSA-2559582 (reactome)</string>
+       <string>GO:0032332 (go)</string>
       </void>
       <void method="add">
-       <string>GO:0032332 (go)</string>
+       <string>R-HSA-2559582 (reactome)</string>
       </void>
       <void method="add">
        <string>GO:0001227 (go)</string>
       </void>
       <void method="add">
-       <string>R-HSA-209560 (reactome)</string>
-      </void>
-      <void method="add">
        <string>1NFI (rcsb pdb)</string>
       </void>
       <void method="add">
-       <string>R-HSA-5660668 (reactome)</string>
+       <string>R-HSA-209560 (reactome)</string>
       </void>
       <void method="add">
        <string>GO:0046627 (go)</string>
       </void>
       <void method="add">
-       <string>GO:0045893 (go)</string>
+       <string>R-HSA-5660668 (reactome)</string>
       </void>
       <void method="add">
        <string>GO:0014040 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0045893 (go)</string>
       </void>
       <void method="add">
        <string>GO:0071356 (go)</string>
@@ -9682,13 +9524,13 @@
        <string>GO:1902894 (go)</string>
       </void>
       <void method="add">
-       <string>GO:0000981 (go)</string>
-      </void>
-      <void method="add">
        <string>GO:0035525 (go)</string>
       </void>
       <void method="add">
        <string>GO:0071224 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000981 (go)</string>
       </void>
       <void method="add">
        <string>GO:0033234 (go)</string>
@@ -9697,13 +9539,13 @@
        <string>GO:0051092 (go)</string>
       </void>
       <void method="add">
-       <string>GO:0002223 (go)</string>
-      </void>
-      <void method="add">
        <string>GO:0043066 (go)</string>
       </void>
       <void method="add">
        <string>GO:0032481 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0002223 (go)</string>
       </void>
       <void method="add">
        <string>ENSP00000384273 (ensembl)</string>
@@ -9733,16 +9575,16 @@
        <string>GO:0043620 (go)</string>
       </void>
       <void method="add">
-       <string>GO:0003677 (go)</string>
-      </void>
-      <void method="add">
        <string>GO:0050862 (go)</string>
       </void>
       <void method="add">
-       <string>R-HSA-3134963 (reactome)</string>
+       <string>GO:0003677 (go)</string>
       </void>
       <void method="add">
        <string>GO:0005654 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-3134963 (reactome)</string>
       </void>
       <void method="add">
        <string>GO:0035729 (go)</string>
@@ -9781,9 +9623,6 @@
        <string>R-HSA-448706 (reactome)</string>
       </void>
       <void method="add">
-       <string>GO:0042025 (go)</string>
-      </void>
-      <void method="add">
        <string>R-HSA-9020702 (reactome)</string>
       </void>
       <void method="add">
@@ -9802,10 +9641,10 @@
        <string>GO:0010224 (go)</string>
       </void>
       <void method="add">
-       <string>GO:0070491 (go)</string>
+       <string>GO:0005667 (go)</string>
       </void>
       <void method="add">
-       <string>GO:0005667 (go)</string>
+       <string>GO:0070491 (go)</string>
       </void>
       <void method="add">
        <string>GO:0051059 (go)</string>
@@ -9844,13 +9683,10 @@
        <string>GO:0034097 (go)</string>
       </void>
       <void method="add">
-       <string>GO:0019221 (go)</string>
-      </void>
-      <void method="add">
        <string>GO:0043123 (go)</string>
       </void>
       <void method="add">
-       <string>GO:0019901 (go)</string>
+       <string>GO:0019221 (go)</string>
       </void>
       <void method="add">
        <string>GO:0009887 (go)</string>
@@ -9859,10 +9695,13 @@
        <string>NP_001230913.1 (refseq)</string>
       </void>
       <void method="add">
-       <string>GO:0042805 (go)</string>
+       <string>GO:0019901 (go)</string>
       </void>
       <void method="add">
        <string>GO:0070431 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0042805 (go)</string>
       </void>
       <void method="add">
        <string>GO:0007249 (go)</string>
@@ -9880,22 +9719,22 @@
        <string>3RC0 (rcsb pdb)</string>
       </void>
       <void method="add">
-       <string>GO:0005634 (go)</string>
-      </void>
-      <void method="add">
        <string>2LSP (rcsb pdb)</string>
       </void>
       <void method="add">
-       <string>R-HSA-5603029 (reactome)</string>
+       <string>GO:0005634 (go)</string>
       </void>
       <void method="add">
        <string>GO:0050727 (go)</string>
       </void>
       <void method="add">
-       <string>R-HSA-445989 (reactome)</string>
+       <string>R-HSA-5603029 (reactome)</string>
       </void>
       <void method="add">
        <string>2O61 (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-445989 (reactome)</string>
       </void>
       <void method="add">
        <string>GO:0031490 (go)</string>
@@ -9916,10 +9755,10 @@
        <string>GO:0006325 (go)</string>
       </void>
       <void method="add">
-       <string>R-HSA-381340 (reactome)</string>
+       <string>GO:1901222 (go)</string>
       </void>
       <void method="add">
-       <string>GO:1901222 (go)</string>
+       <string>R-HSA-381340 (reactome)</string>
       </void>
       <void method="add">
        <string>GO:0006117 (go)</string>
@@ -9934,10 +9773,10 @@
        <string>GO:0032495 (go)</string>
       </void>
       <void method="add">
-       <string>5U4K (rcsb pdb)</string>
+       <string>GO:0000979 (go)</string>
       </void>
       <void method="add">
-       <string>GO:0000979 (go)</string>
+       <string>5U4K (rcsb pdb)</string>
       </void>
       <void method="add">
        <string>R-HSA-193692 (reactome)</string>
@@ -9970,10 +9809,10 @@
        <string>GO:0001225 (go)</string>
       </void>
       <void method="add">
-       <string>IPR030495 (interpro)</string>
+       <string>GO:0051591 (go)</string>
       </void>
       <void method="add">
-       <string>GO:0051591 (go)</string>
+       <string>IPR030495 (interpro)</string>
       </void>
       <void method="add">
        <string>GO:0001228 (go)</string>
