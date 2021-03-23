@@ -62,7 +62,6 @@ public class InteractionSearchService {
                 PageRequest.of(page, pageSize));
     }
 
-// TODO CHECK IF WE NEED IT
     public Page<SearchInteraction> findInteractionForGraphJson(String query,
                                                                boolean batchSearch,
                                                                Set<String> interactorSpeciesFilter,
@@ -81,7 +80,6 @@ public class InteractionSearchService {
                 PageRequest.of(page, pageSize));
     }
 
-    // TODO CHECK IF WE NEED IT
     public FacetPage<SearchInteraction> findInteractionForGraphJsonWithFacet(String query,
                                                                              boolean batchSearch,
                                                                              Set<String> interactorSpeciesFilter,

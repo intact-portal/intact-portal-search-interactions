@@ -1,17 +1,7 @@
 package uk.ac.ebi.intact.search.interactions.ws.controller;
 
 
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +12,10 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.LinkedMultiValueMap;
-import sun.net.www.http.HttpClient;
+import org.springframework.util.MultiValueMap;
 import uk.ac.ebi.intact.search.interactions.ws.RequiresSolrServer;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.nio.charset.StandardCharsets;
 
 import static org.junit.Assert.*;
 
@@ -109,36 +95,28 @@ public class InteractionSearchControllerTest {
     }
 
     @Test
-    @Ignore
     public void postRequestTest(){
-        try {
-            CloseableHttpClient httpclient = HttpClients.createDefault();
-            HttpPost httppost = new HttpPost( "http://localhost:" + port + wsContextPath + "/findInteractionWithFacet");
 
-// Request parameters and other properties.
-            List<NameValuePair> params = new ArrayList<NameValuePair>(2);
-            params.add(new BasicNameValuePair("query", "EBI-724102"));
-            httppost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+        String url = "http://localhost:" + port + wsContextPath + "/findInteractionWithFacet";
 
-//Execute and get the response.
-            HttpResponse response = httpclient.execute(httppost);
-            org.apache.http.HttpEntity entity = response.getEntity();
+        // Request parameters and other properties.
+        LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
+        parameters.add("query", "EBI-724102");
 
-            if (entity != null) {
-                try (InputStream instream = entity.getContent()) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(new MediaType(MediaType.APPLICATION_FORM_URLENCODED, StandardCharsets.UTF_8));
 
-                    BufferedReader is =
-                            new BufferedReader(new InputStreamReader(instream));
-                    String line=null;
-                    while ((line = is.readLine( )) != null) {
-                        System.out.println(line);
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(parameters, headers);
 
+        //Execute and get the response.
+        ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
 
-                    }
-                }
-            }
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+        // Expect Ok
+        assertEquals(response.getStatusCode(), HttpStatus.OK);
+        assertNotNull(response.getBody());
+
+        String body = response.getBody();
+        System.out.println(body);
+
     }
 }
