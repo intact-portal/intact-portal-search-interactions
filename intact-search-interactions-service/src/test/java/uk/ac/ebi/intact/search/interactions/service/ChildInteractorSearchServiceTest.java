@@ -400,9 +400,9 @@ public class ChildInteractorSearchServiceTest {
         Set<String> species = new HashSet<>();
         species.add("Homo sapiens");
 
-        Set<Integer> binaryIds = new HashSet<>();
-        binaryIds.add(10);
-        binaryIds.add(1);
+        Set<Long> binaryIds = new HashSet<>();
+        binaryIds.add(10l);
+        binaryIds.add(1l);
         GroupPage<SearchChildInteractor> interactorOp = childInteractorSearchService.findInteractorsWithGroup(
                 "physical association",
                 false,

@@ -149,7 +149,7 @@
      </object>
     </void>
     <void property="binaryInteractionId">
-     <int>1</int>
+     <long>1</long>
     </void>
     <void property="biologicalRoleA">
      <string>unspecified role</string>
@@ -1205,7 +1205,7 @@
      </object>
     </void>
     <void property="binaryInteractionId">
-     <int>2</int>
+     <long>2</long>
     </void>
     <void property="biologicalRoleA">
      <string>unspecified role</string>
@@ -2057,7 +2057,7 @@
      </object>
     </void>
     <void property="binaryInteractionId">
-     <int>3</int>
+     <long>3</long>
     </void>
     <void property="biologicalRoleA">
      <string>unspecified role</string>
@@ -3076,7 +3076,7 @@
      </object>
     </void>
     <void property="binaryInteractionId">
-     <int>4</int>
+     <long>4</long>
     </void>
     <void property="biologicalRoleA">
      <string>unspecified role</string>
@@ -4080,7 +4080,7 @@
      </object>
     </void>
     <void property="binaryInteractionId">
-     <int>5</int>
+     <long>5</long>
     </void>
     <void property="biologicalRoleA">
      <string>unspecified role</string>
@@ -5136,7 +5136,7 @@
      </object>
     </void>
     <void property="binaryInteractionId">
-     <int>6</int>
+     <long>6</long>
     </void>
     <void property="biologicalRoleA">
      <string>unspecified role</string>
@@ -5904,7 +5904,7 @@
      </object>
     </void>
     <void property="binaryInteractionId">
-     <int>7</int>
+     <long>7</long>
     </void>
     <void property="biologicalRoleA">
      <string>unspecified role</string>
@@ -6728,7 +6728,7 @@
      </object>
     </void>
     <void property="binaryInteractionId">
-     <int>8</int>
+     <long>8</long>
     </void>
     <void property="biologicalRoleA">
      <string>unspecified role</string>
@@ -7590,7 +7590,7 @@
      </object>
     </void>
     <void property="binaryInteractionId">
-     <int>9</int>
+     <long>9</long>
     </void>
     <void property="biologicalRoleA">
      <string>unspecified role</string>
@@ -8400,7 +8400,7 @@
      </object>
     </void>
     <void property="binaryInteractionId">
-     <int>10</int>
+     <long>10</long>
     </void>
     <void property="biologicalRoleA">
      <string>unspecified role</string>

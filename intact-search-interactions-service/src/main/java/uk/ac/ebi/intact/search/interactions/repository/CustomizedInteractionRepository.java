@@ -43,7 +43,7 @@ public interface CustomizedInteractionRepository {
                                                           double minMiScore,
                                                           double maxMiScore,
                                                           boolean interSpecies,
-                                                          Set<Integer> binaryInteractionIdFilter,
+                                                          Set<Long> binaryInteractionIdFilter,
                                                           Set<String> interactorAcFilter,
                                                           Sort sort, Pageable pageable);
 
@@ -128,6 +128,6 @@ public interface CustomizedInteractionRepository {
                                 double minMiScore,
                                 double maxMiScore,
                                 boolean interSpecies,
-                                Set<Integer> binaryInteractionIdFilter,
+                                Set<Long> binaryInteractionIdFilter,
                                 Set<String> interactorAcFilter);
 }

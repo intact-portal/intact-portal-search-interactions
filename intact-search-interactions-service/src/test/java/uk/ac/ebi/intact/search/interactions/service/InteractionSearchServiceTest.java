@@ -600,12 +600,12 @@ public class InteractionSearchServiceTest {
                 10);
         assertEquals(5, interactionOp.getTotalElements());
 
-        Set<Integer> binariesExpected = new HashSet<>();
-        binariesExpected.add(5);
-        binariesExpected.add(3);
-        binariesExpected.add(4);
-        binariesExpected.add(1);
-        binariesExpected.add(10);
+        Set<Long> binariesExpected = new HashSet<>();
+        binariesExpected.add(5l);
+        binariesExpected.add(3l);
+        binariesExpected.add(4l);
+        binariesExpected.add(1l);
+        binariesExpected.add(10l);
 
         for (SearchInteraction interaction : interactionOp.getContent()) {
             assertTrue(binariesExpected.contains(interaction.getBinaryInteractionId()));
@@ -720,9 +720,9 @@ public class InteractionSearchServiceTest {
         Set<String> species = new HashSet<>();
         species.add("Homo sapiens");
 
-        Set<Integer> binaryIds = new HashSet<>();
-        binaryIds.add(10);
-        binaryIds.add(1);
+        Set<Long> binaryIds = new HashSet<>();
+        binaryIds.add(10l);
+        binaryIds.add(1l);
         FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
                 "physical association",
                 false,
@@ -741,9 +741,9 @@ public class InteractionSearchServiceTest {
                 10);
         assertEquals(2, interactionOp.getTotalElements());
 
-        Set<Integer> binariesExpected = new HashSet<>();
-        binariesExpected.add(1);
-        binariesExpected.add(10);
+        Set<Long> binariesExpected = new HashSet<>();
+        binariesExpected.add(1l);
+        binariesExpected.add(10l);
 
         for (SearchInteraction interaction : interactionOp.getContent()) {
             assertTrue(binariesExpected.contains(interaction.getBinaryInteractionId()));

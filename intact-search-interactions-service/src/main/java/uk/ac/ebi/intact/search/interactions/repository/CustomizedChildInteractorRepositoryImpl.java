@@ -67,7 +67,7 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
                                                                  double minMiScore,
                                                                  double maxMiScore,
                                                                  boolean interSpecies,
-                                                                 Set<Integer> binaryInteractionIdFilter,
+                                                                 Set<Long> binaryInteractionIdFilter,
                                                                  Set<String> interactorAcFilter,
                                                                  Sort sort, Pageable pageable) {
 
@@ -135,7 +135,7 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
                                       double minMiScore,
                                       double maxMiScore,
                                       boolean interSpecies,
-                                      Set<Integer> binaryInteractionIdFilter,
+                                      Set<Long> binaryInteractionIdFilter,
                                       Set<String> interactorAcFilter) {
         // filters
         List<FilterQuery> interactionFilterQueries = searchInteractionUtility.createFilterQuery(interactorSpeciesFilter, interactorTypeFilter, interactionDetectionMethodFilter,

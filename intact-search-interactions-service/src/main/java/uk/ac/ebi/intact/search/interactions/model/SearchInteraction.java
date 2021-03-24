@@ -28,7 +28,7 @@ public class SearchInteraction {
 
     @Field(BINARY_INTERACTION_ID)
     @Indexed
-    private int binaryInteractionId;
+    private long binaryInteractionId;
 
     @Field(DOCUMENT_TYPE)
     private String documentType;
@@ -312,7 +312,7 @@ public class SearchInteraction {
                              Set<String> parameters, Date creationDate, Date updationDate,
                              Set<String> checksums, boolean negative, String type, String typeMIA, String typeMIB,
                              String typeMIIdentifier, boolean disruptedByMutation,
-                             boolean mutationA, boolean mutationB, int binaryInteractionId, String acA, String acB,
+                             boolean mutationA, boolean mutationB, long binaryInteractionId, String acA, String acB,
                              Integer featureCount, String descriptionA, String descriptionB,
                              List<SearchChildInteractor> searchChildInteractors, String intactNameA, String intactNameB,
                              String publicationPubmedIdentifier, Set<String> featureTypesA, Set<String> featureTypesB,
@@ -1063,11 +1063,11 @@ public class SearchInteraction {
         this.mutationB = mutationB;
     }
 
-    public int getBinaryInteractionId() {
+    public long getBinaryInteractionId() {
         return binaryInteractionId;
     }
 
-    public void setBinaryInteractionId(int binaryInteractionId) {
+    public void setBinaryInteractionId(long binaryInteractionId) {
         this.binaryInteractionId = binaryInteractionId;
     }
 

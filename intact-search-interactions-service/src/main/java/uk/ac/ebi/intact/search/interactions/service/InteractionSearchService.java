@@ -52,7 +52,7 @@ public class InteractionSearchService {
                                                                  double minMiScore,
                                                                  double maxMiScore,
                                                                  boolean interSpecies,
-                                                                 Set<Integer> binaryInteractionIdFilter,
+                                                                 Set<Long> binaryInteractionIdFilter,
                                                                  Set<String> interactorAcFilter,
                                                                  int page,
                                                                  int pageSize) {
@@ -106,7 +106,7 @@ public class InteractionSearchService {
                                        double minMiScore,
                                        double maxMiScore,
                                        boolean interSpecies,
-                                       Set<Integer> binaryInteractionIdFilter,
+                                       Set<Long> binaryInteractionIdFilter,
                                        Set<String> interactorAcFilter
     ) {
         return interactionRepository.countInteractionResult(query, batchSearch, interactorAc, interactorSpeciesFilter,

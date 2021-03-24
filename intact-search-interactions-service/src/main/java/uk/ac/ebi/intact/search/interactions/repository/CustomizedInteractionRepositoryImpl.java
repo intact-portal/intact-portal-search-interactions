@@ -70,7 +70,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                                                                  double minMiScore,
                                                                  double maxMiScore,
                                                                  boolean interSpecies,
-                                                                 Set<Integer> binaryInteractionIdFilter,
+                                                                 Set<Long> binaryInteractionIdFilter,
                                                                  Set<String> interactorAcFilter,
                                                                  Sort sort, Pageable pageable) {
 
@@ -298,7 +298,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                                        double minMiScore,
                                        double maxMiScore,
                                        boolean interSpecies,
-                                       Set<Integer> binaryInteractionIdFilter,
+                                       Set<Long> binaryInteractionIdFilter,
                                        Set<String> interactorAcFilter) {
 
         // search query
