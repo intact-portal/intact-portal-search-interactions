@@ -253,7 +253,7 @@ public class InteractionSearchServiceTest {
                 null,
                 null,
                 false,
-                0,
+                false, 0,
                 1,
                 false,
                 null,
@@ -356,6 +356,7 @@ public class InteractionSearchServiceTest {
                 null,
                 null,
                 false,
+                false,
                 0,
                 1,
                 false,
@@ -394,8 +395,8 @@ public class InteractionSearchServiceTest {
         Set<String> species = new HashSet<>();
         species.add("Homo sapiens");
 
-        Set<String> interactorType = new HashSet<>();
-        interactorType.add("protein");
+        Set<String> interactorTypesFilter = new HashSet<>();
+        interactorTypesFilter.add("protein");
 
         Set<String> detectionMethod = new HashSet<>();
         detectionMethod.add("molecular sieving");
@@ -416,10 +417,11 @@ public class InteractionSearchServiceTest {
                 "physical association",
                 false,
                 species,
-                interactorType,
+                interactorTypesFilter,
                 detectionMethod,
                 interactionType,
                 hostOrganism,
+                false,
                 false,
                 minMiscore,
                 maxMiscore,
@@ -455,8 +457,8 @@ public class InteractionSearchServiceTest {
         species.add("Homo sapiens");
         species.add("Rattus norvegicus (Rat)");
 
-        Set<String> interactorType = new HashSet<>();
-        interactorType.add("protein");
+        Set<String> interactorTypesFilter = new HashSet<>();
+        interactorTypesFilter.add("protein");
 
         int page = 0;
 
@@ -466,10 +468,11 @@ public class InteractionSearchServiceTest {
                 "physical association",
                 false,
                 species,
-                interactorType,
+                interactorTypesFilter,
                 detectionMethod,
                 interactionType,
                 hostOrganism,
+                false,
                 false,
                 minMiscore,
                 maxMiscore,
@@ -496,6 +499,7 @@ public class InteractionSearchServiceTest {
                 null,
                 null,
                 false,
+                false,
                 0,
                 1,
                 false,
@@ -520,6 +524,7 @@ public class InteractionSearchServiceTest {
                 null,
                 null,
                 null,
+                false,
                 false,
                 0,
                 1,
@@ -546,6 +551,7 @@ public class InteractionSearchServiceTest {
                 null,
                 null,
                 null,
+                false,
                 false,
                 0,
                 1,
@@ -574,6 +580,7 @@ public class InteractionSearchServiceTest {
                 null,
                 null,
                 false,
+                false,
                 0,
                 1,
                 false,
@@ -600,6 +607,7 @@ public class InteractionSearchServiceTest {
                 null,
                 null,
                 null,
+                false,
                 false,
                 0,
                 1,
@@ -633,6 +641,7 @@ public class InteractionSearchServiceTest {
                 null,
                 null,
                 null,
+                false,
                 false,
                 0,
                 1,
@@ -775,6 +784,7 @@ public class InteractionSearchServiceTest {
                 null,
                 null,
                 false,
+                false,
                 0,
                 1,
                 false,
@@ -910,6 +920,7 @@ public class InteractionSearchServiceTest {
                 null,
                 null,
                 false,
+                false,
                 0,
                 1,
                 false,
@@ -961,6 +972,7 @@ public class InteractionSearchServiceTest {
                 null,
                 hostOrganisms,
                 false,
+                false,
                 0,
                 1,
                 false,
@@ -980,6 +992,7 @@ public class InteractionSearchServiceTest {
                 null,
                 null,
                 hostOrganismsForFacetTest,
+                false,
                 false,
                 0,
                 1,
@@ -1010,16 +1023,17 @@ public class InteractionSearchServiceTest {
      **/
     @Test
     public void filterByMultipleInteractionType() {
-        Set<String> interactionTypes = new HashSet<>();
-        interactionTypes.add("physical association");
+        Set<String> interactionTypesFilter = new HashSet<>();
+        interactionTypesFilter.add("physical association");
         FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
                 "*",
                 false,
                 null,
                 null,
                 null,
-                interactionTypes,
+                interactionTypesFilter,
                 null,
+                false,
                 false,
                 0,
                 1,

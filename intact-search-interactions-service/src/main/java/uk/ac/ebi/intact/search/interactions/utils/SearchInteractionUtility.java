@@ -187,6 +187,14 @@ public class SearchInteractionUtility {
         }
     }
 
+    private void createMutationFilterCriteria(String tagForExcludingFacets, boolean value, List<FilterQuery> filterQueries) {
+
+        if (value) {
+            Criteria conditions = new Criteria(tagForExcludingFacets + DISRUPTED_BY_MUTATION).is(value);
+            filterQueries.add(new SimpleFilterQuery(conditions));
+        }
+    }
+
     private void createMiScoreFilterCriteria(String tagForExcludingFacets, double minScore, double maxScore, List<FilterQuery> filterQueries) {
 
         Criteria conditions = new Criteria(tagForExcludingFacets + INTACT_MISCORE).between(minScore, maxScore);
@@ -215,12 +223,12 @@ public class SearchInteractionUtility {
     }
 
     // Adds tags in solr to allow calculate properly the facets for multiselection in species and interactor type
-    private void createInteractorTypeFilterCriteria(String tagForExcludingFacets, Set<String> interactorTypes, List<FilterQuery> filterQueries) {
+    private void createInteractorTypeFilterCriteria(String tagForExcludingFacets, Set<String> interactorTypesFilter, List<FilterQuery> filterQueries) {
 
-        if (interactorTypes != null && !interactorTypes.isEmpty()) {
+        if (interactorTypesFilter != null && !interactorTypesFilter.isEmpty()) {
             Criteria conditions = null;
 
-            conditions = new Criteria(tagForExcludingFacets + TYPE_A_B_STR).in(interactorTypes);
+            conditions = new Criteria(tagForExcludingFacets + TYPE_A_B_STR).in(interactorTypesFilter);
             conditions.isOr();
 
             filterQueries.add(new SimpleFilterQuery(conditions));
