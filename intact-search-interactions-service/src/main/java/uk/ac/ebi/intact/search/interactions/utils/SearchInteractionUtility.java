@@ -108,39 +108,43 @@ public class SearchInteractionUtility {
     }
 
     public List<FilterQuery> createFilterQuery(Set<String> interactorSpeciesFilter,
-                                               Set<String> interactorTypeFilter,
-                                               Set<String> interactionDetectionMethodFilter,
-                                               Set<String> interactionTypeFilter,
-                                               Set<String> interactionHostOrganismFilter,
-                                               boolean isNegativeFilter,
-                                               double minMiScore,
-                                               double maxMiScore,
-                                               boolean interSpecies,
+                                               Set<String> interactorTypesFilter,
+                                               Set<String> interactionDetectionMethodsFilter,
+                                               Set<String> interactionTypesFilter,
+                                               Set<String> interactionHostOrganismsFilter,
+                                               boolean negativeFilter,
+                                               boolean mutationFilter,
+                                               double minMIScore,
+                                               double maxMIScore,
+                                               boolean intraSpeciesFilter,
                                                Set<Integer> binaryInteractionIdFilter,
                                                Set<String> interactorAcFilter) {
 
         List<FilterQuery> filterQueries = new ArrayList<FilterQuery>();
 
         //Interactor species filter
-        createInteractorSpeciesFilterCriteria("{!tag=SPECIES}", interactorSpeciesFilter, interSpecies, filterQueries);
+        createInteractorSpeciesFilterCriteria("{!tag=SPECIES}", interactorSpeciesFilter, intraSpeciesFilter, filterQueries);
 
         //Interactor type filter
-        createInteractorTypeFilterCriteria("{!tag=TYPE}", interactorTypeFilter, filterQueries);
+        createInteractorTypeFilterCriteria("{!tag=TYPE}", interactorTypesFilter, filterQueries);
 
         //Interaction detection method filter
-        createFilterCriteriaForStringValues("{!tag=DETECTION_METHOD}", interactionDetectionMethodFilter, DETECTION_METHOD_STR, filterQueries);
+        createFilterCriteriaForStringValues("{!tag=DETECTION_METHOD}", interactionDetectionMethodsFilter, DETECTION_METHOD_STR, filterQueries);
 
         //Interaction type filter
-        createFilterCriteriaForStringValues("{!tag=INTERACTION_TYPE}", interactionTypeFilter, TYPE_STR, filterQueries);
+        createFilterCriteriaForStringValues("{!tag=INTERACTION_TYPE}", interactionTypesFilter, TYPE_STR, filterQueries);
 
         //Interaction host organism filter
-        createFilterCriteriaForStringValues("{!tag=HOST_ORGANISM}", interactionHostOrganismFilter, HOST_ORGANISM_STR, filterQueries);
+        createFilterCriteriaForStringValues("{!tag=HOST_ORGANISM}", interactionHostOrganismsFilter, HOST_ORGANISM_STR, filterQueries);
 
         //isNegative filter
-        createNegativeFilterCriteria("{!tag=NEGATIVE_INTERACTION}", isNegativeFilter, filterQueries);
+        createNegativeFilterCriteria("{!tag=NEGATIVE_INTERACTION}", negativeFilter, filterQueries);
+
+        //isNegative filter
+        createMutationFilterCriteria("{!tag=MUTATION}", mutationFilter, filterQueries);
 
         //miscore filter
-        createMiScoreFilterCriteria("{!tag=MI_SCORE}", minMiScore, maxMiScore, filterQueries);
+        createMiScoreFilterCriteria("{!tag=MI_SCORE}", minMIScore, maxMIScore, filterQueries);
 
         //binaryInteractionIdFilter filter
         createFilterCriteriaForIntegerValues("{!tag=GRAPH_FILTER}", binaryInteractionIdFilter, BINARY_INTERACTION_ID, filterQueries);
@@ -201,22 +205,18 @@ public class SearchInteractionUtility {
         filterQueries.add(new SimpleFilterQuery(conditions));
     }
 
-    // interSpecies: if false it creates 'and' condition between two species
+    // intraSpeciesFilter: if false it creates 'and' condition between two species
     //               if true it creates 'or' condition between set of species
     // Adds tags in solr to allow calculate properly the facets for multiselection in species and interactor type
-    //TODO rename variable creates confusion
-    private void createInteractorSpeciesFilterCriteria(String tagForExcludingFacets, Set<String> species, boolean interSpecies, List<FilterQuery> filterQueries) {
+    private void createInteractorSpeciesFilterCriteria(String tagForExcludingFacets, Set<String> species, boolean intraSpeciesFilter, List<FilterQuery> filterQueries) {
 
         if (species != null && !species.isEmpty()) {
             Criteria conditions;
-            if (!interSpecies) {
+            if (!intraSpeciesFilter) {
                 conditions = new Criteria(tagForExcludingFacets + SPECIES_A_B_STR).in(species);
                 conditions.isOr();
             } else { // Return only interactions from exactly the same species in both interactors.
-                // If more than one we keep only the first one
-                Iterator<String> iterator = species.iterator();
-                String intraSpecies = iterator.next();
-                conditions = new Criteria(SPECIES_A_STR).is(intraSpecies).and(new Criteria(SPECIES_B_STR).is(intraSpecies));
+                conditions = new Criteria(tagForExcludingFacets + SPECIES_A_STR).in(species).and(new Criteria(SPECIES_B_STR).in(species));
             }
             filterQueries.add(new SimpleFilterQuery(conditions));
         }

@@ -37,26 +37,27 @@ public class ChildInteractorSearchService {
                                                                      Set<String> interactorAcFilter,
                                                                      int page,
                                                                      int pageSize) {
-        return childInteractorRepository.findChildInteractors(query, batchSearch, interactorSpeciesFilter, interactorTypeFilter, interactionDetectionMethodFilter,
-                interactionTypeFilter, interactionHostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, interSpecies, binaryInteractionIdFilter, interactorAcFilter, null,
+        return childInteractorRepository.findChildInteractors(query, batchSearch, interactorSpeciesFilter, interactorTypesFilter, interactionDetectionMethodsFilter,
+                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, minMIScore, maxMIScore, intraSpeciesFilter, binaryInteractionIdFilter, interactorAcFilter, null,
                 PageRequest.of(page, pageSize));
     }
 
     public long countInteractorsWithGroup(String query,
                                           boolean batchSearch,
                                           Set<String> interactorSpeciesFilter,
-                                          Set<String> interactorTypeFilter,
-                                          Set<String> interactionDetectionMethodFilter,
-                                          Set<String> interactionTypeFilter,
-                                          Set<String> interactionHostOrganismFilter,
-                                          boolean isNegativeFilter,
-                                          double minMiScore,
-                                          double maxMiScore,
-                                          boolean interSpecies,
+                                          Set<String> interactorTypesFilter,
+                                          Set<String> interactionDetectionMethodsFilter,
+                                          Set<String> interactionTypesFilter,
+                                          Set<String> interactionHostOrganismsFilter,
+                                          boolean negativeFilter,
+                                          boolean mutationFilter,
+                                          double minMIScore,
+                                          double maxMIScore,
+                                          boolean intraSpeciesFilter,
                                           Set<Integer> binaryInteractionIdFilter,
                                           Set<String> interactorAcFilter) {
-        return childInteractorRepository.countChildInteractors(query, batchSearch, interactorSpeciesFilter, interactorTypeFilter, interactionDetectionMethodFilter,
-                interactionTypeFilter, interactionHostOrganismFilter, isNegativeFilter, minMiScore, maxMiScore, interSpecies, binaryInteractionIdFilter, interactorAcFilter);
+        return childInteractorRepository.countChildInteractors(query, batchSearch, interactorSpeciesFilter, interactorTypesFilter, interactionDetectionMethodsFilter,
+                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, minMIScore, maxMIScore, intraSpeciesFilter, binaryInteractionIdFilter, interactorAcFilter);
     }
 
     public long countTotal() {
