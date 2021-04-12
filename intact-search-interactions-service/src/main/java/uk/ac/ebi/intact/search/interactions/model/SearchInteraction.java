@@ -10,7 +10,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-import static uk.ac.ebi.intact.search.interactions.model.SearchChildInteractorFields.DOCUMENT_TYPE;
 import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields.*;
 
 /**
@@ -28,7 +27,7 @@ public class SearchInteraction {
 
     @Field(BINARY_INTERACTION_ID)
     @Indexed
-    private int binaryInteractionId;
+    private long binaryInteractionId;
 
     @Field(DOCUMENT_TYPE)
     private String documentType;
@@ -1063,11 +1062,11 @@ public class SearchInteraction {
         this.mutationB = mutationB;
     }
 
-    public int getBinaryInteractionId() {
+    public long getBinaryInteractionId() {
         return binaryInteractionId;
     }
 
-    public void setBinaryInteractionId(int binaryInteractionId) {
+    public void setBinaryInteractionId(long binaryInteractionId) {
         this.binaryInteractionId = binaryInteractionId;
     }
 

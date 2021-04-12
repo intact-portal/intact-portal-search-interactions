@@ -27,6 +27,7 @@ public interface CustomizedChildInteractorRepository {
      * @param minMIScore                        minimum value of mi-score for the interaction
      * @param maxMIScore                        maximum value of mi-score for the interaction
      * @param intraSpeciesFilter                boolean to restrict the result ot the same or different interactor species
+     * @param binaryInteractionIds
      * @param sort                              field to define the sort of the results
      * @param pageable                          page number and size of the request
      * @return the interactors matching all the criteria
@@ -43,7 +44,7 @@ public interface CustomizedChildInteractorRepository {
                                                           double minMIScore,
                                                           double maxMIScore,
                                                           boolean intraSpeciesFilter,
-                                                          Set<Integer> binaryInteractionIds,
+                                                          Set<Long> binaryInteractionIds,
                                                           Set<String> interactorAcs,
                                                           Sort sort, Pageable pageable);
 
@@ -60,6 +61,7 @@ public interface CustomizedChildInteractorRepository {
      * @param minMIScore                        minimum value of mi-score for the interaction
      * @param maxMIScore                        maximum value of mi-score for the interaction
      * @param intraSpeciesFilter                boolean to restrict the result ot the same or different interactor species
+     * @param binaryInteractionIds
      * @return the number of interactors matching all the criteria
      */
     long countChildInteractors(String query,
@@ -74,6 +76,6 @@ public interface CustomizedChildInteractorRepository {
                                double minMIScore,
                                double maxMIScore,
                                boolean intraSpeciesFilter,
-                               Set<Integer> binaryInteractionIds,
+                               Set<Long> binaryInteractionIds,
                                Set<String> interactorAcs);
 }

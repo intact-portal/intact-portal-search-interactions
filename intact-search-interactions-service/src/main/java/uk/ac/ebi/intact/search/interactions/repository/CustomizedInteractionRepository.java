@@ -45,7 +45,7 @@ public interface CustomizedInteractionRepository {
                                                           double minMIScore,
                                                           double maxMIScore,
                                                           boolean intraSpeciesFilter,
-                                                          Set<Integer> binaryInteractionIds,
+                                                          Set<Long> binaryInteractionIds,
                                                           Set<String> interactorAcs,
                                                           Sort sort, Pageable pageable);
 
@@ -150,6 +150,7 @@ public interface CustomizedInteractionRepository {
      * @param minMIScore                        minimum value of mi-score for the interaction
      * @param maxMIScore                        maximum value of mi-score for the interaction
      * @param intraSpeciesFilter                      boolean to restrict the result ot the same or different interactor species
+     * @param binaryInteractionIds
      * @param sort                              field to define the sort of the results
      * @param pageable                          page number and size of the request
      * @return the interaction data matching all the criteria
@@ -166,7 +167,7 @@ public interface CustomizedInteractionRepository {
                                                        double minMIScore,
                                                        double maxMIScore,
                                                        boolean intraSpeciesFilter,
-                                                       Set<Integer> binaryInteractionIdFilter,
+                                                       Set<Long> binaryInteractionIds,
                                                        Set<String> interactorAcs,
                                                        Sort sort, Pageable pageable);
 
@@ -184,6 +185,7 @@ public interface CustomizedInteractionRepository {
      * @param minMIScore                        minimum value of mi-score for the interaction
      * @param maxMIScore                        maximum value of mi-score for the interaction
      * @param intraSpeciesFilter                boolean to restrict the result ot the same or different interactor species
+     * @param binaryInteractionIds
      * @param interactorAcs                    interactor accession e.g. EBI-XXXXXX
      * @return the number of interactions matching all the criteria
      */
@@ -200,7 +202,7 @@ public interface CustomizedInteractionRepository {
                                 double minMIScore,
                                 double maxMIScore,
                                 boolean intraSpeciesFilter,
-                                Set<Integer> binaryInteractionIds,
+                                Set<Long> binaryInteractionIds,
                                 Set<String> interactorAcs);
 
     long countInteractionResult(String query,
@@ -210,11 +212,11 @@ public interface CustomizedInteractionRepository {
                                 Set<String> interactionDetectionMethodsFilter,
                                 Set<String> interactionTypesFilter,
                                 Set<String> interactionHostOrganismsFilter,
-                                boolean isNegativeFilter,
+                                boolean negativeFilter,
                                 boolean mutationFilter,
                                 double minMIScore,
                                 double maxMIScore,
                                 boolean intraSpeciesFilter,
-                                Set<Integer> binaryInteractionIdFilter,
+                                Set<Long> binaryInteractionIds,
                                 Set<String> interactorAcs);
 }

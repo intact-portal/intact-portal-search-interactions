@@ -117,10 +117,10 @@ public class SearchInteractionUtility {
                                                double minMIScore,
                                                double maxMIScore,
                                                boolean intraSpeciesFilter,
-                                               Set<Integer> binaryInteractionIdFilter,
-                                               Set<String> interactorAcFilter) {
+                                               Set<Long> binaryInteractionIds,
+                                               Set<String> interactorAcs) {
 
-        List<FilterQuery> filterQueries = new ArrayList<FilterQuery>();
+        List<FilterQuery> filterQueries = new ArrayList<>();
 
         //Interactor species filter
         createInteractorSpeciesFilterCriteria("{!tag=SPECIES}", interactorSpeciesFilter, intraSpeciesFilter, filterQueries);
@@ -137,20 +137,20 @@ public class SearchInteractionUtility {
         //Interaction host organism filter
         createFilterCriteriaForStringValues("{!tag=HOST_ORGANISM}", interactionHostOrganismsFilter, HOST_ORGANISM_STR, filterQueries);
 
-        //isNegative filter
+        //Negative filter
         createNegativeFilterCriteria("{!tag=NEGATIVE_INTERACTION}", negativeFilter, filterQueries);
 
-        //isNegative filter
+        //Mutation filter
         createMutationFilterCriteria("{!tag=MUTATION}", mutationFilter, filterQueries);
 
-        //miscore filter
-        createMiScoreFilterCriteria("{!tag=MI_SCORE}", minMIScore, maxMIScore, filterQueries);
+        //MIScore filter
+        createMIScoreFilterCriteria("{!tag=MI_SCORE}", minMIScore, maxMIScore, filterQueries);
 
-        //binaryInteractionIdFilter filter
-        createFilterCriteriaForIntegerValues("{!tag=GRAPH_FILTER}", binaryInteractionIdFilter, BINARY_INTERACTION_ID, filterQueries);
+        //binaryInteractionIds filter
+        createFilterCriteriaForLongValues("{!tag=GRAPH_FILTER}", binaryInteractionIds, BINARY_INTERACTION_ID, filterQueries);
 
-        //interactorAcFilter filter
-        createInteractorAcsFilter("{!tag=GRAPH_FILTER}", interactorAcFilter, filterQueries);
+        //InteractorAcs filter
+        createInteractorAcsFilter("{!tag=GRAPH_FILTER}", interactorAcs, filterQueries);
 
         return filterQueries;
     }
@@ -165,7 +165,7 @@ public class SearchInteractionUtility {
         }
     }
 
-    private void createFilterCriteriaForIntegerValues(String tagForExcludingFacets, Set<Integer> values, String field, List<FilterQuery> filterQueries) {
+    private void createFilterCriteriaForLongValues(String tagForExcludingFacets, Set<Long> values, String field, List<FilterQuery> filterQueries) {
 
         if (values != null && !values.isEmpty()) {
             Criteria conditions = new Criteria(tagForExcludingFacets + field).in(values);
@@ -199,7 +199,7 @@ public class SearchInteractionUtility {
         }
     }
 
-    private void createMiScoreFilterCriteria(String tagForExcludingFacets, double minScore, double maxScore, List<FilterQuery> filterQueries) {
+    private void createMIScoreFilterCriteria(String tagForExcludingFacets, double minScore, double maxScore, List<FilterQuery> filterQueries) {
 
         Criteria conditions = new Criteria(tagForExcludingFacets + INTACT_MISCORE).between(minScore, maxScore);
         filterQueries.add(new SimpleFilterQuery(conditions));

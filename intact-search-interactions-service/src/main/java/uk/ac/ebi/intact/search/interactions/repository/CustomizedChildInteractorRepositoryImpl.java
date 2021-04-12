@@ -52,6 +52,7 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
      * @param minMIScore                        minimum value of mi-score for the interaction
      * @param maxMIScore                        maximum value of mi-score for the interaction
      * @param intraSpeciesFilter                boolean to restrict the result ot the same or different interactor species
+     * @param binaryInteractionIds
      * @param sort                              field to define the sort of the results
      * @param pageable                          page number and size of the request
      * @return the interactors matching all the criteria
@@ -69,13 +70,13 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
                                                                  double minMIScore,
                                                                  double maxMIScore,
                                                                  boolean intraSpeciesFilter,
-                                                                 Set<Integer> binaryInteractionIdFilter,
-                                                                 Set<String> interactorAcFilter,
+                                                                 Set<Long> binaryInteractionIds,
+                                                                 Set<String> interactorAcs,
                                                                  Sort sort, Pageable pageable) {
 
         // filters
         List<FilterQuery> interactionFilterQueries = searchInteractionUtility.createFilterQuery(interactorSpeciesFilter, interactorTypeFilter, interactionDetectionMethodFilter,
-                interactionTypeFilter, interactionHostOrganismFilter, negativeFilter, mutationFilter, minMIScore, maxMIScore, intraSpeciesFilter, binaryInteractionIdFilter, interactorAcFilter);
+                interactionTypeFilter, interactionHostOrganismFilter, negativeFilter, mutationFilter, minMIScore, maxMIScore, intraSpeciesFilter, binaryInteractionIds, interactorAcs);
 
         // search query
         SimpleQuery search = new SimpleQuery();
@@ -121,6 +122,7 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
      * @param minMIScore                        minimum value of mi-score for the interaction
      * @param maxMIScore                        maximum value of mi-score for the interaction
      * @param intraSpeciesFilter                boolean to restrict the result ot the same or different interactor species
+     * @param binaryInteractionIdFilter
      * @return the number of interactors matching all the criteria
      */
     // By default the numCount return by solr when group.main=true is the total documents instead of the number of groups.
@@ -139,11 +141,11 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
                                       double minMIScore,
                                       double maxMIScore,
                                       boolean intraSpeciesFilter,
-                                      Set<Integer> binaryInteractionIdFilter,
-                                      Set<String> interactorAcFilter) {
+                                      Set<Long> binaryInteractionIds,
+                                      Set<String> interactorAcs) {
         // filters
         List<FilterQuery> interactionFilterQueries = searchInteractionUtility.createFilterQuery(interactorSpeciesFilter, interactorTypeFilter, interactionDetectionMethodFilter,
-                interactionTypeFilter, interactionHostOrganismFilter, negativeFilter, mutationFilter, minMIScore, maxMIScore, intraSpeciesFilter, binaryInteractionIdFilter, interactorAcFilter);
+                interactionTypeFilter, interactionHostOrganismFilter, negativeFilter, mutationFilter, minMIScore, maxMIScore, intraSpeciesFilter, binaryInteractionIds, interactorAcs);
 
         // search query
         SimpleQuery search = new SimpleQuery();

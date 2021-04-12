@@ -70,7 +70,7 @@ public class InteractionSearchController {
             @RequestParam(value = "minMIScore", defaultValue = "0", required = false) double minMIScore,
             @RequestParam(value = "maxMIScore", defaultValue = "1", required = false) double maxMIScore,
             @RequestParam(value = "intraSpeciesFilter", required = false) boolean intraSpeciesFilter,
-            @RequestParam(value = "binaryInteractionIds", required = false) Set<Integer> binaryInteractionIds,
+            @RequestParam(value = "binaryInteractionIds", required = false) Set<Long> binaryInteractionIds,
             @RequestParam(value = "interactorAcs", required = false) Set<String> interactorAcs,
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) throws IOException {
@@ -127,7 +127,7 @@ public class InteractionSearchController {
             @RequestParam(value = "minMIScore", defaultValue = "0", required = false) double minMIScore,
             @RequestParam(value = "maxMIScore", defaultValue = "1", required = false) double maxMIScore,
             @RequestParam(value = "intraSpeciesFilter", required = false) boolean intraSpeciesFilter,
-            @RequestParam(value = "binaryInteractionIds", required = false) Set<Integer> binaryInteractionIds,
+            @RequestParam(value = "binaryInteractionIds", required = false) Set<Long> binaryInteractionIds,
             @RequestParam(value = "interactorAcs", required = false) Set<String> interactorAcs,
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
@@ -190,8 +190,8 @@ public class InteractionSearchController {
             @RequestParam(value = "minMIScore", defaultValue = "0", required = false) double minMIScore,
             @RequestParam(value = "maxMIScore", defaultValue = "1", required = false) double maxMIScore,
             @RequestParam(value = "intraSpeciesFilter", required = false) boolean intraSpeciesFilter,
-            @RequestParam(value = "binaryInteractionIds", required = false) Set<Integer> binaryInteractionId,
-            @RequestParam(value = "interactorAcs", required = false) Set<String> interactorAc,
+            @RequestParam(value = "binaryInteractionIds", required = false) Set<Long> binaryInteractionIds,
+            @RequestParam(value = "interactorAcs", required = false) Set<String> interactorAcs,
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
             @RequestParam(value = "draw") int draw) throws IOException {
@@ -209,8 +209,8 @@ public class InteractionSearchController {
                 mutationFilter, minMIScore,
                 maxMIScore,
                 intraSpeciesFilter,
-                binaryInteractionId,
-                interactorAc,
+                binaryInteractionIds,
+                interactorAcs,
                 page,
                 pageSize);
 
@@ -226,8 +226,8 @@ public class InteractionSearchController {
                 mutationFilter, minMIScore,
                 maxMIScore,
                 intraSpeciesFilter,
-                binaryInteractionId,
-                interactorAc);
+                binaryInteractionIds,
+                interactorAcs);
 
         for (SearchChildInteractor searchInteractor : searchInteractors.getContent()) {
 
@@ -244,8 +244,8 @@ public class InteractionSearchController {
                     mutationFilter, minMIScore,
                     maxMIScore,
                     intraSpeciesFilter,
-                    binaryInteractionId,
-                    interactorAc);
+                    binaryInteractionIds,
+                    interactorAcs);
 
             searchInteractor.setInteractionSearchCount(interactionCount);
         }
