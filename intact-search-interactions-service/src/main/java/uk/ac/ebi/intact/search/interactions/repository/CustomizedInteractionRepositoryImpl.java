@@ -51,7 +51,8 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                                                                  Set<String> interactionTypesFilter,
                                                                  Set<String> interactionHostOrganismsFilter,
                                                                  boolean negativeFilter,
-                                                                 boolean mutationFilter, double minMIScore,
+                                                                 boolean mutationFilter,
+                                                                 double minMIScore,
                                                                  double maxMIScore,
                                                                  boolean intraSpeciesFilter,
                                                                  Set<Integer> binaryInteractionIds,
@@ -78,14 +79,14 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         // facet
         // Adds exclude tags in solr to allow calculate properly the facets for multiselection in species and interactor type
         FacetOptions facetOptions = new FacetOptions(
-                "{!ex=SPECIES,GRAPH_s}" + SPECIES_A_B_STR,
-                "{!ex=TYPE,GRAPH_s}" + TYPE_A_B_STR,
-                "{!ex=DETECTION_METHOD,GRAPH_s}" + DETECTION_METHOD_STR,
-                "{!ex=INTERACTION_TYPE,GRAPH_s}" + TYPE_STR,
-                "{!ex=HOST_ORGANISM,GRAPH_s}" + HOST_ORGANISM_STR,
-                "{!ex=NEGATIVE_INTERACTION,GRAPH_s}" + NEGATIVE,
-                "{!ex=MUTATION,GRAPH_s}" + DISRUPTED_BY_MUTATION,
-                "{!ex=MI_SCORE,GRAPH_s}" + INTACT_MISCORE);
+                "{!ex=SPECIES,GRAPH_FILTER}" + SPECIES_A_B_STR,
+                "{!ex=TYPE,GRAPH_FILTER}" + TYPE_A_B_STR,
+                "{!ex=DETECTION_METHOD,GRAPH_FILTER}" + DETECTION_METHOD_STR,
+                "{!ex=INTERACTION_TYPE,GRAPH_FILTER}" + TYPE_STR,
+                "{!ex=HOST_ORGANISM,GRAPH_FILTER}" + HOST_ORGANISM_STR,
+                "{!ex=NEGATIVE_INTERACTION,GRAPH_FILTER}" + NEGATIVE,
+                "{!ex=MUTATION,GRAPH_FILTER}" + DISRUPTED_BY_MUTATION,
+                "{!ex=MI_SCORE,GRAPH_FILTER}" + INTACT_MISCORE);
         facetOptions.setFacetLimit(FACET_MIN_COUNT);
 
         facetOptions.getFieldsWithParameters().add(new FacetOptions.FieldWithFacetParameters(SPECIES_A_B_STR).setMethod("enum"));
@@ -127,7 +128,8 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                                                                Set<String> interactionTypesFilter,
                                                                Set<String> interactionHostOrganismsFilter,
                                                                boolean negativeFilter,
-                                                               boolean mutationFilter, double minMiScore,
+                                                               boolean mutationFilter,
+                                                               double minMiScore,
                                                                double maxMiScore,
                                                                boolean intraSpeciesFilter,
                                                                Sort sort, Pageable pageable) {
@@ -202,7 +204,8 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                                                                              Set<String> interactionTypesFilter,
                                                                              Set<String> interactionHostOrganismsFilter,
                                                                              boolean negativeFilter,
-                                                                             boolean mutationFilter, double minMIScore,
+                                                                             boolean mutationFilter,
+                                                                             double minMIScore,
                                                                              double maxMIScore,
                                                                              boolean intraSpeciesFilter,
                                                                              Sort sort, Pageable pageable) {
@@ -235,9 +238,9 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         // facet
         // Adds exclude tags in solr to allow calculate properly the facets for multiselection in species and interactor type
         FacetOptions facetOptions = new FacetOptions(
-                "{!ex=SPECIES,GRAPH_s}" + SPECIES_A_B_STR, //TODO replace by taxids of A and B
-                "{!ex=TYPE,GRAPH_s}" + TYPE_A_B_STR, //TODO replace by MI ID
-                "{!ex=INTERACTION_TYPE,GRAPH_s}" + TYPE_STR); //TODO replace by MI ID
+                "{!ex=SPECIES,GRAPH_FILTER}" + SPECIES_A_B_STR, //TODO replace by taxids of A and B
+                "{!ex=TYPE,GRAPH_FILTER}" + TYPE_A_B_STR, //TODO replace by MI ID
+                "{!ex=INTERACTION_TYPE,GRAPH_FILTER}" + TYPE_STR); //TODO replace by MI ID
         facetOptions.setFacetLimit(FACET_MIN_COUNT);
 
         facetOptions.getFieldsWithParameters().add(new FacetOptions.FieldWithFacetParameters(SPECIES_A_B_STR).setMethod("enum"));
@@ -290,7 +293,8 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                                               Set<String> interactionTypesFilter,
                                               Set<String> interactionHostOrganismsFilter,
                                               boolean negativeFilter,
-                                              boolean mutationFilter, double minMiScore,
+                                              boolean mutationFilter,
+                                              double minMiScore,
                                               double maxMiScore,
                                               boolean intraSpeciesFilter) {
 
@@ -324,8 +328,9 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                                                               Set<String> interactionTypesFilter,
                                                               Set<String> interactionHostOrganismsFilter,
                                                               boolean negativeFilter,
-                                                              boolean mutationFilter, double minMiScore,
-                                                              double maxMiScore,
+                                                              boolean mutationFilter,
+                                                              double minMIScore,
+                                                              double maxMIScore,
                                                               boolean intraSpeciesFilter,
                                                               Set<Integer> binaryInteractionIds,
                                                               Set<String> interactorAcs,
@@ -341,7 +346,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
         // filters
         List<FilterQuery> filterQueries = searchInteractionUtility.createFilterQuery(interactorSpeciesFilters, interactorTypesFilter, interactionDetectionMethodsFilter,
-                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, minMiScore, maxMiScore, intraSpeciesFilter, binaryInteractionIds, interactorAcs);
+                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, minMIScore, maxMIScore, intraSpeciesFilter, binaryInteractionIds, interactorAcs);
 
         if (!filterQueries.isEmpty()) {
             for (FilterQuery filterQuery : filterQueries) {

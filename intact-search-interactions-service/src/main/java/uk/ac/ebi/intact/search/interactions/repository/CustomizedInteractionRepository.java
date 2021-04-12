@@ -105,7 +105,6 @@ public interface CustomizedInteractionRepository {
                                                                       Set<String> interactionHostOrganismsFilter,
                                                                       boolean negativeFilter,
                                                                       boolean mutationFilter,
-
                                                                       double minMIScore,
                                                                       double maxMIScore,
                                                                       boolean intraSpeciesFilter, Sort sort, Pageable pageable);
@@ -148,8 +147,8 @@ public interface CustomizedInteractionRepository {
      * @param interactionHostOrganismsFilter    (Optional) filter interactions by host organism
      * @param negativeFilter                    (Optional) filter interactions that are negativeFilter if true
      * @param mutationFilter                    (Optional) Filters interaction that are not affected by mutation
-     * @param minMiScore                        minimum value of mi-score for the interaction
-     * @param maxMiScore                        maximum value of mi-score for the interaction
+     * @param minMIScore                        minimum value of mi-score for the interaction
+     * @param maxMIScore                        maximum value of mi-score for the interaction
      * @param intraSpeciesFilter                      boolean to restrict the result ot the same or different interactor species
      * @param sort                              field to define the sort of the results
      * @param pageable                          page number and size of the request
@@ -164,8 +163,8 @@ public interface CustomizedInteractionRepository {
                                                        Set<String> interactionHostOrganismsFilter,
                                                        boolean negativeFilter,
                                                        boolean mutationFilter,
-                                                       double minMiScore,
-                                                       double maxMiScore,
+                                                       double minMIScore,
+                                                       double maxMIScore,
                                                        boolean intraSpeciesFilter,
                                                        Set<Integer> binaryInteractionIdFilter,
                                                        Set<String> interactorAcs,
