@@ -216,7 +216,11 @@ public class SearchInteractionUtility {
                 conditions = new Criteria(tagForExcludingFacets + SPECIES_A_B_STR).in(species);
                 conditions.isOr();
             } else { // Return only interactions from exactly the same species in both interactors.
-                conditions = new Criteria(tagForExcludingFacets + SPECIES_A_STR).in(species).and(new Criteria(SPECIES_B_STR).in(species));
+                //conditions = new Criteria(tagForExcludingFacets + SPECIES_A_STR).in(species).and(new Criteria(SPECIES_B_STR).in(species));
+                // If more than one we keep only the first one
+                Iterator<String> iterator = species.iterator();
+                String intraSpecies = iterator.next();
+                conditions = new Criteria(SPECIES_A_STR).is(intraSpecies).and(new Criteria(SPECIES_B_STR).is(intraSpecies));
             }
             filterQueries.add(new SimpleFilterQuery(conditions));
         }

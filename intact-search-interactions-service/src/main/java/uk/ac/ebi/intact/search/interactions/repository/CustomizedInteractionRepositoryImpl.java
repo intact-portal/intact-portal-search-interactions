@@ -109,9 +109,6 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
             search.addSort(Sort.by(Sort.Direction.ASC, PUBLICATION_PUBMED_IDENTIFIER));
             search.addSort(Sort.by(Sort.Direction.ASC, DETECTION_METHOD));
         }
-//        else {
-//            search.addSort(DEFAULT_QUERY_SORT_WITH_QUERY);
-//        }
 
         // isEmbeddedSolr parameter is needed for the batch search tests to work
         // check https://issues.apache.org/jira/browse/SOLR-12858 for embedded POST request issue

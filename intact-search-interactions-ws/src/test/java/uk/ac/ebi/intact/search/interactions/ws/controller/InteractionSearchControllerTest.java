@@ -17,7 +17,8 @@ import uk.ac.ebi.intact.search.interactions.ws.RequiresSolrServer;
 
 import java.nio.charset.StandardCharsets;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by anjali on 26/03/19.
@@ -32,67 +33,11 @@ public class InteractionSearchControllerTest {
     @LocalServerPort
     private int port;
 
-    @Autowired
-    private InteractionSearchController controller;
-
-    @Autowired
-    private TestRestTemplate restTemplate;
-
     @Value("${server.servlet.context-path}")
     private String wsContextPath;
 
-    @Test
-    public void contexLoads() {
-        assertNotNull(controller);
-    }
-
-    @Test
-    public void uploadBatchFileFunctionality() {
-
-        LinkedMultiValueMap<String, Object> parameters = new LinkedMultiValueMap<String, Object>();
-        parameters.add("file", new org.springframework.core.io.ClassPathResource("batchfiles/2_interactors.txt"));
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
-
-        HttpEntity<LinkedMultiValueMap<String, Object>> entity = new HttpEntity<LinkedMultiValueMap<String, Object>>(parameters, headers);
-        String uploadFileUrl = "http://localhost:" + port + wsContextPath + "/uploadFile";
-
-        ResponseEntity<String> response = restTemplate.exchange(uploadFileUrl, HttpMethod.POST, entity, String.class, "");
-
-        // Expect Ok
-        assertEquals(response.getStatusCode(), HttpStatus.OK);
-
-        String fileName = null;
-        try {
-            fileName = response.getBody();
-        } catch (Exception e) {
-            fail();
-        }
-        assertNotNull(fileName);
-
-        assertTrue(fileName.startsWith("file_"));
-
-    }
-
-    @Test
-    public void emptyFileUploadTest() {
-
-        LinkedMultiValueMap<String, Object> parameters = new LinkedMultiValueMap<String, Object>();
-        parameters.add("file", new org.springframework.core.io.ClassPathResource("batchfiles/empty_file.txt"));
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
-
-        HttpEntity<LinkedMultiValueMap<String, Object>> entity =
-                new HttpEntity<LinkedMultiValueMap<String, Object>>(parameters, headers);
-        String uploadFileUrl = "http://localhost:" + port + wsContextPath + "/uploadFile";
-
-        ResponseEntity<String> response = restTemplate.exchange(uploadFileUrl, HttpMethod.POST, entity, String.class, "");
-
-        // Expectation failed
-        assertEquals(response.getStatusCode(), HttpStatus.EXPECTATION_FAILED);
-    }
+    @Autowired
+    private TestRestTemplate restTemplate;
 
     @Test
     public void postRequestTest(){
