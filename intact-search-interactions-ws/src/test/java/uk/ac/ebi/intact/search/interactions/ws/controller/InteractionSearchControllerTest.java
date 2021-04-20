@@ -57,7 +57,7 @@ public class InteractionSearchControllerTest {
         ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
 
         // Expect Ok
-        assertEquals(response.getStatusCode(), HttpStatus.OK);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
 
         String body = response.getBody();
