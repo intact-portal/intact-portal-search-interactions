@@ -288,7 +288,7 @@ public class InteractionSearchServiceTest {
             }
         }
 
-        facetFieldEntryPage = interaction.getFacetResultPage(SearchInteractionFields.DETECTION_METHOD_STR);
+        facetFieldEntryPage = interaction.getFacetResultPage(SearchInteractionFields.DETECTION_METHOD_S);
         assertFalse(facetFieldEntryPage.getContent().isEmpty());
         for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage.getContent()) {
             final String value = facetFieldEntry.getValue();
@@ -306,7 +306,7 @@ public class InteractionSearchServiceTest {
             }
         }
 
-        facetFieldEntryPage = interaction.getFacetResultPage(SearchInteractionFields.TYPE_STR);
+        facetFieldEntryPage = interaction.getFacetResultPage(SearchInteractionFields.TYPE_S);
         assertFalse(facetFieldEntryPage.getContent().isEmpty());
         for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage.getContent()) {
             final String value = facetFieldEntry.getValue();
@@ -315,7 +315,7 @@ public class InteractionSearchServiceTest {
             }
         }
 
-        facetFieldEntryPage = interaction.getFacetResultPage(SearchInteractionFields.HOST_ORGANISM_STR);
+        facetFieldEntryPage = interaction.getFacetResultPage(SearchInteractionFields.HOST_ORGANISM_S);
         assertFalse(facetFieldEntryPage.getContent().isEmpty());
         for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage.getContent()) {
             final String value = facetFieldEntry.getValue();
@@ -690,7 +690,7 @@ public class InteractionSearchServiceTest {
         detectionMethodsFacetsExpected.put("elisa", 1L);
         detectionMethodsFacetsExpected.put("affinity chrom", 1L);
 
-        for (FacetFieldEntry facetFieldEntry : interactionOp.getFacetResultPage(DETECTION_METHOD_STR)) {
+        for (FacetFieldEntry facetFieldEntry : interactionOp.getFacetResultPage(DETECTION_METHOD_S)) {
             assertEquals(detectionMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
         }
 
@@ -698,7 +698,7 @@ public class InteractionSearchServiceTest {
         HashMap<String, Long> interactionTypeFacetsExpected = new HashMap<>();
         interactionTypeFacetsExpected.put("physical association", 6L);
 
-        for (FacetFieldEntry facetFieldEntry : interactionOp.getFacetResultPage(TYPE_STR)) {
+        for (FacetFieldEntry facetFieldEntry : interactionOp.getFacetResultPage(TYPE_S)) {
             assertEquals(interactionTypeFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
         }
 
@@ -707,7 +707,7 @@ public class InteractionSearchServiceTest {
         HashMap<String, Long> hostOrganismFacetsExpected = new HashMap<>();
         hostOrganismFacetsExpected.put("In vitro", 6L);
 
-        for (FacetFieldEntry facetFieldEntry : interactionOp.getFacetResultPage(HOST_ORGANISM_STR)) {
+        for (FacetFieldEntry facetFieldEntry : interactionOp.getFacetResultPage(HOST_ORGANISM_S)) {
             assertEquals(hostOrganismFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
         }
 
@@ -800,7 +800,7 @@ public class InteractionSearchServiceTest {
         detectionMethodsFacetsExpected.put("elisa", 1L);
         detectionMethodsFacetsExpected.put("affinity chrom", 1L);
 
-        for (FacetFieldEntry facetFieldEntry : interactionOp.getFacetResultPage(DETECTION_METHOD_STR)) {
+        for (FacetFieldEntry facetFieldEntry : interactionOp.getFacetResultPage(DETECTION_METHOD_S)) {
             assertEquals(detectionMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
         }
 
@@ -809,7 +809,7 @@ public class InteractionSearchServiceTest {
         HashMap<String, Long> interactionTypeFacetsExpected = new HashMap<>();
         interactionTypeFacetsExpected.put("physical association", 6L);
 
-        for (FacetFieldEntry facetFieldEntry : interactionOp.getFacetResultPage(TYPE_STR)) {
+        for (FacetFieldEntry facetFieldEntry : interactionOp.getFacetResultPage(TYPE_S)) {
             assertEquals(interactionTypeFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
         }
 
@@ -818,7 +818,7 @@ public class InteractionSearchServiceTest {
         HashMap<String, Long> hostOrganismFacetsExpected = new HashMap<>();
         hostOrganismFacetsExpected.put("In vitro", 6L);
 
-        for (FacetFieldEntry facetFieldEntry : interactionOp.getFacetResultPage(HOST_ORGANISM_STR)) {
+        for (FacetFieldEntry facetFieldEntry : interactionOp.getFacetResultPage(HOST_ORGANISM_S)) {
             assertEquals(hostOrganismFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
         }
 
@@ -890,7 +890,7 @@ public class InteractionSearchServiceTest {
         detectionMethodsFacetsExpected.put("affinity chrom", 1L);
         detectionMethodsFacetsExpected.put("anti bait coip", 4L);
 
-        for (FacetFieldEntry facetFieldEntry : interactionOp.getFacetResultPage(DETECTION_METHOD_STR)) {
+        for (FacetFieldEntry facetFieldEntry : interactionOp.getFacetResultPage(DETECTION_METHOD_S)) {
             assertEquals(detectionMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
         }
 
@@ -950,7 +950,7 @@ public class InteractionSearchServiceTest {
         hostOrganismFacetsExpected.put("In vitro", 6L);
         hostOrganismFacetsExpected.put("rattus norvegicus liver", 4L);
 
-        for (FacetFieldEntry facetFieldEntry : interactionOpForFacetTest.getFacetResultPage(HOST_ORGANISM_STR)) {
+        for (FacetFieldEntry facetFieldEntry : interactionOpForFacetTest.getFacetResultPage(HOST_ORGANISM_S)) {
             assertEquals(hostOrganismFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
         }
 
@@ -987,7 +987,7 @@ public class InteractionSearchServiceTest {
         HashMap<String, Long> interactionTypeFacetsExpected = new HashMap<>();
         interactionTypeFacetsExpected.put("physical association", 10L);
 
-        for (FacetFieldEntry facetFieldEntry : interactionOp.getFacetResultPage(TYPE_STR)) {
+        for (FacetFieldEntry facetFieldEntry : interactionOp.getFacetResultPage(TYPE_S)) {
             assertEquals(interactionTypeFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
         }
     }

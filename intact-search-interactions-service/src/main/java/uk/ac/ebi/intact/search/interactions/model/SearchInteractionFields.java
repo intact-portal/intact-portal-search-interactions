@@ -14,8 +14,8 @@ public class SearchInteractionFields {
     public static final String ID_B = "idB";
     public static final String AC_A = "acA";
     public static final String AC_B = "acB";
-    public static final String AC_A_STR = "acA_str";
-    public static final String AC_B_STR = "acB_str";
+    public static final String AC_A_S = "acA_s";
+    public static final String AC_B_S = "acB_s";
     public static final String MOLECULE_A = "moleculeA";
     public static final String MOLECULE_B = "moleculeB";
     public static final String INTACT_NAME_A = "intactNameA";
@@ -30,6 +30,7 @@ public class SearchInteractionFields {
     public static final String ALIASES_B = "aliasesB";
     public static final String TAX_IDA = "taxIdA";
     public static final String TAX_IDB = "taxIdB";
+    public static final String INTRA_TAX_ID = "intra_taxId";
     public static final String TYPE_A = "typeA";
     public static final String TYPE_B = "typeB";
     public static final String XREFS_A = "xrefsA";
@@ -39,10 +40,14 @@ public class SearchInteractionFields {
     public static final String CHECKSUMS_A = "checksumsA";
     public static final String CHECKSUMS_B = "checksumsB";
     public static final String SPECIES_A = "speciesA";
-    public static final String SPECIES_A_STR = "speciesA_str";
+    // CopyField
+    public static final String SPECIES_A_S = "speciesA_s";
     public static final String SPECIES_B = "speciesB";
-    public static final String SPECIES_B_STR = "speciesB_str";
+    // CopyField
+    public static final String SPECIES_B_S = "speciesB_s";
+    // CopyField
     public static final String SPECIES_A_B_STR = "speciesA_B_str";
+    public static final String INTRA_SPECIES = "intra_species";
 
     //participants
 
@@ -62,13 +67,13 @@ public class SearchInteractionFields {
     public static final String FEATURE_TYPE_B = "feature_type_B";
     public static final String STOICHIOMETRY_A = "stoichiometry_A";
     public static final String STOICHIOMETRY_B = "stoichiometry_B";
-    public static final String IDENTIFICATION_METHOD_A = "identification_method_A";
-    public static final String IDENTIFICATION_METHOD_B = "identification_method_B";
-    public static final String IDENTIFICATION_METHOD_MI_IDENTIFIER_A = "identification_method_mi_identifier_A";
-    public static final String IDENTIFICATION_METHOD_MI_IDENTIFIER_B = "identification_method_mi_identifier_B";
+    public static final String IDENTIFICATION_METHODS_A = "identification_method_A";
+    public static final String IDENTIFICATION_METHODS_B = "identification_method_B";
+    public static final String IDENTIFICATION_METHOD_MI_IDENTIFIERS_A = "identification_method_mi_identifier_A";
+    public static final String IDENTIFICATION_METHOD_MI_IDENTIFIERS_B = "identification_method_mi_identifier_B";
 
     public static final String DETECTION_METHOD = "detection_method";
-    public static final String DETECTION_METHOD_STR = "detection_method_str";
+    public static final String DETECTION_METHOD_S = "detection_method_s";
     public static final String DETECTION_METHOD_MI_IDENTIFIER = "detection_method_mi_identifier";
     public static final String PUBLICATION_AUTHORS = "publication_authors";
     public static final String FIRST_AUTHOR = "first_author";
@@ -86,16 +91,16 @@ public class SearchInteractionFields {
     public static final String PARAMETER_TYPES = "parameter_types";
     public static final String CREATION_DATE = "creation_date";
     public static final String UPDATION_DATE = "updation_date";
-    public static final String CHECKSUM = "checksum";
+    public static final String CHECKSUMS = "checksum";
     public static final String NEGATIVE = "negative";
     public static final String TYPE = "type";
     public static final String TYPE_MI_IDENTIFIER = "type_mi_identifier";
-    public static final String TYPE_STR = "type_str";
+    public static final String TYPE_S = "type_s";
     public static final String HOST_ORGANISM = "host_organism";
     public static final String HOST_ORGANISM_TAX_ID = "host_organism_taxId";
-    public static final String HOST_ORGANISM_STR = "host_organism_str";
+    public static final String HOST_ORGANISM_S = "host_organism_s";
     public static final String AC = "ac";
-    public static final String AC_STR = "ac_str";
+    public static final String AC_S = "ac_s";
     public static final String EXPERIMENTAL_PREPARATIONS_A = "experimental_preparations_A";
     public static final String EXPERIMENTAL_PREPARATIONS_B = "experimental_preparations_B";
     public static final String TYPE_MI_A = "type_MI_A";
@@ -117,4 +122,24 @@ public class SearchInteractionFields {
     public static final String DEFAULT = "default"; //Copy field for general search
     public static final String INTERACTOR_DEFAULT = "interactor_default"; //Copy field for interactor search
     public static final String INTERACTOR_IDENTIFIERS = "interactor_identifiers";
+
+    /* Fields related with the styling of the network and other visual components */
+
+    // Taxonomy inter intra species
+    public static final String TAX_IDA_STYLED = "taxIdA_styled";
+    public static final String TAX_IDB_STYLED = "taxIdB_styled";
+    // CopyField
+    public static final String TAX_ID_A_B_STYLED = "taxId_A_B_styled";
+    public static final String INTRA_TAX_ID_STYLED = "intra_taxId_styled";
+
+    // Interaction type
+    public static final String TYPE_MI_IDENTIFIER_STYLED = "type_mi_identifier_styled";
+
+    // Interactor type
+    public static final String TYPE_MI_A_STYLED = "type_MI_A_styled";
+    public static final String TYPE_MI_B_STYLED = "type_MI_B_styled";
+    // CopyField
+    public static final String TYPE_MI_A_B_STYLED = "type_MI_A_B_styled";
+
+
 }

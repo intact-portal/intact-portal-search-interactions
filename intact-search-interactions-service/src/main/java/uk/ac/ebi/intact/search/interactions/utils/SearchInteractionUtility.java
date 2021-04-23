@@ -65,18 +65,18 @@ public class SearchInteractionUtility {
                             }
                             if (userConditions == null) {
                                 if (isEBIAc(word)) {
-                                    userConditions = new Criteria(AC_A_STR).is(word)
-                                            .or(AC_B_STR).is(word)
-                                            .or(AC_STR).is(word);
+                                    userConditions = new Criteria(AC_A_S).is(word)
+                                            .or(AC_B_S).is(word)
+                                            .or(AC_S).is(word);
                                 } else {
                                     word = escapeQueryChars(word);
                                     userConditions = new Criteria(DEFAULT).expression(word);
                                 }
                             } else {
                                 if (isEBIAc(word)) {
-                                    Criteria criteria = new Criteria(AC_A_STR).is(word)
-                                            .or(AC_B_STR).is(word)
-                                            .or(AC_STR).is(word);
+                                    Criteria criteria = new Criteria(AC_A_S).is(word)
+                                            .or(AC_B_S).is(word)
+                                            .or(AC_S).is(word);
                                     userConditions.or(criteria);
                                 } else {
                                     word = escapeQueryChars(word);
@@ -123,19 +123,19 @@ public class SearchInteractionUtility {
         List<FilterQuery> filterQueries = new ArrayList<>();
 
         //Interactor species filter
-        createInteractorSpeciesFilterCriteria("{!tag=SPECIES}", interactorSpeciesFilter, intraSpeciesFilter, filterQueries);
+        createInteractorSpeciesFilterCriteria(interactorSpeciesFilter, intraSpeciesFilter, filterQueries);
 
         //Interactor type filter
         createInteractorTypeFilterCriteria("{!tag=TYPE}", interactorTypesFilter, filterQueries);
 
         //Interaction detection method filter
-        createFilterCriteriaForStringValues("{!tag=DETECTION_METHOD}", interactionDetectionMethodsFilter, DETECTION_METHOD_STR, filterQueries);
+        createFilterCriteriaForStringValues("{!tag=DETECTION_METHOD}", interactionDetectionMethodsFilter, DETECTION_METHOD_S, filterQueries);
 
         //Interaction type filter
-        createFilterCriteriaForStringValues("{!tag=INTERACTION_TYPE}", interactionTypesFilter, TYPE_STR, filterQueries);
+        createFilterCriteriaForStringValues("{!tag=INTERACTION_TYPE}", interactionTypesFilter, TYPE_S, filterQueries);
 
         //Interaction host organism filter
-        createFilterCriteriaForStringValues("{!tag=HOST_ORGANISM}", interactionHostOrganismsFilter, HOST_ORGANISM_STR, filterQueries);
+        createFilterCriteriaForStringValues("{!tag=HOST_ORGANISM}", interactionHostOrganismsFilter, HOST_ORGANISM_S, filterQueries);
 
         //Negative filter
         createNegativeFilterCriteria("{!tag=NEGATIVE_INTERACTION}", negativeFilter, filterQueries);
@@ -176,8 +176,8 @@ public class SearchInteractionUtility {
 
     private void createInteractorAcsFilter(String tagForExcludingFacets, Set<String> values, List<FilterQuery> filterQueries) {
         if (values != null && !values.isEmpty()) {
-            Criteria conditions = new Criteria(tagForExcludingFacets + AC_A_STR).in(values)
-                    .or(AC_B_STR).in(values);
+            Criteria conditions = new Criteria(tagForExcludingFacets + AC_A_S).in(values)
+                    .or(AC_B_S).in(values);
             filterQueries.add(new SimpleFilterQuery(conditions));
 
         }
@@ -208,19 +208,19 @@ public class SearchInteractionUtility {
     // intraSpeciesFilter: if false it creates 'and' condition between two species
     //               if true it creates 'or' condition between set of species
     // Adds tags in solr to allow calculate properly the facets for multiselection in species and interactor type
-    private void createInteractorSpeciesFilterCriteria(String tagForExcludingFacets, Set<String> species, boolean intraSpeciesFilter, List<FilterQuery> filterQueries) {
+    private void createInteractorSpeciesFilterCriteria(Set<String> species, boolean intraSpeciesFilter, List<FilterQuery> filterQueries) {
 
         if (species != null && !species.isEmpty()) {
             Criteria conditions;
             if (!intraSpeciesFilter) {
-                conditions = new Criteria(tagForExcludingFacets + SPECIES_A_B_STR).in(species);
+                conditions = new Criteria("{!tag=SPECIES}" + SPECIES_A_B_STR).in(species);
                 conditions.isOr();
             } else { // Return only interactions from exactly the same species in both interactors.
-                //conditions = new Criteria(tagForExcludingFacets + SPECIES_A_STR).in(species).and(new Criteria(SPECIES_B_STR).in(species));
+                conditions = new Criteria("{!tag=INTRA_SPECIES}" + INTRA_SPECIES).in(species);
                 // If more than one we keep only the first one
-                Iterator<String> iterator = species.iterator();
-                String intraSpecies = iterator.next();
-                conditions = new Criteria(SPECIES_A_STR).is(intraSpecies).and(new Criteria(SPECIES_B_STR).is(intraSpecies));
+//                Iterator<String> iterator = species.iterator();
+//                String intraSpecies = iterator.next();
+//                conditions = new Criteria(SPECIES_A_S).is(intraSpecies).and(new Criteria(SPECIES_B_S).is(intraSpecies));
             }
             filterQueries.add(new SimpleFilterQuery(conditions));
         }

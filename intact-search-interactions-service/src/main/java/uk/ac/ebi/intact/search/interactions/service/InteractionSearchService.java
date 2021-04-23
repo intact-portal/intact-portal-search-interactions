@@ -42,6 +42,26 @@ public class InteractionSearchService {
         return interactionRepository.findInteractions(query, PageRequest.of(0, 10));
     }
 
+    public FacetPage<SearchInteraction> findInteractionFacets(String query,
+                                                              boolean batchSearch,
+                                                              Set<String> interactorSpeciesFilter,
+                                                              Set<String> interactorTypesFilter,
+                                                              Set<String> interactionDetectionMethodsFilter,
+                                                              Set<String> interactionTypesFilter,
+                                                              Set<String> interactionHostOrganismsFilter,
+                                                              boolean negativeFilter,
+                                                              boolean mutationFilter,
+                                                              double minMIScore,
+                                                              double maxMIScore,
+                                                              boolean intraSpeciesFilter,
+                                                              Set<Long> binaryInteractionIds,
+                                                              Set<String> interactorAcs) {
+        return this.interactionRepository.findInteractionFacets(query, batchSearch, interactorSpeciesFilter,
+                interactorTypesFilter, interactionDetectionMethodsFilter, interactionTypesFilter,
+                interactionHostOrganismsFilter, negativeFilter, mutationFilter, minMIScore, maxMIScore, intraSpeciesFilter,
+                binaryInteractionIds, interactorAcs);
+    }
+
     public FacetPage<SearchInteraction> findInteractionWithFacet(String query,
                                                                  boolean batchSearch,
                                                                  Set<String> interactorSpeciesFilter,

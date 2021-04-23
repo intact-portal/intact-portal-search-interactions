@@ -2,6 +2,7 @@ package uk.ac.ebi.intact.search.interactions.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.solr.core.RequestMethod;
@@ -43,6 +44,40 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
     }
 
     @Override
+    public FacetPage<SearchInteraction> findInteractionFacets(String query,
+                                                                 boolean batchSearch,
+                                                                 Set<String> interactorSpeciesFilter,
+                                                                 Set<String> interactorTypesFilter,
+                                                                 Set<String> interactionDetectionMethodsFilter,
+                                                                 Set<String> interactionTypesFilter,
+                                                                 Set<String> interactionHostOrganismsFilter,
+                                                                 boolean negativeFilter,
+                                                                 boolean mutationFilter,
+                                                                 double minMIScore,
+                                                                 double maxMIScore,
+                                                                 boolean intraSpeciesFilter,
+                                                                 Set<Long> binaryInteractionIds,
+                                                                 Set<String> interactorAcs) {
+        return findInteractionWithFacet(query,
+                batchSearch,
+                interactorSpeciesFilter,
+                interactorTypesFilter,
+                interactionDetectionMethodsFilter,
+                interactionTypesFilter,
+                interactionHostOrganismsFilter,
+                negativeFilter,
+                mutationFilter,
+                minMIScore,
+                maxMIScore,
+                intraSpeciesFilter,
+                binaryInteractionIds,
+                interactorAcs,
+                Sort.unsorted(),
+                // We need at least one page with one interaction to avoid problems until we find a way to retrieve the facets without page.
+                PageRequest.of(0,1));
+    }
+
+    @Override
     public FacetPage<SearchInteraction> findInteractionWithFacet(String query,
                                                                  boolean batchSearch,
                                                                  Set<String> interactorSpeciesFilter,
@@ -79,18 +114,19 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         // facet
         // Adds exclude tags in solr to allow calculate properly the facets for multiselection in species and interactor type
         FacetOptions facetOptions = new FacetOptions(
-                "{!ex=SPECIES,GRAPH_FILTER}" + SPECIES_A_B_STR,
-                "{!ex=TYPE,GRAPH_FILTER}" + TYPE_A_B_STR,
-                "{!ex=DETECTION_METHOD,GRAPH_FILTER}" + DETECTION_METHOD_STR,
-                "{!ex=INTERACTION_TYPE,GRAPH_FILTER}" + TYPE_STR,
-                "{!ex=HOST_ORGANISM,GRAPH_FILTER}" + HOST_ORGANISM_STR,
+                "{!ex=SPECIES,GRAPH_FILTER}" + TAX_ID_A_B_STYLED,
+                "{!ex=INTRA_SPECIES,GRAPH_FILTER}" + INTRA_TAX_ID_STYLED,
+                "{!ex=TYPE,GRAPH_FILTER}" + TYPE_MI_A_B_STYLED,
+                "{!ex=DETECTION_METHOD,GRAPH_FILTER}" + DETECTION_METHOD_S,
+                "{!ex=INTERACTION_TYPE,GRAPH_FILTER}" + TYPE_MI_IDENTIFIER_STYLED,
+                "{!ex=HOST_ORGANISM,GRAPH_FILTER}" + HOST_ORGANISM_S,
                 "{!ex=NEGATIVE_INTERACTION,GRAPH_FILTER}" + NEGATIVE,
                 "{!ex=MUTATION,GRAPH_FILTER}" + DISRUPTED_BY_MUTATION,
                 "{!ex=MI_SCORE,GRAPH_FILTER}" + INTACT_MISCORE);
         facetOptions.setFacetLimit(FACET_MIN_COUNT);
 
-        facetOptions.getFieldsWithParameters().add(new FacetOptions.FieldWithFacetParameters(SPECIES_A_B_STR).setMethod("enum"));
-        facetOptions.getFieldsWithParameters().add(new FacetOptions.FieldWithFacetParameters(TYPE_A_B_STR).setMethod("enum"));
+//        facetOptions.getFieldsWithParameters().add(new FacetOptions.FieldWithFacetParameters(SPECIES_A_B_STR).setMethod("enum"));
+//        facetOptions.getFieldsWithParameters().add(new FacetOptions.FieldWithFacetParameters(TYPE_A_B_STR).setMethod("enum"));
 
         /*facetOptions.setFacetSort(FacetOptions.FacetSort.COUNT);*/
         search.setFacetOptions(facetOptions);
@@ -237,7 +273,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         FacetOptions facetOptions = new FacetOptions(
                 "{!ex=SPECIES,GRAPH_FILTER}" + SPECIES_A_B_STR, //TODO replace by taxids of A and B
                 "{!ex=TYPE,GRAPH_FILTER}" + TYPE_A_B_STR, //TODO replace by MI ID
-                "{!ex=INTERACTION_TYPE,GRAPH_FILTER}" + TYPE_STR); //TODO replace by MI ID
+                "{!ex=INTERACTION_TYPE,GRAPH_FILTER}" + TYPE_S); //TODO replace by MI ID
         facetOptions.setFacetLimit(FACET_MIN_COUNT);
 
         facetOptions.getFieldsWithParameters().add(new FacetOptions.FieldWithFacetParameters(SPECIES_A_B_STR).setMethod("enum"));
@@ -407,8 +443,8 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
             FilterQuery fq = new SimpleFilterQuery();
 
-            Criteria cond1 = Criteria.where(AC_A_STR).is(interactorAc);
-            Criteria cond2 = Criteria.where(AC_B_STR).is(interactorAc);
+            Criteria cond1 = Criteria.where(AC_A_S).is(interactorAc);
+            Criteria cond2 = Criteria.where(AC_B_S).is(interactorAc);
             Criteria c = cond1.or(cond2);
 
             fq.addCriteria(c);
