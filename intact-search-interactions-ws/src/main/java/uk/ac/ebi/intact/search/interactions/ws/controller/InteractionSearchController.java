@@ -16,6 +16,7 @@ import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.service.ChildInteractorSearchService;
 import uk.ac.ebi.intact.search.interactions.service.InteractionSearchService;
 import uk.ac.ebi.intact.search.interactions.ws.controller.model.ChildInteractorSearchResult;
+import uk.ac.ebi.intact.search.interactions.ws.controller.model.InteractionFacetsSearchResult;
 import uk.ac.ebi.intact.search.interactions.ws.controller.model.InteractionSearchResult;
 
 import java.io.IOException;
@@ -46,6 +47,44 @@ public class InteractionSearchController {
     @GetMapping(value = "/findInteractions/{query}", produces = {APPLICATION_JSON_VALUE})
     public Page<SearchInteraction> findInteractions(@PathVariable String query) {
         return interactionSearchService.findInteractions(query);
+    }
+
+    @CrossOrigin(origins = "*")
+    @PostMapping(value = "/findInteractionFacets",
+            produces = {APPLICATION_JSON_VALUE})
+    public InteractionFacetsSearchResult findInteractionFacets(
+            @RequestParam(value = "query") String query,
+            @RequestParam(value = "batchSearch", required = false) boolean batchSearch,
+            @RequestParam(value = "interactorSpeciesFilter", required = false) Set<String> interactorSpeciesFilter,
+            @RequestParam(value = "interactorTypesFilter", required = false) Set<String> interactorTypesFilter,
+            @RequestParam(value = "interactionDetectionMethodsFilter", required = false) Set<String> interactionDetectionMethodsFilter,
+            @RequestParam(value = "interactionTypesFilter", required = false) Set<String> interactionTypesFilter,
+            @RequestParam(value = "interactionHostOrganismsFilter", required = false) Set<String> interactionHostOrganismsFilter,
+            @RequestParam(value = "negativeFilter", required = false) boolean negativeFilter,
+            @RequestParam(value = "mutationFilter", required = false) boolean mutationFilter,
+            @RequestParam(value = "minMIScore", defaultValue = "0", required = false) double minMIScore,
+            @RequestParam(value = "maxMIScore", defaultValue = "1", required = false) double maxMIScore,
+            @RequestParam(value = "intraSpeciesFilter", required = false) boolean intraSpeciesFilter,
+            @RequestParam(value = "binaryInteractionIds", required = false) Set<Long> binaryInteractionIds,
+            @RequestParam(value = "interactorAcs", required = false) Set<String> interactorAcs) {
+
+        return new InteractionFacetsSearchResult(
+                interactionSearchService.findInteractionFacets(
+                        query,
+                        batchSearch,
+                        interactorSpeciesFilter,
+                        interactorTypesFilter,
+                        interactionDetectionMethodsFilter,
+                        interactionTypesFilter,
+                        interactionHostOrganismsFilter,
+                        negativeFilter,
+                        mutationFilter,
+                        minMIScore,
+                        maxMIScore,
+                        intraSpeciesFilter,
+                        binaryInteractionIds,
+                        interactorAcs));
+
     }
 
     @CrossOrigin(origins = "*")

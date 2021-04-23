@@ -4,7 +4,7 @@ public class FacetCount<T> {
 
     private String value;
     private String termId;
-    private String color;
+    private String visualProperty;
     private T valueCount;
 
     FacetCount(String value, T valueCount) {
@@ -22,7 +22,7 @@ public class FacetCount<T> {
             if (styledValue.length == 3) {
                 setTermId(styledValue[0]);
                 this.value = styledValue[1];
-                setColor(styledValue[2]);
+                setVisualProperty(styledValue[2]);
             }
             else {
                 this.value = value;
@@ -38,12 +38,12 @@ public class FacetCount<T> {
         this.termId = termId;
     }
 
-    public String getColor() {
-        return color;
+    public String getVisualProperty() {
+        return visualProperty;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public void setVisualProperty(String visualProperty) {
+        this.visualProperty = visualProperty;
     }
 
     public T getValueCount() {
