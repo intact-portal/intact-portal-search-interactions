@@ -9,7 +9,7 @@ spec:
     - port: 31235
       protocol: TCP
       # The port which will be externally exposed. Must be in the range [30000, 32767].
-      nodePort: 31245
+      nodePort: 31247
       # The port on your Deployment which it will expose
       targetPort: 8082
   selector:
