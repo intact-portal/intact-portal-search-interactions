@@ -321,6 +321,9 @@ public class SearchInteraction {
     @Field(TYPE_MI_B_STYLED)
     private String typeMIBStyled;
 
+    @Field(HOST_ORGANISM_TAXID_STYLED)
+    private String hostOrganismTaxIdStyled;
+
     @ChildDocument
     private List<SearchChildInteractor> searchChildInteractors;
 
@@ -1192,6 +1195,14 @@ public class SearchInteraction {
 
     public void setTypeMIBStyled(String typeMIBStyled) {
         this.typeMIBStyled = typeMIBStyled;
+    }
+
+    public String getHostOrganismTaxIdStyled() {
+        return hostOrganismTaxIdStyled;
+    }
+
+    public void setHostOrganismTaxIdStyled(String hostOrganismTaxIdStyled) {
+        this.hostOrganismTaxIdStyled = hostOrganismTaxIdStyled;
     }
 
     public List<SearchChildInteractor> getSearchChildInteractors() {

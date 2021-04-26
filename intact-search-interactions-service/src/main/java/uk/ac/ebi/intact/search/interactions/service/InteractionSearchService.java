@@ -51,6 +51,7 @@ public class InteractionSearchService {
                                                               Set<String> interactionHostOrganismsFilter,
                                                               boolean negativeFilter,
                                                               boolean mutationFilter,
+                                                              boolean expansionFilter,
                                                               double minMIScore,
                                                               double maxMIScore,
                                                               boolean intraSpeciesFilter,
@@ -58,7 +59,7 @@ public class InteractionSearchService {
                                                               Set<String> interactorAcs) {
         return this.interactionRepository.findInteractionFacets(query, batchSearch, interactorSpeciesFilter,
                 interactorTypesFilter, interactionDetectionMethodsFilter, interactionTypesFilter,
-                interactionHostOrganismsFilter, negativeFilter, mutationFilter, minMIScore, maxMIScore, intraSpeciesFilter,
+                interactionHostOrganismsFilter, negativeFilter, mutationFilter, expansionFilter, minMIScore, maxMIScore, intraSpeciesFilter,
                 binaryInteractionIds, interactorAcs);
     }
 
@@ -71,6 +72,7 @@ public class InteractionSearchService {
                                                                  Set<String> interactionHostOrganismsFilter,
                                                                  boolean negativeFilter,
                                                                  boolean mutationFilter,
+                                                                 boolean expansionFilter,
                                                                  double minMIScore,
                                                                  double maxMIScore,
                                                                  boolean intraSpeciesFilter,
@@ -79,7 +81,7 @@ public class InteractionSearchService {
                                                                  int page,
                                                                  int pageSize) {
         return interactionRepository.findInteractionWithFacet(query, batchSearch, interactorSpeciesFilter, interactorTypesFilter, interactionDetectionMethodsFilter,
-                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, minMIScore, maxMIScore, intraSpeciesFilter, binaryInteractionIds, interactorAcs, null,
+                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, expansionFilter, minMIScore, maxMIScore, intraSpeciesFilter, binaryInteractionIds, interactorAcs, null,
                 PageRequest.of(page, pageSize));
     }
 
@@ -92,13 +94,14 @@ public class InteractionSearchService {
                                                                Set<String> interactionHostOrganismsFilter,
                                                                boolean negativeFilter,
                                                                boolean mutationFilter,
+                                                               boolean expansionFilter,
                                                                double minMIScore,
                                                                double maxMIScore,
                                                                boolean intraSpeciesFilter,
                                                                int page,
                                                                int pageSize) {
         return interactionRepository.findInteractionForGraphJson(query, batchSearch, interactorSpeciesFilter, interactorTypesFilter, interactionDetectionMethodsFilter,
-                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, minMIScore, maxMIScore, intraSpeciesFilter, null,
+                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, expansionFilter, minMIScore, maxMIScore, intraSpeciesFilter, null,
                 PageRequest.of(page, pageSize));
     }
 
@@ -111,13 +114,14 @@ public class InteractionSearchService {
                                                                              Set<String> interactionHostOrganismsFilter,
                                                                              boolean negativeFilter,
                                                                              boolean mutationFilter,
+                                                                             boolean expansionFilter,
                                                                              double minMiScore,
                                                                              double maxMiScore,
                                                                              boolean intraSpeciesFilter,
                                                                              int page,
                                                                              int pageSize) {
         return interactionRepository.findInteractionForGraphJsonWithFacet(query, batchSearch, interactorSpeciesFilter, interactorTypesFilter, interactionDetectionMethodsFilter,
-                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, minMiScore, maxMiScore, intraSpeciesFilter, null,
+                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, expansionFilter, minMiScore, maxMiScore, intraSpeciesFilter, null,
                 PageRequest.of(page, pageSize));
     }
 
@@ -130,6 +134,7 @@ public class InteractionSearchService {
                                                               Set<String> interactionHostOrganismsFilter,
                                                               boolean negativeFilter,
                                                               boolean mutationFilter,
+                                                              boolean expansionFilter,
                                                               double minMiScore,
                                                               double maxMiScore,
                                                               boolean intraSpeciesFilter,
@@ -137,7 +142,7 @@ public class InteractionSearchService {
                                                               Set<String> interactorAcs,
                                                               Pageable page) {
         return interactionRepository.findInteractionIdentifiers(query, batchSearch, interactorSpeciesFilters, interactorTypesFilter, interactionDetectionMethodsFilter,
-                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, minMiScore, maxMiScore, intraSpeciesFilter, binaryInteractionIds, interactorAcs, null,
+                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, expansionFilter, minMiScore, maxMiScore, intraSpeciesFilter, binaryInteractionIds, interactorAcs, null,
                 page);
     }
 
@@ -150,6 +155,7 @@ public class InteractionSearchService {
                                                               Set<String> interactionHostOrganismsFilter,
                                                               boolean negativeFilter,
                                                               boolean mutationFilter,
+                                                              boolean expansionFilter,
                                                               double minMiScore,
                                                               double maxMiScore,
                                                               boolean intraSpeciesFilter,
@@ -158,7 +164,7 @@ public class InteractionSearchService {
                                                               int page,
                                                               int pageSize) {
         return interactionRepository.findInteractionIdentifiers(query, batchSearch, interactorSpeciesFilter, interactorTypesFilter, interactionDetectionMethodsFilter,
-                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, minMiScore, maxMiScore, intraSpeciesFilter, binaryInteractionIds, interactorAcs, null,
+                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, expansionFilter, minMiScore, maxMiScore, intraSpeciesFilter, binaryInteractionIds, interactorAcs, null,
                 PageRequest.of(page, pageSize));
 
     }
@@ -173,11 +179,12 @@ public class InteractionSearchService {
                                               Set<String> interactionHostOrganismsFilter,
                                               boolean negativeFilter,
                                               boolean mutationFilter,
+                                              boolean expansionFilter,
                                               double minMIScore,
                                               double maxMIScore,
                                               boolean intraSpeciesFilter) {
         return interactionRepository.countInteractionsForGraphJson(query, batchSearch, interactorSpeciesFilter, interactorTypesFilter, interactionDetectionMethodsFilter,
-                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, minMIScore, maxMIScore, intraSpeciesFilter);
+                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, expansionFilter, minMIScore, maxMIScore, intraSpeciesFilter);
     }
 
     public long countInteractionResult(String query,
@@ -190,6 +197,7 @@ public class InteractionSearchService {
                                        Set<String> interactionHostOrganismsFilter,
                                        boolean negativeFilter,
                                        boolean mutationFilter,
+                                       boolean expansionFilter,
                                        double minMIScore,
                                        double maxMIScore,
                                        boolean intraSpeciesFilter,
@@ -198,7 +206,7 @@ public class InteractionSearchService {
     ) {
         return interactionRepository.countInteractionResult(query, batchSearch, interactorAc, interactorSpeciesFilter,
                 interactorTypesFilter, interactionDetectionMethodsFilter, interactionTypesFilter,
-                interactionHostOrganismsFilter, negativeFilter, mutationFilter, minMIScore, maxMIScore, intraSpeciesFilter,
+                interactionHostOrganismsFilter, negativeFilter, mutationFilter, expansionFilter, minMIScore, maxMIScore, intraSpeciesFilter,
                 binaryInteractionIds, interactorAcs);
     }
 
@@ -211,6 +219,7 @@ public class InteractionSearchService {
                                        Set<String> interactionHostOrganismsFilter,
                                        boolean negativeFilter,
                                        boolean mutationFilter,
+                                       boolean expansionFilter,
                                        double minMIScore,
                                        double maxMIScore,
                                        boolean intraSpeciesFilter,
@@ -219,7 +228,7 @@ public class InteractionSearchService {
     ) {
         return interactionRepository.countInteractionResult(query, batchSearch, interactorSpeciesFilter,
                 interactorTypesFilter, interactionDetectionMethodsFilter, interactionTypesFilter,
-                interactionHostOrganismsFilter, negativeFilter, mutationFilter, minMIScore, maxMIScore, intraSpeciesFilter,
+                interactionHostOrganismsFilter, negativeFilter, mutationFilter, expansionFilter, minMIScore, maxMIScore, intraSpeciesFilter,
                 binaryInteractionIds, interactorAcs);
     }
 

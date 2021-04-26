@@ -114,6 +114,7 @@ public class SearchInteractionUtility {
                                                Set<String> interactionHostOrganismsFilter,
                                                boolean negativeFilter,
                                                boolean mutationFilter,
+                                               boolean expansionFilter,
                                                double minMIScore,
                                                double maxMIScore,
                                                boolean intraSpeciesFilter,
@@ -138,10 +139,13 @@ public class SearchInteractionUtility {
         createFilterCriteriaForStringValues("{!tag=HOST_ORGANISM}", interactionHostOrganismsFilter, HOST_ORGANISM_S, filterQueries);
 
         //Negative filter
-        createNegativeFilterCriteria("{!tag=NEGATIVE_INTERACTION}", negativeFilter, filterQueries);
+        createFilterCriteriaForBoolean("{!tag=NEGATIVE_INTERACTION}", negativeFilter, NEGATIVE, filterQueries);
 
         //Mutation filter
-        createMutationFilterCriteria("{!tag=MUTATION}", mutationFilter, filterQueries);
+        createFilterCriteriaForBoolean("{!tag=MUTATION}", mutationFilter, DISRUPTED_BY_MUTATION,filterQueries);
+
+        //Expansion filter
+        createExpansionFilterCriteria("{!tag=EXPANSION}", expansionFilter, filterQueries);
 
         //MIScore filter
         createMIScoreFilterCriteria("{!tag=MI_SCORE}", minMIScore, maxMIScore, filterQueries);
@@ -183,24 +187,27 @@ public class SearchInteractionUtility {
         }
     }
 
-    private void createNegativeFilterCriteria(String tagForExcludingFacets, boolean value, List<FilterQuery> filterQueries) {
+    private void createFilterCriteriaForBoolean(String tagForExcludingFacets, boolean value, String field, List<FilterQuery> filterQueries) {
 
         if (value) {
-            Criteria conditions = new Criteria(tagForExcludingFacets + NEGATIVE).is(value);
+            Criteria conditions = new Criteria(tagForExcludingFacets + field).is(value);
             filterQueries.add(new SimpleFilterQuery(conditions));
         }
     }
 
-    private void createMutationFilterCriteria(String tagForExcludingFacets, boolean value, List<FilterQuery> filterQueries) {
-
+    private void createExpansionFilterCriteria(String tagForExcludingFacets, boolean value, List<FilterQuery> filterQueries) {
+        // Expansion filter meaning:
+        // true: hides spoke expanded interactions
+        // false: keeps every interaction
         if (value) {
-            Criteria conditions = new Criteria(tagForExcludingFacets + DISRUPTED_BY_MUTATION).is(value);
+            Criteria conditions = new Criteria(tagForExcludingFacets + "-" + EXPANSION_METHOD).is("spoke expansion");
             filterQueries.add(new SimpleFilterQuery(conditions));
         }
     }
+
+
 
     private void createMIScoreFilterCriteria(String tagForExcludingFacets, double minScore, double maxScore, List<FilterQuery> filterQueries) {
-
         Criteria conditions = new Criteria(tagForExcludingFacets + INTACT_MISCORE).between(minScore, maxScore);
         filterQueries.add(new SimpleFilterQuery(conditions));
     }
@@ -217,10 +224,6 @@ public class SearchInteractionUtility {
                 conditions.isOr();
             } else { // Return only interactions from exactly the same species in both interactors.
                 conditions = new Criteria("{!tag=INTRA_SPECIES}" + INTRA_SPECIES).in(species);
-                // If more than one we keep only the first one
-//                Iterator<String> iterator = species.iterator();
-//                String intraSpecies = iterator.next();
-//                conditions = new Criteria(SPECIES_A_S).is(intraSpecies).and(new Criteria(SPECIES_B_S).is(intraSpecies));
             }
             filterQueries.add(new SimpleFilterQuery(conditions));
         }
@@ -242,13 +245,8 @@ public class SearchInteractionUtility {
     private boolean isEBIAc(String term) {
         String pattern = "EBI-" + "[0-9]+";
         Pattern r1 = Pattern.compile(pattern);
-
         Matcher m = r1.matcher(term);
-        boolean matched = m.matches();
 
-        if (matched) {
-            return true;
-        }
-        return false;
+        return m.matches();
     }
 }

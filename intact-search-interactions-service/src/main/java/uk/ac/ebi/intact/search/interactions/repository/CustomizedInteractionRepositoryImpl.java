@@ -53,6 +53,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                                                                  Set<String> interactionHostOrganismsFilter,
                                                                  boolean negativeFilter,
                                                                  boolean mutationFilter,
+                                                                 boolean expansionFilter,
                                                                  double minMIScore,
                                                                  double maxMIScore,
                                                                  boolean intraSpeciesFilter,
@@ -67,6 +68,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                 interactionHostOrganismsFilter,
                 negativeFilter,
                 mutationFilter,
+                expansionFilter,
                 minMIScore,
                 maxMIScore,
                 intraSpeciesFilter,
@@ -87,6 +89,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                                                                  Set<String> interactionHostOrganismsFilter,
                                                                  boolean negativeFilter,
                                                                  boolean mutationFilter,
+                                                                 boolean expansionFilter,
                                                                  double minMIScore,
                                                                  double maxMIScore,
                                                                  boolean intraSpeciesFilter,
@@ -103,7 +106,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
         // filters
         List<FilterQuery> filterQueries = searchInteractionUtility.createFilterQuery(interactorSpeciesFilter, interactorTypesFilter, interactionDetectionMethodsFilter,
-                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, minMIScore, maxMIScore, intraSpeciesFilter, binaryInteractionIds, interactorAcs);
+                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, expansionFilter, minMIScore, maxMIScore, intraSpeciesFilter, binaryInteractionIds, interactorAcs);
 
         if (!filterQueries.isEmpty()) {
             for (FilterQuery filterQuery : filterQueries) {
@@ -114,14 +117,15 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         // facet
         // Adds exclude tags in solr to allow calculate properly the facets for multiselection in species and interactor type
         FacetOptions facetOptions = new FacetOptions(
-                "{!ex=SPECIES,GRAPH_FILTER}" + TAX_ID_A_B_STYLED,
-                "{!ex=INTRA_SPECIES,GRAPH_FILTER}" + INTRA_TAX_ID_STYLED,
+                "{!ex=SPECIES,INTRA_SPECIES,GRAPH_FILTER}" + TAX_ID_A_B_STYLED,
+                "{!ex=SPECIES,INTRA_SPECIES,GRAPH_FILTER}" + INTRA_TAX_ID_STYLED,
                 "{!ex=TYPE,GRAPH_FILTER}" + TYPE_MI_A_B_STYLED,
                 "{!ex=DETECTION_METHOD,GRAPH_FILTER}" + DETECTION_METHOD_S,
                 "{!ex=INTERACTION_TYPE,GRAPH_FILTER}" + TYPE_MI_IDENTIFIER_STYLED,
-                "{!ex=HOST_ORGANISM,GRAPH_FILTER}" + HOST_ORGANISM_S,
+                "{!ex=HOST_ORGANISM,GRAPH_FILTER}" + HOST_ORGANISM_TAXID_STYLED,
                 "{!ex=NEGATIVE_INTERACTION,GRAPH_FILTER}" + NEGATIVE,
                 "{!ex=MUTATION,GRAPH_FILTER}" + DISRUPTED_BY_MUTATION,
+                "{!ex=EXPANSION,GRAPH_FILTER}" + EXPANSION_METHOD_S,
                 "{!ex=MI_SCORE,GRAPH_FILTER}" + INTACT_MISCORE);
         facetOptions.setFacetLimit(FACET_MIN_COUNT);
 
@@ -162,6 +166,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                                                                Set<String> interactionHostOrganismsFilter,
                                                                boolean negativeFilter,
                                                                boolean mutationFilter,
+                                                               boolean expansionFilter,
                                                                double minMiScore,
                                                                double maxMiScore,
                                                                boolean intraSpeciesFilter,
@@ -176,7 +181,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
         // filters
         List<FilterQuery> filterQueries = searchInteractionUtility.createFilterQuery(interactorSpeciesFilter, interactorTypesFilter, interactionDetectionMethodsFilter,
-                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, minMiScore, maxMiScore, intraSpeciesFilter, null, null);
+                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, expansionFilter, minMiScore, maxMiScore, intraSpeciesFilter, null, null);
 
         if (!filterQueries.isEmpty()) {
             for (FilterQuery filterQuery : filterQueries) {
@@ -238,6 +243,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                                                                              Set<String> interactionHostOrganismsFilter,
                                                                              boolean negativeFilter,
                                                                              boolean mutationFilter,
+                                                                             boolean expansionFilter,
                                                                              double minMIScore,
                                                                              double maxMIScore,
                                                                              boolean intraSpeciesFilter,
@@ -252,7 +258,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
         // filters
         List<FilterQuery> filterQueries = searchInteractionUtility.createFilterQuery(interactorSpeciesFilter, interactorTypesFilter, interactionDetectionMethodsFilter,
-                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, minMIScore, maxMIScore, intraSpeciesFilter, null, null);
+                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, expansionFilter, minMIScore, maxMIScore, intraSpeciesFilter, null, null);
 
         if (!filterQueries.isEmpty()) {
             for (FilterQuery filterQuery : filterQueries) {
@@ -327,6 +333,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                                               Set<String> interactionHostOrganismsFilter,
                                               boolean negativeFilter,
                                               boolean mutationFilter,
+                                              boolean expansionFilter,
                                               double minMiScore,
                                               double maxMiScore,
                                               boolean intraSpeciesFilter) {
@@ -340,7 +347,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
         // filters
         List<FilterQuery> filterQueries = searchInteractionUtility.createFilterQuery(interactorSpeciesFilter, interactorTypesFilter, interactionDetectionMethodsFilter,
-                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, minMiScore, maxMiScore, intraSpeciesFilter, null, null);
+                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, expansionFilter, minMiScore, maxMiScore, intraSpeciesFilter, null, null);
 
         if (!filterQueries.isEmpty()) {
             for (FilterQuery filterQuery : filterQueries) {
@@ -362,6 +369,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                                                               Set<String> interactionHostOrganismsFilter,
                                                               boolean negativeFilter,
                                                               boolean mutationFilter,
+                                                              boolean expansionFilter,
                                                               double minMIScore,
                                                               double maxMIScore,
                                                               boolean intraSpeciesFilter,
@@ -379,7 +387,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
         // filters
         List<FilterQuery> filterQueries = searchInteractionUtility.createFilterQuery(interactorSpeciesFilters, interactorTypesFilter, interactionDetectionMethodsFilter,
-                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, minMIScore, maxMIScore, intraSpeciesFilter, binaryInteractionIds, interactorAcs);
+                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, expansionFilter, minMIScore, maxMIScore, intraSpeciesFilter, binaryInteractionIds, interactorAcs);
 
         if (!filterQueries.isEmpty()) {
             for (FilterQuery filterQuery : filterQueries) {
@@ -416,6 +424,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                                        Set<String> interactionHostOrganismsFilter,
                                        boolean negativeFilter,
                                        boolean mutationFilter,
+                                       boolean expansionFilter,
                                        double minMiScore,
                                        double maxMiScore,
                                        boolean intraSpeciesFilter,
@@ -433,7 +442,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
         // filters
         List<FilterQuery> sQueries = searchInteractionUtility.createFilterQuery(interactorSpeciesFilter, interactorTypesFilter, interactionDetectionMethodsFilter,
-                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, minMiScore, maxMiScore, intraSpeciesFilter, binaryInteractionIds,
+                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, expansionFilter, minMiScore, maxMiScore, intraSpeciesFilter, binaryInteractionIds,
                 interactorAcs);
 
         if (!sQueries.isEmpty()) {
@@ -462,8 +471,10 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                                        Set<String> interactionDetectionMethodsFilter,
                                        Set<String> interactionTypesFilter,
                                        Set<String> interactionHostOrganismsFilter,
-                                       boolean isNegatives,
-                                       boolean mutationFilter, double minMIScore,
+                                       boolean negativeFilter,
+                                       boolean mutationFilter,
+                                       boolean expansionFilter,
+                                       double minMIScore,
                                        double maxMIScore,
                                        boolean intraSpeciesFilter,
                                        Set<Long> binaryInteractionIds,
@@ -480,7 +491,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
         // filters
         List<FilterQuery> filterQueries = searchInteractionUtility.createFilterQuery(interactorSpeciesFilter, interactorTypesFilter, interactionDetectionMethodsFilter,
-                interactionTypesFilter, interactionHostOrganismsFilter, isNegatives, mutationFilter, minMIScore, maxMIScore, intraSpeciesFilter, binaryInteractionIds,
+                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, expansionFilter, minMIScore, maxMIScore, intraSpeciesFilter, binaryInteractionIds,
                 interactorAcs);
 
         if (!filterQueries.isEmpty()) {

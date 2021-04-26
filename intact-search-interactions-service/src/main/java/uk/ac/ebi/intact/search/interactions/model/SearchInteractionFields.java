@@ -73,6 +73,7 @@ public class SearchInteractionFields {
     public static final String IDENTIFICATION_METHOD_MI_IDENTIFIERS_B = "identification_method_mi_identifier_B";
 
     public static final String DETECTION_METHOD = "detection_method";
+    // CopyField for faceting
     public static final String DETECTION_METHOD_S = "detection_method_s";
     public static final String DETECTION_METHOD_MI_IDENTIFIER = "detection_method_mi_identifier";
     public static final String PUBLICATION_AUTHORS = "publication_authors";
@@ -84,6 +85,9 @@ public class SearchInteractionFields {
     public static final String CONFIDENCE_VALUES = "confidence_values";
     public static final String INTACT_MISCORE = "intact_miscore";
     public static final String EXPANSION_METHOD = "expansion_method";
+    // CopyField for faceting
+    public static final String EXPANSION_METHOD_S = "expansion_method_s";
+
     public static final String XREFS = "xrefs";
     public static final String ALL_ANNOTATIONS = "all_annotations";
     public static final String ANNOTATIONS = "annotations";
@@ -140,6 +144,9 @@ public class SearchInteractionFields {
     public static final String TYPE_MI_B_STYLED = "type_MI_B_styled";
     // CopyField
     public static final String TYPE_MI_A_B_STYLED = "type_MI_A_B_styled";
+
+    //Host Organism
+    public static final String HOST_ORGANISM_TAXID_STYLED = "host_organism_taxId_styled";
 
 
 }

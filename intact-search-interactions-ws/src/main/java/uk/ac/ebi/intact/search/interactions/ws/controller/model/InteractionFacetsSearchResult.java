@@ -18,6 +18,10 @@ public class InteractionFacetsSearchResult {
         this.page = page;
     }
 
+    public long getTotalElements() {
+        return page.getTotalElements();
+    }
+
     public Collection<Field> getFacetFields() {
         return page.getFacetFields();
     }

@@ -39,24 +39,6 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
         this.solrOperations = solrOperations;
     }
 
-    /**
-     * @param query                             input used to retrieve the interactors contained in the interaction
-     * @param batchSearch                       (optional) true if que query needs to be treated as a batch search
-     * @param interactorSpeciesFilter           (Optional) interactor species of the interaction
-     * @param interactorTypeFilter              (Optional) filter interactions by interactor type
-     * @param interactionDetectionMethodFilter  (Optional) filter interactions by interaction detection method
-     * @param interactionTypeFilter             (Optional) filter interactions by interaction type
-     * @param interactionHostOrganismFilter     (Optional) filter interactions by host organism
-     * @param negativeFilter                    (Optional) filter interactions that are negative if true
-     * @param mutationFilter                    (Optional) Filters interaction that are not affected by mutation
-     * @param minMIScore                        minimum value of mi-score for the interaction
-     * @param maxMIScore                        maximum value of mi-score for the interaction
-     * @param intraSpeciesFilter                boolean to restrict the result ot the same or different interactor species
-     * @param binaryInteractionIds
-     * @param sort                              field to define the sort of the results
-     * @param pageable                          page number and size of the request
-     * @return the interactors matching all the criteria
-     */
     @Override
     public GroupPage<SearchChildInteractor> findChildInteractors(String query,
                                                                  boolean batchSearch,
@@ -67,6 +49,7 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
                                                                  Set<String> interactionHostOrganismFilter,
                                                                  boolean negativeFilter,
                                                                  boolean mutationFilter,
+                                                                 boolean expansionFilter,
                                                                  double minMIScore,
                                                                  double maxMIScore,
                                                                  boolean intraSpeciesFilter,
@@ -76,7 +59,7 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
 
         // filters
         List<FilterQuery> interactionFilterQueries = searchInteractionUtility.createFilterQuery(interactorSpeciesFilter, interactorTypeFilter, interactionDetectionMethodFilter,
-                interactionTypeFilter, interactionHostOrganismFilter, negativeFilter, mutationFilter, minMIScore, maxMIScore, intraSpeciesFilter, binaryInteractionIds, interactorAcs);
+                interactionTypeFilter, interactionHostOrganismFilter, negativeFilter, mutationFilter, expansionFilter, minMIScore, maxMIScore, intraSpeciesFilter, binaryInteractionIds, interactorAcs);
 
         // search query
         SimpleQuery search = new SimpleQuery();
@@ -109,22 +92,6 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
                 (batchSearch ? RequestMethod.POST : RequestMethod.GET));
     }
 
-    /**
-     * @param query                             input used to retrieve the interactors contained in the interaction
-     * @param batchSearch                       (optional) true if que query needs to be treated as a batch search
-     * @param interactorSpeciesFilter           (Optional) interactor species of the interaction
-     * @param interactorTypeFilter              (Optional) filter interactions by interactor type
-     * @param interactionDetectionMethodFilter  (Optional) filter interactions by interaction detection method
-     * @param interactionTypeFilter             (Optional) filter interactions by interaction type
-     * @param interactionHostOrganismFilter     (Optional) filter interactions by host organism
-     * @param negativeFilter                    (Optional) filter interactions that are negative if true
-     * @param mutationFilter                    (Optional) Filters interaction that are not affected by mutation
-     * @param minMIScore                        minimum value of mi-score for the interaction
-     * @param maxMIScore                        maximum value of mi-score for the interaction
-     * @param intraSpeciesFilter                boolean to restrict the result ot the same or different interactor species
-     * @param binaryInteractionIdFilter
-     * @return the number of interactors matching all the criteria
-     */
     // By default the numCount return by solr when group.main=true is the total documents instead of the number of groups.
     // To make the pagination of interactors working we need to ask solr the number of groups for that group.main=false and
     // group.ngroups=true (setTotalCount(true) in spring-data-solr)
@@ -138,6 +105,7 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
                                       Set<String> interactionHostOrganismFilter,
                                       boolean negativeFilter,
                                       boolean mutationFilter,
+                                      boolean expansionFilter,
                                       double minMIScore,
                                       double maxMIScore,
                                       boolean intraSpeciesFilter,
@@ -145,7 +113,7 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
                                       Set<String> interactorAcs) {
         // filters
         List<FilterQuery> interactionFilterQueries = searchInteractionUtility.createFilterQuery(interactorSpeciesFilter, interactorTypeFilter, interactionDetectionMethodFilter,
-                interactionTypeFilter, interactionHostOrganismFilter, negativeFilter, mutationFilter, minMIScore, maxMIScore, intraSpeciesFilter, binaryInteractionIds, interactorAcs);
+                interactionTypeFilter, interactionHostOrganismFilter, negativeFilter, mutationFilter, expansionFilter, minMIScore, maxMIScore, intraSpeciesFilter, binaryInteractionIds, interactorAcs);
 
         // search query
         SimpleQuery search = new SimpleQuery();
