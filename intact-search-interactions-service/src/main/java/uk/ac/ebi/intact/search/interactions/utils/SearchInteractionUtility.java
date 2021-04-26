@@ -142,7 +142,7 @@ public class SearchInteractionUtility {
         createFilterCriteriaForBoolean("{!tag=NEGATIVE_INTERACTION}", negativeFilter, NEGATIVE, filterQueries);
 
         //Mutation filter
-        createFilterCriteriaForBoolean("{!tag=MUTATION}", mutationFilter, DISRUPTED_BY_MUTATION,filterQueries);
+        createFilterCriteriaForBoolean("{!tag=MUTATION}", mutationFilter, AFFECTED_BY_MUTATION,filterQueries);
 
         //Expansion filter
         createExpansionFilterCriteria("{!tag=EXPANSION}", expansionFilter, filterQueries);

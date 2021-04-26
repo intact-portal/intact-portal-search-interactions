@@ -110,7 +110,7 @@ public class SearchInteractionFields {
     public static final String TYPE_MI_A = "type_MI_A";
     public static final String TYPE_MI_B = "type_MI_B";
     public static final String TYPE_A_B_STR = "typeA_B_str";
-    public static final String DISRUPTED_BY_MUTATION = "disrupted_by_mutation";
+    public static final String AFFECTED_BY_MUTATION = "affected_by_mutation";
     public static final String MUTATION_A = "mutation_A";
     public static final String MUTATION_B = "mutation_B";
     public static final String FEATURE_COUNT = "feature_count";

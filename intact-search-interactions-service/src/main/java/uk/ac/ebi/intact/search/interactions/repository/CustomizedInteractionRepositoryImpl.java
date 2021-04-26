@@ -124,7 +124,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                 "{!ex=INTERACTION_TYPE,GRAPH_FILTER}" + TYPE_MI_IDENTIFIER_STYLED,
                 "{!ex=HOST_ORGANISM,GRAPH_FILTER}" + HOST_ORGANISM_TAXID_STYLED,
                 "{!ex=NEGATIVE_INTERACTION,GRAPH_FILTER}" + NEGATIVE,
-                "{!ex=MUTATION,GRAPH_FILTER}" + DISRUPTED_BY_MUTATION,
+                "{!ex=MUTATION,GRAPH_FILTER}" + AFFECTED_BY_MUTATION,
                 "{!ex=EXPANSION,GRAPH_FILTER}" + EXPANSION_METHOD_S,
                 "{!ex=MI_SCORE,GRAPH_FILTER}" + INTACT_MISCORE);
         facetOptions.setFacetLimit(FACET_MIN_COUNT);
@@ -207,7 +207,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         search.addProjectionOnField(new SimpleField(EXPANSION_METHOD));
         search.addProjectionOnField(new SimpleField(INTACT_MISCORE));
         search.addProjectionOnField(new SimpleField(TYPE_MI_IDENTIFIER));
-        search.addProjectionOnField(new SimpleField(DISRUPTED_BY_MUTATION));
+        search.addProjectionOnField(new SimpleField(AFFECTED_BY_MUTATION));
 
         //interactor details
         search.addProjectionOnField(new SimpleField(AC_A));
@@ -298,7 +298,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         search.addProjectionOnField(new SimpleField(EXPANSION_METHOD));
         search.addProjectionOnField(new SimpleField(INTACT_MISCORE));
         search.addProjectionOnField(new SimpleField(TYPE_MI_IDENTIFIER));
-        search.addProjectionOnField(new SimpleField(DISRUPTED_BY_MUTATION));
+        search.addProjectionOnField(new SimpleField(AFFECTED_BY_MUTATION));
 
         //interactor details
         search.addProjectionOnField(new SimpleField(AC_A));

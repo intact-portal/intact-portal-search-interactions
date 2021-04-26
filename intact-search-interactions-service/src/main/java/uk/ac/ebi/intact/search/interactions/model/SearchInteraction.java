@@ -293,8 +293,8 @@ public class SearchInteraction {
     @Field(TYPE_MI_IDENTIFIER)
     private String typeMIIdentifier;
 
-    @Field(DISRUPTED_BY_MUTATION)
-    private boolean disruptedByMutation;
+    @Field(AFFECTED_BY_MUTATION)
+    private boolean affectedByMutation;
 
     @Field(FIRST_AUTHOR)
     private String firstAuthor;
@@ -342,7 +342,7 @@ public class SearchInteraction {
                              Set<String> xrefs, Set<String> allAnnotations, Set<String> annotations,
                              Set<String> parameters, Date creationDate, Date updationDate,
                              Set<String> checksums, boolean negative, String type, String typeMIA, String typeMIB,
-                             String typeMIIdentifier, boolean disruptedByMutation,
+                             String typeMIIdentifier, boolean affectedByMutation,
                              boolean mutationA, boolean mutationB, int binaryInteractionId, String acA, String acB,
                              Integer featureCount, String descriptionA, String descriptionB,
                              List<SearchChildInteractor> searchChildInteractors, String intactNameA, String intactNameB,
@@ -404,7 +404,7 @@ public class SearchInteraction {
         this.typeMIA = typeMIA;
         this.typeMIB = typeMIB;
         this.typeMIIdentifier = typeMIIdentifier;
-        this.disruptedByMutation = disruptedByMutation;
+        this.affectedByMutation = affectedByMutation;
         this.mutationA = mutationA;
         this.mutationB = mutationB;
         this.featureCount = featureCount;
@@ -1125,12 +1125,12 @@ public class SearchInteraction {
         this.typeMIIdentifier = typeMIIdentifier;
     }
 
-    public boolean isDisruptedByMutation() {
-        return disruptedByMutation;
+    public boolean isAffectedByMutation() {
+        return affectedByMutation;
     }
 
-    public void setDisruptedByMutation(boolean disruptedByMutation) {
-        this.disruptedByMutation = disruptedByMutation;
+    public void setAffectedByMutation(boolean affectedByMutation) {
+        this.affectedByMutation = affectedByMutation;
     }
 
     public String getFirstAuthor() {
@@ -1301,7 +1301,7 @@ public class SearchInteraction {
                 ", typeMIA='" + typeMIA + '\'' +
                 ", typeMIB='" + typeMIB + '\'' +
                 ", typeMIIdentifier='" + typeMIIdentifier + '\'' +
-                ", disruptedByMutation=" + disruptedByMutation +
+                ", disruptedByMutation=" + affectedByMutation +
                 ", mutationA=" + mutationA +
                 ", mutationB=" + mutationB +
                 ", searchChildInteractors=" + searchChildInteractors +
