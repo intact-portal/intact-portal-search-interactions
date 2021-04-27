@@ -324,6 +324,9 @@ public class SearchInteraction {
     @Field(HOST_ORGANISM_TAXID_STYLED)
     private String hostOrganismTaxIdStyled;
 
+    @Field(AFFECTED_BY_MUTATION_STYLED)
+    private String affectedByMutationStyled;
+
     @ChildDocument
     private List<SearchChildInteractor> searchChildInteractors;
 
@@ -1203,6 +1206,14 @@ public class SearchInteraction {
 
     public void setHostOrganismTaxIdStyled(String hostOrganismTaxIdStyled) {
         this.hostOrganismTaxIdStyled = hostOrganismTaxIdStyled;
+    }
+
+    public String getAffectedByMutationStyled() {
+        return affectedByMutationStyled;
+    }
+
+    public void setAffectedByMutationStyled(String affectedByMutationStyled) {
+        this.affectedByMutationStyled = affectedByMutationStyled;
     }
 
     public List<SearchChildInteractor> getSearchChildInteractors() {

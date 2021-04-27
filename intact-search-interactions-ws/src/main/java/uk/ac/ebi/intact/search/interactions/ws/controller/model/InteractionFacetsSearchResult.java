@@ -3,6 +3,7 @@ package uk.ac.ebi.intact.search.interactions.ws.controller.model;
 import org.springframework.data.solr.core.query.Field;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
+import org.springframework.data.solr.core.query.result.FacetQueryEntry;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 
 import java.util.*;
@@ -22,10 +23,6 @@ public class InteractionFacetsSearchResult {
         return page.getTotalElements();
     }
 
-    public Collection<Field> getFacetFields() {
-        return page.getFacetFields();
-    }
-
     /**
      * Gives map of facet fields and List of FacetCount,
      * where List of FacetCount contains List of facet field values and their respective counts.
@@ -37,15 +34,15 @@ public class InteractionFacetsSearchResult {
         Map<String, List<FacetCount>> facetPerFieldMap = new HashMap<>();
 
         for (Field field : page.getFacetFields()) {
-            List<FacetCount> facet = new ArrayList<>();
+            List<FacetCount> facets = new ArrayList<>();
             for (FacetFieldEntry facetFieldEntry : page.getFacetResultPage(field).getContent()) {
-                facet.add(new FacetCount<>(facetFieldEntry.getValue(), facetFieldEntry.getValueCount()));
+                facets.add(new FacetCount<>(facetFieldEntry.getValue(), facetFieldEntry.getValueCount()));
             }
-            facetPerFieldMap.put(field.getName(), facet);
+            facetPerFieldMap.put(field.getName(), facets);
         }
 
         //TODO Add testing
-        List<FacetCount> combinedFacet = new ArrayList<>();
+        List<FacetCount> combinedFacets = new ArrayList<>();
         for (FacetFieldEntry interSpeciesEntry : page.getFacetResultPage(TAX_ID_A_B_STYLED).getContent()) {
             String interSpeciesEntryValue = interSpeciesEntry.getValue();
 
@@ -58,10 +55,26 @@ public class InteractionFacetsSearchResult {
                 }
             }
 
-            combinedFacet.add(new FacetCount<>(interSpeciesEntry.getValue(), speciesCount));
+            combinedFacets.add(new FacetCount<>(interSpeciesEntry.getValue(), speciesCount));
         }
 
-        facetPerFieldMap.put("combined_species", combinedFacet);
+        facetPerFieldMap.put("combined_species", combinedFacets);
+
+        // Expansion method query facet
+        //TODO Add testing
+        List<FacetCount> facets = new ArrayList<>();
+
+        for (FacetQueryEntry facetQueryEntry : page.getFacetQueryResult().getContent()) {
+
+            if (facetQueryEntry.getKey().equalsIgnoreCase("expansion_true")) {
+                facets.add(new FacetCount<>("true", facetQueryEntry.getValueCount())); //801
+            }
+            if (facetQueryEntry.getKey().equalsIgnoreCase("expansion_false")) {
+                facets.add(new FacetCount<>("false", facetQueryEntry.getValueCount())); //733
+            }
+        }
+        facetPerFieldMap.put("expansion_method_s", facets);
+
 
         return facetPerFieldMap;
     }

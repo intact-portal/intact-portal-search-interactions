@@ -145,8 +145,9 @@ public class SearchInteractionFields {
     // CopyField
     public static final String TYPE_MI_A_B_STYLED = "type_MI_A_B_styled";
 
-    //Host Organism
+    // Host Organism
     public static final String HOST_ORGANISM_TAXID_STYLED = "host_organism_taxId_styled";
 
-
+    // Affected by mutation
+    public static final String AFFECTED_BY_MUTATION_STYLED = "affected_by_mutation_styled";
 }
