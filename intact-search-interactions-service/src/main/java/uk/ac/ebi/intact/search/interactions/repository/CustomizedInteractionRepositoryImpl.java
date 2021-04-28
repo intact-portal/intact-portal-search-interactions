@@ -125,7 +125,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                 "{!ex=INTERACTION_TYPE,GRAPH_FILTER}" + TYPE_MI_IDENTIFIER_STYLED,
                 "{!ex=HOST_ORGANISM,GRAPH_FILTER}" + HOST_ORGANISM_TAXID_STYLED,
                 "{!ex=NEGATIVE_INTERACTION,GRAPH_FILTER}" + NEGATIVE,
-                "{!ex=MUTATION,GRAPH_FILTER}" + AFFECTED_BY_MUTATION,
+                "{!ex=MUTATION,GRAPH_FILTER}" + AFFECTED_BY_MUTATION_STYLED,
                 "{!ex=MI_SCORE,GRAPH_FILTER}" + INTACT_MISCORE);
 
         facetOptions.addFacetQuery(new SimpleFacetQuery(new Criteria("{!ex=EXPANSION,GRAPH_FILTER key=expansion_true} -" + EXPANSION_METHOD_S).is("spoke expansion")));

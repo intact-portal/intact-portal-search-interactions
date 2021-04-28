@@ -216,15 +216,22 @@ public class SearchInteractionUtility {
     //               if true it creates 'or' condition between set of species
     // Adds tags in solr to allow calculate properly the facets for multiselection in species and interactor type
     private void createInteractorSpeciesFilterCriteria(Set<String> species, boolean intraSpeciesFilter, List<FilterQuery> filterQueries) {
+        Criteria conditions = null;
 
         if (species != null && !species.isEmpty()) {
-            Criteria conditions;
             if (!intraSpeciesFilter) {
                 conditions = new Criteria("{!tag=SPECIES}" + SPECIES_A_B_STR).in(species);
                 conditions.isOr();
             } else { // Return only interactions from exactly the same species in both interactors.
                 conditions = new Criteria("{!tag=INTRA_SPECIES}" + INTRA_SPECIES).in(species);
             }
+            filterQueries.add(new SimpleFilterQuery(conditions));
+        } else {
+            if (intraSpeciesFilter) {
+                conditions = new Criteria("{!tag=INTRA_SPECIES}" + INTRA_SPECIES).isNotNull();
+            }
+        }
+        if (conditions != null) {
             filterQueries.add(new SimpleFilterQuery(conditions));
         }
     }
