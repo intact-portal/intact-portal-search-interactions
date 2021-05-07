@@ -225,7 +225,6 @@ public class SearchInteractionUtility {
             } else { // Return only interactions from exactly the same species in both interactors.
                 conditions = new Criteria("{!tag=INTRA_SPECIES}" + INTRA_SPECIES).in(species);
             }
-            filterQueries.add(new SimpleFilterQuery(conditions));
         } else {
             if (intraSpeciesFilter) {
                 conditions = new Criteria("{!tag=INTRA_SPECIES}" + INTRA_SPECIES).isNotNull();

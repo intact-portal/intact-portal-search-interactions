@@ -43,10 +43,10 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
     public GroupPage<SearchChildInteractor> findChildInteractors(String query,
                                                                  boolean batchSearch,
                                                                  Set<String> interactorSpeciesFilter,
-                                                                 Set<String> interactorTypeFilter,
-                                                                 Set<String> interactionDetectionMethodFilter,
-                                                                 Set<String> interactionTypeFilter,
-                                                                 Set<String> interactionHostOrganismFilter,
+                                                                 Set<String> interactorTypesFilter,
+                                                                 Set<String> interactionDetectionMethodsFilter,
+                                                                 Set<String> interactionTypesFilter,
+                                                                 Set<String> interactionHostOrganismsFilter,
                                                                  boolean negativeFilter,
                                                                  boolean mutationFilter,
                                                                  boolean expansionFilter,
@@ -58,8 +58,8 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
                                                                  Sort sort, Pageable pageable) {
 
         // filters
-        List<FilterQuery> interactionFilterQueries = searchInteractionUtility.createFilterQuery(interactorSpeciesFilter, interactorTypeFilter, interactionDetectionMethodFilter,
-                interactionTypeFilter, interactionHostOrganismFilter, negativeFilter, mutationFilter, expansionFilter, minMIScore, maxMIScore, intraSpeciesFilter, binaryInteractionIds, interactorAcs);
+        List<FilterQuery> interactionFilterQueries = searchInteractionUtility.createFilterQuery(interactorSpeciesFilter, interactorTypesFilter, interactionDetectionMethodsFilter,
+                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, expansionFilter, minMIScore, maxMIScore, intraSpeciesFilter, binaryInteractionIds, interactorAcs);
 
         // search query
         SimpleQuery search = new SimpleQuery();
