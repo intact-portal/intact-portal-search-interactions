@@ -4,7 +4,7 @@ Web Services for accessing Interaction details from solr index.
 Has Following end points:
 
 * /interactions/findInteractions/queryString
-* /interactions/findInteractionWithFacet/queryString?species=?&interactionTypeFilter=?&detectionMethodFilter=?&hostOrganismFilter=?&isNegativeFilter=?&minMiscore=?&maxMiscore=?&interSpecies=?&page=?&pageSize=?
+* /interactions/findInteractionWithFacet/queryString?species=?&interactionTypesFilter=?&detectionMethods=?&hostOrganisms=?&negativeFilter=?&minMIScore=?&maxMIScore=?&intraSpeciesFilter=?&page=?&pageSize=?
   (all the parameters are optional)
 
 ## Prerequisites

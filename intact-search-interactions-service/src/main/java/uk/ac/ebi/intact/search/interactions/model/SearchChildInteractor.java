@@ -66,6 +66,12 @@ public class SearchChildInteractor {
     @Field(INTERACTOR_FEATURE_SHORTLABELS)
     private Set<String> interactorFeatureShortLabels;
 
+    /* Fields related with the styling of the network and other visual components */
+    @Field(INTERACTOR_TAX_ID_STYLED)
+    private String interactorTaxIdStyled;
+
+    @Field(INTERACTOR_TYPE_MI_IDENTIFIER_STYLED)
+    private String interactorTypeMIIdentifierStyled;
 
     /**
      * This field is not part of the solr doc.
@@ -238,6 +244,22 @@ public class SearchChildInteractor {
 
     public void setInteractorFeatureShortLabels(Set<String> interactorFeatureShortLabels) {
         this.interactorFeatureShortLabels = interactorFeatureShortLabels;
+    }
+
+    public String getInteractorTaxIdStyled() {
+        return interactorTaxIdStyled;
+    }
+
+    public void setInteractorTaxIdStyled(String interactorTaxIdStyled) {
+        this.interactorTaxIdStyled = interactorTaxIdStyled;
+    }
+
+    public String getInteractorTypeMIIdentifierStyled() {
+        return interactorTypeMIIdentifierStyled;
+    }
+
+    public void setInteractorTypeMIIdentifierStyled(String interactorTypeMIIdentifierStyled) {
+        this.interactorTypeMIIdentifierStyled = interactorTypeMIIdentifierStyled;
     }
 
     @Override

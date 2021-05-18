@@ -10,7 +10,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-import static uk.ac.ebi.intact.search.interactions.model.SearchChildInteractorFields.DOCUMENT_TYPE;
 import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields.*;
 
 /**
@@ -28,23 +27,50 @@ public class SearchInteraction {
 
     @Field(BINARY_INTERACTION_ID)
     @Indexed
-    private int binaryInteractionId;
+    private long binaryInteractionId;
 
     @Field(DOCUMENT_TYPE)
     private String documentType;
 
-    //TODO Do we need idA and idB or ar the same than acA acB?
+    //Stores preferred identifier + database e.g "O95644 (uniprotkb)"
     @Field(ID_A)
     private String idA;
 
+    //Stores preferred identifier + database e.g "Q8WXI9 (uniprotkb)"
     @Field(ID_B)
     private String idB;
 
+    //Stores IntAct accession: "EBI-6907210"
     @Field(AC_A)
     private String acA;
 
+    //Stores IntAct accession: "EBI-923440"
     @Field(AC_B)
     private String acB;
+
+    @Field(UNIQUE_ID_A)
+    private String uniqueIdA;
+
+    @Field(UNIQUE_ID_B)
+    private String uniqueIdB;
+
+    @Field(MOLECULE_A)
+    private String moleculeA;
+
+    @Field(MOLECULE_B)
+    private String moleculeB;
+
+    @Field(INTACT_NAME_A)
+    private String intactNameA;
+
+    @Field(INTACT_NAME_B)
+    private String intactNameB;
+
+    @Field(MUTATION_A)
+    private boolean mutationA;
+
+    @Field(MUTATION_B)
+    private boolean mutationB;
 
     @Field(ALT_IDS_A)
     private Set<String> altIdsA;
@@ -64,6 +90,9 @@ public class SearchInteraction {
     @Field(TAX_IDB)
     private Integer taxIdB;
 
+    @Field(INTRA_TAX_ID)
+    private Integer intraTaxId;
+
     @Field(DESCRIPTION_A)
     private String descriptionA;
 
@@ -75,6 +104,12 @@ public class SearchInteraction {
 
     @Field(TYPE_B)
     private String typeB;
+
+    @Field(TYPE_MI_A)
+    private String typeMIA;
+
+    @Field(TYPE_MI_B)
+    private String typeMIB;
 
     @Field(XREFS_A)
     private Set<String> xrefsA;
@@ -99,6 +134,9 @@ public class SearchInteraction {
 
     @Field(SPECIES_B)
     private String speciesB;
+
+    @Field(INTRA_SPECIES)
+    private String intraSpecies;
 
     //participants
 
@@ -127,16 +165,16 @@ public class SearchInteraction {
     private String experimentalRoleMIIdentifierB;
 
     @Field(FEATURE_A)
-    private Set<String> featureA;
+    private Set<String> featuresA;
 
     @Field(FEATURE_B)
-    private Set<String> featureB;
+    private Set<String> featuresB;
 
     @Field(FEATURE_SHORTLABEL_A)
-    private Set<String> featureShortLabelA;
+    private Set<String> featureShortLabelsA;
 
     @Field(FEATURE_SHORTLABEL_B)
-    private Set<String> featureShortLabelB;
+    private Set<String> featureShortLabelsB;
 
     @Field(FEATURE_TYPE_A)
     private Set<String> featureTypesA;
@@ -159,18 +197,25 @@ public class SearchInteraction {
     @Field(STOICHIOMETRY_B)
     private String stoichiometryB;
 
-    @Field(IDENTIFICATION_METHOD_A)
-    private Set<String> identificationMethodA;
+    @Field(IDENTIFICATION_METHODS_A)
+    private Set<String> identificationMethodsA;
 
-    @Field(IDENTIFICATION_METHOD_B)
-    private Set<String> identificationMethodB;
+    @Field(IDENTIFICATION_METHODS_B)
+    private Set<String> identificationMethodsB;
 
-    @Field(IDENTIFICATION_METHOD_MI_IDENTIFIER_A)
-    private Set<String> identificationMethodMIIdentifierA;
+    @Field(IDENTIFICATION_METHOD_MI_IDENTIFIERS_A)
+    private Set<String> identificationMethodMIIdentifiersA;
 
-    @Field(IDENTIFICATION_METHOD_MI_IDENTIFIER_B)
-    private Set<String> identificationMethodMIIdentifierB;
+    @Field(IDENTIFICATION_METHOD_MI_IDENTIFIERS_B)
+    private Set<String> identificationMethodMIIdentifiersB;
 
+    @Field(EXPERIMENTAL_PREPARATIONS_A)
+    private Set<String> experimentalPreparationsA;
+
+    @Field(EXPERIMENTAL_PREPARATIONS_B)
+    private Set<String> experimentalPreparationsB;
+
+   // Interaction
     @Field(DETECTION_METHOD)
     private String detectionMethod;
 
@@ -214,7 +259,7 @@ public class SearchInteraction {
     @Field(UPDATION_DATE)
     private Date updationDate;
 
-    @Field(CHECKSUM)
+    @Field(CHECKSUMS)
     private Set<String> checksums;
 
     @Field(NEGATIVE)
@@ -232,36 +277,6 @@ public class SearchInteraction {
     @Field(INTACT_MISCORE)
     private double intactMiscore;
 
-    @Field(MOLECULE_A)
-    private String moleculeA;
-
-    @Field(MOLECULE_B)
-    private String moleculeB;
-
-    @Field(INTACT_NAME_A)
-    private String intactNameA;
-
-    @Field(INTACT_NAME_B)
-    private String intactNameB;
-
-    @Field(FIRST_AUTHOR)
-    private String firstAuthor;
-
-    @Field(EXPERIMENTAL_PREPARATIONS_A)
-    private Set<String> experimentalPreparationsA;
-
-    @Field(EXPERIMENTAL_PREPARATIONS_B)
-    private Set<String> experimentalPreparationsB;
-
-    @Field(RELEASE_DATE)
-    private Date releaseDate;
-
-    @Field(UNIQUE_ID_A)
-    private String uniqueIdA;
-
-    @Field(UNIQUE_ID_B)
-    private String uniqueIdB;
-
     @Field(PUBLICATION_IDENTIFIERS)
     private Set<String> publicationIdentifiers;
 
@@ -275,23 +290,42 @@ public class SearchInteraction {
     @Field(COUNT)
     private Integer count;
 
-    @Field(TYPE_MI_A)
-    private String typeMIA;
-
-    @Field(TYPE_MI_B)
-    private String typeMIB;
-
     @Field(TYPE_MI_IDENTIFIER)
     private String typeMIIdentifier;
 
-    @Field(DISRUPTED_BY_MUTATION)
-    private boolean disruptedByMutation;
+    @Field(AFFECTED_BY_MUTATION)
+    private boolean affectedByMutation;
 
-    @Field(MUTATION_A)
-    private boolean mutationA;
+    @Field(FIRST_AUTHOR)
+    private String firstAuthor;
 
-    @Field(MUTATION_B)
-    private boolean mutationB;
+    @Field(RELEASE_DATE)
+    private Date releaseDate;
+
+    /* Fields related with the styling of the network and other visual components */
+    @Field(INTRA_TAX_ID_STYLED)
+    private String intraTaxIdStyled;
+
+    @Field(TAX_IDA_STYLED)
+    private String taxIdAStyled;
+
+    @Field(TAX_IDB_STYLED)
+    private String taxIdBStyled;
+
+    @Field(TYPE_MI_IDENTIFIER_STYLED)
+    private String typeMIIdentifierStyled;
+
+    @Field(TYPE_MI_A_STYLED)
+    private String typeMIAStyled;
+
+    @Field(TYPE_MI_B_STYLED)
+    private String typeMIBStyled;
+
+    @Field(HOST_ORGANISM_TAXID_STYLED)
+    private String hostOrganismTaxIdStyled;
+
+    @Field(AFFECTED_BY_MUTATION_STYLED)
+    private String affectedByMutationStyled;
 
     @ChildDocument
     private List<SearchChildInteractor> searchChildInteractors;
@@ -304,20 +338,20 @@ public class SearchInteraction {
                              String typeB, Set<String> xrefsA, Set<String> xrefsB, Set<String> annotationsA,
                              Set<String> annotationsB, Set<String> checksumsA, Set<String> checksumsB, String speciesA,
                              String speciesB, String biologicalRoleA, String biologicalRoleB, String experimentalRoleA,
-                             String experimentalRoleB, Set<String> featureA, Set<String> featureB, String stoichiometryA,
-                             String stoichiometryB, Set<String> identificationMethodA, Set<String> identificationMethodB,
+                             String experimentalRoleB, Set<String> featuresA, Set<String> featuresB, String stoichiometryA,
+                             String stoichiometryB, Set<String> identificationMethodsA, Set<String> identificationMethodB,
                              String detectionMethod, Set<String> authors, String sourceDatabase,
                              Set<String> identifiers, Set<String> confidenceValues, String expansionMethod,
                              Set<String> xrefs, Set<String> allAnnotations, Set<String> annotations,
                              Set<String> parameters, Date creationDate, Date updationDate,
                              Set<String> checksums, boolean negative, String type, String typeMIA, String typeMIB,
-                             String typeMIIdentifier, boolean disruptedByMutation,
+                             String typeMIIdentifier, boolean affectedByMutation,
                              boolean mutationA, boolean mutationB, int binaryInteractionId, String acA, String acB,
                              Integer featureCount, String descriptionA, String descriptionB,
                              List<SearchChildInteractor> searchChildInteractors, String intactNameA, String intactNameB,
                              String publicationPubmedIdentifier, Set<String> featureTypesA, Set<String> featureTypesB,
                              Set<String> parameterTypes, String detectionMethodMIIdentifier,
-                             Set<String> identificationMethodMIIdentifierA, Set<String> identificationMethodMIIdentifierB,
+                             Set<String> identificationMethodMIIdentifiersA, Set<String> identificationMethodMIIdentifiersB,
                              String biologicalRoleMIIdentifierA, String biologicalRoleMIIdentifierB, String experimentalRoleMIIdentifierA,
                              String experimentalRoleMIIdentifierB, Set<String> featureRangesA, Set<String> featureRangesB,
                              Set<String> publicationAnnotations, Integer hostOrganismTaxId, String documentType) {
@@ -346,14 +380,14 @@ public class SearchInteraction {
         this.biologicalRoleB = biologicalRoleB;
         this.experimentalRoleA = experimentalRoleA;
         this.experimentalRoleB = experimentalRoleB;
-        this.featureA = featureA;
-        this.featureB = featureB;
+        this.featuresA = featuresA;
+        this.featuresB = featuresB;
         this.stoichiometryA = stoichiometryA;
         this.stoichiometryB = stoichiometryB;
-        this.identificationMethodA = identificationMethodA;
-        this.identificationMethodB = identificationMethodB;
-        this.identificationMethodMIIdentifierA = identificationMethodMIIdentifierA;
-        this.identificationMethodMIIdentifierB = identificationMethodMIIdentifierB;
+        this.identificationMethodsA = identificationMethodsA;
+        this.identificationMethodsB = identificationMethodB;
+        this.identificationMethodMIIdentifiersA = identificationMethodMIIdentifiersA;
+        this.identificationMethodMIIdentifiersB = identificationMethodMIIdentifiersB;
         this.detectionMethod = detectionMethod;
         this.detectionMethodMIIdentifier = detectionMethodMIIdentifier;
         this.authors = authors;
@@ -373,7 +407,7 @@ public class SearchInteraction {
         this.typeMIA = typeMIA;
         this.typeMIB = typeMIB;
         this.typeMIIdentifier = typeMIIdentifier;
-        this.disruptedByMutation = disruptedByMutation;
+        this.affectedByMutation = affectedByMutation;
         this.mutationA = mutationA;
         this.mutationB = mutationB;
         this.featureCount = featureCount;
@@ -398,124 +432,20 @@ public class SearchInteraction {
         this.documentType = documentType;
     }
 
-    public Integer getHostOrganismTaxId() {
-        return hostOrganismTaxId;
+    public String getAc() {
+        return ac;
     }
 
-    public void setHostOrganismTaxId(Integer hostOrganismTaxId) {
-        this.hostOrganismTaxId = hostOrganismTaxId;
+    public void setAc(String ac) {
+        this.ac = ac;
     }
 
-    public Set<String> getFeatureRangesA() {
-        return featureRangesA;
+    public long getBinaryInteractionId() {
+        return binaryInteractionId;
     }
 
-    public void setFeatureRangesA(Set<String> featureRangesA) {
-        this.featureRangesA = featureRangesA;
-    }
-
-    public Set<String> getFeatureRangesB() {
-        return featureRangesB;
-    }
-
-    public void setFeatureRangesB(Set<String> featureRangesB) {
-        this.featureRangesB = featureRangesB;
-    }
-
-    public Set<String> getPublicationAnnotations() {
-        return publicationAnnotations;
-    }
-
-    public void setPublicationAnnotations(Set<String> publicationAnnotations) {
-        this.publicationAnnotations = publicationAnnotations;
-    }
-
-    public String getBiologicalRoleMIIdentifierA() {
-        return biologicalRoleMIIdentifierA;
-    }
-
-    public void setBiologicalRoleMIIdentifierA(String biologicalRoleMIIdentifierA) {
-        this.biologicalRoleMIIdentifierA = biologicalRoleMIIdentifierA;
-    }
-
-    public String getBiologicalRoleMIIdentifierB() {
-        return biologicalRoleMIIdentifierB;
-    }
-
-    public void setBiologicalRoleMIIdentifierB(String biologicalRoleMIIdentifierB) {
-        this.biologicalRoleMIIdentifierB = biologicalRoleMIIdentifierB;
-    }
-
-    public String getExperimentalRoleMIIdentifierA() {
-        return experimentalRoleMIIdentifierA;
-    }
-
-    public void setExperimentalRoleMIIdentifierA(String experimentalRoleMIIdentifierA) {
-        this.experimentalRoleMIIdentifierA = experimentalRoleMIIdentifierA;
-    }
-
-    public String getExperimentalRoleMIIdentifierB() {
-        return experimentalRoleMIIdentifierB;
-    }
-
-    public void setExperimentalRoleMIIdentifierB(String experimentalRoleMIIdentifierB) {
-        this.experimentalRoleMIIdentifierB = experimentalRoleMIIdentifierB;
-    }
-
-    public Set<String> getIdentificationMethodMIIdentifierA() {
-        return identificationMethodMIIdentifierA;
-    }
-
-    public void setIdentificationMethodMIIdentifierA(Set<String> identificationMethodMIIdentifierA) {
-        this.identificationMethodMIIdentifierA = identificationMethodMIIdentifierA;
-    }
-
-    public Set<String> getIdentificationMethodMIIdentifierB() {
-        return identificationMethodMIIdentifierB;
-    }
-
-    public void setIdentificationMethodMIIdentifierB(Set<String> identificationMethodMIIdentifierB) {
-        this.identificationMethodMIIdentifierB = identificationMethodMIIdentifierB;
-    }
-
-    public String getDetectionMethodMIIdentifier() {
-        return detectionMethodMIIdentifier;
-    }
-
-    public void setDetectionMethodMIIdentifier(String detectionMethodMIIdentifier) {
-        this.detectionMethodMIIdentifier = detectionMethodMIIdentifier;
-    }
-
-    public Set<String> getFeatureTypesA() {
-        return featureTypesA;
-    }
-
-    public void setFeatureTypesA(Set<String> featureTypesA) {
-        this.featureTypesA = featureTypesA;
-    }
-
-    public Set<String> getFeatureTypesB() {
-        return featureTypesB;
-    }
-
-    public void setFeatureTypesB(Set<String> featureTypesB) {
-        this.featureTypesB = featureTypesB;
-    }
-
-    public Set<String> getParameterTypes() {
-        return parameterTypes;
-    }
-
-    public void setParameterTypes(Set<String> parameterTypes) {
-        this.parameterTypes = parameterTypes;
-    }
-
-    public String getPublicationPubmedIdentifier() {
-        return publicationPubmedIdentifier;
-    }
-
-    public void setPublicationPubmedIdentifier(String publicationPubmedIdentifier) {
-        this.publicationPubmedIdentifier = publicationPubmedIdentifier;
+    public void setBinaryInteractionId(long binaryInteractionId) {
+        this.binaryInteractionId = binaryInteractionId;
     }
 
     public String getDocumentType() {
@@ -540,6 +470,86 @@ public class SearchInteraction {
 
     public void setIdB(String idB) {
         this.idB = idB;
+    }
+
+    public String getAcA() {
+        return acA;
+    }
+
+    public void setAcA(String acA) {
+        this.acA = acA;
+    }
+
+    public String getAcB() {
+        return acB;
+    }
+
+    public void setAcB(String acB) {
+        this.acB = acB;
+    }
+
+    public String getUniqueIdA() {
+        return uniqueIdA;
+    }
+
+    public void setUniqueIdA(String uniqueIdA) {
+        this.uniqueIdA = uniqueIdA;
+    }
+
+    public String getUniqueIdB() {
+        return uniqueIdB;
+    }
+
+    public void setUniqueIdB(String uniqueIdB) {
+        this.uniqueIdB = uniqueIdB;
+    }
+
+    public String getMoleculeA() {
+        return moleculeA;
+    }
+
+    public void setMoleculeA(String moleculeA) {
+        this.moleculeA = moleculeA;
+    }
+
+    public String getMoleculeB() {
+        return moleculeB;
+    }
+
+    public void setMoleculeB(String moleculeB) {
+        this.moleculeB = moleculeB;
+    }
+
+    public String getIntactNameA() {
+        return intactNameA;
+    }
+
+    public void setIntactNameA(String intactNameA) {
+        this.intactNameA = intactNameA;
+    }
+
+    public String getIntactNameB() {
+        return intactNameB;
+    }
+
+    public void setIntactNameB(String intactNameB) {
+        this.intactNameB = intactNameB;
+    }
+
+    public boolean isMutationA() {
+        return mutationA;
+    }
+
+    public void setMutationA(boolean mutationA) {
+        this.mutationA = mutationA;
+    }
+
+    public boolean isMutationB() {
+        return mutationB;
+    }
+
+    public void setMutationB(boolean mutationB) {
+        this.mutationB = mutationB;
     }
 
     public Set<String> getAltIdsA() {
@@ -590,6 +600,14 @@ public class SearchInteraction {
         this.taxIdB = taxIdB;
     }
 
+    public Integer getIntraTaxId() {
+        return intraTaxId;
+    }
+
+    public void setIntraTaxId(Integer intraTaxId) {
+        this.intraTaxId = intraTaxId;
+    }
+
     public String getDescriptionA() {
         return descriptionA;
     }
@@ -620,6 +638,22 @@ public class SearchInteraction {
 
     public void setTypeB(String typeB) {
         this.typeB = typeB;
+    }
+
+    public String getTypeMIA() {
+        return typeMIA;
+    }
+
+    public void setTypeMIA(String typeMIA) {
+        this.typeMIA = typeMIA;
+    }
+
+    public String getTypeMIB() {
+        return typeMIB;
+    }
+
+    public void setTypeMIB(String typeMIB) {
+        this.typeMIB = typeMIB;
     }
 
     public Set<String> getXrefsA() {
@@ -686,6 +720,14 @@ public class SearchInteraction {
         this.speciesB = speciesB;
     }
 
+    public String getIntraSpecies() {
+        return intraSpecies;
+    }
+
+    public void setIntraSpecies(String intraSpecies) {
+        this.intraSpecies = intraSpecies;
+    }
+
     public String getBiologicalRoleA() {
         return biologicalRoleA;
     }
@@ -718,6 +760,110 @@ public class SearchInteraction {
         this.experimentalRoleB = experimentalRoleB;
     }
 
+    public String getBiologicalRoleMIIdentifierA() {
+        return biologicalRoleMIIdentifierA;
+    }
+
+    public void setBiologicalRoleMIIdentifierA(String biologicalRoleMIIdentifierA) {
+        this.biologicalRoleMIIdentifierA = biologicalRoleMIIdentifierA;
+    }
+
+    public String getBiologicalRoleMIIdentifierB() {
+        return biologicalRoleMIIdentifierB;
+    }
+
+    public void setBiologicalRoleMIIdentifierB(String biologicalRoleMIIdentifierB) {
+        this.biologicalRoleMIIdentifierB = biologicalRoleMIIdentifierB;
+    }
+
+    public String getExperimentalRoleMIIdentifierA() {
+        return experimentalRoleMIIdentifierA;
+    }
+
+    public void setExperimentalRoleMIIdentifierA(String experimentalRoleMIIdentifierA) {
+        this.experimentalRoleMIIdentifierA = experimentalRoleMIIdentifierA;
+    }
+
+    public String getExperimentalRoleMIIdentifierB() {
+        return experimentalRoleMIIdentifierB;
+    }
+
+    public void setExperimentalRoleMIIdentifierB(String experimentalRoleMIIdentifierB) {
+        this.experimentalRoleMIIdentifierB = experimentalRoleMIIdentifierB;
+    }
+
+    public Set<String> getFeaturesA() {
+        return featuresA;
+    }
+
+    public void setFeaturesA(Set<String> featuresA) {
+        this.featuresA = featuresA;
+    }
+
+    public Set<String> getFeaturesB() {
+        return featuresB;
+    }
+
+    public void setFeaturesB(Set<String> featuresB) {
+        this.featuresB = featuresB;
+    }
+
+    public Set<String> getFeatureShortLabelsA() {
+        return featureShortLabelsA;
+    }
+
+    public void setFeatureShortLabelsA(Set<String> featureShortLabelsA) {
+        this.featureShortLabelsA = featureShortLabelsA;
+    }
+
+    public Set<String> getFeatureShortLabelsB() {
+        return featureShortLabelsB;
+    }
+
+    public void setFeatureShortLabelsB(Set<String> featureShortLabelsB) {
+        this.featureShortLabelsB = featureShortLabelsB;
+    }
+
+    public Set<String> getFeatureTypesA() {
+        return featureTypesA;
+    }
+
+    public void setFeatureTypesA(Set<String> featureTypesA) {
+        this.featureTypesA = featureTypesA;
+    }
+
+    public Set<String> getFeatureTypesB() {
+        return featureTypesB;
+    }
+
+    public void setFeatureTypesB(Set<String> featureTypesB) {
+        this.featureTypesB = featureTypesB;
+    }
+
+    public Set<String> getFeatureRangesA() {
+        return featureRangesA;
+    }
+
+    public void setFeatureRangesA(Set<String> featureRangesA) {
+        this.featureRangesA = featureRangesA;
+    }
+
+    public Set<String> getFeatureRangesB() {
+        return featureRangesB;
+    }
+
+    public void setFeatureRangesB(Set<String> featureRangesB) {
+        this.featureRangesB = featureRangesB;
+    }
+
+    public Integer getFeatureCount() {
+        return featureCount;
+    }
+
+    public void setFeatureCount(Integer featureCount) {
+        this.featureCount = featureCount;
+    }
+
     public String getStoichiometryA() {
         return stoichiometryA;
     }
@@ -734,36 +880,68 @@ public class SearchInteraction {
         this.stoichiometryB = stoichiometryB;
     }
 
-    public Set<String> getFeatureA() {
-        return featureA;
+    public Set<String> getIdentificationMethodsA() {
+        return identificationMethodsA;
     }
 
-    public void setFeatureA(Set<String> featureA) {
-        this.featureA = featureA;
+    public void setIdentificationMethodsA(Set<String> identificationMethodsA) {
+        this.identificationMethodsA = identificationMethodsA;
     }
 
-    public Set<String> getFeatureB() {
-        return featureB;
+    public Set<String> getIdentificationMethodsB() {
+        return identificationMethodsB;
     }
 
-    public void setFeatureB(Set<String> featureB) {
-        this.featureB = featureB;
+    public void setIdentificationMethodsB(Set<String> identificationMethodsB) {
+        this.identificationMethodsB = identificationMethodsB;
     }
 
-    public Set<String> getIdentificationMethodA() {
-        return identificationMethodA;
+    public Set<String> getIdentificationMethodMIIdentifiersA() {
+        return identificationMethodMIIdentifiersA;
     }
 
-    public void setIdentificationMethodA(Set<String> identificationMethodA) {
-        this.identificationMethodA = identificationMethodA;
+    public void setIdentificationMethodMIIdentifiersA(Set<String> identificationMethodMIIdentifiersA) {
+        this.identificationMethodMIIdentifiersA = identificationMethodMIIdentifiersA;
     }
 
-    public Set<String> getIdentificationMethodB() {
-        return identificationMethodB;
+    public Set<String> getIdentificationMethodMIIdentifiersB() {
+        return identificationMethodMIIdentifiersB;
     }
 
-    public void setIdentificationMethodB(Set<String> identificationMethodB) {
-        this.identificationMethodB = identificationMethodB;
+    public void setIdentificationMethodMIIdentifiersB(Set<String> identificationMethodMIIdentifiersB) {
+        this.identificationMethodMIIdentifiersB = identificationMethodMIIdentifiersB;
+    }
+
+    public Set<String> getExperimentalPreparationsA() {
+        return experimentalPreparationsA;
+    }
+
+    public void setExperimentalPreparationsA(Set<String> experimentalPreparationsA) {
+        this.experimentalPreparationsA = experimentalPreparationsA;
+    }
+
+    public Set<String> getExperimentalPreparationsB() {
+        return experimentalPreparationsB;
+    }
+
+    public void setExperimentalPreparationsB(Set<String> experimentalPreparationsB) {
+        this.experimentalPreparationsB = experimentalPreparationsB;
+    }
+
+    public String getDetectionMethod() {
+        return detectionMethod;
+    }
+
+    public void setDetectionMethod(String detectionMethod) {
+        this.detectionMethod = detectionMethod;
+    }
+
+    public String getDetectionMethodMIIdentifier() {
+        return detectionMethodMIIdentifier;
+    }
+
+    public void setDetectionMethodMIIdentifier(String detectionMethodMIIdentifier) {
+        this.detectionMethodMIIdentifier = detectionMethodMIIdentifier;
     }
 
     public Set<String> getAuthors() {
@@ -772,6 +950,22 @@ public class SearchInteraction {
 
     public void setAuthors(Set<String> authors) {
         this.authors = authors;
+    }
+
+    public String getSourceDatabase() {
+        return sourceDatabase;
+    }
+
+    public void setSourceDatabase(String sourceDatabase) {
+        this.sourceDatabase = sourceDatabase;
+    }
+
+    public Set<String> getIdentifiers() {
+        return identifiers;
+    }
+
+    public void setIdentifiers(Set<String> identifiers) {
+        this.identifiers = identifiers;
     }
 
     public Set<String> getConfidenceValues() {
@@ -790,70 +984,6 @@ public class SearchInteraction {
         this.expansionMethod = expansionMethod;
     }
 
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public Date getUpdationDate() {
-        return updationDate;
-    }
-
-    public void setUpdationDate(Date updationDate) {
-        this.updationDate = updationDate;
-    }
-
-    public boolean isNegative() {
-        return negative;
-    }
-
-    public void setNegative(boolean negative) {
-        this.negative = negative;
-    }
-
-    public String getHostOrganism() {
-        return hostOrganism;
-    }
-
-    public void setHostOrganism(String hostOrganism) {
-        this.hostOrganism = hostOrganism;
-    }
-
-    public double getIntactMiscore() {
-        return intactMiscore;
-    }
-
-    public void setIntactMiscore(double intactMiscore) {
-        this.intactMiscore = intactMiscore;
-    }
-
-    public String getAc() {
-        return ac;
-    }
-
-    public void setAc(String ac) {
-        this.ac = ac;
-    }
-
-    public String getDetectionMethod() {
-        return detectionMethod;
-    }
-
-    public void setDetectionMethod(String detectionMethod) {
-        this.detectionMethod = detectionMethod;
-    }
-
-    public Set<String> getIdentifiers() {
-        return identifiers;
-    }
-
-    public void setIdentifiers(Set<String> identifiers) {
-        this.identifiers = identifiers;
-    }
-
     public Set<String> getXrefs() {
         return xrefs;
     }
@@ -870,12 +1000,44 @@ public class SearchInteraction {
         this.allAnnotations = allAnnotations;
     }
 
+    public Set<String> getAnnotations() {
+        return annotations;
+    }
+
+    public void setAnnotations(Set<String> annotations) {
+        this.annotations = annotations;
+    }
+
     public Set<String> getParameters() {
         return parameters;
     }
 
     public void setParameters(Set<String> parameters) {
         this.parameters = parameters;
+    }
+
+    public Set<String> getParameterTypes() {
+        return parameterTypes;
+    }
+
+    public void setParameterTypes(Set<String> parameterTypes) {
+        this.parameterTypes = parameterTypes;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public Date getUpdationDate() {
+        return updationDate;
+    }
+
+    public void setUpdationDate(Date updationDate) {
+        this.updationDate = updationDate;
     }
 
     public Set<String> getChecksums() {
@@ -886,12 +1048,68 @@ public class SearchInteraction {
         this.checksums = checksums;
     }
 
+    public boolean isNegative() {
+        return negative;
+    }
+
+    public void setNegative(boolean negative) {
+        this.negative = negative;
+    }
+
     public String getType() {
         return type;
     }
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getHostOrganism() {
+        return hostOrganism;
+    }
+
+    public void setHostOrganism(String hostOrganism) {
+        this.hostOrganism = hostOrganism;
+    }
+
+    public Integer getHostOrganismTaxId() {
+        return hostOrganismTaxId;
+    }
+
+    public void setHostOrganismTaxId(Integer hostOrganismTaxId) {
+        this.hostOrganismTaxId = hostOrganismTaxId;
+    }
+
+    public double getIntactMiscore() {
+        return intactMiscore;
+    }
+
+    public void setIntactMiscore(double intactMiscore) {
+        this.intactMiscore = intactMiscore;
+    }
+
+    public Set<String> getPublicationIdentifiers() {
+        return publicationIdentifiers;
+    }
+
+    public void setPublicationIdentifiers(Set<String> publicationIdentifiers) {
+        this.publicationIdentifiers = publicationIdentifiers;
+    }
+
+    public Set<String> getPublicationAnnotations() {
+        return publicationAnnotations;
+    }
+
+    public void setPublicationAnnotations(Set<String> publicationAnnotations) {
+        this.publicationAnnotations = publicationAnnotations;
+    }
+
+    public String getPublicationPubmedIdentifier() {
+        return publicationPubmedIdentifier;
+    }
+
+    public void setPublicationPubmedIdentifier(String publicationPubmedIdentifier) {
+        this.publicationPubmedIdentifier = publicationPubmedIdentifier;
     }
 
     public Integer getCount() {
@@ -910,68 +1128,12 @@ public class SearchInteraction {
         this.typeMIIdentifier = typeMIIdentifier;
     }
 
-    public boolean isDisruptedByMutation() {
-        return disruptedByMutation;
+    public boolean isAffectedByMutation() {
+        return affectedByMutation;
     }
 
-    public void setDisruptedByMutation(boolean disruptedByMutation) {
-        this.disruptedByMutation = disruptedByMutation;
-    }
-
-    public String getAcA() {
-        return acA;
-    }
-
-    public void setAcA(String acA) {
-        this.acA = acA;
-    }
-
-    public String getAcB() {
-        return acB;
-    }
-
-    public void setAcB(String acB) {
-        this.acB = acB;
-    }
-
-    public Set<String> getFeatureShortLabelA() {
-        return featureShortLabelA;
-    }
-
-    public void setFeatureShortLabelA(Set<String> featureShortLabelA) {
-        this.featureShortLabelA = featureShortLabelA;
-    }
-
-    public Set<String> getFeatureShortLabelB() {
-        return featureShortLabelB;
-    }
-
-    public void setFeatureShortLabelB(Set<String> featureShortLabelB) {
-        this.featureShortLabelB = featureShortLabelB;
-    }
-
-    public String getSourceDatabase() {
-        return sourceDatabase;
-    }
-
-    public void setSourceDatabase(String sourceDatabase) {
-        this.sourceDatabase = sourceDatabase;
-    }
-
-    public String getMoleculeA() {
-        return moleculeA;
-    }
-
-    public void setMoleculeA(String moleculeA) {
-        this.moleculeA = moleculeA;
-    }
-
-    public String getMoleculeB() {
-        return moleculeB;
-    }
-
-    public void setMoleculeB(String moleculeB) {
-        this.moleculeB = moleculeB;
+    public void setAffectedByMutation(boolean affectedByMutation) {
+        this.affectedByMutation = affectedByMutation;
     }
 
     public String getFirstAuthor() {
@@ -990,101 +1152,68 @@ public class SearchInteraction {
         this.releaseDate = releaseDate;
     }
 
-    public String getUniqueIdA() {
-        return uniqueIdA;
+    public String getIntraTaxIdStyled() {
+        return intraTaxIdStyled;
     }
 
-    public void setUniqueIdA(String uniqueIdA) {
-        this.uniqueIdA = uniqueIdA;
+    public void setIntraTaxIdStyled(String intraTaxIdStyled) {
+        this.intraTaxIdStyled = intraTaxIdStyled;
     }
 
-    public String getUniqueIdB() {
-        return uniqueIdB;
+    public String getTaxIdAStyled() {
+        return taxIdAStyled;
     }
 
-    public void setUniqueIdB(String uniqueIdB) {
-        this.uniqueIdB = uniqueIdB;
+    public void setTaxIdAStyled(String taxIdAStyled) {
+        this.taxIdAStyled = taxIdAStyled;
     }
 
-    public Set<String> getExperimentalPreparationsB() {
-        return experimentalPreparationsB;
+    public String getTaxIdBStyled() {
+        return taxIdBStyled;
     }
 
-    public void setExperimentalPreparationsB(Set<String> experimentalPreparationsB) {
-        this.experimentalPreparationsB = experimentalPreparationsB;
+    public void setTaxIdBStyled(String taxIdBStyled) {
+        this.taxIdBStyled = taxIdBStyled;
     }
 
-    public Set<String> getExperimentalPreparationsA() {
-        return experimentalPreparationsA;
+    public String getTypeMIIdentifierStyled() {
+        return typeMIIdentifierStyled;
     }
 
-    public void setExperimentalPreparationsA(Set<String> experimentalPreparationsA) {
-        this.experimentalPreparationsA = experimentalPreparationsA;
+    public void setTypeMIIdentifierStyled(String typeMIIdentifierStyled) {
+        this.typeMIIdentifierStyled = typeMIIdentifierStyled;
     }
 
-    public Set<String> getPublicationIdentifiers() {
-        return publicationIdentifiers;
+    public String getTypeMIAStyled() {
+        return typeMIAStyled;
     }
 
-    public void setPublicationIdentifiers(Set<String> publicationIdentifiers) {
-        this.publicationIdentifiers = publicationIdentifiers;
+    public void setTypeMIAStyled(String typeMIAStyled) {
+        this.typeMIAStyled = typeMIAStyled;
     }
 
-
-    public String getTypeMIA() {
-        return typeMIA;
+    public String getTypeMIBStyled() {
+        return typeMIBStyled;
     }
 
-    public void setTypeMIA(String typeMIA) {
-        this.typeMIA = typeMIA;
+    public void setTypeMIBStyled(String typeMIBStyled) {
+        this.typeMIBStyled = typeMIBStyled;
     }
 
-    public String getTypeMIB() {
-        return typeMIB;
+    public String getHostOrganismTaxIdStyled() {
+        return hostOrganismTaxIdStyled;
     }
 
-    public void setTypeMIB(String typeMIB) {
-        this.typeMIB = typeMIB;
+    public void setHostOrganismTaxIdStyled(String hostOrganismTaxIdStyled) {
+        this.hostOrganismTaxIdStyled = hostOrganismTaxIdStyled;
     }
 
-    public boolean isMutationA() {
-        return mutationA;
+    public String getAffectedByMutationStyled() {
+        return affectedByMutationStyled;
     }
 
-    public void setMutationA(boolean mutationA) {
-        this.mutationA = mutationA;
-    }
-
-    public boolean isMutationB() {
-        return mutationB;
-    }
-
-    public void setMutationB(boolean mutationB) {
-        this.mutationB = mutationB;
-    }
-
-    public int getBinaryInteractionId() {
-        return binaryInteractionId;
-    }
-
-    public void setBinaryInteractionId(int binaryInteractionId) {
-        this.binaryInteractionId = binaryInteractionId;
-    }
-
-    public Set<String> getAnnotations() {
-        return annotations;
-    }
-
-    public void setAnnotations(Set<String> annotations) {
-        this.annotations = annotations;
-    }
-
-    public Integer getFeatureCount() {
-        return featureCount;
-    }
-
-    public void setFeatureCount(Integer featureCount) {
-        this.featureCount = featureCount;
+    public void setAffectedByMutationStyled(String affectedByMutationStyled) {
+        this.affectedByMutationStyled = affectedByMutationStyled;
     }
 
     public List<SearchChildInteractor> getSearchChildInteractors() {
@@ -1093,22 +1222,6 @@ public class SearchInteraction {
 
     public void setSearchChildInteractors(List<SearchChildInteractor> searchChildInteractors) {
         this.searchChildInteractors = searchChildInteractors;
-    }
-
-    public String getIntactNameA() {
-        return intactNameA;
-    }
-
-    public void setIntactNameA(String intactNameA) {
-        this.intactNameA = intactNameA;
-    }
-
-    public String getIntactNameB() {
-        return intactNameB;
-    }
-
-    public void setIntactNameB(String intactNameB) {
-        this.intactNameB = intactNameB;
     }
 
     @Override
@@ -1147,10 +1260,10 @@ public class SearchInteraction {
                 ", biologicalRoleMIIdentifierB='" + biologicalRoleMIIdentifierB + '\'' +
                 ", experimentalRoleMIIdentifierA='" + experimentalRoleMIIdentifierA + '\'' +
                 ", experimentalRoleMIIdentifierB='" + experimentalRoleMIIdentifierB + '\'' +
-                ", featureA=" + featureA +
-                ", featureB=" + featureB +
-                ", featureShortLabelA=" + featureShortLabelA +
-                ", featureShortLabelB=" + featureShortLabelB +
+                ", featureA=" + featuresA +
+                ", featureB=" + featuresB +
+                ", featureShortLabelA=" + featureShortLabelsA +
+                ", featureShortLabelB=" + featureShortLabelsB +
                 ", featureTypesA=" + featureTypesA +
                 ", featureTypesB=" + featureTypesB +
                 ", featureRangesA=" + featureRangesA +
@@ -1158,10 +1271,10 @@ public class SearchInteraction {
                 ", featureCount=" + featureCount +
                 ", stoichiometryA='" + stoichiometryA + '\'' +
                 ", stoichiometryB='" + stoichiometryB + '\'' +
-                ", identificationMethodA=" + identificationMethodA +
-                ", identificationMethodB=" + identificationMethodB +
-                ", identificationMethodMIIdentifierA=" + identificationMethodMIIdentifierA +
-                ", identificationMethodMIIdentifierB=" + identificationMethodMIIdentifierB +
+                ", identificationMethodA=" + identificationMethodsA +
+                ", identificationMethodB=" + identificationMethodsB +
+                ", identificationMethodMIIdentifierA=" + identificationMethodMIIdentifiersA +
+                ", identificationMethodMIIdentifierB=" + identificationMethodMIIdentifiersB +
                 ", detectionMethod='" + detectionMethod + '\'' +
                 ", detectionMethodMIIdentifier='" + detectionMethodMIIdentifier + '\'' +
                 ", authors=" + authors +
@@ -1199,7 +1312,7 @@ public class SearchInteraction {
                 ", typeMIA='" + typeMIA + '\'' +
                 ", typeMIB='" + typeMIB + '\'' +
                 ", typeMIIdentifier='" + typeMIIdentifier + '\'' +
-                ", disruptedByMutation=" + disruptedByMutation +
+                ", disruptedByMutation=" + affectedByMutation +
                 ", mutationA=" + mutationA +
                 ", mutationB=" + mutationB +
                 ", searchChildInteractors=" + searchChildInteractors +

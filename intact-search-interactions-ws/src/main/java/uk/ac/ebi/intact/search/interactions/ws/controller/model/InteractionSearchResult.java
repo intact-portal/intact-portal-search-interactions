@@ -11,6 +11,8 @@ import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import java.util.*;
 import java.util.function.Function;
 
+import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields.*;
+
 /**
  * This class has all the methods/utils of a Page and one more customized method getFacetResultPage()
  */
@@ -119,53 +121,30 @@ public class InteractionSearchResult implements Page<SearchInteraction> {
         for (Field field : page.getFacetFields()) {
             List<FacetCount> facet = new ArrayList<>();
             for (FacetFieldEntry facetFieldEntry : page.getFacetResultPage(field).getContent()) {
-                facet.add(new FacetCount(facetFieldEntry.getValue(), facetFieldEntry.getValueCount()));
-            }
-
-            facetPerFieldMap.put(field.getName(), facet);
-        }
-
-        return facetPerFieldMap;
-    }
-
-/*    public Map<String,Map<String,Long>> getFacetResultPage2() {
-        Map<String,Map<String,Long>> facetPerFieldMap = new HashMap<>();
-
-        for (Field field : page.getFacetFields()) {
-            Map<String,Long> facet = new HashMap<>();
-            for (FacetFieldEntry facetFieldEntry : page.getFacetResultPage(field).getContent()) {
-                facet.put(facetFieldEntry.getValue(),facetFieldEntry.getValueCount());
+                facet.add(new FacetCount<>(facetFieldEntry.getValue(), facetFieldEntry.getValueCount()));
             }
             facetPerFieldMap.put(field.getName(), facet);
         }
 
+        //TODO Add testing
+        List<FacetCount> combinedFacet = new ArrayList<>();
+        for (FacetFieldEntry interSpeciesEntry : page.getFacetResultPage(TAX_ID_A_B_STYLED).getContent()) {
+            String interSpeciesEntryValue = interSpeciesEntry.getValue();
+
+            SpeciesCount speciesCount = new SpeciesCount(interSpeciesEntry.getValueCount(), 0L);
+
+            for (FacetFieldEntry facetFieldEntry : page.getFacetResultPage(INTRA_TAX_ID_STYLED).getContent()) {
+                if(facetFieldEntry.getValue().equalsIgnoreCase(interSpeciesEntryValue)){
+                    speciesCount.setIntra(facetFieldEntry.getValueCount());
+                    break;
+                }
+            }
+
+            combinedFacet.add(new FacetCount<>(interSpeciesEntry.getValue(), speciesCount));
+        }
+
+        facetPerFieldMap.put("combined_species", combinedFacet);
+
         return facetPerFieldMap;
-    }*/
-
-    public class FacetCount {
-
-        private String value;
-        private Long valueCount;
-
-        FacetCount(String value, Long valueCount) {
-            this.value = value;
-            this.valueCount = valueCount;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        public void setValue(String value) {
-            this.value = value;
-        }
-
-        public Long getValueCount() {
-            return valueCount;
-        }
-
-        public void setValueCount(Long valueCount) {
-            this.valueCount = valueCount;
-        }
     }
 }

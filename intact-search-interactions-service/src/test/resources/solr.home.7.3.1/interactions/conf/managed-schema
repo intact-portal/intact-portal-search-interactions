@@ -481,7 +481,7 @@
   <field name="annotationsA" type="text_general" multiValued="true"/>
   <field name="annotationsB" type="text_general" multiValued="true"/>
   <field name="author" type="text_general"/>
-  <field name="binary_interaction_id" type="plongs"/>
+  <field name="binary_interaction_id" type="plong"/>
   <field name="biological_role_A" type="text_general"/>
   <field name="biological_role_B" type="text_general"/>
   <field name="biological_role_mi_identifier_A" type="text_general"/>
@@ -489,17 +489,15 @@
   <field name="checksumsA" type="text_general" multiValued="true"/>
   <field name="checksumsB" type="text_general" multiValued="true"/>
   <field name="confidence_values" type="text_general" multiValued="true"/>
-  <field name="count" type="plongs"/>
-  <field name="creation_date" type="pdates"/>
+  <field name="count" type="plong"/>
+  <field name="creation_date" type="pdate"/>
   <field name="default" type="text_en_splitting_tight_ngram" multiValued="true" indexed="true" stored="false"/>
   <field name="description" type="text_general"/>
   <field name="descriptionA" type="text_general"/>
   <field name="descriptionB" type="text_general"/>
   <field name="detection_method" type="text_general"/>
   <field name="detection_method_mi_identifier" type="text_general"/>
-  <field name="disrupted_by_mutation" type="booleans"/>
-  <field name="disrupted_by_mutation_A" type="booleans"/>
-  <field name="disrupted_by_mutation_B" type="booleans"/>
+  <field name="disrupted_by_mutation" type="boolean"/>
   <field name="document_type" type="text_general"/>
   <field name="expansion_method" type="text_general"/>
   <field name="experimental_preparations_A" type="text_general" multiValued="true"/>
@@ -512,14 +510,14 @@
   <field name="feature_B" type="text_general" multiValued="true"/>
   <field name="feature_type_A" type="text_general" multiValued="true" indexed="true" stored="true"/>
   <field name="feature_type_B" type="text_general" multiValued="true" indexed="true" stored="true"/>
-  <field name="feature_count" type="plongs"/>
+  <field name="feature_count" type="plong"/>
   <field name="feature_shortlabel_A" type="text_general" multiValued="true"/>
   <field name="feature_shortlabel_B" type="text_general" multiValued="true"/>
   <field name="feature_ranges_A" type="text_general" multiValued="true"/>
   <field name="feature_ranges_B" type="text_general" multiValued="true"/>
   <field name="first_author" type="text_general"/>
   <field name="host_organism" type="text_general"/>
-  <field name="host_organism_taxId" type="plongs"/>
+  <field name="host_organism_taxId" type="plong"/>
   <field name="id" type="string" multiValued="false" indexed="true" required="true" stored="true"/>
   <field name="idA" type="text_general"/>
   <field name="idB" type="text_general"/>
@@ -528,19 +526,19 @@
   <field name="identification_method_mi_identifier_A" type="text_general" multiValued="true"/>
   <field name="identification_method_mi_identifier_B" type="text_general" multiValued="true"/>
   <field name="identifiers" type="text_general" multiValued="true"/>
-  <field name="intact_miscore" type="pdoubles"/>
-  <field name="interaction_count" type="plongs"/>
+  <field name="intact_miscore" type="pdouble"/>
+  <field name="interaction_count" type="plong"/>
   <!-- interactor_* fields are likely to be only stored, currently we are not using them for searching  -->
   <field name="interactor_alias" type="text_general" multiValued="true"/>
   <field name="interactor_alt_ids" type="text_general" multiValued="true"/>
-  <field name="interactor_default" type="text_general" multiValued="true" indexed="true" stored="true"/>
+  <field name="interactor_default" type="text_general" multiValued="true" indexed="true" stored="false"/>
   <field name="interactor_description" type="text_general"/>
   <field name="interactor_feature_shortlabels" type="text_general" multiValued="true"/>
   <field name="interactor_name" type="text_general"/>
   <field name="interactor_intact_name" type="text_general"/>
   <field name="interactor_preferred_id" type="text_general"/>
   <field name="interactor_species_name" type="text_general"/>
-  <field name="interactor_tax_id" type="plongs"/>
+  <field name="interactor_tax_id" type="plong"/>
   <field name="interactor_type" type="text_general"/>
   <field name="interactor_type_mi_identifier" type="text_general"/>
   <field name="interactor_xrefs" type="text_general" multiValued="true"/>
@@ -548,23 +546,23 @@
   <field name="moleculeB" type="text_general"/>
   <field name="intactNameA" type="text_general"/>
   <field name="intactNameB" type="text_general"/>
-  <field name="mutation_A" type="booleans"/>
-  <field name="mutation_B" type="booleans"/>
-  <field name="negative" type="booleans"/>
+  <field name="mutation_A" type="boolean"/>
+  <field name="mutation_B" type="boolean"/>
+  <field name="negative" type="boolean"/>
   <field name="parameters" type="text_general" multiValued="true"/>
   <field name="parameter_types" type="text_general" multiValued="true" indexed="true" stored="true"/>
   <field name="publication_authors" type="text_general" multiValued="true"/>
   <field name="publication_id" type="text_general"/>
   <field name="publication_identifiers" type="text_general" multiValued="true"/>
   <field name="publication_annotations" type="text_general" multiValued="true"/>
-  <field name="release_date" type="pdates"/>
+  <field name="release_date" type="pdate"/>
   <field name="source_database" type="text_general"/>
   <field name="speciesA" type="text_general"/>
   <field name="speciesB" type="text_general"/>
   <field name="stoichiometry_A" type="text_general"/>
   <field name="stoichiometry_B" type="text_general"/>
-  <field name="taxIdA" type="plongs"/>
-  <field name="taxIdB" type="plongs"/>
+  <field name="taxIdA" type="plong"/>
+  <field name="taxIdB" type="plong"/>
   <field name="type" type="text_general"/>
   <field name="typeA" type="text_general"/>
   <field name="typeB" type="text_general"/>
@@ -574,7 +572,7 @@
   <field name="uniqueIdA" type="text_general"/>
   <field name="uniqueIdB" type="text_general"/>
   <field name="uniqueKey" type="text_general"/>
-  <field name="updation_date" type="pdates"/>
+  <field name="updation_date" type="pdate"/>
   <field name="xrefs" type="text_general" multiValued="true"/>
   <field name="xrefsA" type="text_general" multiValued="true"/>
   <field name="xrefsB" type="text_general" multiValued="true"/>
@@ -667,32 +665,38 @@
   <copyField source="xrefs" dest="interaction_identifiers" maxChars="256"/>
   <copyField source="xrefsA" dest="interactor_identifiers" maxChars="256"/>
   <copyField source="xrefsB" dest="interactor_identifiers" maxChars="256"/>
-  <copyField source="typeA" dest="typeA_str" maxChars="256"/>
-  <copyField source="typeB" dest="typeB_str" maxChars="256"/>
+  <!--  Do we need typeA_s and typeB_s? -->
+  <copyField source="typeA" dest="typeA_s" maxChars="256"/>
+  <copyField source="typeB" dest="typeB_s" maxChars="256"/>
   <copyField source="typeA" dest="typeA_B_str"/>
   <copyField source="typeB" dest="typeA_B_str"/>
-  <copyField source="speciesA" dest="speciesA_str" maxChars="256"/>
-  <copyField source="speciesB" dest="speciesB_str" maxChars="256"/>
+  <copyField source="type_MI_A" dest="type_MI_A_B_str"/>
+  <copyField source="type_MI_B" dest="type_MI_A_B_str"/>
+  <!--  Do we need speciesA_s and speciesB_s? -->
+  <copyField source="speciesA" dest="speciesA_s" maxChars="256"/>
+  <copyField source="speciesB" dest="speciesB_s" maxChars="256"/>
   <copyField source="speciesA" dest="speciesA_B_str"/>
   <copyField source="speciesB" dest="speciesA_B_str"/>
+  <copyField source="taxIdA" dest="taxIdA_B_ls"/>
+  <copyField source="taxIdB" dest="taxIdA_B_ls"/>
   <copyField source="identification_method_A" dest="identification_method_A_str" maxChars="256"/>
-  <copyField source="biological_role_A" dest="biological_role_A_str" maxChars="256"/>
-  <copyField source="experimental_role_A" dest="experimental_role_A_str" maxChars="256"/>
   <copyField source="identification_method_B" dest="identification_method_B_str" maxChars="256"/>
-  <copyField source="experimental_role_B" dest="experimental_role_B_str" maxChars="256"/>
-  <copyField source="biological_role_B" dest="biological_role_B_str" maxChars="256"/>
-  <copyField source="expansion_method" dest="expansion_method_str" maxChars="256"/>
-  <copyField source="host_organism" dest="host_organism_str" maxChars="256"/>
+  <copyField source="biological_role_A" dest="biological_role_A_s" maxChars="256"/>
+  <copyField source="biological_role_B" dest="biological_role_B_s" maxChars="256"/>
+  <copyField source="experimental_role_A" dest="experimental_role_A_s" maxChars="256"/>
+  <copyField source="experimental_role_B" dest="experimental_role_B_s" maxChars="256"/>
+  <copyField source="expansion_method" dest="expansion_method_s" maxChars="256"/>
+  <copyField source="host_organism" dest="host_organism_s" maxChars="256"/>
   <copyField source="publication_authors" dest="publication_authors_str" maxChars="256"/>
   <!-- Check if you need to remove fields from default, like identifiers -->
-  <copyField source="source_database" dest="source_database_str" maxChars="256"/>
-  <copyField source="ac" dest="ac_str" maxChars="256"/>
-  <copyField source="type" dest="type_str" maxChars="256"/>
-  <copyField source="detection_method" dest="detection_method_str" maxChars="256"/>
-  <copyField source="idB" dest="idB_str" maxChars="256"/>
-  <copyField source="idA" dest="idA_str" maxChars="256"/>
-  <copyField source="acA" dest="acA_str" maxChars="256"/>
-  <copyField source="acB" dest="acB_str" maxChars="256"/>
+  <copyField source="source_database" dest="source_database_s" maxChars="256"/>
+  <copyField source="ac" dest="ac_s" maxChars="256"/>
+  <copyField source="type" dest="type_s" maxChars="256"/>
+  <copyField source="detection_method" dest="detection_method_s" maxChars="256"/>
+  <copyField source="idA" dest="idA_s" maxChars="256"/>
+  <copyField source="idB" dest="idB_s" maxChars="256"/>
+  <copyField source="acA" dest="acA_s" maxChars="256"/>
+  <copyField source="acB" dest="acB_s" maxChars="256"/>
 
   <!--copy selected fields into default-->
 

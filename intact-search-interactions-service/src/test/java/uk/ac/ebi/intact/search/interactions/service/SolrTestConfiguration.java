@@ -2,7 +2,6 @@ package uk.ac.ebi.intact.search.interactions.service;
 
 import org.apache.solr.client.solrj.SolrClient;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.solr.core.SolrOperations;
 import org.springframework.data.solr.core.SolrTemplate;
@@ -12,7 +11,6 @@ import org.springframework.data.solr.server.support.EmbeddedSolrServerFactory;
 /**
  * @author Elisabet Barrera
  */
-@TestConfiguration
 @EnableSolrRepositories(basePackages = "uk.ac.ebi.intact.search.interactions.repository",
         schemaCreationSupport = true)
 @SpringBootApplication

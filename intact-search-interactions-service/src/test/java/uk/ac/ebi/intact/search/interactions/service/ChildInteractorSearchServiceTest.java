@@ -72,6 +72,8 @@ public class ChildInteractorSearchServiceTest {
                 null,
                 null,
                 false,
+                false,
+                false,
                 0,
                 1,
                 false,
@@ -92,8 +94,8 @@ public class ChildInteractorSearchServiceTest {
         Set<String> species = new HashSet<>();
         species.add("Homo sapiens");
 
-        Set<String> interactorType = new HashSet<>();
-        interactorType.add("protein");
+        Set<String> interactorTypesFilter = new HashSet<>();
+        interactorTypesFilter.add("protein");
 
         Set<String> detectionMethod = new HashSet<>();
         detectionMethod.add("molecular sieving");
@@ -114,10 +116,12 @@ public class ChildInteractorSearchServiceTest {
                 "physical association",
                 false,
                 species,
-                interactorType,
+                interactorTypesFilter,
                 detectionMethod,
                 interactionType,
                 hostOrganism,
+                false,
+                false,
                 false,
                 minMiscore,
                 maxMiscore,
@@ -133,10 +137,12 @@ public class ChildInteractorSearchServiceTest {
                 "physical association",
                 false,
                 species,
-                interactorType,
+                interactorTypesFilter,
                 detectionMethod,
                 interactionType,
                 hostOrganism,
+                false,
+                false,
                 false,
                 minMiscore,
                 maxMiscore,
@@ -172,6 +178,8 @@ public class ChildInteractorSearchServiceTest {
                 null,
                 null,
                 false,
+                false,
+                false,
                 0,
                 1,
                 false,
@@ -191,6 +199,8 @@ public class ChildInteractorSearchServiceTest {
                 null,
                 null,
                 null,
+                false,
+                false,
                 false,
                 0,
                 1,
@@ -220,6 +230,8 @@ public class ChildInteractorSearchServiceTest {
                 null,
                 null,
                 null,
+                false,
+                false,
                 false,
                 0,
                 1,
@@ -258,6 +270,8 @@ public class ChildInteractorSearchServiceTest {
                 null,
                 null,
                 false,
+                false,
+                false,
                 0,
                 1,
                 false,
@@ -276,6 +290,8 @@ public class ChildInteractorSearchServiceTest {
                 null,
                 null,
                 null,
+                false,
+                false,
                 false,
                 0,
                 1,
@@ -300,6 +316,8 @@ public class ChildInteractorSearchServiceTest {
                 null,
                 null,
                 false,
+                false,
+                false,
                 0,
                 1,
                 false,
@@ -321,6 +339,8 @@ public class ChildInteractorSearchServiceTest {
                 null,
                 null,
                 null,
+                false,
+                false,
                 false,
                 0,
                 1,
@@ -350,6 +370,8 @@ public class ChildInteractorSearchServiceTest {
                 null,
                 null,
                 false,
+                false,
+                false,
                 0,
                 1,
                 false,
@@ -367,6 +389,8 @@ public class ChildInteractorSearchServiceTest {
                 null,
                 null,
                 null,
+                false,
+                false,
                 false,
                 0,
                 1,
@@ -400,9 +424,9 @@ public class ChildInteractorSearchServiceTest {
         Set<String> species = new HashSet<>();
         species.add("Homo sapiens");
 
-        Set<Integer> binaryIds = new HashSet<>();
-        binaryIds.add(10);
-        binaryIds.add(1);
+        Set<Long> binaryIds = new HashSet<>();
+        binaryIds.add(10L);
+        binaryIds.add(1L);
         GroupPage<SearchChildInteractor> interactorOp = childInteractorSearchService.findInteractorsWithGroup(
                 "physical association",
                 false,
@@ -411,6 +435,8 @@ public class ChildInteractorSearchServiceTest {
                 null,
                 null,
                 null,
+                false,
+                false,
                 false,
                 0,
                 1,
@@ -429,6 +455,8 @@ public class ChildInteractorSearchServiceTest {
                 null,
                 null,
                 null,
+                false,
+                false,
                 false,
                 0,
                 1,
@@ -470,6 +498,8 @@ public class ChildInteractorSearchServiceTest {
                 null,
                 null,
                 false,
+                false,
+                false,
                 0,
                 1,
                 false,
@@ -487,6 +517,8 @@ public class ChildInteractorSearchServiceTest {
                 detectionMethods,
                 null,
                 null,
+                false,
+                false,
                 false,
                 0,
                 1,

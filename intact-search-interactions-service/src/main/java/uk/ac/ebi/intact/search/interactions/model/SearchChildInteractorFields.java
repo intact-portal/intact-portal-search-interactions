@@ -35,4 +35,7 @@ public class SearchChildInteractorFields {
 
     public static final String INTERACTOR_FEATURE_SHORTLABELS = "interactor_feature_shortlabels";
 
+    /* Fields related with the styling of the network and other visual components */
+    public static final String INTERACTOR_TAX_ID_STYLED = "interactor_tax_id_styled";
+    public static final String INTERACTOR_TYPE_MI_IDENTIFIER_STYLED = "interactor_type_mi_identifier_styled";
 }

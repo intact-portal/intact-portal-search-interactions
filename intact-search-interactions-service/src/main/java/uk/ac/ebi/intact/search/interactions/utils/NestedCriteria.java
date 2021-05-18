@@ -29,7 +29,6 @@ public class NestedCriteria extends Criteria implements QueryStringHolder {
         StringBuilder interactionFilterQ = new StringBuilder();
 
         if (!interactionFilterQueries.isEmpty()) {
-            int counter = 1;
             for (FilterQuery interactionFilterQuery : interactionFilterQueries) {
                 String parsedQuery = parser.createQueryStringFromNode(Objects.requireNonNull(interactionFilterQuery.getCriteria()), SearchInteraction.class);
                 // Removes the tags that are needed for the general query.
@@ -41,12 +40,13 @@ public class NestedCriteria extends Criteria implements QueryStringHolder {
                 // &group=true&group.main=true&group.format=grouped&group.field=id&group.limit=1&group.ngroups=false&group.facet=false&group.truncate=false
 
                 parsedQuery = parsedQuery.replaceAll("^\\{.*\\}", "");
-                if (counter == 1) {
-                    interactionFilterQ = new StringBuilder(" +" + "(" + parsedQuery + ")");
+                if (parsedQuery.startsWith("-")) {
+                    //For example expansionFilter
+                    parsedQuery = parsedQuery.replaceFirst("-", "");
+                    interactionFilterQ.append(" -(").append(parsedQuery).append(")");
                 } else {
-                    interactionFilterQ.append(" +").append("(" + parsedQuery + ")");
+                    interactionFilterQ.append(" +(").append(parsedQuery).append(")");
                 }
-                counter++;
             }
         }
         return "{!child of=" + SearchInteractionFields.DOCUMENT_TYPE + ":" + DocumentType.INTERACTION + "}"
