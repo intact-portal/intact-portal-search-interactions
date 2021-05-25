@@ -212,27 +212,27 @@
     </analyzer>
   </fieldType>
   <fieldType name="text_en_splitting_tight_ngram" class="solr.TextField" autoGeneratePhraseQueries="true" positionIncrementGap="100">
-     <analyzer type="index">
-       <tokenizer class="solr.WhitespaceTokenizerFactory"/>
-       <filter class="solr.SynonymGraphFilterFactory" expand="false" ignoreCase="true" synonyms="synonyms.txt"/>
-       <filter class="solr.StopFilterFactory" words="lang/stopwords_en.txt" ignoreCase="true"/>
-       <filter class="solr.WordDelimiterGraphFilterFactory" catenateNumbers="1" generateNumberParts="0" generateWordParts="1" splitOnCaseChange="0" splitOnNumerics="0" preserveOriginal="1" catenateAll="0" catenateWords="1"/>
-       <filter class="solr.LowerCaseFilterFactory"/>
-       <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
-       <filter class="solr.EnglishMinimalStemFilterFactory"/>
-       <filter class="solr.RemoveDuplicatesTokenFilterFactory"/>
-       <filter class="solr.FlattenGraphFilterFactory"/>
-       <filter class="solr.EdgeNGramFilterFactory" maxGramSize="150" minGramSize="1"/>
-     </analyzer>
-     <analyzer type="query">
-       <tokenizer class="solr.WhitespaceTokenizerFactory"/>
-       <filter class="solr.SynonymGraphFilterFactory" expand="false" ignoreCase="true" synonyms="synonyms.txt"/>
-       <filter class="solr.StopFilterFactory" words="lang/stopwords_en.txt" ignoreCase="true"/>
-       <filter class="solr.LowerCaseFilterFactory"/>
-       <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
-       <filter class="solr.EnglishMinimalStemFilterFactory"/>
-       <filter class="solr.RemoveDuplicatesTokenFilterFactory"/>
-     </analyzer>
+    <analyzer type="index">
+      <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+      <filter class="solr.SynonymGraphFilterFactory" expand="false" ignoreCase="true" synonyms="synonyms.txt"/>
+      <filter class="solr.StopFilterFactory" words="lang/stopwords_en.txt" ignoreCase="true"/>
+      <filter class="solr.WordDelimiterGraphFilterFactory" catenateNumbers="1" generateNumberParts="0" splitOnCaseChange="0" generateWordParts="1" splitOnNumerics="0" preserveOriginal="1" catenateAll="0" catenateWords="1"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+      <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
+      <filter class="solr.EnglishMinimalStemFilterFactory"/>
+      <filter class="solr.RemoveDuplicatesTokenFilterFactory"/>
+      <filter class="solr.FlattenGraphFilterFactory"/>
+      <filter class="solr.EdgeNGramFilterFactory" maxGramSize="150" minGramSize="1"/>
+    </analyzer>
+    <analyzer type="query">
+      <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+      <filter class="solr.SynonymGraphFilterFactory" expand="false" ignoreCase="true" synonyms="synonyms.txt"/>
+      <filter class="solr.StopFilterFactory" words="lang/stopwords_en.txt" ignoreCase="true"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+      <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
+      <filter class="solr.EnglishMinimalStemFilterFactory"/>
+      <filter class="solr.RemoveDuplicatesTokenFilterFactory"/>
+    </analyzer>
   </fieldType>
   <fieldType name="text_es" class="solr.TextField" positionIncrementGap="100">
     <analyzer>
@@ -469,9 +469,11 @@
   <field name="_root_" type="string" docValues="false" indexed="true" stored="false"/>
   <field name="_text_" type="text_general" multiValued="true" indexed="true" stored="false"/>
   <field name="_version_" type="plong" indexed="false" stored="false"/>
-  <field name="ac" type="text_general"/>
-  <field name="acA" type="text_general"/>
-  <field name="acB" type="text_general"/>
+  <field name="ac" type="string"/>
+  <field name="acA" type="string"/>
+  <field name="acB" type="string"/>
+  <field name="affected_by_mutation" type="boolean"/>
+  <field name="affected_by_mutation_styled" type="string"/>
   <field name="aliasesA" type="text_general" multiValued="true"/>
   <field name="aliasesB" type="text_general" multiValued="true"/>
   <field name="all_annotations" type="text_general" multiValued="true"/>
@@ -497,7 +499,6 @@
   <field name="descriptionB" type="text_general"/>
   <field name="detection_method" type="text_general"/>
   <field name="detection_method_mi_identifier" type="text_general"/>
-  <field name="disrupted_by_mutation" type="boolean"/>
   <field name="document_type" type="text_general"/>
   <field name="expansion_method" type="text_general"/>
   <field name="experimental_preparations_A" type="text_general" multiValued="true"/>
@@ -508,16 +509,17 @@
   <field name="experimental_role_mi_identifier_B" type="text_general"/>
   <field name="feature_A" type="text_general" multiValued="true"/>
   <field name="feature_B" type="text_general" multiValued="true"/>
-  <field name="feature_type_A" type="text_general" multiValued="true" indexed="true" stored="true"/>
-  <field name="feature_type_B" type="text_general" multiValued="true" indexed="true" stored="true"/>
   <field name="feature_count" type="plong"/>
-  <field name="feature_shortlabel_A" type="text_general" multiValued="true"/>
-  <field name="feature_shortlabel_B" type="text_general" multiValued="true"/>
   <field name="feature_ranges_A" type="text_general" multiValued="true"/>
   <field name="feature_ranges_B" type="text_general" multiValued="true"/>
+  <field name="feature_shortlabel_A" type="text_general" multiValued="true"/>
+  <field name="feature_shortlabel_B" type="text_general" multiValued="true"/>
+  <field name="feature_type_A" type="text_general" multiValued="true" indexed="true" stored="true"/>
+  <field name="feature_type_B" type="text_general" multiValued="true" indexed="true" stored="true"/>
   <field name="first_author" type="text_general"/>
   <field name="host_organism" type="text_general"/>
   <field name="host_organism_taxId" type="plong"/>
+  <field name="host_organism_taxId_styled" type="string"/>
   <field name="id" type="string" multiValued="false" indexed="true" required="true" stored="true"/>
   <field name="idA" type="text_general"/>
   <field name="idB" type="text_general"/>
@@ -526,35 +528,39 @@
   <field name="identification_method_mi_identifier_A" type="text_general" multiValued="true"/>
   <field name="identification_method_mi_identifier_B" type="text_general" multiValued="true"/>
   <field name="identifiers" type="text_general" multiValued="true"/>
+  <field name="intactNameA" type="text_general"/>
+  <field name="intactNameB" type="text_general"/>
   <field name="intact_miscore" type="pdouble"/>
   <field name="interaction_count" type="plong"/>
-  <!-- interactor_* fields are likely to be only stored, currently we are not using them for searching  -->
   <field name="interactor_alias" type="text_general" multiValued="true"/>
   <field name="interactor_alt_ids" type="text_general" multiValued="true"/>
   <field name="interactor_default" type="text_general" multiValued="true" indexed="true" stored="false"/>
   <field name="interactor_description" type="text_general"/>
   <field name="interactor_feature_shortlabels" type="text_general" multiValued="true"/>
-  <field name="interactor_name" type="text_general"/>
   <field name="interactor_intact_name" type="text_general"/>
+  <field name="interactor_name" type="text_general"/>
   <field name="interactor_preferred_id" type="text_general"/>
   <field name="interactor_species_name" type="text_general"/>
   <field name="interactor_tax_id" type="plong"/>
+  <field name="interactor_tax_id_styled" type="string"/>
   <field name="interactor_type" type="text_general"/>
   <field name="interactor_type_mi_identifier" type="text_general"/>
+  <field name="interactor_type_mi_identifier_styled" type="string"/>
   <field name="interactor_xrefs" type="text_general" multiValued="true"/>
+  <field name="intra_species" type="string" indexed="true" stored="true"/>
+  <field name="intra_taxId" type="plong"/>
+  <field name="intra_taxId_styled" type="string"/>
   <field name="moleculeA" type="text_general"/>
   <field name="moleculeB" type="text_general"/>
-  <field name="intactNameA" type="text_general"/>
-  <field name="intactNameB" type="text_general"/>
   <field name="mutation_A" type="boolean"/>
   <field name="mutation_B" type="boolean"/>
   <field name="negative" type="boolean"/>
-  <field name="parameters" type="text_general" multiValued="true"/>
   <field name="parameter_types" type="text_general" multiValued="true" indexed="true" stored="true"/>
-  <field name="publication_authors" type="text_general" multiValued="true"/>
-  <field name="publication_id" type="text_general"/>
-  <field name="publication_identifiers" type="text_general" multiValued="true"/>
+  <field name="parameters" type="text_general" multiValued="true"/>
   <field name="publication_annotations" type="text_general" multiValued="true"/>
+  <field name="publication_authors" type="text_general" multiValued="true"/>
+  <field name="publication_id" type="string"/>
+  <field name="publication_identifiers" type="text_general" multiValued="true"/>
   <field name="release_date" type="pdate"/>
   <field name="source_database" type="text_general"/>
   <field name="speciesA" type="text_general"/>
@@ -562,13 +568,20 @@
   <field name="stoichiometry_A" type="text_general"/>
   <field name="stoichiometry_B" type="text_general"/>
   <field name="taxIdA" type="plong"/>
+  <field name="taxIdA_styled" type="string"/>
   <field name="taxIdB" type="plong"/>
+  <field name="taxIdB_styled" type="string"/>
+  <field name="taxId_A_B_styled" type="strings"/>
   <field name="type" type="text_general"/>
   <field name="typeA" type="text_general"/>
   <field name="typeB" type="text_general"/>
   <field name="type_MI_A" type="text_general"/>
+  <field name="type_MI_A_B_styled" type="strings"/>
+  <field name="type_MI_A_styled" type="string"/>
   <field name="type_MI_B" type="text_general"/>
+  <field name="type_MI_B_styled" type="string"/>
   <field name="type_mi_identifier" type="text_general"/>
+  <field name="type_mi_identifier_styled" type="string"/>
   <field name="uniqueIdA" type="text_general"/>
   <field name="uniqueIdB" type="text_general"/>
   <field name="uniqueKey" type="text_general"/>
@@ -642,14 +655,63 @@
   <dynamicField name="*_f" type="pfloat" indexed="true" stored="true"/>
   <dynamicField name="*_d" type="pdouble" indexed="true" stored="true"/>
   <dynamicField name="*_p" type="location" indexed="true" stored="true"/>
-  <!-- interactor_default can be replace in a query by interactor_identifiers or aliasesA or aliasesB
- and can simplify problems of identifiers with '-' or numbers -->
+  <copyField source="aliasesA" dest="default"/>
   <copyField source="aliasesA" dest="interactor_default"/>
+  <copyField source="aliasesB" dest="default"/>
   <copyField source="aliasesB" dest="interactor_default"/>
+  <copyField source="altIdsA" dest="default"/>
   <copyField source="altIdsA" dest="interactor_default"/>
+  <copyField source="altIdsB" dest="default"/>
   <copyField source="altIdsB" dest="interactor_default"/>
+  <copyField source="descriptionA" dest="default"/>
+  <copyField source="descriptionB" dest="default"/>
+  <copyField source="detection_method" dest="default"/>
+  <copyField source="detection_method_mi_identifier" dest="default"/>
+  <copyField source="feature_ranges_A" dest="default"/>
+  <copyField source="feature_ranges_B" dest="default"/>
+  <copyField source="feature_shortlabel_A" dest="default"/>
+  <copyField source="feature_shortlabel_B" dest="default"/>
+  <copyField source="feature_type_A" dest="default"/>
+  <copyField source="feature_type_B" dest="default"/>
+  <copyField source="first_author" dest="default"/>
+  <copyField source="host_organism" dest="default"/>
+  <copyField source="host_organism_taxId" dest="default"/>
+  <copyField source="idA" dest="default"/>
   <copyField source="idA" dest="interactor_default"/>
+  <copyField source="idB" dest="default"/>
   <copyField source="idB" dest="interactor_default"/>
+  <copyField source="identification_method_A" dest="default"/>
+  <copyField source="identification_method_B" dest="default"/>
+  <copyField source="identification_method_mi_identifier_A" dest="default"/>
+  <copyField source="identification_method_mi_identifier_B" dest="default"/>
+  <copyField source="identifiers" dest="default"/>
+  <copyField source="intactNameA" dest="default"/>
+  <copyField source="intactNameB" dest="default"/>
+  <copyField source="moleculeA" dest="default"/>
+  <copyField source="moleculeB" dest="default"/>
+  <copyField source="parameter_types" dest="default"/>
+  <copyField source="publication_annotations" dest="default"/>
+  <copyField source="publication_authors" dest="default"/>
+  <copyField source="publication_identifiers" dest="default"/>
+  <copyField source="speciesA" dest="default"/>
+  <copyField source="speciesB" dest="default"/>
+  <copyField source="taxIdA" dest="default"/>
+  <copyField source="taxIdA_styled" dest="taxId_A_B_styled"/>
+  <copyField source="taxIdB" dest="default"/>
+  <copyField source="taxIdB_styled" dest="taxId_A_B_styled"/>
+  <copyField source="type" dest="default"/>
+  <copyField source="typeA" dest="default"/>
+  <copyField source="typeB" dest="default"/>
+  <copyField source="type_MI_A" dest="default"/>
+  <copyField source="type_MI_A_styled" dest="type_MI_A_B_styled"/>
+  <copyField source="type_MI_B" dest="default"/>
+  <copyField source="type_MI_B_styled" dest="type_MI_A_B_styled"/>
+  <copyField source="type_mi_identifier" dest="default"/>
+  <copyField source="uniqueIdA" dest="default"/>
+  <copyField source="uniqueIdB" dest="default"/>
+  <copyField source="xrefs" dest="default"/>
+  <copyField source="xrefsA" dest="default"/>
+  <copyField source="xrefsB" dest="default"/>
   <copyField source="ac" dest="interaction_identifiers" maxChars="256"/>
   <copyField source="acA" dest="interactor_identifiers" maxChars="256"/>
   <copyField source="acB" dest="interactor_identifiers" maxChars="256"/>
@@ -665,14 +727,12 @@
   <copyField source="xrefs" dest="interaction_identifiers" maxChars="256"/>
   <copyField source="xrefsA" dest="interactor_identifiers" maxChars="256"/>
   <copyField source="xrefsB" dest="interactor_identifiers" maxChars="256"/>
-  <!--  Do we need typeA_s and typeB_s? -->
   <copyField source="typeA" dest="typeA_s" maxChars="256"/>
   <copyField source="typeB" dest="typeB_s" maxChars="256"/>
   <copyField source="typeA" dest="typeA_B_str"/>
   <copyField source="typeB" dest="typeA_B_str"/>
   <copyField source="type_MI_A" dest="type_MI_A_B_str"/>
   <copyField source="type_MI_B" dest="type_MI_A_B_str"/>
-  <!--  Do we need speciesA_s and speciesB_s? -->
   <copyField source="speciesA" dest="speciesA_s" maxChars="256"/>
   <copyField source="speciesB" dest="speciesB_s" maxChars="256"/>
   <copyField source="speciesA" dest="speciesA_B_str"/>
@@ -688,7 +748,6 @@
   <copyField source="expansion_method" dest="expansion_method_s" maxChars="256"/>
   <copyField source="host_organism" dest="host_organism_s" maxChars="256"/>
   <copyField source="publication_authors" dest="publication_authors_str" maxChars="256"/>
-  <!-- Check if you need to remove fields from default, like identifiers -->
   <copyField source="source_database" dest="source_database_s" maxChars="256"/>
   <copyField source="ac" dest="ac_s" maxChars="256"/>
   <copyField source="type" dest="type_s" maxChars="256"/>
@@ -697,58 +756,4 @@
   <copyField source="idB" dest="idB_s" maxChars="256"/>
   <copyField source="acA" dest="acA_s" maxChars="256"/>
   <copyField source="acB" dest="acB_s" maxChars="256"/>
-
-  <!--copy selected fields into default-->
-
-  <copyField source="moleculeA" dest="default"/>
-  <copyField source="moleculeB" dest="default"/>
-  <copyField source="intactNameA" dest="default"/>
-  <copyField source="intactNameB" dest="default"/>
-  <copyField source="altIdsA" dest="default" />
-  <copyField source="altIdsB" dest="default" />
-  <copyField source="idA" dest="default" />
-  <copyField source="idB" dest="default" />
-  <copyField source="identifiers" dest="default" />
-  <copyField source="publication_identifiers" dest="default" />
-  <copyField source="uniqueIdA" dest="default" />
-  <copyField source="uniqueIdB" dest="default" />
-  <copyField source="xrefs" dest="default" />
-  <copyField source="xrefsA" dest="default" />
-  <copyField source="xrefsB" dest="default" />
-  <copyField source="aliasesA" dest="default"/>
-  <copyField source="aliasesB" dest="default"/>
-  <copyField source="detection_method" dest="default"/>
-  <copyField source="detection_method_mi_identifier" dest="default"/>
-  <copyField source="identification_method_A" dest="default" />
-  <copyField source="identification_method_B" dest="default" />
-  <copyField source="identification_method_mi_identifier_A" dest="default" />
-  <copyField source="identification_method_mi_identifier_B" dest="default" />
-  <copyField source="type" dest="default"/>
-  <copyField source="type_mi_identifier" dest="default"/>
-  <copyField source="publication_authors" dest="default" />
-  <copyField source="first_author" dest="default"/>
-  <copyField source="feature_shortlabel_A" dest="default" />
-  <copyField source="feature_shortlabel_B" dest="default" />
-  <copyField source="feature_type_A" dest="default" />
-  <copyField source="feature_type_B" dest="default" />
-  <copyField source="descriptionA" dest="default" />
-  <copyField source="descriptionB" dest="default" />
-
-  <!-- To be decided to be kept or not -->
-
-    <copyField source="speciesA" dest="default"/>
-    <copyField source="speciesB" dest="default"/>
-    <copyField source="taxIdA" dest="default"/>
-    <copyField source="taxIdB" dest="default"/>
-    <copyField source="parameter_types" dest="default" />
-    <copyField source="host_organism" dest="default"/>
-    <copyField source="host_organism_taxId" dest="default"/>
-    <copyField source="typeA" dest="default"/>
-    <copyField source="typeB" dest="default"/>
-    <copyField source="type_MI_A" dest="default"/>
-    <copyField source="type_MI_B" dest="default"/>
-    <!--feature range need to be added in index and then here, just have featureA and featureB and remove feature shortlabel and feature type from above default -->
-    <copyField source="feature_ranges_A" dest="default"/>
-    <copyField source="feature_ranges_B" dest="default"/>
-    <copyField source="publication_annotations" dest="default"/>
 </schema>
