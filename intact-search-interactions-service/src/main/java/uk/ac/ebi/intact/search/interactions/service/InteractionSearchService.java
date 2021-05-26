@@ -1,7 +1,5 @@
 package uk.ac.ebi.intact.search.interactions.service;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -20,8 +18,6 @@ import java.util.Set;
  */
 @Service
 public class InteractionSearchService {
-
-    private static final Log log = LogFactory.getLog(InteractionSearchService.class);
 
     private final InteractionRepository interactionRepository;
 

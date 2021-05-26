@@ -532,6 +532,8 @@
   <field name="intactNameB" type="text_general"/>
   <field name="intact_miscore" type="pdouble"/>
   <field name="interaction_count" type="plong"/>
+
+  <!-- interactor_* fields are likely to be only stored, currently we are not using them for searching  -->
   <field name="interactor_alias" type="text_general" multiValued="true"/>
   <field name="interactor_alt_ids" type="text_general" multiValued="true"/>
   <field name="interactor_default" type="text_general" multiValued="true" indexed="true" stored="false"/>
@@ -655,63 +657,14 @@
   <dynamicField name="*_f" type="pfloat" indexed="true" stored="true"/>
   <dynamicField name="*_d" type="pdouble" indexed="true" stored="true"/>
   <dynamicField name="*_p" type="location" indexed="true" stored="true"/>
-  <copyField source="aliasesA" dest="default"/>
+  <!-- interactor_default can be replace in a query by interactor_identifiers or aliasesA or aliasesB
+ and can simplify problems of identifiers with '-' or numbers -->
   <copyField source="aliasesA" dest="interactor_default"/>
-  <copyField source="aliasesB" dest="default"/>
   <copyField source="aliasesB" dest="interactor_default"/>
-  <copyField source="altIdsA" dest="default"/>
   <copyField source="altIdsA" dest="interactor_default"/>
-  <copyField source="altIdsB" dest="default"/>
   <copyField source="altIdsB" dest="interactor_default"/>
-  <copyField source="descriptionA" dest="default"/>
-  <copyField source="descriptionB" dest="default"/>
-  <copyField source="detection_method" dest="default"/>
-  <copyField source="detection_method_mi_identifier" dest="default"/>
-  <copyField source="feature_ranges_A" dest="default"/>
-  <copyField source="feature_ranges_B" dest="default"/>
-  <copyField source="feature_shortlabel_A" dest="default"/>
-  <copyField source="feature_shortlabel_B" dest="default"/>
-  <copyField source="feature_type_A" dest="default"/>
-  <copyField source="feature_type_B" dest="default"/>
-  <copyField source="first_author" dest="default"/>
-  <copyField source="host_organism" dest="default"/>
-  <copyField source="host_organism_taxId" dest="default"/>
-  <copyField source="idA" dest="default"/>
   <copyField source="idA" dest="interactor_default"/>
-  <copyField source="idB" dest="default"/>
   <copyField source="idB" dest="interactor_default"/>
-  <copyField source="identification_method_A" dest="default"/>
-  <copyField source="identification_method_B" dest="default"/>
-  <copyField source="identification_method_mi_identifier_A" dest="default"/>
-  <copyField source="identification_method_mi_identifier_B" dest="default"/>
-  <copyField source="identifiers" dest="default"/>
-  <copyField source="intactNameA" dest="default"/>
-  <copyField source="intactNameB" dest="default"/>
-  <copyField source="moleculeA" dest="default"/>
-  <copyField source="moleculeB" dest="default"/>
-  <copyField source="parameter_types" dest="default"/>
-  <copyField source="publication_annotations" dest="default"/>
-  <copyField source="publication_authors" dest="default"/>
-  <copyField source="publication_identifiers" dest="default"/>
-  <copyField source="speciesA" dest="default"/>
-  <copyField source="speciesB" dest="default"/>
-  <copyField source="taxIdA" dest="default"/>
-  <copyField source="taxIdA_styled" dest="taxId_A_B_styled"/>
-  <copyField source="taxIdB" dest="default"/>
-  <copyField source="taxIdB_styled" dest="taxId_A_B_styled"/>
-  <copyField source="type" dest="default"/>
-  <copyField source="typeA" dest="default"/>
-  <copyField source="typeB" dest="default"/>
-  <copyField source="type_MI_A" dest="default"/>
-  <copyField source="type_MI_A_styled" dest="type_MI_A_B_styled"/>
-  <copyField source="type_MI_B" dest="default"/>
-  <copyField source="type_MI_B_styled" dest="type_MI_A_B_styled"/>
-  <copyField source="type_mi_identifier" dest="default"/>
-  <copyField source="uniqueIdA" dest="default"/>
-  <copyField source="uniqueIdB" dest="default"/>
-  <copyField source="xrefs" dest="default"/>
-  <copyField source="xrefsA" dest="default"/>
-  <copyField source="xrefsB" dest="default"/>
   <copyField source="ac" dest="interaction_identifiers" maxChars="256"/>
   <copyField source="acA" dest="interactor_identifiers" maxChars="256"/>
   <copyField source="acB" dest="interactor_identifiers" maxChars="256"/>
@@ -727,12 +680,14 @@
   <copyField source="xrefs" dest="interaction_identifiers" maxChars="256"/>
   <copyField source="xrefsA" dest="interactor_identifiers" maxChars="256"/>
   <copyField source="xrefsB" dest="interactor_identifiers" maxChars="256"/>
+  <!--  Do we need typeA_s and typeB_s? -->
   <copyField source="typeA" dest="typeA_s" maxChars="256"/>
   <copyField source="typeB" dest="typeB_s" maxChars="256"/>
   <copyField source="typeA" dest="typeA_B_str"/>
   <copyField source="typeB" dest="typeA_B_str"/>
   <copyField source="type_MI_A" dest="type_MI_A_B_str"/>
   <copyField source="type_MI_B" dest="type_MI_A_B_str"/>
+  <!--  Do we need speciesA_s and speciesB_s? -->
   <copyField source="speciesA" dest="speciesA_s" maxChars="256"/>
   <copyField source="speciesB" dest="speciesB_s" maxChars="256"/>
   <copyField source="speciesA" dest="speciesA_B_str"/>
@@ -748,6 +703,7 @@
   <copyField source="expansion_method" dest="expansion_method_s" maxChars="256"/>
   <copyField source="host_organism" dest="host_organism_s" maxChars="256"/>
   <copyField source="publication_authors" dest="publication_authors_str" maxChars="256"/>
+  <!-- Check if you need to remove fields from default, like identifiers -->
   <copyField source="source_database" dest="source_database_s" maxChars="256"/>
   <copyField source="ac" dest="ac_s" maxChars="256"/>
   <copyField source="type" dest="type_s" maxChars="256"/>
@@ -756,4 +712,63 @@
   <copyField source="idB" dest="idB_s" maxChars="256"/>
   <copyField source="acA" dest="acA_s" maxChars="256"/>
   <copyField source="acB" dest="acB_s" maxChars="256"/>
+
+  <!-- styling fields -->
+  <copyField source="taxIdA_styled" dest="taxId_A_B_styled"/>
+  <copyField source="taxIdB_styled" dest="taxId_A_B_styled"/>
+  <copyField source="type_MI_A_styled" dest="type_MI_A_B_styled"/>
+  <copyField source="type_MI_B_styled" dest="type_MI_A_B_styled"/>
+
+  <!--copy selected fields into default-->
+  <copyField source="moleculeA" dest="default"/>
+  <copyField source="moleculeB" dest="default"/>
+  <copyField source="intactNameA" dest="default"/>
+  <copyField source="intactNameB" dest="default"/>
+  <copyField source="altIdsA" dest="default" />
+  <copyField source="altIdsB" dest="default" />
+  <copyField source="idA" dest="default" />
+  <copyField source="idB" dest="default" />
+  <copyField source="identifiers" dest="default" />
+  <copyField source="publication_identifiers" dest="default" />
+  <copyField source="uniqueIdA" dest="default" />
+  <copyField source="uniqueIdB" dest="default" />
+  <copyField source="xrefs" dest="default" />
+  <copyField source="xrefsA" dest="default" />
+  <copyField source="xrefsB" dest="default" />
+  <copyField source="aliasesA" dest="default"/>
+  <copyField source="aliasesB" dest="default"/>
+  <copyField source="detection_method" dest="default"/>
+  <copyField source="detection_method_mi_identifier" dest="default"/>
+  <copyField source="identification_method_A" dest="default" />
+  <copyField source="identification_method_B" dest="default" />
+  <copyField source="identification_method_mi_identifier_A" dest="default" />
+  <copyField source="identification_method_mi_identifier_B" dest="default" />
+  <copyField source="type" dest="default"/>
+  <copyField source="type_mi_identifier" dest="default"/>
+  <copyField source="publication_authors" dest="default" />
+  <copyField source="first_author" dest="default"/>
+  <copyField source="feature_shortlabel_A" dest="default" />
+  <copyField source="feature_shortlabel_B" dest="default" />
+  <copyField source="feature_type_A" dest="default" />
+  <copyField source="feature_type_B" dest="default" />
+  <copyField source="descriptionA" dest="default" />
+  <copyField source="descriptionB" dest="default" />
+
+  <!-- To be decided to be kept or not -->
+
+    <copyField source="speciesA" dest="default"/>
+    <copyField source="speciesB" dest="default"/>
+    <copyField source="taxIdA" dest="default"/>
+    <copyField source="taxIdB" dest="default"/>
+    <copyField source="parameter_types" dest="default" />
+    <copyField source="host_organism" dest="default"/>
+    <copyField source="host_organism_taxId" dest="default"/>
+    <copyField source="typeA" dest="default"/>
+    <copyField source="typeB" dest="default"/>
+    <copyField source="type_MI_A" dest="default"/>
+    <copyField source="type_MI_B" dest="default"/>
+    <!--feature range need to be added in index and then here, just have featureA and featureB and remove feature shortlabel and feature type from above default -->
+    <copyField source="feature_ranges_A" dest="default"/>
+    <copyField source="feature_ranges_B" dest="default"/>
+    <copyField source="publication_annotations" dest="default"/>
 </schema>

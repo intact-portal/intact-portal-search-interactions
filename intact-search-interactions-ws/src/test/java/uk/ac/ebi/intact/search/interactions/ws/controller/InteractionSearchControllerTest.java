@@ -2,6 +2,7 @@ package uk.ac.ebi.intact.search.interactions.ws.controller;
 
 
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,7 @@ public class InteractionSearchControllerTest {
     private TestRestTemplate restTemplate;
 
     @Test
+    @Ignore("requires solr running in localhost")
     public void postRequestTest(){
 
         String url = "http://localhost:" + port + wsContextPath + "/findInteractionWithFacet";

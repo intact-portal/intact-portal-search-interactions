@@ -408,8 +408,6 @@ public class ChildInteractorSearchServiceTest {
         interactorsExpected.add("EBI-10000824");
         interactorsExpected.add("EBI-73886");
 
-        assertTrue((interactorOp.getContent().get(0).getInteractorAc().equals("EBI-715849")));
-
         for (SearchChildInteractor interactor : interactorOp.getContent()) {
             assertTrue(interactorsExpected.contains(interactor.getInteractorAc()));
         }
