@@ -1,4 +1,4 @@
-package uk.ac.ebi.intact.search.interactions.ws.controller.model;
+package uk.ac.ebi.intact.search.interactions.utils;
 
 public enum NegativeFilterStatus {
     POSITIVE_ONLY(false),

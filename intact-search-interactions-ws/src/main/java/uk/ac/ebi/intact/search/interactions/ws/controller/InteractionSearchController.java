@@ -15,10 +15,10 @@ import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.service.ChildInteractorSearchService;
 import uk.ac.ebi.intact.search.interactions.service.InteractionSearchService;
+import uk.ac.ebi.intact.search.interactions.utils.NegativeFilterStatus;
 import uk.ac.ebi.intact.search.interactions.ws.controller.model.ChildInteractorSearchResult;
 import uk.ac.ebi.intact.search.interactions.ws.controller.model.InteractionFacetsSearchResult;
 import uk.ac.ebi.intact.search.interactions.ws.controller.model.InteractionSearchResult;
-import uk.ac.ebi.intact.search.interactions.ws.controller.model.NegativeFilterStatus;
 
 import java.io.IOException;
 import java.io.StringWriter;
