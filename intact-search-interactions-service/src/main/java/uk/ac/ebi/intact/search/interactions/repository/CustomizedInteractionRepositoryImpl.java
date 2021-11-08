@@ -347,6 +347,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         search.addProjectionOnField(new SimpleField(INTACT_MISCORE));
         search.addProjectionOnField(new SimpleField(TYPE_MI_IDENTIFIER));
         search.addProjectionOnField(new SimpleField(AFFECTED_BY_MUTATION));
+        search.addProjectionOnField(new SimpleField(NEGATIVE));
 
         //interactor details
         search.addProjectionOnField(new SimpleField(AC_A));
