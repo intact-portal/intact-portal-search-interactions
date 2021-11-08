@@ -4,7 +4,10 @@ import org.springframework.data.solr.core.query.Criteria;
 import org.springframework.data.solr.core.query.FilterQuery;
 import org.springframework.data.solr.core.query.SimpleFilterQuery;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -112,7 +115,7 @@ public class SearchInteractionUtility {
                                                Set<String> interactionDetectionMethodsFilter,
                                                Set<String> interactionTypesFilter,
                                                Set<String> interactionHostOrganismsFilter,
-                                               boolean negativeFilter,
+                                               Boolean negativeFilter,
                                                boolean mutationFilter,
                                                boolean expansionFilter,
                                                double minMIScore,
@@ -139,10 +142,10 @@ public class SearchInteractionUtility {
         createFilterCriteriaForStringValues("{!tag=HOST_ORGANISM}", interactionHostOrganismsFilter, HOST_ORGANISM_S, filterQueries);
 
         //Negative filter
-        createFilterCriteriaForBoolean("{!tag=NEGATIVE_INTERACTION}", negativeFilter, NEGATIVE, filterQueries);
+        createNegativeInteractionsFilterCriteria("{!tag=NEGATIVE_INTERACTION}", negativeFilter, NEGATIVE, filterQueries);
 
         //Mutation filter
-        createFilterCriteriaForBoolean("{!tag=MUTATION}", mutationFilter, AFFECTED_BY_MUTATION,filterQueries);
+        createFilterCriteriaForBoolean("{!tag=MUTATION}", mutationFilter, AFFECTED_BY_MUTATION, filterQueries);
 
         //Expansion filter
         createExpansionFilterCriteria("{!tag=EXPANSION}", expansionFilter, filterQueries);
@@ -195,6 +198,14 @@ public class SearchInteractionUtility {
         }
     }
 
+    private void createNegativeInteractionsFilterCriteria(String tagForExcludingFacets, Boolean value, String field, List<FilterQuery> filterQueries) {
+
+        if (value != null) {
+            Criteria conditions = new Criteria(tagForExcludingFacets + field).is(value);
+            filterQueries.add(new SimpleFilterQuery(conditions));
+        }
+    }
+
     private void createExpansionFilterCriteria(String tagForExcludingFacets, boolean value, List<FilterQuery> filterQueries) {
         // Expansion filter meaning:
         // true: hides spoke expanded interactions
@@ -204,7 +215,6 @@ public class SearchInteractionUtility {
             filterQueries.add(new SimpleFilterQuery(conditions));
         }
     }
-
 
 
     private void createMIScoreFilterCriteria(String tagForExcludingFacets, double minScore, double maxScore, List<FilterQuery> filterQueries) {

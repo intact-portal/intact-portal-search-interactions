@@ -5,7 +5,7 @@
 
     <groupId>uk.ac.ebi.intact.search.interactions</groupId>
     <artifactId>intact-search-interactions-module</artifactId>
-    <version>1.0.6-SNAPSHOT</version>
+    <version>1.0.7-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>IntAct Portal :: Search Interactions Parent Module</name>
@@ -31,7 +31,8 @@
 
     <scm>
         <connection>scm:git:https://github.com/intact-portal/intact-portal-search-interactions.git</connection>
-        <developerConnection>scm:git:https://github.com/intact-portal/intact-portal-search-interactions.git</developerConnection>
+        <developerConnection>scm:git:https://github.com/intact-portal/intact-portal-search-interactions.git
+        </developerConnection>
         <url>https://github.com/intact-portal/intact-portal-search-interactions</url>
         <tag>HEAD</tag>
     </scm>

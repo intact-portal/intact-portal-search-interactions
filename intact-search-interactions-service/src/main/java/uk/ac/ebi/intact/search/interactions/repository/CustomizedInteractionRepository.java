@@ -38,7 +38,7 @@ public interface CustomizedInteractionRepository {
                                                               Set<String> interactionDetectionMethodsFilter,
                                                               Set<String> interactionTypesFilter,
                                                               Set<String> interactionHostOrganismsFilter,
-                                                              boolean negativeFilter,
+                                                              Boolean negativeFilter,
                                                               boolean mutationFilter,
                                                               boolean expansionFilter,
                                                               double minMIScore,
@@ -63,22 +63,23 @@ public interface CustomizedInteractionRepository {
      * @param sort                              field to define the sort of the results
      * @param pageable                          page number and size of the request
      * @return the interaction data matching all the criteria
-     */Page<SearchInteraction> findInteractions(String query,
-                                                boolean batchSearch,
-                                                Set<String> interactorSpeciesFilter,
-                                                Set<String> interactorTypesFilter,
-                                                Set<String> interactionDetectionMethodsFilter,
-                                                Set<String> interactionTypesFilter,
-                                                Set<String> interactionHostOrganismsFilter,
-                                                boolean negativeFilter,
-                                                boolean mutationFilter,
-                                                boolean expansionFilter,
-                                                double minMIScore,
-                                                double maxMIScore,
-                                                boolean intraSpeciesFilter,
-                                                Set<Long> binaryInteractionIds,
-                                                Set<String> interactorAcs,
-                                                Sort sort, Pageable pageable);
+     */
+    Page<SearchInteraction> findInteractions(String query,
+                                             boolean batchSearch,
+                                             Set<String> interactorSpeciesFilter,
+                                             Set<String> interactorTypesFilter,
+                                             Set<String> interactionDetectionMethodsFilter,
+                                             Set<String> interactionTypesFilter,
+                                             Set<String> interactionHostOrganismsFilter,
+                                             boolean negativeFilter,
+                                             boolean mutationFilter,
+                                             boolean expansionFilter,
+                                             double minMIScore,
+                                             double maxMIScore,
+                                             boolean intraSpeciesFilter,
+                                             Set<Long> binaryInteractionIds,
+                                             Set<String> interactorAcs,
+                                             Sort sort, Pageable pageable);
 
     /**
      * @param query                             input used to retrieve the interaction
@@ -104,7 +105,7 @@ public interface CustomizedInteractionRepository {
                                                           Set<String> interactionDetectionMethodsFilter,
                                                           Set<String> interactionTypesFilter,
                                                           Set<String> interactionHostOrganismsFilter,
-                                                          boolean negativeFilter,
+                                                          Boolean negativeFilter,
                                                           boolean mutationFilter,
                                                           boolean expansionFilter,
                                                           double minMIScore,
@@ -217,7 +218,7 @@ public interface CustomizedInteractionRepository {
      * @param mutationFilter                    (Optional) Filters interaction that are not affected by mutation
      * @param minMIScore                        minimum value of mi-score for the interaction
      * @param maxMIScore                        maximum value of mi-score for the interaction
-     * @param intraSpeciesFilter                      boolean to restrict the result ot the same or different interactor species
+     * @param intraSpeciesFilter                boolean to restrict the result ot the same or different interactor species
      * @param binaryInteractionIds
      * @param sort                              field to define the sort of the results
      * @param pageable                          page number and size of the request
@@ -255,7 +256,7 @@ public interface CustomizedInteractionRepository {
      * @param maxMIScore                        maximum value of mi-score for the interaction
      * @param intraSpeciesFilter                boolean to restrict the result ot the same or different interactor species
      * @param binaryInteractionIds
-     * @param interactorAcs                    interactor accession e.g. EBI-XXXXXX
+     * @param interactorAcs                     interactor accession e.g. EBI-XXXXXX
      * @return the number of interactions matching all the criteria
      */
     long countInteractionResult(String query,
@@ -266,7 +267,7 @@ public interface CustomizedInteractionRepository {
                                 Set<String> interactionDetectionMethodsFilter,
                                 Set<String> interactionTypesFilter,
                                 Set<String> interactionHostOrganismsFilter,
-                                boolean negativeFilter,
+                                Boolean negativeFilter,
                                 boolean mutationFilter,
                                 boolean expansionFilter,
                                 double minMIScore,

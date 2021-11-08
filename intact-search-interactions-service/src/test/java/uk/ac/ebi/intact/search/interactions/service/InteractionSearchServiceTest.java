@@ -357,6 +357,7 @@ public class InteractionSearchServiceTest {
         // negative facet checking
         HashMap<String, Long> negativeFacetsExpected = new HashMap<>();
         negativeFacetsExpected.put("false", 10L);
+        negativeFacetsExpected.put("true", 0L);
 
         facetFieldEntryPage = interactionFacetPage.getFacetResultPage(NEGATIVE);
         assertEquals(1, facetFieldEntryPage.getTotalElements());
@@ -441,7 +442,7 @@ public class InteractionSearchServiceTest {
         assertEquals(expectedAcs, acs);
 
         Set<Long> binaryIds = new TreeSet<>();
-        Set<Long> expectedBinaryIds = new TreeSet<>(Arrays.asList(1L,2L,3L,4L,5L,10L));
+        Set<Long> expectedBinaryIds = new TreeSet<>(Arrays.asList(1L, 2L, 3L, 4L, 5L, 10L));
 
         for (SearchInteraction searchInteraction : interactionPage) {
             binaryIds.add(searchInteraction.getBinaryInteractionId());
@@ -2174,6 +2175,114 @@ public class InteractionSearchServiceTest {
         assertEquals(2, facetPageFacetQueryResult.getTotalElements());
         for (FacetQueryEntry facetQueryEntry : facetPageFacetQueryResult) {
             assertEquals(expansionMethodExpected.get(facetQueryEntry.getValue()), new Long(facetQueryEntry.getValueCount()));
+        }
+    }
+
+    /*
+     * Expected interactions/facets when queried and filtered by positive interactions
+     **/
+    @Test
+    public void filterByPositiveInteractions() {
+        FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
+                "*",
+                false,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+        assertEquals(10, interactionOp.getTotalElements());
+
+        //facet checking
+        //interaction type facet checking
+        HashMap<String, Long> negativeInteractionFacetsExpected = new HashMap<>();
+        negativeInteractionFacetsExpected.put("false", 10L);
+        negativeInteractionFacetsExpected.put("true", 0L);
+
+        for (FacetFieldEntry facetFieldEntry : interactionOp.getFacetResultPage(NEGATIVE)) {
+            assertEquals(negativeInteractionFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+        }
+    }
+
+    /*
+     * Expected interactions/facets when queried and filtered by negative interactions
+     **/
+    @Test
+    public void filterByNegativeInteractions() {
+        FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
+                "*",
+                false,
+                null,
+                null,
+                null,
+                null,
+                null,
+                true,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+        assertEquals(0, interactionOp.getTotalElements());
+
+        //facet checking
+        //interaction type facet checking
+        HashMap<String, Long> negativeInteractionFacetsExpected = new HashMap<>();
+        negativeInteractionFacetsExpected.put("false", 10L);
+        negativeInteractionFacetsExpected.put("true", 0L);
+
+        for (FacetFieldEntry facetFieldEntry : interactionOp.getFacetResultPage(NEGATIVE)) {
+            assertEquals(negativeInteractionFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+        }
+    }
+
+    /*
+     * Expected interactions/facets when queried and filtered by negative and positive interactions
+     **/
+    @Test
+    public void filterByNegativeAndPositiveInteractions() {
+        FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
+                "*",
+                false,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+        assertEquals(10, interactionOp.getTotalElements());
+
+        //facet checking
+        //interaction type facet checking
+        HashMap<String, Long> negativeInteractionFacetsExpected = new HashMap<>();
+        negativeInteractionFacetsExpected.put("false", 10L);
+        negativeInteractionFacetsExpected.put("true", 0L);
+
+        for (FacetFieldEntry facetFieldEntry : interactionOp.getFacetResultPage(NEGATIVE)) {
+            assertEquals(negativeInteractionFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
         }
     }
 }

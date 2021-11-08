@@ -45,20 +45,20 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
     @Override
     public FacetPage<SearchInteraction> findInteractionFacets(String query,
-                                                                 boolean batchSearch,
-                                                                 Set<String> interactorSpeciesFilter,
-                                                                 Set<String> interactorTypesFilter,
-                                                                 Set<String> interactionDetectionMethodsFilter,
-                                                                 Set<String> interactionTypesFilter,
-                                                                 Set<String> interactionHostOrganismsFilter,
-                                                                 boolean negativeFilter,
-                                                                 boolean mutationFilter,
-                                                                 boolean expansionFilter,
-                                                                 double minMIScore,
-                                                                 double maxMIScore,
-                                                                 boolean intraSpeciesFilter,
-                                                                 Set<Long> binaryInteractionIds,
-                                                                 Set<String> interactorAcs) {
+                                                              boolean batchSearch,
+                                                              Set<String> interactorSpeciesFilter,
+                                                              Set<String> interactorTypesFilter,
+                                                              Set<String> interactionDetectionMethodsFilter,
+                                                              Set<String> interactionTypesFilter,
+                                                              Set<String> interactionHostOrganismsFilter,
+                                                              Boolean negativeFilter,
+                                                              boolean mutationFilter,
+                                                              boolean expansionFilter,
+                                                              double minMIScore,
+                                                              double maxMIScore,
+                                                              boolean intraSpeciesFilter,
+                                                              Set<Long> binaryInteractionIds,
+                                                              Set<String> interactorAcs) {
         return findInteractionWithFacet(query,
                 batchSearch,
                 interactorSpeciesFilter,
@@ -77,7 +77,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                 Sort.unsorted(),
                 // We need at least one page with one interaction to avoid problems until we find a way to retrieve the
                 // facets without results.
-                PageRequest.of(0,1));
+                PageRequest.of(0, 1));
     }
 
     @Override
@@ -88,7 +88,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                                                                  Set<String> interactionDetectionMethodsFilter,
                                                                  Set<String> interactionTypesFilter,
                                                                  Set<String> interactionHostOrganismsFilter,
-                                                                 boolean negativeFilter,
+                                                                 Boolean negativeFilter,
                                                                  boolean mutationFilter,
                                                                  boolean expansionFilter,
                                                                  double minMIScore,
@@ -162,21 +162,21 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
     @Override
     public Page<SearchInteraction> findInteractions(String query,
-                                                                 boolean batchSearch,
-                                                                 Set<String> interactorSpeciesFilter,
-                                                                 Set<String> interactorTypesFilter,
-                                                                 Set<String> interactionDetectionMethodsFilter,
-                                                                 Set<String> interactionTypesFilter,
-                                                                 Set<String> interactionHostOrganismsFilter,
-                                                                 boolean negativeFilter,
-                                                                 boolean mutationFilter,
-                                                                 boolean expansionFilter,
-                                                                 double minMIScore,
-                                                                 double maxMIScore,
-                                                                 boolean intraSpeciesFilter,
-                                                                 Set<Long> binaryInteractionIds,
-                                                                 Set<String> interactorAcs,
-                                                                 Sort sort, Pageable pageable) {
+                                                    boolean batchSearch,
+                                                    Set<String> interactorSpeciesFilter,
+                                                    Set<String> interactorTypesFilter,
+                                                    Set<String> interactionDetectionMethodsFilter,
+                                                    Set<String> interactionTypesFilter,
+                                                    Set<String> interactionHostOrganismsFilter,
+                                                    boolean negativeFilter,
+                                                    boolean mutationFilter,
+                                                    boolean expansionFilter,
+                                                    double minMIScore,
+                                                    double maxMIScore,
+                                                    boolean intraSpeciesFilter,
+                                                    Set<Long> binaryInteractionIds,
+                                                    Set<String> interactorAcs,
+                                                    Sort sort, Pageable pageable) {
 
 
         SimpleQuery search = (SimpleQuery) createQuery(
@@ -470,7 +470,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                                        Set<String> interactionDetectionMethodsFilter,
                                        Set<String> interactionTypesFilter,
                                        Set<String> interactionHostOrganismsFilter,
-                                       boolean negativeFilter,
+                                       Boolean negativeFilter,
                                        boolean mutationFilter,
                                        boolean expansionFilter,
                                        double minMiScore,
