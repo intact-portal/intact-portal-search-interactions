@@ -46,6 +46,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
     @Override
     public FacetPage<SearchInteraction> findInteractionFacets(String query,
                                                               boolean batchSearch,
+                                                              boolean advancedSearch,
                                                               Set<String> interactorSpeciesFilter,
                                                               Set<String> interactorTypesFilter,
                                                               Set<String> interactionDetectionMethodsFilter,
@@ -61,6 +62,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                                                               Set<String> interactorAcs) {
         return findInteractionWithFacet(query,
                 batchSearch,
+                advancedSearch,
                 interactorSpeciesFilter,
                 interactorTypesFilter,
                 interactionDetectionMethodsFilter,
@@ -83,6 +85,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
     @Override
     public FacetPage<SearchInteraction> findInteractionWithFacet(String query,
                                                                  boolean batchSearch,
+                                                                 boolean advancedSearch,
                                                                  Set<String> interactorSpeciesFilter,
                                                                  Set<String> interactorTypesFilter,
                                                                  Set<String> interactionDetectionMethodsFilter,
@@ -102,7 +105,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         SimpleFacetQuery search = new SimpleFacetQuery();
 
         // search criterias
-        Criteria conditions = searchInteractionUtility.createSearchConditions(query, batchSearch);
+        Criteria conditions = searchInteractionUtility.createSearchConditions(query, batchSearch, advancedSearch);
         search.addCriteria(conditions);
 
         // filters
@@ -163,6 +166,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
     @Override
     public Page<SearchInteraction> findInteractions(String query,
                                                     boolean batchSearch,
+                                                    boolean advancedSearch,
                                                     Set<String> interactorSpeciesFilter,
                                                     Set<String> interactorTypesFilter,
                                                     Set<String> interactionDetectionMethodsFilter,
@@ -182,6 +186,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         SimpleQuery search = (SimpleQuery) createQuery(
                 query,
                 batchSearch,
+                advancedSearch,
                 interactorSpeciesFilter,
                 interactorTypesFilter,
                 interactionDetectionMethodsFilter,
@@ -207,6 +212,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
     @Override
     public Page<SearchInteraction> findInteractionForGraphJson(String query,
                                                                boolean batchSearch,
+                                                               boolean advancedSearch,
                                                                Set<String> interactorSpeciesFilter,
                                                                Set<String> interactorTypesFilter,
                                                                Set<String> interactionDetectionMethodsFilter,
@@ -224,7 +230,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         SimpleQuery search = new SimpleQuery();
 
         // search criterias
-        Criteria conditions = searchInteractionUtility.createSearchConditions(query, batchSearch);
+        Criteria conditions = searchInteractionUtility.createSearchConditions(query, batchSearch, advancedSearch);
         search.addCriteria(conditions);
 
         // filters
@@ -284,6 +290,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
     @Override
     public FacetPage<SearchInteraction> findInteractionForGraphJsonWithFacet(String query,
                                                                              boolean batchSearch,
+                                                                             boolean advancedSearch,
                                                                              Set<String> interactorSpeciesFilter,
                                                                              Set<String> interactorTypesFilter,
                                                                              Set<String> interactionDetectionMethodsFilter,
@@ -301,7 +308,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         SimpleFacetQuery search = new SimpleFacetQuery();
 
         // search criterias
-        Criteria conditions = searchInteractionUtility.createSearchConditions(query, batchSearch);
+        Criteria conditions = searchInteractionUtility.createSearchConditions(query, batchSearch, advancedSearch);
         search.addCriteria(conditions);
 
         // filters
@@ -375,6 +382,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
     @Override
     public long countInteractionsForGraphJson(String query, boolean batchSearch,
+                                              boolean advancedSearch,
                                               Set<String> interactorSpeciesFilter,
                                               Set<String> interactorTypesFilter,
                                               Set<String> interactionDetectionMethodsFilter,
@@ -391,7 +399,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         SimpleQuery search = new SimpleQuery();
 
         // search criterias
-        Criteria conditions = searchInteractionUtility.createSearchConditions(query, batchSearch);
+        Criteria conditions = searchInteractionUtility.createSearchConditions(query, batchSearch, advancedSearch);
         search.addCriteria(conditions);
 
         // filters
@@ -411,6 +419,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
     @Override
     public Page<SearchInteraction> findInteractionIdentifiers(String query,
                                                               boolean batchSearch,
+                                                              boolean advancedSearch,
                                                               Set<String> interactorSpeciesFilters,
                                                               Set<String> interactorTypesFilter,
                                                               Set<String> interactionDetectionMethodsFilter,
@@ -431,7 +440,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         SimpleQuery search = new SimpleQuery();
 
         // search criterias
-        Criteria conditions = searchInteractionUtility.createSearchConditions(query, batchSearch);
+        Criteria conditions = searchInteractionUtility.createSearchConditions(query, batchSearch, advancedSearch);
         search.addCriteria(conditions);
 
         // filters
@@ -465,6 +474,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
     @Override
     public long countInteractionResult(String query,
                                        boolean batchSearch,
+                                       boolean advancedSearch,
                                        String interactorAc,
                                        Set<String> interactorSpeciesFilter,
                                        Set<String> interactorTypesFilter,
@@ -484,7 +494,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         SimpleQuery search = new SimpleQuery();
 
         // search criterias
-        Criteria conditions = searchInteractionUtility.createSearchConditions(query, batchSearch);
+        Criteria conditions = searchInteractionUtility.createSearchConditions(query, batchSearch, advancedSearch);
 
         // search query
         search.addCriteria(conditions);
@@ -515,6 +525,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
     @Override
     public long countInteractionResult(String query,
                                        boolean batchSearch,
+                                       boolean advancedSearch,
                                        Set<String> interactorSpeciesFilter,
                                        Set<String> interactorTypesFilter,
                                        Set<String> interactionDetectionMethodsFilter,
@@ -533,7 +544,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         SimpleQuery search = new SimpleQuery();
 
         // search criterias
-        Criteria conditions = searchInteractionUtility.createSearchConditions(query, batchSearch);
+        Criteria conditions = searchInteractionUtility.createSearchConditions(query, batchSearch, advancedSearch);
 
         // search query
         search.addCriteria(conditions);
@@ -555,6 +566,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
     private Query createQuery(String query,
                               boolean batchSearch,
+                              boolean advancedSearch,
                               Set<String> interactorSpeciesFilter,
                               Set<String> interactorTypesFilter,
                               Set<String> interactionDetectionMethodsFilter,
@@ -575,7 +587,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         SimpleQuery search = new SimpleQuery();
 
         // search criterias
-        Criteria conditions = searchInteractionUtility.createSearchConditions(query, batchSearch);
+        Criteria conditions = searchInteractionUtility.createSearchConditions(query, batchSearch, advancedSearch);
         search.addCriteria(conditions);
 
         // filters

@@ -10,7 +10,7 @@ import uk.ac.ebi.intact.search.interactions.utils.DocumentType;
 
 import java.util.Optional;
 
-import static uk.ac.ebi.intact.search.interactions.model.AdvanceSearchInteractionFields.AS_ID_A;
+import static uk.ac.ebi.intact.search.interactions.model.AdvancedSearchInteractionFields.AS_ID_A;
 import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields.DEFAULT;
 import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields.DOCUMENT_TYPE;
 

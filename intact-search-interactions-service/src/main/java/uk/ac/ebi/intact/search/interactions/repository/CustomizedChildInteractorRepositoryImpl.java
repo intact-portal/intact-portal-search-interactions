@@ -42,6 +42,7 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
     @Override
     public GroupPage<SearchChildInteractor> findChildInteractors(String query,
                                                                  boolean batchSearch,
+                                                                 boolean advancedSearch,
                                                                  Set<String> interactorSpeciesFilter,
                                                                  Set<String> interactorTypesFilter,
                                                                  Set<String> interactionDetectionMethodsFilter,
@@ -65,7 +66,7 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
         SimpleQuery search = new SimpleQuery();
 
         // search criterias
-        Criteria interactionSearchCriteria = searchInteractionUtility.createSearchConditions(query, batchSearch);
+        Criteria interactionSearchCriteria = searchInteractionUtility.createSearchConditions(query, batchSearch, advancedSearch);
         Criteria interactorCriteria = new NestedCriteria(interactionSearchCriteria, interactionFilterQueries);
 
         search.addCriteria(interactorCriteria);
@@ -98,6 +99,7 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
     @Override
     public long countChildInteractors(String query,
                                       boolean batchSearch,
+                                      boolean advancedSearch,
                                       Set<String> interactorSpeciesFilter,
                                       Set<String> interactorTypeFilter,
                                       Set<String> interactionDetectionMethodFilter,
@@ -119,7 +121,7 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
         SimpleQuery search = new SimpleQuery();
 
         // search criterias
-        Criteria interactionSearchCriteria = searchInteractionUtility.createSearchConditions(query, batchSearch);
+        Criteria interactionSearchCriteria = searchInteractionUtility.createSearchConditions(query, batchSearch, advancedSearch);
         Criteria interactorCriteria = new NestedCriteria(interactionSearchCriteria, interactionFilterQueries);
 
         search.addCriteria(interactorCriteria);

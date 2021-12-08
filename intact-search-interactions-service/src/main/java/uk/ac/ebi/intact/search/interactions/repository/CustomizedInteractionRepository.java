@@ -33,6 +33,7 @@ public interface CustomizedInteractionRepository {
      */
     public FacetPage<SearchInteraction> findInteractionFacets(String query,
                                                               boolean batchSearch,
+                                                              boolean advancedSearch,
                                                               Set<String> interactorSpeciesFilter,
                                                               Set<String> interactorTypesFilter,
                                                               Set<String> interactionDetectionMethodsFilter,
@@ -66,6 +67,7 @@ public interface CustomizedInteractionRepository {
      */
     Page<SearchInteraction> findInteractions(String query,
                                              boolean batchSearch,
+                                             boolean advancedSearch,
                                              Set<String> interactorSpeciesFilter,
                                              Set<String> interactorTypesFilter,
                                              Set<String> interactionDetectionMethodsFilter,
@@ -100,6 +102,7 @@ public interface CustomizedInteractionRepository {
      */
     FacetPage<SearchInteraction> findInteractionWithFacet(String query,
                                                           boolean batchSearch,
+                                                          boolean advancedSearch,
                                                           Set<String> interactorSpeciesFilter,
                                                           Set<String> interactorTypesFilter,
                                                           Set<String> interactionDetectionMethodsFilter,
@@ -134,6 +137,7 @@ public interface CustomizedInteractionRepository {
      */
     Page<SearchInteraction> findInteractionForGraphJson(String query,
                                                         boolean batchSearch,
+                                                        boolean advancedSearch,
                                                         Set<String> interactorSpeciesFilter,
                                                         Set<String> interactorTypesFilter,
                                                         Set<String> interactionDetectionMethodsFilter,
@@ -165,6 +169,7 @@ public interface CustomizedInteractionRepository {
      */
     FacetPage<SearchInteraction> findInteractionForGraphJsonWithFacet(String query,
                                                                       boolean batchSearch,
+                                                                      boolean advancedSearch,
                                                                       Set<String> interactorSpeciesFilter,
                                                                       Set<String> interactorTypesFilter,
                                                                       Set<String> interactionDetectionMethodsFilter,
@@ -194,6 +199,7 @@ public interface CustomizedInteractionRepository {
      */
     long countInteractionsForGraphJson(String query,
                                        boolean batchSearch,
+                                       boolean advancedSearch,
                                        Set<String> interactorSpeciesFilter,
                                        Set<String> interactorTypesFilter,
                                        Set<String> interactionDetectionMethodsFilter,
@@ -226,6 +232,7 @@ public interface CustomizedInteractionRepository {
      */
     Page<SearchInteraction> findInteractionIdentifiers(String query,
                                                        boolean batchSearch,
+                                                       boolean advancedSearch,
                                                        Set<String> interactorSpeciesFilter,
                                                        Set<String> interactorTypesFilter,
                                                        Set<String> interactionDetectionMethodsFilter,
@@ -261,6 +268,7 @@ public interface CustomizedInteractionRepository {
      */
     long countInteractionResult(String query,
                                 boolean batchSearch,
+                                boolean advancedSearch,
                                 String interactorAc,
                                 Set<String> interactorSpeciesFilter,
                                 Set<String> interactorTypesFilter,
@@ -278,6 +286,7 @@ public interface CustomizedInteractionRepository {
 
     long countInteractionResult(String query,
                                 boolean batchSearch,
+                                boolean advancedSearch,
                                 Set<String> interactorSpeciesFilter,
                                 Set<String> interactorTypesFilter,
                                 Set<String> interactionDetectionMethodsFilter,

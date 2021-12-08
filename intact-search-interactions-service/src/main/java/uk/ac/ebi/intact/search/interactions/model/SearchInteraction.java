@@ -16,7 +16,7 @@ import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields
  * @author Elisabet Barrera
  */
 @SolrDocument(collection = SearchInteraction.INTERACTIONS)
-public class SearchInteraction extends AdvanceSearchInteraction {
+public class SearchInteraction extends AdvancedSearchInteraction {
 
     public static final String INTERACTIONS = "interactions";
 

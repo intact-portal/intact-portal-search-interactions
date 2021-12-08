@@ -56,6 +56,7 @@ public class InteractionSearchController {
     public InteractionFacetsSearchResult findInteractionFacets(
             @RequestParam(value = "query") String query,
             @RequestParam(value = "batchSearch", required = false) boolean batchSearch,
+            @RequestParam(value = "advancedSearch", required = false) boolean advancedSearch,
             @RequestParam(value = "interactorSpeciesFilter", required = false) Set<String> interactorSpeciesFilter,
             @RequestParam(value = "interactorTypesFilter", required = false) Set<String> interactorTypesFilter,
             @RequestParam(value = "interactionDetectionMethodsFilter", required = false) Set<String> interactionDetectionMethodsFilter,
@@ -74,6 +75,7 @@ public class InteractionSearchController {
                 interactionSearchService.findInteractionFacets(
                         query,
                         batchSearch,
+                        advancedSearch,
                         interactorSpeciesFilter,
                         interactorTypesFilter,
                         interactionDetectionMethodsFilter,
@@ -96,6 +98,7 @@ public class InteractionSearchController {
     public ResponseEntity<String> findInteractionWithFacet(
             @RequestParam(value = "query") String query,
             @RequestParam(value = "batchSearch", required = false) boolean batchSearch,
+            @RequestParam(value = "advancedSearch", required = false) boolean advancedSearch,
             @RequestParam(value = "interactorSpeciesFilter", required = false) Set<String> interactorSpeciesFilter,
             @RequestParam(value = "interactorTypesFilter", required = false) Set<String> interactorTypesFilter,
             @RequestParam(value = "interactionDetectionMethodsFilter", required = false) Set<String> interactionDetectionMethodsFilter,
@@ -116,6 +119,7 @@ public class InteractionSearchController {
                 interactionSearchService.findInteractionWithFacet(
                         query,
                         batchSearch,
+                        advancedSearch,
                         interactorSpeciesFilter,
                         interactorTypesFilter,
                         interactionDetectionMethodsFilter,
@@ -156,6 +160,7 @@ public class InteractionSearchController {
     public ResponseEntity<String> getInteractionsDatatablesHandler(
             @RequestParam(value = "query") String query,
             @RequestParam(value = "batchSearch", required = false) boolean batchSearch,
+            @RequestParam(value = "advancedSearch", required = false) boolean advancedSearch,
             @RequestParam(value = "interactorSpeciesFilter", required = false) Set<String> interactorSpeciesFilter,
             @RequestParam(value = "interactorTypesFilter", required = false) Set<String> interactorTypesFilter,
             @RequestParam(value = "interactionDetectionMethodsFilter", required = false) Set<String> interactionDetectionMethodsFilter,
@@ -175,6 +180,7 @@ public class InteractionSearchController {
         FacetPage<SearchInteraction> searchInteraction = interactionSearchService.findInteractionWithFacet(
                 query,
                 batchSearch,
+                advancedSearch,
                 interactorSpeciesFilter,
                 interactorTypesFilter,
                 interactionDetectionMethodsFilter,
@@ -222,6 +228,7 @@ public class InteractionSearchController {
     public ResponseEntity<String> getInteractorsDatatablesHandler(
             @RequestParam(value = "query") String query,
             @RequestParam(value = "batchSearch", required = false) boolean batchSearch,
+            @RequestParam(value = "advancedSearch", required = false) boolean advancedSearch,
             @RequestParam(value = "interactorSpeciesFilter", required = false) Set<String> interactorSpeciesFilter,
             @RequestParam(value = "interactorTypesFilter", required = false) Set<String> interactorTypesFilter,
             @RequestParam(value = "interactionDetectionMethodsFilter", required = false) Set<String> interactionDetectionMethodsFilter,
@@ -243,6 +250,7 @@ public class InteractionSearchController {
         GroupPage<SearchChildInteractor> searchInteractors = childInteractorSearchService.findInteractorsWithGroup(
                 query,
                 batchSearch,
+                advancedSearch,
                 interactorSpeciesFilter,
                 interactorTypesFilter,
                 interactionDetectionMethodsFilter,
@@ -262,6 +270,7 @@ public class InteractionSearchController {
         long numGroups = childInteractorSearchService.countInteractorsWithGroup(
                 query,
                 batchSearch,
+                advancedSearch,
                 interactorSpeciesFilter,
                 interactorTypesFilter,
                 interactionDetectionMethodsFilter,
@@ -281,6 +290,7 @@ public class InteractionSearchController {
             Long interactionCount = interactionSearchService.countInteractionResult(
                     query,
                     batchSearch,
+                    advancedSearch,
                     searchInteractor.getInteractorAc(),
                     interactorSpeciesFilter,
                     interactorTypesFilter,
@@ -334,6 +344,7 @@ public class InteractionSearchController {
     public long countInteractionResult(
             @RequestParam(value = "query") String query,
             @RequestParam(value = "batchSearch", required = false) boolean batchSearch,
+            @RequestParam(value = "advancedSearch", required = false) boolean advancedSearch,
             @RequestParam(value = "interactorAc") String interactorAc,
             @RequestParam(value = "interactorSpeciesFilter", required = false) Set<String> interactorSpeciesFilter,
             @RequestParam(value = "interactorTypesFilter", required = false) Set<String> interactorTypesFilter,
@@ -350,6 +361,7 @@ public class InteractionSearchController {
         return interactionSearchService.countInteractionResult(
                 query,
                 batchSearch,
+                advancedSearch,
                 interactorAc,
                 interactorSpeciesFilter,
                 interactorTypesFilter,

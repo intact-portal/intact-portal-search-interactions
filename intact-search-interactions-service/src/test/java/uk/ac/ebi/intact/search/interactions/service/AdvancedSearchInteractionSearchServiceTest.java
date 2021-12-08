@@ -23,7 +23,7 @@ import static org.junit.Assert.assertEquals;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class AdvanceSearchInteractionSearchServiceTest {
+public class AdvancedSearchInteractionSearchServiceTest {
 
     @Resource
     private InteractionIndexService interactionIndexService;
@@ -67,6 +67,14 @@ public class AdvanceSearchInteractionSearchServiceTest {
         Page<SearchInteraction> interactionPage2 = interactionSearchService.findInteractionsByAdvancedQuery("P12345*");
         assertEquals(2, interactionPage2.getTotalElements());
         assertEquals(2, interactionPage2.getNumberOfElements());
+
+        Page<SearchInteraction> interactionPage3 = interactionSearchService.findInteractionsByAdvancedQuery("EBI-12345");
+        assertEquals(1, interactionPage3.getTotalElements());
+        assertEquals(1, interactionPage3.getNumberOfElements());
+
+        Page<SearchInteraction> interactionPage4 = interactionSearchService.findInteractionsByAdvancedQuery("EBI-12345*");
+        assertEquals(2, interactionPage4.getTotalElements());
+        assertEquals(2, interactionPage4.getNumberOfElements());
     }
 
 

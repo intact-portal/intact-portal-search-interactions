@@ -5,10 +5,10 @@ import org.springframework.data.solr.core.mapping.SolrDocument;
 
 import java.util.Set;
 
-import static uk.ac.ebi.intact.search.interactions.model.AdvanceSearchInteractionFields.AS_ID_A;
+import static uk.ac.ebi.intact.search.interactions.model.AdvancedSearchInteractionFields.AS_ID_A;
 
 @SolrDocument(collection = SearchInteraction.INTERACTIONS)
-public class AdvanceSearchInteraction {
+public class AdvancedSearchInteraction {
 
     @Field(AS_ID_A)
     private Set<String> asIdA;

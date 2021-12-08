@@ -23,6 +23,7 @@ public class ChildInteractorSearchService {
 
     public GroupPage<SearchChildInteractor> findInteractorsWithGroup(String query,
                                                                      boolean batchSearch,
+                                                                     boolean advancedSearch,
                                                                      Set<String> interactorSpeciesFilter,
                                                                      Set<String> interactorTypesFilter,
                                                                      Set<String> interactionDetectionMethodsFilter,
@@ -38,13 +39,14 @@ public class ChildInteractorSearchService {
                                                                      Set<String> interactorAcs,
                                                                      int page,
                                                                      int pageSize) {
-        return childInteractorRepository.findChildInteractors(query, batchSearch, interactorSpeciesFilter, interactorTypesFilter, interactionDetectionMethodsFilter,
+        return childInteractorRepository.findChildInteractors(query, batchSearch, advancedSearch, interactorSpeciesFilter, interactorTypesFilter, interactionDetectionMethodsFilter,
                 interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, expansionFilter, minMIScore, maxMIScore, intraSpeciesFilter, binaryInteractionIds, interactorAcs, null,
                 PageRequest.of(page, pageSize));
     }
 
     public long countInteractorsWithGroup(String query,
                                           boolean batchSearch,
+                                          boolean advancedSearch,
                                           Set<String> interactorSpeciesFilter,
                                           Set<String> interactorTypesFilter,
                                           Set<String> interactionDetectionMethodsFilter,
@@ -58,7 +60,7 @@ public class ChildInteractorSearchService {
                                           boolean intraSpeciesFilter,
                                           Set<Long> binaryInteractionIds,
                                           Set<String> interactorAcs) {
-        return childInteractorRepository.countChildInteractors(query, batchSearch, interactorSpeciesFilter, interactorTypesFilter, interactionDetectionMethodsFilter,
+        return childInteractorRepository.countChildInteractors(query, batchSearch, advancedSearch, interactorSpeciesFilter, interactorTypesFilter, interactionDetectionMethodsFilter,
                 interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, expansionFilter, minMIScore, maxMIScore, intraSpeciesFilter, binaryInteractionIds, interactorAcs);
     }
 

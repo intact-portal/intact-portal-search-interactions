@@ -21,7 +21,7 @@ import static org.junit.Assert.assertEquals;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class AdvanceSearchInteractionIndexServiceTest {
+public class AdvancedSearchInteractionIndexServiceTest {
 
     private SearchInteraction searchInteraction1;
     private SearchInteraction searchInteraction2;

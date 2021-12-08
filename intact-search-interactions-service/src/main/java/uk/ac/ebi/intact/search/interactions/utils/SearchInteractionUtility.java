@@ -3,6 +3,7 @@ package uk.ac.ebi.intact.search.interactions.utils;
 import org.springframework.data.solr.core.query.Criteria;
 import org.springframework.data.solr.core.query.FilterQuery;
 import org.springframework.data.solr.core.query.SimpleFilterQuery;
+import org.springframework.data.solr.core.query.SimpleStringCriteria;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,7 +40,7 @@ public class SearchInteractionUtility {
         return s.toLowerCase();
     }
 
-    public Criteria createSearchConditions(String searchTerms, boolean batchSearch) {
+    public Criteria createSearchConditions(String searchTerms, boolean batchSearch, boolean advancedSearch) {
         Criteria conditions;
         Criteria userConditions = null;
         Criteria documentConditions = new Criteria(DOCUMENT_TYPE).is(DocumentType.INTERACTION);
@@ -48,42 +49,46 @@ public class SearchInteractionUtility {
         //We prepare the term to split by several characters
 
         searchTerms = searchTerms.trim();
-        if (searchTerms != null && !searchTerms.isEmpty()) {
-            if (searchTerms.startsWith("\"") && searchTerms.endsWith("\"")) {
-                words.add(searchTerms);
-            } else {
-                words = Arrays.asList(searchTerms.split("[\\s,\\n]"));
-            }
+        if (advancedSearch) {
+            return new SimpleStringCriteria(searchTerms);
+        } else {
+            if (searchTerms != null && !searchTerms.isEmpty()) {
+                if (searchTerms.startsWith("\"") && searchTerms.endsWith("\"")) {
+                    words.add(searchTerms);
+                } else {
+                    words = Arrays.asList(searchTerms.split("[\\s,\\n]"));
+                }
 
-            if (batchSearch) {
-                userConditions = batchSearchConditions(words);
-            } else {
-                //TODO Review query formation
-                if (!searchTerms.trim().equals("*")) {
-                    for (String word : words) {
-                        word = word.trim();
-                        if (!word.isEmpty()) {
-                            if (word.equals("AND") || word.equals("OR") || word.equals("NOT")) {// solr treats these Capital words as logical words
-                                word = lowerCaseWord(word);
-                            }
-                            if (userConditions == null) {
-                                if (isEBIAc(word)) {
-                                    userConditions = new Criteria(AC_A_S).is(word)
-                                            .or(AC_B_S).is(word)
-                                            .or(AC_S).is(word);
-                                } else {
-                                    word = escapeQueryChars(word);
-                                    userConditions = new Criteria(DEFAULT).expression(word);
+                if (batchSearch) {
+                    userConditions = batchSearchConditions(words);
+                } else {
+                    //TODO Review query formation
+                    if (!searchTerms.trim().equals("*")) {
+                        for (String word : words) {
+                            word = word.trim();
+                            if (!word.isEmpty()) {
+                                if (word.equals("AND") || word.equals("OR") || word.equals("NOT")) {// solr treats these Capital words as logical words
+                                    word = lowerCaseWord(word);
                                 }
-                            } else {
-                                if (isEBIAc(word)) {
-                                    Criteria criteria = new Criteria(AC_A_S).is(word)
-                                            .or(AC_B_S).is(word)
-                                            .or(AC_S).is(word);
-                                    userConditions.or(criteria);
+                                if (userConditions == null) {
+                                    if (isEBIAc(word)) {
+                                        userConditions = new Criteria(AC_A_S).is(word)
+                                                .or(AC_B_S).is(word)
+                                                .or(AC_S).is(word);
+                                    } else {
+                                        word = escapeQueryChars(word);
+                                        userConditions = new Criteria(DEFAULT).expression(word);
+                                    }
                                 } else {
-                                    word = escapeQueryChars(word);
-                                    userConditions = userConditions.or(DEFAULT).expression(word);
+                                    if (isEBIAc(word)) {
+                                        Criteria criteria = new Criteria(AC_A_S).is(word)
+                                                .or(AC_B_S).is(word)
+                                                .or(AC_S).is(word);
+                                        userConditions.or(criteria);
+                                    } else {
+                                        word = escapeQueryChars(word);
+                                        userConditions = userConditions.or(DEFAULT).expression(word);
+                                    }
                                 }
                             }
                         }

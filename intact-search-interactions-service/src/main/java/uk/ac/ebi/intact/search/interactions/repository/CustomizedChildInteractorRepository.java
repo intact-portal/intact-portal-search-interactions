@@ -34,6 +34,7 @@ public interface CustomizedChildInteractorRepository {
      */
     GroupPage<SearchChildInteractor> findChildInteractors(String query,
                                                           boolean batchSearch,
+                                                          boolean advancedSearch,
                                                           Set<String> interactorSpeciesFilter,
                                                           Set<String> interactorTypesFilter,
                                                           Set<String> interactionDetectionMethodsFilter,
@@ -67,6 +68,7 @@ public interface CustomizedChildInteractorRepository {
      */
     long countChildInteractors(String query,
                                boolean batchSearch,
+                               boolean advancedSearch,
                                Set<String> interactorSpeciesFilter,
                                Set<String> interactorTypesFilter,
                                Set<String> interactionDetectionMethodsFilter,
