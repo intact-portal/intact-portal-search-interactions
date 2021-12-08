@@ -38,6 +38,12 @@ public class InteractionSearchService {
         return interactionRepository.findInteractions(query, PageRequest.of(0, 10));
     }
 
+    //delete this later
+    public Page<SearchInteraction> findInteractionsByAdvancedQuery(String query) {
+        query = SearchInteractionUtility.escapeQueryChars(query);
+        return interactionRepository.findInteractionsByAdvancedQuery(query, PageRequest.of(0, 10));
+    }
+
     public FacetPage<SearchInteraction> findInteractionFacets(String query,
                                                               boolean batchSearch,
                                                               Set<String> interactorSpeciesFilter,

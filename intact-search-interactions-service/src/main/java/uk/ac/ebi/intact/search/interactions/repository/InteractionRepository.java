@@ -10,6 +10,7 @@ import uk.ac.ebi.intact.search.interactions.utils.DocumentType;
 
 import java.util.Optional;
 
+import static uk.ac.ebi.intact.search.interactions.model.AdvanceSearchInteractionFields.AS_ID_A;
 import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields.DEFAULT;
 import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields.DOCUMENT_TYPE;
 
@@ -25,4 +26,8 @@ public interface InteractionRepository extends SolrCrudRepository<SearchInteract
     Optional<SearchInteraction> findByAc(String ac);
 
     long countByDocumentType(String interactions);
+
+    //delete this afterwards
+    @Query(value = DOCUMENT_TYPE + ":" + DocumentType.INTERACTION + " AND " + AS_ID_A + ":?0")
+    Page<SearchInteraction> findInteractionsByAdvancedQuery(String query, Pageable pageable);
 }
