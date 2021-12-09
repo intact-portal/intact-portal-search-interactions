@@ -23,6 +23,6 @@ public class AdvancedSearchInteractionUtility {
             Arrays.stream(asValues).forEach(e -> e = e + ":");
         }
 
-        return StringUtils.replaceEach(searchTerms, miqlKeys, asValues);
+        return "(" + StringUtils.replaceEach(searchTerms, miqlKeys, asValues) + ")";
     }
 }
