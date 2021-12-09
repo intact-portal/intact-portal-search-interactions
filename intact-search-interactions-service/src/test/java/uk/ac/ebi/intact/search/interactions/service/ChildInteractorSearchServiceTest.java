@@ -66,6 +66,7 @@ public class ChildInteractorSearchServiceTest {
         GroupPage<SearchChildInteractor> page = childInteractorSearchService.findInteractorsWithGroup(
                 "rat",
                 false,
+                false,
                 null,
                 null,
                 null,
@@ -115,6 +116,7 @@ public class ChildInteractorSearchServiceTest {
         GroupPage<SearchChildInteractor> childInteractorsOp = childInteractorSearchService.findInteractorsWithGroup(
                 "physical association",
                 false,
+                false,
                 species,
                 interactorTypesFilter,
                 detectionMethod,
@@ -135,6 +137,7 @@ public class ChildInteractorSearchServiceTest {
 
         long numInteractors = childInteractorSearchService.countInteractorsWithGroup(
                 "physical association",
+                false,
                 false,
                 species,
                 interactorTypesFilter,
@@ -172,6 +175,7 @@ public class ChildInteractorSearchServiceTest {
         //Interactors
         GroupPage<SearchChildInteractor> childInteractorsOp = childInteractorSearchService.findInteractorsWithGroup("rat",
                 false,
+                false,
                 null,
                 null,
                 null,
@@ -193,6 +197,7 @@ public class ChildInteractorSearchServiceTest {
 
         long numInteractors = childInteractorSearchService.countInteractorsWithGroup(
                 "rat",
+                false,
                 false,
                 null,
                 null,
@@ -224,6 +229,7 @@ public class ChildInteractorSearchServiceTest {
 
         //Interactions
         FacetPage<SearchInteraction> searchInteractionsOp = interactionSearchService.findInteractionWithFacet("rat",
+                false,
                 false,
                 null,
                 null,
@@ -264,6 +270,7 @@ public class ChildInteractorSearchServiceTest {
         GroupPage<SearchChildInteractor> childInteractorsOp = childInteractorSearchService.findInteractorsWithGroup(
                 "",
                 false,
+                false,
                 null,
                 null,
                 null,
@@ -284,6 +291,7 @@ public class ChildInteractorSearchServiceTest {
 
         long numInteractors = childInteractorSearchService.countInteractorsWithGroup(
                 "",
+                false,
                 false,
                 null,
                 null,
@@ -310,6 +318,7 @@ public class ChildInteractorSearchServiceTest {
         GroupPage<SearchChildInteractor> childInteractorsOp = childInteractorSearchService.findInteractorsWithGroup(
                 "*",
                 false,
+                false,
                 null,
                 null,
                 null,
@@ -333,6 +342,7 @@ public class ChildInteractorSearchServiceTest {
 
         long numInteractors = childInteractorSearchService.countInteractorsWithGroup(
                 "*",
+                false,
                 false,
                 null,
                 null,
@@ -364,6 +374,7 @@ public class ChildInteractorSearchServiceTest {
         GroupPage<SearchChildInteractor> interactorOp = childInteractorSearchService.findInteractorsWithGroup(
                 "physical association",
                 false,
+                false,
                 species,
                 null,
                 null,
@@ -383,6 +394,7 @@ public class ChildInteractorSearchServiceTest {
 
         long numInteractors = childInteractorSearchService.countInteractorsWithGroup(
                 "physical association",
+                false,
                 false,
                 species,
                 null,
@@ -428,6 +440,7 @@ public class ChildInteractorSearchServiceTest {
         GroupPage<SearchChildInteractor> interactorOp = childInteractorSearchService.findInteractorsWithGroup(
                 "physical association",
                 false,
+                false,
                 species,
                 null,
                 null,
@@ -447,6 +460,7 @@ public class ChildInteractorSearchServiceTest {
 
         long numInteractors = childInteractorSearchService.countInteractorsWithGroup(
                 "physical association",
+                false,
                 false,
                 species,
                 null,
@@ -490,6 +504,7 @@ public class ChildInteractorSearchServiceTest {
         GroupPage<SearchChildInteractor> interactorOp = childInteractorSearchService.findInteractorsWithGroup(
                 "physical association",
                 false,
+                false,
                 null,
                 null,
                 detectionMethods,
@@ -509,6 +524,7 @@ public class ChildInteractorSearchServiceTest {
 
         long numInteractors = childInteractorSearchService.countInteractorsWithGroup(
                 "physical association",
+                false,
                 false,
                 null,
                 null,

@@ -266,6 +266,7 @@ public class InteractionSearchServiceTest {
         FacetPage<SearchInteraction> interactionFacetPage = interactionSearchService.findInteractionFacets(
                 "physical association",
                 false,
+                false,
                 null,
                 null,
                 null,
@@ -409,6 +410,7 @@ public class InteractionSearchServiceTest {
         Page<SearchInteraction> interactionPage = interactionSearchService.findInteractionIdentifiers(
                 "In vitro",
                 false,
+                false,
                 null,
                 null,
                 null,
@@ -481,6 +483,7 @@ public class InteractionSearchServiceTest {
 
         FacetPage<SearchInteraction> interactionFacetPage = interactionSearchService.findInteractionWithFacet(
                 "physical association",
+                false,
                 false,
                 species,
                 interactorTypesFilter,
@@ -640,6 +643,7 @@ public class InteractionSearchServiceTest {
         FacetPage<SearchInteraction> interactionFacetPage = interactionSearchService.findInteractionWithFacet(
                 "physical association",
                 false,
+                false,
                 species,
                 interactorTypesFilter,
                 detectionMethod,
@@ -736,6 +740,7 @@ public class InteractionSearchServiceTest {
 
         FacetPage<SearchInteraction> interactionFacetPage = interactionSearchService.findInteractionWithFacet(
                 "rat",
+                false,
                 false,
                 null,
                 null,
@@ -871,6 +876,7 @@ public class InteractionSearchServiceTest {
         FacetPage<SearchInteraction> interactionFacetPage = interactionSearchService.findInteractionWithFacet(
                 "kappaB",
                 false,
+                false,
                 null,
                 null,
                 null,
@@ -1004,6 +1010,7 @@ public class InteractionSearchServiceTest {
 
         FacetPage<SearchInteraction> interactionFacetPage = interactionSearchService.findInteractionWithFacet(
                 "",
+                false,
                 false,
                 null,
                 null,
@@ -1149,6 +1156,7 @@ public class InteractionSearchServiceTest {
         FacetPage<SearchInteraction> interactionFacetPage = interactionSearchService.findInteractionWithFacet(
                 "*",
                 false,
+                false,
                 null,
                 null,
                 null,
@@ -1293,6 +1301,7 @@ public class InteractionSearchServiceTest {
         FacetPage<SearchInteraction> interactionFacetPage = interactionSearchService.findInteractionWithFacet(
                 "EBI-715849,EBI-724102",
                 true,
+                false,
                 null,
                 null,
                 null,
@@ -1434,6 +1443,7 @@ public class InteractionSearchServiceTest {
         interactorAcs.add("EBI-10000824");
         FacetPage<SearchInteraction> interactionFacetPage = interactionSearchService.findInteractionWithFacet(
                 "physical association",
+                false,
                 false,
                 species,
                 null,
@@ -1594,6 +1604,7 @@ public class InteractionSearchServiceTest {
         FacetPage<SearchInteraction> interactionFacetPage = interactionSearchService.findInteractionWithFacet(
                 "physical association",
                 false,
+                false,
                 species,
                 null,
                 null,
@@ -1747,6 +1758,7 @@ public class InteractionSearchServiceTest {
         FacetPage<SearchInteraction> interactionFacetPage = interactionSearchService.findInteractionWithFacet(
                 "physical association",
                 false,
+                false,
                 null,
                 null,
                 detectionMethods,
@@ -1898,6 +1910,7 @@ public class InteractionSearchServiceTest {
         FacetPage<SearchInteraction> interactionFacetPage = interactionSearchService.findInteractionWithFacet(
                 "physical association",
                 false,
+                false,
                 null,
                 null,
                 null,
@@ -2044,6 +2057,7 @@ public class InteractionSearchServiceTest {
         FacetPage<SearchInteraction> interactionFacetPage = interactionSearchService.findInteractionWithFacet(
                 "*",
                 false,
+                false,
                 null,
                 null,
                 null,
@@ -2186,6 +2200,7 @@ public class InteractionSearchServiceTest {
         FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
                 "*",
                 false,
+                false,
                 null,
                 null,
                 null,
@@ -2222,6 +2237,7 @@ public class InteractionSearchServiceTest {
         FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
                 "*",
                 false,
+                false,
                 null,
                 null,
                 null,
@@ -2257,6 +2273,7 @@ public class InteractionSearchServiceTest {
     public void filterByNegativeAndPositiveInteractions() {
         FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
                 "*",
+                false,
                 false,
                 null,
                 null,
