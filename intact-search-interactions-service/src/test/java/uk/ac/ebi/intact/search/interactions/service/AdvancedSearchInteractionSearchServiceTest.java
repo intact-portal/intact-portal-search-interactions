@@ -6,17 +6,19 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
+import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.test.context.junit4.SpringRunner;
+import uk.ac.ebi.intact.search.interactions.model.AdvancedSearchInteractionFields;
+import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.service.util.TestUtil;
+import uk.ac.ebi.intact.search.interactions.utils.DocumentType;
+import static uk.ac.ebi.intact.search.interactions.model.AdvancedSearchInteractionFields.MiqlFieldConstants.*;
 
 import javax.annotation.Resource;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
+import java.util.*;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 /**
  * @author Elisabet Barrera
@@ -41,12 +43,36 @@ public class AdvancedSearchInteractionSearchServiceTest {
         interactionIndexService.deleteAll();
         /*Interactions are instantiated from saved searchInteractions in an xml as instantiating it one by one in the code is cumbersome
          * For ref. The Interactions.xml can be created with a method saveInteractioninDisc in CommonUtility in intact-portal-indexer*/
-        Collection<SearchInteraction> searchInteractions = TestUtil.getInteractionObjFromXml("./src/test/resources/Interactions.xml");
-        Iterator<SearchInteraction> searchInteractionIterator = searchInteractions.iterator();
-        searchInteractionIterator.next().setAsIdA(new HashSet<>(Arrays.asList("P12345", "EBI-12345")));
-        searchInteractionIterator.next().setAsIdA(new HashSet<>(Arrays.asList("P123456", "EBI-123456")));
-        interactionIndexService.save(searchInteractions);
-        assertEquals(10, interactionSearchService.countTotal());
+        SearchInteraction searchInteraction1 = new SearchInteraction();
+
+        searchInteraction1.setAc("interaction_c1");
+        searchInteraction1.setDocumentType(DocumentType.INTERACTION);
+        searchInteraction1.setAuthors(new LinkedHashSet<>(Collections.singletonList("Pa et al.")));
+        searchInteraction1.setCount(50);
+        searchInteraction1.setIdentifiers(
+                new HashSet<>(Arrays.asList("interaction_id1", "interaction_id2", "interaction_id3")));
+        searchInteraction1.setPublicationIdentifiers(
+                new HashSet<>(Collections.singletonList("publication_1")));
+        searchInteraction1.setPublicationPubmedIdentifier("unassigned1");
+        searchInteraction1.setAsIdA(new HashSet<>(Arrays.asList("P12345", "EBI-12345")));
+
+        SearchInteraction searchInteraction2 = new SearchInteraction();
+        List<SearchChildInteractor> searchChildInteractors2 = new ArrayList<>();
+
+        searchInteraction2.setAc("interaction_c2 ");
+        searchInteraction2.setDocumentType(DocumentType.INTERACTION);
+        searchInteraction2.setAuthors(new LinkedHashSet<>(Collections.singletonList("Ma et al.")));
+        searchInteraction2.setCount(50);
+        searchInteraction2.setIdentifiers(
+                new HashSet<>(Arrays.asList("interaction_id4", "interaction_id5", "interaction_id6")));
+        searchInteraction2.setPublicationIdentifiers(
+                new HashSet<>(Collections.singletonList("publication_2")));
+        searchInteraction2.setPublicationPubmedIdentifier("unassigned2");
+        searchInteraction2.setAsIdA(new HashSet<>(Arrays.asList("P123456", "EBI-123456")));
+
+        interactionIndexService.save(searchInteraction1);
+        interactionIndexService.save(searchInteraction2);
+        assertEquals(2, interactionSearchService.countTotal());
     }
 
     @After
@@ -60,21 +86,175 @@ public class AdvancedSearchInteractionSearchServiceTest {
      */
     @Test
     public void findByAsIdA() {
-        Page<SearchInteraction> interactionPage = interactionSearchService.findInteractionsByAdvancedQuery("P12345");
-        assertEquals(1, interactionPage.getTotalElements());
-        assertEquals(1, interactionPage.getNumberOfElements());
+        FacetPage<SearchInteraction> interactionFacetPage1 = interactionSearchService.findInteractionWithFacet(
+                ID_A+":P12345",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
 
-        Page<SearchInteraction> interactionPage2 = interactionSearchService.findInteractionsByAdvancedQuery("P12345*");
-        assertEquals(2, interactionPage2.getTotalElements());
-        assertEquals(2, interactionPage2.getNumberOfElements());
+        // page checks
+        assertFalse(interactionFacetPage1.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage1.getContent().size());
+        assertEquals(1, interactionFacetPage1.getNumberOfElements());
+        assertEquals(0, interactionFacetPage1.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage1.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage1.getTotalElements());
 
-        Page<SearchInteraction> interactionPage3 = interactionSearchService.findInteractionsByAdvancedQuery("EBI-12345");
-        assertEquals(1, interactionPage3.getTotalElements());
-        assertEquals(1, interactionPage3.getNumberOfElements());
 
-        Page<SearchInteraction> interactionPage4 = interactionSearchService.findInteractionsByAdvancedQuery("EBI-12345*");
-        assertEquals(2, interactionPage4.getTotalElements());
-        assertEquals(2, interactionPage4.getNumberOfElements());
+        FacetPage<SearchInteraction> interactionFacetPage2 = interactionSearchService.findInteractionWithFacet(
+                ID_A+":P12345*",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage2.getContent().isEmpty());
+        assertEquals(2, interactionFacetPage2.getContent().size());
+        assertEquals(2, interactionFacetPage2.getNumberOfElements());
+        assertEquals(0, interactionFacetPage2.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage2.getPageable().getPageSize());
+        assertEquals(2, interactionFacetPage2.getTotalElements());
+
+        FacetPage<SearchInteraction> interactionFacetPage3 = interactionSearchService.findInteractionWithFacet(
+                ID_A+":EBI-12345",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage3.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage3.getContent().size());
+        assertEquals(1, interactionFacetPage3.getNumberOfElements());
+        assertEquals(0, interactionFacetPage3.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage3.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage3.getTotalElements());
+
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                ID_A+":EBI-12345 OR "+ID_A+":P123456",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        //assertEquals(2, interactionFacetPage5.getContent().size());
+        assertEquals(2, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(2, interactionFacetPage5.getTotalElements());
+
+        FacetPage<SearchInteraction> interactionFacetPage6 = interactionSearchService.findInteractionWithFacet(
+                ID_A+":EBI-12345 AND P123456",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertTrue(interactionFacetPage6.getContent().isEmpty());
+        assertEquals(0, interactionFacetPage6.getContent().size());
+        assertEquals(0, interactionFacetPage6.getNumberOfElements());
+        assertEquals(0, interactionFacetPage6.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage6.getPageable().getPageSize());
+        assertEquals(0, interactionFacetPage6.getTotalElements());
+
+        FacetPage<SearchInteraction> interactionFacetPage7 = interactionSearchService.findInteractionWithFacet(
+                ID_A+":+EBI-12345 -P123456",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertTrue(interactionFacetPage7.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage7.getContent().size());
+        assertEquals(1, interactionFacetPage7.getNumberOfElements());
+        assertEquals(0, interactionFacetPage7.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage7.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage7.getTotalElements());
+
     }
 
 

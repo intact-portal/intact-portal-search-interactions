@@ -1,14 +1,13 @@
 package uk.ac.ebi.intact.search.interactions.utils;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.solr.core.query.Criteria;
 import org.springframework.data.solr.core.query.FilterQuery;
 import org.springframework.data.solr.core.query.SimpleFilterQuery;
 import org.springframework.data.solr.core.query.SimpleStringCriteria;
+import uk.ac.ebi.intact.search.interactions.model.AdvancedSearchInteractionFields;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -49,10 +48,10 @@ public class SearchInteractionUtility {
         //We prepare the term to split by several characters
 
         searchTerms = searchTerms.trim();
-        if (advancedSearch) {
-            return new SimpleStringCriteria(searchTerms);
-        } else {
-            if (searchTerms != null && !searchTerms.isEmpty()) {
+        if (searchTerms != null && !searchTerms.isEmpty()) {
+            if (advancedSearch) {
+                userConditions= new SimpleStringCriteria(AdvancedSearchInteractionUtility.getAdvancedSearchQuery(searchTerms));
+            } else {
                 if (searchTerms.startsWith("\"") && searchTerms.endsWith("\"")) {
                     words.add(searchTerms);
                 } else {

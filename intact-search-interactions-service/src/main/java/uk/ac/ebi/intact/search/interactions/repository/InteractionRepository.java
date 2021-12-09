@@ -27,7 +27,4 @@ public interface InteractionRepository extends SolrCrudRepository<SearchInteract
 
     long countByDocumentType(String interactions);
 
-    //delete this afterwards
-    @Query(value = DOCUMENT_TYPE + ":" + DocumentType.INTERACTION + " AND " + AS_ID_A + ":?0")
-    Page<SearchInteraction> findInteractionsByAdvancedQuery(String query, Pageable pageable);
 }

@@ -35,7 +35,7 @@ public class AdvancedSearchInteractionIndexServiceTest {
     @Before
     public void setUp() {
 
-        //Create new interactors documents
+        //Create new interaction documents
         searchInteraction1 = new SearchInteraction();
 
         searchInteraction1.setAc("interaction_c1");
