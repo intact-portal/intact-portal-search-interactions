@@ -13,11 +13,22 @@ public class AdvancedSearchInteraction {
     @Field(ID_A)
     private Set<String> asIdA;
 
+    @Field(ID_B)
+    private Set<String> asIdB;
+
     public Set<String> getAsIdA() {
         return asIdA;
     }
 
     public void setAsIdA(Set<String> asIdA) {
         this.asIdA = asIdA;
+    }
+
+    public Set<String> getAsIdB() {
+        return asIdB;
+    }
+
+    public void setAsIdB(Set<String> asIdB) {
+        this.asIdB = asIdB;
     }
 }

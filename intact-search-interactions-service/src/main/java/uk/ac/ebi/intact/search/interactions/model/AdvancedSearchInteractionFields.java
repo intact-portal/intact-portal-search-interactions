@@ -7,7 +7,9 @@ import java.util.stream.Collectors;
 
 public enum AdvancedSearchInteractionFields {
 
-    AS_ID_A(MiqlFieldConstants.ID_A,AdvancedSearchFieldConstants.ID_A);
+    AS_ID_A(MiqlFieldConstants.ID_A,AdvancedSearchFieldConstants.ID_A),
+    AS_ID_B(MiqlFieldConstants.ID_B,AdvancedSearchFieldConstants.ID_B),
+    AS_ID(MiqlFieldConstants.ID,AdvancedSearchFieldConstants.ID);
 
     AdvancedSearchInteractionFields(String miqlFieldName, String asFieldName){
         this.miqlFieldName=miqlFieldName;
@@ -30,9 +32,13 @@ public enum AdvancedSearchInteractionFields {
 
     public static class MiqlFieldConstants {
         public static final String ID_A = "idA";
+        public static final String ID_B = "idB";
+        public static final String ID="id";
     }
 
     public static class AdvancedSearchFieldConstants {
         public static final String ID_A = "as_idA";
+        public static final String ID_B = "as_idB";
+        public static final String ID="as_id";
     }
 }
