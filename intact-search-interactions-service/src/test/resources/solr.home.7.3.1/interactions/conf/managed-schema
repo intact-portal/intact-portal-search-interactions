@@ -301,7 +301,21 @@
     </analyzer>
   </fieldType>
   <fieldType name="text_intact" class="solr.TextField" positionIncrementGap="100" indexed="true" stored="false" omitNorms="true" termVectors="true" required="true" multiValued="true">
-    <analyzer>
+    <analyzer type="index">
+          <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="[\(\)]" replacement=""/>
+          <!-- replace brakets -->
+          <tokenizer class="solr.PatternTokenizerFactory" pattern=":" />
+          <filter class="solr.TrimFilterFactory"/>
+          <!--
+            trim white spaces at the beginning and end of the words
+          -->
+          <filter class="solr.LowerCaseFilterFactory"/>
+          <filter class="solr.StopFilterFactory"/>
+          <!--
+            discards common english stop words: "a", "an", ...
+          -->
+      </analyzer>
+    <analyzer type="query">
       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="[\(\)]" replacement=""/>
       <!-- replace brakets -->
       <tokenizer class="solr.WhitespaceTokenizerFactory"/>
@@ -612,6 +626,8 @@
 
   <field name="as_idA" type="text_intact" default="-" />
   <field name="as_idB" type="text_intact" default="-" />
+  <field name="as_altidA" type="text_intact" default="-" />
+  <field name="as_altidB" type="text_intact" default="-" />
   <field name="as_id" type="text_intact" default=""/>
 
   <dynamicField name="*_txt_en_split_tight" type="text_en_splitting_tight" indexed="true" stored="true"/>
@@ -798,4 +814,6 @@
     <!-- Advanced Search copy fields -->
     <copyField source="as_idA" dest="as_id"/>
     <copyField source="as_idB" dest="as_id"/>
+    <copyField source="as_altidA" dest="as_id"/>
+    <copyField source="as_altidB" dest="as_id"/>
 </schema>

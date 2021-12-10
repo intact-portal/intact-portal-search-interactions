@@ -23,7 +23,7 @@ import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static uk.ac.ebi.intact.search.interactions.model.AdvancedSearchInteractionFields.MiqlFieldConstants.ID_A;
+import static uk.ac.ebi.intact.search.interactions.model.AdvancedSearchInteractionFields.MiqlFieldConstants.ALTID_A;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -50,8 +50,8 @@ public class ChildInteractorSearchServiceTest {
          * For ref. The Interactions.xml can be created with a method saveInteractioninDisc in CommonUtility in intact-portal-indexer*/
         Collection<SearchInteraction> searchInteractions = TestUtil.getInteractionObjFromXml("./src/test/resources/Interactions.xml");
         Iterator<SearchInteraction> iterator = searchInteractions.iterator();
-        iterator.next().setAsIdA(new HashSet<>(Arrays.asList("P12345", "EBI-12345")));
-        iterator.next().setAsIdA(new HashSet<>(Arrays.asList("P123456", "EBI-123456")));
+        iterator.next().setAsAltidA(new HashSet<>(Arrays.asList("P12345", "EBI-12345")));
+        iterator.next().setAsAltidB(new HashSet<>(Arrays.asList("P123456", "EBI-123456")));
         interactionIndexService.save(searchInteractions, Duration.ofMillis(100));
         assertEquals(20, childInteractorSearchService.countTotal());// includes duplicated records
     }
@@ -68,7 +68,7 @@ public class ChildInteractorSearchServiceTest {
     @Test
     public void getUniqueChildInteractorsFromMIQLQuery() {
         GroupPage<SearchChildInteractor> page = childInteractorSearchService.findInteractorsWithGroup(
-                ID_A + ":(EBI-12345 OR P123456)",
+                ALTID_A + ":(EBI-12345 OR P123456)",
                 false,
                 true,
                 null,

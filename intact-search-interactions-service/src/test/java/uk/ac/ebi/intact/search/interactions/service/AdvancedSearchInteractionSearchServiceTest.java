@@ -55,9 +55,10 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 new HashSet<>(Collections.singletonList("publication_1")));
         searchInteraction1.setPublicationPubmedIdentifier("unassigned1");
         searchInteraction1.setDetectionMethod("detection_method1");
-        searchInteraction1.setAsIdA(new HashSet<>(Arrays.asList("P12345", "EBI-12345")));
-        searchInteraction1.setAsIdB(new HashSet<>(Arrays.asList("O12345", "EBI-22345")));
-
+        searchInteraction1.setAsAltidA(new HashSet<>(Arrays.asList("uniprotkb:P12345", "intact:EBI-12345")));
+        searchInteraction1.setAsAltidB(new HashSet<>(Arrays.asList("uniprotkb:O12345", "intact:EBI-22345")));
+        searchInteraction1.setAsIdA("preferred-identifier1");
+        searchInteraction1.setAsIdB("preferred-identifier2");
 
         SearchInteraction searchInteraction2 = new SearchInteraction();
         List<SearchChildInteractor> searchChildInteractors2 = new ArrayList<>();
@@ -72,8 +73,10 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 new HashSet<>(Collections.singletonList("publication_2")));
         searchInteraction2.setPublicationPubmedIdentifier("unassigned2");
         searchInteraction2.setDetectionMethod("detection_method2");
-        searchInteraction2.setAsIdA(new HashSet<>(Arrays.asList("P123456", "EBI-123456")));
-        searchInteraction2.setAsIdB(new HashSet<>(Arrays.asList("O123456", "EBI-223456")));
+        searchInteraction2.setAsAltidA(new HashSet<>(Arrays.asList("uniprotkb:P123456", "intact:EBI-123456")));
+        searchInteraction2.setAsAltidB(new HashSet<>(Arrays.asList("uniprotkb:O123456", "intact:EBI-223456")));
+        searchInteraction2.setAsIdA("preferred-identifier3");
+        searchInteraction2.setAsIdB("preferred-identifier4");
 
         interactionIndexService.save(searchInteraction1);
         interactionIndexService.save(searchInteraction2);
@@ -86,13 +89,13 @@ public class AdvancedSearchInteractionSearchServiceTest {
     }
 
     /**
-     * Behaviour If the User executes "idA miql query"
+     * Behaviour If the User executes "altidA miql query"
      * this test if for all fields with text_intact type in solr
      */
     @Test
-    public void findByAsIdA() {
+    public void findByAsAltIdA() {
         FacetPage<SearchInteraction> interactionFacetPage1 = interactionSearchService.findInteractionWithFacet(
-                ID_A + ":P12345",
+                ALTID_A + ":P12345",
                 false,
                 true,
                 null,
@@ -121,7 +124,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
 
 
         FacetPage<SearchInteraction> interactionFacetPage2 = interactionSearchService.findInteractionWithFacet(
-                ID_A + ":P12345*",
+                ALTID_A + ":P12345*",
                 false,
                 true,
                 null,
@@ -160,7 +163,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
         }
 
         FacetPage<SearchInteraction> interactionFacetPage3 = interactionSearchService.findInteractionWithFacet(
-                ID_A + ":EBI-12345",
+                ALTID_A + ":EBI-12345",
                 false,
                 true,
                 null,
@@ -188,7 +191,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
         assertEquals(1, interactionFacetPage3.getTotalElements());
 
         FacetPage<SearchInteraction> interactionFacetPage4 = interactionSearchService.findInteractionWithFacet(
-                ID_A + ":(EBI-12345 P123456)",
+                ALTID_A + ":(EBI-12345 P123456)",
                 false,
                 true,
                 null,
@@ -216,7 +219,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
         assertEquals(2, interactionFacetPage4.getTotalElements());
 
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                ID_A + ":(EBI-12345 OR P123456)",
+                ALTID_A + ":(EBI-12345 OR P123456)",
                 false,
                 true,
                 null,
@@ -244,7 +247,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
         assertEquals(2, interactionFacetPage5.getTotalElements());
 
         FacetPage<SearchInteraction> interactionFacetPage6 = interactionSearchService.findInteractionWithFacet(
-                ID_A + ":(EBI-12345 AND P123456)",
+                ALTID_A + ":(EBI-12345 AND P123456)",
                 false,
                 true,
                 null,
@@ -272,7 +275,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
         assertEquals(0, interactionFacetPage6.getTotalElements());
 
         FacetPage<SearchInteraction> interactionFacetPage7 = interactionSearchService.findInteractionWithFacet(
-                ID_A + ":(+EBI-12345 -P12345)",
+                ALTID_A + ":(+EBI-12345 -P12345)",
                 false,
                 true,
                 null,
@@ -300,7 +303,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
         assertEquals(0, interactionFacetPage7.getTotalElements());
 
         FacetPage<SearchInteraction> interactionFacetPage8 = interactionSearchService.findInteractionWithFacet(
-                ID_A + ":EBI-12345 OR " + ID_A + ":P123456",
+                ALTID_A + ":EBI-12345 OR " + ALTID_A + ":P123456",
                 false,
                 true,
                 null,
@@ -326,15 +329,43 @@ public class AdvancedSearchInteractionSearchServiceTest {
         assertEquals(0, interactionFacetPage8.getPageable().getPageNumber());
         assertEquals(10, interactionFacetPage8.getPageable().getPageSize());
         assertEquals(2, interactionFacetPage8.getTotalElements());
+
+        FacetPage<SearchInteraction> interactionFacetPage9 = interactionSearchService.findInteractionWithFacet(
+                ALTID_A + "\"uniprotkb:P12345\"",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage9.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage9.getContent().size());
+        assertEquals(1, interactionFacetPage9.getNumberOfElements());
+        assertEquals(0, interactionFacetPage9.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage9.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage9.getTotalElements());
     }
 
     /**
-     * Behaviour If the User executes "idB miql query"
+     * Behaviour If the User executes "altidB miql query"
      */
     @Test
-    public void findByAsIdB() {
+    public void findByAsAltIdB() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                ID_B + ":(EBI-22345 OR O123456)",
+                ALTID_B + ":(EBI-22345 OR O123456)",
                 false,
                 true,
                 null,
@@ -363,12 +394,12 @@ public class AdvancedSearchInteractionSearchServiceTest {
     }
 
     /**
-     * Behaviour If the User executes "idA,idB miql query"
+     * Behaviour If the User executes "altidA,altidB miql query"
      */
     @Test
-    public void findByAsIdAIdB() {
+    public void findByAsAltIdAIdB() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                ID_A + ":EBI-123456 AND "+ID_B+":O123456",
+                ALTID_A + ":EBI-123456 AND " + ALTID_B + ":O123456",
                 false,
                 true,
                 null,
@@ -395,7 +426,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
         assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
         assertEquals(1, interactionFacetPage5.getTotalElements());
 
-        assertEquals("interaction_c2",interactionFacetPage5.iterator().next().getAc());
+        assertEquals("interaction_c2", interactionFacetPage5.iterator().next().getAc());
 
     }
 
@@ -405,7 +436,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                ID + ":EBI-123456 AND "+ID+":O123456",
+                ID + ":EBI-123456 AND " + ID + ":O123456",
                 false,
                 true,
                 null,
@@ -432,7 +463,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
         assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
         assertEquals(1, interactionFacetPage5.getTotalElements());
 
-        assertEquals("interaction_c2",interactionFacetPage5.iterator().next().getAc());
+        assertEquals("interaction_c2", interactionFacetPage5.iterator().next().getAc());
 
     }
 }

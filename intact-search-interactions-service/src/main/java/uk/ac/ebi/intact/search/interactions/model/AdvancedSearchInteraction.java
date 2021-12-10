@@ -11,24 +11,46 @@ import static uk.ac.ebi.intact.search.interactions.model.AdvancedSearchInteracti
 public class AdvancedSearchInteraction {
 
     @Field(ID_A)
-    private Set<String> asIdA;
+    private String asIdA;
 
-    @Field(ID_B)
-    private Set<String> asIdB;
+    @Field(ID_A)
+    private String asIdB;
 
-    public Set<String> getAsIdA() {
+    @Field(ALTID_A)
+    private Set<String> asAltidA;
+
+    @Field(ALTID_B)
+    private Set<String> asAltidB;
+
+    public String getAsIdA() {
         return asIdA;
     }
 
-    public void setAsIdA(Set<String> asIdA) {
+    public void setAsIdA(String asIdA) {
         this.asIdA = asIdA;
     }
 
-    public Set<String> getAsIdB() {
+    public String getAsIdB() {
         return asIdB;
     }
 
-    public void setAsIdB(Set<String> asIdB) {
+    public void setAsIdB(String asIdB) {
         this.asIdB = asIdB;
+    }
+
+    public Set<String> getAsAltidA() {
+        return asAltidA;
+    }
+
+    public void setAsAltidA(Set<String> asAltidA) {
+        this.asAltidA = asAltidA;
+    }
+
+    public Set<String> getAsAltidB() {
+        return asAltidB;
+    }
+
+    public void setAsAltidB(Set<String> asAltidB) {
+        this.asAltidB = asAltidB;
     }
 }

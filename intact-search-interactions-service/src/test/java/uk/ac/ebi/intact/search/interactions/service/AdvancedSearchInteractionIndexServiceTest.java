@@ -47,8 +47,10 @@ public class AdvancedSearchInteractionIndexServiceTest {
         searchInteraction1.setPublicationIdentifiers(
                 new HashSet<>(Collections.singletonList("publication_1")));
         searchInteraction1.setPublicationPubmedIdentifier("unassigned1");
-        searchInteraction1.setAsIdA(new HashSet<>(Arrays.asList("P12345", "EBI-12345")));
-        searchInteraction1.setAsIdB(new HashSet<>(Arrays.asList("O12345", "EBI-22345")));
+        searchInteraction1.setAsAltidA(new HashSet<>(Arrays.asList("uniprotkb:P12345", "intact:EBI-12345")));
+        searchInteraction1.setAsAltidB(new HashSet<>(Arrays.asList("uniprotkb:O12345", "intact:EBI-22345")));
+        searchInteraction1.setAsIdA("preferred-identifier1");
+        searchInteraction1.setAsIdB("preferred-identifier2");
 
         searchInteraction2 = new SearchInteraction();
         List<SearchChildInteractor> searchChildInteractors2 = new ArrayList<>();
@@ -62,8 +64,10 @@ public class AdvancedSearchInteractionIndexServiceTest {
         searchInteraction2.setPublicationIdentifiers(
                 new HashSet<>(Collections.singletonList("publication_2")));
         searchInteraction2.setPublicationPubmedIdentifier("unassigned2");
-        searchInteraction2.setAsIdA(new HashSet<>(Arrays.asList("P6789", "EBI-6789")));// all interactor A identifiers
-        searchInteraction2.setAsIdB(new HashSet<>(Arrays.asList("O6789", "EBI-7789")));// all interactor B identifiers
+        searchInteraction2.setAsAltidA(new HashSet<>(Arrays.asList("uniprotkb:P6789", "intact:EBI-6789")));// all interactor A identifiers
+        searchInteraction2.setAsAltidB(new HashSet<>(Arrays.asList("uniprotkb:O6789", "intact:EBI-7789")));// all interactor B identifiers
+        searchInteraction1.setAsIdA("preferred-identifier3");// preferred identifier
+        searchInteraction1.setAsIdB("preferred-identifier4");// preferred identifier
 
     }
 
