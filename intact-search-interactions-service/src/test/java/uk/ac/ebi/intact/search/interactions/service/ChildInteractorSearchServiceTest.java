@@ -23,6 +23,7 @@ import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static uk.ac.ebi.intact.search.interactions.model.AdvancedSearchInteractionFields.MiqlFieldConstants.ID_A;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -48,6 +49,9 @@ public class ChildInteractorSearchServiceTest {
         /*Interactions are instantiated from saved searchInteractions in an xml as instantiating it one by one in the code is cumbersome
          * For ref. The Interactions.xml can be created with a method saveInteractioninDisc in CommonUtility in intact-portal-indexer*/
         Collection<SearchInteraction> searchInteractions = TestUtil.getInteractionObjFromXml("./src/test/resources/Interactions.xml");
+        Iterator<SearchInteraction> iterator = searchInteractions.iterator();
+        iterator.next().setAsIdA(new HashSet<>(Arrays.asList("P12345", "EBI-12345")));
+        iterator.next().setAsIdA(new HashSet<>(Arrays.asList("P123456", "EBI-123456")));
         interactionIndexService.save(searchInteractions, Duration.ofMillis(100));
         assertEquals(20, childInteractorSearchService.countTotal());// includes duplicated records
     }
@@ -55,6 +59,34 @@ public class ChildInteractorSearchServiceTest {
     @After
     public void tearDown() {
         interactionIndexService.deleteAll();
+    }
+
+    /**
+     * Expected number of interactors when interactions are queried by species. Returns total documents found in the groups
+     * instead the number of unique groups
+     */
+    @Test
+    public void getUniqueChildInteractorsFromMIQLQuery() {
+        GroupPage<SearchChildInteractor> page = childInteractorSearchService.findInteractorsWithGroup(
+                ID_A + ":(EBI-12345 OR P123456)",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+        assertEquals(4, page.getTotalElements());
     }
 
     /**

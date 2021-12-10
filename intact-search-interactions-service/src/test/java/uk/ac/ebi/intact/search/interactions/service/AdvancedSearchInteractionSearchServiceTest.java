@@ -78,8 +78,8 @@ public class AdvancedSearchInteractionSearchServiceTest {
     }
 
     /**
-     * Behaviour If the User types "Author name" in search box
-     * includes min gram size check
+     * Behaviour If the User executes "idA miql query"
+     * this test if for all fields with string type in solr
      */
     @Test
     public void findByAsIdA() {
