@@ -11,10 +11,10 @@ import static uk.ac.ebi.intact.search.interactions.model.AdvancedSearchInteracti
 public class AdvancedSearchInteraction {
 
     @Field(ID_A)
-    private String asIdA;
+    private Set<String> asIdA;
 
     @Field(ID_A)
-    private String asIdB;
+    private Set<String> asIdB;
 
     @Field(ALTID_A)
     private Set<String> asAltidA;
@@ -22,19 +22,19 @@ public class AdvancedSearchInteraction {
     @Field(ALTID_B)
     private Set<String> asAltidB;
 
-    public String getAsIdA() {
+    public Set<String> getAsIdA() {
         return asIdA;
     }
 
-    public void setAsIdA(String asIdA) {
+    public void setAsIdA(Set<String> asIdA) {
         this.asIdA = asIdA;
     }
 
-    public String getAsIdB() {
+    public Set<String> getAsIdB() {
         return asIdB;
     }
 
-    public void setAsIdB(String asIdB) {
+    public void setAsIdB(Set<String> asIdB) {
         this.asIdB = asIdB;
     }
 

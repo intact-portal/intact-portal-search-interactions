@@ -301,21 +301,7 @@
     </analyzer>
   </fieldType>
   <fieldType name="text_intact" class="solr.TextField" positionIncrementGap="100" indexed="true" stored="false" omitNorms="true" termVectors="true" required="true" multiValued="true">
-    <analyzer type="index">
-          <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="[\(\)]" replacement=""/>
-          <!-- replace brakets -->
-          <tokenizer class="solr.PatternTokenizerFactory" pattern=":" />
-          <filter class="solr.TrimFilterFactory"/>
-          <!--
-            trim white spaces at the beginning and end of the words
-          -->
-          <filter class="solr.LowerCaseFilterFactory"/>
-          <filter class="solr.StopFilterFactory"/>
-          <!--
-            discards common english stop words: "a", "an", ...
-          -->
-      </analyzer>
-    <analyzer type="query">
+    <analyzer>
       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="[\(\)]" replacement=""/>
       <!-- replace brakets -->
       <tokenizer class="solr.WhitespaceTokenizerFactory"/>

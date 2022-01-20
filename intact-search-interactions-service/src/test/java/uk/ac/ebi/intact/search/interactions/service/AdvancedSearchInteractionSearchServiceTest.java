@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.utils.DocumentType;
+import uk.ac.ebi.intact.search.interactions.utils.as.converters.XrefFieldConverter;
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -19,6 +20,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 import static uk.ac.ebi.intact.search.interactions.model.AdvancedSearchInteractionFields.MiqlFieldConstants.*;
 import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields.DETECTION_METHOD_S;
+import static uk.ac.ebi.intact.search.interactions.service.util.TestUtil.merge;
 
 /**
  * @author Elisabet Barrera
@@ -55,10 +57,12 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 new HashSet<>(Collections.singletonList("publication_1")));
         searchInteraction1.setPublicationPubmedIdentifier("unassigned1");
         searchInteraction1.setDetectionMethod("detection_method1");
-        searchInteraction1.setAsAltidA(new HashSet<>(Arrays.asList("uniprotkb:P12345", "intact:EBI-12345")));
-        searchInteraction1.setAsAltidB(new HashSet<>(Arrays.asList("uniprotkb:O12345", "intact:EBI-22345")));
-        searchInteraction1.setAsIdA("preferred-identifier1");
-        searchInteraction1.setAsIdB("preferred-identifier2");
+        searchInteraction1.setAsAltidA(merge(XrefFieldConverter.indexFieldValues("uniprotkb", "P12345"),
+                XrefFieldConverter.indexFieldValues("intact", "EBI-12345")));// all interactor A identifiers
+        searchInteraction1.setAsAltidB(merge(XrefFieldConverter.indexFieldValues("uniprotkb", "O12345"),
+                XrefFieldConverter.indexFieldValues("intact", "EBI-22345")));// all interactor B identifiers
+        searchInteraction1.setAsIdA(XrefFieldConverter.indexFieldValues("db2", "preferred-identifier1"));// preferred identifier
+        searchInteraction1.setAsIdB(XrefFieldConverter.indexFieldValues("db2", "preferred-identifier2"));// preferred identifier
 
         SearchInteraction searchInteraction2 = new SearchInteraction();
         List<SearchChildInteractor> searchChildInteractors2 = new ArrayList<>();
@@ -73,10 +77,12 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 new HashSet<>(Collections.singletonList("publication_2")));
         searchInteraction2.setPublicationPubmedIdentifier("unassigned2");
         searchInteraction2.setDetectionMethod("detection_method2");
-        searchInteraction2.setAsAltidA(new HashSet<>(Arrays.asList("uniprotkb:P123456", "intact:EBI-123456")));
-        searchInteraction2.setAsAltidB(new HashSet<>(Arrays.asList("uniprotkb:O123456", "intact:EBI-223456")));
-        searchInteraction2.setAsIdA("preferred-identifier3");
-        searchInteraction2.setAsIdB("preferred-identifier4");
+        searchInteraction2.setAsAltidA(merge(XrefFieldConverter.indexFieldValues("uniprotkb", "P123456"),
+                XrefFieldConverter.indexFieldValues("intact", "EBI-123456")));// all interactor A identifiers
+        searchInteraction2.setAsAltidB(merge(XrefFieldConverter.indexFieldValues("uniprotkb", "O123456"),
+                XrefFieldConverter.indexFieldValues("intact", "EBI-223456")));// all interactor B identifiers
+        searchInteraction2.setAsIdA(XrefFieldConverter.indexFieldValues("db2", "preferred-identifier3"));// preferred identifier
+        searchInteraction2.setAsIdB(XrefFieldConverter.indexFieldValues("db2", "preferred-identifier4"));// preferred identifier
 
         interactionIndexService.save(searchInteraction1);
         interactionIndexService.save(searchInteraction2);
