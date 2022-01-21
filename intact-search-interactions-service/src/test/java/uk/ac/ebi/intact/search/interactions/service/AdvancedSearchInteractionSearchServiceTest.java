@@ -337,7 +337,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
         assertEquals(2, interactionFacetPage8.getTotalElements());
 
         FacetPage<SearchInteraction> interactionFacetPage9 = interactionSearchService.findInteractionWithFacet(
-                ALTID_A + "\"uniprotkb:P12345\"",
+                ALTID_A + " :uniprotkb:P12345",
                 false,
                 true,
                 null,
