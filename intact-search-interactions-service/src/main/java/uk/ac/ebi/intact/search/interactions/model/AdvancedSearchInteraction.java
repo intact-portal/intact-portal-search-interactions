@@ -13,7 +13,7 @@ public class AdvancedSearchInteraction {
     @Field(ID_A)
     private Set<String> asIdA;
 
-    @Field(ID_A)
+    @Field(ID_B)
     private Set<String> asIdB;
 
     @Field(ALTID_A)
