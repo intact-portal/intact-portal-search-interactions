@@ -300,7 +300,7 @@
       <filter class="solr.LowerCaseFilterFactory"/>
     </analyzer>
   </fieldType>
-  <fieldType name="text_intact" class="solr.TextField" positionIncrementGap="100" indexed="true" stored="false" omitNorms="true" termVectors="true" required="true" multiValued="true">
+  <fieldType name="text_intact" class="solr.TextField" positionIncrementGap="100" indexed="true" stored="true" omitNorms="true" termVectors="true" required="true" multiValued="true">
     <analyzer>
       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="[\(\)]" replacement=""/>
       <!-- replace brakets -->
@@ -615,6 +615,10 @@
   <field name="as_altidA" type="text_intact" default="-" />
   <field name="as_altidB" type="text_intact" default="-" />
   <field name="as_id" type="text_intact" default=""/>
+  <field name="as_aliasA" type="text_intact" default="-"/>
+  <field name="as_aliasB" type="text_intact" default="-"/>
+  <field name="as_alias" type="text_intact" default=""/>
+
 
   <dynamicField name="*_txt_en_split_tight" type="text_en_splitting_tight" indexed="true" stored="true"/>
   <dynamicField name="*_descendent_path" type="descendent_path" indexed="true" stored="true"/>
@@ -798,8 +802,6 @@
     <copyField source="publication_annotations" dest="default"/>
 
     <!-- Advanced Search copy fields -->
-    <copyField source="as_idA" dest="as_id"/>
-    <copyField source="as_idB" dest="as_id"/>
     <copyField source="as_altidA" dest="as_id"/>
     <copyField source="as_altidB" dest="as_id"/>
 </schema>

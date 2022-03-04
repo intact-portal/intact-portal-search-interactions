@@ -55,6 +55,10 @@ public class AdvancedSearchInteractionIndexServiceTest {
                 XrefFieldConverter.indexFieldValues("intact", "EBI-22345")));// all interactor B identifiers
         searchInteraction1.setAsIdA(XrefFieldConverter.indexFieldValues("db1", "preferred-identifier1"));// preferred identifier
         searchInteraction1.setAsIdB(XrefFieldConverter.indexFieldValues("db1", "preferred-identifier2"));// preferred identifier
+        searchInteraction1.setAliasA(merge(XrefFieldConverter.indexFieldValues(null, "alias1"),
+                XrefFieldConverter.indexFieldValues(null, "alias2")));
+        searchInteraction1.setAliasB(merge(XrefFieldConverter.indexFieldValues(null, "alias3"),
+                XrefFieldConverter.indexFieldValues(null, "alias4")));
 
         searchInteraction2 = new SearchInteraction();
         List<SearchChildInteractor> searchChildInteractors2 = new ArrayList<>();
@@ -74,7 +78,10 @@ public class AdvancedSearchInteractionIndexServiceTest {
                 XrefFieldConverter.indexFieldValues("intact", "EEBI-7789")));// all interactor B identifiers
         searchInteraction2.setAsIdA(XrefFieldConverter.indexFieldValues("db2", "preferred-identifier3"));// preferred identifier
         searchInteraction2.setAsIdB(XrefFieldConverter.indexFieldValues("db2", "preferred-identifier4"));// preferred identifier
-
+        searchInteraction2.setAliasA(merge(XrefFieldConverter.indexFieldValues(null, "alias5"),
+                XrefFieldConverter.indexFieldValues(null, "alias6")));
+        searchInteraction2.setAliasB(merge(XrefFieldConverter.indexFieldValues(null, "alias7"),
+                XrefFieldConverter.indexFieldValues(null, "alias8")));
     }
 
     @After
