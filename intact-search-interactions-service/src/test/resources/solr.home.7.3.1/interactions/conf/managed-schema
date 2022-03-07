@@ -804,4 +804,6 @@
     <!-- Advanced Search copy fields -->
     <copyField source="as_altidA" dest="as_id"/>
     <copyField source="as_altidB" dest="as_id"/>
+    <copyField source="as_aliasA" dest="as_alias"/>
+    <copyField source="as_aliasB" dest="as_alias"/>
 </schema>

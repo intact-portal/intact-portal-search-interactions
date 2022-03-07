@@ -23,10 +23,10 @@ public class AdvancedSearchInteraction {
     private Set<String> asAltidB;
 
     @Field(ALIAS_A)
-    private Set<String> aliasA;
+    private Set<String> asAliasA;
 
     @Field(ALIAS_B)
-    private Set<String> aliasB;
+    private Set<String> asAliasB;
 
     public Set<String> getAsIdA() {
         return asIdA;
@@ -60,19 +60,19 @@ public class AdvancedSearchInteraction {
         this.asAltidB = asAltidB;
     }
 
-    public Set<String> getAliasA() {
-        return aliasA;
+    public Set<String> getAsAliasA() {
+        return asAliasA;
     }
 
-    public void setAliasA(Set<String> aliasA) {
-        this.aliasA = aliasA;
+    public void setAsAliasA(Set<String> asAliasA) {
+        this.asAliasA = asAliasA;
     }
 
-    public Set<String> getAliasB() {
-        return aliasB;
+    public Set<String> getAsAliasB() {
+        return asAliasB;
     }
 
-    public void setAliasB(Set<String> aliasB) {
-        this.aliasB = aliasB;
+    public void setAsAliasB(Set<String> asAliasB) {
+        this.asAliasB = asAliasB;
     }
 }

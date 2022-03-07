@@ -63,9 +63,9 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 XrefFieldConverter.indexFieldValues("intact", "EBI-22345")));// all interactor B identifiers
         searchInteraction1.setAsIdA(XrefFieldConverter.indexFieldValues("db1", "preferred-identifier1"));// preferred identifier
         searchInteraction1.setAsIdB(XrefFieldConverter.indexFieldValues("db1", "preferred-identifier2"));// preferred identifier
-        searchInteraction1.setAliasA(merge(XrefFieldConverter.indexFieldValues(null, "some text of alias1"),
-                XrefFieldConverter.indexFieldValues(null, "alias2")));
-        searchInteraction1.setAliasB(merge(XrefFieldConverter.indexFieldValues(null, "alias3"),
+        searchInteraction1.setAsAliasA((merge(XrefFieldConverter.indexFieldValues(null, "some text of alias1"),
+                XrefFieldConverter.indexFieldValues(null, "alias2"))));
+        searchInteraction1.setAsAliasB(merge(XrefFieldConverter.indexFieldValues(null, "some text of alias3"),
                 XrefFieldConverter.indexFieldValues(null, "alias4")));
 
         SearchInteraction searchInteraction2 = new SearchInteraction();
@@ -87,9 +87,9 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 XrefFieldConverter.indexFieldValues("intact", "EBI-223456")));// all interactor B identifiers
         searchInteraction2.setAsIdA(XrefFieldConverter.indexFieldValues("db2", "preferred-identifier3"));// preferred identifier
         searchInteraction2.setAsIdB(XrefFieldConverter.indexFieldValues("db2", "preferred-identifier4"));// preferred identifier
-        searchInteraction2.setAliasA(merge(XrefFieldConverter.indexFieldValues(null, "alias1"),
+        searchInteraction2.setAsAliasA(merge(XrefFieldConverter.indexFieldValues(null, "alias1"),
                 XrefFieldConverter.indexFieldValues(null, "alias6")));
-        searchInteraction2.setAliasB(merge(XrefFieldConverter.indexFieldValues(null, "alias7"),
+        searchInteraction2.setAsAliasB(merge(XrefFieldConverter.indexFieldValues(null, "alias3"),
                 XrefFieldConverter.indexFieldValues(null, "alias8")));
 
         interactionIndexService.save(searchInteraction1);
@@ -561,7 +561,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsAliasAWithoutQuotes() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                ALIAS_A + ":some text of alias1",
+                ALIAS_A + ":(some text of alias1)",
                 false,
                 true,
                 null,
@@ -588,8 +588,9 @@ public class AdvancedSearchInteractionSearchServiceTest {
         assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
         assertEquals(2, interactionFacetPage5.getTotalElements());
 
-        assertEquals("interaction_c1", interactionFacetPage5.iterator().next().getAc());
-
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+        assertEquals("interaction_c2", iteractor.next().getAc());
     }
 
     /**
@@ -626,6 +627,194 @@ public class AdvancedSearchInteractionSearchServiceTest {
         assertEquals(1, interactionFacetPage5.getTotalElements());
 
         assertEquals("interaction_c1", interactionFacetPage5.iterator().next().getAc());
+
+    }
+
+    /**
+     * Behaviour If the User executes "aliasB miql query without quotes"
+     */
+    @Test
+    public void findByAsAliasBWithoutQuotes() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                ALIAS_B + ":(some text of alias3)",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(2, interactionFacetPage5.getContent().size());
+        assertEquals(2, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(2, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+        assertEquals("interaction_c2", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "aliasB miql query without quotes"
+     */
+    @Test
+    public void findByAsAliasBWithQuotes() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                ALIAS_B + ":\"some text of alias3\"",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        assertEquals("interaction_c1", interactionFacetPage5.iterator().next().getAc());
+
+    }
+
+    /**
+     * Behaviour If the User executes "alias miql query without quotes"
+     */
+    @Test
+    public void findByAsAliasWithoutQuotes() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                ALIAS + ":(some text of alias3)",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(2, interactionFacetPage5.getContent().size());
+        assertEquals(2, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(2, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+        assertEquals("interaction_c2", iteractor.next().getAc());
+
+    }
+
+    /**
+     * Behaviour If the User executes "alias miql query without quotes"
+     */
+    @Test
+    public void findByAsAliasWithQuotes() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                ALIAS + ":\"some text of alias3\"",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        assertEquals("interaction_c1", interactionFacetPage5.iterator().next().getAc());
+
+    }
+
+    /**
+     * Behaviour If the User executes "alias miql query with a single term"
+     */
+    @Test
+    public void findByAsAliasWithSingleTerm() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                ALIAS + ":alias6",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        assertEquals("interaction_c2", interactionFacetPage5.iterator().next().getAc());
 
     }
 }
