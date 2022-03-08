@@ -28,6 +28,12 @@ public class AdvancedSearchInteraction {
     @Field(ALIAS_B)
     private Set<String> asAliasB;
 
+    @Field(PUB_ID)
+    private Set<String> asPubId;
+
+    @Field(INTERACTION_XREFS)
+    private Set<String> asInteractionXrefs;
+
     public Set<String> getAsIdA() {
         return asIdA;
     }
@@ -74,5 +80,21 @@ public class AdvancedSearchInteraction {
 
     public void setAsAliasB(Set<String> asAliasB) {
         this.asAliasB = asAliasB;
+    }
+
+    public Set<String> getAsPubId() {
+        return asPubId;
+    }
+
+    public void setAsPubId(Set<String> asPubId) {
+        this.asPubId = asPubId;
+    }
+
+    public Set<String> getAsInteractionXrefs() {
+        return asInteractionXrefs;
+    }
+
+    public void setAsInteractionXrefs(Set<String> asInteractionXrefs) {
+        this.asInteractionXrefs = asInteractionXrefs;
     }
 }

@@ -13,7 +13,10 @@ public enum AdvancedSearchInteractionFields {
     AS_ID(MiqlFieldConstants.ID, AdvancedSearchFieldConstants.ID),
     AS_ALIAS(MiqlFieldConstants.ALIAS, AdvancedSearchFieldConstants.ALIAS),
     AS_ALIAS_A(MiqlFieldConstants.ALIAS_A, AdvancedSearchFieldConstants.ALIAS_A),
-    AS_ALIAS_B(MiqlFieldConstants.ALIAS_B, AdvancedSearchFieldConstants.ALIAS_B);
+    AS_ALIAS_B(MiqlFieldConstants.ALIAS_B, AdvancedSearchFieldConstants.ALIAS_B),
+    AS_IDENTIFIER(MiqlFieldConstants.IDENTIFIER, AdvancedSearchFieldConstants.IDENTIFIER),
+    AS_PUB_ID(MiqlFieldConstants.PUB_ID, AdvancedSearchFieldConstants.PUB_ID),
+    AS_INTERACTION_XREFS(MiqlFieldConstants.INTERACTION_XREFS, AdvancedSearchFieldConstants.INTERACTION_XREFS);
 
     AdvancedSearchInteractionFields(String miqlFieldName, String asFieldName) {
         this.miqlFieldName = miqlFieldName;
@@ -41,9 +44,12 @@ public enum AdvancedSearchInteractionFields {
         public static final String ID = "id";
         public static final String ALTID_A = "altidA";
         public static final String ALTID_B = "altidB";
-        public static final String ALIAS_A ="aliasA";
-        public static final String ALIAS_B ="aliasB";
-        public static final String ALIAS ="alias";
+        public static final String ALIAS_A = "aliasA";
+        public static final String ALIAS_B = "aliasB";
+        public static final String ALIAS = "alias";
+        public static final String IDENTIFIER = "identifier";
+        public static final String PUB_ID = "pubid";
+        public static final String INTERACTION_XREFS = "interaction_id";
     }
 
     public static class AdvancedSearchFieldConstants {
@@ -52,8 +58,11 @@ public enum AdvancedSearchInteractionFields {
         public static final String ID = "as_id";
         public static final String ALTID_A = "as_altidA";
         public static final String ALTID_B = "as_altidB";
-        public static final String ALIAS_A ="as_aliasA";
-        public static final String ALIAS_B ="as_aliasB";
-        public static final String ALIAS ="as_alias";
+        public static final String ALIAS_A = "as_aliasA";
+        public static final String ALIAS_B = "as_aliasB";
+        public static final String ALIAS = "as_alias";
+        public static final String IDENTIFIER = "as_identifier";
+        public static final String PUB_ID = "as_pubid";
+        public static final String INTERACTION_XREFS = "as_interaction_id";
     }
 }

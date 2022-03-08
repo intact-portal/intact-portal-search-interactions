@@ -614,11 +614,13 @@
   <field name="as_idB" type="text_intact" default="-" />
   <field name="as_altidA" type="text_intact" default="-" />
   <field name="as_altidB" type="text_intact" default="-" />
-  <field name="as_id" type="text_intact" default=""/>
+  <field name="as_id" type="text_intact" default=""/><!-- id = altA+altB (alt ids contain idA and idB) -->
   <field name="as_aliasA" type="text_intact" default="-"/>
   <field name="as_aliasB" type="text_intact" default="-"/>
-  <field name="as_alias" type="text_intact" default=""/>
-
+  <field name="as_alias" type="text_intact" default=""/><!-- alias = aliasA+aliasB -->
+  <field name="as_identifier" type="text_intact" default=""/><!-- identifier = id + alias -->
+  <field name="as_pubid" type="text_intact" default="-"/>
+  <field name="as_interaction_id" type="text_intact" default="-"/>
 
   <dynamicField name="*_txt_en_split_tight" type="text_en_splitting_tight" indexed="true" stored="true"/>
   <dynamicField name="*_descendent_path" type="descendent_path" indexed="true" stored="true"/>
@@ -806,4 +808,8 @@
     <copyField source="as_altidB" dest="as_id"/>
     <copyField source="as_aliasA" dest="as_alias"/>
     <copyField source="as_aliasB" dest="as_alias"/>
+    <copyField source="as_altidA" dest="as_identifier"/>
+    <copyField source="as_altidB" dest="as_identifier"/>
+    <copyField source="as_aliasA" dest="as_identifier"/>
+    <copyField source="as_aliasB" dest="as_identifier"/>
 </schema>
