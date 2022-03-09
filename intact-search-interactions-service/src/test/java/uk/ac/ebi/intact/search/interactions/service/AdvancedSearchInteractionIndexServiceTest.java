@@ -9,6 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.utils.DocumentType;
+import uk.ac.ebi.intact.search.interactions.utils.as.converters.TextFieldConverter;
 import uk.ac.ebi.intact.search.interactions.utils.as.converters.XrefFieldConverter;
 
 import javax.annotation.Resource;
@@ -62,6 +63,10 @@ public class AdvancedSearchInteractionIndexServiceTest {
         searchInteraction1.setAsPubId(XrefFieldConverter.indexFieldValues("pubmed", "12345/678.9"));
         searchInteraction1.setAsInteractionXrefs(merge(XrefFieldConverter.indexFieldValues("intact", "EBI-123456"),
                 XrefFieldConverter.indexFieldValues("imex", "IM-12345-1")));
+        searchInteraction1.setAsTaxIdA(merge(TextFieldConverter.indexFieldValues("taxid", "9606", "Human"),//short name
+                TextFieldConverter.indexFieldValues("taxid", "9606", "Homo Sapiens")));//full name
+        searchInteraction1.setAsTaxIdB(merge(TextFieldConverter.indexFieldValues("taxid", "9606", "Human test text"),
+                TextFieldConverter.indexFieldValues("taxid", "9606", "Homo Sapiens test text")));
 
         searchInteraction2 = new SearchInteraction();
         List<SearchChildInteractor> searchChildInteractors2 = new ArrayList<>();
@@ -88,6 +93,10 @@ public class AdvancedSearchInteractionIndexServiceTest {
         searchInteraction2.setAsPubId(XrefFieldConverter.indexFieldValues("pubmed", "12345678"));
         searchInteraction2.setAsInteractionXrefs(merge(XrefFieldConverter.indexFieldValues("intact", "EBI-1234567"),
                 XrefFieldConverter.indexFieldValues("imex", "IM-123456-1")));
+        searchInteraction2.setAsTaxIdA(merge(TextFieldConverter.indexFieldValues("taxid", "10116", "Rat"),
+                TextFieldConverter.indexFieldValues("taxid", "9606", "Rattus norvegicus")));
+        searchInteraction2.setAsTaxIdB(merge(TextFieldConverter.indexFieldValues("taxid", "10116", "Rat test text"),
+                TextFieldConverter.indexFieldValues("taxid", "9606", "Rattus norvegicus test text")));
     }
 
     @After

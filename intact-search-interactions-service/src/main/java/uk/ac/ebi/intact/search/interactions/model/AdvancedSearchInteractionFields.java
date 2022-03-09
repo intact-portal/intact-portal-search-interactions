@@ -6,17 +6,20 @@ import java.util.stream.Collectors;
 
 public enum AdvancedSearchInteractionFields {
 
-    AS_ID_A(MiqlFieldConstants.ID_A, AdvancedSearchFieldConstants.ID_A),
-    AS_ID_B(MiqlFieldConstants.ID_B, AdvancedSearchFieldConstants.ID_B),
     ALT_ID_A(MiqlFieldConstants.ALTID_A, AdvancedSearchFieldConstants.ALTID_A),
     ALT_ID_B(MiqlFieldConstants.ALTID_B, AdvancedSearchFieldConstants.ALTID_B),
-    AS_ID(MiqlFieldConstants.ID, AdvancedSearchFieldConstants.ID),
     AS_ALIAS(MiqlFieldConstants.ALIAS, AdvancedSearchFieldConstants.ALIAS),
     AS_ALIAS_A(MiqlFieldConstants.ALIAS_A, AdvancedSearchFieldConstants.ALIAS_A),
     AS_ALIAS_B(MiqlFieldConstants.ALIAS_B, AdvancedSearchFieldConstants.ALIAS_B),
     AS_IDENTIFIER(MiqlFieldConstants.IDENTIFIER, AdvancedSearchFieldConstants.IDENTIFIER),
     AS_PUB_ID(MiqlFieldConstants.PUB_ID, AdvancedSearchFieldConstants.PUB_ID),
-    AS_INTERACTION_XREFS(MiqlFieldConstants.INTERACTION_XREFS, AdvancedSearchFieldConstants.INTERACTION_XREFS);
+    AS_INTERACTION_XREFS(MiqlFieldConstants.INTERACTION_XREFS, AdvancedSearchFieldConstants.INTERACTION_XREFS),
+    AS_TAX_ID_A(MiqlFieldConstants.TAX_ID_A, AdvancedSearchFieldConstants.TAX_ID_A),
+    AS_TAX_ID_B(MiqlFieldConstants.TAX_ID_B, AdvancedSearchFieldConstants.TAX_ID_B),
+    AS_SPECIES(MiqlFieldConstants.SPECIES, AdvancedSearchFieldConstants.SPECIES),
+    AS_ID_A(MiqlFieldConstants.ID_A, AdvancedSearchFieldConstants.ID_A),
+    AS_ID_B(MiqlFieldConstants.ID_B, AdvancedSearchFieldConstants.ID_B),
+    AS_ID(MiqlFieldConstants.ID, AdvancedSearchFieldConstants.ID);
 
     AdvancedSearchInteractionFields(String miqlFieldName, String asFieldName) {
         this.miqlFieldName = miqlFieldName;
@@ -25,17 +28,19 @@ public enum AdvancedSearchInteractionFields {
 
     private String miqlFieldName;
     private String asFieldName;
+    public static String SOLR_FIELD_VALUE_SEPARATOR = "SOLR_FIELD_VALUE_SEPARATOR";
+    public static String SOLR_FIELD_VALUE_SEPARATOR_VALUE = ":";
 
     public static final Map<String, String> MIQL_AS_MAP =
             Arrays.stream(AdvancedSearchInteractionFields.values())
                     .collect(Collectors.toMap(AdvancedSearchInteractionFields::getMiqlFieldName, e -> e.getAsFieldName()));
 
     public String getMiqlFieldName() {
-        return miqlFieldName;
+        return miqlFieldName + SOLR_FIELD_VALUE_SEPARATOR_VALUE;
     }
 
     public String getAsFieldName() {
-        return asFieldName;
+        return asFieldName + SOLR_FIELD_VALUE_SEPARATOR;
     }
 
     public static class MiqlFieldConstants {
@@ -50,6 +55,9 @@ public enum AdvancedSearchInteractionFields {
         public static final String IDENTIFIER = "identifier";
         public static final String PUB_ID = "pubid";
         public static final String INTERACTION_XREFS = "interaction_id";
+        public static final String TAX_ID_A = "taxidA";
+        public static final String TAX_ID_B = "taxidB";
+        public static final String SPECIES = "species";
     }
 
     public static class AdvancedSearchFieldConstants {
@@ -64,5 +72,8 @@ public enum AdvancedSearchInteractionFields {
         public static final String IDENTIFIER = "as_identifier";
         public static final String PUB_ID = "as_pubid";
         public static final String INTERACTION_XREFS = "as_interaction_id";
+        public static final String TAX_ID_A = "as_taxidA";
+        public static final String TAX_ID_B = "as_taxidB";
+        public static final String SPECIES = "as_species";
     }
 }

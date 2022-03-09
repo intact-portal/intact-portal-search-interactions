@@ -34,6 +34,12 @@ public class AdvancedSearchInteraction {
     @Field(INTERACTION_XREFS)
     private Set<String> asInteractionXrefs;
 
+    @Field(TAX_ID_A)
+    private Set<String> asTaxIdA;
+
+    @Field(TAX_ID_B)
+    private Set<String> asTaxIdB;
+
     public Set<String> getAsIdA() {
         return asIdA;
     }
@@ -96,5 +102,21 @@ public class AdvancedSearchInteraction {
 
     public void setAsInteractionXrefs(Set<String> asInteractionXrefs) {
         this.asInteractionXrefs = asInteractionXrefs;
+    }
+
+    public Set<String> getAsTaxIdA() {
+        return asTaxIdA;
+    }
+
+    public void setAsTaxIdA(Set<String> asTaxIdA) {
+        this.asTaxIdA = asTaxIdA;
+    }
+
+    public Set<String> getAsTaxIdB() {
+        return asTaxIdB;
+    }
+
+    public void setAsTaxIdB(Set<String> asTaxIdB) {
+        this.asTaxIdB = asTaxIdB;
     }
 }
