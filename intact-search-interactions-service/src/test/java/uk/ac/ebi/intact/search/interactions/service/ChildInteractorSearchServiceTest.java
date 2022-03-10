@@ -51,7 +51,7 @@ public class ChildInteractorSearchServiceTest {
         Collection<SearchInteraction> searchInteractions = TestUtil.getInteractionObjFromXml("./src/test/resources/Interactions.xml");
         Iterator<SearchInteraction> iterator = searchInteractions.iterator();
         iterator.next().setAsAltidA(new HashSet<>(Arrays.asList("P12345", "EBI-12345")));
-        iterator.next().setAsAltidB(new HashSet<>(Arrays.asList("P123456", "EBI-123456")));
+        iterator.next().setAsAltidA(new HashSet<>(Arrays.asList("P123456", "EBI-123456")));
         interactionIndexService.save(searchInteractions, Duration.ofMillis(100));
         assertEquals(20, childInteractorSearchService.countTotal());// includes duplicated records
     }

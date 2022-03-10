@@ -30,7 +30,7 @@ public class AdvancedSearchInteractionUtility {
         }*/
 
         for (String miqlKey : miqlAsMap.keySet()) {
-            searchTerms = searchTerms.replaceAll("^[" + miqlKey + "]$", " " + miqlAsMap.get(miqlKey));
+            searchTerms = searchTerms.replaceAll("\\b" + miqlKey, " " + miqlAsMap.get(miqlKey));
         }
 
         String formattedSearchTerms = escapeQueryChars(searchTerms);// escape solr special query characters

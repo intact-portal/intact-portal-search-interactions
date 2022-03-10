@@ -102,10 +102,10 @@ public class AdvancedSearchInteractionSearchServiceTest {
         searchInteraction2.setAsPubId(XrefFieldConverter.indexFieldValues("pubmed", "12345678"));
         searchInteraction2.setAsInteractionXrefs(merge(XrefFieldConverter.indexFieldValues("intact", "EBI-1234567"),
                 XrefFieldConverter.indexFieldValues("imex", "IM-123456-1")));
-        searchInteraction2.setAsTaxIdA(merge(TextFieldConverter.indexFieldValues("taxid", "10116", "Rat"),
-                TextFieldConverter.indexFieldValues("taxid", "9606", "Rattus norvegicus")));
-        searchInteraction2.setAsTaxIdB(merge(TextFieldConverter.indexFieldValues("taxid", "10116", "Rat test text"),
-                TextFieldConverter.indexFieldValues("taxid", "9606", "Rattus norvegicus test text")));
+        searchInteraction2.setAsTaxIdA(merge(TextFieldConverter.indexFieldValues("taxid", "10116", "organism1 short name"),
+                TextFieldConverter.indexFieldValues("taxid", "10116", "organism1 full name")));
+        searchInteraction2.setAsTaxIdB(merge(TextFieldConverter.indexFieldValues("taxid", "12345", "organism2 short name"),
+                TextFieldConverter.indexFieldValues("taxid", "12345", "organism2 full name")));
 
         interactionIndexService.save(searchInteraction1);
         interactionIndexService.save(searchInteraction2);
@@ -860,14 +860,53 @@ public class AdvancedSearchInteractionSearchServiceTest {
 
         // page checks
         assertFalse(interactionFacetPage5.getContent().isEmpty());
-        assertEquals(1, interactionFacetPage5.getContent().size());
-        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(2, interactionFacetPage5.getContent().size());
+        assertEquals(2, interactionFacetPage5.getNumberOfElements());
         assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
         assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
-        assertEquals(1, interactionFacetPage5.getTotalElements());
+        assertEquals(2, interactionFacetPage5.getTotalElements());
 
-        assertEquals("interaction_c2", interactionFacetPage5.iterator().next().getAc());
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+        assertEquals("interaction_c2", iteractor.next().getAc());
 
+    }
+
+
+    /**
+     * Behaviour If the User executes "alias miql query with aliasA And aliasB"
+     */
+    @Test
+    public void findByAsAliasWithAliasAAndAliasB() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                ALIAS + ":(alias3 AND alias1)",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(2, interactionFacetPage5.getContent().size());
+        assertEquals(2, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(2, interactionFacetPage5.getTotalElements());
+
+        assertEquals("interaction_c1", interactionFacetPage5.iterator().next().getAc());
     }
 
     /**
@@ -1013,6 +1052,42 @@ public class AdvancedSearchInteractionSearchServiceTest {
         assertEquals(1, interactionFacetPage5.getTotalElements());
 
         assertEquals("interaction_c2", interactionFacetPage5.iterator().next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "identifier miql query with altIdB and altIdA and aliasA and aliasB"
+     */
+    @Test
+    public void findByAsIdentifierWithAltIdBAAndAltIdBAndAliasAAndAliasB() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                IDENTIFIER + ":(P12345 AND O12345 AND alias1 AND alias3)",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        assertEquals("interaction_c1", interactionFacetPage5.iterator().next().getAc());
     }
 
     /**
@@ -1420,5 +1495,412 @@ public class AdvancedSearchInteractionSearchServiceTest {
 
         Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
         assertEquals("interaction_c1", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "taxidB miql query with db:id"
+     */
+    @Test
+    public void findByAsTaxIdBWithDBAndId() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                TAX_ID_B + ":taxid:9606",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        assertEquals("interaction_c1", interactionFacetPage5.iterator().next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "taxidB miql query with db"
+     */
+    @Test
+    public void findByAsTaxIdBWithOnlyDB() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                TAX_ID_B + ":taxid",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(2, interactionFacetPage5.getContent().size());
+        assertEquals(2, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(2, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+        assertEquals("interaction_c2", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "taxidB miql query with id"
+     */
+    @Test
+    public void findByAsTaxIdBWithOnlyId() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                TAX_ID_B + ":9606",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "taxidB miql query with text(short name)"
+     */
+    @Test
+    public void findByAsTaxIdBWithOnlyShortName() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                TAX_ID_B + ":\"Human test text\"",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "taxidB miql query with text(full name)"
+     */
+    @Test
+    public void findByAsTaxIdBWithOnlyFullName() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                TAX_ID_B + ":\"Homo Sapiens test text\"",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "species miql query with db:id"
+     */
+    @Test
+    public void findByAsSpeciesWithDBAndId() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                SPECIES + ":taxid:9606",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        assertEquals("interaction_c1", interactionFacetPage5.iterator().next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "species miql query with db"
+     */
+    @Test
+    public void findByAsSpeciesWithOnlyDB() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                SPECIES + ":taxid",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(2, interactionFacetPage5.getContent().size());
+        assertEquals(2, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(2, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+        assertEquals("interaction_c2", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "species miql query with id"
+     */
+    @Test
+    public void findByAsSpeciesWithOnlyId() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                SPECIES + ":9606",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "species miql query with text(short name)"
+     */
+    @Test
+    public void findByAsSpeciesWithOnlyShortName() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                SPECIES + ":\"Human test text\"",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "species miql query with text(full name)"
+     */
+    @Test
+    public void findByAsSpeciesWithOnlyFullName() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                SPECIES + ":\"Homo Sapiens test text\"",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "species miql query with taxidA and TaxIdB"
+     */
+    @Test
+    public void findByAsSpeciesWithTaxIdAAndTaxIdB() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                SPECIES + ":(taxid:10116 AND taxid:12345)",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c2", iteractor.next().getAc());
     }
 }

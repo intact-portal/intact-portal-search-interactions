@@ -93,10 +93,10 @@ public class AdvancedSearchInteractionIndexServiceTest {
         searchInteraction2.setAsPubId(XrefFieldConverter.indexFieldValues("pubmed", "12345678"));
         searchInteraction2.setAsInteractionXrefs(merge(XrefFieldConverter.indexFieldValues("intact", "EBI-1234567"),
                 XrefFieldConverter.indexFieldValues("imex", "IM-123456-1")));
-        searchInteraction2.setAsTaxIdA(merge(TextFieldConverter.indexFieldValues("taxid", "10116", "Rat"),
-                TextFieldConverter.indexFieldValues("taxid", "9606", "Rattus norvegicus")));
-        searchInteraction2.setAsTaxIdB(merge(TextFieldConverter.indexFieldValues("taxid", "10116", "Rat test text"),
-                TextFieldConverter.indexFieldValues("taxid", "9606", "Rattus norvegicus test text")));
+        searchInteraction2.setAsTaxIdA(merge(TextFieldConverter.indexFieldValues("taxid", "10116", "organism1 short name"),
+                TextFieldConverter.indexFieldValues("taxid", "10116", "organism1 full name")));
+        searchInteraction2.setAsTaxIdB(merge(TextFieldConverter.indexFieldValues("taxid", "12345", "organism2 short name"),
+                TextFieldConverter.indexFieldValues("taxid", "12345", "organism2 full name")));
     }
 
     @After
