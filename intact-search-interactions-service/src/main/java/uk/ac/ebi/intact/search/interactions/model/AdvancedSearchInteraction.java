@@ -43,6 +43,12 @@ public class AdvancedSearchInteraction {
     @Field(PUB_AUTHORS)
     private Set<String> asPubAuthors;
 
+    @Field(PUB_FIRST_AUTHOR)
+    private Set<String> asPubFirstAuthor;
+
+    @Field(PUB_YEAR)
+    private Integer asPubYear;
+
     public Set<String> getAsIdA() {
         return asIdA;
     }
@@ -129,5 +135,21 @@ public class AdvancedSearchInteraction {
 
     public void setAsPubAuthors(Set<String> asPubAuthors) {
         this.asPubAuthors = asPubAuthors;
+    }
+
+    public Set<String> getAsPubFirstAuthor() {
+        return asPubFirstAuthor;
+    }
+
+    public void setAsPubFirstAuthor(Set<String> asPubFirstAuthor) {
+        this.asPubFirstAuthor = asPubFirstAuthor;
+    }
+
+    public Integer getAsPubYear() {
+        return asPubYear;
+    }
+
+    public void setAsPubYear(Integer asPubYear) {
+        this.asPubYear = asPubYear;
     }
 }

@@ -300,6 +300,7 @@
       <filter class="solr.LowerCaseFilterFactory"/>
     </analyzer>
   </fieldType>
+  <!-- used exclusively for advanced search - start -->
   <fieldType name="text_intact" class="solr.TextField" positionIncrementGap="100" indexed="true" stored="true" omitNorms="true" termVectors="true" required="true" multiValued="true">
     <analyzer>
       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="[\(\)]" replacement=""/>
@@ -316,6 +317,8 @@
       -->
   </analyzer>
   </fieldType>
+  <fieldType name="int_Intact" class="solr.TrieIntField" indexed="true" stored="true" precisionStep="0" positionIncrementGap="0" multiValued="false" required="true"/>
+  <!-- used exclusively for advanced search - end -->
   <fieldType name="text_general" class="solr.TextField" positionIncrementGap="100">
     <analyzer type="index">
       <tokenizer class="solr.StandardTokenizerFactory"/>
@@ -625,6 +628,8 @@
   <field name="as_taxidB" type="text_intact" default="-"/>
   <field name="as_species" type="text_intact" default=""/><!-- species = taxidA + taxidB -->
   <field name="as_pubauth" type="text_intact" default="-"/>
+  <field name="as_pubauthors" type="text_intact" default="-"/>
+  <field name="as_pubyear" type="int_Intact" default="0"/>
 
   <dynamicField name="*_txt_en_split_tight" type="text_en_splitting_tight" indexed="true" stored="true"/>
   <dynamicField name="*_descendent_path" type="descendent_path" indexed="true" stored="true"/>

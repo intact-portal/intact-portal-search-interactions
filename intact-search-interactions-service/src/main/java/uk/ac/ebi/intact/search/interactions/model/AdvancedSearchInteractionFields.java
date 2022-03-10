@@ -20,7 +20,9 @@ public enum AdvancedSearchInteractionFields {
     AS_ID_A(MiqlFieldConstants.ID_A, AdvancedSearchFieldConstants.ID_A),
     AS_ID_B(MiqlFieldConstants.ID_B, AdvancedSearchFieldConstants.ID_B),
     AS_ID(MiqlFieldConstants.ID, AdvancedSearchFieldConstants.ID),
-    AS_PUB_AUTHORS(MiqlFieldConstants.PUB_AUTHORS, AdvancedSearchFieldConstants.PUB_AUTHORS);
+    AS_PUB_AUTHORS(MiqlFieldConstants.PUB_AUTHORS, AdvancedSearchFieldConstants.PUB_AUTHORS),
+    AS_PUB_FIRST_AUTHOR(MiqlFieldConstants.PUB_FIRST_AUTHOR, AdvancedSearchFieldConstants.PUB_FIRST_AUTHOR),
+    AS_PUB_YEAR(MiqlFieldConstants.PUB_YEAR, AdvancedSearchFieldConstants.PUB_YEAR);
 
     AdvancedSearchInteractionFields(String miqlFieldName, String asFieldName) {
         this.miqlFieldName = miqlFieldName;
@@ -59,7 +61,9 @@ public enum AdvancedSearchInteractionFields {
         public static final String TAX_ID_A = "taxidA";
         public static final String TAX_ID_B = "taxidB";
         public static final String SPECIES = "species";
-        public static final String PUB_AUTHORS = "pubauth";
+        public static final String PUB_AUTHORS = "pubauthors";
+        public static final String PUB_FIRST_AUTHOR = "pubauth";
+        public static final String PUB_YEAR = "pubyear";
     }
 
     public static class AdvancedSearchFieldConstants {
@@ -77,6 +81,9 @@ public enum AdvancedSearchInteractionFields {
         public static final String TAX_ID_A = "as_taxidA";
         public static final String TAX_ID_B = "as_taxidB";
         public static final String SPECIES = "as_species";
-        public static final String PUB_AUTHORS = "as_pubauth";
+        public static final String PUB_AUTHORS = "as_pubauthors";
+        public static final String PUB_FIRST_AUTHOR = "as_pubauth";
+        public static final String PUB_YEAR = "as_pubyear";
+
     }
 }

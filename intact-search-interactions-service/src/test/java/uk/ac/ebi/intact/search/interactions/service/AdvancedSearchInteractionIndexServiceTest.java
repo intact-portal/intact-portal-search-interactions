@@ -69,6 +69,8 @@ public class AdvancedSearchInteractionIndexServiceTest {
                 TextFieldConverter.indexFieldValues("taxid", "9606", "Homo Sapiens test text")));
         searchInteraction1.setAsPubAuthors(merge(TextFieldConverter.indexFieldValues(null, null, "Name1 I.nitials1 et al."),
                 TextFieldConverter.indexFieldValues(null, null, "Name2 I.nitials2 et al.")));
+        searchInteraction1.setAsPubFirstAuthor(TextFieldConverter.indexFieldValues(null, null, "FirstAuthor1 I.nitials1 et al."));
+        searchInteraction1.setAsPubYear(2012);
 
         searchInteraction2 = new SearchInteraction();
         List<SearchChildInteractor> searchChildInteractors2 = new ArrayList<>();
@@ -101,6 +103,8 @@ public class AdvancedSearchInteractionIndexServiceTest {
                 TextFieldConverter.indexFieldValues("taxid", "12345", "organism2 full name")));
         searchInteraction2.setAsPubAuthors(merge(TextFieldConverter.indexFieldValues(null, null, "Name3 I.nitials3 et al."),
                 TextFieldConverter.indexFieldValues(null, null, "Name2 I.nitials2 et al.")));
+        searchInteraction2.setAsPubFirstAuthor(TextFieldConverter.indexFieldValues(null, null, "FirstAuthor2 I.nitials2 et al."));
+        searchInteraction2.setAsPubYear(2015);
     }
 
     @After
