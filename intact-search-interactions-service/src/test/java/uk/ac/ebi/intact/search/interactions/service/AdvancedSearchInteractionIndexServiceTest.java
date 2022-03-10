@@ -67,6 +67,8 @@ public class AdvancedSearchInteractionIndexServiceTest {
                 TextFieldConverter.indexFieldValues("taxid", "9606", "Homo Sapiens")));//full name
         searchInteraction1.setAsTaxIdB(merge(TextFieldConverter.indexFieldValues("taxid", "9606", "Human test text"),
                 TextFieldConverter.indexFieldValues("taxid", "9606", "Homo Sapiens test text")));
+        searchInteraction1.setAsPubAuthors(merge(TextFieldConverter.indexFieldValues(null, null, "Name1 I.nitials1 et al."),
+                TextFieldConverter.indexFieldValues(null, null, "Name2 I.nitials2 et al.")));
 
         searchInteraction2 = new SearchInteraction();
         List<SearchChildInteractor> searchChildInteractors2 = new ArrayList<>();
@@ -97,6 +99,8 @@ public class AdvancedSearchInteractionIndexServiceTest {
                 TextFieldConverter.indexFieldValues("taxid", "10116", "organism1 full name")));
         searchInteraction2.setAsTaxIdB(merge(TextFieldConverter.indexFieldValues("taxid", "12345", "organism2 short name"),
                 TextFieldConverter.indexFieldValues("taxid", "12345", "organism2 full name")));
+        searchInteraction2.setAsPubAuthors(merge(TextFieldConverter.indexFieldValues(null, null, "Name3 I.nitials3 et al."),
+                TextFieldConverter.indexFieldValues(null, null, "Name2 I.nitials2 et al.")));
     }
 
     @After

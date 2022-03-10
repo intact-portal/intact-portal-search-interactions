@@ -19,18 +19,8 @@ public class AdvancedSearchInteractionUtility {
         String searchTerms = userAdvancedQuery.replaceAll("\\s*([:])\\s*", ":");
 
         Map<String, String> miqlAsMap = AdvancedSearchInteractionFields.MIQL_AS_MAP;
-        /*if (miqlKeys == null) {
-            miqlKeys = miqlAsMap.keySet().toArray(new String[0]);
-            Arrays.stream(miqlKeys).map(e -> e + ":").collect(Collectors.toList()).toArray(miqlKeys);
-        }
-        if (asValues == null) {
-            asValues = miqlAsMap.values().toArray(new String[0]);
-            // so that we can escape solr special query characters
-            Arrays.stream(asValues).map(e -> e + SOLR_FIELD_VALUE_SEPARATOR).collect(Collectors.toList()).toArray(asValues);
-        }*/
-
         for (String miqlKey : miqlAsMap.keySet()) {
-            searchTerms = searchTerms.replaceAll("\\b" + miqlKey, " " + miqlAsMap.get(miqlKey));
+            searchTerms = searchTerms.replaceAll("\\b" + miqlKey, miqlAsMap.get(miqlKey));
         }
 
         String formattedSearchTerms = escapeQueryChars(searchTerms);// escape solr special query characters

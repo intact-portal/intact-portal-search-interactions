@@ -19,7 +19,8 @@ public enum AdvancedSearchInteractionFields {
     AS_SPECIES(MiqlFieldConstants.SPECIES, AdvancedSearchFieldConstants.SPECIES),
     AS_ID_A(MiqlFieldConstants.ID_A, AdvancedSearchFieldConstants.ID_A),
     AS_ID_B(MiqlFieldConstants.ID_B, AdvancedSearchFieldConstants.ID_B),
-    AS_ID(MiqlFieldConstants.ID, AdvancedSearchFieldConstants.ID);
+    AS_ID(MiqlFieldConstants.ID, AdvancedSearchFieldConstants.ID),
+    AS_PUB_AUTHORS(MiqlFieldConstants.PUB_AUTHORS, AdvancedSearchFieldConstants.PUB_AUTHORS);
 
     AdvancedSearchInteractionFields(String miqlFieldName, String asFieldName) {
         this.miqlFieldName = miqlFieldName;
@@ -58,6 +59,7 @@ public enum AdvancedSearchInteractionFields {
         public static final String TAX_ID_A = "taxidA";
         public static final String TAX_ID_B = "taxidB";
         public static final String SPECIES = "species";
+        public static final String PUB_AUTHORS = "pubauth";
     }
 
     public static class AdvancedSearchFieldConstants {
@@ -75,5 +77,6 @@ public enum AdvancedSearchInteractionFields {
         public static final String TAX_ID_A = "as_taxidA";
         public static final String TAX_ID_B = "as_taxidB";
         public static final String SPECIES = "as_species";
+        public static final String PUB_AUTHORS = "as_pubauth";
     }
 }

@@ -40,6 +40,9 @@ public class AdvancedSearchInteraction {
     @Field(TAX_ID_B)
     private Set<String> asTaxIdB;
 
+    @Field(PUB_AUTHORS)
+    private Set<String> asPubAuthors;
+
     public Set<String> getAsIdA() {
         return asIdA;
     }
@@ -118,5 +121,13 @@ public class AdvancedSearchInteraction {
 
     public void setAsTaxIdB(Set<String> asTaxIdB) {
         this.asTaxIdB = asTaxIdB;
+    }
+
+    public Set<String> getAsPubAuthors() {
+        return asPubAuthors;
+    }
+
+    public void setAsPubAuthors(Set<String> asPubAuthors) {
+        this.asPubAuthors = asPubAuthors;
     }
 }
