@@ -52,6 +52,12 @@ public class AdvancedSearchInteraction {
     @Field(TYPE)
     private Set<String> asType;
 
+    @Field(INTERACTION_DETECTION_METHOD)
+    private Set<String> asIDetectionMethod;
+
+    @Field(HOST_ORGANISM)
+    private Set<String> asHostOrganism;
+
     public Set<String> getAsIdA() {
         return asIdA;
     }
@@ -162,5 +168,21 @@ public class AdvancedSearchInteraction {
 
     public void setAsType(Set<String> asType) {
         this.asType = asType;
+    }
+
+    public Set<String> getAsIDetectionMethod() {
+        return asIDetectionMethod;
+    }
+
+    public void setAsIDetectionMethod(Set<String> asIDetectionMethod) {
+        this.asIDetectionMethod = asIDetectionMethod;
+    }
+
+    public Set<String> getAsHostOrganism() {
+        return asHostOrganism;
+    }
+
+    public void setAsHostOrganism(Set<String> asHostOrganism) {
+        this.asHostOrganism = asHostOrganism;
     }
 }

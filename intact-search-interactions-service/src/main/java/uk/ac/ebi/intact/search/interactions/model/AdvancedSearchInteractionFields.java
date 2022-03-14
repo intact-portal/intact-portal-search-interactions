@@ -23,7 +23,9 @@ public enum AdvancedSearchInteractionFields {
     AS_PUB_AUTHORS(MiqlFieldConstants.PUB_AUTHORS, AdvancedSearchFieldConstants.PUB_AUTHORS),
     AS_PUB_FIRST_AUTHOR(MiqlFieldConstants.PUB_FIRST_AUTHOR, AdvancedSearchFieldConstants.PUB_FIRST_AUTHOR),
     AS_PUB_YEAR(MiqlFieldConstants.PUB_YEAR, AdvancedSearchFieldConstants.PUB_YEAR),
-    AS_TYPE(MiqlFieldConstants.TYPE, AdvancedSearchFieldConstants.TYPE);
+    AS_TYPE(MiqlFieldConstants.TYPE, AdvancedSearchFieldConstants.TYPE),
+    AS_HOST_ORGANISM(MiqlFieldConstants.HOST_ORGANISM, AdvancedSearchFieldConstants.HOST_ORGANISM),
+    AS_INTERACTION_DETECTION_METHOD(MiqlFieldConstants.INTERACTION_DETECTION_METHOD, AdvancedSearchFieldConstants.INTERACTION_DETECTION_METHOD);
 
     AdvancedSearchInteractionFields(String miqlFieldName, String asFieldName) {
         this.miqlFieldName = miqlFieldName;
@@ -66,6 +68,8 @@ public enum AdvancedSearchInteractionFields {
         public static final String PUB_FIRST_AUTHOR = "pubauth";
         public static final String PUB_YEAR = "pubyear";
         public static final String TYPE = "type";
+        public static final String HOST_ORGANISM = "taxidHost";
+        public static final String INTERACTION_DETECTION_METHOD = "detmethod";
     }
 
     public static class AdvancedSearchFieldConstants {
@@ -87,6 +91,8 @@ public enum AdvancedSearchInteractionFields {
         public static final String PUB_FIRST_AUTHOR = "as_pubauth";
         public static final String PUB_YEAR = "as_pubyear";
         public static final String TYPE = "as_type";
+        public static final String HOST_ORGANISM = "as_taxidHost";
+        public static final String INTERACTION_DETECTION_METHOD = "as_detmethod";
 
     }
 }
