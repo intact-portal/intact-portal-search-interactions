@@ -49,6 +49,9 @@ public class AdvancedSearchInteraction {
     @Field(PUB_YEAR)
     private Integer asPubYear;
 
+    @Field(TYPE)
+    private Set<String> asType;
+
     public Set<String> getAsIdA() {
         return asIdA;
     }
@@ -151,5 +154,13 @@ public class AdvancedSearchInteraction {
 
     public void setAsPubYear(Integer asPubYear) {
         this.asPubYear = asPubYear;
+    }
+
+    public Set<String> getAsType() {
+        return asType;
+    }
+
+    public void setAsType(Set<String> asType) {
+        this.asType = asType;
     }
 }
