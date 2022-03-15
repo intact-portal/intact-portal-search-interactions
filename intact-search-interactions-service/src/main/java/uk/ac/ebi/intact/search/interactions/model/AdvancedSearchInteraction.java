@@ -70,6 +70,18 @@ public class AdvancedSearchInteraction {
     @Field(TYPE_B)
     private Set<String> asTypeB;
 
+    @Field(FEATURE_TYPE_A)
+    private Set<String> asFeatureTypeA;
+
+    @Field(FEATURE_TYPE_B)
+    private Set<String> asFeatureTypeB;
+
+    @Field(PART_METHOD_A)
+    private Set<String> partMethodA;
+
+    @Field(PART_METHOD_B)
+    private Set<String> partMethodB;
+
     public Set<String> getAsIdA() {
         return asIdA;
     }
@@ -228,5 +240,37 @@ public class AdvancedSearchInteraction {
 
     public void setAsTypeB(Set<String> asTypeB) {
         this.asTypeB = asTypeB;
+    }
+
+    public Set<String> getAsFeatureTypeA() {
+        return asFeatureTypeA;
+    }
+
+    public void setAsFeatureTypeA(Set<String> asFeatureTypeA) {
+        this.asFeatureTypeA = asFeatureTypeA;
+    }
+
+    public Set<String> getAsFeatureTypeB() {
+        return asFeatureTypeB;
+    }
+
+    public void setAsFeatureTypeB(Set<String> asFeatureTypeB) {
+        this.asFeatureTypeB = asFeatureTypeB;
+    }
+
+    public Set<String> getPartMethodA() {
+        return partMethodA;
+    }
+
+    public void setPartMethodA(Set<String> partMethodA) {
+        this.partMethodA = partMethodA;
+    }
+
+    public Set<String> getPartMethodB() {
+        return partMethodB;
+    }
+
+    public void setPartMethodB(Set<String> partMethodB) {
+        this.partMethodB = partMethodB;
     }
 }

@@ -639,6 +639,12 @@
   <field name="as_ptypeA" type="text_intact" default="-"/>
   <field name="as_ptypeB" type="text_intact" default="-"/>
   <field name="as_ptype" type="text_intact" default=""/><!-- ptype = ptypeA + ptypeB -->
+  <field name="as_ftypeA" type="text_intact" default="-"/>
+  <field name="as_ftypeB" type="text_intact" default="-"/>
+  <field name="as_ftype" type="text_intact" default=""/> <!-- ftype = ftypeA + ftypeB -->
+  <field name="as_pmethodA" type="text_intact" default="-"/>
+  <field name="as_pmethodB" type="text_intact" default="-"/>
+  <field name="as_pmethod" type="text_intact" default=""/><!-- pmethod = pmethodA + pmethodB -->
 
   <dynamicField name="*_txt_en_split_tight" type="text_en_splitting_tight" indexed="true" stored="true"/>
   <dynamicField name="*_descendent_path" type="descendent_path" indexed="true" stored="true"/>
@@ -836,4 +842,8 @@
     <copyField source="as_pbioroleB" dest="as_pbiorole"/>
     <copyField source="as_ptypeA" dest="as_ptype"/>
     <copyField source="as_ptypeB" dest="as_ptype"/>
+    <copyField source="as_ftypeA" dest="as_ftype"/>
+    <copyField source="as_ftypeB" dest="as_ftype"/>
+    <copyField source="as_pmethodA" dest="as_pmethod"/>
+    <copyField source="as_pmethodB" dest="as_pmethod"/>
 </schema>

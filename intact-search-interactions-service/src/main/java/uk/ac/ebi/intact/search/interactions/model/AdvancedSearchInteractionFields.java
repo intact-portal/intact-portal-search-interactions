@@ -31,7 +31,13 @@ public enum AdvancedSearchInteractionFields {
     AS_BIOROLE(MiqlFieldConstants.BIOROLE, AdvancedSearchFieldConstants.BIOROLE),
     AS_TYPE_A(MiqlFieldConstants.TYPE_A, AdvancedSearchFieldConstants.TYPE_A),
     AS_TYPE_B(MiqlFieldConstants.TYPE_B, AdvancedSearchFieldConstants.TYPE_B),
-    AS_INTERACTOR_TYPE(MiqlFieldConstants.INTERACTOR_TYPE, AdvancedSearchFieldConstants.INTERACTOR_TYPE);
+    AS_INTERACTOR_TYPE(MiqlFieldConstants.INTERACTOR_TYPE, AdvancedSearchFieldConstants.INTERACTOR_TYPE),
+    AS_FEATURE_TYPE_A(MiqlFieldConstants.FEATURE_TYPE_A, AdvancedSearchFieldConstants.FEATURE_TYPE_A),
+    AS_FEATURE_TYPE_B(MiqlFieldConstants.FEATURE_TYPE_B, AdvancedSearchFieldConstants.FEATURE_TYPE_B),
+    AS_FEATURE_TYPE(MiqlFieldConstants.FEATURE_TYPE, AdvancedSearchFieldConstants.FEATURE_TYPE),
+    AS_PART_METHOD_A(MiqlFieldConstants.PART_METHOD_A, AdvancedSearchFieldConstants.PART_METHOD_A),
+    AS_PART_METHOD_B(MiqlFieldConstants.PART_METHOD_B, AdvancedSearchFieldConstants.PART_METHOD_B),
+    AS_PART_METHOD(MiqlFieldConstants.PART_METHOD, AdvancedSearchFieldConstants.PART_METHOD);
 
     AdvancedSearchInteractionFields(String miqlFieldName, String asFieldName) {
         this.miqlFieldName = miqlFieldName;
@@ -82,6 +88,12 @@ public enum AdvancedSearchInteractionFields {
         public static final String TYPE_A = "ptypeA";
         public static final String TYPE_B = "ptypeB";
         public static final String INTERACTOR_TYPE = "ptype";
+        public static final String FEATURE_TYPE_A = "ftypeA";
+        public static final String FEATURE_TYPE_B = "ftypeB";
+        public static final String FEATURE_TYPE = "ftype";
+        public static final String PART_METHOD_A = "pmethodA";
+        public static final String PART_METHOD_B = "pmethodB";
+        public static final String PART_METHOD = "pmethod";
     }
 
     public static class AdvancedSearchFieldConstants {
@@ -111,7 +123,11 @@ public enum AdvancedSearchInteractionFields {
         public static final String TYPE_A = "as_ptypeA";
         public static final String TYPE_B = "as_ptypeB";
         public static final String INTERACTOR_TYPE = "as_ptype";
-
-
+        public static final String FEATURE_TYPE_A = "as_ftypeA";
+        public static final String FEATURE_TYPE_B = "as_ftypeB";
+        public static final String FEATURE_TYPE = "as_ftype";
+        public static final String PART_METHOD_A = "as_pmethodA";
+        public static final String PART_METHOD_B = "as_pmethodB";
+        public static final String PART_METHOD = "as_pmethod";
     }
 }
