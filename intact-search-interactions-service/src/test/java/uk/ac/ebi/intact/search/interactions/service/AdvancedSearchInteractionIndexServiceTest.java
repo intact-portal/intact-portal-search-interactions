@@ -75,6 +75,10 @@ public class AdvancedSearchInteractionIndexServiceTest {
         searchInteraction1.setAsPubFirstAuthor(TextFieldConverter.indexFieldValues(null, null, "FirstAuthor1 I.nitials1 et al."));
         searchInteraction1.setAsPubYear(2012);
         searchInteraction1.setAsType(TextFieldConverter.indexFieldValues("psi-mi", "MI:1234", "Type1 shortlabel"));
+        searchInteraction1.setAsBioRoleA(TextFieldConverter.indexFieldValues("psi-mi", "MI:412345", "BioroleA1 shortlabel"));
+        searchInteraction1.setAsBioRoleB(TextFieldConverter.indexFieldValues("psi-mi", "MI:4123345", "BioroleB1 shortlabel"));
+        searchInteraction1.setAsTypeA(TextFieldConverter.indexFieldValues("psi-mi", "MI:512345", "typeA1 shortlabel"));
+        searchInteraction1.setAsTypeB(TextFieldConverter.indexFieldValues("psi-mi", "MI:5123345", "typeB1 shortlabel"));
 
         searchInteraction2 = new SearchInteraction();
         List<SearchChildInteractor> searchChildInteractors2 = new ArrayList<>();
@@ -113,6 +117,10 @@ public class AdvancedSearchInteractionIndexServiceTest {
         searchInteraction2.setAsPubFirstAuthor(TextFieldConverter.indexFieldValues(null, null, "FirstAuthor2 I.nitials2 et al."));
         searchInteraction2.setAsPubYear(2015);
         searchInteraction2.setAsType(TextFieldConverter.indexFieldValues("psi-mi", "MI:12345", "Type2 shortlabel"));
+        searchInteraction2.setAsBioRoleA(TextFieldConverter.indexFieldValues("psi-mi", "MI:422345", "BioroleA2 shortlabel"));
+        searchInteraction2.setAsBioRoleB(TextFieldConverter.indexFieldValues("psi-mi", "MI:4223345", "BioroleB2 shortlabel"));
+        searchInteraction2.setAsTypeA(TextFieldConverter.indexFieldValues("psi-mi", "MI:522345", "typeA2 shortlabel"));
+        searchInteraction2.setAsTypeB(TextFieldConverter.indexFieldValues("psi-mi", "MI:5223345", "typeB2 shortlabel"));
     }
 
     @After

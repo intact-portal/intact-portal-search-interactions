@@ -83,6 +83,10 @@ public class AdvancedSearchInteractionSearchServiceTest {
         searchInteraction1.setAsPubFirstAuthor(TextFieldConverter.indexFieldValues(null, null, "FirstAuthor1 I.nitials1 et al."));
         searchInteraction1.setAsPubYear(2012);
         searchInteraction1.setAsType(TextFieldConverter.indexFieldValues("psi-mi", "MI:1234", "Type1 shortlabel"));
+        searchInteraction1.setAsBioRoleA(TextFieldConverter.indexFieldValues("psi-mi", "MI:412345", "BioroleA1 shortlabel"));
+        searchInteraction1.setAsBioRoleB(TextFieldConverter.indexFieldValues("psi-mi", "MI:4123345", "BioroleB1 shortlabel"));
+        searchInteraction1.setAsTypeA(TextFieldConverter.indexFieldValues("psi-mi", "MI:512345", "typeA1 shortlabel"));
+        searchInteraction1.setAsTypeB(TextFieldConverter.indexFieldValues("psi-mi", "MI:5123345", "typeB1 shortlabel"));
 
         SearchInteraction searchInteraction2 = new SearchInteraction();
         List<SearchChildInteractor> searchChildInteractors2 = new ArrayList<>();
@@ -122,7 +126,10 @@ public class AdvancedSearchInteractionSearchServiceTest {
         searchInteraction2.setAsPubFirstAuthor(TextFieldConverter.indexFieldValues(null, null, "FirstAuthor2 I.nitials2 et al."));
         searchInteraction2.setAsPubYear(2015);
         searchInteraction2.setAsType(TextFieldConverter.indexFieldValues("psi-mi", "MI:12345", "Type2 shortlabel"));
-
+        searchInteraction2.setAsBioRoleA(TextFieldConverter.indexFieldValues("psi-mi", "MI:422345", "BioroleA2 shortlabel"));
+        searchInteraction2.setAsBioRoleB(TextFieldConverter.indexFieldValues("psi-mi", "MI:4223345", "BioroleB2 shortlabel"));
+        searchInteraction2.setAsTypeA(TextFieldConverter.indexFieldValues("psi-mi", "MI:522345", "typeA2 shortlabel"));
+        searchInteraction2.setAsTypeB(TextFieldConverter.indexFieldValues("psi-mi", "MI:5223345", "typeB2 shortlabel"));
         interactionIndexService.save(searchInteraction1);
         interactionIndexService.save(searchInteraction2);
         assertEquals(2, interactionSearchService.countTotal());
@@ -2592,6 +2599,673 @@ public class AdvancedSearchInteractionSearchServiceTest {
     public void findByAsDetectionMethodWithOnlyShortName() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
                 INTERACTION_DETECTION_METHOD + ":\"DetectionMethod1 shortlabel\"",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "pbioroleA miql query with db:id"
+     */
+    @Test
+    public void findByAsBioRoleAWithDBAndId() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                BIOROLE_A + ":psi-mi:MI:412345",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        assertEquals("interaction_c1", interactionFacetPage5.iterator().next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "pbioroleA miql query with db"
+     */
+    @Test
+    public void findByAsBioRoleAWithOnlyDB() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                BIOROLE_A + ":psi-mi",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(2, interactionFacetPage5.getContent().size());
+        assertEquals(2, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(2, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+        assertEquals("interaction_c2", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "pbioroleA miql query with id"
+     */
+    @Test
+    public void findByAsBioRoleAWithOnlyId() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                BIOROLE_A + ":MI:412345",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "pbioroleA miql query with text(short name)"
+     */
+    @Test
+    public void findByAsBioRoleAWithOnlyShortName() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                BIOROLE_A + ":\"BioroleA1 shortlabel\"",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "pbioroleB miql query with db:id"
+     */
+    @Test
+    public void findByAsBioRoleBWithDBAndId() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                BIOROLE_B + ":psi-mi:MI:4123345",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        assertEquals("interaction_c1", interactionFacetPage5.iterator().next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "pbioroleB miql query with db"
+     */
+    @Test
+    public void findByAsBioRoleBWithOnlyDB() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                BIOROLE_B + ":psi-mi",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(2, interactionFacetPage5.getContent().size());
+        assertEquals(2, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(2, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+        assertEquals("interaction_c2", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "pbioroleB miql query with id"
+     */
+    @Test
+    public void findByAsBioRoleBWithOnlyId() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                BIOROLE_B + ":MI:4123345",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "pbioroleB miql query with text(short name)"
+     */
+    @Test
+    public void findByAsBioRoleBWithOnlyShortName() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                BIOROLE_B + ":\"BioroleB1 shortlabel\"",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "pbioroleA and pbioroleB miql query with id"
+     */
+    @Test
+    public void findByAsBioRoleAAndBWithOnlyId() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                BIOROLE + ":(MI:4123345 AND MI:412345)",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+    }
+
+
+    /**
+     * Behaviour If the User executes "typeA miql query with db:id"
+     */
+    @Test
+    public void findByAsTypeAWithDBAndId() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                TYPE_A + ":psi-mi:MI:512345",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        assertEquals("interaction_c1", interactionFacetPage5.iterator().next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "typeA miql query with db"
+     */
+    @Test
+    public void findByAsTypeAWithOnlyDB() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                TYPE_A + ":psi-mi",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(2, interactionFacetPage5.getContent().size());
+        assertEquals(2, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(2, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+        assertEquals("interaction_c2", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "typeA miql query with id"
+     */
+    @Test
+    public void findByAsTypeAWithOnlyId() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                TYPE_A + ":MI:512345",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "typeA miql query with text(short name)"
+     */
+    @Test
+    public void findByAsTypeAWithOnlyShortName() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                TYPE_A + ":\"typeA1 shortlabel\"",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "typeB miql query with db:id"
+     */
+    @Test
+    public void findByAsTypeBWithDBAndId() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                TYPE_B + ":psi-mi:MI:5123345",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        assertEquals("interaction_c1", interactionFacetPage5.iterator().next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "typeB miql query with db"
+     */
+    @Test
+    public void findByAsTypeBWithOnlyDB() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                TYPE_B + ":psi-mi",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(2, interactionFacetPage5.getContent().size());
+        assertEquals(2, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(2, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+        assertEquals("interaction_c2", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "typeB miql query with id"
+     */
+    @Test
+    public void findByAsTypeBWithOnlyId() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                TYPE_B + ":MI:5123345",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "typeB miql query with text(short name)"
+     */
+    @Test
+    public void findByAsTypeBWithOnlyShortName() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                TYPE_B + ":\"typeB1 shortlabel\"",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "typeA and typeB miql query with id"
+     */
+    @Test
+    public void findByAsTypeAAndBWithOnlyId() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                INTERACTOR_TYPE + ":(MI:512345 AND MI:5123345)",
                 false,
                 true,
                 null,

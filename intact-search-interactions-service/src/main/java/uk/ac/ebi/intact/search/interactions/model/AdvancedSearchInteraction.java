@@ -58,6 +58,18 @@ public class AdvancedSearchInteraction {
     @Field(HOST_ORGANISM)
     private Set<String> asHostOrganism;
 
+    @Field(BIOROLE_A)
+    private Set<String> asBioRoleA;
+
+    @Field(BIOROLE_B)
+    private Set<String> asBioRoleB;
+
+    @Field(TYPE_A)
+    private Set<String> asTypeA;
+
+    @Field(TYPE_B)
+    private Set<String> asTypeB;
+
     public Set<String> getAsIdA() {
         return asIdA;
     }
@@ -184,5 +196,37 @@ public class AdvancedSearchInteraction {
 
     public void setAsHostOrganism(Set<String> asHostOrganism) {
         this.asHostOrganism = asHostOrganism;
+    }
+
+    public Set<String> getAsBioRoleA() {
+        return asBioRoleA;
+    }
+
+    public void setAsBioRoleA(Set<String> asBioRoleA) {
+        this.asBioRoleA = asBioRoleA;
+    }
+
+    public Set<String> getAsBioRoleB() {
+        return asBioRoleB;
+    }
+
+    public void setAsBioRoleB(Set<String> asBioRoleB) {
+        this.asBioRoleB = asBioRoleB;
+    }
+
+    public Set<String> getAsTypeA() {
+        return asTypeA;
+    }
+
+    public void setAsTypeA(Set<String> asTypeA) {
+        this.asTypeA = asTypeA;
+    }
+
+    public Set<String> getAsTypeB() {
+        return asTypeB;
+    }
+
+    public void setAsTypeB(Set<String> asTypeB) {
+        this.asTypeB = asTypeB;
     }
 }

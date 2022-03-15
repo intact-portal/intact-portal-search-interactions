@@ -633,6 +633,12 @@
   <field name="as_pubyear" type="int_Intact" default="0"/>
   <field name="as_type" type="text_intact" default="-"/>
   <field name="as_detmethod" type="text_intact" default="-"/>
+  <field name="as_pbioroleA" type="text_intact" default="-"/>
+  <field name="as_pbioroleB" type="text_intact" default="-"/>
+  <field name="as_pbiorole" type="text_intact" default=""/><!-- pbiorole = pbioroleA + pbioroleB -->
+  <field name="as_ptypeA" type="text_intact" default="-"/>
+  <field name="as_ptypeB" type="text_intact" default="-"/>
+  <field name="as_ptype" type="text_intact" default=""/><!-- ptype = ptypeA + ptypeB -->
 
   <dynamicField name="*_txt_en_split_tight" type="text_en_splitting_tight" indexed="true" stored="true"/>
   <dynamicField name="*_descendent_path" type="descendent_path" indexed="true" stored="true"/>
@@ -826,4 +832,8 @@
     <copyField source="as_aliasB" dest="as_identifier"/>
     <copyField source="as_taxidA" dest="as_species"/>
     <copyField source="as_taxidB" dest="as_species"/>
+    <copyField source="as_pbioroleA" dest="as_pbiorole"/>
+    <copyField source="as_pbioroleB" dest="as_pbiorole"/>
+    <copyField source="as_ptypeA" dest="as_ptype"/>
+    <copyField source="as_ptypeB" dest="as_ptype"/>
 </schema>

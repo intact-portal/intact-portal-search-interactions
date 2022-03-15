@@ -25,7 +25,13 @@ public enum AdvancedSearchInteractionFields {
     AS_PUB_YEAR(MiqlFieldConstants.PUB_YEAR, AdvancedSearchFieldConstants.PUB_YEAR),
     AS_TYPE(MiqlFieldConstants.TYPE, AdvancedSearchFieldConstants.TYPE),
     AS_HOST_ORGANISM(MiqlFieldConstants.HOST_ORGANISM, AdvancedSearchFieldConstants.HOST_ORGANISM),
-    AS_INTERACTION_DETECTION_METHOD(MiqlFieldConstants.INTERACTION_DETECTION_METHOD, AdvancedSearchFieldConstants.INTERACTION_DETECTION_METHOD);
+    AS_INTERACTION_DETECTION_METHOD(MiqlFieldConstants.INTERACTION_DETECTION_METHOD, AdvancedSearchFieldConstants.INTERACTION_DETECTION_METHOD),
+    AS_BIOROLE_A(MiqlFieldConstants.BIOROLE_A, AdvancedSearchFieldConstants.BIOROLE_A),
+    AS_BIOROLE_B(MiqlFieldConstants.BIOROLE_B, AdvancedSearchFieldConstants.BIOROLE_B),
+    AS_BIOROLE(MiqlFieldConstants.BIOROLE, AdvancedSearchFieldConstants.BIOROLE),
+    AS_TYPE_A(MiqlFieldConstants.TYPE_A, AdvancedSearchFieldConstants.TYPE_A),
+    AS_TYPE_B(MiqlFieldConstants.TYPE_B, AdvancedSearchFieldConstants.TYPE_B),
+    AS_INTERACTOR_TYPE(MiqlFieldConstants.INTERACTOR_TYPE, AdvancedSearchFieldConstants.INTERACTOR_TYPE);
 
     AdvancedSearchInteractionFields(String miqlFieldName, String asFieldName) {
         this.miqlFieldName = miqlFieldName;
@@ -70,6 +76,12 @@ public enum AdvancedSearchInteractionFields {
         public static final String TYPE = "type";
         public static final String HOST_ORGANISM = "taxidHost";
         public static final String INTERACTION_DETECTION_METHOD = "detmethod";
+        public static final String BIOROLE_A = "pbioroleA";
+        public static final String BIOROLE_B = "pbioroleB";
+        public static final String BIOROLE = "pbiorole";
+        public static final String TYPE_A = "ptypeA";
+        public static final String TYPE_B = "ptypeB";
+        public static final String INTERACTOR_TYPE = "ptype";
     }
 
     public static class AdvancedSearchFieldConstants {
@@ -93,6 +105,13 @@ public enum AdvancedSearchInteractionFields {
         public static final String TYPE = "as_type";
         public static final String HOST_ORGANISM = "as_taxidHost";
         public static final String INTERACTION_DETECTION_METHOD = "as_detmethod";
+        public static final String BIOROLE_A = "as_pbioroleA";
+        public static final String BIOROLE_B = "as_pbioroleB";
+        public static final String BIOROLE = "as_pbiorole";
+        public static final String TYPE_A = "as_ptypeA";
+        public static final String TYPE_B = "as_ptypeB";
+        public static final String INTERACTOR_TYPE = "as_ptype";
+
 
     }
 }
