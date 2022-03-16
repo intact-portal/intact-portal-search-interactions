@@ -37,7 +37,10 @@ public enum AdvancedSearchInteractionFields {
     AS_FEATURE_TYPE(MiqlFieldConstants.FEATURE_TYPE, AdvancedSearchFieldConstants.FEATURE_TYPE),
     AS_IDENTIFICATION_METHOD_A(MiqlFieldConstants.IDENTIFICATION_METHOD_A, AdvancedSearchFieldConstants.IDENTIFICATION_METHOD_A),
     AS_IDENTIFICATION_METHOD_B(MiqlFieldConstants.IDENTIFICATION_METHOD_B, AdvancedSearchFieldConstants.IDENTIFICATION_METHOD_B),
-    AS_IDENTIFICATION_METHOD(MiqlFieldConstants.IDENTIFICATION_METHOD, AdvancedSearchFieldConstants.IDENTIFICATION_METHOD);
+    AS_IDENTIFICATION_METHOD(MiqlFieldConstants.IDENTIFICATION_METHOD, AdvancedSearchFieldConstants.IDENTIFICATION_METHOD),
+    AS_XREFS_A(MiqlFieldConstants.XREFS_A, AdvancedSearchFieldConstants.XREFS_A),
+    AS_XREFS_B(MiqlFieldConstants.XREFS_B, AdvancedSearchFieldConstants.XREFS_B),
+    AS_INTERACTOR_XREFS(MiqlFieldConstants.INTERACTOR_XREFS, AdvancedSearchFieldConstants.INTERACTOR_XREFS);
 
     AdvancedSearchInteractionFields(String miqlFieldName, String asFieldName) {
         this.miqlFieldName = miqlFieldName;
@@ -94,6 +97,9 @@ public enum AdvancedSearchInteractionFields {
         public static final String IDENTIFICATION_METHOD_A = "pmethodA";
         public static final String IDENTIFICATION_METHOD_B = "pmethodB";
         public static final String IDENTIFICATION_METHOD = "pmethod";
+        public static final String XREFS_A = "pxrefA";
+        public static final String XREFS_B = "pxrefB";
+        public static final String INTERACTOR_XREFS = "pxref";
     }
 
     public static class AdvancedSearchFieldConstants {
@@ -129,5 +135,8 @@ public enum AdvancedSearchInteractionFields {
         public static final String IDENTIFICATION_METHOD_A = "as_pmethodA";
         public static final String IDENTIFICATION_METHOD_B = "as_pmethodB";
         public static final String IDENTIFICATION_METHOD = "as_pmethod";
+        public static final String XREFS_A = "as_pxrefA";
+        public static final String XREFS_B = "as_pxrefB";
+        public static final String INTERACTOR_XREFS = "as_pxref";
     }
 }

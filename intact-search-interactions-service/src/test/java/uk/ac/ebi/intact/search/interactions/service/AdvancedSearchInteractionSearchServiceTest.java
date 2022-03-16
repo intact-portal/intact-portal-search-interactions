@@ -91,6 +91,10 @@ public class AdvancedSearchInteractionSearchServiceTest {
         searchInteraction1.setAsFeatureTypesB(TextFieldConverter.indexFieldValues("psi-mi", "MI:612334", "feature type B1 shortlabel"));
         searchInteraction1.setAsIdentificationMethodsA(TextFieldConverter.indexFieldValues("psi-mi", "MI:71234", "participant identification method A1 shortlabel"));
         searchInteraction1.setAsIdentificationMethodsB(TextFieldConverter.indexFieldValues("psi-mi", "MI:712334", "participant identification method B1 shortlabel"));
+        searchInteraction1.setAsXrefsA(merge(XrefFieldConverter.indexFieldValues("intact", "EBI-9123456"),
+                XrefFieldConverter.indexFieldValues("go", "GO:213456")));
+        searchInteraction1.setAsXrefsB(merge(XrefFieldConverter.indexFieldValues("intact", "EBI-9223456"),
+                XrefFieldConverter.indexFieldValues("go", "GO:223456")));
 
         SearchInteraction searchInteraction2 = new SearchInteraction();
         List<SearchChildInteractor> searchChildInteractors2 = new ArrayList<>();
@@ -138,6 +142,10 @@ public class AdvancedSearchInteractionSearchServiceTest {
         searchInteraction2.setAsFeatureTypesB(TextFieldConverter.indexFieldValues("psi-mi", "MI:622334", "feature type B2 shortlabel"));
         searchInteraction2.setAsIdentificationMethodsA(TextFieldConverter.indexFieldValues("psi-mi", "MI:72234", "participant identification method A2 shortlabel"));
         searchInteraction2.setAsIdentificationMethodsB(TextFieldConverter.indexFieldValues("psi-mi", "MI:722334", "participant identification method B2 shortlabel"));
+        searchInteraction2.setAsXrefsA(merge(XrefFieldConverter.indexFieldValues("intact", "EBI-8123456"),
+                XrefFieldConverter.indexFieldValues("go", "GO:313456")));
+        searchInteraction2.setAsXrefsB(merge(XrefFieldConverter.indexFieldValues("intact", "EBI-8223456"),
+                XrefFieldConverter.indexFieldValues("go", "GO:323456")));
 
         interactionIndexService.save(searchInteraction1);
         interactionIndexService.save(searchInteraction2);
@@ -3943,6 +3951,266 @@ public class AdvancedSearchInteractionSearchServiceTest {
     public void findByAsParticipantIdentificationAAndBWithOnlyId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
                 IDENTIFICATION_METHOD + ":(MI:71234 AND MI:712334)",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "pxrefA miql query with db:id"
+     */
+    @Test
+    public void findByAsXrefAWithDBAndId() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                XREFS_A + ":intact:EBI-9123456",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        assertEquals("interaction_c1", interactionFacetPage5.iterator().next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "pxrefA miql query with db"
+     */
+    @Test
+    public void findByAsXrefAWithOnlyDB() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                XREFS_A + ":intact",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(2, interactionFacetPage5.getContent().size());
+        assertEquals(2, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(2, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+        assertEquals("interaction_c2", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "pxrefA miql query with id"
+     */
+    @Test
+    public void findByAsXrefAWithOnlyId() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                XREFS_A + ":EBI-9123456",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+    }
+
+
+    /**
+     * Behaviour If the User executes "pxrefB miql query with db:id"
+     */
+    @Test
+    public void findByAsXrefBWithDBAndId() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                XREFS_B + ":go:GO:223456",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        assertEquals("interaction_c1", interactionFacetPage5.iterator().next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "pxrefB miql query with db"
+     */
+    @Test
+    public void findByAsXrefBWithOnlyDB() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                XREFS_B + ":go",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(2, interactionFacetPage5.getContent().size());
+        assertEquals(2, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(2, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+        assertEquals("interaction_c2", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "pxrefB miql query with id"
+     */
+    @Test
+    public void findByAsXrefBWithOnlyId() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                XREFS_B + ":GO:223456",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "pxrefA and pxrefB miql query with id"
+     */
+    @Test
+    public void findByAsXrefAAndBWithOnlyId() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                INTERACTOR_XREFS + ":(GO:223456 AND EBI-9123456)",
                 false,
                 true,
                 null,

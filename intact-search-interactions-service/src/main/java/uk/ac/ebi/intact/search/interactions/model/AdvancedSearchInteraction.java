@@ -82,6 +82,12 @@ public class AdvancedSearchInteraction {
     @Field(IDENTIFICATION_METHOD_B)
     private Set<String> asIdentificationMethodsB;
 
+    @Field(XREFS_A)
+    private Set<String> asXrefsA;
+
+    @Field(XREFS_B)
+    private Set<String> asXrefsB;
+
     public Set<String> getAsIdA() {
         return asIdA;
     }
@@ -272,5 +278,21 @@ public class AdvancedSearchInteraction {
 
     public void setAsIdentificationMethodsB(Set<String> asIdentificationMethodsB) {
         this.asIdentificationMethodsB = asIdentificationMethodsB;
+    }
+
+    public Set<String> getAsXrefsA() {
+        return asXrefsA;
+    }
+
+    public void setAsXrefsA(Set<String> asXrefsA) {
+        this.asXrefsA = asXrefsA;
+    }
+
+    public Set<String> getAsXrefsB() {
+        return asXrefsB;
+    }
+
+    public void setAsXrefsB(Set<String> asXrefsB) {
+        this.asXrefsB = asXrefsB;
     }
 }

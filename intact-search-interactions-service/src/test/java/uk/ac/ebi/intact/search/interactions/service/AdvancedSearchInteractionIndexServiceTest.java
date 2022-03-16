@@ -83,7 +83,10 @@ public class AdvancedSearchInteractionIndexServiceTest {
         searchInteraction1.setAsFeatureTypesB(TextFieldConverter.indexFieldValues("psi-mi", "MI:612334", "feature type B1 shortlabel"));
         searchInteraction1.setAsIdentificationMethodsA(TextFieldConverter.indexFieldValues("psi-mi", "MI:71234", "participant identification method A1 shortlabel"));
         searchInteraction1.setAsIdentificationMethodsB(TextFieldConverter.indexFieldValues("psi-mi", "MI:712334", "participant identification method B1 shortlabel"));
-
+        searchInteraction1.setAsXrefsA(merge(XrefFieldConverter.indexFieldValues("intact", "EBI-9123456"),
+                XrefFieldConverter.indexFieldValues("go", "GO:213456")));
+        searchInteraction1.setAsXrefsB(merge(XrefFieldConverter.indexFieldValues("intact", "EBI-9223456"),
+                XrefFieldConverter.indexFieldValues("go", "GO:223456")));
 
         searchInteraction2 = new SearchInteraction();
         List<SearchChildInteractor> searchChildInteractors2 = new ArrayList<>();
@@ -130,6 +133,10 @@ public class AdvancedSearchInteractionIndexServiceTest {
         searchInteraction2.setAsFeatureTypesB(TextFieldConverter.indexFieldValues("psi-mi", "MI:622334", "feature type B2 shortlabel"));
         searchInteraction2.setAsIdentificationMethodsA(TextFieldConverter.indexFieldValues("psi-mi", "MI:72234", "participant identification method A2 shortlabel"));
         searchInteraction2.setAsIdentificationMethodsB(TextFieldConverter.indexFieldValues("psi-mi", "MI:722334", "participant identification method B2 shortlabel"));
+        searchInteraction2.setAsXrefsA(merge(XrefFieldConverter.indexFieldValues("intact", "EBI-8123456"),
+                XrefFieldConverter.indexFieldValues("go", "GO:313456")));
+        searchInteraction2.setAsXrefsB(merge(XrefFieldConverter.indexFieldValues("intact", "EBI-8223456"),
+                XrefFieldConverter.indexFieldValues("go", "GO:323456")));
     }
 
     @After
