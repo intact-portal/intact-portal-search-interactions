@@ -35,9 +35,9 @@ public enum AdvancedSearchInteractionFields {
     AS_FEATURE_TYPE_A(MiqlFieldConstants.FEATURE_TYPE_A, AdvancedSearchFieldConstants.FEATURE_TYPE_A),
     AS_FEATURE_TYPE_B(MiqlFieldConstants.FEATURE_TYPE_B, AdvancedSearchFieldConstants.FEATURE_TYPE_B),
     AS_FEATURE_TYPE(MiqlFieldConstants.FEATURE_TYPE, AdvancedSearchFieldConstants.FEATURE_TYPE),
-    AS_PART_METHOD_A(MiqlFieldConstants.PART_METHOD_A, AdvancedSearchFieldConstants.PART_METHOD_A),
-    AS_PART_METHOD_B(MiqlFieldConstants.PART_METHOD_B, AdvancedSearchFieldConstants.PART_METHOD_B),
-    AS_PART_METHOD(MiqlFieldConstants.PART_METHOD, AdvancedSearchFieldConstants.PART_METHOD);
+    AS_IDENTIFICATION_METHOD_A(MiqlFieldConstants.IDENTIFICATION_METHOD_A, AdvancedSearchFieldConstants.IDENTIFICATION_METHOD_A),
+    AS_IDENTIFICATION_METHOD_B(MiqlFieldConstants.IDENTIFICATION_METHOD_B, AdvancedSearchFieldConstants.IDENTIFICATION_METHOD_B),
+    AS_IDENTIFICATION_METHOD(MiqlFieldConstants.IDENTIFICATION_METHOD, AdvancedSearchFieldConstants.IDENTIFICATION_METHOD);
 
     AdvancedSearchInteractionFields(String miqlFieldName, String asFieldName) {
         this.miqlFieldName = miqlFieldName;
@@ -91,9 +91,9 @@ public enum AdvancedSearchInteractionFields {
         public static final String FEATURE_TYPE_A = "ftypeA";
         public static final String FEATURE_TYPE_B = "ftypeB";
         public static final String FEATURE_TYPE = "ftype";
-        public static final String PART_METHOD_A = "pmethodA";
-        public static final String PART_METHOD_B = "pmethodB";
-        public static final String PART_METHOD = "pmethod";
+        public static final String IDENTIFICATION_METHOD_A = "pmethodA";
+        public static final String IDENTIFICATION_METHOD_B = "pmethodB";
+        public static final String IDENTIFICATION_METHOD = "pmethod";
     }
 
     public static class AdvancedSearchFieldConstants {
@@ -126,8 +126,8 @@ public enum AdvancedSearchInteractionFields {
         public static final String FEATURE_TYPE_A = "as_ftypeA";
         public static final String FEATURE_TYPE_B = "as_ftypeB";
         public static final String FEATURE_TYPE = "as_ftype";
-        public static final String PART_METHOD_A = "as_pmethodA";
-        public static final String PART_METHOD_B = "as_pmethodB";
-        public static final String PART_METHOD = "as_pmethod";
+        public static final String IDENTIFICATION_METHOD_A = "as_pmethodA";
+        public static final String IDENTIFICATION_METHOD_B = "as_pmethodB";
+        public static final String IDENTIFICATION_METHOD = "as_pmethod";
     }
 }

@@ -71,16 +71,16 @@ public class AdvancedSearchInteraction {
     private Set<String> asTypeB;
 
     @Field(FEATURE_TYPE_A)
-    private Set<String> asFeatureTypeA;
+    private Set<String> asFeatureTypesA;
 
     @Field(FEATURE_TYPE_B)
-    private Set<String> asFeatureTypeB;
+    private Set<String> asFeatureTypesB;
 
-    @Field(PART_METHOD_A)
-    private Set<String> partMethodA;
+    @Field(IDENTIFICATION_METHOD_A)
+    private Set<String> asIdentificationMethodsA;
 
-    @Field(PART_METHOD_B)
-    private Set<String> partMethodB;
+    @Field(IDENTIFICATION_METHOD_B)
+    private Set<String> asIdentificationMethodsB;
 
     public Set<String> getAsIdA() {
         return asIdA;
@@ -242,35 +242,35 @@ public class AdvancedSearchInteraction {
         this.asTypeB = asTypeB;
     }
 
-    public Set<String> getAsFeatureTypeA() {
-        return asFeatureTypeA;
+    public Set<String> getAsFeatureTypesA() {
+        return asFeatureTypesA;
     }
 
-    public void setAsFeatureTypeA(Set<String> asFeatureTypeA) {
-        this.asFeatureTypeA = asFeatureTypeA;
+    public void setAsFeatureTypesA(Set<String> asFeatureTypesA) {
+        this.asFeatureTypesA = asFeatureTypesA;
     }
 
-    public Set<String> getAsFeatureTypeB() {
-        return asFeatureTypeB;
+    public Set<String> getAsFeatureTypesB() {
+        return asFeatureTypesB;
     }
 
-    public void setAsFeatureTypeB(Set<String> asFeatureTypeB) {
-        this.asFeatureTypeB = asFeatureTypeB;
+    public void setAsFeatureTypesB(Set<String> asFeatureTypesB) {
+        this.asFeatureTypesB = asFeatureTypesB;
     }
 
-    public Set<String> getPartMethodA() {
-        return partMethodA;
+    public Set<String> getAsIdentificationMethodsA() {
+        return asIdentificationMethodsA;
     }
 
-    public void setPartMethodA(Set<String> partMethodA) {
-        this.partMethodA = partMethodA;
+    public void setAsIdentificationMethodsA(Set<String> asIdentificationMethodsA) {
+        this.asIdentificationMethodsA = asIdentificationMethodsA;
     }
 
-    public Set<String> getPartMethodB() {
-        return partMethodB;
+    public Set<String> getAsIdentificationMethodsB() {
+        return asIdentificationMethodsB;
     }
 
-    public void setPartMethodB(Set<String> partMethodB) {
-        this.partMethodB = partMethodB;
+    public void setAsIdentificationMethodsB(Set<String> asIdentificationMethodsB) {
+        this.asIdentificationMethodsB = asIdentificationMethodsB;
     }
 }

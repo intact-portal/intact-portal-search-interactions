@@ -79,10 +79,10 @@ public class AdvancedSearchInteractionIndexServiceTest {
         searchInteraction1.setAsBioRoleB(TextFieldConverter.indexFieldValues("psi-mi", "MI:4123345", "BioroleB1 shortlabel"));
         searchInteraction1.setAsTypeA(TextFieldConverter.indexFieldValues("psi-mi", "MI:512345", "typeA1 shortlabel"));
         searchInteraction1.setAsTypeB(TextFieldConverter.indexFieldValues("psi-mi", "MI:5123345", "typeB1 shortlabel"));
-        searchInteraction1.setAsFeatureTypeA(TextFieldConverter.indexFieldValues("psi-mi", "MI:61234", "feature type A1 shortlabel"));
-        searchInteraction1.setAsFeatureTypeB(TextFieldConverter.indexFieldValues("psi-mi", "MI:612334", "feature type B1 shortlabel"));
-        searchInteraction1.setPartMethodA(TextFieldConverter.indexFieldValues("psi-mi", "MI:71234", "participant identification method A1 shortlabel"));
-        searchInteraction1.setPartMethodB(TextFieldConverter.indexFieldValues("psi-mi", "MI:712334", "participant identification method B1 shortlabel"));
+        searchInteraction1.setAsFeatureTypesA(TextFieldConverter.indexFieldValues("psi-mi", "MI:61234", "feature type A1 shortlabel"));
+        searchInteraction1.setAsFeatureTypesB(TextFieldConverter.indexFieldValues("psi-mi", "MI:612334", "feature type B1 shortlabel"));
+        searchInteraction1.setAsIdentificationMethodsA(TextFieldConverter.indexFieldValues("psi-mi", "MI:71234", "participant identification method A1 shortlabel"));
+        searchInteraction1.setAsIdentificationMethodsB(TextFieldConverter.indexFieldValues("psi-mi", "MI:712334", "participant identification method B1 shortlabel"));
 
 
         searchInteraction2 = new SearchInteraction();
@@ -126,10 +126,10 @@ public class AdvancedSearchInteractionIndexServiceTest {
         searchInteraction2.setAsBioRoleB(TextFieldConverter.indexFieldValues("psi-mi", "MI:4223345", "BioroleB2 shortlabel"));
         searchInteraction2.setAsTypeA(TextFieldConverter.indexFieldValues("psi-mi", "MI:522345", "typeA2 shortlabel"));
         searchInteraction2.setAsTypeB(TextFieldConverter.indexFieldValues("psi-mi", "MI:5223345", "typeB2 shortlabel"));
-        searchInteraction2.setAsFeatureTypeA(TextFieldConverter.indexFieldValues("psi-mi", "MI:62234", "feature type A2 shortlabel"));
-        searchInteraction2.setAsFeatureTypeB(TextFieldConverter.indexFieldValues("psi-mi", "MI:622334", "feature type B2 shortlabel"));
-        searchInteraction2.setPartMethodA(TextFieldConverter.indexFieldValues("psi-mi", "MI:72234", "participant identification method A2 shortlabel"));
-        searchInteraction2.setPartMethodB(TextFieldConverter.indexFieldValues("psi-mi", "MI:722334", "participant identification method B2 shortlabel"));
+        searchInteraction2.setAsFeatureTypesA(TextFieldConverter.indexFieldValues("psi-mi", "MI:62234", "feature type A2 shortlabel"));
+        searchInteraction2.setAsFeatureTypesB(TextFieldConverter.indexFieldValues("psi-mi", "MI:622334", "feature type B2 shortlabel"));
+        searchInteraction2.setAsIdentificationMethodsA(TextFieldConverter.indexFieldValues("psi-mi", "MI:72234", "participant identification method A2 shortlabel"));
+        searchInteraction2.setAsIdentificationMethodsB(TextFieldConverter.indexFieldValues("psi-mi", "MI:722334", "participant identification method B2 shortlabel"));
     }
 
     @After
