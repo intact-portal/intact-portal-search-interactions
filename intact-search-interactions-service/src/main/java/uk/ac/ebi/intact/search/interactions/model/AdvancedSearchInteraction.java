@@ -88,6 +88,9 @@ public class AdvancedSearchInteraction {
     @Field(XREFS_B)
     private Set<String> asXrefsB;
 
+    @Field(INTERACTION_IDS)
+    private Set<String> asInteractionIds;
+
     public Set<String> getAsIdA() {
         return asIdA;
     }
@@ -294,5 +297,13 @@ public class AdvancedSearchInteraction {
 
     public void setAsXrefsB(Set<String> asXrefsB) {
         this.asXrefsB = asXrefsB;
+    }
+
+    public Set<String> getAsInteractionIds() {
+        return asInteractionIds;
+    }
+
+    public void setAsInteractionIds(Set<String> asInteractionIds) {
+        this.asInteractionIds = asInteractionIds;
     }
 }

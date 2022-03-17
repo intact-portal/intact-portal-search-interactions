@@ -61,7 +61,7 @@ public class AdvancedSearchInteractionIndexServiceTest {
         searchInteraction1.setAsAliasB(merge(XrefFieldConverter.indexFieldValues(null, "alias3"),
                 XrefFieldConverter.indexFieldValues(null, "alias4")));
         searchInteraction1.setAsPubId(XrefFieldConverter.indexFieldValues("pubmed", "12345/678.9"));
-        searchInteraction1.setAsInteractionXrefs(merge(XrefFieldConverter.indexFieldValues("intact", "EBI-123456"),
+        searchInteraction1.setAsInteractionIds(merge(XrefFieldConverter.indexFieldValues("intact", "EBI-123456"),
                 XrefFieldConverter.indexFieldValues("imex", "IM-12345-1")));
         searchInteraction1.setAsTaxIdA(merge(TextFieldConverter.indexFieldValues("taxid", "9606", "Human"),//short name
                 TextFieldConverter.indexFieldValues("taxid", "9606", "Homo Sapiens")));//full name
@@ -87,6 +87,8 @@ public class AdvancedSearchInteractionIndexServiceTest {
                 XrefFieldConverter.indexFieldValues("go", "GO:213456")));
         searchInteraction1.setAsXrefsB(merge(XrefFieldConverter.indexFieldValues("intact", "EBI-9223456"),
                 XrefFieldConverter.indexFieldValues("go", "GO:223456")));
+        searchInteraction1.setAsInteractionXrefs(XrefFieldConverter.indexFieldValues("go", "GO:412345"));
+
 
         searchInteraction2 = new SearchInteraction();
         List<SearchChildInteractor> searchChildInteractors2 = new ArrayList<>();
@@ -111,7 +113,7 @@ public class AdvancedSearchInteractionIndexServiceTest {
         searchInteraction2.setAsAliasB(merge(XrefFieldConverter.indexFieldValues(null, "alias7"),
                 XrefFieldConverter.indexFieldValues(null, "alias8")));
         searchInteraction2.setAsPubId(XrefFieldConverter.indexFieldValues("pubmed", "12345678"));
-        searchInteraction2.setAsInteractionXrefs(merge(XrefFieldConverter.indexFieldValues("intact", "EBI-1234567"),
+        searchInteraction2.setAsInteractionIds(merge(XrefFieldConverter.indexFieldValues("intact", "EBI-1234567"),
                 XrefFieldConverter.indexFieldValues("imex", "IM-123456-1")));
         searchInteraction2.setAsTaxIdA(merge(TextFieldConverter.indexFieldValues("taxid", "10116", "organism1 short name"),
                 TextFieldConverter.indexFieldValues("taxid", "10116", "organism1 full name")));
@@ -137,6 +139,7 @@ public class AdvancedSearchInteractionIndexServiceTest {
                 XrefFieldConverter.indexFieldValues("go", "GO:313456")));
         searchInteraction2.setAsXrefsB(merge(XrefFieldConverter.indexFieldValues("intact", "EBI-8223456"),
                 XrefFieldConverter.indexFieldValues("go", "GO:323456")));
+        searchInteraction2.setAsInteractionXrefs(XrefFieldConverter.indexFieldValues("go", "GO:512345"));
     }
 
     @After

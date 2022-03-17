@@ -40,7 +40,8 @@ public enum AdvancedSearchInteractionFields {
     AS_IDENTIFICATION_METHOD(MiqlFieldConstants.IDENTIFICATION_METHOD, AdvancedSearchFieldConstants.IDENTIFICATION_METHOD),
     AS_XREFS_A(MiqlFieldConstants.XREFS_A, AdvancedSearchFieldConstants.XREFS_A),
     AS_XREFS_B(MiqlFieldConstants.XREFS_B, AdvancedSearchFieldConstants.XREFS_B),
-    AS_INTERACTOR_XREFS(MiqlFieldConstants.INTERACTOR_XREFS, AdvancedSearchFieldConstants.INTERACTOR_XREFS);
+    AS_INTERACTOR_XREFS(MiqlFieldConstants.INTERACTOR_XREFS, AdvancedSearchFieldConstants.INTERACTOR_XREFS),
+    AS_INTERACTION_IDS(MiqlFieldConstants.INTERACTION_IDS, AdvancedSearchFieldConstants.INTERACTION_IDS);
 
     AdvancedSearchInteractionFields(String miqlFieldName, String asFieldName) {
         this.miqlFieldName = miqlFieldName;
@@ -75,7 +76,7 @@ public enum AdvancedSearchInteractionFields {
         public static final String ALIAS = "alias";
         public static final String IDENTIFIER = "identifier";
         public static final String PUB_ID = "pubid";
-        public static final String INTERACTION_XREFS = "interaction_id";
+        public static final String INTERACTION_XREFS = "xref";
         public static final String TAX_ID_A = "taxidA";
         public static final String TAX_ID_B = "taxidB";
         public static final String SPECIES = "species";
@@ -100,6 +101,7 @@ public enum AdvancedSearchInteractionFields {
         public static final String XREFS_A = "pxrefA";
         public static final String XREFS_B = "pxrefB";
         public static final String INTERACTOR_XREFS = "pxref";
+        public static final String INTERACTION_IDS = "interaction_id";
     }
 
     public static class AdvancedSearchFieldConstants {
@@ -113,7 +115,7 @@ public enum AdvancedSearchInteractionFields {
         public static final String ALIAS = "as_alias";
         public static final String IDENTIFIER = "as_identifier";
         public static final String PUB_ID = "as_pubid";
-        public static final String INTERACTION_XREFS = "as_interaction_id";
+        public static final String INTERACTION_XREFS = "as_xref";
         public static final String TAX_ID_A = "as_taxidA";
         public static final String TAX_ID_B = "as_taxidB";
         public static final String SPECIES = "as_species";
@@ -138,5 +140,6 @@ public enum AdvancedSearchInteractionFields {
         public static final String XREFS_A = "as_pxrefA";
         public static final String XREFS_B = "as_pxrefB";
         public static final String INTERACTOR_XREFS = "as_pxref";
+        public static final String INTERACTION_IDS = "as_interaction_id";
     }
 }
