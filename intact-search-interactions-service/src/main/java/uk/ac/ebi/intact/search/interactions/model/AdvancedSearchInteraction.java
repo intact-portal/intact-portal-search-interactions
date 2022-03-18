@@ -91,6 +91,12 @@ public class AdvancedSearchInteraction {
     @Field(INTERACTION_IDS)
     private Set<String> asInteractionIds;
 
+    @Field(SOURCE)
+    private Set<String> asSource;
+
+    @Field(EXPANSION_METHOD)
+    private Set<String> asExpansionMethod;
+
     public Set<String> getAsIdA() {
         return asIdA;
     }
@@ -305,5 +311,21 @@ public class AdvancedSearchInteraction {
 
     public void setAsInteractionIds(Set<String> asInteractionIds) {
         this.asInteractionIds = asInteractionIds;
+    }
+
+    public Set<String> getAsSource() {
+        return asSource;
+    }
+
+    public void setAsSource(Set<String> asSource) {
+        this.asSource = asSource;
+    }
+
+    public Set<String> getAsExpansionMethod() {
+        return asExpansionMethod;
+    }
+
+    public void setAsExpansionMethod(Set<String> asExpansionMethod) {
+        this.asExpansionMethod = asExpansionMethod;
     }
 }

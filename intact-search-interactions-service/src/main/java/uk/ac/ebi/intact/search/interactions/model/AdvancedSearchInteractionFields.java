@@ -41,7 +41,9 @@ public enum AdvancedSearchInteractionFields {
     AS_XREFS_A(MiqlFieldConstants.XREFS_A, AdvancedSearchFieldConstants.XREFS_A),
     AS_XREFS_B(MiqlFieldConstants.XREFS_B, AdvancedSearchFieldConstants.XREFS_B),
     AS_INTERACTOR_XREFS(MiqlFieldConstants.INTERACTOR_XREFS, AdvancedSearchFieldConstants.INTERACTOR_XREFS),
-    AS_INTERACTION_IDS(MiqlFieldConstants.INTERACTION_IDS, AdvancedSearchFieldConstants.INTERACTION_IDS);
+    AS_INTERACTION_IDS(MiqlFieldConstants.INTERACTION_IDS, AdvancedSearchFieldConstants.INTERACTION_IDS),
+    AS_EXPANSION_METHOD(MiqlFieldConstants.EXPANSION_METHOD, AdvancedSearchFieldConstants.EXPANSION_METHOD),
+    AS_SOURCE(MiqlFieldConstants.SOURCE, AdvancedSearchFieldConstants.SOURCE);
 
     AdvancedSearchInteractionFields(String miqlFieldName, String asFieldName) {
         this.miqlFieldName = miqlFieldName;
@@ -102,6 +104,8 @@ public enum AdvancedSearchInteractionFields {
         public static final String XREFS_B = "pxrefB";
         public static final String INTERACTOR_XREFS = "pxref";
         public static final String INTERACTION_IDS = "interaction_id";
+        public static final String EXPANSION_METHOD = "complex";
+        public static final String SOURCE = "source";
     }
 
     public static class AdvancedSearchFieldConstants {
@@ -141,5 +145,7 @@ public enum AdvancedSearchInteractionFields {
         public static final String XREFS_B = "as_pxrefB";
         public static final String INTERACTOR_XREFS = "as_pxref";
         public static final String INTERACTION_IDS = "as_interaction_id";
+        public static final String EXPANSION_METHOD = "as_complex";
+        public static final String SOURCE = "as_source";
     }
 }
