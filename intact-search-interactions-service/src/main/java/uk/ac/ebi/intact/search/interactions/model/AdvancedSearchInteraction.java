@@ -97,6 +97,15 @@ public class AdvancedSearchInteraction {
     @Field(EXPANSION_METHOD)
     private Set<String> asExpansionMethod;
 
+    @Field(LAST_UPDATED)
+    private Integer asUpdationDate;
+
+    @Field(RELEASE_DATE)
+    private Integer asReleaseDate;
+
+    @Field(INTACT_MI_SCORE)
+    private double asIntactMiscore;
+
     public Set<String> getAsIdA() {
         return asIdA;
     }
@@ -327,5 +336,29 @@ public class AdvancedSearchInteraction {
 
     public void setAsExpansionMethod(Set<String> asExpansionMethod) {
         this.asExpansionMethod = asExpansionMethod;
+    }
+
+    public Integer getAsUpdationDate() {
+        return asUpdationDate;
+    }
+
+    public void setAsUpdationDate(Integer asUpdationDate) {
+        this.asUpdationDate = asUpdationDate;
+    }
+
+    public double getAsIntactMiscore() {
+        return asIntactMiscore;
+    }
+
+    public void setAsIntactMiscore(double asIntactMiscore) {
+        this.asIntactMiscore = asIntactMiscore;
+    }
+
+    public Integer getAsReleaseDate() {
+        return asReleaseDate;
+    }
+
+    public void setAsReleaseDate(Integer asReleaseDate) {
+        this.asReleaseDate = asReleaseDate;
     }
 }

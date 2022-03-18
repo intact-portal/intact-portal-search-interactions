@@ -12,10 +12,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.utils.DocumentType;
+import uk.ac.ebi.intact.search.interactions.utils.as.converters.DateFieldConverter;
 import uk.ac.ebi.intact.search.interactions.utils.as.converters.TextFieldConverter;
 import uk.ac.ebi.intact.search.interactions.utils.as.converters.XrefFieldConverter;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static org.junit.Assert.*;
@@ -98,6 +100,12 @@ public class AdvancedSearchInteractionSearchServiceTest {
         searchInteraction1.setAsInteractionXrefs(XrefFieldConverter.indexFieldValues("go", "GO:412345"));
         searchInteraction1.setAsSource(TextFieldConverter.indexFieldValues("psi-mi", "MI:0469", "European Bioinformatics Institute"));
         searchInteraction1.setAsExpansionMethod(TextFieldConverter.indexFieldValues("psi-mi", "MI:1060", "spoke expansion"));
+        try {
+            searchInteraction1.setAsUpdationDate(DateFieldConverter.indexFieldValues(new SimpleDateFormat("yyyy/MM/dd").parse("2012/01/01")));
+            searchInteraction1.setAsReleaseDate(DateFieldConverter.indexFieldValues(new SimpleDateFormat("yyyy/MM/dd").parse("2013/01/01")));
+        } catch (Exception e) {
+        }
+        searchInteraction1.setAsIntactMiscore(0.5);
 
         SearchInteraction searchInteraction2 = new SearchInteraction();
         List<SearchChildInteractor> searchChildInteractors2 = new ArrayList<>();
@@ -152,6 +160,12 @@ public class AdvancedSearchInteractionSearchServiceTest {
         searchInteraction2.setAsInteractionXrefs(XrefFieldConverter.indexFieldValues("go", "GO:512345"));
         searchInteraction2.setAsSource(TextFieldConverter.indexFieldValues("psi-mi", "MI:0471", "Mint"));
         searchInteraction2.setAsExpansionMethod(TextFieldConverter.indexFieldValues("psi-mi", "MI:1061", "matrix expansion"));
+        try {
+            searchInteraction2.setAsUpdationDate(DateFieldConverter.indexFieldValues(new SimpleDateFormat("yyyy/MM/dd").parse("2015/01/01")));
+            searchInteraction2.setAsReleaseDate(DateFieldConverter.indexFieldValues(new SimpleDateFormat("yyyy/MM/dd").parse("2016/01/01")));
+        } catch (Exception e) {
+        }
+        searchInteraction2.setAsIntactMiscore(1.0);
 
         interactionIndexService.save(searchInteraction1);
         interactionIndexService.save(searchInteraction2);
@@ -4652,5 +4666,227 @@ public class AdvancedSearchInteractionSearchServiceTest {
 
         Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
         assertEquals("interaction_c1", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "udate miql query with a particular date"
+     */
+    @Test
+    public void findByAsLastUpdateDate() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                LAST_UPDATED + ":20120101",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        assertEquals("interaction_c1", interactionFacetPage5.iterator().next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "udate miql query within year range"
+     */
+    @Test
+    public void findByAsLastUpdateDateRange() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                LAST_UPDATED + ":[20120101 TO 20150101]",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(2, interactionFacetPage5.getContent().size());
+        assertEquals(2, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(2, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+        assertEquals("interaction_c2", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "rdate miql query with a particular date"
+     */
+    @Test
+    public void findByAsReleaseDate() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                RELEASE_DATE + ":20130101",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        assertEquals("interaction_c1", interactionFacetPage5.iterator().next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "rdate miql query within year range"
+     */
+    @Test
+    public void findByAsReleaseDateRange() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                RELEASE_DATE + ":[20130101 TO 20160101]",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(2, interactionFacetPage5.getContent().size());
+        assertEquals(2, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(2, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+        assertEquals("interaction_c2", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "intact-miscore miql query with a particular score"
+     */
+    @Test
+    public void findByAsIntactMiScore() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                INTACT_MI_SCORE + ":0.5",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        assertEquals("interaction_c1", interactionFacetPage5.iterator().next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "intact-miscore miql query within year range"
+     */
+    @Test
+    public void findByAsIntactMiScoreRange() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                INTACT_MI_SCORE + ":[0.5 TO 1.0]",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(2, interactionFacetPage5.getContent().size());
+        assertEquals(2, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(2, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+        assertEquals("interaction_c2", iteractor.next().getAc());
     }
 }

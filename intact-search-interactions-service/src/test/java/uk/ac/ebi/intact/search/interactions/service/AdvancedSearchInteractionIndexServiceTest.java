@@ -9,10 +9,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.utils.DocumentType;
+import uk.ac.ebi.intact.search.interactions.utils.as.converters.DateFieldConverter;
 import uk.ac.ebi.intact.search.interactions.utils.as.converters.TextFieldConverter;
 import uk.ac.ebi.intact.search.interactions.utils.as.converters.XrefFieldConverter;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.*;
 
@@ -90,6 +92,12 @@ public class AdvancedSearchInteractionIndexServiceTest {
         searchInteraction1.setAsInteractionXrefs(XrefFieldConverter.indexFieldValues("go", "GO:412345"));
         searchInteraction1.setAsSource(TextFieldConverter.indexFieldValues("psi-mi", "MI:0469", "European Bioinformatics Institute"));
         searchInteraction1.setAsExpansionMethod(TextFieldConverter.indexFieldValues("psi-mi", "MI:1060", "spoke expansion"));
+        try {
+            searchInteraction1.setAsUpdationDate(DateFieldConverter.indexFieldValues(new SimpleDateFormat("yyyy/MM/dd").parse("2012/01/01")));
+            searchInteraction1.setAsReleaseDate(DateFieldConverter.indexFieldValues(new SimpleDateFormat("yyyy/MM/dd").parse("2013/01/01")));
+        } catch (Exception e) {
+        }
+        searchInteraction1.setAsIntactMiscore(0.5);
 
         searchInteraction2 = new SearchInteraction();
         List<SearchChildInteractor> searchChildInteractors2 = new ArrayList<>();
@@ -143,6 +151,12 @@ public class AdvancedSearchInteractionIndexServiceTest {
         searchInteraction2.setAsInteractionXrefs(XrefFieldConverter.indexFieldValues("go", "GO:512345"));
         searchInteraction2.setAsSource(TextFieldConverter.indexFieldValues("psi-mi", "MI:0471", "Mint"));
         searchInteraction2.setAsExpansionMethod(TextFieldConverter.indexFieldValues("psi-mi", "MI:1061", "matrix expansion"));
+        try {
+            searchInteraction2.setAsUpdationDate(DateFieldConverter.indexFieldValues(new SimpleDateFormat("yyyy/MM/dd").parse("2015/01/01")));
+            searchInteraction2.setAsReleaseDate(DateFieldConverter.indexFieldValues(new SimpleDateFormat("yyyy/MM/dd").parse("2016/01/01")));
+        } catch (Exception e) {
+        }
+        searchInteraction2.setAsIntactMiscore(1.0);
     }
 
     @After

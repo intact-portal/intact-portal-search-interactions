@@ -43,7 +43,10 @@ public enum AdvancedSearchInteractionFields {
     AS_INTERACTOR_XREFS(MiqlFieldConstants.INTERACTOR_XREFS, AdvancedSearchFieldConstants.INTERACTOR_XREFS),
     AS_INTERACTION_IDS(MiqlFieldConstants.INTERACTION_IDS, AdvancedSearchFieldConstants.INTERACTION_IDS),
     AS_EXPANSION_METHOD(MiqlFieldConstants.EXPANSION_METHOD, AdvancedSearchFieldConstants.EXPANSION_METHOD),
-    AS_SOURCE(MiqlFieldConstants.SOURCE, AdvancedSearchFieldConstants.SOURCE);
+    AS_SOURCE(MiqlFieldConstants.SOURCE, AdvancedSearchFieldConstants.SOURCE),
+    AS_LAST_UPDATED(MiqlFieldConstants.LAST_UPDATED, AdvancedSearchFieldConstants.LAST_UPDATED),
+    AS_RELEASE_DATE(MiqlFieldConstants.RELEASE_DATE, AdvancedSearchFieldConstants.RELEASE_DATE),
+    AS_INTACT_MI_SCORE(MiqlFieldConstants.INTACT_MI_SCORE, AdvancedSearchFieldConstants.INTACT_MI_SCORE);
 
     AdvancedSearchInteractionFields(String miqlFieldName, String asFieldName) {
         this.miqlFieldName = miqlFieldName;
@@ -106,6 +109,9 @@ public enum AdvancedSearchInteractionFields {
         public static final String INTERACTION_IDS = "interaction_id";
         public static final String EXPANSION_METHOD = "complex";
         public static final String SOURCE = "source";
+        public static final String LAST_UPDATED = "udate";
+        public static final String RELEASE_DATE = "rdate";
+        public static final String INTACT_MI_SCORE = "intact-miscore";
     }
 
     public static class AdvancedSearchFieldConstants {
@@ -147,5 +153,8 @@ public enum AdvancedSearchInteractionFields {
         public static final String INTERACTION_IDS = "as_interaction_id";
         public static final String EXPANSION_METHOD = "as_complex";
         public static final String SOURCE = "as_source";
+        public static final String LAST_UPDATED = "as_udate";
+        public static final String RELEASE_DATE = "as_rdate";
+        public static final String INTACT_MI_SCORE = "as_intact-miscore";
     }
 }
