@@ -104,6 +104,8 @@ public class AdvancedSearchInteractionIndexServiceTest {
         searchInteraction1.setAsAffectedByMutation(true);
         searchInteraction1.setAsMutationA(true);
         searchInteraction1.setAsMutationB(true);
+        searchInteraction1.setAsAnnotations(merge(XrefFieldConverter.indexFieldValues("dataset", "Disease1 - Disease elaborated"),
+                XrefFieldConverter.indexFieldValues("annotation topic1", "annotation text1")));
 
         searchInteraction2 = new SearchInteraction();
         List<SearchChildInteractor> searchChildInteractors2 = new ArrayList<>();
@@ -169,6 +171,8 @@ public class AdvancedSearchInteractionIndexServiceTest {
         searchInteraction2.setAsAffectedByMutation(false);
         searchInteraction2.setAsMutationA(false);
         searchInteraction2.setAsMutationB(false);
+        searchInteraction2.setAsAnnotations(merge(XrefFieldConverter.indexFieldValues("dataset", "Disease2 - Disease elaborated"),
+                XrefFieldConverter.indexFieldValues("annotation topic2", "annotation text2")));
     }
 
     @After

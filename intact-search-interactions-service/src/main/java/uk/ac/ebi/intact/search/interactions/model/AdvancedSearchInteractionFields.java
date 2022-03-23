@@ -52,7 +52,8 @@ public enum AdvancedSearchInteractionFields {
     AS_STC(MiqlFieldConstants.STC, AdvancedSearchFieldConstants.STC),
     AS_MUTATION(MiqlFieldConstants.MUTATION, AdvancedSearchFieldConstants.MUTATION),
     AS_MUTATION_A(MiqlFieldConstants.MUTATION_A, AdvancedSearchFieldConstants.MUTATION_A),
-    AS_MUTATION_B(MiqlFieldConstants.MUTATION_B, AdvancedSearchFieldConstants.MUTATION_B);
+    AS_MUTATION_B(MiqlFieldConstants.MUTATION_B, AdvancedSearchFieldConstants.MUTATION_B),
+    AS_ANNOTATIONS(MiqlFieldConstants.ANNOTATIONS, AdvancedSearchFieldConstants.ANNOTATIONS);
 
     AdvancedSearchInteractionFields(String miqlFieldName, String asFieldName) {
         this.miqlFieldName = miqlFieldName;
@@ -124,6 +125,8 @@ public enum AdvancedSearchInteractionFields {
         public static final String MUTATION = "mutation";
         public static final String MUTATION_A = "mutationA";
         public static final String MUTATION_B = "mutationB";
+        public static final String ANNOTATIONS = "annot";
+
     }
 
     public static class AdvancedSearchFieldConstants {
@@ -174,5 +177,6 @@ public enum AdvancedSearchInteractionFields {
         public static final String MUTATION = "as_mutation";
         public static final String MUTATION_A = "as_mutationA";
         public static final String MUTATION_B = "as_mutationB";
+        public static final String ANNOTATIONS = "as_annot";
     }
 }

@@ -124,6 +124,9 @@ public class AdvancedSearchInteraction {
     @Field(MUTATION_B)
     private boolean asMutationB;
 
+    @Field(ANNOTATIONS)
+    private Set<String> asAnnotations;
+
     public Set<String> getAsIdA() {
         return asIdA;
     }
@@ -426,5 +429,13 @@ public class AdvancedSearchInteraction {
 
     public void setAsMutationB(boolean asMutationB) {
         this.asMutationB = asMutationB;
+    }
+
+    public Set<String> getAsAnnotations() {
+        return asAnnotations;
+    }
+
+    public void setAsAnnotations(Set<String> asAnnotations) {
+        this.asAnnotations = asAnnotations;
     }
 }
