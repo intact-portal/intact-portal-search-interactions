@@ -106,6 +106,24 @@ public class AdvancedSearchInteraction {
     @Field(INTACT_MI_SCORE)
     private double asIntactMiscore;
 
+    @Field(NEGATIVE)
+    private boolean asNegative;
+
+    @Field(PARAM)
+    private boolean asParam;
+
+    @Field(STC)
+    private boolean asStoichiometry;
+
+    @Field(MUTATION)
+    private boolean asAffectedByMutation;
+
+    @Field(MUTATION_A)
+    private boolean asMutationA;
+
+    @Field(MUTATION_B)
+    private boolean asMutationB;
+
     public Set<String> getAsIdA() {
         return asIdA;
     }
@@ -360,5 +378,53 @@ public class AdvancedSearchInteraction {
 
     public void setAsReleaseDate(Integer asReleaseDate) {
         this.asReleaseDate = asReleaseDate;
+    }
+
+    public boolean isAsNegative() {
+        return asNegative;
+    }
+
+    public void setAsNegative(boolean asNegative) {
+        this.asNegative = asNegative;
+    }
+
+    public boolean isAsParam() {
+        return asParam;
+    }
+
+    public void setAsParam(boolean asParam) {
+        this.asParam = asParam;
+    }
+
+    public boolean isAsStoichiometry() {
+        return asStoichiometry;
+    }
+
+    public void setAsStoichiometry(boolean asStoichiometry) {
+        this.asStoichiometry = asStoichiometry;
+    }
+
+    public boolean isAsAffectedByMutation() {
+        return asAffectedByMutation;
+    }
+
+    public void setAsAffectedByMutation(boolean asAffectedByMutation) {
+        this.asAffectedByMutation = asAffectedByMutation;
+    }
+
+    public boolean isAsMutationA() {
+        return asMutationA;
+    }
+
+    public void setAsMutationA(boolean asMutationA) {
+        this.asMutationA = asMutationA;
+    }
+
+    public boolean isAsMutationB() {
+        return asMutationB;
+    }
+
+    public void setAsMutationB(boolean asMutationB) {
+        this.asMutationB = asMutationB;
     }
 }

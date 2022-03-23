@@ -46,7 +46,13 @@ public enum AdvancedSearchInteractionFields {
     AS_SOURCE(MiqlFieldConstants.SOURCE, AdvancedSearchFieldConstants.SOURCE),
     AS_LAST_UPDATED(MiqlFieldConstants.LAST_UPDATED, AdvancedSearchFieldConstants.LAST_UPDATED),
     AS_RELEASE_DATE(MiqlFieldConstants.RELEASE_DATE, AdvancedSearchFieldConstants.RELEASE_DATE),
-    AS_INTACT_MI_SCORE(MiqlFieldConstants.INTACT_MI_SCORE, AdvancedSearchFieldConstants.INTACT_MI_SCORE);
+    AS_INTACT_MI_SCORE(MiqlFieldConstants.INTACT_MI_SCORE, AdvancedSearchFieldConstants.INTACT_MI_SCORE),
+    AS_NEGATIVE(MiqlFieldConstants.NEGATIVE, AdvancedSearchFieldConstants.NEGATIVE),
+    AS_PARAM(MiqlFieldConstants.PARAM, AdvancedSearchFieldConstants.PARAM),
+    AS_STC(MiqlFieldConstants.STC, AdvancedSearchFieldConstants.STC),
+    AS_MUTATION(MiqlFieldConstants.MUTATION, AdvancedSearchFieldConstants.MUTATION),
+    AS_MUTATION_A(MiqlFieldConstants.MUTATION_A, AdvancedSearchFieldConstants.MUTATION_A),
+    AS_MUTATION_B(MiqlFieldConstants.MUTATION_B, AdvancedSearchFieldConstants.MUTATION_B);
 
     AdvancedSearchInteractionFields(String miqlFieldName, String asFieldName) {
         this.miqlFieldName = miqlFieldName;
@@ -112,6 +118,12 @@ public enum AdvancedSearchInteractionFields {
         public static final String LAST_UPDATED = "udate";
         public static final String RELEASE_DATE = "rdate";
         public static final String INTACT_MI_SCORE = "intact-miscore";
+        public static final String NEGATIVE = "negative";
+        public static final String PARAM = "param";
+        public static final String STC = "stc";
+        public static final String MUTATION = "mutation";
+        public static final String MUTATION_A = "mutationA";
+        public static final String MUTATION_B = "mutationB";
     }
 
     public static class AdvancedSearchFieldConstants {
@@ -156,5 +168,11 @@ public enum AdvancedSearchInteractionFields {
         public static final String LAST_UPDATED = "as_udate";
         public static final String RELEASE_DATE = "as_rdate";
         public static final String INTACT_MI_SCORE = "as_intact-miscore";
+        public static final String NEGATIVE = "as_negative";
+        public static final String PARAM = "as_param";
+        public static final String STC = "as_stc";
+        public static final String MUTATION = "as_mutation";
+        public static final String MUTATION_A = "as_mutationA";
+        public static final String MUTATION_B = "as_mutationB";
     }
 }

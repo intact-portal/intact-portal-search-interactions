@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.utils.DocumentType;
+import uk.ac.ebi.intact.search.interactions.utils.NegativeFilterStatus;
 import uk.ac.ebi.intact.search.interactions.utils.as.converters.DateFieldConverter;
 import uk.ac.ebi.intact.search.interactions.utils.as.converters.TextFieldConverter;
 import uk.ac.ebi.intact.search.interactions.utils.as.converters.XrefFieldConverter;
@@ -106,6 +107,12 @@ public class AdvancedSearchInteractionSearchServiceTest {
         } catch (Exception e) {
         }
         searchInteraction1.setAsIntactMiscore(0.5);
+        searchInteraction1.setAsNegative(true);
+        searchInteraction1.setAsStoichiometry(true);
+        searchInteraction1.setAsParam(true);
+        searchInteraction1.setAsAffectedByMutation(true);
+        searchInteraction1.setAsMutationA(true);
+        searchInteraction1.setAsMutationB(true);
 
         SearchInteraction searchInteraction2 = new SearchInteraction();
         List<SearchChildInteractor> searchChildInteractors2 = new ArrayList<>();
@@ -166,6 +173,12 @@ public class AdvancedSearchInteractionSearchServiceTest {
         } catch (Exception e) {
         }
         searchInteraction2.setAsIntactMiscore(1.0);
+        searchInteraction2.setAsNegative(false);
+        searchInteraction2.setAsStoichiometry(false);
+        searchInteraction2.setAsParam(false);
+        searchInteraction2.setAsAffectedByMutation(false);
+        searchInteraction2.setAsMutationA(false);
+        searchInteraction2.setAsMutationB(false);
 
         interactionIndexService.save(searchInteraction1);
         interactionIndexService.save(searchInteraction2);
@@ -192,7 +205,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -221,7 +234,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -260,7 +273,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -288,7 +301,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -316,7 +329,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -344,7 +357,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -372,7 +385,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -400,7 +413,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -428,7 +441,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -462,7 +475,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -496,7 +509,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -533,7 +546,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -570,7 +583,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -607,7 +620,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -644,7 +657,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -682,7 +695,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -719,7 +732,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -757,7 +770,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -794,7 +807,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -833,7 +846,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -870,7 +883,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -907,7 +920,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -947,7 +960,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -983,7 +996,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -1020,7 +1033,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -1056,7 +1069,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -1092,7 +1105,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -1128,7 +1141,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -1164,7 +1177,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -1200,7 +1213,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -1238,7 +1251,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -1275,7 +1288,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -1311,7 +1324,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -1349,7 +1362,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -1386,7 +1399,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -1422,7 +1435,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -1460,7 +1473,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -1497,7 +1510,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -1534,7 +1547,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -1571,7 +1584,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -1607,7 +1620,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -1645,7 +1658,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -1682,7 +1695,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -1719,7 +1732,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -1756,7 +1769,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -1792,7 +1805,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -1830,7 +1843,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -1867,7 +1880,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -1904,7 +1917,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -1941,7 +1954,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -1978,7 +1991,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -2015,7 +2028,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -2053,7 +2066,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -2089,7 +2102,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -2125,7 +2138,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -2161,7 +2174,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -2199,7 +2212,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -2235,7 +2248,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -2273,7 +2286,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -2310,7 +2323,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -2347,7 +2360,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -2383,7 +2396,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -2421,7 +2434,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -2458,7 +2471,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -2495,7 +2508,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -2532,7 +2545,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -2568,7 +2581,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -2606,7 +2619,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -2643,7 +2656,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -2680,7 +2693,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -2716,7 +2729,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -2754,7 +2767,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -2791,7 +2804,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -2828,7 +2841,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -2864,7 +2877,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -2902,7 +2915,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -2939,7 +2952,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -2976,7 +2989,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -3014,7 +3027,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -3050,7 +3063,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -3088,7 +3101,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -3125,7 +3138,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -3162,7 +3175,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -3198,7 +3211,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -3236,7 +3249,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -3273,7 +3286,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -3310,7 +3323,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -3347,7 +3360,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -3383,7 +3396,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -3421,7 +3434,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -3458,7 +3471,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -3496,7 +3509,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -3532,7 +3545,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -3570,7 +3583,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -3607,7 +3620,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -3644,7 +3657,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -3681,7 +3694,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -3717,7 +3730,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -3755,7 +3768,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -3792,7 +3805,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -3830,7 +3843,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -3866,7 +3879,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -3904,7 +3917,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -3941,7 +3954,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -3978,7 +3991,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -4015,7 +4028,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -4051,7 +4064,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -4089,7 +4102,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -4127,7 +4140,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -4163,7 +4176,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -4201,7 +4214,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -4238,7 +4251,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -4275,7 +4288,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -4311,7 +4324,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -4349,7 +4362,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -4386,7 +4399,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -4422,7 +4435,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -4460,7 +4473,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -4497,7 +4510,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -4534,7 +4547,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -4570,7 +4583,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -4608,7 +4621,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -4645,7 +4658,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -4682,7 +4695,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -4718,7 +4731,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -4756,7 +4769,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -4792,7 +4805,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -4830,7 +4843,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -4866,7 +4879,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 null,
                 null,
                 null,
-                false,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
                 false,
                 false,
                 0,
@@ -4888,5 +4901,227 @@ public class AdvancedSearchInteractionSearchServiceTest {
         Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
         assertEquals("interaction_c1", iteractor.next().getAc());
         assertEquals("interaction_c2", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "negative miql query within year range"
+     */
+    @Test
+    public void findByAsNegative() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                NEGATIVE + ":true",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "param miql query within year range"
+     */
+    @Test
+    public void findByAsParam() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                PARAM + ":true",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "stc miql query within year range"
+     */
+    @Test
+    public void findByAsStoichiometry() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                STC + ":true",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "mutation miql query within year range"
+     */
+    @Test
+    public void findByAsMutation() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                MUTATION + ":true",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "mutationA miql query within year range"
+     */
+    @Test
+    public void findByAsMutationA() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                MUTATION_A + ":true",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "mutationB miql query within year range"
+     */
+    @Test
+    public void findByAsMutationB() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                MUTATION_B + ":true",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
     }
 }

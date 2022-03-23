@@ -98,6 +98,12 @@ public class AdvancedSearchInteractionIndexServiceTest {
         } catch (Exception e) {
         }
         searchInteraction1.setAsIntactMiscore(0.5);
+        searchInteraction1.setAsNegative(true);
+        searchInteraction1.setAsStoichiometry(true);
+        searchInteraction1.setAsParam(true);
+        searchInteraction1.setAsAffectedByMutation(true);
+        searchInteraction1.setAsMutationA(true);
+        searchInteraction1.setAsMutationB(true);
 
         searchInteraction2 = new SearchInteraction();
         List<SearchChildInteractor> searchChildInteractors2 = new ArrayList<>();
@@ -157,6 +163,12 @@ public class AdvancedSearchInteractionIndexServiceTest {
         } catch (Exception e) {
         }
         searchInteraction2.setAsIntactMiscore(1.0);
+        searchInteraction2.setAsNegative(false);
+        searchInteraction2.setAsStoichiometry(false);
+        searchInteraction2.setAsParam(false);
+        searchInteraction2.setAsAffectedByMutation(false);
+        searchInteraction2.setAsMutationA(false);
+        searchInteraction2.setAsMutationB(false);
     }
 
     @After
