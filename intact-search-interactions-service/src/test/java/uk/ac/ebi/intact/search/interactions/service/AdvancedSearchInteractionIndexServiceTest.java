@@ -106,6 +106,8 @@ public class AdvancedSearchInteractionIndexServiceTest {
         searchInteraction1.setAsMutationB(true);
         searchInteraction1.setAsAnnotations(merge(XrefFieldConverter.indexFieldValues("dataset", "Disease1 - Disease elaborated"),
                 XrefFieldConverter.indexFieldValues("annotation topic1", "annotation text1")));
+        searchInteraction1.setAsGeneNameA("Gene NameA1");
+        searchInteraction1.setAsGeneNameB("Gene NameB1");
 
         searchInteraction2 = new SearchInteraction();
         List<SearchChildInteractor> searchChildInteractors2 = new ArrayList<>();
@@ -173,6 +175,8 @@ public class AdvancedSearchInteractionIndexServiceTest {
         searchInteraction2.setAsMutationB(false);
         searchInteraction2.setAsAnnotations(merge(XrefFieldConverter.indexFieldValues("dataset", "Disease2 - Disease elaborated"),
                 XrefFieldConverter.indexFieldValues("annotation topic2", "annotation text2")));
+        searchInteraction2.setAsGeneNameA("Gene NameA2");
+        searchInteraction2.setAsGeneNameB("Gene NameB2");
     }
 
     @After

@@ -115,6 +115,8 @@ public class AdvancedSearchInteractionSearchServiceTest {
         searchInteraction1.setAsMutationB(true);
         searchInteraction1.setAsAnnotations(merge(XrefFieldConverter.indexFieldValues("dataset", "Disease1 - Disease elaborated"),
                 XrefFieldConverter.indexFieldValues("annotation topic1", "annotation text1")));
+        searchInteraction1.setAsGeneNameA("Gene NameA1");
+        searchInteraction1.setAsGeneNameB("Gene NameB1");
 
         SearchInteraction searchInteraction2 = new SearchInteraction();
         List<SearchChildInteractor> searchChildInteractors2 = new ArrayList<>();
@@ -183,6 +185,8 @@ public class AdvancedSearchInteractionSearchServiceTest {
         searchInteraction2.setAsMutationB(false);
         searchInteraction2.setAsAnnotations(merge(XrefFieldConverter.indexFieldValues("dataset", "Disease2 - Disease elaborated"),
                 XrefFieldConverter.indexFieldValues("annotation topic2", "annotation text2")));
+        searchInteraction2.setAsGeneNameA("Gene NameA2");
+        searchInteraction2.setAsGeneNameB("Gene NameB2");
 
         interactionIndexService.save(searchInteraction1);
         interactionIndexService.save(searchInteraction2);
@@ -5130,7 +5134,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     }
 
     /**
-     * Behaviour If the User executes "annot miql query with db:id"
+     * Behaviour If the User executes "annot miql query with topic:text"
      */
     @Test
     public void findByAsAnnotationWithTopicAndText() {
@@ -5166,7 +5170,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     }
 
     /**
-     * Behaviour If the User executes "annot miql query with db"
+     * Behaviour If the User executes "annot miql query with topic"
      */
     @Test
     public void findByAsAnnotationsWithOnlyTopic() {
@@ -5204,12 +5208,123 @@ public class AdvancedSearchInteractionSearchServiceTest {
     }
 
     /**
-     * Behaviour If the User executes "annot miql query with id"
+     * Behaviour If the User executes "annot miql query with text"
      */
     @Test
     public void findByAsAnnotationsWithOnlyText() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
                 ANNOTATIONS + ":\"Disease1 - Disease elaborated\"",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "geneNameA miql query with Name"
+     */
+    @Test
+    public void findByAsGeneNameA() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                GENE_NAME_A + ":\"Gene NameA1\"",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "geneNameB miql query with Name"
+     */
+    @Test
+    public void findByAsGeneNameB() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                GENE_NAME_B + ":\"Gene NameB1\"",
+                false,
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                NegativeFilterStatus.POSITIVE_AND_NEGATIVE.booleanValue,
+                false,
+                false,
+                0,
+                1,
+                false,
+                null,
+                null,
+                0,
+                10);
+
+        // page checks
+        assertFalse(interactionFacetPage5.getContent().isEmpty());
+        assertEquals(1, interactionFacetPage5.getContent().size());
+        assertEquals(1, interactionFacetPage5.getNumberOfElements());
+        assertEquals(0, interactionFacetPage5.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage5.getPageable().getPageSize());
+        assertEquals(1, interactionFacetPage5.getTotalElements());
+
+        Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
+        assertEquals("interaction_c1", iteractor.next().getAc());
+    }
+
+    /**
+     * Behaviour If the User executes "geneName miql query with nameA and nameB"
+     */
+    @Test
+    public void findByAsGeneNameAAndB() {
+        FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
+                GENE_NAME + ":(\"Gene NameA1\" AND \"Gene NameB1\" )",
                 false,
                 true,
                 null,

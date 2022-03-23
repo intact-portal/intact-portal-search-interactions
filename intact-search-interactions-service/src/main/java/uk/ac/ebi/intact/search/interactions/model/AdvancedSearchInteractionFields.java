@@ -53,7 +53,10 @@ public enum AdvancedSearchInteractionFields {
     AS_MUTATION(MiqlFieldConstants.MUTATION, AdvancedSearchFieldConstants.MUTATION),
     AS_MUTATION_A(MiqlFieldConstants.MUTATION_A, AdvancedSearchFieldConstants.MUTATION_A),
     AS_MUTATION_B(MiqlFieldConstants.MUTATION_B, AdvancedSearchFieldConstants.MUTATION_B),
-    AS_ANNOTATIONS(MiqlFieldConstants.ANNOTATIONS, AdvancedSearchFieldConstants.ANNOTATIONS);
+    AS_ANNOTATIONS(MiqlFieldConstants.ANNOTATIONS, AdvancedSearchFieldConstants.ANNOTATIONS),
+    AS_GENE_NAME_A(MiqlFieldConstants.GENE_NAME_A, AdvancedSearchFieldConstants.GENE_NAME_A),
+    AS_GENE_NAME_B(MiqlFieldConstants.GENE_NAME_B, AdvancedSearchFieldConstants.GENE_NAME_B),
+    AS_GENE_NAME(MiqlFieldConstants.GENE_NAME, AdvancedSearchFieldConstants.GENE_NAME);
 
     AdvancedSearchInteractionFields(String miqlFieldName, String asFieldName) {
         this.miqlFieldName = miqlFieldName;
@@ -126,7 +129,9 @@ public enum AdvancedSearchInteractionFields {
         public static final String MUTATION_A = "mutationA";
         public static final String MUTATION_B = "mutationB";
         public static final String ANNOTATIONS = "annot";
-
+        public static final String GENE_NAME = "geneName";
+        public static final String GENE_NAME_A = "geneNameA";
+        public static final String GENE_NAME_B = "geneNameB";
     }
 
     public static class AdvancedSearchFieldConstants {
@@ -178,5 +183,8 @@ public enum AdvancedSearchInteractionFields {
         public static final String MUTATION_A = "as_mutationA";
         public static final String MUTATION_B = "as_mutationB";
         public static final String ANNOTATIONS = "as_annot";
+        public static final String GENE_NAME = "as_geneName";
+        public static final String GENE_NAME_A = "as_geneNameA";
+        public static final String GENE_NAME_B = "as_geneNameB";
     }
 }

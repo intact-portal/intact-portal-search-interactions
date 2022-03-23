@@ -127,6 +127,12 @@ public class AdvancedSearchInteraction {
     @Field(ANNOTATIONS)
     private Set<String> asAnnotations;
 
+    @Field(GENE_NAME_A)
+    private String asGeneNameA;
+
+    @Field(GENE_NAME_B)
+    private String asGeneNameB;
+
     public Set<String> getAsIdA() {
         return asIdA;
     }
@@ -437,5 +443,21 @@ public class AdvancedSearchInteraction {
 
     public void setAsAnnotations(Set<String> asAnnotations) {
         this.asAnnotations = asAnnotations;
+    }
+
+    public String getAsGeneNameA() {
+        return asGeneNameA;
+    }
+
+    public void setAsGeneNameA(String asGeneNameA) {
+        this.asGeneNameA = asGeneNameA;
+    }
+
+    public String getAsGeneNameB() {
+        return asGeneNameB;
+    }
+
+    public void setAsGeneNameB(String asGeneNameB) {
+        this.asGeneNameB = asGeneNameB;
     }
 }
