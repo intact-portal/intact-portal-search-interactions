@@ -301,7 +301,7 @@
     </analyzer>
   </fieldType>
   <!-- used exclusively for advanced search - start -->
-  <fieldType name="text_intact" class="solr.TextField" positionIncrementGap="100" indexed="true" stored="true" omitNorms="true" termVectors="true" required="true" multiValued="true">
+  <fieldType name="text_intact" class="solr.TextField" positionIncrementGap="100" indexed="true" stored="false" omitNorms="true" termVectors="true" required="true" multiValued="true">
     <analyzer>
       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="[\(\)]" replacement=""/>
       <!-- replace brakets -->
@@ -317,9 +317,9 @@
       -->
   </analyzer>
   </fieldType>
-  <fieldType name="int_intact" class="solr.TrieIntField" indexed="true" stored="true" precisionStep="0" positionIncrementGap="0" multiValued="false" required="true"/>
-  <fieldType name="double_intact" class="solr.DoublePointField"  docValues="true" indexed="true" stored="true" multiValued="false"/>
-  <fieldType name="boolean_intact" class="solr.BoolField" indexed="true" stored="true" sortMissingLast="true"/>
+  <fieldType name="int_intact" class="solr.TrieIntField" indexed="true" stored="false" precisionStep="0" positionIncrementGap="0" multiValued="false" required="true"/>
+  <fieldType name="double_intact" class="solr.DoublePointField"  indexed="true" stored="false" multiValued="false"/>
+  <fieldType name="boolean_intact" class="solr.BoolField" indexed="true" stored="false" sortMissingLast="true"/>
   <!-- used exclusively for advanced search - end -->
   <fieldType name="text_general" class="solr.TextField" positionIncrementGap="100">
     <analyzer type="index">
