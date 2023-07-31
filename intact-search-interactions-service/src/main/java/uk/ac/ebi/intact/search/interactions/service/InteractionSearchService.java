@@ -34,8 +34,12 @@ public class InteractionSearchService {
     }
 
     public Page<SearchInteraction> findInteractions(String query) {
+        return findInteractions(query, PageRequest.of(0,10));
+    }
+
+    public Page<SearchInteraction> findInteractions(String query, Pageable pageable) {
         query = SearchInteractionUtility.escapeQueryChars(query);
-        return interactionRepository.findInteractions(query, PageRequest.of(0, 10));
+        return interactionRepository.findInteractions(query, pageable);
     }
 
     public FacetPage<SearchInteraction> findInteractionFacets(String query,

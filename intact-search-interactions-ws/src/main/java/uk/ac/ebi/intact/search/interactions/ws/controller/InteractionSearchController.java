@@ -5,12 +5,14 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.data.solr.core.query.result.GroupPage;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.service.ChildInteractorSearchService;
@@ -45,9 +47,17 @@ public class InteractionSearchController {
     }
 
     @CrossOrigin(origins = "*")
+    @GetMapping("/")
+    public RedirectView swagger() {
+        return new RedirectView("swagger-ui.html");
+    }
+
+    @CrossOrigin(origins = "*")
     @GetMapping(value = "/findInteractions/{query}", produces = {APPLICATION_JSON_VALUE})
-    public Page<SearchInteraction> findInteractions(@PathVariable String query) {
-        return interactionSearchService.findInteractions(query);
+    public Page<SearchInteraction> findInteractions(
+            @PathVariable String query,
+            Pageable pageable) {
+        return interactionSearchService.findInteractions(query, pageable);
     }
 
     @CrossOrigin(origins = "*")
@@ -244,7 +254,7 @@ public class InteractionSearchController {
             @RequestParam(value = "interactorAcs", required = false) Set<String> interactorAcs,
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
-            @RequestParam(value = "draw") int draw) throws IOException {
+            @RequestParam(value = "draw", defaultValue = "1") int draw) throws IOException {
 
 
         GroupPage<SearchChildInteractor> searchInteractors = childInteractorSearchService.findInteractorsWithGroup(
