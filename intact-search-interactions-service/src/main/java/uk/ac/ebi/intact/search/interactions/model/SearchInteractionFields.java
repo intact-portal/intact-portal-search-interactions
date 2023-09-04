@@ -150,4 +150,12 @@ public class SearchInteractionFields {
 
     // Affected by mutation
     public static final String AFFECTED_BY_MUTATION_STYLED = "affected_by_mutation_styled";
+
+    // Interaction formats
+    public static final String JSON_FORMAT = "json_format";
+    public static final String XML_25_FORMAT = "xml25Format";
+    public static final String XML_30_FORMAT = "xml30Format";
+    public static final String TAB_25_FORMAT = "tab25Format";
+    public static final String TAB_26_FORMAT = "tab26Format";
+    public static final String TAB_27_FORMAT = "tab27Format";
 }

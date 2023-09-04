@@ -327,6 +327,24 @@ public class SearchInteraction extends AdvancedSearchInteraction {
     @Field(AFFECTED_BY_MUTATION_STYLED)
     private String affectedByMutationStyled;
 
+    @Field(JSON_FORMAT)
+    private String jsonFormat;
+
+    @Field(XML_25_FORMAT)
+    private String xml25Format;
+
+    @Field(XML_30_FORMAT)
+    private String xml30Format;
+
+    @Field(TAB_25_FORMAT)
+    private String tab25Format;
+
+    @Field(TAB_26_FORMAT)
+    private String tab26Format;
+
+    @Field(TAB_27_FORMAT)
+    private String tab27Format;
+
     @ChildDocument
     private List<SearchChildInteractor> searchChildInteractors;
 
@@ -1214,6 +1232,54 @@ public class SearchInteraction extends AdvancedSearchInteraction {
 
     public void setAffectedByMutationStyled(String affectedByMutationStyled) {
         this.affectedByMutationStyled = affectedByMutationStyled;
+    }
+
+    public String getJsonFormat() {
+        return jsonFormat;
+    }
+
+    public void setJsonFormat(String jsonFormat) {
+        this.jsonFormat = jsonFormat;
+    }
+
+    public String getXml25Format() {
+        return xml25Format;
+    }
+
+    public void setXml25Format(String xml25Format) {
+        this.xml25Format = xml25Format;
+    }
+
+    public String getXml30Format() {
+        return xml30Format;
+    }
+
+    public void setXml30Format(String xml30Format) {
+        this.xml30Format = xml30Format;
+    }
+
+    public String getTab25Format() {
+        return tab25Format;
+    }
+
+    public void setTab25Format(String tab25Format) {
+        this.tab25Format = tab25Format;
+    }
+
+    public String getTab26Format() {
+        return tab26Format;
+    }
+
+    public void setTab26Format(String tab26Format) {
+        this.tab26Format = tab26Format;
+    }
+
+    public String getTab27Format() {
+        return tab27Format;
+    }
+
+    public void setTab27Format(String tab27Format) {
+        this.tab27Format = tab27Format;
     }
 
     public List<SearchChildInteractor> getSearchChildInteractors() {
