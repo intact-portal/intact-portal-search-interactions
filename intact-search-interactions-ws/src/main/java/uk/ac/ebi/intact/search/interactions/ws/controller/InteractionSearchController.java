@@ -388,6 +388,47 @@ public class InteractionSearchController {
                 null);
     }
 
+    @CrossOrigin(origins = "*")
+    @GetMapping(value = "/countInteractions",
+            params = {
+                    "query",
+            },
+            produces = {APPLICATION_JSON_VALUE})
+    public long countInteractions(
+            @RequestParam(value = "query") String query,
+            @RequestParam(value = "batchSearch", required = false) boolean batchSearch,
+            @RequestParam(value = "advancedSearch", required = false) boolean advancedSearch,
+            @RequestParam(value = "interactorSpeciesFilter", required = false) Set<String> interactorSpeciesFilter,
+            @RequestParam(value = "interactorTypesFilter", required = false) Set<String> interactorTypesFilter,
+            @RequestParam(value = "interactionDetectionMethodsFilter", required = false) Set<String> interactionDetectionMethodsFilter,
+            @RequestParam(value = "interactionTypesFilter", required = false) Set<String> interactionTypesFilter,
+            @RequestParam(value = "interactionHostOrganismsFilter", required = false) Set<String> interactionHostOrganismsFilter,
+            @RequestParam(value = "negativeFilter", required = false, defaultValue = "POSITIVE_ONLY") NegativeFilterStatus negativeFilter,
+            @RequestParam(value = "mutationFilter", required = false) boolean mutationFilter,
+            @RequestParam(value = "expansionFilter", required = false) boolean expansionFilter,
+            @RequestParam(value = "minMIScore", defaultValue = "0", required = false) double minMIScore,
+            @RequestParam(value = "maxMIScore", defaultValue = "1", required = false) double maxMIScore,
+            @RequestParam(value = "intraSpeciesFilter", required = false) boolean intraSpeciesFilter) {
+
+        return interactionSearchService.countInteractionResult(
+                query,
+                batchSearch,
+                advancedSearch,
+                interactorSpeciesFilter,
+                interactorTypesFilter,
+                interactionDetectionMethodsFilter,
+                interactionTypesFilter,
+                interactionHostOrganismsFilter,
+                negativeFilter.booleanValue,
+                mutationFilter,
+                expansionFilter,
+                minMIScore,
+                maxMIScore,
+                intraSpeciesFilter,
+                null,
+                null);
+    }
+
 
     @CrossOrigin(origins = "*")
     @GetMapping(value = "/countTotal",
