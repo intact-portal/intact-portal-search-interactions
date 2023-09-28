@@ -151,6 +151,29 @@ public class InteractionSearchService {
                 page);
     }
 
+    public Page<SearchInteraction> findInteractionIdentifiersWithFormat(String query,
+                                                                        boolean batchSearch,
+                                                                        boolean advancedSearch,
+                                                                        Set<String> interactorSpeciesFilters,
+                                                                        Set<String> interactorTypesFilter,
+                                                                        Set<String> interactionDetectionMethodsFilter,
+                                                                        Set<String> interactionTypesFilter,
+                                                                        Set<String> interactionHostOrganismsFilter,
+                                                                        Boolean negativeFilter,
+                                                                        boolean mutationFilter,
+                                                                        boolean expansionFilter,
+                                                                        double minMiScore,
+                                                                        double maxMiScore,
+                                                                        boolean intraSpeciesFilter,
+                                                                        Set<Long> binaryInteractionIds,
+                                                                        Set<String> interactorAcs,
+                                                                        Pageable page,
+                                                                        String format) {
+        return interactionRepository.findInteractionIdentifiersWithFormat(query, batchSearch, advancedSearch, interactorSpeciesFilters, interactorTypesFilter, interactionDetectionMethodsFilter,
+                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, expansionFilter, minMiScore, maxMiScore, intraSpeciesFilter, binaryInteractionIds, interactorAcs, null,
+                page, format);
+    }
+
     public Page<SearchInteraction> findInteractionIdentifiers(String query,
                                                               boolean batchSearch,
                                                               boolean advancedSearch,
