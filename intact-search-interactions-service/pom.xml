@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>uk.ac.ebi.intact.search.interactions</groupId>
+        <artifactId>intact-search-interactions-module</artifactId>
+        <version>1.1.0</version>
+    </parent>
+
+    <artifactId>intact-search-interactions-service</artifactId>
+
+    <name>IntAct Portal :: Search Interactions Service Layer</name>
+    <description>SpringBoot with spring data interactions solr</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-solr</artifactId>
+        </dependency>
+
+        <!-- Test dependencies -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Dependency added for enable EmbeddedSolrServerFactory -->
+        <dependency>
+            <groupId>org.apache.solr</groupId>
+            <artifactId>solr-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- The version of this dependence needs to change to avoid this issue with solr embedded mode-->
+        <!-- https://github.com/spring-projects/spring-boot/issues/15110-->
+        <dependency>
+            <groupId>io.dropwizard.metrics</groupId>
+            <artifactId>metrics-core</artifactId>
+            <version>3.2.6</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>
