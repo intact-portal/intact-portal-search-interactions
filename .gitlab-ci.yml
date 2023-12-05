@@ -1,6 +1,6 @@
 image: docker:latest
 services:
-  - docker:dind
+  - docker:stable-dind
 variables:
   CONTAINER_IMAGE: ${CI_REGISTRY_IMAGE}:latest
   DOCKER_TLS_CERTDIR: ""
@@ -10,12 +10,12 @@ stages:
   - kubernetes-deploy
 
 maven-build:
-  image: maven:3.6-jdk-8
+  image: maven:3.6-jdk-11
   stage: build-jar
   script: "mvn package -B -s settings.xml -Pip-solr-indexing-hx"
   after_script:
     - "mkdir /builds/intact-ci/intact-portal-search-interactions/target/"
-    - "cp /builds/intact-ci/intact-portal-search-interactions/intact-search-interactions-ws/target/intact-search-interactions-ws-1.1.0-SNAPSHOT.jar /builds/intact-ci/intact-portal-search-interactions/target/"
+    - "cp /builds/intact-ci/intact-portal-search-interactions/intact-search-interactions-ws/target/intact-search-interactions-ws-1.1.1.jar /builds/intact-ci/intact-portal-search-interactions/target/"
   artifacts:
     paths:
       - target/*.jar
@@ -41,7 +41,7 @@ hh-production-deploy:
     - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
     - chmod +x ./kubectl
     - mv ./kubectl /usr/local/bin/kubectl
-    - git clone https://k8s-config-token:${K8S_CONFIG_TOKEN_HH}@gitlab.ebi.ac.uk/anjali/k8s-config-hh
+    - git clone https://k8s-config-token:${K8S_CONFIG_TOKEN_HH}@gitlab.ebi.ac.uk/intact-ci/k8s-config-hh
     - mkdir ~/.kube
     - cp k8s-config-hh/config ~/.kube/
     - kubectl config use-context prod
@@ -60,7 +60,7 @@ hx-production-deploy:
     - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
     - chmod +x ./kubectl
     - mv ./kubectl /usr/local/bin/kubectl
-    - git clone https://k8s-config-token:${K8S_CONFIG_TOKEN_HX}@gitlab.ebi.ac.uk/anjali/k8s-config-hx
+    - git clone https://k8s-config-token:${K8S_CONFIG_TOKEN_HX}@gitlab.ebi.ac.uk/intact-ci/k8s-config-hx
     - mkdir ~/.kube
     - cp k8s-config-hx/config ~/.kube/
     - kubectl config use-context prod
@@ -79,7 +79,7 @@ hx-test-deploy:
     - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
     - chmod +x ./kubectl
     - mv ./kubectl /usr/local/bin/kubectl
-    - git clone https://k8s-config-token:${K8S_CONFIG_TOKEN_HX}@gitlab.ebi.ac.uk/anjali/k8s-config-hx
+    - git clone https://k8s-config-token:${K8S_CONFIG_TOKEN_HX}@gitlab.ebi.ac.uk/intact-ci/k8s-config-hx
     - mkdir ~/.kube
     - cp k8s-config-hx/config ~/.kube/
     - kubectl config get-contexts
