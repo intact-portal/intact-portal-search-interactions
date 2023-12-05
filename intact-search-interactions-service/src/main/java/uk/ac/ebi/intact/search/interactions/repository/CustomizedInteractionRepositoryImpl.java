@@ -14,6 +14,8 @@ import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.utils.SearchInteractionUtility;
 
 import javax.annotation.Resource;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -26,6 +28,16 @@ import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields
 
 @Repository
 public class CustomizedInteractionRepositoryImpl implements CustomizedInteractionRepository {
+
+    private static final Set<String> EXCLUDED_FORMAT_FIELDS = Set.of(
+            JSON_FORMAT,
+            XML_25_FORMAT,
+            XML_30_FORMAT,
+            TAB_25_FORMAT,
+            TAB_26_FORMAT,
+            TAB_27_FORMAT);
+
+    private static final String[] SEARCH_INTERACTION_FIELDS = searchInteractionFields();
 
     // default minimum counts for faceting
     private static final int FACET_MIN_COUNT = 10000;
@@ -145,6 +157,9 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         // pagination
         search.setPageRequest(pageable);
 
+        // fields
+        search.addProjectionOnFields(SEARCH_INTERACTION_FIELDS);
+
         // sorting
         if (sort != null) {
             search.addSort(sort);
@@ -181,7 +196,6 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                                                     Set<Long> binaryInteractionIds,
                                                     Set<String> interactorAcs,
                                                     Sort sort, Pageable pageable) {
-
 
         SimpleQuery search = (SimpleQuery) createQuery(
                 query,
@@ -634,6 +648,10 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         // pagination
         search.setPageRequest(pageable);
 
+        // fields
+        search.addProjectionOnFields(SEARCH_INTERACTION_FIELDS);
+
+        // sorting
         if (sort != null) {
             search.addSort(sort);
         } else {
@@ -699,5 +717,23 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         search.addProjectionOnField(new SimpleField(BINARY_INTERACTION_ID));
 
         return search;
+    }
+
+    private static String[] searchInteractionFields() {
+        // SOLR search does not allow to exclude fields to fetch, and by default it fetches all fields.
+        // To not fetch the data from the fields with the interactions serialised in different formats, we get
+        // all the SearchInteraction fields, and exclude the format ones from that list.
+        // We then use addProjectionOnField to specify which fields to fetch with a SOLR search.
+
+        List<String> fields = new ArrayList<>();
+        for (Field field : SearchInteraction.class.getDeclaredFields()) {
+            if (field.getAnnotation(org.apache.solr.client.solrj.beans.Field.class) != null) {
+                String fieldValue = field.getAnnotation(org.apache.solr.client.solrj.beans.Field.class).value();
+                if (!EXCLUDED_FORMAT_FIELDS.contains(fieldValue)) {
+                    fields.add(fieldValue);
+                }
+            }
+        }
+        return fields.toArray(new String[0]);
     }
 }
