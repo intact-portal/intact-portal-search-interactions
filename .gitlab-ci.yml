@@ -15,7 +15,7 @@ maven-build:
   script: "mvn package -B -s settings.xml -Pip-solr-indexing-hx"
   after_script:
     - "mkdir /builds/intact-ci/intact-portal-search-interactions/target/"
-    - "cp /builds/intact-ci/intact-portal-search-interactions/intact-search-interactions-ws/target/intact-search-interactions-ws-1.1.1.jar /builds/intact-ci/intact-portal-search-interactions/target/"
+    - "cp /builds/intact-ci/intact-portal-search-interactions/intact-search-interactions-ws/target/intact-search-interactions-ws.jar /builds/intact-ci/intact-portal-search-interactions/target/"
   artifacts:
     paths:
       - target/*.jar
@@ -32,6 +32,7 @@ docker-build:
     - docker push ${CONTAINER_IMAGE}
     - docker rmi ${CONTAINER_IMAGE}
     - docker logout "$CI_REGISTRY"
+  needs: [ maven-build ]
 
 hh-production-deploy:
   stage: kubernetes-deploy
@@ -51,6 +52,7 @@ hh-production-deploy:
     - kubectl rollout restart deployment/intact-portal-search-interactions-deployment
     - kubectl get nodes
   when: manual
+  needs: [ docker-build ]
 
 hx-production-deploy:
   stage: kubernetes-deploy
@@ -70,6 +72,7 @@ hx-production-deploy:
     - kubectl rollout restart deployment/intact-portal-search-interactions-deployment
     - kubectl get nodes
   when: manual
+  needs: [ docker-build ]
 
 hx-test-deploy:
   stage: kubernetes-deploy
@@ -90,5 +93,6 @@ hx-test-deploy:
     - kubectl rollout restart deployment/intact-portal-search-interactions-deployment
     - kubectl get nodes
   when: manual
+  needs: [ docker-build ]
 
 
