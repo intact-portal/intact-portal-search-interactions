@@ -74,7 +74,7 @@ hx-production-deploy:
   when: manual
   needs: [ docker-build ]
 
-hx-test-deploy:
+hh-test-deploy:
   stage: kubernetes-deploy
   image: alpine
   script:
@@ -86,7 +86,7 @@ hx-test-deploy:
     - mkdir ~/.kube
     - cp k8s-config-hh-test/config ~/.kube/
     - kubectl config get-contexts
-    - kubectl config use-context team-admin-hx-wp-webadmin-24
+    - kubectl config use-context team-admin-hh-wp-webadmin-68
     - 'printf "$(kubectl create secret docker-registry gitlab-registry --docker-server=$CI_REGISTRY --docker-username=$CI_DEPLOY_USER --docker-password=$CI_DEPLOY_PASSWORD --docker-email=$GITLAB_USER_EMAIL -o yaml --dry-run=client)" | kubectl apply -f -'
     - kubectl get secrets gitlab-registry -o yaml
     - kubectl apply -f k8s-test/k8s_deploy.yml
