@@ -112,6 +112,77 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                                                                  Set<Long> binaryInteractionIds,
                                                                  Set<String> interactorAcs,
                                                                  Sort sort, Pageable pageable) {
+        return this.findInteractionWithFacetAndFields(query, batchSearch, advancedSearch,
+                interactorSpeciesFilter,
+                interactorTypesFilter,
+                interactionDetectionMethodsFilter,
+                interactionTypesFilter,
+                interactionHostOrganismsFilter,
+                negativeFilter,
+                mutationFilter,
+                expansionFilter,
+                minMIScore,
+                maxMIScore,
+                intraSpeciesFilter,
+                binaryInteractionIds,
+                interactorAcs,
+                sort, pageable, SEARCH_INTERACTION_FIELDS);
+    }
+
+    @Override
+    public FacetPage<SearchInteraction> findInteractionIdsWithFacet(String query,
+                                                                 boolean batchSearch,
+                                                                 boolean advancedSearch,
+                                                                 Set<String> interactorSpeciesFilter,
+                                                                 Set<String> interactorTypesFilter,
+                                                                 Set<String> interactionDetectionMethodsFilter,
+                                                                 Set<String> interactionTypesFilter,
+                                                                 Set<String> interactionHostOrganismsFilter,
+                                                                 Boolean negativeFilter,
+                                                                 boolean mutationFilter,
+                                                                 boolean expansionFilter,
+                                                                 double minMIScore,
+                                                                 double maxMIScore,
+                                                                 boolean intraSpeciesFilter,
+                                                                 Set<Long> binaryInteractionIds,
+                                                                 Set<String> interactorAcs,
+                                                                 Sort sort, Pageable pageable) {
+        return this.findInteractionWithFacetAndFields(query, batchSearch, advancedSearch,
+                interactorSpeciesFilter,
+                interactorTypesFilter,
+                interactionDetectionMethodsFilter,
+                interactionTypesFilter,
+                interactionHostOrganismsFilter,
+                negativeFilter,
+                mutationFilter,
+                expansionFilter,
+                minMIScore,
+                maxMIScore,
+                intraSpeciesFilter,
+                binaryInteractionIds,
+                interactorAcs,
+                sort, pageable,
+                new String[]{BINARY_INTERACTION_ID});
+    }
+
+    private FacetPage<SearchInteraction> findInteractionWithFacetAndFields(String query,
+                                                                           boolean batchSearch,
+                                                                           boolean advancedSearch,
+                                                                           Set<String> interactorSpeciesFilter,
+                                                                           Set<String> interactorTypesFilter,
+                                                                           Set<String> interactionDetectionMethodsFilter,
+                                                                           Set<String> interactionTypesFilter,
+                                                                           Set<String> interactionHostOrganismsFilter,
+                                                                           Boolean negativeFilter,
+                                                                           boolean mutationFilter,
+                                                                           boolean expansionFilter,
+                                                                           double minMIScore,
+                                                                           double maxMIScore,
+                                                                           boolean intraSpeciesFilter,
+                                                                           Set<Long> binaryInteractionIds,
+                                                                           Set<String> interactorAcs,
+                                                                           Sort sort, Pageable pageable,
+                                                                           String[] fieldsToProject) {
 
         // search query
         SimpleFacetQuery search = new SimpleFacetQuery();
@@ -158,7 +229,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         search.setPageRequest(pageable);
 
         // fields
-        search.addProjectionOnFields(SEARCH_INTERACTION_FIELDS);
+        search.addProjectionOnFields(fieldsToProject);
 
         // sorting
         if (sort != null) {
@@ -730,6 +801,19 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
             if (field.getAnnotation(org.apache.solr.client.solrj.beans.Field.class) != null) {
                 String fieldValue = field.getAnnotation(org.apache.solr.client.solrj.beans.Field.class).value();
                 if (!EXCLUDED_FORMAT_FIELDS.contains(fieldValue)) {
+                    fields.add(fieldValue);
+                }
+            }
+        }
+        return fields.toArray(new String[0]);
+    }
+
+    private static String[] searchInteractionBinaryIdField(){
+        List<String> fields = new ArrayList<>();
+        for (Field field : SearchInteraction.class.getDeclaredFields()) {
+            if (field.getAnnotation(org.apache.solr.client.solrj.beans.Field.class) != null) {
+                String fieldValue = field.getAnnotation(org.apache.solr.client.solrj.beans.Field.class).value();
+                if (BINARY_INTERACTION_ID.contains(fieldValue)) {
                     fields.add(fieldValue);
                 }
             }
