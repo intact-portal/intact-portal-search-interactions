@@ -136,6 +136,8 @@ public interface CustomizedInteractionRepository {
                                                           Set<String> interactorAcs,
                                                           Sort sort, Pageable pageable);
 
+    Page<Long> findBinaryInteractionIds(String query, boolean advancedSearch, Pageable pageable);
+
     /**
      * @param query                             input used to retrieve the interaction
      * @param batchSearch                       (Optional) true if que query needs to be treated as a batch search

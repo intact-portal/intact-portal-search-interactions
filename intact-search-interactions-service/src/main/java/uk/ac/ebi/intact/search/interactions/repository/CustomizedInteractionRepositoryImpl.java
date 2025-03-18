@@ -165,6 +165,25 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                 new String[]{BINARY_INTERACTION_ID});
     }
 
+    @Override
+    public Page<Long> findBinaryInteractionIds(String query, boolean advancedSearch, Pageable pageable) {
+        // search query
+        SimpleFacetQuery search = new SimpleFacetQuery();
+
+        // search criteria
+        Criteria conditions = searchInteractionUtility.createSearchConditions(query, false, advancedSearch);
+        search.addCriteria(conditions);
+
+        // Retrieve only binary interaction id
+        search.addProjectionOnFields(BINARY_INTERACTION_ID);
+
+        // pagination
+        search.setPageRequest(pageable);
+
+        return solrOperations.queryForFacetPage(INTERACTIONS, search, SearchInteraction.class, RequestMethod.GET)
+                .map(SearchInteraction::getBinaryInteractionId);
+    }
+
     private FacetPage<SearchInteraction> findInteractionWithFacetAndFields(String query,
                                                                            boolean batchSearch,
                                                                            boolean advancedSearch,
@@ -801,19 +820,6 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
             if (field.getAnnotation(org.apache.solr.client.solrj.beans.Field.class) != null) {
                 String fieldValue = field.getAnnotation(org.apache.solr.client.solrj.beans.Field.class).value();
                 if (!EXCLUDED_FORMAT_FIELDS.contains(fieldValue)) {
-                    fields.add(fieldValue);
-                }
-            }
-        }
-        return fields.toArray(new String[0]);
-    }
-
-    private static String[] searchInteractionBinaryIdField(){
-        List<String> fields = new ArrayList<>();
-        for (Field field : SearchInteraction.class.getDeclaredFields()) {
-            if (field.getAnnotation(org.apache.solr.client.solrj.beans.Field.class) != null) {
-                String fieldValue = field.getAnnotation(org.apache.solr.client.solrj.beans.Field.class).value();
-                if (BINARY_INTERACTION_ID.contains(fieldValue)) {
                     fields.add(fieldValue);
                 }
             }

@@ -87,6 +87,33 @@ public class InteractionSearchService {
                 PageRequest.of(page, pageSize));
     }
 
+    public FacetPage<SearchInteraction> findInteractionIds(String query,
+                                                                    boolean batchSearch,
+                                                                    boolean advancedSearch,
+                                                                    Set<String> interactorSpeciesFilter,
+                                                                    Set<String> interactorTypesFilter,
+                                                                    Set<String> interactionDetectionMethodsFilter,
+                                                                    Set<String> interactionTypesFilter,
+                                                                    Set<String> interactionHostOrganismsFilter,
+                                                                    Boolean negativeFilter,
+                                                                    boolean mutationFilter,
+                                                                    boolean expansionFilter,
+                                                                    double minMIScore,
+                                                                    double maxMIScore,
+                                                                    boolean intraSpeciesFilter,
+                                                                    Set<Long> binaryInteractionIds,
+                                                                    Set<String> interactorAcs,
+                                                                    int page,
+                                                                    int pageSize) {
+        return interactionRepository.findInteractionIdsWithFacet(query, batchSearch, advancedSearch, interactorSpeciesFilter, interactorTypesFilter, interactionDetectionMethodsFilter,
+                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, expansionFilter, minMIScore, maxMIScore, intraSpeciesFilter, binaryInteractionIds, interactorAcs, null,
+                PageRequest.of(page, pageSize));
+    }
+
+    public Page<Long> findBinaryInteractionIds(String query, boolean advancedSearch, Pageable pageable) {
+        return interactionRepository.findBinaryInteractionIds(query, advancedSearch, pageable);
+    }
+
     public FacetPage<SearchInteraction> findInteractionIdsWithFacet(String query,
                                                                  boolean batchSearch,
                                                                  boolean advancedSearch,
