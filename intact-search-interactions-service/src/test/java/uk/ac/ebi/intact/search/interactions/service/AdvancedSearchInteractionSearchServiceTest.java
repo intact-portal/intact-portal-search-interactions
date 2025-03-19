@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -23,6 +24,7 @@ import java.util.*;
 
 import static org.junit.Assert.*;
 import static uk.ac.ebi.intact.search.interactions.model.AdvancedSearchInteractionFields.MiqlFieldConstants.*;
+import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields.AC;
 import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields.DETECTION_METHOD_S;
 import static uk.ac.ebi.intact.search.interactions.service.util.TestUtil.merge;
 
@@ -5353,5 +5355,16 @@ public class AdvancedSearchInteractionSearchServiceTest {
 
         Iterator<SearchInteraction> iteractor = interactionFacetPage5.iterator();
         assertEquals("interaction_c1", iteractor.next().getAc());
+    }
+
+    @Test
+    public void findBinaryInteractionsIdsAdvancedSearch() {
+        //has to be here as the Interactions.xml is set up for advanced search here
+        PageRequest pageable = PageRequest.of(0, 10);
+        Page<Long> results = interactionSearchService.findBinaryInteractionIds(
+                ALTID_B + ":(EBI-22345 OR O123456)",
+                true,
+                pageable);
+        assertEquals(2, results.getTotalElements());
     }
 }

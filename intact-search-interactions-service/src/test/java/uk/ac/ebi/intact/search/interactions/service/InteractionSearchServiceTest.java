@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.data.solr.core.query.result.FacetQueryEntry;
@@ -18,6 +19,7 @@ import javax.annotation.Resource;
 import java.util.*;
 
 import static org.junit.Assert.*;
+import static uk.ac.ebi.intact.search.interactions.model.AdvancedSearchInteractionFields.MiqlFieldConstants.ID_A;
 import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields.*;
 
 /**
@@ -38,7 +40,6 @@ public class InteractionSearchServiceTest {
      */
     @Before
     public void setUp() {
-
         //Delete all documents from solr core
         interactionIndexService.deleteAll();
         /*Interactions are instantiated from saved searchInteractions in an xml as instantiating it one by one in the code is cumbersome
@@ -2301,5 +2302,15 @@ public class InteractionSearchServiceTest {
         for (FacetFieldEntry facetFieldEntry : interactionOp.getFacetResultPage(NEGATIVE)) {
             assertEquals(negativeInteractionFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
         }
+    }
+
+    @Test
+    public void findBinaryInteractionsIdsSearch() {
+        PageRequest pageable = PageRequest.of(0, 10);
+        Page<Long> results = interactionSearchService.findBinaryInteractionIds(
+                "NDC80",
+                false,
+                pageable);
+        assertEquals(4, results.getTotalElements());
     }
 }
