@@ -46,9 +46,9 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
     @Resource
     private boolean isEmbeddedSolr;
 
-    // default sorting for the query results
+    //default sorting for the query results
     //TODO Solve problems with multivalue fields that are not allow to be sorted. Schema-less create all the fields as multivalues
-//    private static final Sort DEFAULT_QUERY_SORT_WITH_QUERY = new Sort(Sort.Direction.DESC, SearchInteractorFields.INTERACTION_COUNT);
+    //private static final Sort DEFAULT_QUERY_SORT_WITH_QUERY = new Sort(Sort.Direction.DESC, SearchInteractorFields.INTERACTION_COUNT);
 
     @Autowired
     public CustomizedInteractionRepositoryImpl(SolrOperations solrOperations) {
@@ -127,42 +127,6 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                 binaryInteractionIds,
                 interactorAcs,
                 sort, pageable, SEARCH_INTERACTION_FIELDS);
-    }
-
-    @Override
-    public FacetPage<SearchInteraction> findInteractionIdsWithFacet(String query,
-                                                                 boolean batchSearch,
-                                                                 boolean advancedSearch,
-                                                                 Set<String> interactorSpeciesFilter,
-                                                                 Set<String> interactorTypesFilter,
-                                                                 Set<String> interactionDetectionMethodsFilter,
-                                                                 Set<String> interactionTypesFilter,
-                                                                 Set<String> interactionHostOrganismsFilter,
-                                                                 Boolean negativeFilter,
-                                                                 boolean mutationFilter,
-                                                                 boolean expansionFilter,
-                                                                 double minMIScore,
-                                                                 double maxMIScore,
-                                                                 boolean intraSpeciesFilter,
-                                                                 Set<Long> binaryInteractionIds,
-                                                                 Set<String> interactorAcs,
-                                                                 Sort sort, Pageable pageable) {
-        return this.findInteractionWithFacetAndFields(query, batchSearch, advancedSearch,
-                interactorSpeciesFilter,
-                interactorTypesFilter,
-                interactionDetectionMethodsFilter,
-                interactionTypesFilter,
-                interactionHostOrganismsFilter,
-                negativeFilter,
-                mutationFilter,
-                expansionFilter,
-                minMIScore,
-                maxMIScore,
-                intraSpeciesFilter,
-                binaryInteractionIds,
-                interactorAcs,
-                sort, pageable,
-                new String[]{BINARY_INTERACTION_ID});
     }
 
     @Override
