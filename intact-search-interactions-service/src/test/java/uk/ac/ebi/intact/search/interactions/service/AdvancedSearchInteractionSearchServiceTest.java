@@ -12,6 +12,7 @@ import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.test.context.junit4.SpringRunner;
 import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
+import uk.ac.ebi.intact.search.interactions.model.SimpleInteractionQueryParameters;
 import uk.ac.ebi.intact.search.interactions.utils.DocumentType;
 import uk.ac.ebi.intact.search.interactions.utils.NegativeFilterStatus;
 import uk.ac.ebi.intact.search.interactions.utils.as.converters.DateFieldConverter;
@@ -5360,11 +5361,13 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findBinaryInteractionsIdsAdvancedSearch() {
         //has to be here as the Interactions.xml is set up for advanced search here
-        PageRequest pageable = PageRequest.of(0, 10);
         Page<Long> results = interactionSearchService.findBinaryInteractionIds(
-                ALTID_B + ":(EBI-22345 OR O123456)",
-                true,
-                pageable);
+                SimpleInteractionQueryParameters.builder()
+                        .query(ALTID_B + ":(EBI-22345 OR O123456)")
+                        .advancedSearch(true)
+                        .pageSize(10)
+                        .pageNumber(0)
+                        .build());
         assertEquals(2, results.getTotalElements());
     }
 }

@@ -10,6 +10,8 @@ import org.springframework.data.solr.core.SolrOperations;
 import org.springframework.data.solr.core.query.*;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestBody;
+import uk.ac.ebi.intact.search.interactions.model.SimpleInteractionQueryParameters;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.utils.SearchInteractionUtility;
 
@@ -130,7 +132,12 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
     }
 
     @Override
-    public Page<Long> findBinaryInteractionIds(String query, boolean advancedSearch, Pageable pageable) {
+    public Page<Long> findBinaryInteractionIds(@RequestBody SimpleInteractionQueryParameters parameters) {
+
+        String query = parameters.getQuery();
+        boolean advancedSearch = parameters.isAdvancedSearch();
+        Pageable pageable = PageRequest.of(parameters.getPageNumber(),
+                parameters.getPageSize());
         // search query
         SimpleFacetQuery search = new SimpleFacetQuery();
 

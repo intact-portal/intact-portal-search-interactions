@@ -7,19 +7,18 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.data.solr.core.query.result.FacetQueryEntry;
 import org.springframework.test.context.junit4.SpringRunner;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
+import uk.ac.ebi.intact.search.interactions.model.SimpleInteractionQueryParameters;
 import uk.ac.ebi.intact.search.interactions.service.util.TestUtil;
 
 import javax.annotation.Resource;
 import java.util.*;
 
 import static org.junit.Assert.*;
-import static uk.ac.ebi.intact.search.interactions.model.AdvancedSearchInteractionFields.MiqlFieldConstants.ID_A;
 import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields.*;
 
 /**
@@ -2306,11 +2305,13 @@ public class InteractionSearchServiceTest {
 
     @Test
     public void findBinaryInteractionsIdsSearch() {
-        PageRequest pageable = PageRequest.of(0, 10);
         Page<Long> results = interactionSearchService.findBinaryInteractionIds(
-                "NDC80",
-                false,
-                pageable);
+                SimpleInteractionQueryParameters.builder()
+                        .query("ndc80")
+                        .advancedSearch(false)
+                        .pageSize(10)
+                        .pageNumber(0)
+                        .build());
         assertEquals(4, results.getTotalElements());
     }
 }

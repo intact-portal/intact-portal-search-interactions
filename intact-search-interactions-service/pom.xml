@@ -10,6 +10,10 @@
         <version>1.2.0-SNAPSHOT</version>
     </parent>
 
+    <properties>
+        <lombok.version>1.18.36</lombok.version>
+    </properties>
+
     <artifactId>intact-search-interactions-service</artifactId>
 
     <name>IntAct Portal :: Search Interactions Service Layer</name>
@@ -48,5 +52,20 @@
             <version>3.2.6</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+        </dependency>
+
     </dependencies>
 </project>
