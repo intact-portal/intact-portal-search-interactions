@@ -5,6 +5,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.solr.core.query.result.GroupPage;
 import org.springframework.stereotype.Repository;
 import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
+import uk.ac.ebi.intact.search.interactions.model.parameters.InteractionSearchParameters;
+import uk.ac.ebi.intact.search.interactions.model.parameters.PagedInteractionSearchParameters;
 
 import java.util.Set;
 
@@ -32,23 +34,7 @@ public interface CustomizedChildInteractorRepository {
      * @param pageable                          page number and size of the request
      * @return the interactors matching all the criteria
      */
-    GroupPage<SearchChildInteractor> findChildInteractors(String query,
-                                                          boolean batchSearch,
-                                                          boolean advancedSearch,
-                                                          Set<String> interactorSpeciesFilter,
-                                                          Set<String> interactorTypesFilter,
-                                                          Set<String> interactionDetectionMethodsFilter,
-                                                          Set<String> interactionTypesFilter,
-                                                          Set<String> interactionHostOrganismsFilter,
-                                                          Boolean negativeFilter,
-                                                          boolean mutationFilter,
-                                                          boolean expansionFilter,
-                                                          double minMIScore,
-                                                          double maxMIScore,
-                                                          boolean intraSpeciesFilter,
-                                                          Set<Long> binaryInteractionIds,
-                                                          Set<String> interactorAcs,
-                                                          Sort sort, Pageable pageable);
+    GroupPage<SearchChildInteractor> findChildInteractors(PagedInteractionSearchParameters parameters);
 
     /**
      * @param query                             input used to retrieve the interactors contained in the interaction
@@ -66,20 +52,5 @@ public interface CustomizedChildInteractorRepository {
      * @param binaryInteractionIds
      * @return the number of interactors matching all the criteria
      */
-    long countChildInteractors(String query,
-                               boolean batchSearch,
-                               boolean advancedSearch,
-                               Set<String> interactorSpeciesFilter,
-                               Set<String> interactorTypesFilter,
-                               Set<String> interactionDetectionMethodsFilter,
-                               Set<String> interactionTypesFilter,
-                               Set<String> interactionHostOrganismsFilter,
-                               Boolean negativeFilter,
-                               boolean mutationFilter,
-                               boolean expansionFilter,
-                               double minMIScore,
-                               double maxMIScore,
-                               boolean intraSpeciesFilter,
-                               Set<Long> binaryInteractionIds,
-                               Set<String> interactorAcs);
+    long countChildInteractors(InteractionSearchParameters parameters);
 }

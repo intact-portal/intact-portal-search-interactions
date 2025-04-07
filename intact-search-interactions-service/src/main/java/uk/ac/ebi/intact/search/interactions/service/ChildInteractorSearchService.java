@@ -4,6 +4,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.solr.core.query.result.GroupPage;
 import org.springframework.stereotype.Service;
 import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
+import uk.ac.ebi.intact.search.interactions.model.parameters.InteractionSearchParameters;
+import uk.ac.ebi.intact.search.interactions.model.parameters.PagedInteractionSearchParameters;
 import uk.ac.ebi.intact.search.interactions.repository.ChildInteractorRepository;
 import uk.ac.ebi.intact.search.interactions.utils.DocumentType;
 
@@ -21,47 +23,12 @@ public class ChildInteractorSearchService {
         this.childInteractorRepository = childInteractorRepository;
     }
 
-    public GroupPage<SearchChildInteractor> findInteractorsWithGroup(String query,
-                                                                     boolean batchSearch,
-                                                                     boolean advancedSearch,
-                                                                     Set<String> interactorSpeciesFilter,
-                                                                     Set<String> interactorTypesFilter,
-                                                                     Set<String> interactionDetectionMethodsFilter,
-                                                                     Set<String> interactionTypesFilter,
-                                                                     Set<String> interactionHostOrganismsFilter,
-                                                                     Boolean negativeFilter,
-                                                                     boolean mutationFilter,
-                                                                     boolean expansionFilter,
-                                                                     double minMIScore,
-                                                                     double maxMIScore,
-                                                                     boolean intraSpeciesFilter,
-                                                                     Set<Long> binaryInteractionIds,
-                                                                     Set<String> interactorAcs,
-                                                                     int page,
-                                                                     int pageSize) {
-        return childInteractorRepository.findChildInteractors(query, batchSearch, advancedSearch, interactorSpeciesFilter, interactorTypesFilter, interactionDetectionMethodsFilter,
-                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, expansionFilter, minMIScore, maxMIScore, intraSpeciesFilter, binaryInteractionIds, interactorAcs, null,
-                PageRequest.of(page, pageSize));
+    public GroupPage<SearchChildInteractor> findInteractorsWithGroup(PagedInteractionSearchParameters parameters) {
+        return childInteractorRepository.findChildInteractors(parameters);
     }
 
-    public long countInteractorsWithGroup(String query,
-                                          boolean batchSearch,
-                                          boolean advancedSearch,
-                                          Set<String> interactorSpeciesFilter,
-                                          Set<String> interactorTypesFilter,
-                                          Set<String> interactionDetectionMethodsFilter,
-                                          Set<String> interactionTypesFilter,
-                                          Set<String> interactionHostOrganismsFilter,
-                                          Boolean negativeFilter,
-                                          boolean mutationFilter,
-                                          boolean expansionFilter,
-                                          double minMIScore,
-                                          double maxMIScore,
-                                          boolean intraSpeciesFilter,
-                                          Set<Long> binaryInteractionIds,
-                                          Set<String> interactorAcs) {
-        return childInteractorRepository.countChildInteractors(query, batchSearch, advancedSearch, interactorSpeciesFilter, interactorTypesFilter, interactionDetectionMethodsFilter,
-                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, expansionFilter, minMIScore, maxMIScore, intraSpeciesFilter, binaryInteractionIds, interactorAcs);
+    public long countInteractorsWithGroup(InteractionSearchParameters parameters) {
+        return childInteractorRepository.countChildInteractors(parameters);
     }
 
     public long countTotal() {

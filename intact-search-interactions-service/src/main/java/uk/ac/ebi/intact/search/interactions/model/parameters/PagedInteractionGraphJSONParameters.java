@@ -20,7 +20,9 @@ import java.util.Set;
 public class PagedInteractionGraphJSONParameters extends InteractionGraphJSONParameters {
 
     @Builder.Default
-    protected Pageable pageable = PageRequest.of(0, 20);
+    protected int page = 0;
+    @Builder.Default
+    protected int pageSize = 20;
 
     protected Sort sort;
 
@@ -45,7 +47,8 @@ public class PagedInteractionGraphJSONParameters extends InteractionGraphJSONPar
                 .mutationFilter(mutationFilter)
                 .negativeFilter(negativeFilter)
 
-                .pageable(pageable)
+                .page(page)
+                .pageSize(pageSize)
                 .sort(sort)
 
                 .binaryInteractionIds(null)

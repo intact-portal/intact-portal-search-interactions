@@ -41,11 +41,15 @@ public class SearchInteractionUtility {
         return s.toLowerCase();
     }
 
-    public Criteria createSearchConditions(String searchTerms, boolean batchSearch, boolean advancedSearch) {
+    public Criteria createSearchConditions(InteractionSearchParameters parameters) {
         Criteria conditions;
         Criteria userConditions = null;
         Criteria documentConditions = new Criteria(DOCUMENT_TYPE).is(DocumentType.INTERACTION);
         List<String> words = new ArrayList<>();
+
+        String searchTerms = parameters.getQuery();
+        boolean batchSearch = parameters.isBatchSearch();
+        boolean advancedSearch = parameters.isAdvancedSearch();
 
         //We prepare the term to split by several characters
 

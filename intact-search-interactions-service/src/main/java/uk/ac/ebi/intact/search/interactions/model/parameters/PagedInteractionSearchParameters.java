@@ -21,9 +21,12 @@ import java.util.Set;
 public class PagedInteractionSearchParameters extends InteractionSearchParameters {
 
     @Builder.Default
-    protected Pageable pageable = PageRequest.of(0, 20);
+    private Integer page = 0;
 
-    protected Sort sort;
+    @Builder.Default
+    private Integer pageSize = 20;
+
+    private Sort sort;
 
     public static PagedInteractionSearchParametersBuilder<?,?> copyParameters(InteractionSearchParameters parameters) {
         return (PagedInteractionSearchParametersBuilder<?,?>) parameters.toBuilder();

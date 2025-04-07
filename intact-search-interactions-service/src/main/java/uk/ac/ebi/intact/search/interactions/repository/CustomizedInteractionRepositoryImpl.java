@@ -59,7 +59,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
     @Override
     public FacetPage<SearchInteraction> findInteractionFacets(InteractionSearchParameters parameters) {
-        return findInteractionWithFacet(PagedInteractionSearchParameters.copyParameters(parameters).pageable(PageRequest.of(0, 0)).build());
+        return findInteractionWithFacet(PagedInteractionSearchParameters.copyParameters(parameters).pageSize(0).build());
     }
 
     @Override
@@ -69,7 +69,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         SimpleFacetQuery search = new SimpleFacetQuery();
 
         // search criterias
-        Criteria conditions = searchInteractionUtility.createSearchConditions(parameters.getQuery(), parameters.isBatchSearch(), parameters.isAdvancedSearch());
+        Criteria conditions = searchInteractionUtility.createSearchConditions(parameters);
         search.addCriteria(conditions);
 
         // filters
@@ -106,7 +106,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         search.setFacetOptions(facetOptions);
 
         // pagination
-        search.setPageRequest(parameters.getPageable());
+        search.setPageRequest(PageRequest.of(parameters.getPage(), parameters.getPageSize()));
 
         // fields
         search.addProjectionOnFields(SEARCH_INTERACTION_FIELDS);
@@ -154,7 +154,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         SimpleQuery search = new SimpleQuery();
 
         // search criterias
-        Criteria conditions = searchInteractionUtility.createSearchConditions(parameters.getQuery(), parameters.isBatchSearch(), parameters.isAdvancedSearch());
+        Criteria conditions = searchInteractionUtility.createSearchConditions(parameters);
         search.addCriteria(conditions);
 
         // filters
@@ -167,7 +167,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         }
 
         // pagination
-        search.setPageRequest(parameters.getPageable());
+        search.setPageRequest(PageRequest.of(parameters.getPage(), parameters.getPageSize()));
 
         // sorting
         if (parameters.getSort() != null) {
@@ -223,7 +223,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         SimpleFacetQuery search = new SimpleFacetQuery();
 
         // search criterias
-        Criteria conditions = searchInteractionUtility.createSearchConditions(parameters.getQuery(), parameters.isBatchSearch(), parameters.isAdvancedSearch());
+        Criteria conditions = searchInteractionUtility.createSearchConditions(parameters);
         search.addCriteria(conditions);
 
         // filters
@@ -236,7 +236,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         }
 
         // pagination
-        search.setPageRequest(parameters.getPageable());
+        search.setPageRequest(PageRequest.of(parameters.getPage(), parameters.getPageSize()));
 
         // sorting
         if (parameters.getSort() != null) {
@@ -307,7 +307,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         SimpleQuery search = new SimpleQuery();
 
         // search criterias
-        Criteria conditions = searchInteractionUtility.createSearchConditions(parameters.getQuery(), parameters.isBatchSearch(), parameters.isAdvancedSearch());
+        Criteria conditions = searchInteractionUtility.createSearchConditions(parameters);
         search.addCriteria(conditions);
 
         // filters
@@ -372,7 +372,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         SimpleQuery search = new SimpleQuery();
 
         // search criterias
-        Criteria conditions = searchInteractionUtility.createSearchConditions(parameters.getQuery(), parameters.isBatchSearch(), parameters.isAdvancedSearch());
+        Criteria conditions = searchInteractionUtility.createSearchConditions(parameters);
 
         // search query
         search.addCriteria(conditions);
@@ -405,7 +405,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         SimpleQuery search = new SimpleQuery();
 
         // search criterias
-        Criteria conditions = searchInteractionUtility.createSearchConditions(parameters.getQuery(), parameters.isBatchSearch(), parameters.isAdvancedSearch());
+        Criteria conditions = searchInteractionUtility.createSearchConditions(parameters);
 
         // search query
         search.addCriteria(conditions);
@@ -429,7 +429,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         SimpleQuery search = new SimpleQuery();
 
         // search criterias
-        Criteria conditions = searchInteractionUtility.createSearchConditions(parameters.getQuery(), parameters.isBatchSearch(), parameters.isAdvancedSearch());
+        Criteria conditions = searchInteractionUtility.createSearchConditions(parameters);
         search.addCriteria(conditions);
 
         // filters
@@ -442,7 +442,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         }
 
         // pagination
-        search.setPageRequest(parameters.getPageable());
+        search.setPageRequest(PageRequest.of(parameters.getPage(), parameters.getPageSize()));
 
         // fields
         search.addProjectionOnFields(SEARCH_INTERACTION_FIELDS);
@@ -468,7 +468,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         SimpleQuery search = new SimpleQuery();
 
         // search criterias
-        Criteria conditions = searchInteractionUtility.createSearchConditions(parameters.getQuery(), parameters.isBatchSearch(), parameters.isAdvancedSearch());
+        Criteria conditions = searchInteractionUtility.createSearchConditions(parameters);
         search.addCriteria(conditions);
 
         // filters
@@ -481,7 +481,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         }
 
         // pagination
-        search.setPageRequest(parameters.getPageable());
+        search.setPageRequest(PageRequest.of(parameters.getPage(), parameters.getPageSize()));
 
         // sorting
         if (parameters.getSort() != null) {

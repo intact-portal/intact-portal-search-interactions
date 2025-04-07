@@ -15,6 +15,7 @@ import org.springframework.data.solr.core.query.result.GroupPage;
 import org.springframework.test.context.junit4.SpringRunner;
 import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
+import uk.ac.ebi.intact.search.interactions.model.parameters.PagedInteractionSearchParameters;
 import uk.ac.ebi.intact.search.interactions.service.util.TestUtil;
 
 import javax.annotation.Resource;
@@ -37,6 +38,12 @@ public class ChildInteractorSearchServiceTest {
 
     @Resource
     private InteractionSearchService interactionSearchService;
+
+    private final PagedInteractionSearchParameters baseParameters = PagedInteractionSearchParameters.builder()
+            .page(0)
+            .pageSize(10)
+            .advancedSearch(false)
+            .build();
 
     /**
      * Before any tests run, this cleans the solr index and creates a new index with stored searchInteractions in an xml
@@ -67,25 +74,13 @@ public class ChildInteractorSearchServiceTest {
      */
     @Test
     public void getUniqueChildInteractorsFromMIQLQuery() {
+
         GroupPage<SearchChildInteractor> page = childInteractorSearchService.findInteractorsWithGroup(
-                ALTID_A + ":(EBI-12345 OR P123456)",
-                false,
-                true,
-                null,
-                null,
-                null,
-                null,
-                null,
-                false,
-                false,
-                false,
-                0,
-                1,
-                false,
-                null,
-                null,
-                0,
-                10);
+                baseParameters.toBuilder()
+                        .query(ALTID_A + ":(EBI-12345 OR P123456)")
+                        .advancedSearch(true)
+                        .build()
+        );
         assertEquals(4, page.getTotalElements());
     }
 
@@ -95,25 +90,7 @@ public class ChildInteractorSearchServiceTest {
      */
     @Test
     public void getUniqueChildInteractorsFromInteractionQuery() {
-        GroupPage<SearchChildInteractor> page = childInteractorSearchService.findInteractorsWithGroup(
-                "rat",
-                false,
-                false,
-                null,
-                null,
-                null,
-                null,
-                null,
-                false,
-                false,
-                false,
-                0,
-                1,
-                false,
-                null,
-                null,
-                0,
-                10);
+        GroupPage<SearchChildInteractor> page = childInteractorSearchService.findInteractorsWithGroup(baseParameters.toBuilder().query("rat").build());
         assertEquals(5, page.getTotalElements());
     }
 
@@ -124,72 +101,26 @@ public class ChildInteractorSearchServiceTest {
     @Test
     public void getUniqueChildInteractorsFromInteractionFilterQuery() {
 
-        Set<String> species = new HashSet<>();
-        species.add("Homo sapiens");
 
-        Set<String> interactorTypesFilter = new HashSet<>();
-        interactorTypesFilter.add("protein");
-
-        Set<String> detectionMethod = new HashSet<>();
-        detectionMethod.add("molecular sieving");
-
-        Set<String> interactionType = new HashSet<>();
-        interactionType.add("physical association");
-
-        Set<String> hostOrganism = new HashSet<>();
-        hostOrganism.add("In vitro");
-
-        double minMiscore = 0;
-        double maxMiscore = 0.7;
-
-        int page = 0;
-        int size = 10;
-
+        PagedInteractionSearchParameters params = baseParameters.toBuilder()
+                .query("physical association")
+                .interactorSpeciesFilter(Set.of("Homo sapiens"))
+                .interactorTypesFilter(Set.of("protein"))
+                .interactionDetectionMethodsFilter(Set.of("molecular sieving"))
+                .interactionTypesFilter(Set.of("physical association"))
+                .interactionHostOrganismsFilter(Set.of("In vitro"))
+                .minMIScore(0)
+                .maxMIScore(0.7)
+                .build();
         GroupPage<SearchChildInteractor> childInteractorsOp = childInteractorSearchService.findInteractorsWithGroup(
-                "physical association",
-                false,
-                false,
-                species,
-                interactorTypesFilter,
-                detectionMethod,
-                interactionType,
-                hostOrganism,
-                false,
-                false,
-                false,
-                minMiscore,
-                maxMiscore,
-                false,
-                null,
-                null,
-                page,
-                size);
+                params);
         assertEquals(2, childInteractorsOp.getTotalElements()); //Total documents found before grouping
         assertEquals(2, childInteractorsOp.getNumberOfElements()); //Elements in the page
 
-        long numInteractors = childInteractorSearchService.countInteractorsWithGroup(
-                "physical association",
-                false,
-                false,
-                species,
-                interactorTypesFilter,
-                detectionMethod,
-                interactionType,
-                hostOrganism,
-                false,
-                false,
-                false,
-                minMiscore,
-                maxMiscore,
-                false,
-                null
-                , null);
+        long numInteractors = childInteractorSearchService.countInteractorsWithGroup(params);
         assertEquals(2, numInteractors);
 
-        List<String> interactorAcs = new ArrayList<>();
-        interactorAcs.add("EBI-724102");
-        interactorAcs.add("EBI-715849");
-
+        List<String> interactorAcs = List.of("EBI-724102", "EBI-715849");
 
         for (SearchChildInteractor searchChildInteractor : childInteractorsOp.getContent()) {
             if (!interactorAcs.contains(searchChildInteractor.getInteractorAc())) {
@@ -204,54 +135,23 @@ public class ChildInteractorSearchServiceTest {
     @Test
     public void checkInteractionAndChildInteractorsSync() {
 
-        //Interactors
-        GroupPage<SearchChildInteractor> childInteractorsOp = childInteractorSearchService.findInteractorsWithGroup("rat",
-                false,
-                false,
-                null,
-                null,
-                null,
-                null,
-                null,
-                false,
-                false,
-                false,
-                0,
-                1,
-                false,
-                null,
-                null,
-                0,
-                10);
+        PagedInteractionSearchParameters params = baseParameters.toBuilder().query("rat").build();
+
+        GroupPage<SearchChildInteractor> childInteractorsOp = childInteractorSearchService.findInteractorsWithGroup(params);
         assertEquals(5, childInteractorsOp.getTotalElements());  //Total documents found before grouping
         assertEquals(5, childInteractorsOp.getNumberOfElements()); //Elements in the page
 
 
-        long numInteractors = childInteractorSearchService.countInteractorsWithGroup(
-                "rat",
-                false,
-                false,
-                null,
-                null,
-                null,
-                null,
-                null,
-                false,
-                false,
-                false,
-                0,
-                1,
-                false,
-                null
-                , null);
+        long numInteractors = childInteractorSearchService.countInteractorsWithGroup(params);
         assertEquals(5, numInteractors);
 
-        List<String> interactorAcs = new ArrayList<>();
-        interactorAcs.add("EBI-7837133");
-        interactorAcs.add("EBI-915507");
-        interactorAcs.add("EBI-2028244");
-        interactorAcs.add("EBI-4423297");
-        interactorAcs.add("EBI-9997695");
+        List<String> interactorAcs = List.of(
+                "EBI-7837133",
+                "EBI-915507",
+                "EBI-2028244",
+                "EBI-4423297",
+                "EBI-9997695"
+        );
 
         for (SearchChildInteractor searchChildInteractor : childInteractorsOp.getContent()) {
             if (!interactorAcs.contains(searchChildInteractor.getInteractorAc())) {
@@ -260,31 +160,12 @@ public class ChildInteractorSearchServiceTest {
         }
 
         //Interactions
-        FacetPage<SearchInteraction> searchInteractionsOp = interactionSearchService.findInteractionWithFacet("rat",
-                false,
-                false,
-                null,
-                null,
-                null,
-                null,
-                null,
-                false,
-                false,
-                false,
-                0,
-                1,
-                false,
-                null,
-                null,
-                0,
-                10
-        );
+        FacetPage<SearchInteraction> searchInteractionsOp = interactionSearchService.findInteractionWithFacet(params);
         assertEquals(4, searchInteractionsOp.getTotalElements());
 
 
         //5 binaries 2 interactions
-        List<String> interactionAcs = new ArrayList<>();
-        interactionAcs.add("EBI-10000796");
+        List<String> interactionAcs = List.of("EBI-10000796");
 
         for (SearchInteraction searchInteraction : searchInteractionsOp.getContent()) {
             if (!interactionAcs.contains(searchInteraction.getAc())) {
@@ -299,45 +180,11 @@ public class ChildInteractorSearchServiceTest {
 
     @Test
     public void findInteractorsByEmptyString() {
-        GroupPage<SearchChildInteractor> childInteractorsOp = childInteractorSearchService.findInteractorsWithGroup(
-                "",
-                false,
-                false,
-                null,
-                null,
-                null,
-                null,
-                null,
-                false,
-                false,
-                false,
-                0,
-                1,
-                false,
-                null,
-                null,
-                0,
-                10);
+        GroupPage<SearchChildInteractor> childInteractorsOp = childInteractorSearchService.findInteractorsWithGroup(baseParameters.toBuilder().query("").build());
         assertEquals(20, childInteractorsOp.getTotalElements()); //Total documents found before grouping
         assertEquals(10, childInteractorsOp.getNumberOfElements()); //Elements in the first page
 
-        long numInteractors = childInteractorSearchService.countInteractorsWithGroup(
-                "",
-                false,
-                false,
-                null,
-                null,
-                null,
-                null,
-                null,
-                false,
-                false,
-                false,
-                0,
-                1,
-                false,
-                null,
-                null);
+        long numInteractors = childInteractorSearchService.countInteractorsWithGroup(baseParameters.toBuilder().query("").build());
         assertEquals(11, numInteractors);
     }
 
@@ -347,48 +194,14 @@ public class ChildInteractorSearchServiceTest {
 
     @Test
     public void findInteractionsByStarString() {
-        GroupPage<SearchChildInteractor> childInteractorsOp = childInteractorSearchService.findInteractorsWithGroup(
-                "*",
-                false,
-                false,
-                null,
-                null,
-                null,
-                null,
-                null,
-                false,
-                false,
-                false,
-                0,
-                1,
-                false,
-                null,
-                null,
-                0,
-                10);
+        GroupPage<SearchChildInteractor> childInteractorsOp = childInteractorSearchService.findInteractorsWithGroup(baseParameters.toBuilder().query("*").build());
         //TODO... Check later why total elements is 20 here, the earlier
         // checkInteractionAndChildInteractorsSync test seems to give correct value, here it should be 11
 
         assertEquals(20, childInteractorsOp.getTotalElements()); //Total documents found before grouping
         assertEquals(10, childInteractorsOp.getNumberOfElements()); //Elements in the first page
 
-        long numInteractors = childInteractorSearchService.countInteractorsWithGroup(
-                "*",
-                false,
-                false,
-                null,
-                null,
-                null,
-                null,
-                null,
-                false,
-                false,
-                false,
-                0,
-                1,
-                false,
-                null,
-                null);
+        long numInteractors = childInteractorSearchService.countInteractorsWithGroup(baseParameters.toBuilder().query("*").build());
         assertEquals(11, numInteractors);
     }
 
@@ -403,44 +216,16 @@ public class ChildInteractorSearchServiceTest {
         Set<String> interactorAcs = new HashSet<>();
         interactorAcs.add("EBI-715849");
         interactorAcs.add("EBI-10000824");
-        GroupPage<SearchChildInteractor> interactorOp = childInteractorSearchService.findInteractorsWithGroup(
-                "physical association",
-                false,
-                false,
-                species,
-                null,
-                null,
-                null,
-                null,
-                false,
-                false,
-                false,
-                0,
-                1,
-                false,
-                null,
-                interactorAcs,
-                0,
-                10);
+        PagedInteractionSearchParameters params = baseParameters.toBuilder()
+                .query("physical association")
+                .interactorSpeciesFilter(species)
+                .interactorAcs(interactorAcs)
+                .build();
+
+        GroupPage<SearchChildInteractor> interactorOp = childInteractorSearchService.findInteractorsWithGroup(params);
         assertEquals(10, interactorOp.getTotalElements());//TODO...this needs to be checked it should give 6
 
-        long numInteractors = childInteractorSearchService.countInteractorsWithGroup(
-                "physical association",
-                false,
-                false,
-                species,
-                null,
-                null,
-                null,
-                null,
-                false,
-                false,
-                false,
-                0,
-                1,
-                false,
-                null,
-                interactorAcs);
+        long numInteractors = childInteractorSearchService.countInteractorsWithGroup(params);
 
         assertEquals(6, numInteractors);
 
@@ -463,51 +248,17 @@ public class ChildInteractorSearchServiceTest {
      **/
     @Test
     public void filterByBinaryIds() {
-        Set<String> species = new HashSet<>();
-        species.add("Homo sapiens");
 
-        Set<Long> binaryIds = new HashSet<>();
-        binaryIds.add(10L);
-        binaryIds.add(1L);
-        GroupPage<SearchChildInteractor> interactorOp = childInteractorSearchService.findInteractorsWithGroup(
-                "physical association",
-                false,
-                false,
-                species,
-                null,
-                null,
-                null,
-                null,
-                false,
-                false,
-                false,
-                0,
-                1,
-                false,
-                binaryIds,
-                null,
-                0,
-                10);
+        PagedInteractionSearchParameters params = baseParameters.toBuilder()
+                .query("physical association")
+                .interactorSpeciesFilter(Set.of("Homo sapiens"))
+                .binaryInteractionIds(Set.of(10L, 1L))
+                .build();
+
+        GroupPage<SearchChildInteractor> interactorOp = childInteractorSearchService.findInteractorsWithGroup(params);
         assertEquals(4, interactorOp.getTotalElements());
 
-        long numInteractors = childInteractorSearchService.countInteractorsWithGroup(
-                "physical association",
-                false,
-                false,
-                species,
-                null,
-                null,
-                null,
-                null,
-                false,
-                false,
-                false,
-                0,
-                1,
-                false,
-                binaryIds,
-                null
-        );
+        long numInteractors = childInteractorSearchService.countInteractorsWithGroup(params);
 
         assertEquals(4, numInteractors);
 
@@ -529,48 +280,17 @@ public class ChildInteractorSearchServiceTest {
     @Test
     public void filterByMultipleDetectionMethods() {
 
+        PagedInteractionSearchParameters params = baseParameters.toBuilder()
+                .query("physical association")
+                .interactionDetectionMethodsFilter(Set.of(
+                        "density sedimentation",
+                        "molecular sieving"
+                )).build();
 
-        Set<String> detectionMethods = new HashSet<>();
-        detectionMethods.add("density sedimentation");
-        detectionMethods.add("molecular sieving");
-        GroupPage<SearchChildInteractor> interactorOp = childInteractorSearchService.findInteractorsWithGroup(
-                "physical association",
-                false,
-                false,
-                null,
-                null,
-                detectionMethods,
-                null,
-                null,
-                false,
-                false,
-                false,
-                0,
-                1,
-                false,
-                null,
-                null,
-                0,
-                10);
+        GroupPage<SearchChildInteractor> interactorOp = childInteractorSearchService.findInteractorsWithGroup(params);
         assertEquals(4, interactorOp.getTotalElements());
 
-        long numInteractors = childInteractorSearchService.countInteractorsWithGroup(
-                "physical association",
-                false,
-                false,
-                null,
-                null,
-                detectionMethods,
-                null,
-                null,
-                false,
-                false,
-                false,
-                0,
-                1,
-                false,
-                null,
-                null);
+        long numInteractors = childInteractorSearchService.countInteractorsWithGroup(params);
 
         assertEquals(4, numInteractors);
 
