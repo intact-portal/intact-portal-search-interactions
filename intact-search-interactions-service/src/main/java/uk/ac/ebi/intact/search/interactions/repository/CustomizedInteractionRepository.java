@@ -5,7 +5,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestBody;
 import uk.ac.ebi.intact.search.interactions.model.SimpleInteractionQueryParameters;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 
@@ -121,7 +120,7 @@ public interface CustomizedInteractionRepository {
                                                           Sort sort, Pageable pageable);
 
 
-    Page<Long> findBinaryInteractionIds(@RequestBody SimpleInteractionQueryParameters simpleInteractionQueryParameters);
+    Page<Long> findBinaryInteractionIds(SimpleInteractionQueryParameters simpleInteractionQueryParameters);
 
     /**
      * @param query                             input used to retrieve the interaction

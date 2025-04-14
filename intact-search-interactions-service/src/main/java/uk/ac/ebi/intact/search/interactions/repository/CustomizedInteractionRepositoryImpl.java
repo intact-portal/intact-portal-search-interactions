@@ -10,7 +10,6 @@ import org.springframework.data.solr.core.SolrOperations;
 import org.springframework.data.solr.core.query.*;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestBody;
 import uk.ac.ebi.intact.search.interactions.model.SimpleInteractionQueryParameters;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.utils.SearchInteractionUtility;
@@ -97,42 +96,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
     }
 
     @Override
-    public FacetPage<SearchInteraction> findInteractionWithFacet(String query,
-                                                                 boolean batchSearch,
-                                                                 boolean advancedSearch,
-                                                                 Set<String> interactorSpeciesFilter,
-                                                                 Set<String> interactorTypesFilter,
-                                                                 Set<String> interactionDetectionMethodsFilter,
-                                                                 Set<String> interactionTypesFilter,
-                                                                 Set<String> interactionHostOrganismsFilter,
-                                                                 Boolean negativeFilter,
-                                                                 boolean mutationFilter,
-                                                                 boolean expansionFilter,
-                                                                 double minMIScore,
-                                                                 double maxMIScore,
-                                                                 boolean intraSpeciesFilter,
-                                                                 Set<Long> binaryInteractionIds,
-                                                                 Set<String> interactorAcs,
-                                                                 Sort sort, Pageable pageable) {
-        return this.findInteractionWithFacetAndFields(query, batchSearch, advancedSearch,
-                interactorSpeciesFilter,
-                interactorTypesFilter,
-                interactionDetectionMethodsFilter,
-                interactionTypesFilter,
-                interactionHostOrganismsFilter,
-                negativeFilter,
-                mutationFilter,
-                expansionFilter,
-                minMIScore,
-                maxMIScore,
-                intraSpeciesFilter,
-                binaryInteractionIds,
-                interactorAcs,
-                sort, pageable, SEARCH_INTERACTION_FIELDS);
-    }
-
-    @Override
-    public Page<Long> findBinaryInteractionIds(@RequestBody SimpleInteractionQueryParameters parameters) {
+    public Page<Long> findBinaryInteractionIds(SimpleInteractionQueryParameters parameters) {
 
         String query = parameters.getQuery();
         boolean advancedSearch = parameters.isAdvancedSearch();
@@ -155,7 +119,8 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                 .map(SearchInteraction::getBinaryInteractionId);
     }
 
-    private FacetPage<SearchInteraction> findInteractionWithFacetAndFields(String query,
+    @Override
+    public FacetPage<SearchInteraction> findInteractionWithFacet(String query,
                                                                            boolean batchSearch,
                                                                            boolean advancedSearch,
                                                                            Set<String> interactorSpeciesFilter,
@@ -171,13 +136,12 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                                                                            boolean intraSpeciesFilter,
                                                                            Set<Long> binaryInteractionIds,
                                                                            Set<String> interactorAcs,
-                                                                           Sort sort, Pageable pageable,
-                                                                           String[] fieldsToProject) {
+                                                                           Sort sort, Pageable pageable) {
 
         // search query
         SimpleFacetQuery search = new SimpleFacetQuery();
 
-        // search criterias
+        // search criteria
         Criteria conditions = searchInteractionUtility.createSearchConditions(query, batchSearch, advancedSearch);
         search.addCriteria(conditions);
 
@@ -219,7 +183,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         search.setPageRequest(pageable);
 
         // fields
-        search.addProjectionOnFields(fieldsToProject);
+        search.addProjectionOnFields(SEARCH_INTERACTION_FIELDS);
 
         // sorting
         if (sort != null) {
