@@ -12,6 +12,7 @@ import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.data.solr.core.query.result.FacetQueryEntry;
 import org.springframework.test.context.junit4.SpringRunner;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
+import uk.ac.ebi.intact.search.interactions.model.SimpleInteractionQueryParameters;
 import uk.ac.ebi.intact.search.interactions.model.parameters.PagedInteractionSearchParameters;
 import uk.ac.ebi.intact.search.interactions.service.util.TestUtil;
 import uk.ac.ebi.intact.search.interactions.utils.NegativeFilterStatus;
@@ -42,7 +43,6 @@ public class InteractionSearchServiceTest {
      */
     @Before
     public void setUp() {
-
         //Delete all documents from solr core
         interactionIndexService.deleteAll();
         /*Interactions are instantiated from saved searchInteractions in an xml as instantiating it one by one in the code is cumbersome
@@ -2020,5 +2020,17 @@ public class InteractionSearchServiceTest {
         for (FacetFieldEntry facetFieldEntry : interactionOp.getFacetResultPage(NEGATIVE)) {
             assertEquals(negativeInteractionFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
         }
+    }
+
+    @Test
+    public void findBinaryInteractionsIdsSearch() {
+        Page<Long> results = interactionSearchService.findBinaryInteractionIds(
+                SimpleInteractionQueryParameters.builder()
+                        .query("ndc80")
+                        .advancedSearch(false)
+                        .pageSize(10)
+                        .pageNumber(0)
+                        .build());
+        assertEquals(4, results.getTotalElements());
     }
 }

@@ -5,6 +5,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.stereotype.Service;
+import uk.ac.ebi.intact.search.interactions.model.SimpleInteractionQueryParameters;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.model.parameters.*;
 import uk.ac.ebi.intact.search.interactions.repository.InteractionRepository;
@@ -49,6 +50,10 @@ public class InteractionSearchService {
 
     public FacetPage<SearchInteraction> findInteractionWithFacet(PagedInteractionSearchParameters parameters) {
         return interactionRepository.findInteractionWithFacet(parameters);
+    }
+
+    public Page<Long> findBinaryInteractionIds(SimpleInteractionQueryParameters simpleInteractionQueryParameters) {
+        return interactionRepository.findBinaryInteractionIds(simpleInteractionQueryParameters);
     }
 
     public Page<SearchInteraction> findInteractionForGraphJson(PagedInteractionGraphJSONParameters parameters) {

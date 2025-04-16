@@ -3,6 +3,7 @@ package uk.ac.ebi.intact.search.interactions.repository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.stereotype.Repository;
+import uk.ac.ebi.intact.search.interactions.model.SimpleInteractionQueryParameters;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.model.parameters.InteractionSearchParameters;
 import uk.ac.ebi.intact.search.interactions.model.parameters.PagedFormattedInteractionSearchParameters;
@@ -26,6 +27,7 @@ public interface CustomizedInteractionRepository {
 
     FacetPage<SearchInteraction> findInteractionWithFacet(PagedInteractionSearchParameters parameters);
 
+    Page<Long> findBinaryInteractionIds(SimpleInteractionQueryParameters simpleInteractionQueryParameters);
 
     Page<SearchInteraction> findInteractionForGraphJson(PagedInteractionSearchParameters parameters);
 

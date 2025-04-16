@@ -9,6 +9,7 @@ import org.springframework.data.solr.core.SolrOperations;
 import org.springframework.data.solr.core.query.*;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.stereotype.Repository;
+import uk.ac.ebi.intact.search.interactions.model.SimpleInteractionQueryParameters;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.model.parameters.InteractionSearchParameters;
 import uk.ac.ebi.intact.search.interactions.model.parameters.PagedFormattedInteractionSearchParameters;
@@ -48,9 +49,9 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
     @Resource
     private boolean isEmbeddedSolr;
 
-    // default sorting for the query results
+    //default sorting for the query results
     //TODO Solve problems with multivalue fields that are not allow to be sorted. Schema-less create all the fields as multivalues
-//    private static final Sort DEFAULT_QUERY_SORT_WITH_QUERY = new Sort(Sort.Direction.DESC, SearchInteractorFields.INTERACTION_COUNT);
+    //private static final Sort DEFAULT_QUERY_SORT_WITH_QUERY = new Sort(Sort.Direction.DESC, SearchInteractorFields.INTERACTION_COUNT);
 
     @Autowired
     public CustomizedInteractionRepositoryImpl(SolrOperations solrOperations) {
@@ -60,6 +61,30 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
     @Override
     public FacetPage<SearchInteraction> findInteractionFacets(InteractionSearchParameters parameters) {
         return findInteractionWithFacet(PagedInteractionSearchParameters.copyParameters(parameters).pageSize(0).build());
+    }
+
+    @Override
+    public Page<Long> findBinaryInteractionIds(SimpleInteractionQueryParameters parameters) {
+
+        String query = parameters.getQuery();
+        boolean advancedSearch = parameters.isAdvancedSearch();
+        Pageable pageable = PageRequest.of(parameters.getPageNumber(),
+                parameters.getPageSize());
+        // search query
+        SimpleFacetQuery search = new SimpleFacetQuery();
+
+        // search criteria
+        Criteria conditions = searchInteractionUtility.createSearchConditions(query, false, advancedSearch);
+        search.addCriteria(conditions);
+
+        // Retrieve only binary interaction id
+        search.addProjectionOnFields(BINARY_INTERACTION_ID);
+
+        // pagination
+        search.setPageRequest(pageable);
+
+        return solrOperations.queryForFacetPage(INTERACTIONS, search, SearchInteraction.class, RequestMethod.GET)
+                .map(SearchInteraction::getBinaryInteractionId);
     }
 
     @Override
