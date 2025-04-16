@@ -1,11 +1,11 @@
 package uk.ac.ebi.intact.search.interactions.model;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
-import lombok.experimental.SuperBuilder;
 import lombok.extern.jackson.Jacksonized;
 
-@SuperBuilder(toBuilder = true)
+@Builder(toBuilder = true)
 @Jacksonized
 @Data
 public class SimpleInteractionQueryParameters {

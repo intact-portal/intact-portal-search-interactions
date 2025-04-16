@@ -121,22 +121,22 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
     @Override
     public FacetPage<SearchInteraction> findInteractionWithFacet(String query,
-                                                                           boolean batchSearch,
-                                                                           boolean advancedSearch,
-                                                                           Set<String> interactorSpeciesFilter,
-                                                                           Set<String> interactorTypesFilter,
-                                                                           Set<String> interactionDetectionMethodsFilter,
-                                                                           Set<String> interactionTypesFilter,
-                                                                           Set<String> interactionHostOrganismsFilter,
-                                                                           Boolean negativeFilter,
-                                                                           boolean mutationFilter,
-                                                                           boolean expansionFilter,
-                                                                           double minMIScore,
-                                                                           double maxMIScore,
-                                                                           boolean intraSpeciesFilter,
-                                                                           Set<Long> binaryInteractionIds,
-                                                                           Set<String> interactorAcs,
-                                                                           Sort sort, Pageable pageable) {
+                                                                 boolean batchSearch,
+                                                                 boolean advancedSearch,
+                                                                 Set<String> interactorSpeciesFilter,
+                                                                 Set<String> interactorTypesFilter,
+                                                                 Set<String> interactionDetectionMethodsFilter,
+                                                                 Set<String> interactionTypesFilter,
+                                                                 Set<String> interactionHostOrganismsFilter,
+                                                                 Boolean negativeFilter,
+                                                                 boolean mutationFilter,
+                                                                 boolean expansionFilter,
+                                                                 double minMIScore,
+                                                                 double maxMIScore,
+                                                                 boolean intraSpeciesFilter,
+                                                                 Set<Long> binaryInteractionIds,
+                                                                 Set<String> interactorAcs,
+                                                                 Sort sort, Pageable pageable) {
 
         // search query
         SimpleFacetQuery search = new SimpleFacetQuery();
