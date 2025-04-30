@@ -14,6 +14,9 @@
 
     <name>IntAct Portal :: Search Interactions Web Service</name>
     <description>SpringBoot with spring data interactions solr</description>
+    <properties>
+        <swagger.version>2.9.2</swagger.version>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -38,13 +41,13 @@
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
-            <version>2.9.2</version>
+            <version>${swagger.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.9.2</version>
+            <version>${swagger.version}</version>
         </dependency>
 
         <!-- Test dependencies -->
@@ -52,6 +55,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
     </dependencies>
 

@@ -5,6 +5,7 @@ import org.springframework.data.solr.core.query.FilterQuery;
 import org.springframework.data.solr.core.query.SimpleFilterQuery;
 import org.springframework.data.solr.core.query.SimpleStringCriteria;
 import uk.ac.ebi.intact.search.interactions.model.parameters.InteractionSearchParameters;
+import uk.ac.ebi.intact.search.interactions.model.parameters.SimpleSearchParametersI;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,7 +42,7 @@ public class SearchInteractionUtility {
         return s.toLowerCase();
     }
 
-    public Criteria createSearchConditions(InteractionSearchParameters parameters) {
+    public Criteria createSearchConditions(SimpleSearchParametersI parameters) {
         Criteria conditions;
         Criteria userConditions = null;
         Criteria documentConditions = new Criteria(DOCUMENT_TYPE).is(DocumentType.INTERACTION);

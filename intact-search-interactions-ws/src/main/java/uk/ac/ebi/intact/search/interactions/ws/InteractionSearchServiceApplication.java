@@ -12,8 +12,7 @@ import org.springframework.data.solr.core.SolrOperations;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.repository.config.EnableSolrRepositories;
 
-@EnableSolrRepositories(basePackages = "uk.ac.ebi.intact.search",
-        schemaCreationSupport = true)
+@EnableSolrRepositories(basePackages = "uk.ac.ebi.intact.search", schemaCreationSupport = true)
 @SpringBootApplication(scanBasePackages = "uk.ac.ebi.intact.search")
 public class InteractionSearchServiceApplication extends SpringBootServletInitializer {
 

@@ -39,12 +39,6 @@ public class ChildInteractorSearchServiceTest {
     @Resource
     private InteractionSearchService interactionSearchService;
 
-    private final PagedInteractionSearchParameters baseParameters = PagedInteractionSearchParameters.builder()
-            .page(0)
-            .pageSize(10)
-            .advancedSearch(false)
-            .build();
-
     /**
      * Before any tests run, this cleans the solr index and creates a new index with stored searchInteractions in an xml
      */
@@ -76,7 +70,7 @@ public class ChildInteractorSearchServiceTest {
     public void getUniqueChildInteractorsFromMIQLQuery() {
 
         GroupPage<SearchChildInteractor> page = childInteractorSearchService.findInteractorsWithGroup(
-                baseParameters.toBuilder()
+                PagedInteractionSearchParameters.builder()
                         .query(ALTID_A + ":(EBI-12345 OR P123456)")
                         .advancedSearch(true)
                         .build()
@@ -90,7 +84,7 @@ public class ChildInteractorSearchServiceTest {
      */
     @Test
     public void getUniqueChildInteractorsFromInteractionQuery() {
-        GroupPage<SearchChildInteractor> page = childInteractorSearchService.findInteractorsWithGroup(baseParameters.toBuilder().query("rat").build());
+        GroupPage<SearchChildInteractor> page = childInteractorSearchService.findInteractorsWithGroup(PagedInteractionSearchParameters.builder().query("rat").build());
         assertEquals(5, page.getTotalElements());
     }
 
@@ -102,7 +96,7 @@ public class ChildInteractorSearchServiceTest {
     public void getUniqueChildInteractorsFromInteractionFilterQuery() {
 
 
-        PagedInteractionSearchParameters params = baseParameters.toBuilder()
+        PagedInteractionSearchParameters params = PagedInteractionSearchParameters.builder()
                 .query("physical association")
                 .interactorSpeciesFilter(Set.of("Homo sapiens"))
                 .interactorTypesFilter(Set.of("protein"))
@@ -135,7 +129,7 @@ public class ChildInteractorSearchServiceTest {
     @Test
     public void checkInteractionAndChildInteractorsSync() {
 
-        PagedInteractionSearchParameters params = baseParameters.toBuilder().query("rat").build();
+        PagedInteractionSearchParameters params = PagedInteractionSearchParameters.builder().query("rat").build();
 
         GroupPage<SearchChildInteractor> childInteractorsOp = childInteractorSearchService.findInteractorsWithGroup(params);
         assertEquals(5, childInteractorsOp.getTotalElements());  //Total documents found before grouping
@@ -180,11 +174,11 @@ public class ChildInteractorSearchServiceTest {
 
     @Test
     public void findInteractorsByEmptyString() {
-        GroupPage<SearchChildInteractor> childInteractorsOp = childInteractorSearchService.findInteractorsWithGroup(baseParameters.toBuilder().query("").build());
+        GroupPage<SearchChildInteractor> childInteractorsOp = childInteractorSearchService.findInteractorsWithGroup(PagedInteractionSearchParameters.builder().query("").build());
         assertEquals(20, childInteractorsOp.getTotalElements()); //Total documents found before grouping
         assertEquals(10, childInteractorsOp.getNumberOfElements()); //Elements in the first page
 
-        long numInteractors = childInteractorSearchService.countInteractorsWithGroup(baseParameters.toBuilder().query("").build());
+        long numInteractors = childInteractorSearchService.countInteractorsWithGroup(PagedInteractionSearchParameters.builder().query("").build());
         assertEquals(11, numInteractors);
     }
 
@@ -194,14 +188,14 @@ public class ChildInteractorSearchServiceTest {
 
     @Test
     public void findInteractionsByStarString() {
-        GroupPage<SearchChildInteractor> childInteractorsOp = childInteractorSearchService.findInteractorsWithGroup(baseParameters.toBuilder().query("*").build());
+        GroupPage<SearchChildInteractor> childInteractorsOp = childInteractorSearchService.findInteractorsWithGroup(PagedInteractionSearchParameters.builder().query("*").build());
         //TODO... Check later why total elements is 20 here, the earlier
         // checkInteractionAndChildInteractorsSync test seems to give correct value, here it should be 11
 
         assertEquals(20, childInteractorsOp.getTotalElements()); //Total documents found before grouping
         assertEquals(10, childInteractorsOp.getNumberOfElements()); //Elements in the first page
 
-        long numInteractors = childInteractorSearchService.countInteractorsWithGroup(baseParameters.toBuilder().query("*").build());
+        long numInteractors = childInteractorSearchService.countInteractorsWithGroup(PagedInteractionSearchParameters.builder().query("*").build());
         assertEquals(11, numInteractors);
     }
 
@@ -216,7 +210,7 @@ public class ChildInteractorSearchServiceTest {
         Set<String> interactorAcs = new HashSet<>();
         interactorAcs.add("EBI-715849");
         interactorAcs.add("EBI-10000824");
-        PagedInteractionSearchParameters params = baseParameters.toBuilder()
+        PagedInteractionSearchParameters params = PagedInteractionSearchParameters.builder()
                 .query("physical association")
                 .interactorSpeciesFilter(species)
                 .interactorAcs(interactorAcs)
@@ -249,7 +243,7 @@ public class ChildInteractorSearchServiceTest {
     @Test
     public void filterByBinaryIds() {
 
-        PagedInteractionSearchParameters params = baseParameters.toBuilder()
+        PagedInteractionSearchParameters params = PagedInteractionSearchParameters.builder()
                 .query("physical association")
                 .interactorSpeciesFilter(Set.of("Homo sapiens"))
                 .binaryInteractionIds(Set.of(10L, 1L))
@@ -280,7 +274,7 @@ public class ChildInteractorSearchServiceTest {
     @Test
     public void filterByMultipleDetectionMethods() {
 
-        PagedInteractionSearchParameters params = baseParameters.toBuilder()
+        PagedInteractionSearchParameters params = PagedInteractionSearchParameters.builder()
                 .query("physical association")
                 .interactionDetectionMethodsFilter(Set.of(
                         "density sedimentation",

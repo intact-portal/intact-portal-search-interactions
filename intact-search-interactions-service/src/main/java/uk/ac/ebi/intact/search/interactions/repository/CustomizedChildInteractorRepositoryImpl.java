@@ -65,7 +65,7 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
 
         // sorting
         if (parameters.getSort() != null) {
-            search.addSort(parameters.getSort());
+            search.addSort(parameters.standardiseSort());
         }
 //        else {
 //            search.addSort(DEFAULT_QUERY_SORT_WITH_QUERY);

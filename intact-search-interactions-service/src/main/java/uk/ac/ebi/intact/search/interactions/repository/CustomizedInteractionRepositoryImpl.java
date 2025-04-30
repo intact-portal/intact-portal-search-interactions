@@ -3,13 +3,14 @@ package uk.ac.ebi.intact.search.interactions.repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.solr.core.RequestMethod;
 import org.springframework.data.solr.core.SolrOperations;
 import org.springframework.data.solr.core.query.*;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.stereotype.Repository;
-import uk.ac.ebi.intact.search.interactions.model.SimpleInteractionQueryParameters;
+import uk.ac.ebi.intact.search.interactions.model.parameters.SimpleInteractionQueryParameters;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.model.parameters.InteractionSearchParameters;
 import uk.ac.ebi.intact.search.interactions.model.parameters.PagedFormattedInteractionSearchParameters;
@@ -60,28 +61,23 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
     @Override
     public FacetPage<SearchInteraction> findInteractionFacets(InteractionSearchParameters parameters) {
-        return findInteractionWithFacet(PagedInteractionSearchParameters.copyParameters(parameters).pageSize(0).build());
+        return findInteractionWithFacet(PagedInteractionSearchParameters.copyParameters(parameters).pageSize(1).build());
     }
 
     @Override
     public Page<Long> findBinaryInteractionIds(SimpleInteractionQueryParameters parameters) {
-
-        String query = parameters.getQuery();
-        boolean advancedSearch = parameters.isAdvancedSearch();
-        Pageable pageable = PageRequest.of(parameters.getPageNumber(),
-                parameters.getPageSize());
         // search query
         SimpleFacetQuery search = new SimpleFacetQuery();
 
         // search criteria
-        Criteria conditions = searchInteractionUtility.createSearchConditions(query, false, advancedSearch);
+        Criteria conditions = searchInteractionUtility.createSearchConditions(parameters);
         search.addCriteria(conditions);
 
         // Retrieve only binary interaction id
         search.addProjectionOnFields(BINARY_INTERACTION_ID);
 
         // pagination
-        search.setPageRequest(pageable);
+        search.setPageRequest(PageRequest.of(parameters.getPage(), parameters.getPageSize()));
 
         return solrOperations.queryForFacetPage(INTERACTIONS, search, SearchInteraction.class, RequestMethod.GET)
                 .map(SearchInteraction::getBinaryInteractionId);
@@ -138,7 +134,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
         // sorting
         if (parameters.getSort() != null) {
-            search.addSort(parameters.getSort());
+            search.addSort(parameters.standardiseSort());
         } else {
             //order is important to give clustering effect
             search.addSort(Sort.by(Sort.Direction.DESC, INTACT_MISCORE));
@@ -196,7 +192,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
         // sorting
         if (parameters.getSort() != null) {
-            search.addSort(parameters.getSort());
+            search.addSort(parameters.standardiseSort());
         }
 
         //projection
@@ -265,7 +261,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
         // sorting
         if (parameters.getSort() != null) {
-            search.addSort(parameters.getSort());
+            search.addSort(parameters.standardiseSort());
         }
 
         // facet
@@ -474,7 +470,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
         // sorting
         if (parameters.getSort() != null) {
-            search.addSort(parameters.getSort());
+            search.addSort(parameters.standardiseSort());
         } else {
             //order is important to give clustering effect
             search.addSort(Sort.by(Sort.Direction.DESC, INTACT_MISCORE));
@@ -510,7 +506,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
 
         // sorting
         if (parameters.getSort() != null) {
-            search.addSort(parameters.getSort());
+            search.addSort(parameters.standardiseSort());
         }
 
         //projection

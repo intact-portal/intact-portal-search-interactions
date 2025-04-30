@@ -1,30 +1,30 @@
 package uk.ac.ebi.intact.search.interactions.model.parameters;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.jackson.Jacksonized;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import uk.ac.ebi.intact.search.interactions.utils.NegativeFilterStatus;
 
-import java.util.Set;
+import java.util.List;
 
 
 @EqualsAndHashCode(callSuper = true)
 @SuperBuilder(toBuilder = true)
 @Jacksonized
 @Data
-public class PagedInteractionGraphJSONParameters extends InteractionGraphJSONParameters {
-
+public class PagedInteractionGraphJSONParameters extends InteractionGraphJSONParameters implements PagedParametersI {
+    @Schema(description = "Page index, starting at 0", example = "0")
     @Builder.Default
     protected int page = 0;
-    @Builder.Default
-    protected int pageSize = 20;
 
-    protected Sort sort;
+    @Schema(description = "Amount of documents per page", example = "10")
+    @Builder.Default
+    protected int pageSize = 10;
+
+    @Schema(description = "Fields by which to order the result query", example = "null")
+    protected List<PagedInteractionSearchParameters.Order> sort;
 
     public static PagedInteractionGraphJSONParameters.PagedInteractionGraphJSONParametersBuilder<?, ?> copyParameters(InteractionGraphJSONParameters parameters) {
         return (PagedInteractionGraphJSONParameters.PagedInteractionGraphJSONParametersBuilder<?, ?>) parameters.toBuilder();

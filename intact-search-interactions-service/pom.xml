@@ -12,6 +12,7 @@
 
     <properties>
         <lombok.version>1.18.36</lombok.version>
+        <springdoc-openapi.version>1.8.0</springdoc-openapi.version>
     </properties>
 
     <artifactId>intact-search-interactions-service</artifactId>
@@ -43,6 +44,12 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>${springdoc-openapi.version}</version>
+        </dependency>
+
         <!-- Test dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -64,18 +71,6 @@
             <artifactId>metrics-core</artifactId>
             <version>3.2.6</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
         </dependency>
     </dependencies>
 

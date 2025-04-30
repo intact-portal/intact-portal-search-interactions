@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.model.parameters.PagedInteractionSearchParameters;
+import uk.ac.ebi.intact.search.interactions.model.parameters.SimpleInteractionQueryParameters;
 import uk.ac.ebi.intact.search.interactions.utils.DocumentType;
 import uk.ac.ebi.intact.search.interactions.utils.NegativeFilterStatus;
 import uk.ac.ebi.intact.search.interactions.utils.as.converters.DateFieldConverter;
@@ -42,16 +43,16 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Resource
     private InteractionSearchService interactionSearchService;
 
-    private final PagedInteractionSearchParameters asParams = PagedInteractionSearchParameters.builder()
-            .advancedSearch(true)
-            .negativeFilter(NegativeFilterStatus.POSITIVE_AND_NEGATIVE)
-            .build();
+    private PagedInteractionSearchParameters.PagedInteractionSearchParametersBuilder<?,?> asParams;
 
     /**
      * Before any tests run, this cleans the solr index and creates a new index with stored searchInteractions in an xml
      */
     @Before
     public void setUp() {
+        asParams = PagedInteractionSearchParameters.builder()
+                .advancedSearch(true)
+                .negativeFilter(NegativeFilterStatus.POSITIVE_AND_NEGATIVE);
 
         //Delete all documents from solr core
         interactionIndexService.deleteAll();
@@ -213,8 +214,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsAltIdA() {
         FacetPage<SearchInteraction> interactionFacetPage1 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(ALTID_A + ":P12345")
+                asParams.query(ALTID_A + ":P12345")
                         .build()
         );
 
@@ -228,8 +228,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
 
 
         FacetPage<SearchInteraction> interactionFacetPage2 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(ALTID_A + ":P12345*")
+                asParams.query(ALTID_A + ":P12345*")
                         .build()
         );
 
@@ -253,8 +252,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
         }
 
         FacetPage<SearchInteraction> interactionFacetPage3 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(ALTID_A + ":EBI-12345")
+                asParams.query(ALTID_A + ":EBI-12345")
                         .build()
         );
 
@@ -267,8 +265,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
         assertEquals(1, interactionFacetPage3.getTotalElements());
 
         FacetPage<SearchInteraction> interactionFacetPage4 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(ALTID_A + ":(EBI-12345 P123456)")
+                asParams.query(ALTID_A + ":(EBI-12345 P123456)")
                         .build());
 
         // page checks
@@ -280,8 +277,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
         assertEquals(2, interactionFacetPage4.getTotalElements());
 
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(ALTID_A + ":(EBI-12345 OR P123456)")
+                asParams.query(ALTID_A + ":(EBI-12345 OR P123456)")
                         .build()
         );
 
@@ -294,8 +290,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
         assertEquals(2, interactionFacetPage5.getTotalElements());
 
         FacetPage<SearchInteraction> interactionFacetPage6 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(ALTID_A + ":(EBI-12345 AND P123456)")
+                asParams.query(ALTID_A + ":(EBI-12345 AND P123456)")
                         .build()
         );
 
@@ -308,8 +303,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
         assertEquals(0, interactionFacetPage6.getTotalElements());
 
         FacetPage<SearchInteraction> interactionFacetPage7 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(ALTID_A + ":(+EBI-12345 -P12345)")
+                asParams.query(ALTID_A + ":(+EBI-12345 -P12345)")
                         .build()
         );
 
@@ -322,8 +316,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
         assertEquals(0, interactionFacetPage7.getTotalElements());
 
         FacetPage<SearchInteraction> interactionFacetPage8 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(ALTID_A + ":EBI-12345 OR " + ALTID_A + ":P123456")
+                asParams.query(ALTID_A + ":EBI-12345 OR " + ALTID_A + ":P123456")
                         .build());
 
         // page checks
@@ -335,8 +328,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
         assertEquals(2, interactionFacetPage8.getTotalElements());
 
         FacetPage<SearchInteraction> interactionFacetPage9 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(ALTID_A + " :uniprotkb:P12345")
+                asParams.query(ALTID_A + " :uniprotkb:P12345")
                         .build());
 
         // page checks
@@ -354,8 +346,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsAltIdB() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(ALTID_B + ":(EBI-22345 OR O123456)")
+                asParams.query(ALTID_B + ":(EBI-22345 OR O123456)")
                         .build());
 
         // page checks
@@ -373,8 +364,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsAltIdAIdB() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(ALTID_A + ":EBI-123456 AND " + ALTID_B + ":O123456")
+                asParams.query(ALTID_A + ":EBI-123456 AND " + ALTID_B + ":O123456")
                         .build());
 
         // page checks
@@ -395,8 +385,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(ID + ":EBI-123456 AND " + ID + ":O123456")
+                asParams.query(ID + ":EBI-123456 AND " + ID + ":O123456")
                         .build());
 
         // page checks
@@ -417,8 +406,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsIdA() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(ID_A + ":preferred-identifier3")
+                asParams.query(ID_A + ":preferred-identifier3")
                         .build()
         );
 
@@ -440,8 +428,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsIdB() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(ID_B + ":preferred-identifier2")
+                asParams.query(ID_B + ":preferred-identifier2")
                         .build());
 
         // page checks
@@ -462,8 +449,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsAliasAWithoutQuotes() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(ALIAS_A + ":(some text of alias1)")
+                asParams.query(ALIAS_A + ":(some text of alias1)")
                         .build());
 
         // page checks
@@ -485,8 +471,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsAliasAWithQuotes() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(ALIAS_A + ":\"some text of alias1\"")
+                asParams.query(ALIAS_A + ":\"some text of alias1\"")
                         .build());
 
         // page checks
@@ -507,8 +492,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsAliasBWithoutQuotes() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(ALIAS_B + ":(some text of alias3)")
+                asParams.query(ALIAS_B + ":(some text of alias3)")
                         .build());
 
         // page checks
@@ -530,8 +514,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsAliasBWithQuotes() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(ALIAS_B + ":\"some text of alias3\"")
+                asParams.query(ALIAS_B + ":\"some text of alias3\"")
                         .build());
 
         // page checks
@@ -552,8 +535,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsAliasWithoutQuotes() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(ALIAS + ":(some text of alias3)")
+                asParams.query(ALIAS + ":(some text of alias3)")
                         .build());
 
         // page checks
@@ -576,8 +558,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsAliasWithQuotes() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(ALIAS + ":\"some text of alias3\"")
+                asParams.query(ALIAS + ":\"some text of alias3\"")
                         .build());
 
         // page checks
@@ -598,8 +579,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsAliasWithSingleTerm() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(ALIAS + ":alias6")
+                asParams.query(ALIAS + ":alias6")
                         .build());
 
         // page checks
@@ -620,8 +600,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsAliasWithSingleTermwithQuotes() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(ALIAS + ":\"alias3\"")
+                asParams.query(ALIAS + ":\"alias3\"")
                         .build());
 
         // page checks
@@ -645,8 +624,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsAliasWithAliasAAndAliasB() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(ALIAS + ":(alias3 AND alias1)")
+                asParams.query(ALIAS + ":(alias3 AND alias1)")
                         .build());
 
         // page checks
@@ -666,8 +644,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsIdentifierWithAliasA() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(IDENTIFIER + ":alias6")
+                asParams.query(IDENTIFIER + ":alias6")
                         .build());
 
         // page checks
@@ -688,8 +665,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsIdentifierWithAliasB() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(IDENTIFIER + ":alias4")
+                asParams.query(IDENTIFIER + ":alias4")
                         .build());
 
         // page checks
@@ -709,8 +685,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsIdentifierWithAltIdA() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(IDENTIFIER + ":P12345")
+                asParams.query(IDENTIFIER + ":P12345")
                         .build());
 
         // page checks
@@ -730,8 +705,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsIdentifierWithAltIdB() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(IDENTIFIER + ":O123456")
+                asParams.query(IDENTIFIER + ":O123456")
                         .build());
 
         // page checks
@@ -751,8 +725,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsIdentifierWithAltIdBAAndAltIdBAndAliasAAndAliasB() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(IDENTIFIER + ":(P12345 AND O12345 AND alias1 AND alias3)")
+                asParams.query(IDENTIFIER + ":(P12345 AND O12345 AND alias1 AND alias3)")
                         .build());
 
         // page checks
@@ -772,8 +745,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsPubIdWithDBAndId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(PUB_ID + ":pubmed:12345/678.9")
+                asParams.query(PUB_ID + ":pubmed:12345/678.9")
                         .build());
 
         // page checks
@@ -793,8 +765,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsPubIdWithOnlyDB() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(PUB_ID + ":pubmed")
+                asParams.query(PUB_ID + ":pubmed")
                         .build());
 
         // page checks
@@ -816,8 +787,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsPubIdWithOnlyId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(PUB_ID + ":12345/678.9")
+                asParams.query(PUB_ID + ":12345/678.9")
                         .build());
 
         // page checks
@@ -838,8 +808,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsInteractionIdWithDBAndId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(INTERACTION_IDS + ":intact:EBI-123456")
+                asParams.query(INTERACTION_IDS + ":intact:EBI-123456")
                         .build());
 
         // page checks
@@ -859,8 +828,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsInteractionIdWithOnlyDB() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(INTERACTION_IDS + ":imex")
+                asParams.query(INTERACTION_IDS + ":imex")
                         .build());
 
         // page checks
@@ -882,8 +850,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsInteractionIdWithOnlyId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(INTERACTION_IDS + ":IM-12345-1")
+                asParams.query(INTERACTION_IDS + ":IM-12345-1")
                         .build());
 
         // page checks
@@ -904,8 +871,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsTaxIdAWithDBAndId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(TAX_ID_A + ":taxid:9606")
+                asParams.query(TAX_ID_A + ":taxid:9606")
                         .build());
 
         // page checks
@@ -925,8 +891,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsTaxIdAWithOnlyDB() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(TAX_ID_A + ":taxid")
+                asParams.query(TAX_ID_A + ":taxid")
                         .build());
 
         // page checks
@@ -948,8 +913,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsTaxIdAWithOnlyId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(TAX_ID_A + ":9606")
+                asParams.query(TAX_ID_A + ":9606")
                         .build());
 
         // page checks
@@ -970,8 +934,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsTaxIdAWithOnlyShortName() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(TAX_ID_A + ":\"Human\"")
+                asParams.query(TAX_ID_A + ":\"Human\"")
                         .build());
 
         // page checks
@@ -992,8 +955,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsTaxIdAWithOnlyFullName() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(TAX_ID_A + ":\"Homo Sapiens\"")
+                asParams.query(TAX_ID_A + ":\"Homo Sapiens\"")
                         .build());
 
         // page checks
@@ -1014,8 +976,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsTaxIdBWithDBAndId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(TAX_ID_B + ":taxid:9606")
+                asParams.query(TAX_ID_B + ":taxid:9606")
                         .build());
 
         // page checks
@@ -1035,8 +996,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsTaxIdBWithOnlyDB() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(TAX_ID_B + ":taxid")
+                asParams.query(TAX_ID_B + ":taxid")
                         .build());
 
         // page checks
@@ -1058,8 +1018,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsTaxIdBWithOnlyId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(TAX_ID_B + ":9606")
+                asParams.query(TAX_ID_B + ":9606")
                         .build());
 
         // page checks
@@ -1080,8 +1039,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsTaxIdBWithOnlyShortName() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(TAX_ID_B + ":\"Human test text\"")
+                asParams.query(TAX_ID_B + ":\"Human test text\"")
                         .build());
 
         // page checks
@@ -1102,8 +1060,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsTaxIdBWithOnlyFullName() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(TAX_ID_B + ":\"Homo Sapiens test text\"")
+                asParams.query(TAX_ID_B + ":\"Homo Sapiens test text\"")
                         .build());
 
         // page checks
@@ -1124,8 +1081,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsSpeciesWithDBAndId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(SPECIES + ":taxid:9606")
+                asParams.query(SPECIES + ":taxid:9606")
                         .build());
 
         // page checks
@@ -1145,8 +1101,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsSpeciesWithOnlyDB() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(SPECIES + ":taxid")
+                asParams.query(SPECIES + ":taxid")
                         .build());
 
         // page checks
@@ -1168,8 +1123,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsSpeciesWithOnlyId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(SPECIES + ":9606")
+                asParams.query(SPECIES + ":9606")
                         .build());
 
         // page checks
@@ -1190,8 +1144,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsSpeciesWithOnlyShortName() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(SPECIES + ":\"Human test text\"")
+                asParams.query(SPECIES + ":\"Human test text\"")
                         .build());
 
         // page checks
@@ -1212,8 +1165,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsSpeciesWithOnlyFullName() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(SPECIES + ":\"Homo Sapiens test text\"")
+                asParams.query(SPECIES + ":\"Homo Sapiens test text\"")
                         .build());
 
         // page checks
@@ -1234,8 +1186,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsSpeciesWithTaxIdAAndTaxIdB() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(SPECIES + ":(taxid:10116 AND taxid:12345)")
+                asParams.query(SPECIES + ":(taxid:10116 AND taxid:12345)")
                         .build());
 
         // page checks
@@ -1256,8 +1207,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsPubAuthorWithFirstName() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(PUB_AUTHORS + ":Name3")
+                asParams.query(PUB_AUTHORS + ":Name3")
                         .build());
 
         // page checks
@@ -1278,8 +1228,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsPubAuthorWithFirstNameAndInitialsWithinQuotes() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(PUB_AUTHORS + ":\"Name2 I.nitials2\"")
+                asParams.query(PUB_AUTHORS + ":\"Name2 I.nitials2\"")
                         .build());
 
         // page checks
@@ -1301,8 +1250,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsPubFirstAuthorWithFirstName() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(PUB_FIRST_AUTHOR + ":FirstAuthor1")
+                asParams.query(PUB_FIRST_AUTHOR + ":FirstAuthor1")
                         .build());
 
         // page checks
@@ -1322,8 +1270,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsPubFirstAuthorWithFirstNameAndInitialsWithinQuotes() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(PUB_FIRST_AUTHOR + ":\"FirstAuthor2 I.nitials2\"")
+                asParams.query(PUB_FIRST_AUTHOR + ":\"FirstAuthor2 I.nitials2\"")
                         .build());
 
         // page checks
@@ -1343,8 +1290,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsPubYear() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(PUB_YEAR + ":2012")
+                asParams.query(PUB_YEAR + ":2012")
                         .build());
 
         // page checks
@@ -1364,8 +1310,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsPubYearRange() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(PUB_YEAR + ":[2012 TO 2015]")
+                asParams.query(PUB_YEAR + ":[2012 TO 2015]")
                         .build());
 
         // page checks
@@ -1387,8 +1332,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsTypeWithDBAndId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(TYPE + ":psi-mi:MI:1234")
+                asParams.query(TYPE + ":psi-mi:MI:1234")
                         .build());
 
         // page checks
@@ -1408,8 +1352,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsTypeWithOnlyDB() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(TYPE + ":psi-mi")
+                asParams.query(TYPE + ":psi-mi")
                         .build());
 
         // page checks
@@ -1431,8 +1374,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsTypeWithOnlyId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(TYPE + ":MI:1234")
+                asParams.query(TYPE + ":MI:1234")
                         .build());
 
         // page checks
@@ -1453,8 +1395,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsTypeWithOnlyShortName() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(TYPE + ":\"Type1 shortlabel\"")
+                asParams.query(TYPE + ":\"Type1 shortlabel\"")
                         .build());
 
         // page checks
@@ -1475,8 +1416,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsHostOrganismWithDBAndId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(HOST_ORGANISM + ":taxid:2345678")
+                asParams.query(HOST_ORGANISM + ":taxid:2345678")
                         .build());
 
         // page checks
@@ -1496,8 +1436,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsHostOrganismWithOnlyDB() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(HOST_ORGANISM + ":taxid")
+                asParams.query(HOST_ORGANISM + ":taxid")
                         .build());
 
         // page checks
@@ -1519,8 +1458,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsHostOrganismWithOnlyId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(HOST_ORGANISM + ":2345678")
+                asParams.query(HOST_ORGANISM + ":2345678")
                         .build());
 
         // page checks
@@ -1541,8 +1479,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsHostOrganismWithOnlyShortName() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(HOST_ORGANISM + ":\"organism4 short name\"")
+                asParams.query(HOST_ORGANISM + ":\"organism4 short name\"")
                         .build());
 
         // page checks
@@ -1563,8 +1500,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsHostOrganismWithOnlyFullName() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(HOST_ORGANISM + ":\"organism4 full name\"")
+                asParams.query(HOST_ORGANISM + ":\"organism4 full name\"")
                         .build());
 
         // page checks
@@ -1585,8 +1521,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsDetectionMethodWithDBAndId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(INTERACTION_DETECTION_METHOD + ":psi-mi:MI:21234")
+                asParams.query(INTERACTION_DETECTION_METHOD + ":psi-mi:MI:21234")
                         .build());
 
         // page checks
@@ -1606,8 +1541,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsDetectionMethodWithOnlyDB() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(INTERACTION_DETECTION_METHOD + ":psi-mi")
+                asParams.query(INTERACTION_DETECTION_METHOD + ":psi-mi")
                         .build());
 
         // page checks
@@ -1629,8 +1563,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsDetectionMethodWithOnlyId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(INTERACTION_DETECTION_METHOD + ":MI:21234")
+                asParams.query(INTERACTION_DETECTION_METHOD + ":MI:21234")
                         .build());
 
         // page checks
@@ -1651,8 +1584,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsDetectionMethodWithOnlyShortName() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(INTERACTION_DETECTION_METHOD + ":\"DetectionMethod1 shortlabel\"")
+                asParams.query(INTERACTION_DETECTION_METHOD + ":\"DetectionMethod1 shortlabel\"")
                         .build());
 
         // page checks
@@ -1673,8 +1605,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsBioRoleAWithDBAndId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(BIOROLE_A + ":psi-mi:MI:412345")
+                asParams.query(BIOROLE_A + ":psi-mi:MI:412345")
                         .build());
 
         // page checks
@@ -1694,8 +1625,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsBioRoleAWithOnlyDB() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(BIOROLE_A + ":psi-mi")
+                asParams.query(BIOROLE_A + ":psi-mi")
                         .build());
 
         // page checks
@@ -1717,8 +1647,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsBioRoleAWithOnlyId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(BIOROLE_A + ":MI:412345")
+                asParams.query(BIOROLE_A + ":MI:412345")
                         .build());
 
         // page checks
@@ -1739,8 +1668,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsBioRoleAWithOnlyShortName() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(BIOROLE_A + ":\"BioroleA1 shortlabel\"")
+                asParams.query(BIOROLE_A + ":\"BioroleA1 shortlabel\"")
                         .build());
 
         // page checks
@@ -1761,8 +1689,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsBioRoleBWithDBAndId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(BIOROLE_B + ":psi-mi:MI:4123345")
+                asParams.query(BIOROLE_B + ":psi-mi:MI:4123345")
                         .build());
 
         // page checks
@@ -1782,8 +1709,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsBioRoleBWithOnlyDB() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(BIOROLE_B + ":psi-mi")
+                asParams.query(BIOROLE_B + ":psi-mi")
                         .build());
 
         // page checks
@@ -1805,8 +1731,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsBioRoleBWithOnlyId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(BIOROLE_B + ":MI:4123345")
+                asParams.query(BIOROLE_B + ":MI:4123345")
                         .build());
 
         // page checks
@@ -1827,8 +1752,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsBioRoleBWithOnlyShortName() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(BIOROLE_B + ":\"BioroleB1 shortlabel\"")
+                asParams.query(BIOROLE_B + ":\"BioroleB1 shortlabel\"")
                         .build());
 
         // page checks
@@ -1849,8 +1773,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsBioRoleAAndBWithOnlyId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(BIOROLE + ":(MI:4123345 AND MI:412345)")
+                asParams.query(BIOROLE + ":(MI:4123345 AND MI:412345)")
                         .build());
 
         // page checks
@@ -1872,8 +1795,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsTypeAWithDBAndId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(TYPE_A + ":psi-mi:MI:512345")
+                asParams.query(TYPE_A + ":psi-mi:MI:512345")
                         .build());
 
         // page checks
@@ -1893,8 +1815,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsTypeAWithOnlyDB() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(TYPE_A + ":psi-mi")
+                asParams.query(TYPE_A + ":psi-mi")
                         .build());
 
         // page checks
@@ -1916,8 +1837,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsTypeAWithOnlyId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(TYPE_A + ":MI:512345")
+                asParams.query(TYPE_A + ":MI:512345")
                         .build());
 
         // page checks
@@ -1938,8 +1858,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsTypeAWithOnlyShortName() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(TYPE_A + ":\"typeA1 shortlabel\"")
+                asParams.query(TYPE_A + ":\"typeA1 shortlabel\"")
                         .build());
 
         // page checks
@@ -1960,8 +1879,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsTypeBWithDBAndId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(TYPE_B + ":psi-mi:MI:5123345")
+                asParams.query(TYPE_B + ":psi-mi:MI:5123345")
                         .build());
 
         // page checks
@@ -1981,8 +1899,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsTypeBWithOnlyDB() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(TYPE_B + ":psi-mi")
+                asParams.query(TYPE_B + ":psi-mi")
                         .build());
 
         // page checks
@@ -2004,8 +1921,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsTypeBWithOnlyId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(TYPE_B + ":MI:5123345")
+                asParams.query(TYPE_B + ":MI:5123345")
                         .build());
 
         // page checks
@@ -2026,8 +1942,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsTypeBWithOnlyShortName() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(TYPE_B + ":\"typeB1 shortlabel\"")
+                asParams.query(TYPE_B + ":\"typeB1 shortlabel\"")
                         .build());
 
         // page checks
@@ -2048,8 +1963,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsTypeAAndBWithOnlyId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(INTERACTOR_TYPE + ":(MI:512345 AND MI:5123345)")
+                asParams.query(INTERACTOR_TYPE + ":(MI:512345 AND MI:5123345)")
                         .build());
 
         // page checks
@@ -2070,8 +1984,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsFeatureTypeAWithDBAndId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(FEATURE_TYPE_A + ":psi-mi:MI:61234")
+                asParams.query(FEATURE_TYPE_A + ":psi-mi:MI:61234")
                         .build());
 
         // page checks
@@ -2091,8 +2004,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsFeatureTypeAWithOnlyDB() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(FEATURE_TYPE_A + ":psi-mi")
+                asParams.query(FEATURE_TYPE_A + ":psi-mi")
                         .build());
 
         // page checks
@@ -2114,8 +2026,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsFeatureTypeAWithOnlyId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(FEATURE_TYPE_A + ":MI:61234")
+                asParams.query(FEATURE_TYPE_A + ":MI:61234")
                         .build());
 
         // page checks
@@ -2136,8 +2047,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsFeatureTypeAWithOnlyShortName() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(FEATURE_TYPE_A + ":\"feature type A1 shortlabel\"")
+                asParams.query(FEATURE_TYPE_A + ":\"feature type A1 shortlabel\"")
                         .build());
 
         // page checks
@@ -2159,8 +2069,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsFeatureTypeBWithDBAndId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(FEATURE_TYPE_B + ":psi-mi:MI:612334")
+                asParams.query(FEATURE_TYPE_B + ":psi-mi:MI:612334")
                         .build());
 
         // page checks
@@ -2180,8 +2089,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsFeatureTypeBWithOnlyDB() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(FEATURE_TYPE_B + ":psi-mi")
+                asParams.query(FEATURE_TYPE_B + ":psi-mi")
                         .build());
 
         // page checks
@@ -2203,8 +2111,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsFeatureTypeBWithOnlyId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(FEATURE_TYPE_B + ":MI:612334")
+                asParams.query(FEATURE_TYPE_B + ":MI:612334")
                         .build());
 
         // page checks
@@ -2225,8 +2132,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsFeatureTypeBWithOnlyShortName() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(FEATURE_TYPE_B + ":\"feature type B1 shortlabel\"")
+                asParams.query(FEATURE_TYPE_B + ":\"feature type B1 shortlabel\"")
                         .build());
 
         // page checks
@@ -2247,8 +2153,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsFeatureTypeAAndBWithOnlyId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(FEATURE_TYPE + ":(MI:61234 AND MI:612334)")
+                asParams.query(FEATURE_TYPE + ":(MI:61234 AND MI:612334)")
                         .build());
 
         // page checks
@@ -2269,8 +2174,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsParticipantIdentificationAWithDBAndId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(IDENTIFICATION_METHOD_A + ":psi-mi:MI:71234")
+                asParams.query(IDENTIFICATION_METHOD_A + ":psi-mi:MI:71234")
                         .build());
 
         // page checks
@@ -2290,8 +2194,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsParticipantIdentificationAWithOnlyDB() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(IDENTIFICATION_METHOD_A + ":psi-mi")
+                asParams.query(IDENTIFICATION_METHOD_A + ":psi-mi")
                         .build());
 
         // page checks
@@ -2313,8 +2216,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsParticipantIdentificationAWithOnlyId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(IDENTIFICATION_METHOD_A + ":MI:71234")
+                asParams.query(IDENTIFICATION_METHOD_A + ":MI:71234")
                         .build());
 
         // page checks
@@ -2335,8 +2237,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsParticipantIdentificationAWithOnlyShortName() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(IDENTIFICATION_METHOD_A + ":\"participant identification method A1 shortlabel\"")
+                asParams.query(IDENTIFICATION_METHOD_A + ":\"participant identification method A1 shortlabel\"")
                         .build());
 
         // page checks
@@ -2358,8 +2259,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsParticipantIdentificationBWithDBAndId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(IDENTIFICATION_METHOD_B + ":psi-mi:MI:712334")
+                asParams.query(IDENTIFICATION_METHOD_B + ":psi-mi:MI:712334")
                         .build());
 
         // page checks
@@ -2379,8 +2279,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsParticipantIdentificationBWithOnlyDB() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(IDENTIFICATION_METHOD_B + ":psi-mi")
+                asParams.query(IDENTIFICATION_METHOD_B + ":psi-mi")
                         .build());
 
         // page checks
@@ -2402,8 +2301,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsParticipantIdentificationBWithOnlyId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(IDENTIFICATION_METHOD_B + ":MI:712334")
+                asParams.query(IDENTIFICATION_METHOD_B + ":MI:712334")
                         .build());
 
         // page checks
@@ -2424,8 +2322,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsParticipantIdentificationBWithOnlyShortName() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(IDENTIFICATION_METHOD_B + ":\"participant identification method B1 shortlabel\"")
+                asParams.query(IDENTIFICATION_METHOD_B + ":\"participant identification method B1 shortlabel\"")
                         .build());
 
         // page checks
@@ -2446,8 +2343,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsParticipantIdentificationAAndBWithOnlyId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(IDENTIFICATION_METHOD + ":(MI:71234 AND MI:712334)")
+                asParams.query(IDENTIFICATION_METHOD + ":(MI:71234 AND MI:712334)")
                         .build());
 
         // page checks
@@ -2468,8 +2364,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsXrefAWithDBAndId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(XREFS_A + ":intact:EBI-9123456")
+                asParams.query(XREFS_A + ":intact:EBI-9123456")
                         .build());
 
         // page checks
@@ -2489,8 +2384,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsXrefAWithOnlyDB() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(XREFS_A + ":intact")
+                asParams.query(XREFS_A + ":intact")
                         .build());
 
         // page checks
@@ -2512,8 +2406,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsXrefAWithOnlyId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(XREFS_A + ":EBI-9123456")
+                asParams.query(XREFS_A + ":EBI-9123456")
                         .build());
 
         // page checks
@@ -2535,8 +2428,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsXrefBWithDBAndId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(XREFS_B + ":go:GO:223456")
+                asParams.query(XREFS_B + ":go:GO:223456")
                         .build());
 
         // page checks
@@ -2556,8 +2448,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsXrefBWithOnlyDB() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(XREFS_B + ":go")
+                asParams.query(XREFS_B + ":go")
                         .build());
 
         // page checks
@@ -2579,8 +2470,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsXrefBWithOnlyId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(XREFS_B + ":GO:223456")
+                asParams.query(XREFS_B + ":GO:223456")
                         .build());
 
         // page checks
@@ -2601,8 +2491,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsXrefAAndBWithOnlyId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(INTERACTOR_XREFS + ":(GO:223456 AND EBI-9123456)")
+                asParams.query(INTERACTOR_XREFS + ":(GO:223456 AND EBI-9123456)")
                         .build());
 
         // page checks
@@ -2623,8 +2512,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsInteractionXrefWithDBAndId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(INTERACTION_XREFS + ":go:GO:412345")
+                asParams.query(INTERACTION_XREFS + ":go:GO:412345")
                         .build());
 
         // page checks
@@ -2644,8 +2532,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsInteractionXrefWithOnlyDB() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(INTERACTION_XREFS + ":go")
+                asParams.query(INTERACTION_XREFS + ":go")
                         .build());
 
         // page checks
@@ -2667,8 +2554,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsInteractionXrefWithOnlyId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(INTERACTION_XREFS + ":GO:412345")
+                asParams.query(INTERACTION_XREFS + ":GO:412345")
                         .build());
 
         // page checks
@@ -2689,8 +2575,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsSourceWithDBAndId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(SOURCE + ":psi-mi:MI:0469")
+                asParams.query(SOURCE + ":psi-mi:MI:0469")
                         .build());
 
         // page checks
@@ -2710,8 +2595,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsSourceWithOnlyDB() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(SOURCE + ":psi-mi")
+                asParams.query(SOURCE + ":psi-mi")
                         .build());
 
         // page checks
@@ -2733,8 +2617,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsSourceWithOnlyId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(SOURCE + ":MI:0469")
+                asParams.query(SOURCE + ":MI:0469")
                         .build());
 
         // page checks
@@ -2755,8 +2638,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsSourceWithOnlyShortName() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(SOURCE + ":\"European Bioinformatics Institute\"")
+                asParams.query(SOURCE + ":\"European Bioinformatics Institute\"")
                         .build());
 
         // page checks
@@ -2777,8 +2659,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsExpansionMethodWithDBAndId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(EXPANSION_METHOD + ":psi-mi:MI:1060")
+                asParams.query(EXPANSION_METHOD + ":psi-mi:MI:1060")
                         .build());
 
         // page checks
@@ -2798,8 +2679,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsExpansionMethodWithOnlyDB() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(EXPANSION_METHOD + ":psi-mi")
+                asParams.query(EXPANSION_METHOD + ":psi-mi")
                         .build());
 
         // page checks
@@ -2821,8 +2701,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsExpansionMethodWithOnlyId() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(EXPANSION_METHOD + ":MI:1060")
+                asParams.query(EXPANSION_METHOD + ":MI:1060")
                         .build());
 
         // page checks
@@ -2843,8 +2722,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsExpansionMethodWithOnlyShortName() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(EXPANSION_METHOD + ":\"spoke expansion\"")
+                asParams.query(EXPANSION_METHOD + ":\"spoke expansion\"")
                         .build());
 
         // page checks
@@ -2865,8 +2743,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsLastUpdateDate() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(LAST_UPDATED + ":20120101")
+                asParams.query(LAST_UPDATED + ":20120101")
                         .build());
 
         // page checks
@@ -2886,8 +2763,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsLastUpdateDateRange() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(LAST_UPDATED + ":[20120101 TO 20150101]")
+                asParams.query(LAST_UPDATED + ":[20120101 TO 20150101]")
                         .build());
 
         // page checks
@@ -2909,8 +2785,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsReleaseDate() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(RELEASE_DATE + ":20130101")
+                asParams.query(RELEASE_DATE + ":20130101")
                         .build());
 
         // page checks
@@ -2930,8 +2805,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsReleaseDateRange() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(RELEASE_DATE + ":[20130101 TO 20160101]")
+                asParams.query(RELEASE_DATE + ":[20130101 TO 20160101]")
                         .build());
 
         // page checks
@@ -2953,8 +2827,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsIntactMiScore() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(INTACT_MI_SCORE + ":0.5")
+                asParams.query(INTACT_MI_SCORE + ":0.5")
                         .build());
 
         // page checks
@@ -2974,8 +2847,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsIntactMiScoreRange() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(INTACT_MI_SCORE + ":[0.5 TO 1.0]")
+                asParams.query(INTACT_MI_SCORE + ":[0.5 TO 1.0]")
                         .build());
 
         // page checks
@@ -2997,8 +2869,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsNegative() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(NEGATIVE + ":true")
+                asParams.query(NEGATIVE + ":true")
                         .build());
 
         // page checks
@@ -3019,8 +2890,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsParam() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(PARAM + ":true")
+                asParams.query(PARAM + ":true")
                         .build());
 
         // page checks
@@ -3041,8 +2911,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsStoichiometry() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(STC + ":true")
+                asParams.query(STC + ":true")
                         .build());
 
         // page checks
@@ -3063,8 +2932,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsMutation() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(MUTATION + ":true")
+                asParams.query(MUTATION + ":true")
                         .build());
 
         // page checks
@@ -3085,8 +2953,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsMutationA() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(MUTATION_A + ":true")
+                asParams.query(MUTATION_A + ":true")
                         .build());
 
         // page checks
@@ -3107,8 +2974,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsMutationB() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(MUTATION_B + ":true")
+                asParams.query(MUTATION_B + ":true")
                         .build());
 
         // page checks
@@ -3129,8 +2995,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsAnnotationWithTopicAndText() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(ANNOTATIONS + ":\"dataset:Disease1\"")
+                asParams.query(ANNOTATIONS + ":\"dataset:Disease1\"")
                         .build());
 
         // page checks
@@ -3150,8 +3015,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsAnnotationsWithOnlyTopic() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(ANNOTATIONS + ":dataset")
+                asParams.query(ANNOTATIONS + ":dataset")
                         .build());
 
         // page checks
@@ -3173,8 +3037,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsAnnotationsWithOnlyText() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(ANNOTATIONS + ":\"Disease1 - Disease elaborated\"")
+                asParams.query(ANNOTATIONS + ":\"Disease1 - Disease elaborated\"")
                         .build());
 
         // page checks
@@ -3195,8 +3058,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsGeneNameA() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(GENE_NAME_A + ":\"Gene NameA1\"")
+                asParams.query(GENE_NAME_A + ":\"Gene NameA1\"")
                         .build());
 
         // page checks
@@ -3217,8 +3079,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsGeneNameB() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(GENE_NAME_B + ":\"Gene NameB1\"")
+                asParams.query(GENE_NAME_B + ":\"Gene NameB1\"")
                         .build());
 
         // page checks
@@ -3239,8 +3100,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
     @Test
     public void findByAsGeneNameAAndB() {
         FacetPage<SearchInteraction> interactionFacetPage5 = interactionSearchService.findInteractionWithFacet(
-                asParams.toBuilder()
-                        .query(GENE_NAME + ":(\"Gene NameA1\" AND \"Gene NameB1\" )")
+                asParams.query(GENE_NAME + ":(\"Gene NameA1\" AND \"Gene NameB1\" )")
                         .build());
 
         // page checks
@@ -3263,7 +3123,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                         .query(ALTID_B + ":(EBI-22345 OR O123456)")
                         .advancedSearch(true)
                         .pageSize(10)
-                        .pageNumber(0)
+                        .page(0)
                         .build());
         assertEquals(2, results.getTotalElements());
     }

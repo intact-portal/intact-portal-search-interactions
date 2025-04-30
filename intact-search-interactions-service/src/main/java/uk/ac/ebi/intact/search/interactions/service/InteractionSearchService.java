@@ -5,7 +5,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.stereotype.Service;
-import uk.ac.ebi.intact.search.interactions.model.SimpleInteractionQueryParameters;
+import uk.ac.ebi.intact.search.interactions.model.parameters.SimpleInteractionQueryParameters;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.model.parameters.*;
 import uk.ac.ebi.intact.search.interactions.repository.InteractionRepository;
@@ -13,7 +13,6 @@ import uk.ac.ebi.intact.search.interactions.utils.DocumentType;
 import uk.ac.ebi.intact.search.interactions.utils.SearchInteractionUtility;
 
 import java.util.Optional;
-import java.util.Set;
 
 /**
  * @author Elisabet Barrera

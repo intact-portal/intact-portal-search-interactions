@@ -12,7 +12,7 @@ import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.data.solr.core.query.result.FacetQueryEntry;
 import org.springframework.test.context.junit4.SpringRunner;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
-import uk.ac.ebi.intact.search.interactions.model.SimpleInteractionQueryParameters;
+import uk.ac.ebi.intact.search.interactions.model.parameters.SimpleInteractionQueryParameters;
 import uk.ac.ebi.intact.search.interactions.model.parameters.PagedInteractionSearchParameters;
 import uk.ac.ebi.intact.search.interactions.service.util.TestUtil;
 import uk.ac.ebi.intact.search.interactions.utils.NegativeFilterStatus;
@@ -35,8 +35,6 @@ public class InteractionSearchServiceTest {
 
     @Resource
     private InteractionSearchService interactionSearchService;
-
-    private PagedInteractionSearchParameters baseParameters = PagedInteractionSearchParameters.builder().build();
 
     /**
      * Before any tests run, this cleans the solr index and creates a new index with stored searchInteractions in an xml
@@ -268,7 +266,7 @@ public class InteractionSearchServiceTest {
     @Test
     public void facetTest() {
         FacetPage<SearchInteraction> interactionFacetPage = interactionSearchService.findInteractionFacets(
-                baseParameters.toBuilder()
+                PagedInteractionSearchParameters.builder()
                         .query("physical association")
                         .build()
         );
@@ -400,7 +398,7 @@ public class InteractionSearchServiceTest {
     @Test
     public void findInteractionIdentifiersTest() {
         Page<SearchInteraction> interactionPage = interactionSearchService.findInteractionIdentifiers(
-                baseParameters.toBuilder().query("In vitro").build()
+                PagedInteractionSearchParameters.builder().query("In vitro").build()
         );
 
         // page checks
@@ -437,7 +435,7 @@ public class InteractionSearchServiceTest {
     public void filterInterSpeciesFalseOneSpecies() {
 
         FacetPage<SearchInteraction> interactionFacetPage = interactionSearchService.findInteractionWithFacet(
-                baseParameters.toBuilder()
+                PagedInteractionSearchParameters.builder()
                         .query("physical association")
                         .interactorSpeciesFilter(Set.of("Homo sapiens"))
                         .interactionTypesFilter(Set.of("physical association"))
@@ -568,7 +566,7 @@ public class InteractionSearchServiceTest {
         //filter2
 
         FacetPage<SearchInteraction> interactionFacetPage = interactionSearchService.findInteractionWithFacet(
-                baseParameters.toBuilder()
+                PagedInteractionSearchParameters.builder()
                         .query("physical association")
                         .interactorSpeciesFilter(Set.of("Homo sapiens", "Rattus norvegicus (Rat)"))
                         .interactorTypesFilter(Set.of("protein"))
@@ -660,7 +658,7 @@ public class InteractionSearchServiceTest {
     public void findInteractionsBySpeciesWithFacet() {
 
         FacetPage<SearchInteraction> interactionFacetPage = interactionSearchService.findInteractionWithFacet(
-                baseParameters.toBuilder().query("rat").build()
+                PagedInteractionSearchParameters.builder().query("rat").build()
         );
 
         // page checks, for this method the interaction content should be ignored
@@ -779,7 +777,7 @@ public class InteractionSearchServiceTest {
     public void findInteractionsByInteractorIndexedField() {
 
         FacetPage<SearchInteraction> interactionFacetPage = interactionSearchService.findInteractionWithFacet(
-                baseParameters.toBuilder()
+                PagedInteractionSearchParameters.builder()
                         .query("kappaB")
                         .build()
         );
@@ -899,7 +897,11 @@ public class InteractionSearchServiceTest {
     @Test
     public void findInteractionsByEmptyString() {
 
-        FacetPage<SearchInteraction> interactionFacetPage = interactionSearchService.findInteractionWithFacet(baseParameters.toBuilder().query("").build());
+        FacetPage<SearchInteraction> interactionFacetPage = interactionSearchService.findInteractionWithFacet(
+                PagedInteractionSearchParameters.builder()
+                        .query("")
+                        .build()
+        );
 
         // page checks
         assertFalse(interactionFacetPage.getContent().isEmpty());
@@ -1027,7 +1029,7 @@ public class InteractionSearchServiceTest {
     public void findInteractionsByStarString() {
 
         FacetPage<SearchInteraction> interactionFacetPage = interactionSearchService.findInteractionWithFacet(
-                baseParameters.toBuilder()
+                PagedInteractionSearchParameters.builder()
                         .query("*")
                         .build()
         );
@@ -1158,7 +1160,7 @@ public class InteractionSearchServiceTest {
 
         // check https://issues.apache.org/jira/browse/SOLR-12858 for embedded POST request issue
         FacetPage<SearchInteraction> interactionFacetPage = interactionSearchService.findInteractionWithFacet(
-                baseParameters.toBuilder()
+                PagedInteractionSearchParameters.builder()
                         .query("EBI-715849,EBI-724102")
                         .batchSearch(true)
                         .build()
@@ -1282,7 +1284,7 @@ public class InteractionSearchServiceTest {
     public void filterByInteractorAcs() {
 
         FacetPage<SearchInteraction> interactionFacetPage = interactionSearchService.findInteractionWithFacet(
-                baseParameters.toBuilder()
+                PagedInteractionSearchParameters.builder()
                         .query("physical association")
                         .interactorSpeciesFilter(Set.of("Homo sapiens"))
                         .interactorAcs(Set.of("EBI-715849", "EBI-10000824"))
@@ -1423,7 +1425,7 @@ public class InteractionSearchServiceTest {
     public void filterByBinaryIds() {
 
         FacetPage<SearchInteraction> interactionFacetPage = interactionSearchService.findInteractionWithFacet(
-                baseParameters.toBuilder()
+                PagedInteractionSearchParameters.builder()
                         .query("physical association")
                         .interactorSpeciesFilter(Set.of("Homo sapiens"))
                         .binaryInteractionIds(Set.of(10L, 1L))
@@ -1561,7 +1563,7 @@ public class InteractionSearchServiceTest {
     public void filterByMultipleDetectionMethods() {
 
         FacetPage<SearchInteraction> interactionFacetPage = interactionSearchService.findInteractionWithFacet(
-                baseParameters.toBuilder()
+                PagedInteractionSearchParameters.builder()
                         .query("physical association")
                         .interactionDetectionMethodsFilter(Set.of("density sedimentation", "molecular sieving"))
                         .build()
@@ -1696,7 +1698,7 @@ public class InteractionSearchServiceTest {
     public void filterByMultipleHostOrganism() {
 
         FacetPage<SearchInteraction> interactionFacetPage = interactionSearchService.findInteractionWithFacet(
-                baseParameters.toBuilder()
+                PagedInteractionSearchParameters.builder()
                         .query("physical association")
                         .interactionHostOrganismsFilter(Set.of(
                                 "In vitro",
@@ -1831,7 +1833,7 @@ public class InteractionSearchServiceTest {
         Set<String> interactionTypesFilter = Set.of("physical association");
 
         FacetPage<SearchInteraction> interactionFacetPage = interactionSearchService.findInteractionWithFacet(
-                baseParameters.toBuilder()
+                PagedInteractionSearchParameters.builder()
                         .query("*")
                         .interactionTypesFilter(interactionTypesFilter)
                         .build()
@@ -1960,7 +1962,7 @@ public class InteractionSearchServiceTest {
      **/
     @Test
     public void filterByPositiveInteractions() {
-        FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(baseParameters.toBuilder().query("*").build());
+        FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(PagedInteractionSearchParameters.builder().query("*").build());
         assertEquals(10, interactionOp.getTotalElements());
 
         //facet checking
@@ -1980,7 +1982,7 @@ public class InteractionSearchServiceTest {
     @Test
     public void filterByNegativeInteractions() {
         FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
-                baseParameters.toBuilder()
+                PagedInteractionSearchParameters.builder()
                         .query("*")
                         .negativeFilter(NegativeFilterStatus.NEGATIVE_ONLY)
                         .build()
@@ -2004,7 +2006,7 @@ public class InteractionSearchServiceTest {
     @Test
     public void filterByNegativeAndPositiveInteractions() {
         FacetPage<SearchInteraction> interactionOp = interactionSearchService.findInteractionWithFacet(
-                baseParameters.toBuilder()
+                PagedInteractionSearchParameters.builder()
                         .query("*")
                         .negativeFilter(NegativeFilterStatus.POSITIVE_AND_NEGATIVE)
                         .build()
@@ -2029,7 +2031,7 @@ public class InteractionSearchServiceTest {
                         .query("ndc80")
                         .advancedSearch(false)
                         .pageSize(10)
-                        .pageNumber(0)
+                        .page(0)
                         .build());
         assertEquals(4, results.getTotalElements());
     }
