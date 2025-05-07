@@ -1,44 +1,26 @@
 package uk.ac.ebi.intact.search.interactions.model.parameters;
 
-import org.springframework.http.MediaType;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 /**
  * Created by anjali on 26/02/19.
  */
+@Getter
+@RequiredArgsConstructor
 public enum InteractionExportFormat {
 
     // Note: We don't use the capitalization for aesthetic purposes.
     // The enums are shown to the users in the swagger documentation.
-    miJSON("json", MediaType.APPLICATION_JSON, "json"),
-    miXML25("xml25", MediaType.APPLICATION_XML, "xml"),
-    miXML30("xml30", MediaType.APPLICATION_XML, "xml"),
-    miTab25("tab25", MediaType.TEXT_PLAIN, "tsv"),
-    miTab26("tab26", MediaType.TEXT_PLAIN, "tsv"),
-    miTab27("tab27", MediaType.TEXT_PLAIN, "tsv"),
-    featureTab("featureTab", MediaType.TEXT_PLAIN, "tsv");
+    miJSON("json"),
+    miXML25("xml25"),
+    miXML30("xml30"),
+    miTab25("tab25"),
+    miTab26("tab26"),
+    miTab27("tab27"),
+    featureTab("featureTab");
 
-    String format;
-    MediaType contentType;
-    String extension;
-
-    InteractionExportFormat(String format, MediaType contentType, String extension)
-    {
-        this.format = format;
-        this.contentType = contentType;
-        this.extension = extension;
-    }
-
-    public String getFormat() {
-        return format;
-    }
-
-    public MediaType getContentType() {
-        return contentType;
-    }
-
-    public String getExtension() {
-        return extension;
-    }
+    final String format;
 
     public static InteractionExportFormat findByFormat(String format) {
 
