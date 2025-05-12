@@ -1,13 +1,16 @@
 package uk.ac.ebi.intact.search.interactions.utils;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.solr.core.query.Criteria;
 import org.springframework.data.solr.core.query.FilterQuery;
 import org.springframework.data.solr.core.query.SimpleFilterQuery;
 import org.springframework.data.solr.core.query.SimpleStringCriteria;
-import uk.ac.ebi.intact.search.interactions.model.AdvancedSearchInteractionFields;
+import uk.ac.ebi.intact.search.interactions.model.parameters.InteractionSearchParameters;
+import uk.ac.ebi.intact.search.interactions.model.parameters.SimpleSearchParametersI;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,11 +42,15 @@ public class SearchInteractionUtility {
         return s.toLowerCase();
     }
 
-    public Criteria createSearchConditions(String searchTerms, boolean batchSearch, boolean advancedSearch) {
+    public Criteria createSearchConditions(SimpleSearchParametersI parameters) {
         Criteria conditions;
         Criteria userConditions = null;
         Criteria documentConditions = new Criteria(DOCUMENT_TYPE).is(DocumentType.INTERACTION);
         List<String> words = new ArrayList<>();
+
+        String searchTerms = parameters.getQuery();
+        boolean batchSearch = parameters.isBatchSearch();
+        boolean advancedSearch = parameters.isAdvancedSearch();
 
         //We prepare the term to split by several characters
 
@@ -114,54 +121,42 @@ public class SearchInteractionUtility {
         return userConditions;
     }
 
-    public List<FilterQuery> createFilterQuery(Set<String> interactorSpeciesFilter,
-                                               Set<String> interactorTypesFilter,
-                                               Set<String> interactionDetectionMethodsFilter,
-                                               Set<String> interactionTypesFilter,
-                                               Set<String> interactionHostOrganismsFilter,
-                                               Boolean negativeFilter,
-                                               boolean mutationFilter,
-                                               boolean expansionFilter,
-                                               double minMIScore,
-                                               double maxMIScore,
-                                               boolean intraSpeciesFilter,
-                                               Set<Long> binaryInteractionIds,
-                                               Set<String> interactorAcs) {
+    public List<FilterQuery> createFilterQuery(InteractionSearchParameters parameters) {
 
         List<FilterQuery> filterQueries = new ArrayList<>();
 
         //Interactor species filter
-        createInteractorSpeciesFilterCriteria(interactorSpeciesFilter, intraSpeciesFilter, filterQueries);
+        createInteractorSpeciesFilterCriteria(parameters.getInteractorSpeciesFilter(), parameters.isIntraSpeciesFilter(), filterQueries);
 
         //Interactor type filter
-        createInteractorTypeFilterCriteria("{!tag=TYPE}", interactorTypesFilter, filterQueries);
+        createInteractorTypeFilterCriteria("{!tag=TYPE}", parameters.getInteractorTypesFilter(), filterQueries);
 
         //Interaction detection method filter
-        createFilterCriteriaForStringValues("{!tag=DETECTION_METHOD}", interactionDetectionMethodsFilter, DETECTION_METHOD_S, filterQueries);
+        createFilterCriteriaForStringValues("{!tag=DETECTION_METHOD}", parameters.getInteractionDetectionMethodsFilter(), DETECTION_METHOD_S, filterQueries);
 
         //Interaction type filter
-        createFilterCriteriaForStringValues("{!tag=INTERACTION_TYPE}", interactionTypesFilter, TYPE_S, filterQueries);
+        createFilterCriteriaForStringValues("{!tag=INTERACTION_TYPE}", parameters.getInteractionTypesFilter(), TYPE_S, filterQueries);
 
         //Interaction host organism filter
-        createFilterCriteriaForStringValues("{!tag=HOST_ORGANISM}", interactionHostOrganismsFilter, HOST_ORGANISM_S, filterQueries);
+        createFilterCriteriaForStringValues("{!tag=HOST_ORGANISM}", parameters.getInteractionHostOrganismsFilter(), HOST_ORGANISM_S, filterQueries);
 
         //Negative filter
-        createNegativeInteractionsFilterCriteria("{!tag=NEGATIVE_INTERACTION}", negativeFilter, NEGATIVE, filterQueries);
+        createNegativeInteractionsFilterCriteria("{!tag=NEGATIVE_INTERACTION}", parameters.getNegativeFilter().booleanValue, NEGATIVE, filterQueries);
 
         //Mutation filter
-        createFilterCriteriaForBoolean("{!tag=MUTATION}", mutationFilter, AFFECTED_BY_MUTATION, filterQueries);
+        createFilterCriteriaForBoolean("{!tag=MUTATION}", parameters.isMutationFilter(), AFFECTED_BY_MUTATION, filterQueries);
 
         //Expansion filter
-        createExpansionFilterCriteria("{!tag=EXPANSION}", expansionFilter, filterQueries);
+        createExpansionFilterCriteria("{!tag=EXPANSION}", parameters.isExpansionFilter(), filterQueries);
 
         //MIScore filter
-        createMIScoreFilterCriteria("{!tag=MI_SCORE}", minMIScore, maxMIScore, filterQueries);
+        createMIScoreFilterCriteria("{!tag=MI_SCORE}", parameters.getMinMIScore(), parameters.getMaxMIScore(), filterQueries);
 
         //binaryInteractionIds filter
-        createFilterCriteriaForLongValues("{!tag=GRAPH_FILTER}", binaryInteractionIds, BINARY_INTERACTION_ID, filterQueries);
+        createFilterCriteriaForLongValues("{!tag=GRAPH_FILTER}", parameters.getBinaryInteractionIds(), BINARY_INTERACTION_ID, filterQueries);
 
         //InteractorAcs filter
-        createInteractorAcsFilter("{!tag=GRAPH_FILTER}", interactorAcs, filterQueries);
+        createInteractorAcsFilter("{!tag=GRAPH_FILTER}", parameters.getInteractorAcs(), filterQueries);
 
         return filterQueries;
     }

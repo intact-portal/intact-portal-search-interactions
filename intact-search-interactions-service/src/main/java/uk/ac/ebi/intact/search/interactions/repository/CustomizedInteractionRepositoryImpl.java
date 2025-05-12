@@ -10,7 +10,11 @@ import org.springframework.data.solr.core.SolrOperations;
 import org.springframework.data.solr.core.query.*;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.stereotype.Repository;
+import uk.ac.ebi.intact.search.interactions.model.parameters.SimpleInteractionQueryParameters;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
+import uk.ac.ebi.intact.search.interactions.model.parameters.InteractionSearchParameters;
+import uk.ac.ebi.intact.search.interactions.model.parameters.PagedFormattedInteractionSearchParameters;
+import uk.ac.ebi.intact.search.interactions.model.parameters.PagedInteractionSearchParameters;
 import uk.ac.ebi.intact.search.interactions.utils.SearchInteractionUtility;
 
 import javax.annotation.Resource;
@@ -46,9 +50,9 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
     @Resource
     private boolean isEmbeddedSolr;
 
-    // default sorting for the query results
+    //default sorting for the query results
     //TODO Solve problems with multivalue fields that are not allow to be sorted. Schema-less create all the fields as multivalues
-//    private static final Sort DEFAULT_QUERY_SORT_WITH_QUERY = new Sort(Sort.Direction.DESC, SearchInteractorFields.INTERACTION_COUNT);
+    //private static final Sort DEFAULT_QUERY_SORT_WITH_QUERY = new Sort(Sort.Direction.DESC, SearchInteractorFields.INTERACTION_COUNT);
 
     @Autowired
     public CustomizedInteractionRepositoryImpl(SolrOperations solrOperations) {
@@ -56,73 +60,41 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
     }
 
     @Override
-    public FacetPage<SearchInteraction> findInteractionFacets(String query,
-                                                              boolean batchSearch,
-                                                              boolean advancedSearch,
-                                                              Set<String> interactorSpeciesFilter,
-                                                              Set<String> interactorTypesFilter,
-                                                              Set<String> interactionDetectionMethodsFilter,
-                                                              Set<String> interactionTypesFilter,
-                                                              Set<String> interactionHostOrganismsFilter,
-                                                              Boolean negativeFilter,
-                                                              boolean mutationFilter,
-                                                              boolean expansionFilter,
-                                                              double minMIScore,
-                                                              double maxMIScore,
-                                                              boolean intraSpeciesFilter,
-                                                              Set<Long> binaryInteractionIds,
-                                                              Set<String> interactorAcs) {
-        return findInteractionWithFacet(query,
-                batchSearch,
-                advancedSearch,
-                interactorSpeciesFilter,
-                interactorTypesFilter,
-                interactionDetectionMethodsFilter,
-                interactionTypesFilter,
-                interactionHostOrganismsFilter,
-                negativeFilter,
-                mutationFilter,
-                expansionFilter,
-                minMIScore,
-                maxMIScore,
-                intraSpeciesFilter,
-                binaryInteractionIds,
-                interactorAcs,
-                Sort.unsorted(),
-                // We need at least one page with one interaction to avoid problems until we find a way to retrieve the
-                // facets without results.
-                PageRequest.of(0, 1));
+    public FacetPage<SearchInteraction> findInteractionFacets(InteractionSearchParameters parameters) {
+        return findInteractionWithFacet(PagedInteractionSearchParameters.copyParameters(parameters).pageSize(1).build());
     }
 
     @Override
-    public FacetPage<SearchInteraction> findInteractionWithFacet(String query,
-                                                                 boolean batchSearch,
-                                                                 boolean advancedSearch,
-                                                                 Set<String> interactorSpeciesFilter,
-                                                                 Set<String> interactorTypesFilter,
-                                                                 Set<String> interactionDetectionMethodsFilter,
-                                                                 Set<String> interactionTypesFilter,
-                                                                 Set<String> interactionHostOrganismsFilter,
-                                                                 Boolean negativeFilter,
-                                                                 boolean mutationFilter,
-                                                                 boolean expansionFilter,
-                                                                 double minMIScore,
-                                                                 double maxMIScore,
-                                                                 boolean intraSpeciesFilter,
-                                                                 Set<Long> binaryInteractionIds,
-                                                                 Set<String> interactorAcs,
-                                                                 Sort sort, Pageable pageable) {
+    public Page<Long> findBinaryInteractionIds(SimpleInteractionQueryParameters parameters) {
+        // search query
+        SimpleFacetQuery search = new SimpleFacetQuery();
+
+        // search criteria
+        Criteria conditions = searchInteractionUtility.createSearchConditions(parameters);
+        search.addCriteria(conditions);
+
+        // Retrieve only binary interaction id
+        search.addProjectionOnFields(BINARY_INTERACTION_ID);
+
+        // pagination
+        search.setPageRequest(PageRequest.of(parameters.getPage(), parameters.getPageSize()));
+
+        return solrOperations.queryForFacetPage(INTERACTIONS, search, SearchInteraction.class, RequestMethod.GET)
+                .map(SearchInteraction::getBinaryInteractionId);
+    }
+
+    @Override
+    public FacetPage<SearchInteraction> findInteractionWithFacet(PagedInteractionSearchParameters parameters) {
 
         // search query
         SimpleFacetQuery search = new SimpleFacetQuery();
 
         // search criterias
-        Criteria conditions = searchInteractionUtility.createSearchConditions(query, batchSearch, advancedSearch);
+        Criteria conditions = searchInteractionUtility.createSearchConditions(parameters);
         search.addCriteria(conditions);
 
         // filters
-        List<FilterQuery> filterQueries = searchInteractionUtility.createFilterQuery(interactorSpeciesFilter, interactorTypesFilter, interactionDetectionMethodsFilter,
-                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, expansionFilter, minMIScore, maxMIScore, intraSpeciesFilter, binaryInteractionIds, interactorAcs);
+        List<FilterQuery> filterQueries = searchInteractionUtility.createFilterQuery(parameters);
 
         if (!filterQueries.isEmpty()) {
             for (FilterQuery filterQuery : filterQueries) {
@@ -155,14 +127,14 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         search.setFacetOptions(facetOptions);
 
         // pagination
-        search.setPageRequest(pageable);
+        search.setPageRequest(PageRequest.of(parameters.getPage(), parameters.getPageSize()));
 
         // fields
         search.addProjectionOnFields(SEARCH_INTERACTION_FIELDS);
 
         // sorting
-        if (sort != null) {
-            search.addSort(sort);
+        if (parameters.getSort() != null) {
+            search.addSort(parameters.standardiseSort());
         } else {
             //order is important to give clustering effect
             search.addSort(Sort.by(Sort.Direction.DESC, INTACT_MISCORE));
@@ -175,81 +147,39 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         // isEmbeddedSolr parameter is needed for the batch search tests to work
         // check https://issues.apache.org/jira/browse/SOLR-12858 for embedded POST request issue
         return solrOperations.queryForFacetPage(INTERACTIONS, search, SearchInteraction.class,
-                ((batchSearch && !isEmbeddedSolr) ? RequestMethod.POST : RequestMethod.GET));
+                ((parameters.isBatchSearch() && !isEmbeddedSolr) ? RequestMethod.POST : RequestMethod.GET));
     }
 
     @Override
-    public Page<SearchInteraction> findInteractions(String query,
-                                                    boolean batchSearch,
-                                                    boolean advancedSearch,
-                                                    Set<String> interactorSpeciesFilter,
-                                                    Set<String> interactorTypesFilter,
-                                                    Set<String> interactionDetectionMethodsFilter,
-                                                    Set<String> interactionTypesFilter,
-                                                    Set<String> interactionHostOrganismsFilter,
-                                                    Boolean negativeFilter,
-                                                    boolean mutationFilter,
-                                                    boolean expansionFilter,
-                                                    double minMIScore,
-                                                    double maxMIScore,
-                                                    boolean intraSpeciesFilter,
-                                                    Set<Long> binaryInteractionIds,
-                                                    Set<String> interactorAcs,
-                                                    Sort sort, Pageable pageable) {
+    public Page<SearchInteraction> findInteractions(PagedInteractionSearchParameters parameters) {
 
         SimpleQuery search = (SimpleQuery) createQuery(
-                query,
-                batchSearch,
-                advancedSearch,
-                interactorSpeciesFilter,
-                interactorTypesFilter,
-                interactionDetectionMethodsFilter,
-                interactionTypesFilter,
-                interactionHostOrganismsFilter,
-                negativeFilter,
-                mutationFilter,
-                expansionFilter,
-                minMIScore,
-                maxMIScore,
-                intraSpeciesFilter,
-                binaryInteractionIds,
-                interactorAcs,
-                sort,
-                pageable);
+                parameters);
 
         // isEmbeddedSolr parameter is needed for the batch search tests to work
         // check https://issues.apache.org/jira/browse/SOLR-12858 for embedded POST request issue
         return solrOperations.queryForPage(INTERACTIONS, search, SearchInteraction.class,
-                ((batchSearch && !isEmbeddedSolr) ? RequestMethod.POST : RequestMethod.GET));
+                ((parameters.isBatchSearch() && !isEmbeddedSolr) ? RequestMethod.POST : RequestMethod.GET));
     }
 
     @Override
-    public Page<SearchInteraction> findInteractionForGraphJson(String query,
-                                                               boolean batchSearch,
-                                                               boolean advancedSearch,
-                                                               Set<String> interactorSpeciesFilter,
-                                                               Set<String> interactorTypesFilter,
-                                                               Set<String> interactionDetectionMethodsFilter,
-                                                               Set<String> interactionTypesFilter,
-                                                               Set<String> interactionHostOrganismsFilter,
-                                                               Boolean negativeFilter,
-                                                               boolean mutationFilter,
-                                                               boolean expansionFilter,
-                                                               double minMIScore,
-                                                               double maxMIScore,
-                                                               boolean intraSpeciesFilter,
-                                                               Sort sort, Pageable pageable) {
+    public Page<SearchInteraction> findInteractionForGraphJson(PagedInteractionSearchParameters parameters) {
+
+        // Important : override the binaryInteractionIds and interactors acs to null
+        parameters = parameters.toBuilder()
+                .binaryInteractionIds(null)
+                .interactorAcs(null)
+                .build();
 
         // search query
         SimpleQuery search = new SimpleQuery();
 
         // search criterias
-        Criteria conditions = searchInteractionUtility.createSearchConditions(query, batchSearch, advancedSearch);
+        Criteria conditions = searchInteractionUtility.createSearchConditions(parameters);
         search.addCriteria(conditions);
 
         // filters
-        List<FilterQuery> filterQueries = searchInteractionUtility.createFilterQuery(interactorSpeciesFilter, interactorTypesFilter, interactionDetectionMethodsFilter,
-                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, expansionFilter, minMIScore, maxMIScore, intraSpeciesFilter, null, null);
+        List<FilterQuery> filterQueries = searchInteractionUtility.createFilterQuery(parameters);
 
         if (!filterQueries.isEmpty()) {
             for (FilterQuery filterQuery : filterQueries) {
@@ -258,11 +188,11 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         }
 
         // pagination
-        search.setPageRequest(pageable);
+        search.setPageRequest(PageRequest.of(parameters.getPage(), parameters.getPageSize()));
 
         // sorting
-        if (sort != null) {
-            search.addSort(sort);
+        if (parameters.getSort() != null) {
+            search.addSort(parameters.standardiseSort());
         }
 
         //projection
@@ -298,36 +228,27 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         search.addProjectionOnField(new SimpleField(MUTATION_B));
 
         return solrOperations.queryForPage(INTERACTIONS, search, SearchInteraction.class,
-                (batchSearch ? RequestMethod.POST : RequestMethod.GET));
+                (parameters.isBatchSearch() ? RequestMethod.POST : RequestMethod.GET));
     }
 
     @Override
-    public FacetPage<SearchInteraction> findInteractionForGraphJsonWithFacet(String query,
-                                                                             boolean batchSearch,
-                                                                             boolean advancedSearch,
-                                                                             Set<String> interactorSpeciesFilter,
-                                                                             Set<String> interactorTypesFilter,
-                                                                             Set<String> interactionDetectionMethodsFilter,
-                                                                             Set<String> interactionTypesFilter,
-                                                                             Set<String> interactionHostOrganismsFilter,
-                                                                             Boolean negativeFilter,
-                                                                             boolean mutationFilter,
-                                                                             boolean expansionFilter,
-                                                                             double minMIScore,
-                                                                             double maxMIScore,
-                                                                             boolean intraSpeciesFilter,
-                                                                             Sort sort, Pageable pageable) {
+    public FacetPage<SearchInteraction> findInteractionForGraphJsonWithFacet(PagedInteractionSearchParameters parameters) {
+
+        // Important : override the binaryInteractionIds and interactors acs to null
+        parameters = parameters.toBuilder()
+                .binaryInteractionIds(null)
+                .interactorAcs(null)
+                .build();
 
         // search query
         SimpleFacetQuery search = new SimpleFacetQuery();
 
         // search criterias
-        Criteria conditions = searchInteractionUtility.createSearchConditions(query, batchSearch, advancedSearch);
+        Criteria conditions = searchInteractionUtility.createSearchConditions(parameters);
         search.addCriteria(conditions);
 
         // filters
-        List<FilterQuery> filterQueries = searchInteractionUtility.createFilterQuery(interactorSpeciesFilter, interactorTypesFilter, interactionDetectionMethodsFilter,
-                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, expansionFilter, minMIScore, maxMIScore, intraSpeciesFilter, null, null);
+        List<FilterQuery> filterQueries = searchInteractionUtility.createFilterQuery(parameters);
 
         if (!filterQueries.isEmpty()) {
             for (FilterQuery filterQuery : filterQueries) {
@@ -336,11 +257,11 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         }
 
         // pagination
-        search.setPageRequest(pageable);
+        search.setPageRequest(PageRequest.of(parameters.getPage(), parameters.getPageSize()));
 
         // sorting
-        if (sort != null) {
-            search.addSort(sort);
+        if (parameters.getSort() != null) {
+            search.addSort(parameters.standardiseSort());
         }
 
         // facet
@@ -391,34 +312,27 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         search.addProjectionOnField(new SimpleField(MUTATION_B));
 
         return solrOperations.queryForFacetPage(INTERACTIONS, search, SearchInteraction.class,
-                (batchSearch ? RequestMethod.POST : RequestMethod.GET));
+                (parameters.isBatchSearch() ? RequestMethod.POST : RequestMethod.GET));
     }
 
     @Override
-    public long countInteractionsForGraphJson(String query, boolean batchSearch,
-                                              boolean advancedSearch,
-                                              Set<String> interactorSpeciesFilter,
-                                              Set<String> interactorTypesFilter,
-                                              Set<String> interactionDetectionMethodsFilter,
-                                              Set<String> interactionTypesFilter,
-                                              Set<String> interactionHostOrganismsFilter,
-                                              Boolean negativeFilter,
-                                              boolean mutationFilter,
-                                              boolean expansionFilter,
-                                              double minMiScore,
-                                              double maxMiScore,
-                                              boolean intraSpeciesFilter) {
+    public long countInteractionsForGraphJson(InteractionSearchParameters parameters) {
+
+        // Important : override the binaryInteractionIds and interactors acs to null
+        parameters = parameters.toBuilder()
+                .binaryInteractionIds(null)
+                .interactorAcs(null)
+                .build();
 
         // search query
         SimpleQuery search = new SimpleQuery();
 
         // search criterias
-        Criteria conditions = searchInteractionUtility.createSearchConditions(query, batchSearch, advancedSearch);
+        Criteria conditions = searchInteractionUtility.createSearchConditions(parameters);
         search.addCriteria(conditions);
 
         // filters
-        List<FilterQuery> filterQueries = searchInteractionUtility.createFilterQuery(interactorSpeciesFilter, interactorTypesFilter, interactionDetectionMethodsFilter,
-                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, expansionFilter, minMiScore, maxMiScore, intraSpeciesFilter, null, null);
+        List<FilterQuery> filterQueries = searchInteractionUtility.createFilterQuery(parameters);
 
         if (!filterQueries.isEmpty()) {
             for (FilterQuery filterQuery : filterQueries) {
@@ -427,127 +341,65 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         }
 
         return solrOperations.count(INTERACTIONS, SimpleQuery.fromQuery(search),
-                (batchSearch ? RequestMethod.POST : RequestMethod.GET));
+                (parameters.isBatchSearch() ? RequestMethod.POST : RequestMethod.GET));
     }
 
     @Override
-    public Page<SearchInteraction> findInteractionIdentifiers(String query,
-                                                              boolean batchSearch,
-                                                              boolean advancedSearch,
-                                                              Set<String> interactorSpeciesFilters,
-                                                              Set<String> interactorTypesFilter,
-                                                              Set<String> interactionDetectionMethodsFilter,
-                                                              Set<String> interactionTypesFilter,
-                                                              Set<String> interactionHostOrganismsFilter,
-                                                              Boolean negativeFilter,
-                                                              boolean mutationFilter,
-                                                              boolean expansionFilter,
-                                                              double minMIScore,
-                                                              double maxMIScore,
-                                                              boolean intraSpeciesFilter,
-                                                              Set<Long> binaryInteractionIds,
-                                                              Set<String> interactorAcs,
-                                                              Sort sort,
-                                                              Pageable pageable) {
+    public Page<SearchInteraction> findInteractionIdentifiers(PagedInteractionSearchParameters parameters) {
 
         // search query
-        SimpleQuery search = queryToFindInteractions(
-                query, batchSearch, advancedSearch, interactorSpeciesFilters, interactorTypesFilter,
-                interactionDetectionMethodsFilter, interactionTypesFilter, interactionHostOrganismsFilter,
-                negativeFilter, mutationFilter, expansionFilter, minMIScore, maxMIScore, intraSpeciesFilter,
-                binaryInteractionIds, interactorAcs, sort, pageable);
+        SimpleQuery search = queryToFindInteractions(parameters);
 
         return solrOperations.queryForPage(INTERACTIONS, search, SearchInteraction.class,
-                (batchSearch ? RequestMethod.POST : RequestMethod.GET));
+                (parameters.isBatchSearch() ? RequestMethod.POST : RequestMethod.GET));
     }
 
     @Override
-    public Page<SearchInteraction> findInteractionIdentifiersWithFormat(
-            String query,
-            boolean batchSearch,
-            boolean advancedSearch,
-            Set<String> interactorSpeciesFilters,
-            Set<String> interactorTypesFilter,
-            Set<String> interactionDetectionMethodsFilter,
-            Set<String> interactionTypesFilter,
-            Set<String> interactionHostOrganismsFilter,
-            Boolean negativeFilter,
-            boolean mutationFilter,
-            boolean expansionFilter,
-            double minMIScore,
-            double maxMIScore,
-            boolean intraSpeciesFilter,
-            Set<Long> binaryInteractionIds,
-            Set<String> interactorAcs,
-            Sort sort,
-            Pageable pageable,
-            String format) {
+    public Page<SearchInteraction> findInteractionIdentifiersWithFormat(PagedFormattedInteractionSearchParameters parameters) {
 
         // search query
-        SimpleQuery search = queryToFindInteractions(
-                query, batchSearch, advancedSearch, interactorSpeciesFilters, interactorTypesFilter,
-                interactionDetectionMethodsFilter, interactionTypesFilter, interactionHostOrganismsFilter,
-                negativeFilter, mutationFilter, expansionFilter, minMIScore, maxMIScore, intraSpeciesFilter,
-                binaryInteractionIds, interactorAcs, sort, pageable);
+        SimpleQuery search = queryToFindInteractions(parameters);
 
         //interaction format
-        switch (format) {
-            case "json":
+        switch (parameters.getFormat()) {
+            case miJSON:
                 search.addProjectionOnField(new SimpleField(JSON_FORMAT));
                 break;
-            case "xml25":
+            case miXML25:
                 search.addProjectionOnField(new SimpleField(XML_25_FORMAT));
                 break;
-            case "xml30":
+            case miXML30:
                 search.addProjectionOnField(new SimpleField(XML_30_FORMAT));
                 break;
-            case "tab25":
+            case miTab25:
                 search.addProjectionOnField(new SimpleField(TAB_25_FORMAT));
                 break;
-            case "tab26":
+            case miTab26:
                 search.addProjectionOnField(new SimpleField(TAB_26_FORMAT));
                 break;
-            case "tab27":
+            case miTab27:
                 search.addProjectionOnField(new SimpleField(TAB_27_FORMAT));
                 break;
         }
 
         return solrOperations.queryForPage(INTERACTIONS, search, SearchInteraction.class,
-                (batchSearch ? RequestMethod.POST : RequestMethod.GET));
+                (parameters.isBatchSearch() ? RequestMethod.POST : RequestMethod.GET));
     }
 
     @Override
-    public long countInteractionResult(String query,
-                                       boolean batchSearch,
-                                       boolean advancedSearch,
-                                       String interactorAc,
-                                       Set<String> interactorSpeciesFilter,
-                                       Set<String> interactorTypesFilter,
-                                       Set<String> interactionDetectionMethodsFilter,
-                                       Set<String> interactionTypesFilter,
-                                       Set<String> interactionHostOrganismsFilter,
-                                       Boolean negativeFilter,
-                                       boolean mutationFilter,
-                                       boolean expansionFilter,
-                                       double minMiScore,
-                                       double maxMiScore,
-                                       boolean intraSpeciesFilter,
-                                       Set<Long> binaryInteractionIds,
-                                       Set<String> interactorAcs) {
+    public long countInteractionResult(String interactorAc, InteractionSearchParameters parameters) {
 
         // search query
         SimpleQuery search = new SimpleQuery();
 
         // search criterias
-        Criteria conditions = searchInteractionUtility.createSearchConditions(query, batchSearch, advancedSearch);
+        Criteria conditions = searchInteractionUtility.createSearchConditions(parameters);
 
         // search query
         search.addCriteria(conditions);
 
         // filters
-        List<FilterQuery> sQueries = searchInteractionUtility.createFilterQuery(interactorSpeciesFilter, interactorTypesFilter, interactionDetectionMethodsFilter,
-                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, expansionFilter, minMiScore, maxMiScore, intraSpeciesFilter, binaryInteractionIds,
-                interactorAcs);
+        List<FilterQuery> sQueries = searchInteractionUtility.createFilterQuery(parameters);
 
         if (!sQueries.isEmpty()) {
             for (FilterQuery sQuery : sQueries) {
@@ -564,40 +416,23 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
             search.addFilterQuery(fq);
         }
         return solrOperations.count(INTERACTIONS, SimpleQuery.fromQuery(search),
-                (batchSearch ? RequestMethod.POST : RequestMethod.GET));
+                (parameters.isBatchSearch() ? RequestMethod.POST : RequestMethod.GET));
     }
 
     @Override
-    public long countInteractionResult(String query,
-                                       boolean batchSearch,
-                                       boolean advancedSearch,
-                                       Set<String> interactorSpeciesFilter,
-                                       Set<String> interactorTypesFilter,
-                                       Set<String> interactionDetectionMethodsFilter,
-                                       Set<String> interactionTypesFilter,
-                                       Set<String> interactionHostOrganismsFilter,
-                                       Boolean negativeFilter,
-                                       boolean mutationFilter,
-                                       boolean expansionFilter,
-                                       double minMIScore,
-                                       double maxMIScore,
-                                       boolean intraSpeciesFilter,
-                                       Set<Long> binaryInteractionIds,
-                                       Set<String> interactorAcs) {
+    public long countInteractionResult(InteractionSearchParameters parameters) {
 
         // search query
         SimpleQuery search = new SimpleQuery();
 
         // search criterias
-        Criteria conditions = searchInteractionUtility.createSearchConditions(query, batchSearch, advancedSearch);
+        Criteria conditions = searchInteractionUtility.createSearchConditions(parameters);
 
         // search query
         search.addCriteria(conditions);
 
         // filters
-        List<FilterQuery> filterQueries = searchInteractionUtility.createFilterQuery(interactorSpeciesFilter, interactorTypesFilter, interactionDetectionMethodsFilter,
-                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, expansionFilter, minMIScore, maxMIScore, intraSpeciesFilter, binaryInteractionIds,
-                interactorAcs);
+        List<FilterQuery> filterQueries = searchInteractionUtility.createFilterQuery(parameters);
 
         if (!filterQueries.isEmpty()) {
             for (FilterQuery filterQuery : filterQueries) {
@@ -606,38 +441,20 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         }
 
         return solrOperations.count(INTERACTIONS, SimpleQuery.fromQuery(search),
-                (batchSearch ? RequestMethod.POST : RequestMethod.GET));
+                (parameters.isBatchSearch() ? RequestMethod.POST : RequestMethod.GET));
     }
 
-    private Query createQuery(String query,
-                              boolean batchSearch,
-                              boolean advancedSearch,
-                              Set<String> interactorSpeciesFilter,
-                              Set<String> interactorTypesFilter,
-                              Set<String> interactionDetectionMethodsFilter,
-                              Set<String> interactionTypesFilter,
-                              Set<String> interactionHostOrganismsFilter,
-                              Boolean negativeFilter,
-                              boolean mutationFilter,
-                              boolean expansionFilter,
-                              double minMIScore,
-                              double maxMIScore,
-                              boolean intraSpeciesFilter,
-                              Set<Long> binaryInteractionIds,
-                              Set<String> interactorAcs,
-                              Sort sort,
-                              Pageable pageable) {
+    private Query createQuery(PagedInteractionSearchParameters parameters) {
 
         // search query
         SimpleQuery search = new SimpleQuery();
 
         // search criterias
-        Criteria conditions = searchInteractionUtility.createSearchConditions(query, batchSearch, advancedSearch);
+        Criteria conditions = searchInteractionUtility.createSearchConditions(parameters);
         search.addCriteria(conditions);
 
         // filters
-        List<FilterQuery> filterQueries = searchInteractionUtility.createFilterQuery(interactorSpeciesFilter, interactorTypesFilter, interactionDetectionMethodsFilter,
-                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, expansionFilter, minMIScore, maxMIScore, intraSpeciesFilter, binaryInteractionIds, interactorAcs);
+        List<FilterQuery> filterQueries = searchInteractionUtility.createFilterQuery(parameters);
 
         if (!filterQueries.isEmpty()) {
             for (FilterQuery filterQuery : filterQueries) {
@@ -646,14 +463,14 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         }
 
         // pagination
-        search.setPageRequest(pageable);
+        search.setPageRequest(PageRequest.of(parameters.getPage(), parameters.getPageSize()));
 
         // fields
         search.addProjectionOnFields(SEARCH_INTERACTION_FIELDS);
 
         // sorting
-        if (sort != null) {
-            search.addSort(sort);
+        if (parameters.getSort() != null) {
+            search.addSort(parameters.standardiseSort());
         } else {
             //order is important to give clustering effect
             search.addSort(Sort.by(Sort.Direction.DESC, INTACT_MISCORE));
@@ -666,35 +483,17 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         return search;
     }
 
-    private SimpleQuery queryToFindInteractions(String query,
-                                                boolean batchSearch,
-                                                boolean advancedSearch,
-                                                Set<String> interactorSpeciesFilters,
-                                                Set<String> interactorTypesFilter,
-                                                Set<String> interactionDetectionMethodsFilter,
-                                                Set<String> interactionTypesFilter,
-                                                Set<String> interactionHostOrganismsFilter,
-                                                Boolean negativeFilter,
-                                                boolean mutationFilter,
-                                                boolean expansionFilter,
-                                                double minMIScore,
-                                                double maxMIScore,
-                                                boolean intraSpeciesFilter,
-                                                Set<Long> binaryInteractionIds,
-                                                Set<String> interactorAcs,
-                                                Sort sort,
-                                                Pageable pageable) {
+    private SimpleQuery queryToFindInteractions(PagedInteractionSearchParameters parameters) {
 
         // search query
         SimpleQuery search = new SimpleQuery();
 
         // search criterias
-        Criteria conditions = searchInteractionUtility.createSearchConditions(query, batchSearch, advancedSearch);
+        Criteria conditions = searchInteractionUtility.createSearchConditions(parameters);
         search.addCriteria(conditions);
 
         // filters
-        List<FilterQuery> filterQueries = searchInteractionUtility.createFilterQuery(interactorSpeciesFilters, interactorTypesFilter, interactionDetectionMethodsFilter,
-                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, expansionFilter, minMIScore, maxMIScore, intraSpeciesFilter, binaryInteractionIds, interactorAcs);
+        List<FilterQuery> filterQueries = searchInteractionUtility.createFilterQuery(parameters);
 
         if (!filterQueries.isEmpty()) {
             for (FilterQuery filterQuery : filterQueries) {
@@ -703,11 +502,11 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
         }
 
         // pagination
-        search.setPageRequest(pageable);
+        search.setPageRequest(PageRequest.of(parameters.getPage(), parameters.getPageSize()));
 
         // sorting
-        if (sort != null) {
-            search.addSort(sort);
+        if (parameters.getSort() != null) {
+            search.addSort(parameters.standardiseSort());
         }
 
         //projection

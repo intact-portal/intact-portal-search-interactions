@@ -7,8 +7,12 @@
     <parent>
         <groupId>uk.ac.ebi.intact.search.interactions</groupId>
         <artifactId>intact-search-interactions-module</artifactId>
-        <version>1.1.1</version>
+        <version>1.2.0-SNAPSHOT</version>
     </parent>
+
+    <properties>
+        <springdoc-openapi.version>1.8.0</springdoc-openapi.version>
+    </properties>
 
     <artifactId>intact-search-interactions-service</artifactId>
 
@@ -24,6 +28,19 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-solr</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>${springdoc-openapi.version}</version>
         </dependency>
 
         <!-- Test dependencies -->
@@ -49,4 +66,22 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
