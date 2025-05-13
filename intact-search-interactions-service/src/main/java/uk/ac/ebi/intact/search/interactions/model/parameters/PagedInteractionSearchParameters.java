@@ -30,7 +30,27 @@ public class PagedInteractionSearchParameters extends InteractionSearchParameter
     private List<Order> sort;
 
     public static PagedInteractionSearchParametersBuilder<?,?> copyParameters(InteractionSearchParameters parameters) {
-        return (PagedInteractionSearchParametersBuilder<?,?>) parameters.toBuilder();
+        return PagedInteractionSearchParameters.builder()
+                .query(parameters.getQuery())
+                .batchSearch(parameters.isBatchSearch())
+                .advancedSearch(parameters.isAdvancedSearch())
+
+                .interactionDetectionMethodsFilter(parameters.getInteractionDetectionMethodsFilter())
+                .interactionTypesFilter(parameters.getInteractionTypesFilter())
+                .interactionHostOrganismsFilter(parameters.getInteractionHostOrganismsFilter())
+                .interactorTypesFilter(parameters.getInteractorTypesFilter())
+                .interactorSpeciesFilter(parameters.getInteractorSpeciesFilter())
+
+                .intraSpeciesFilter(parameters.isIntraSpeciesFilter())
+                .expansionFilter(parameters.isExpansionFilter())
+                .mutationFilter(parameters.isMutationFilter())
+                .negativeFilter(parameters.getNegativeFilter())
+
+                .maxMIScore(parameters.getMaxMIScore())
+                .minMIScore(parameters.getMinMIScore())
+
+                .binaryInteractionIds(parameters.getBinaryInteractionIds())
+                .interactorAcs(parameters.getInteractorAcs());
     }
 
     public Sort standardiseSort() {
