@@ -14,6 +14,7 @@
 
     <name>IntAct Portal :: Search Interactions Web Service</name>
     <description>SpringBoot with spring data interactions solr</description>
+
     <properties>
         <swagger.version>2.9.2</swagger.version>
     </properties>
@@ -60,6 +61,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

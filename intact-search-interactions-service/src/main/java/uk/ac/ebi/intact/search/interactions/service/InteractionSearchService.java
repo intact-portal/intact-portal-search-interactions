@@ -73,7 +73,6 @@ public class InteractionSearchService {
 
     }
 
-    // TODO CHECK IF WE NEED IT
     public long countInteractionsForGraphJson(InteractionGraphJSONParameters parameters) {
         return interactionRepository.countInteractionsForGraphJson((InteractionSearchParameters) parameters);
     }

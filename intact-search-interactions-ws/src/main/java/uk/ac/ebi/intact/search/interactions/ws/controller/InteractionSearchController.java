@@ -1,7 +1,6 @@
 package uk.ac.ebi.intact.search.interactions.ws.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Hidden;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -15,7 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
-import springfox.documentation.annotations.ApiIgnore;
 import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.model.parameters.InteractionSearchParameters;
@@ -24,6 +22,7 @@ import uk.ac.ebi.intact.search.interactions.service.ChildInteractorSearchService
 import uk.ac.ebi.intact.search.interactions.service.InteractionSearchService;
 import uk.ac.ebi.intact.search.interactions.utils.NegativeFilterStatus;
 import uk.ac.ebi.intact.search.interactions.ws.controller.model.ChildInteractorSearchResult;
+import uk.ac.ebi.intact.search.interactions.ws.controller.model.GetInteractionsDatatablesRequest;
 import uk.ac.ebi.intact.search.interactions.ws.controller.model.InteractionFacetsSearchResult;
 import uk.ac.ebi.intact.search.interactions.ws.controller.model.InteractionSearchResult;
 
@@ -220,7 +219,7 @@ public class InteractionSearchController {
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
             @RequestParam(value = "draw") int draw) throws IOException {
-        PagedInteractionSearchParameters parameters = PagedInteractionSearchParameters.builder()
+        GetInteractionsDatatablesRequest parameters = GetInteractionsDatatablesRequest.builder()
                 .query(query)
                 .batchSearch(batchSearch)
                 .advancedSearch(advancedSearch)
@@ -239,16 +238,16 @@ public class InteractionSearchController {
                 .interactorAcs(interactorAcs)
                 .page(page)
                 .pageSize(pageSize)
+                .draw(draw)
                 .build();
 
-        return getInteractionsDatatablesHandlerFromBody(draw, parameters);
+        return getInteractionsDatatablesHandlerFromBody(parameters);
     }
 
     @CrossOrigin(origins = "*")
     @PostMapping(value = "/list/body", produces = {APPLICATION_JSON_VALUE}, consumes = {APPLICATION_JSON_VALUE})
     public ResponseEntity<String> getInteractionsDatatablesHandlerFromBody(
-            @RequestParam(value = "draw") int draw,
-            @RequestBody PagedInteractionSearchParameters parameters
+            @RequestBody GetInteractionsDatatablesRequest parameters
     ) throws IOException {
         FacetPage<SearchInteraction> searchInteraction = interactionSearchService.findInteractionWithFacet(
                 parameters
@@ -257,7 +256,7 @@ public class InteractionSearchController {
         InteractionSearchResult interactionSearchResult = new InteractionSearchResult(searchInteraction);
 
         JSONObject result = new JSONObject();
-        result.put("draw", draw);
+        result.put("draw", parameters.getDraw());
         result.put("recordsTotal", interactionSearchResult.getTotalElements());
         result.put("recordsFiltered", interactionSearchResult.getTotalElements());
 
@@ -304,7 +303,7 @@ public class InteractionSearchController {
             @RequestParam(value = "draw", defaultValue = "1") int draw) throws IOException {
 
 
-        PagedInteractionSearchParameters parameters = PagedInteractionSearchParameters.builder()
+        GetInteractionsDatatablesRequest parameters = GetInteractionsDatatablesRequest.builder()
                 .query(query)
                 .batchSearch(batchSearch)
                 .advancedSearch(advancedSearch)
@@ -323,16 +322,16 @@ public class InteractionSearchController {
                 .interactorAcs(interactorAcs)
                 .page(page)
                 .pageSize(pageSize)
+                .draw(draw)
                 .build();
 
-        return getInteractorsDatatablesHandlerFromBody(draw, parameters);
+        return getInteractorsDatatablesHandlerFromBody(parameters);
     }
 
     @CrossOrigin(origins = "*")
     @PostMapping(value = "/interactors/list/body", produces = {APPLICATION_JSON_VALUE}, consumes = {APPLICATION_JSON_VALUE})
     private ResponseEntity<String> getInteractorsDatatablesHandlerFromBody(
-            @RequestParam(value = "draw", defaultValue = "1") int draw,
-            @RequestBody PagedInteractionSearchParameters parameters) throws IOException {
+            @RequestBody GetInteractionsDatatablesRequest parameters) throws IOException {
         GroupPage<SearchChildInteractor> searchInteractors = childInteractorSearchService.findInteractorsWithGroup(parameters);
 
         long numGroups = childInteractorSearchService.countInteractorsWithGroup(parameters);
@@ -345,7 +344,7 @@ public class InteractionSearchController {
         ChildInteractorSearchResult interactorSearchResult = new ChildInteractorSearchResult(searchInteractors, numGroups);
 
         JSONObject result = new JSONObject();
-        result.put("draw", draw);
+        result.put("draw", parameters.getDraw());
         result.put("recordsTotal", interactorSearchResult.getTotalElements());
         result.put("recordsFiltered", interactorSearchResult.getTotalElements());
 
