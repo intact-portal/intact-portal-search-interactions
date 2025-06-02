@@ -19,6 +19,7 @@ maven-build-test:
   artifacts:
     paths:
       - target/*.jar
+  when: manual
 
 maven-build-prod:
   image: maven:3.6-jdk-11
@@ -30,6 +31,7 @@ maven-build-prod:
   artifacts:
     paths:
       - target/*.jar
+  when: manual
 
 .docker-build:
   stage: build-docker-image
