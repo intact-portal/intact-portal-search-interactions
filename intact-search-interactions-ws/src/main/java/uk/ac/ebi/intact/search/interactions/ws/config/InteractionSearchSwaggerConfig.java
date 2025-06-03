@@ -3,6 +3,8 @@ package uk.ac.ebi.intact.search.interactions.ws.config;
 import com.google.common.base.Predicates;
 import io.swagger.annotations.ApiParam;
 import io.swagger.v3.core.converter.AnnotatedType;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.servers.Server;
 import io.swagger.v3.oas.models.media.Schema;
 import io.swagger.v3.oas.models.media.StringSchema;
 import org.springdoc.core.customizers.OpenApiCustomiser;
@@ -35,6 +37,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@OpenAPIDefinition(servers = { @Server(url = "/intact/ws/interaction/", description = "IntAct Interaction WS") })
 @Configuration
 @EnableSwagger2
 public class InteractionSearchSwaggerConfig {
