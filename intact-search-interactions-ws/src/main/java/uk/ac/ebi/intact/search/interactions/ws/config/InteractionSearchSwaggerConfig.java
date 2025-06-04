@@ -7,6 +7,7 @@ import io.swagger.v3.oas.models.media.StringSchema;
 import io.swagger.v3.oas.models.servers.Server;
 import org.springdoc.core.customizers.OpenApiCustomiser;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Pageable;
@@ -90,7 +91,29 @@ public class InteractionSearchSwaggerConfig {
     }
 
     @Bean
-    OpenApiCustomiser openApiCustomiser(@Qualifier("solrFields") List<String> solrFields) {
+    List<Server> servers(
+            @Value("${main.ws.url}") String webServiceUrl,
+            @Value("${vm.base.urls}") String vmBaseUrls,
+            @Value("${server.servlet.context-path}") String contextPath) {
+
+        List<Server> servers = new ArrayList<>();
+        servers.add(server(webServiceUrl));
+        servers.addAll(Stream.of(vmBaseUrls.split(","))
+                .map(url -> server(url.trim().concat(contextPath)))
+                .collect(Collectors.toList()));
+        return servers;
+    }
+
+    private Server server(String url) {
+        Server server = new Server();
+        server.setUrl(url);
+        return server;
+    }
+
+    @Bean
+    OpenApiCustomiser openApiCustomiser(@Qualifier("solrFields") List<String> solrFields,
+                                        @Qualifier("servers") List<Server> servers) {
+
         return openApi -> {
             Schema<?> orderSchema = openApi.getComponents().getSchemas().get("Order");
             if (orderSchema != null) {
@@ -99,10 +122,7 @@ public class InteractionSearchSwaggerConfig {
                         .example("intact_miscore");
                 orderSchema.addProperty("field", fieldSchema);
             }
-            Server server = new Server();
-            server.setUrl("/intact/ws/interaction/");
-            server.setDescription("IntAct Interaction WS");
-            openApi.setServers(List.of(server));
+            openApi.setServers(servers);
         };
     }
 

@@ -18,13 +18,26 @@
         <profile>
             <id>dev-config</id>
             <properties>
-                <api.docs.url>https://wwwdev.ebi.ac.uk/intact/test/ws/interaction/v3/api-docs</api.docs.url>
+                <vm.urls>
+                    http://hh-rke-wp-webadmin-68-worker-1.caas.ebi.ac.uk:31235,
+                    http://hh-rke-wp-webadmin-68-worker-2.caas.ebi.ac.uk:31235,
+                    http://hh-rke-wp-webadmin-68-worker-3.caas.ebi.ac.uk:31235
+                </vm.urls>
+                <ws.url>https://wwwdev.ebi.ac.uk/intact/test/ws/interaction</ws.url>
             </properties>
         </profile>
         <profile>
             <id>prod-config</id>
             <properties>
-                <api.docs.url>https://www.ebi.ac.uk/intact/ws/interaction/v3/api-docs</api.docs.url>
+                <vm.urls>
+                    http://hh-rke-wp-webadmin-24-worker-1.caas.ebi.ac.uk:31247,
+                    http://hh-rke-wp-webadmin-24-worker-2.caas.ebi.ac.uk:31247,
+                    http://hh-rke-wp-webadmin-24-worker-3.caas.ebi.ac.uk:31247,
+                    http://hx-rke-wp-webadmin-24-worker-1.caas.ebi.ac.uk:31247,
+                    http://hx-rke-wp-webadmin-24-worker-2.caas.ebi.ac.uk:31247,
+                    http://hx-rke-wp-webadmin-24-worker-3.caas.ebi.ac.uk:31247
+                </vm.urls>
+                <ws.url>https://www.ebi.ac.uk/intact/ws/interaction</ws.url>
             </properties>
         </profile>
     </profiles>
