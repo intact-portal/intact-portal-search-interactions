@@ -19,8 +19,25 @@ public class InteractionSearchParameters extends InteractionGraphJSONParameters 
     @Schema(description = "Filters to only include interactions involving the provided set of interactor ACs", example = "null")
     protected Set<String> interactorAcs;
 
-    InteractionSearchParametersBuilder<?, ?> copyParameters(InteractionGraphJSONParameters parameter) {
-        return (InteractionSearchParametersBuilder<?, ?>) parameter.toBuilder();
+    public static InteractionSearchParametersBuilder<?, ?> copyParameters(InteractionGraphJSONParameters parameters) {
+        return PagedInteractionSearchParameters.builder()
+                .query(parameters.getQuery())
+                .batchSearch(parameters.isBatchSearch())
+                .advancedSearch(parameters.isAdvancedSearch())
+
+                .interactionDetectionMethodsFilter(parameters.getInteractionDetectionMethodsFilter())
+                .interactionTypesFilter(parameters.getInteractionTypesFilter())
+                .interactionHostOrganismsFilter(parameters.getInteractionHostOrganismsFilter())
+                .interactorTypesFilter(parameters.getInteractorTypesFilter())
+                .interactorSpeciesFilter(parameters.getInteractorSpeciesFilter())
+
+                .intraSpeciesFilter(parameters.isIntraSpeciesFilter())
+                .expansionFilter(parameters.isExpansionFilter())
+                .mutationFilter(parameters.isMutationFilter())
+                .negativeFilter(parameters.getNegativeFilter())
+
+                .maxMIScore(parameters.getMaxMIScore())
+                .minMIScore(parameters.getMinMIScore());
     }
 
 }

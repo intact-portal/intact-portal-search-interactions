@@ -2,13 +2,12 @@ package uk.ac.ebi.intact.search.interactions.ws.config;
 
 import com.google.common.base.Predicates;
 import io.swagger.annotations.ApiParam;
-import io.swagger.v3.core.converter.AnnotatedType;
 import io.swagger.v3.oas.models.media.Schema;
 import io.swagger.v3.oas.models.media.StringSchema;
+import io.swagger.v3.oas.models.servers.Server;
 import org.springdoc.core.customizers.OpenApiCustomiser;
-import org.springdoc.core.customizers.ParameterCustomizer;
-import org.springdoc.core.customizers.PropertyCustomizer;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Pageable;
@@ -20,14 +19,12 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import uk.ac.ebi.intact.search.interactions.model.AdvancedSearchInteractionFields;
 import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractorFields;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.security.Permissions;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -36,7 +33,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Configuration
-@EnableSwagger2
 public class InteractionSearchSwaggerConfig {
     @Bean
     public Docket api() {
@@ -95,7 +91,29 @@ public class InteractionSearchSwaggerConfig {
     }
 
     @Bean
-    OpenApiCustomiser fieldsCustomizer(@Qualifier("solrFields") List<String> solrFields) {
+    List<Server> servers(
+            @Value("${main.ws.url}") String webServiceUrl,
+            @Value("${vm.base.urls}") String vmBaseUrls,
+            @Value("${server.servlet.context-path}") String contextPath) {
+
+        List<Server> servers = new ArrayList<>();
+        servers.add(server(webServiceUrl));
+        servers.addAll(Stream.of(vmBaseUrls.split(","))
+                .map(url -> server(url.trim().concat(contextPath)))
+                .collect(Collectors.toList()));
+        return servers;
+    }
+
+    private Server server(String url) {
+        Server server = new Server();
+        server.setUrl(url);
+        return server;
+    }
+
+    @Bean
+    OpenApiCustomiser openApiCustomiser(@Qualifier("solrFields") List<String> solrFields,
+                                        @Qualifier("servers") List<Server> servers) {
+
         return openApi -> {
             Schema<?> orderSchema = openApi.getComponents().getSchemas().get("Order");
             if (orderSchema != null) {
@@ -104,9 +122,9 @@ public class InteractionSearchSwaggerConfig {
                         .example("intact_miscore");
                 orderSchema.addProperty("field", fieldSchema);
             }
+            openApi.setServers(servers);
         };
     }
-
 
     private List<String> getConstantsFromClass(Class<?> clazz) {
         List<String> values = new ArrayList<>();

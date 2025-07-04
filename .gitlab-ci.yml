@@ -9,18 +9,31 @@ stages:
   - build-docker-image
   - kubernetes-deploy
 
-maven-build:
+maven-build-test:
   image: maven:3.6-jdk-11
   stage: build-jar
-  script: "mvn package -B -s settings.xml -Pip-solr-indexing-hx"
+  script: "mvn package -B -s settings.xml -P ip-solr-indexing-hx,dev-config"
   after_script:
     - "mkdir /builds/intact-ci/intact-portal-search-interactions/target/"
     - "cp /builds/intact-ci/intact-portal-search-interactions/intact-search-interactions-ws/target/intact-search-interactions-ws.jar /builds/intact-ci/intact-portal-search-interactions/target/"
   artifacts:
     paths:
       - target/*.jar
+  when: manual
 
-docker-build:
+maven-build-prod:
+  image: maven:3.6-jdk-11
+  stage: build-jar
+  script: "mvn package -B -s settings.xml -P ip-solr-indexing-hx,prod-config"
+  after_script:
+    - "mkdir /builds/intact-ci/intact-portal-search-interactions/target/"
+    - "cp /builds/intact-ci/intact-portal-search-interactions/intact-search-interactions-ws/target/intact-search-interactions-ws.jar /builds/intact-ci/intact-portal-search-interactions/target/"
+  artifacts:
+    paths:
+      - target/*.jar
+  when: manual
+
+.docker-build:
   stage: build-docker-image
   before_script:
     - echo "$CI_REGISTRY_PASSWORD" | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
@@ -32,7 +45,14 @@ docker-build:
     - docker push ${CONTAINER_IMAGE}
     - docker rmi ${CONTAINER_IMAGE}
     - docker logout "$CI_REGISTRY"
-  needs: [ maven-build ]
+
+docker-build-test:
+  needs: [ maven-build-test ]
+  extends: [ .docker-build ]
+
+docker-build-prod:
+  needs: [ maven-build-prod ]
+  extends: [ .docker-build ]
 
 hh-production-deploy:
   stage: kubernetes-deploy
@@ -52,7 +72,7 @@ hh-production-deploy:
     - kubectl rollout restart deployment/intact-portal-search-interactions-deployment
     - kubectl get nodes
   when: manual
-  needs: [ docker-build ]
+  needs: [ docker-build-prod ]
 
 hx-production-deploy:
   stage: kubernetes-deploy
@@ -72,7 +92,7 @@ hx-production-deploy:
     - kubectl rollout restart deployment/intact-portal-search-interactions-deployment
     - kubectl get nodes
   when: manual
-  needs: [ docker-build ]
+  needs: [ docker-build-prod ]
 
 hh-test-deploy:
   stage: kubernetes-deploy
@@ -93,6 +113,6 @@ hh-test-deploy:
     - kubectl rollout restart deployment/intact-portal-search-interactions-deployment
     - kubectl get nodes
   when: manual
-  needs: [ docker-build ]
+  needs: [ docker-build-test ]
 
 

@@ -26,10 +26,6 @@ public class PagedInteractionGraphJSONParameters extends InteractionGraphJSONPar
     @Schema(description = "Fields by which to order the result query", example = "null")
     protected List<PagedInteractionSearchParameters.Order> sort;
 
-    public static PagedInteractionGraphJSONParameters.PagedInteractionGraphJSONParametersBuilder<?, ?> copyParameters(InteractionGraphJSONParameters parameters) {
-        return (PagedInteractionGraphJSONParameters.PagedInteractionGraphJSONParametersBuilder<?, ?>) parameters.toBuilder();
-    }
-
     public PagedInteractionSearchParameters toPagedInteractionSearchParameters() {
         return PagedInteractionSearchParameters.builder()
                 .query(query)
