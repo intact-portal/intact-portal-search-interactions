@@ -14,6 +14,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields.*;
 
@@ -164,6 +165,14 @@ public class SearchInteractionUtility {
         return filterQueries;
     }
 
+    private Criteria createCriteriaForLongValues(String tagForExcludingFacets, String field, Set<Long> values) {
+        Criteria conditions = null;
+        if (values != null && !values.isEmpty()) {
+            conditions = new Criteria(tagForExcludingFacets + field).in(values);
+        }
+        return conditions;
+    }
+
     private Criteria createCriteriaForStringValues(String tagForExcludingFacets, String field, Set<String> values) {
         Criteria conditions = null;
         if (values != null && !values.isEmpty()) {
@@ -200,7 +209,7 @@ public class SearchInteractionUtility {
     private void createBinaryInteractionIdsFilterCriteria(Set<Long> values, List<FilterQuery> filterQueries) {
         if (values != null && !values.isEmpty()) {
             String tagForExcludingFacets = "{!tag=GRAPH_FILTER}";
-            Criteria conditions = new Criteria(tagForExcludingFacets + BINARY_INTERACTION_ID).in(values);
+            Criteria conditions = createCriteriaForLongValues(tagForExcludingFacets, BINARY_INTERACTION_ID, values);
             filterQueries.add(new SimpleFilterQuery(conditions));
         }
     }
@@ -238,16 +247,16 @@ public class SearchInteractionUtility {
             if (species != null && !species.isEmpty()) {
                 // Return only interactions from exactly the same species in both interactors.
                 String tagForExcludingFacets = "{!tag=INTRA_SPECIES}";
-                Criteria conditions = createCriteriaForStringValues(tagForExcludingFacets, INTRA_SPECIES, species);
-                filterQueries.add(new SimpleFilterQuery(conditions));
+                createStringLabelsOrTaxIdsFilterCriteria(
+                        tagForExcludingFacets, species, INTRA_TAX_ID, INTRA_SPECIES, filterQueries);
             } else {
                 Criteria conditions = new Criteria("{!tag=INTRA_SPECIES}" + INTRA_TAX_ID).isNotNull();
                 filterQueries.add(new SimpleFilterQuery(conditions));
             }
-        } else {
+        } else if (species != null && !species.isEmpty()) {
             String tagForExcludingFacets = "{!tag=SPECIES}";
-            Criteria conditions = createCriteriaForStringValues(tagForExcludingFacets, SPECIES_A_B_STR, species);
-            filterQueries.add(new SimpleFilterQuery(conditions));
+            createStringLabelsOrTaxIdsFilterCriteria(
+                    tagForExcludingFacets, species, TAX_ID_A_B, SPECIES_A_B_STR, filterQueries);
         }
     }
 
@@ -269,8 +278,35 @@ public class SearchInteractionUtility {
     private void createInteractionHostOrganismsFilterCriteria(Set<String> interactionHostOrganismsFilter, List<FilterQuery> filterQueries) {
         if (interactionHostOrganismsFilter != null && !interactionHostOrganismsFilter.isEmpty()) {
             String tagForExcludingFacets = "{!tag=HOST_ORGANISM}";
-            Criteria conditions = createCriteriaForStringValues(tagForExcludingFacets, HOST_ORGANISM_S, interactionHostOrganismsFilter);
-            filterQueries.add(new SimpleFilterQuery(conditions));
+            createStringLabelsOrTaxIdsFilterCriteria(
+                    tagForExcludingFacets, interactionHostOrganismsFilter, HOST_ORGANISM_TAX_ID, HOST_ORGANISM_S, filterQueries);
+        }
+    }
+
+    private void createStringLabelsOrTaxIdsFilterCriteria(
+            String tagForExcludingFacets,
+            Set<String> values,
+            String taxIdField,
+            String labelField,
+            List<FilterQuery> filterQueries) {
+
+        if (values != null && !values.isEmpty()) {
+            Set<Long> taxIds = filterTaxIdsValues(values);
+            Set<String> labels = filterNotTaxIdsValues(values);
+
+            List<Criteria> conditions = new ArrayList<>();
+            if (!taxIds.isEmpty()) {
+                if (!labels.isEmpty()) {
+                    conditions.add(createCriteriaForLongValues(tagForExcludingFacets, taxIdField, taxIds));
+                    conditions.add(createCriteriaForStringValues(tagForExcludingFacets, labelField, labels));
+                } else {
+                    conditions.add(createCriteriaForLongValues(tagForExcludingFacets, taxIdField, taxIds));
+                }
+            } else if (!labels.isEmpty()) {
+                conditions.add(createCriteriaForStringValues(tagForExcludingFacets, labelField, labels));
+            }
+
+            conditions.forEach(condition -> filterQueries.add(new SimpleFilterQuery(condition)));
         }
     }
 
@@ -285,22 +321,19 @@ public class SearchInteractionUtility {
             Set<String> miIds = filterMiIdsValues(values);
             Set<String> labels = filterNotMiIdsValues(values);
 
-            Criteria conditions = null;
+            List<Criteria> conditions = new ArrayList<>();
             if (!miIds.isEmpty()) {
                 if (!labels.isEmpty()) {
-                    Criteria conditions1 = createCriteriaForStringValues(tagForExcludingFacets, miIdField, miIds);
-                    Criteria conditions2 = createCriteriaForStringValues(tagForExcludingFacets, labelField, labels);
-                    conditions = conditions1.or(conditions2);
+                    conditions.add(createCriteriaForStringValues(tagForExcludingFacets, miIdField, miIds));
+                    conditions.add(createCriteriaForStringValues(tagForExcludingFacets, labelField, labels));
                 } else {
-                    conditions = createCriteriaForStringValues(tagForExcludingFacets, miIdField, miIds);
+                    conditions.add(createCriteriaForStringValues(tagForExcludingFacets, miIdField, miIds));
                 }
             } else if (!labels.isEmpty()) {
-                conditions = createCriteriaForStringValues(tagForExcludingFacets, labelField, labels);
+                conditions.add(createCriteriaForStringValues(tagForExcludingFacets, labelField, labels));
             }
 
-            if (conditions != null) {
-                filterQueries.add(new SimpleFilterQuery(conditions));
-            }
+            conditions.forEach(condition -> filterQueries.add(new SimpleFilterQuery(condition)));
         }
     }
 
@@ -324,11 +357,39 @@ public class SearchInteractionUtility {
                 .collect(Collectors.toSet());
     }
 
+    private Set<Long> filterTaxIdsValues(Set<String> values) {
+        return values.stream()
+                .flatMap(this::splitTerm)
+                .filter(this::isTaxId)
+                .map(Long::parseLong)
+                .collect(Collectors.toSet());
+    }
+
+    private Set<String> filterNotTaxIdsValues(Set<String> values) {
+        return values.stream()
+                .flatMap(this::splitTerm)
+                .filter(value -> !isTaxId(value))
+                .map(s -> s.replace(" ", "\\ "))
+                .collect(Collectors.toSet());
+    }
+
     private boolean isMiId(String term) {
         String pattern = "MI:.*";
         Pattern r1 = Pattern.compile(pattern);
         Matcher m = r1.matcher(term);
 
         return m.matches();
+    }
+
+    private boolean isTaxId(String term) {
+        String pattern = "-?[0-9]+";
+        Pattern r1 = Pattern.compile(pattern);
+        Matcher m = r1.matcher(term);
+
+        return m.matches();
+    }
+
+    private Stream<String> splitTerm(String term) {
+        return Arrays.stream(term.split("__"));
     }
 }
