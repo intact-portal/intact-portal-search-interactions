@@ -369,7 +369,6 @@ public class SearchInteractionUtility {
         return values.stream()
                 .flatMap(this::splitTerm)
                 .filter(value -> !isTaxId(value))
-                .map(s -> s.replace(" ", "\\ "))
                 .collect(Collectors.toSet());
     }
 
