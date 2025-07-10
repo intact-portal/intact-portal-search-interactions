@@ -107,6 +107,7 @@ public class CustomizedInteractionRepositoryImpl implements CustomizedInteractio
                 "{!ex=SPECIES,INTRA_SPECIES,GRAPH_FILTER}" + TAX_ID_A_B_STYLED,
                 "{!ex=SPECIES,INTRA_SPECIES,GRAPH_FILTER}" + INTRA_TAX_ID_STYLED,
                 "{!ex=TYPE,GRAPH_FILTER}" + TYPE_MI_A_B_STYLED,
+                "{!ex=DETECTION_METHOD,GRAPH_FILTER}" + DETECTION_METHOD_S,
                 "{!ex=DETECTION_METHOD,GRAPH_FILTER}" + DETECTION_METHOD_MI_STYLED,
                 "{!ex=INTERACTION_TYPE,GRAPH_FILTER}" + TYPE_MI_IDENTIFIER_STYLED,
                 "{!ex=HOST_ORGANISM,GRAPH_FILTER}" + HOST_ORGANISM_TAXID_STYLED,
