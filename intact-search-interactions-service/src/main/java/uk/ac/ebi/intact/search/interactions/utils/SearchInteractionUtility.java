@@ -23,6 +23,9 @@ import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields
  */
 public class SearchInteractionUtility {
 
+    private static final Pattern MI_ID_PATTERN = Pattern.compile("MI:.*");
+    private static final Pattern TAX_ID_PATTERN = Pattern.compile("-?[0-9]+");
+
     //Custom version of ClientUtils.escapeQueryChars from solrJ
     public static String escapeQueryChars(String s) {
         StringBuilder sb = new StringBuilder();
@@ -323,16 +326,11 @@ public class SearchInteractionUtility {
 
             List<Criteria> conditions = new ArrayList<>();
             if (!miIds.isEmpty()) {
-                if (!labels.isEmpty()) {
-                    conditions.add(createCriteriaForStringValues(tagForExcludingFacets, miIdField, miIds));
-                    conditions.add(createCriteriaForStringValues(tagForExcludingFacets, labelField, labels));
-                } else {
-                    conditions.add(createCriteriaForStringValues(tagForExcludingFacets, miIdField, miIds));
-                }
-            } else if (!labels.isEmpty()) {
+                conditions.add(createCriteriaForStringValues(tagForExcludingFacets, miIdField, miIds));
+            }
+            if (!labels.isEmpty()) {
                 conditions.add(createCriteriaForStringValues(tagForExcludingFacets, labelField, labels));
             }
-
             conditions.forEach(condition -> filterQueries.add(new SimpleFilterQuery(condition)));
         }
     }
@@ -373,19 +371,11 @@ public class SearchInteractionUtility {
     }
 
     private boolean isMiId(String term) {
-        String pattern = "MI:.*";
-        Pattern r1 = Pattern.compile(pattern);
-        Matcher m = r1.matcher(term);
-
-        return m.matches();
+        return MI_ID_PATTERN.matcher(term).matches();
     }
 
     private boolean isTaxId(String term) {
-        String pattern = "-?[0-9]+";
-        Pattern r1 = Pattern.compile(pattern);
-        Matcher m = r1.matcher(term);
-
-        return m.matches();
+        return TAX_ID_PATTERN.matcher(term).matches();
     }
 
     private Stream<String> splitTerm(String term) {
