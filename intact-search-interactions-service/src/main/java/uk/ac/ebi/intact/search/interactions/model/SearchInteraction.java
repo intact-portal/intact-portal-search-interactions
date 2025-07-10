@@ -315,6 +315,15 @@ public class SearchInteraction extends AdvancedSearchInteraction {
     @Field(TYPE_MI_IDENTIFIER_STYLED)
     private String typeMIIdentifierStyled;
 
+    @Field(DETECTION_METHOD_MI_STYLED)
+    private String detectionMethodMIIdentifierStyled;
+
+    @Field(IDENTIFICATION_METHOD_MI_A_STYLED)
+    private String identificationMethodMIAStyled;
+
+    @Field(IDENTIFICATION_METHOD_MI_B_STYLED)
+    private String identificationMethodMIBStyled;
+
     @Field(TYPE_MI_A_STYLED)
     private String typeMIAStyled;
 
@@ -1200,6 +1209,30 @@ public class SearchInteraction extends AdvancedSearchInteraction {
 
     public void setTypeMIIdentifierStyled(String typeMIIdentifierStyled) {
         this.typeMIIdentifierStyled = typeMIIdentifierStyled;
+    }
+
+    public String getDetectionMethodMIIdentifierStyled() {
+        return detectionMethodMIIdentifierStyled;
+    }
+
+    public void setDetectionMethodMIIdentifierStyled(String detectionMethodMIIdentifierStyled) {
+        this.detectionMethodMIIdentifierStyled = detectionMethodMIIdentifierStyled;
+    }
+
+    public String getIdentificationMethodMIAStyled() {
+        return identificationMethodMIAStyled;
+    }
+
+    public void setIdentificationMethodMIAStyled(String identificationMethodMIAStyled) {
+        this.identificationMethodMIAStyled = identificationMethodMIAStyled;
+    }
+
+    public String getIdentificationMethodMIBStyled() {
+        return identificationMethodMIBStyled;
+    }
+
+    public void setIdentificationMethodMIBStyled(String identificationMethodMIBStyled) {
+        this.identificationMethodMIBStyled = identificationMethodMIBStyled;
     }
 
     public String getTypeMIAStyled() {
