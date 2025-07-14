@@ -31,6 +31,7 @@ public class SearchInteractionFields {
     public static final String TAX_IDA = "taxIdA";
     public static final String TAX_IDB = "taxIdB";
     public static final String INTRA_TAX_ID = "intra_taxId";
+    public static final String TAX_ID_A_B = "taxIdA_B_ls";
     public static final String TYPE_A = "typeA";
     public static final String TYPE_B = "typeB";
     public static final String XREFS_A = "xrefsA";
@@ -110,6 +111,7 @@ public class SearchInteractionFields {
     public static final String TYPE_MI_A = "type_MI_A";
     public static final String TYPE_MI_B = "type_MI_B";
     public static final String TYPE_A_B_STR = "typeA_B_str";
+    public static final String TYPE_MI_A_B_STR = "type_MI_A_B_str";
     public static final String AFFECTED_BY_MUTATION = "affected_by_mutation";
     public static final String MUTATION_A = "mutation_A";
     public static final String MUTATION_B = "mutation_B";
