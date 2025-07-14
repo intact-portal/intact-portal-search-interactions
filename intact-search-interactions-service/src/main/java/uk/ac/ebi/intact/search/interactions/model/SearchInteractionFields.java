@@ -151,8 +151,6 @@ public class SearchInteractionFields {
     // Participant detection method
     public static final String IDENTIFICATION_METHOD_MI_A_STYLED = "identification_method_mi_A_styled";
     public static final String IDENTIFICATION_METHOD_MI_B_STYLED = "identification_method_mi_B_styled";
-    // CopyField
-    public static final String IDENTIFICATION_METHOD_MI_A_B_STYLED = "detection_method_mi_styled";
 
     // Interactor type
     public static final String TYPE_MI_A_STYLED = "type_MI_A_styled";
