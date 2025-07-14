@@ -36,6 +36,7 @@ public class PagedInteractionGraphJSONParameters extends InteractionGraphJSONPar
                 .interactorSpeciesFilter(interactorSpeciesFilter)
                 .interactorTypesFilter(interactorTypesFilter)
                 .interactionDetectionMethodsFilter(interactionDetectionMethodsFilter)
+                .participantDetectionMethodsFilter(participantDetectionMethodsFilter)
                 .interactionTypesFilter(interactionTypesFilter)
                 .interactionHostOrganismsFilter(interactionHostOrganismsFilter)
 

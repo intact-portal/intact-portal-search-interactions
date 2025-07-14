@@ -146,11 +146,12 @@ public class SearchInteractionFields {
     public static final String TYPE_MI_IDENTIFIER_STYLED = "type_mi_identifier_styled";
 
     // Interaction detection method
-    public static final String DETECTION_METHOD_MI_STYLED = "detection_method_styled";
+    public static final String DETECTION_METHOD_MI_STYLED = "detection_method_mi_styled";
 
     // Participant detection method
     public static final String IDENTIFICATION_METHOD_MI_A_STYLED = "identification_method_mi_A_styled";
     public static final String IDENTIFICATION_METHOD_MI_B_STYLED = "identification_method_mi_B_styled";
+    public static final String IDENTIFICATION_METHOD_MI_A_B_STYLED = "identification_method_mi_A_B_styled";
 
     // Interactor type
     public static final String TYPE_MI_A_STYLED = "type_MI_A_styled";

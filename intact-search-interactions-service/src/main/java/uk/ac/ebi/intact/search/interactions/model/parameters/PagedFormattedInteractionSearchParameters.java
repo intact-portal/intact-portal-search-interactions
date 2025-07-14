@@ -21,6 +21,7 @@ public class PagedFormattedInteractionSearchParameters extends PagedInteractionS
                 .advancedSearch(parameters.isAdvancedSearch())
 
                 .interactionDetectionMethodsFilter(parameters.getInteractionDetectionMethodsFilter())
+                .participantDetectionMethodsFilter(parameters.getParticipantDetectionMethodsFilter())
                 .interactionTypesFilter(parameters.getInteractionTypesFilter())
                 .interactionHostOrganismsFilter(parameters.getInteractionHostOrganismsFilter())
                 .interactorTypesFilter(parameters.getInteractorTypesFilter())

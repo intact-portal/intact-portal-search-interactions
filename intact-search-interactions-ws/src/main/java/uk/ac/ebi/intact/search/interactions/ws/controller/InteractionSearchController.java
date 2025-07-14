@@ -75,6 +75,7 @@ public class InteractionSearchController {
             @RequestParam(value = "interactorSpeciesFilter", required = false) Set<String> interactorSpeciesFilter,
             @RequestParam(value = "interactorTypesFilter", required = false) Set<String> interactorTypesFilter,
             @RequestParam(value = "interactionDetectionMethodsFilter", required = false) Set<String> interactionDetectionMethodsFilter,
+            @RequestParam(value = "participantDetectionMethodsFilter", required = false) Set<String> participantDetectionMethodsFilter,
             @RequestParam(value = "interactionTypesFilter", required = false) Set<String> interactionTypesFilter,
             @RequestParam(value = "interactionHostOrganismsFilter", required = false) Set<String> interactionHostOrganismsFilter,
             @RequestParam(value = "negativeFilter", required = false, defaultValue = "POSITIVE_ONLY") NegativeFilterStatus negativeFilter,
@@ -94,6 +95,7 @@ public class InteractionSearchController {
                         .interactorSpeciesFilter(interactorSpeciesFilter)
                         .interactorTypesFilter(interactorTypesFilter)
                         .interactionDetectionMethodsFilter(interactionDetectionMethodsFilter)
+                        .participantDetectionMethodsFilter(participantDetectionMethodsFilter)
                         .interactionTypesFilter(interactionTypesFilter)
                         .interactionHostOrganismsFilter(interactionHostOrganismsFilter)
                         .negativeFilter(negativeFilter)
@@ -130,6 +132,7 @@ public class InteractionSearchController {
             @RequestParam(value = "interactorSpeciesFilter", required = false) Set<String> interactorSpeciesFilter,
             @RequestParam(value = "interactorTypesFilter", required = false) Set<String> interactorTypesFilter,
             @RequestParam(value = "interactionDetectionMethodsFilter", required = false) Set<String> interactionDetectionMethodsFilter,
+            @RequestParam(value = "participantDetectionMethodsFilter", required = false) Set<String> participantDetectionMethodsFilter,
             @RequestParam(value = "interactionTypesFilter", required = false) Set<String> interactionTypesFilter,
             @RequestParam(value = "interactionHostOrganismsFilter", required = false) Set<String> interactionHostOrganismsFilter,
             @RequestParam(value = "negativeFilter", required = false, defaultValue = "POSITIVE_ONLY") NegativeFilterStatus negativeFilter,
@@ -151,6 +154,7 @@ public class InteractionSearchController {
                         .interactorSpeciesFilter(interactorSpeciesFilter)
                         .interactorTypesFilter(interactorTypesFilter)
                         .interactionDetectionMethodsFilter(interactionDetectionMethodsFilter)
+                        .participantDetectionMethodsFilter(participantDetectionMethodsFilter)
                         .interactionTypesFilter(interactionTypesFilter)
                         .interactionHostOrganismsFilter(interactionHostOrganismsFilter)
                         .negativeFilter(negativeFilter)
@@ -206,6 +210,7 @@ public class InteractionSearchController {
             @RequestParam(value = "interactorSpeciesFilter", required = false) Set<String> interactorSpeciesFilter,
             @RequestParam(value = "interactorTypesFilter", required = false) Set<String> interactorTypesFilter,
             @RequestParam(value = "interactionDetectionMethodsFilter", required = false) Set<String> interactionDetectionMethodsFilter,
+            @RequestParam(value = "participantDetectionMethodsFilter", required = false) Set<String> participantDetectionMethodsFilter,
             @RequestParam(value = "interactionTypesFilter", required = false) Set<String> interactionTypesFilter,
             @RequestParam(value = "interactionHostOrganismsFilter", required = false) Set<String> interactionHostOrganismsFilter,
             @RequestParam(value = "negativeFilter", required = false, defaultValue = "POSITIVE_ONLY") NegativeFilterStatus negativeFilter,
@@ -226,6 +231,7 @@ public class InteractionSearchController {
                 .interactorSpeciesFilter(interactorSpeciesFilter)
                 .interactorTypesFilter(interactorTypesFilter)
                 .interactionDetectionMethodsFilter(interactionDetectionMethodsFilter)
+                .participantDetectionMethodsFilter(participantDetectionMethodsFilter)
                 .interactionTypesFilter(interactionTypesFilter)
                 .interactionHostOrganismsFilter(interactionHostOrganismsFilter)
                 .negativeFilter(negativeFilter)
@@ -288,6 +294,7 @@ public class InteractionSearchController {
             @RequestParam(value = "interactorSpeciesFilter", required = false) Set<String> interactorSpeciesFilter,
             @RequestParam(value = "interactorTypesFilter", required = false) Set<String> interactorTypesFilter,
             @RequestParam(value = "interactionDetectionMethodsFilter", required = false) Set<String> interactionDetectionMethodsFilter,
+            @RequestParam(value = "participantDetectionMethodsFilter", required = false) Set<String> participantDetectionMethodsFilter,
             @RequestParam(value = "interactionTypesFilter", required = false) Set<String> interactionTypesFilter,
             @RequestParam(value = "interactionHostOrganismsFilter", required = false) Set<String> interactionHostOrganismsFilter,
             @RequestParam(value = "negativeFilter", required = false, defaultValue = "POSITIVE_ONLY") NegativeFilterStatus negativeFilter,
@@ -310,6 +317,7 @@ public class InteractionSearchController {
                 .interactorSpeciesFilter(interactorSpeciesFilter)
                 .interactorTypesFilter(interactorTypesFilter)
                 .interactionDetectionMethodsFilter(interactionDetectionMethodsFilter)
+                .participantDetectionMethodsFilter(participantDetectionMethodsFilter)
                 .interactionTypesFilter(interactionTypesFilter)
                 .interactionHostOrganismsFilter(interactionHostOrganismsFilter)
                 .negativeFilter(negativeFilter)
@@ -380,6 +388,7 @@ public class InteractionSearchController {
             @RequestParam(value = "interactorSpeciesFilter", required = false) Set<String> interactorSpeciesFilter,
             @RequestParam(value = "interactorTypesFilter", required = false) Set<String> interactorTypesFilter,
             @RequestParam(value = "interactionDetectionMethodsFilter", required = false) Set<String> interactionDetectionMethodsFilter,
+            @RequestParam(value = "participantDetectionMethodsFilter", required = false) Set<String> participantDetectionMethodsFilter,
             @RequestParam(value = "interactionTypesFilter", required = false) Set<String> interactionTypesFilter,
             @RequestParam(value = "interactionHostOrganismsFilter", required = false) Set<String> interactionHostOrganismsFilter,
             @RequestParam(value = "negativeFilter", required = false, defaultValue = "POSITIVE_ONLY") NegativeFilterStatus negativeFilter,
@@ -395,6 +404,7 @@ public class InteractionSearchController {
                 .interactorSpeciesFilter(interactorSpeciesFilter)
                 .interactorTypesFilter(interactorTypesFilter)
                 .interactionDetectionMethodsFilter(interactionDetectionMethodsFilter)
+                .participantDetectionMethodsFilter(participantDetectionMethodsFilter)
                 .interactionTypesFilter(interactionTypesFilter)
                 .interactionHostOrganismsFilter(interactionHostOrganismsFilter)
                 .negativeFilter(negativeFilter)

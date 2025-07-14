@@ -138,6 +138,9 @@ public class SearchInteractionUtility {
         //Interaction detection method filter
         createInteractionDetectionMethodsFilterCriteria(parameters.getInteractionDetectionMethodsFilter(), filterQueries);
 
+        //Participant detection method filter
+        createParticipantDetectionMethodsFilterCriteria(parameters.getParticipantDetectionMethodsFilter(), filterQueries);
+
         //Interaction type filter
         createInteractionTypeFilterCriteria(parameters.getInteractionTypesFilter(), filterQueries);
 
@@ -200,6 +203,11 @@ public class SearchInteractionUtility {
     private void createInteractionDetectionMethodsFilterCriteria(Set<String> values, List<FilterQuery> filterQueries) {
         String tagForExcludingFacets = "{!tag=DETECTION_METHOD}";
         createStringLabelsOrMiIdsFilterCriteria(tagForExcludingFacets, values, DETECTION_METHOD_MI_IDENTIFIER_S, DETECTION_METHOD_S, filterQueries);
+    }
+
+    private void createParticipantDetectionMethodsFilterCriteria(Set<String> values, List<FilterQuery> filterQueries) {
+        String tagForExcludingFacets = "{!tag=PARTICIPANT_DETECTION_METHOD}";
+        createStringLabelsOrMiIdsFilterCriteria(tagForExcludingFacets, values, IDENTIFICATION_METHODS_MI_IDS_A_B_S, IDENTIFICATION_METHODS_A_B_S, filterQueries);
     }
 
     private void createBinaryInteractionIdsFilterCriteria(Set<Long> values, List<FilterQuery> filterQueries) {
