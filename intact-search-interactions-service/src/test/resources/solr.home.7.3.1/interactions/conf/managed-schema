@@ -12,6 +12,7 @@
   </fieldType>
   <fieldType name="binary" class="solr.BinaryField"/>
   <fieldType name="boolean" class="solr.BoolField" sortMissingLast="true"/>
+  <fieldType name="boolean_intact" class="solr.BoolField" indexed="true" stored="false" sortMissingLast="true"/>
   <fieldType name="booleans" class="solr.BoolField" sortMissingLast="true" multiValued="true"/>
   <fieldType name="delimited_payloads_float" class="solr.TextField" indexed="true" stored="false">
     <analyzer>
@@ -39,6 +40,8 @@
       <tokenizer class="solr.KeywordTokenizerFactory"/>
     </analyzer>
   </fieldType>
+  <fieldType name="double_intact" class="solr.DoublePointField" indexed="true" stored="false" multiValued="false"/>
+  <fieldType name="int_intact" class="solr.TrieIntField" indexed="true" stored="false" positionIncrementGap="0" multiValued="false" precisionStep="0" required="true"/>
   <fieldType name="intact_identifier" class="solr.TextField" positionIncrementGap="100" multiValued="true">
     <analyzer type="index">
       <charFilter class="solr.PatternReplaceFilterFactory" pattern="[\:\-\(\)]" replacement=""/>
@@ -300,27 +303,6 @@
       <filter class="solr.LowerCaseFilterFactory"/>
     </analyzer>
   </fieldType>
-  <!-- used exclusively for advanced search - start -->
-  <fieldType name="text_intact" class="solr.TextField" positionIncrementGap="100" indexed="true" stored="false" omitNorms="true" termVectors="true" required="true" multiValued="true">
-    <analyzer>
-      <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="[\(\)]" replacement=""/>
-      <!-- replace brakets -->
-      <tokenizer class="solr.WhitespaceTokenizerFactory"/>
-      <filter class="solr.TrimFilterFactory"/>
-      <!--
-        trim white spaces at the beginning and end of the words
-      -->
-      <filter class="solr.LowerCaseFilterFactory"/>
-      <filter class="solr.StopFilterFactory"/>
-      <!--
-        discards common english stop words: "a", "an", ...
-      -->
-  </analyzer>
-  </fieldType>
-  <fieldType name="int_intact" class="solr.TrieIntField" indexed="true" stored="false" precisionStep="0" positionIncrementGap="0" multiValued="false" required="true"/>
-  <fieldType name="double_intact" class="solr.DoublePointField"  indexed="true" stored="false" multiValued="false"/>
-  <fieldType name="boolean_intact" class="solr.BoolField" indexed="true" stored="false" sortMissingLast="true"/>
-  <!-- used exclusively for advanced search - end -->
   <fieldType name="text_general" class="solr.TextField" positionIncrementGap="100">
     <analyzer type="index">
       <tokenizer class="solr.StandardTokenizerFactory"/>
@@ -388,6 +370,15 @@
       <filter class="solr.LowerCaseFilterFactory"/>
       <filter class="solr.StopFilterFactory" words="lang/stopwords_id.txt" ignoreCase="true"/>
       <filter class="solr.IndonesianStemFilterFactory" stemDerivational="true"/>
+    </analyzer>
+  </fieldType>
+  <fieldType name="text_intact" class="solr.TextField" omitNorms="true" indexed="true" stored="false" positionIncrementGap="100" termVectors="true" multiValued="true" required="true">
+    <analyzer>
+      <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="[\(\)]" replacement=""/>
+      <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+      <filter class="solr.TrimFilterFactory"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+      <filter class="solr.StopFilterFactory"/>
     </analyzer>
   </fieldType>
   <fieldType name="text_it" class="solr.TextField" positionIncrementGap="100">
@@ -503,6 +494,57 @@
   <field name="annotations" type="text_general" multiValued="true"/>
   <field name="annotationsA" type="text_general" multiValued="true"/>
   <field name="annotationsB" type="text_general" multiValued="true"/>
+  <field name="as_alias" type="text_intact" default=""/>
+  <field name="as_aliasA" type="text_intact" default="-"/>
+  <field name="as_aliasB" type="text_intact" default="-"/>
+  <field name="as_altidA" type="text_intact" default="-"/>
+  <field name="as_altidB" type="text_intact" default="-"/>
+  <field name="as_annot" type="text_intact" default=""/>
+  <field name="as_complex" type="text_intact" default="-"/>
+  <field name="as_detmethod" type="text_intact" default="-"/>
+  <field name="as_ftype" type="text_intact" default=""/>
+  <field name="as_ftypeA" type="text_intact" default="-"/>
+  <field name="as_ftypeB" type="text_intact" default="-"/>
+  <field name="as_geneName" type="text_intact" default=""/>
+  <field name="as_geneNameA" type="text_intact" default="-"/>
+  <field name="as_geneNameB" type="text_intact" default="-"/>
+  <field name="as_id" type="text_intact" default=""/>
+  <field name="as_idA" type="text_intact" default="-"/>
+  <field name="as_idB" type="text_intact" default="-"/>
+  <field name="as_identifier" type="text_intact" default=""/>
+  <field name="as_intact-miscore" type="double_intact" default="0"/>
+  <field name="as_interaction_id" type="text_intact" default="-"/>
+  <field name="as_mutation" type="boolean_intact" default="false"/>
+  <field name="as_mutationA" type="boolean_intact" default="false"/>
+  <field name="as_mutationB" type="boolean_intact" default="false"/>
+  <field name="as_negative" type="boolean_intact" default="false"/>
+  <field name="as_param" type="boolean_intact" default="false"/>
+  <field name="as_pbiorole" type="text_intact" default=""/>
+  <field name="as_pbioroleA" type="text_intact" default="-"/>
+  <field name="as_pbioroleB" type="text_intact" default="-"/>
+  <field name="as_pmethod" type="text_intact" default=""/>
+  <field name="as_pmethodA" type="text_intact" default="-"/>
+  <field name="as_pmethodB" type="text_intact" default="-"/>
+  <field name="as_ptype" type="text_intact" default=""/>
+  <field name="as_ptypeA" type="text_intact" default="-"/>
+  <field name="as_ptypeB" type="text_intact" default="-"/>
+  <field name="as_pubauth" type="text_intact" default="-"/>
+  <field name="as_pubauthors" type="text_intact" default="-"/>
+  <field name="as_pubid" type="text_intact" default="-"/>
+  <field name="as_pubyear" type="int_intact" default="0"/>
+  <field name="as_pxref" type="text_intact" default=""/>
+  <field name="as_pxrefA" type="text_intact" default="-"/>
+  <field name="as_pxrefB" type="text_intact" default="-"/>
+  <field name="as_rdate" type="int_intact" default="0"/>
+  <field name="as_source" type="text_intact" default="-"/>
+  <field name="as_species" type="text_intact" default=""/>
+  <field name="as_stc" type="boolean_intact" default="false"/>
+  <field name="as_taxidA" type="text_intact" default="-"/>
+  <field name="as_taxidB" type="text_intact" default="-"/>
+  <field name="as_taxidHost" type="text_intact" default="-"/>
+  <field name="as_type" type="text_intact" default="-"/>
+  <field name="as_udate" type="int_intact" default="0"/>
+  <field name="as_xref" type="text_intact" default="-"/>
   <field name="author" type="text_general"/>
   <field name="binary_interaction_id" type="plong"/>
   <field name="biological_role_A" type="text_general"/>
@@ -520,6 +562,7 @@
   <field name="descriptionB" type="text_general"/>
   <field name="detection_method" type="text_general"/>
   <field name="detection_method_mi_identifier" type="text_general"/>
+  <field name="detection_method_mi_styled" type="string"/>
   <field name="document_type" type="text_general"/>
   <field name="expansion_method" type="text_general"/>
   <field name="experimental_preparations_A" type="text_general" multiValued="true"/>
@@ -546,6 +589,9 @@
   <field name="idB" type="text_general"/>
   <field name="identification_method_A" type="text_general" multiValued="true"/>
   <field name="identification_method_B" type="text_general" multiValued="true"/>
+  <field name="identification_method_mi_A_B_styled" type="strings"/>
+  <field name="identification_method_mi_A_styled" type="strings"/>
+  <field name="identification_method_mi_B_styled" type="strings"/>
   <field name="identification_method_mi_identifier_A" type="text_general" multiValued="true"/>
   <field name="identification_method_mi_identifier_B" type="text_general" multiValued="true"/>
   <field name="identifiers" type="text_general" multiValued="true"/>
@@ -553,8 +599,6 @@
   <field name="intactNameB" type="text_general"/>
   <field name="intact_miscore" type="pdouble"/>
   <field name="interaction_count" type="plong"/>
-
-  <!-- interactor_* fields are likely to be only stored, currently we are not using them for searching  -->
   <field name="interactor_alias" type="text_general" multiValued="true"/>
   <field name="interactor_alt_ids" type="text_general" multiValued="true"/>
   <field name="interactor_default" type="text_general" multiValued="true" indexed="true" stored="false"/>
@@ -573,6 +617,8 @@
   <field name="intra_species" type="string" indexed="true" stored="true"/>
   <field name="intra_taxId" type="plong"/>
   <field name="intra_taxId_styled" type="string"/>
+  <field name="jsonFormat" type="text_general"/>
+  <field name="json_format" type="text_general"/>
   <field name="moleculeA" type="text_general"/>
   <field name="moleculeB" type="text_general"/>
   <field name="mutation_A" type="boolean"/>
@@ -585,11 +631,19 @@
   <field name="publication_id" type="string"/>
   <field name="publication_identifiers" type="text_general" multiValued="true"/>
   <field name="release_date" type="pdate"/>
+  <field name="serialised_interaction" type="text_general"/>
+  <field name="serialised_xml" type="text_general"/>
   <field name="source_database" type="text_general"/>
   <field name="speciesA" type="text_general"/>
   <field name="speciesB" type="text_general"/>
   <field name="stoichiometry_A" type="text_general"/>
   <field name="stoichiometry_B" type="text_general"/>
+  <field name="tab25Format" type="text_general"/>
+  <field name="tab26Format" type="text_general"/>
+  <field name="tab27Format" type="text_general"/>
+  <field name="tab_25_format" type="text_general"/>
+  <field name="tab_26_format" type="text_general"/>
+  <field name="tab_27_format" type="text_general"/>
   <field name="taxIdA" type="plong"/>
   <field name="taxIdA_styled" type="string"/>
   <field name="taxIdB" type="plong"/>
@@ -609,64 +663,13 @@
   <field name="uniqueIdB" type="text_general"/>
   <field name="uniqueKey" type="text_general"/>
   <field name="updation_date" type="pdate"/>
+  <field name="xml25Format" type="text_general"/>
+  <field name="xml30Format" type="text_general"/>
+  <field name="xml_25_format" type="text_general"/>
+  <field name="xml_30_format" type="text_general"/>
   <field name="xrefs" type="text_general" multiValued="true"/>
   <field name="xrefsA" type="text_general" multiValued="true"/>
   <field name="xrefsB" type="text_general" multiValued="true"/>
-
-  <!-- Advance Search Fields -->
-
-  <field name="as_idA" type="text_intact" default="-" />
-  <field name="as_idB" type="text_intact" default="-" />
-  <field name="as_altidA" type="text_intact" default="-" />
-  <field name="as_altidB" type="text_intact" default="-" />
-  <field name="as_id" type="text_intact" default=""/><!-- id = altA+altB (alt ids contain idA and idB) -->
-  <field name="as_aliasA" type="text_intact" default="-"/>
-  <field name="as_aliasB" type="text_intact" default="-"/>
-  <field name="as_alias" type="text_intact" default=""/><!-- alias = aliasA+aliasB -->
-  <field name="as_identifier" type="text_intact" default=""/><!-- identifier = id + alias -->
-  <field name="as_pubid" type="text_intact" default="-"/>
-  <field name="as_interaction_id" type="text_intact" default="-"/>
-  <field name="as_taxidA" type="text_intact" default="-"/>
-  <field name="as_taxidB" type="text_intact" default="-"/>
-  <field name="as_species" type="text_intact" default=""/><!-- species = taxidA + taxidB -->
-  <field name="as_taxidHost" type="text_intact" default="-"/>
-  <field name="as_pubauth" type="text_intact" default="-"/>
-  <field name="as_pubauthors" type="text_intact" default="-"/>
-  <field name="as_pubyear" type="int_intact" default="0"/>
-  <field name="as_type" type="text_intact" default="-"/>
-  <field name="as_detmethod" type="text_intact" default="-"/>
-  <field name="as_pbioroleA" type="text_intact" default="-"/>
-  <field name="as_pbioroleB" type="text_intact" default="-"/>
-  <field name="as_pbiorole" type="text_intact" default=""/><!-- pbiorole = pbioroleA + pbioroleB -->
-  <field name="as_ptypeA" type="text_intact" default="-"/>
-  <field name="as_ptypeB" type="text_intact" default="-"/>
-  <field name="as_ptype" type="text_intact" default=""/><!-- ptype = ptypeA + ptypeB -->
-  <field name="as_ftypeA" type="text_intact" default="-"/>
-  <field name="as_ftypeB" type="text_intact" default="-"/>
-  <field name="as_ftype" type="text_intact" default=""/> <!-- ftype = ftypeA + ftypeB -->
-  <field name="as_pmethodA" type="text_intact" default="-"/>
-  <field name="as_pmethodB" type="text_intact" default="-"/>
-  <field name="as_pmethod" type="text_intact" default=""/><!-- pmethod = pmethodA + pmethodB -->
-  <field name="as_pxrefA" type="text_intact" default="-"/>
-  <field name="as_pxrefB" type="text_intact" default="-"/>
-  <field name="as_pxref" type="text_intact" default=""/><!-- pxref = pxrefA + pxrefB -->
-  <field name="as_xref" type="text_intact" default="-"/>
-  <field name="as_complex" type="text_intact" default="-"/>
-  <field name="as_source" type="text_intact" default="-"/>
-  <field name="as_udate" type="int_intact" default="0"/>
-  <field name="as_rdate" type="int_intact" default="0"/>
-  <field name="as_intact-miscore" type="double_intact" default="0"/>
-  <field name="as_negative" type="boolean_intact" default="false"/>
-  <field name="as_param" type="boolean_intact" default="false"/>
-  <field name="as_stc" type="boolean_intact" default="false"/>
-  <field name="as_mutation" type="boolean_intact" default="false"/>
-  <field name="as_mutationA" type="boolean_intact" default="false"/>
-  <field name="as_mutationB" type="boolean_intact" default="false"/>
-  <field name="as_annot" type="text_intact" default=""/>
-  <field name="as_geneNameA" type="text_intact" default="-"/>
-  <field name="as_geneNameB" type="text_intact" default="-"/>
-  <field name="as_geneName" type="text_intact" default=""/><!-- geneName = geneNameA + geneNameB -->
-
   <dynamicField name="*_txt_en_split_tight" type="text_en_splitting_tight" indexed="true" stored="true"/>
   <dynamicField name="*_descendent_path" type="descendent_path" indexed="true" stored="true"/>
   <dynamicField name="*_ancestor_path" type="ancestor_path" indexed="true" stored="true"/>
@@ -733,14 +736,87 @@
   <dynamicField name="*_f" type="pfloat" indexed="true" stored="true"/>
   <dynamicField name="*_d" type="pdouble" indexed="true" stored="true"/>
   <dynamicField name="*_p" type="location" indexed="true" stored="true"/>
-  <!-- interactor_default can be replace in a query by interactor_identifiers or aliasesA or aliasesB
- and can simplify problems of identifiers with '-' or numbers -->
+  <copyField source="aliasesA" dest="default"/>
   <copyField source="aliasesA" dest="interactor_default"/>
+  <copyField source="aliasesB" dest="default"/>
   <copyField source="aliasesB" dest="interactor_default"/>
+  <copyField source="altIdsA" dest="default"/>
   <copyField source="altIdsA" dest="interactor_default"/>
+  <copyField source="altIdsB" dest="default"/>
   <copyField source="altIdsB" dest="interactor_default"/>
+  <copyField source="as_aliasA" dest="as_alias"/>
+  <copyField source="as_aliasA" dest="as_identifier"/>
+  <copyField source="as_aliasB" dest="as_alias"/>
+  <copyField source="as_aliasB" dest="as_identifier"/>
+  <copyField source="as_altidA" dest="as_id"/>
+  <copyField source="as_altidA" dest="as_identifier"/>
+  <copyField source="as_altidB" dest="as_id"/>
+  <copyField source="as_altidB" dest="as_identifier"/>
+  <copyField source="as_ftypeA" dest="as_ftype"/>
+  <copyField source="as_ftypeB" dest="as_ftype"/>
+  <copyField source="as_geneNameA" dest="as_geneName"/>
+  <copyField source="as_geneNameB" dest="as_geneName"/>
+  <copyField source="as_pbioroleA" dest="as_pbiorole"/>
+  <copyField source="as_pbioroleB" dest="as_pbiorole"/>
+  <copyField source="as_pmethodA" dest="as_pmethod"/>
+  <copyField source="as_pmethodB" dest="as_pmethod"/>
+  <copyField source="as_ptypeA" dest="as_ptype"/>
+  <copyField source="as_ptypeB" dest="as_ptype"/>
+  <copyField source="as_pxrefA" dest="as_pxref"/>
+  <copyField source="as_pxrefB" dest="as_pxref"/>
+  <copyField source="as_taxidA" dest="as_species"/>
+  <copyField source="as_taxidB" dest="as_species"/>
+  <copyField source="descriptionA" dest="default"/>
+  <copyField source="descriptionB" dest="default"/>
+  <copyField source="detection_method" dest="default"/>
+  <copyField source="detection_method_mi_identifier" dest="default"/>
+  <copyField source="feature_ranges_A" dest="default"/>
+  <copyField source="feature_ranges_B" dest="default"/>
+  <copyField source="feature_shortlabel_A" dest="default"/>
+  <copyField source="feature_shortlabel_B" dest="default"/>
+  <copyField source="feature_type_A" dest="default"/>
+  <copyField source="feature_type_B" dest="default"/>
+  <copyField source="first_author" dest="default"/>
+  <copyField source="host_organism" dest="default"/>
+  <copyField source="host_organism_taxId" dest="default"/>
+  <copyField source="idA" dest="default"/>
   <copyField source="idA" dest="interactor_default"/>
+  <copyField source="idB" dest="default"/>
   <copyField source="idB" dest="interactor_default"/>
+  <copyField source="identification_method_A" dest="default"/>
+  <copyField source="identification_method_B" dest="default"/>
+  <copyField source="identification_method_mi_A_styled" dest="identification_method_mi_A_B_styled"/>
+  <copyField source="identification_method_mi_B_styled" dest="identification_method_mi_A_B_styled"/>
+  <copyField source="identification_method_mi_identifier_A" dest="default"/>
+  <copyField source="identification_method_mi_identifier_B" dest="default"/>
+  <copyField source="identifiers" dest="default"/>
+  <copyField source="intactNameA" dest="default"/>
+  <copyField source="intactNameB" dest="default"/>
+  <copyField source="moleculeA" dest="default"/>
+  <copyField source="moleculeB" dest="default"/>
+  <copyField source="parameter_types" dest="default"/>
+  <copyField source="publication_annotations" dest="default"/>
+  <copyField source="publication_authors" dest="default"/>
+  <copyField source="publication_identifiers" dest="default"/>
+  <copyField source="speciesA" dest="default"/>
+  <copyField source="speciesB" dest="default"/>
+  <copyField source="taxIdA" dest="default"/>
+  <copyField source="taxIdA_styled" dest="taxId_A_B_styled"/>
+  <copyField source="taxIdB" dest="default"/>
+  <copyField source="taxIdB_styled" dest="taxId_A_B_styled"/>
+  <copyField source="type" dest="default"/>
+  <copyField source="typeA" dest="default"/>
+  <copyField source="typeB" dest="default"/>
+  <copyField source="type_MI_A" dest="default"/>
+  <copyField source="type_MI_A_styled" dest="type_MI_A_B_styled"/>
+  <copyField source="type_MI_B" dest="default"/>
+  <copyField source="type_MI_B_styled" dest="type_MI_A_B_styled"/>
+  <copyField source="type_mi_identifier" dest="default"/>
+  <copyField source="uniqueIdA" dest="default"/>
+  <copyField source="uniqueIdB" dest="default"/>
+  <copyField source="xrefs" dest="default"/>
+  <copyField source="xrefsA" dest="default"/>
+  <copyField source="xrefsB" dest="default"/>
   <copyField source="ac" dest="interaction_identifiers" maxChars="256"/>
   <copyField source="acA" dest="interactor_identifiers" maxChars="256"/>
   <copyField source="acB" dest="interactor_identifiers" maxChars="256"/>
@@ -756,14 +832,12 @@
   <copyField source="xrefs" dest="interaction_identifiers" maxChars="256"/>
   <copyField source="xrefsA" dest="interactor_identifiers" maxChars="256"/>
   <copyField source="xrefsB" dest="interactor_identifiers" maxChars="256"/>
-  <!--  Do we need typeA_s and typeB_s? -->
   <copyField source="typeA" dest="typeA_s" maxChars="256"/>
   <copyField source="typeB" dest="typeB_s" maxChars="256"/>
   <copyField source="typeA" dest="typeA_B_str"/>
   <copyField source="typeB" dest="typeA_B_str"/>
   <copyField source="type_MI_A" dest="type_MI_A_B_str"/>
   <copyField source="type_MI_B" dest="type_MI_A_B_str"/>
-  <!--  Do we need speciesA_s and speciesB_s? -->
   <copyField source="speciesA" dest="speciesA_s" maxChars="256"/>
   <copyField source="speciesB" dest="speciesB_s" maxChars="256"/>
   <copyField source="speciesA" dest="speciesA_B_str"/>
@@ -772,6 +846,10 @@
   <copyField source="taxIdB" dest="taxIdA_B_ls"/>
   <copyField source="identification_method_A" dest="identification_method_A_str" maxChars="256"/>
   <copyField source="identification_method_B" dest="identification_method_B_str" maxChars="256"/>
+  <copyField source="identification_method_A" dest="identification_method_A_B_str"/>
+  <copyField source="identification_method_B" dest="identification_method_A_B_str"/>
+  <copyField source="identification_method_mi_identifier_A" dest="identification_method_mi_identifier_A_B_str"/>
+  <copyField source="identification_method_mi_identifier_B" dest="identification_method_mi_identifier_A_B_str"/>
   <copyField source="biological_role_A" dest="biological_role_A_s" maxChars="256"/>
   <copyField source="biological_role_B" dest="biological_role_B_s" maxChars="256"/>
   <copyField source="experimental_role_A" dest="experimental_role_A_s" maxChars="256"/>
@@ -779,96 +857,28 @@
   <copyField source="expansion_method" dest="expansion_method_s" maxChars="256"/>
   <copyField source="host_organism" dest="host_organism_s" maxChars="256"/>
   <copyField source="publication_authors" dest="publication_authors_str" maxChars="256"/>
-  <!-- Check if you need to remove fields from default, like identifiers -->
   <copyField source="source_database" dest="source_database_s" maxChars="256"/>
   <copyField source="ac" dest="ac_s" maxChars="256"/>
   <copyField source="type" dest="type_s" maxChars="256"/>
+  <copyField source="type_mi_identifier" dest="type_mi_identifier_s" maxChars="256"/>
   <copyField source="detection_method" dest="detection_method_s" maxChars="256"/>
+  <copyField source="detection_method_mi_identifier" dest="detection_method_mi_identifier_s" maxChars="256"/>
   <copyField source="idA" dest="idA_s" maxChars="256"/>
   <copyField source="idB" dest="idB_s" maxChars="256"/>
   <copyField source="acA" dest="acA_s" maxChars="256"/>
   <copyField source="acB" dest="acB_s" maxChars="256"/>
-
-  <!-- styling fields -->
-  <copyField source="taxIdA_styled" dest="taxId_A_B_styled"/>
-  <copyField source="taxIdB_styled" dest="taxId_A_B_styled"/>
-  <copyField source="type_MI_A_styled" dest="type_MI_A_B_styled"/>
-  <copyField source="type_MI_B_styled" dest="type_MI_A_B_styled"/>
-
-  <!--copy selected fields into default-->
-  <copyField source="moleculeA" dest="default"/>
-  <copyField source="moleculeB" dest="default"/>
-  <copyField source="intactNameA" dest="default"/>
-  <copyField source="intactNameB" dest="default"/>
-  <copyField source="altIdsA" dest="default" />
-  <copyField source="altIdsB" dest="default" />
-  <copyField source="idA" dest="default" />
-  <copyField source="idB" dest="default" />
-  <copyField source="identifiers" dest="default" />
-  <copyField source="publication_identifiers" dest="default" />
-  <copyField source="uniqueIdA" dest="default" />
-  <copyField source="uniqueIdB" dest="default" />
-  <copyField source="xrefs" dest="default" />
-  <copyField source="xrefsA" dest="default" />
-  <copyField source="xrefsB" dest="default" />
-  <copyField source="aliasesA" dest="default"/>
-  <copyField source="aliasesB" dest="default"/>
-  <copyField source="detection_method" dest="default"/>
-  <copyField source="detection_method_mi_identifier" dest="default"/>
-  <copyField source="identification_method_A" dest="default" />
-  <copyField source="identification_method_B" dest="default" />
-  <copyField source="identification_method_mi_identifier_A" dest="default" />
-  <copyField source="identification_method_mi_identifier_B" dest="default" />
-  <copyField source="type" dest="default"/>
-  <copyField source="type_mi_identifier" dest="default"/>
-  <copyField source="publication_authors" dest="default" />
-  <copyField source="first_author" dest="default"/>
-  <copyField source="feature_shortlabel_A" dest="default" />
-  <copyField source="feature_shortlabel_B" dest="default" />
-  <copyField source="feature_type_A" dest="default" />
-  <copyField source="feature_type_B" dest="default" />
-  <copyField source="descriptionA" dest="default" />
-  <copyField source="descriptionB" dest="default" />
-
-  <!-- To be decided to be kept or not -->
-
-    <copyField source="speciesA" dest="default"/>
-    <copyField source="speciesB" dest="default"/>
-    <copyField source="taxIdA" dest="default"/>
-    <copyField source="taxIdB" dest="default"/>
-    <copyField source="parameter_types" dest="default" />
-    <copyField source="host_organism" dest="default"/>
-    <copyField source="host_organism_taxId" dest="default"/>
-    <copyField source="typeA" dest="default"/>
-    <copyField source="typeB" dest="default"/>
-    <copyField source="type_MI_A" dest="default"/>
-    <copyField source="type_MI_B" dest="default"/>
-    <!--feature range need to be added in index and then here, just have featureA and featureB and remove feature shortlabel and feature type from above default -->
-    <copyField source="feature_ranges_A" dest="default"/>
-    <copyField source="feature_ranges_B" dest="default"/>
-    <copyField source="publication_annotations" dest="default"/>
-
-    <!-- Advanced Search copy fields -->
-    <copyField source="as_altidA" dest="as_id"/>
-    <copyField source="as_altidB" dest="as_id"/>
-    <copyField source="as_aliasA" dest="as_alias"/>
-    <copyField source="as_aliasB" dest="as_alias"/>
-    <copyField source="as_altidA" dest="as_identifier"/>
-    <copyField source="as_altidB" dest="as_identifier"/>
-    <copyField source="as_aliasA" dest="as_identifier"/>
-    <copyField source="as_aliasB" dest="as_identifier"/>
-    <copyField source="as_taxidA" dest="as_species"/>
-    <copyField source="as_taxidB" dest="as_species"/>
-    <copyField source="as_pbioroleA" dest="as_pbiorole"/>
-    <copyField source="as_pbioroleB" dest="as_pbiorole"/>
-    <copyField source="as_ptypeA" dest="as_ptype"/>
-    <copyField source="as_ptypeB" dest="as_ptype"/>
-    <copyField source="as_ftypeA" dest="as_ftype"/>
-    <copyField source="as_ftypeB" dest="as_ftype"/>
-    <copyField source="as_pmethodA" dest="as_pmethod"/>
-    <copyField source="as_pmethodB" dest="as_pmethod"/>
-    <copyField source="as_pxrefA" dest="as_pxref"/>
-    <copyField source="as_pxrefB" dest="as_pxref"/>
-    <copyField source="as_geneNameA" dest="as_geneName"/>
-    <copyField source="as_geneNameB" dest="as_geneName"/>
+  <copyField source="serialised_interaction" dest="serialised_interaction_str" maxChars="256"/>
+  <copyField source="serialised_xml" dest="serialised_xml_str" maxChars="256"/>
+  <copyField source="xml25Format" dest="xml25Format_str" maxChars="256"/>
+  <copyField source="jsonFormat" dest="jsonFormat_str" maxChars="256"/>
+  <copyField source="tab26Format" dest="tab26Format_str" maxChars="256"/>
+  <copyField source="xml30Format" dest="xml30Format_str" maxChars="256"/>
+  <copyField source="tab27Format" dest="tab27Format_str" maxChars="256"/>
+  <copyField source="tab25Format" dest="tab25Format_str" maxChars="256"/>
+  <copyField source="tab_26_format" dest="tab_26_format_str" maxChars="256"/>
+  <copyField source="json_format" dest="json_format_str" maxChars="256"/>
+  <copyField source="xml_30_format" dest="xml_30_format_str" maxChars="256"/>
+  <copyField source="xml_25_format" dest="xml_25_format_str" maxChars="256"/>
+  <copyField source="tab_27_format" dest="tab_27_format_str" maxChars="256"/>
+  <copyField source="tab_25_format" dest="tab_25_format_str" maxChars="256"/>
 </schema>
