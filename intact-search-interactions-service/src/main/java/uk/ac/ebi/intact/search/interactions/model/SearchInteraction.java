@@ -319,10 +319,10 @@ public class SearchInteraction extends AdvancedSearchInteraction {
     private String detectionMethodMIIdentifierStyled;
 
     @Field(IDENTIFICATION_METHOD_MI_A_STYLED)
-    private String identificationMethodMIAStyled;
+    private Set<String> identificationMethodMIAStyled;
 
     @Field(IDENTIFICATION_METHOD_MI_B_STYLED)
-    private String identificationMethodMIBStyled;
+    private Set<String> identificationMethodMIBStyled;
 
     @Field(TYPE_MI_A_STYLED)
     private String typeMIAStyled;
@@ -1219,19 +1219,19 @@ public class SearchInteraction extends AdvancedSearchInteraction {
         this.detectionMethodMIIdentifierStyled = detectionMethodMIIdentifierStyled;
     }
 
-    public String getIdentificationMethodMIAStyled() {
+    public Set<String> getIdentificationMethodMIAStyled() {
         return identificationMethodMIAStyled;
     }
 
-    public void setIdentificationMethodMIAStyled(String identificationMethodMIAStyled) {
+    public void setIdentificationMethodMIAStyled(Set<String> identificationMethodMIAStyled) {
         this.identificationMethodMIAStyled = identificationMethodMIAStyled;
     }
 
-    public String getIdentificationMethodMIBStyled() {
+    public Set<String> getIdentificationMethodMIBStyled() {
         return identificationMethodMIBStyled;
     }
 
-    public void setIdentificationMethodMIBStyled(String identificationMethodMIBStyled) {
+    public void setIdentificationMethodMIBStyled(Set<String> identificationMethodMIBStyled) {
         this.identificationMethodMIBStyled = identificationMethodMIBStyled;
     }
 
