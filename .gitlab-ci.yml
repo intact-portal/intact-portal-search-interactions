@@ -36,6 +36,8 @@ maven-build-prod:
 .docker-build:
   stage: build-docker-image
   before_script:
+    - unset DOCKER_HOST
+    - unset DOCKER_AUTH_CONFIG
     - echo "$CI_REGISTRY_PASSWORD" | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
     - docker --version
     - echo ${CONTAINER_IMAGE}
