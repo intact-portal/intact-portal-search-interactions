@@ -42,6 +42,8 @@ public class PagedInteractionGraphJSONParameters extends InteractionGraphJSONPar
                 .expansionFilter(expansionFilter)
                 .mutationFilter(mutationFilter)
                 .negativeFilter(negativeFilter)
+                .minMIScore(minMIScore)
+                .maxMIScore(maxMIScore)
 
                 .page(page)
                 .pageSize(pageSize)
