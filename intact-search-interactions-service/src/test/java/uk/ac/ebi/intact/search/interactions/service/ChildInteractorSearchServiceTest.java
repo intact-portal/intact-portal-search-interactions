@@ -368,10 +368,10 @@ public class ChildInteractorSearchServiceTest {
         List<SearchChildInteractor> interactors = interactorOp.getContent();
         // The first interactor is the most popular in the query results, appearing in all interactions
         Assert.assertEquals("EBI-999900", interactors.get(0).getInteractorAc());
-        // The other interactors, even though they are popular in the whole database (EBI-715849 appear in 4 interactions
-        // in the database), they only appear once in the query results, so they don't appear at the top.
-        Assert.assertEquals(
-                Set.of("EBI-715849", "EBI-999909"),
-                interactors.subList(1, 3).stream().map(SearchChildInteractor::getInteractorAc).collect(Collectors.toSet()));
+        // The other interactors appear only once in the query results, so they are sorted by the total number
+        // of interactions for them in the DB. So, as EBI-715849 appear in 4 interactions, it is sorted above the
+        // other interactor.
+        Assert.assertEquals("EBI-715849", interactors.get(1).getInteractorAc());
+        Assert.assertEquals("EBI-999909", interactors.get(2).getInteractorAc());
     }
 }

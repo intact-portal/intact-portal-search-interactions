@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static uk.ac.ebi.intact.search.interactions.model.SearchChildInteractorFields.DOCUMENT_ID;
+import static uk.ac.ebi.intact.search.interactions.model.SearchChildInteractorFields.INTERACTION_COUNT;
 import static uk.ac.ebi.intact.search.interactions.model.SearchInteraction.INTERACTIONS;
 
 /**
@@ -66,9 +67,14 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
         if (parameters.getSort() != null) {
             search.addSort(parameters.standardiseSort());
         } else {
+            // First we sort by the document id of the top interactors, to put on top the interactors appearing
+            // in multiple interactions in the query results.
             List<String> documentIdFacetsSorted = getDocumentIdsInResultsSorted(parameters);
             documentIdFacetsSorted.forEach(documentIdFacet ->
                     search.addSort(Sort.by(Sort.Direction.DESC, customDocumentIdSortField(documentIdFacet))));
+            // Then we sort by the interaction count for each interactor, which counts the total number of interactions
+            // in the DB, not just for the current query.
+            search.addSort(Sort.by(Sort.Direction.DESC, INTERACTION_COUNT));
         }
 
         return solrOperations.queryForGroupPage(INTERACTIONS, search, SearchChildInteractor.class,
