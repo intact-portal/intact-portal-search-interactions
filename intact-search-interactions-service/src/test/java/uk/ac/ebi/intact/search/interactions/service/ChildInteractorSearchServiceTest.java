@@ -21,6 +21,7 @@ import uk.ac.ebi.intact.search.interactions.service.util.TestUtil;
 import javax.annotation.Resource;
 import java.time.Duration;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -419,5 +420,77 @@ public class ChildInteractorSearchServiceTest {
         for (SearchChildInteractor interactor : interactorOp.getContent()) {
             assertTrue(interactorsExpected.contains(interactor.getInteractorAc()));
         }
+    }
+
+    @Test
+    public void sortAllInteractorsByPopularity() {
+        List<String> interactorsAcsSortedByInteractionCount = List.of(
+                "EBI-73886", // 66
+                "EBI-715849", // 29
+                "EBI-2028244", // 27
+                "EBI-7837133", // 22
+                "EBI-9997695", // 11
+                "EBI-4423297", // 10
+                "EBI-915507", // 9
+                "EBI-999909", // 8
+                "EBI-999900", // 5
+                "EBI-724102", // 4
+                "EBI-10000824" // 2
+        );
+
+        GroupPage<SearchChildInteractor> interactorOp = childInteractorSearchService.findInteractorsWithGroup(
+                PagedInteractionSearchParameters.builder()
+                        .query("*")
+                        .page(0)
+                        .pageSize(6)
+                        .build());
+
+        assertEquals(6, interactorOp.getNumberOfElements());
+
+        List<SearchChildInteractor> interactors = interactorOp.getContent();
+        List<String> interactorAcs = interactors.stream()
+                .map(SearchChildInteractor::getInteractorAc)
+                .collect(Collectors.toList());
+        assertEquals(interactorsAcsSortedByInteractionCount.subList(0, 6), interactorAcs);
+
+        interactorOp = childInteractorSearchService.findInteractorsWithGroup(
+                PagedInteractionSearchParameters.builder()
+                        .query("*")
+                        .page(1)
+                        .pageSize(6)
+                        .build());
+
+        assertEquals(5, interactorOp.getNumberOfElements());
+
+        // On the second page, we only get interactors that appear just once
+        interactors = interactorOp.getContent();
+        interactorAcs = interactors.stream()
+                .map(SearchChildInteractor::getInteractorAc)
+                .collect(Collectors.toList());
+        assertEquals(interactorsAcsSortedByInteractionCount.subList(6, interactorsAcsSortedByInteractionCount.size()), interactorAcs);
+    }
+
+    @Test
+    public void sortInteractorsInQueryByPopularity() {
+        List<String> interactorsAcsSortedByInteractionCount = List.of(
+                "EBI-715849", // 29
+                "EBI-999909", // 8
+                "EBI-999900" // 5
+        );
+
+        // Search for interactions with 1 specific protein that return 3 different interactors.
+        GroupPage<SearchChildInteractor> interactorOp = childInteractorSearchService.findInteractorsWithGroup(
+                PagedInteractionSearchParameters.builder()
+                        .query("B4DZZ7")
+                        .pageSize(10)
+                        .build());
+
+        assertEquals(3, interactorOp.getNumberOfElements());
+
+        List<SearchChildInteractor> interactors = interactorOp.getContent();
+        List<String> interactorAcs = interactors.stream()
+                .map(SearchChildInteractor::getInteractorAc)
+                .collect(Collectors.toList());
+        assertEquals(interactorsAcsSortedByInteractionCount, interactorAcs);
     }
 }

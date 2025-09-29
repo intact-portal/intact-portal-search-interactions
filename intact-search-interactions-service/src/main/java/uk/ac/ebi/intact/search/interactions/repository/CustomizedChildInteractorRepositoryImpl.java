@@ -2,6 +2,7 @@ package uk.ac.ebi.intact.search.interactions.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.solr.core.RequestMethod;
 import org.springframework.data.solr.core.SolrOperations;
 import org.springframework.data.solr.core.query.Criteria;
@@ -10,7 +11,6 @@ import org.springframework.data.solr.core.query.GroupOptions;
 import org.springframework.data.solr.core.query.SimpleQuery;
 import org.springframework.data.solr.core.query.result.GroupPage;
 import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
-import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractorFields;
 import uk.ac.ebi.intact.search.interactions.model.parameters.InteractionSearchParameters;
 import uk.ac.ebi.intact.search.interactions.model.parameters.PagedInteractionSearchParameters;
 import uk.ac.ebi.intact.search.interactions.utils.NestedCriteria;
@@ -18,20 +18,17 @@ import uk.ac.ebi.intact.search.interactions.utils.SearchInteractionUtility;
 
 import java.util.List;
 
+import static uk.ac.ebi.intact.search.interactions.model.SearchChildInteractorFields.DOCUMENT_ID;
+import static uk.ac.ebi.intact.search.interactions.model.SearchChildInteractorFields.INTERACTION_COUNT;
 import static uk.ac.ebi.intact.search.interactions.model.SearchInteraction.INTERACTIONS;
 
 /**
  * Created by anjali on 13/02/20.
  */
 public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildInteractorRepository {
-    // default minimum counts for faceting
-    private static final int FACET_MIN_COUNT = 10000;
-    private SolrOperations solrOperations;
-    private SearchInteractionUtility searchInteractionUtility = new SearchInteractionUtility();
 
-    // default sorting for the query results
-    //TODO Solve problems with multivalue fields that are not allow to be sorted. Schema-less create all the fields as multivalues
-//    private static final Sort DEFAULT_QUERY_SORT_WITH_QUERY = new Sort(Sort.Direction.DESC, SearchInteractorFields.INTERACTION_COUNT);
+    private final SolrOperations solrOperations;
+    private final SearchInteractionUtility searchInteractionUtility = new SearchInteractionUtility();
 
     @Autowired
     public CustomizedChildInteractorRepositoryImpl(SolrOperations solrOperations) {
@@ -40,22 +37,10 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
 
     @Override
     public GroupPage<SearchChildInteractor> findChildInteractors(PagedInteractionSearchParameters parameters) {
+        SimpleQuery search = queryToFindInteractors(parameters);
 
-        // filters
-        List<FilterQuery> interactionFilterQueries = searchInteractionUtility.createFilterQuery(parameters);
-
-        // search query
-        SimpleQuery search = new SimpleQuery();
-
-        // search criterias
-        Criteria interactionSearchCriteria = searchInteractionUtility.createSearchConditions(parameters);
-        Criteria interactorCriteria = new NestedCriteria(interactionSearchCriteria, interactionFilterQueries);
-
-        search.addCriteria(interactorCriteria);
-
-        //group
-        GroupOptions groupOptions = new GroupOptions()
-                .addGroupByField(SearchChildInteractorFields.DOCUMENT_ID);
+        // group
+        GroupOptions groupOptions = new GroupOptions().addGroupByField(DOCUMENT_ID);
         groupOptions.setLimit(1);
         groupOptions.setGroupMain(true);
         search.setGroupOptions(groupOptions);
@@ -66,10 +51,11 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
         // sorting
         if (parameters.getSort() != null) {
             search.addSort(parameters.standardiseSort());
+        } else {
+            // We sort by the interaction count for each interactor, which counts the total number of interactions
+            // in the DB, not just for the current query.
+            search.addSort(Sort.by(Sort.Direction.DESC, INTERACTION_COUNT));
         }
-//        else {
-//            search.addSort(DEFAULT_QUERY_SORT_WITH_QUERY);
-//        }
 
         return solrOperations.queryForGroupPage(INTERACTIONS, search, SearchChildInteractor.class,
                 (parameters.isBatchSearch() ? RequestMethod.POST : RequestMethod.GET));
@@ -80,21 +66,10 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
     // group.ngroups=true (setTotalCount(true) in spring-data-solr)
     @Override
     public long countChildInteractors(InteractionSearchParameters parameters) {
-        // filters
-        List<FilterQuery> interactionFilterQueries = searchInteractionUtility.createFilterQuery(parameters);
+        SimpleQuery search = queryToFindInteractors(parameters);
 
-        // search query
-        SimpleQuery search = new SimpleQuery();
-
-        // search criterias
-        Criteria interactionSearchCriteria = searchInteractionUtility.createSearchConditions(parameters);
-        Criteria interactorCriteria = new NestedCriteria(interactionSearchCriteria, interactionFilterQueries);
-
-        search.addCriteria(interactorCriteria);
-
-        //group
-        GroupOptions groupOptions = new GroupOptions()
-                .addGroupByField(SearchChildInteractorFields.DOCUMENT_ID);
+        // group
+        GroupOptions groupOptions = new GroupOptions().addGroupByField(DOCUMENT_ID);
         groupOptions.setLimit(1);
         groupOptions.setGroupMain(false);
         groupOptions.setTotalCount(true);
@@ -105,6 +80,23 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
 
         GroupPage<SearchChildInteractor> groupPage = solrOperations.queryForGroupPage(INTERACTIONS, search, SearchChildInteractor.class,
                 (parameters.isBatchSearch() ? RequestMethod.POST : RequestMethod.GET));
-        return groupPage.getGroupResult(SearchChildInteractorFields.DOCUMENT_ID).getGroupsCount();
+        return groupPage.getGroupResult(DOCUMENT_ID).getGroupsCount();
+    }
+
+    private SimpleQuery queryToFindInteractors(InteractionSearchParameters parameters) {
+        // search query
+        SimpleQuery search = new SimpleQuery();
+        addFiltersToQueryToFindInteractors(search, parameters);
+        return search;
+    }
+
+    private void addFiltersToQueryToFindInteractors(SimpleQuery search, InteractionSearchParameters parameters) {
+        // filters
+        List<FilterQuery> interactionFilterQueries = searchInteractionUtility.createFilterQuery(parameters);
+
+        // search criteria
+        Criteria interactionSearchCriteria = searchInteractionUtility.createSearchConditions(parameters);
+        Criteria interactorCriteria = new NestedCriteria(interactionSearchCriteria, interactionFilterQueries);
+        search.addCriteria(interactorCriteria);
     }
 }
