@@ -196,8 +196,8 @@ public class SearchInteractionUtility {
         }
     }
 
-    private void createFilterCriteriaForBoolean(String tagForExcludingFacets, boolean value, String field, List<FilterQuery> filterQueries) {
-        if (value) {
+    private void createFilterCriteriaForBoolean(String tagForExcludingFacets, Boolean value, String field, List<FilterQuery> filterQueries) {
+        if (value != null) {
             Criteria conditions = new Criteria(tagForExcludingFacets + field).is(value);
             filterQueries.add(new SimpleFilterQuery(conditions));
         }
