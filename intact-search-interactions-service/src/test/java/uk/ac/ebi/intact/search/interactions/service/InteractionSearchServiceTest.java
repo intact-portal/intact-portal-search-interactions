@@ -311,19 +311,6 @@ public class InteractionSearchServiceTest {
         }
 
         //detection method facet checking
-        HashMap<String, Long> detectionMethodsFacetsExpected = new HashMap<>();
-        detectionMethodsFacetsExpected.put("anti bait coip", 4L);
-        detectionMethodsFacetsExpected.put("density sedimentation", 3L);
-        detectionMethodsFacetsExpected.put("elisa", 1L);
-        detectionMethodsFacetsExpected.put("affinity chrom", 1L);
-        detectionMethodsFacetsExpected.put("molecular sieving", 1L);
-
-        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_S);
-        assertEquals(5, facetFieldEntryPage.getTotalElements());
-        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
-            assertEquals(detectionMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
-        }
-
         HashMap<String, Long> detectionMethodsStyledFacetsExpected = new HashMap<>();
         detectionMethodsStyledFacetsExpected.put("MI:0006__anti bait coip", 4L);
         detectionMethodsStyledFacetsExpected.put("MI:0029__density sedimentation", 3L);
@@ -508,18 +495,6 @@ public class InteractionSearchServiceTest {
         }
 
         //detection method facet checking
-        HashMap<String, Long> detectionMethodsFacetsExpected = new HashMap<>();
-        detectionMethodsFacetsExpected.put("density sedimentation", 3L);
-        detectionMethodsFacetsExpected.put("elisa", 1L);
-        detectionMethodsFacetsExpected.put("affinity chrom", 1L);
-        detectionMethodsFacetsExpected.put("molecular sieving", 1L);
-
-        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_S);
-        assertEquals(4, facetFieldEntryPage.getTotalElements());
-        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
-            assertEquals(detectionMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
-        }
-
         HashMap<String, Long> detectionMethodsStyledFacetsExpected = new HashMap<>();
         detectionMethodsStyledFacetsExpected.put("MI:0029__density sedimentation", 3L);
         detectionMethodsStyledFacetsExpected.put("MI:0411__elisa", 1L);
@@ -648,17 +623,6 @@ public class InteractionSearchServiceTest {
 
 
         //detection method facet checking
-        HashMap<String, Long> detectionMethodsFacetsExpected = new HashMap<>();
-        detectionMethodsFacetsExpected.put("density sedimentation", 1L);
-        detectionMethodsFacetsExpected.put("elisa", 1L);
-        detectionMethodsFacetsExpected.put("affinity chrom", 1L);
-
-        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_S);
-        assertEquals(3, facetFieldEntryPage.getTotalElements());
-        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
-            assertEquals(detectionMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
-        }
-
         HashMap<String, Long> detectionMethodsStyledFacetsExpected = new HashMap<>();
         detectionMethodsStyledFacetsExpected.put("MI:0029__density sedimentation", 1L);
         detectionMethodsStyledFacetsExpected.put("MI:0411__elisa", 1L);
@@ -759,15 +723,6 @@ public class InteractionSearchServiceTest {
         }
 
         //detection method facet checking
-        HashMap<String, Long> detectionMethodsFacetsExpected = new HashMap<>();
-        detectionMethodsFacetsExpected.put("anti bait coip", 4L);
-
-        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_S);
-        assertEquals(1, facetFieldEntryPage.getTotalElements());
-        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
-            assertEquals(detectionMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
-        }
-
         HashMap<String, Long> detectionMethodsStyledFacetsExpected = new HashMap<>();
         detectionMethodsStyledFacetsExpected.put("MI:0006__anti bait coip", 4L);
 
@@ -900,15 +855,6 @@ public class InteractionSearchServiceTest {
         }
 
         //detection method facet checking
-        HashMap<String, Long> detectionMethodsFacetsExpected = new HashMap<>();
-        detectionMethodsFacetsExpected.put("elisa", 1L);
-
-        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_S);
-        assertEquals(1, facetFieldEntryPage.getTotalElements());
-        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
-            assertEquals(detectionMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
-        }
-
         HashMap<String, Long> detectionMethodsStyledFacetsExpected = new HashMap<>();
         detectionMethodsStyledFacetsExpected.put("MI:0411__elisa", 1L);
 
@@ -1041,19 +987,6 @@ public class InteractionSearchServiceTest {
         }
 
         //detection method facet checking
-        HashMap<String, Long> detectionMethodsFacetsExpected = new HashMap<>();
-        detectionMethodsFacetsExpected.put("anti bait coip", 4L);
-        detectionMethodsFacetsExpected.put("density sedimentation", 3L);
-        detectionMethodsFacetsExpected.put("elisa", 1L);
-        detectionMethodsFacetsExpected.put("affinity chrom", 1L);
-        detectionMethodsFacetsExpected.put("molecular sieving", 1L);
-
-        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_S);
-        assertEquals(5, facetFieldEntryPage.getTotalElements());
-        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
-            assertEquals(detectionMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
-        }
-
         HashMap<String, Long> detectionMethodsStyledFacetsExpected = new HashMap<>();
         detectionMethodsStyledFacetsExpected.put("MI:0006__anti bait coip", 4L);
         detectionMethodsStyledFacetsExpected.put("MI:0029__density sedimentation", 3L);
@@ -1197,19 +1130,6 @@ public class InteractionSearchServiceTest {
         }
 
         //detection method facet checking
-        HashMap<String, Long> detectionMethodsFacetsExpected = new HashMap<>();
-        detectionMethodsFacetsExpected.put("anti bait coip", 4L);
-        detectionMethodsFacetsExpected.put("density sedimentation", 3L);
-        detectionMethodsFacetsExpected.put("elisa", 1L);
-        detectionMethodsFacetsExpected.put("affinity chrom", 1L);
-        detectionMethodsFacetsExpected.put("molecular sieving", 1L);
-
-        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_S);
-        assertEquals(5, facetFieldEntryPage.getTotalElements());
-        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
-            assertEquals(detectionMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
-        }
-
         HashMap<String, Long> detectionMethodsStyledFacetsExpected = new HashMap<>();
         detectionMethodsStyledFacetsExpected.put("MI:0006__anti bait coip", 4L);
         detectionMethodsStyledFacetsExpected.put("MI:0029__density sedimentation", 3L);
@@ -1352,16 +1272,6 @@ public class InteractionSearchServiceTest {
         }
 
         //detection method facet checking
-        HashMap<String, Long> detectionMethodsFacetsExpected = new HashMap<>();
-        detectionMethodsFacetsExpected.put("density sedimentation", 3L);
-        detectionMethodsFacetsExpected.put("molecular sieving", 1L);
-
-        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_S);
-        assertEquals(2, facetFieldEntryPage.getTotalElements());
-        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
-            assertEquals(detectionMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
-        }
-
         HashMap<String, Long> detectionMethodsStyledFacetsExpected = new HashMap<>();
         detectionMethodsStyledFacetsExpected.put("MI:0029__density sedimentation", 3L);
         detectionMethodsStyledFacetsExpected.put("MI:0071__molecular sieving", 1L);
@@ -1510,18 +1420,6 @@ public class InteractionSearchServiceTest {
         }
 
         //detection method facet checking
-        HashMap<String, Long> detectionMethodsFacetsExpected = new HashMap<>();
-        detectionMethodsFacetsExpected.put("density sedimentation", 3L);
-        detectionMethodsFacetsExpected.put("molecular sieving", 1L);
-        detectionMethodsFacetsExpected.put("elisa", 1L);
-        detectionMethodsFacetsExpected.put("affinity chrom", 1L);
-
-        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_S);
-        assertEquals(4, facetFieldEntryPage.getTotalElements());
-        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
-            assertEquals(detectionMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
-        }
-
         HashMap<String, Long> detectionMethodsStyledFacetsExpected = new HashMap<>();
         detectionMethodsStyledFacetsExpected.put("MI:0029__density sedimentation", 3L);
         detectionMethodsStyledFacetsExpected.put("MI:0411__elisa", 1L);
@@ -1672,18 +1570,6 @@ public class InteractionSearchServiceTest {
         }
 
         //detection method facet checking
-        HashMap<String, Long> detectionMethodsFacetsExpected = new HashMap<>();
-        detectionMethodsFacetsExpected.put("density sedimentation", 3L);
-        detectionMethodsFacetsExpected.put("molecular sieving", 1L);
-        detectionMethodsFacetsExpected.put("elisa", 1L);
-        detectionMethodsFacetsExpected.put("affinity chrom", 1L);
-
-        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_S);
-        assertEquals(4, facetFieldEntryPage.getTotalElements());
-        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
-            assertEquals(detectionMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
-        }
-
         HashMap<String, Long> detectionMethodsStyledFacetsExpected = new HashMap<>();
         detectionMethodsStyledFacetsExpected.put("MI:0029__density sedimentation", 3L);
         detectionMethodsStyledFacetsExpected.put("MI:0411__elisa", 1L);
@@ -1831,19 +1717,6 @@ public class InteractionSearchServiceTest {
         }
 
         //detection method facet checking
-        HashMap<String, Long> detectionMethodsFacetsExpected = new HashMap<>();
-        detectionMethodsFacetsExpected.put("anti bait coip", 4L);
-        detectionMethodsFacetsExpected.put("density sedimentation", 3L);
-        detectionMethodsFacetsExpected.put("molecular sieving", 1L);
-        detectionMethodsFacetsExpected.put("elisa", 1L);
-        detectionMethodsFacetsExpected.put("affinity chrom", 1L);
-
-        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_S);
-        assertEquals(5, facetFieldEntryPage.getTotalElements());
-        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
-            assertEquals(detectionMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
-        }
-
         HashMap<String, Long> detectionMethodsStyledFacetsExpected = new HashMap<>();
         detectionMethodsStyledFacetsExpected.put("MI:0006__anti bait coip", 4L);
         detectionMethodsStyledFacetsExpected.put("MI:0029__density sedimentation", 3L);
@@ -1989,18 +1862,6 @@ public class InteractionSearchServiceTest {
         }
 
         //detection method facet checking
-        HashMap<String, Long> detectionMethodsFacetsExpected = new HashMap<>();
-        detectionMethodsFacetsExpected.put("density sedimentation", 3L);
-        detectionMethodsFacetsExpected.put("molecular sieving", 1L);
-        detectionMethodsFacetsExpected.put("elisa", 1L);
-        detectionMethodsFacetsExpected.put("affinity chrom", 1L);
-
-        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_S);
-        assertEquals(4, facetFieldEntryPage.getTotalElements());
-        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
-            assertEquals(detectionMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
-        }
-
         HashMap<String, Long> detectionMethodsStyledFacetsExpected = new HashMap<>();
         detectionMethodsStyledFacetsExpected.put("MI:0029__density sedimentation", 3L);
         detectionMethodsStyledFacetsExpected.put("MI:0411__elisa", 1L);
@@ -2144,19 +2005,6 @@ public class InteractionSearchServiceTest {
         }
 
         //detection method facet checking
-        HashMap<String, Long> detectionMethodsFacetsExpected = new HashMap<>();
-        detectionMethodsFacetsExpected.put("anti bait coip", 4L);
-        detectionMethodsFacetsExpected.put("density sedimentation", 3L);
-        detectionMethodsFacetsExpected.put("elisa", 1L);
-        detectionMethodsFacetsExpected.put("affinity chrom", 1L);
-        detectionMethodsFacetsExpected.put("molecular sieving", 1L);
-
-        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_S);
-        assertEquals(5, facetFieldEntryPage.getTotalElements());
-        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
-            assertEquals(detectionMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
-        }
-
         HashMap<String, Long> detectionMethodsStyledFacetsExpected = new HashMap<>();
         detectionMethodsStyledFacetsExpected.put("MI:0006__anti bait coip", 4L);
         detectionMethodsStyledFacetsExpected.put("MI:0029__density sedimentation", 3L);
@@ -2302,19 +2150,6 @@ public class InteractionSearchServiceTest {
         }
 
         //detection method facet checking
-        HashMap<String, Long> detectionMethodsFacetsExpected = new HashMap<>();
-        detectionMethodsFacetsExpected.put("anti bait coip", 4L);
-        detectionMethodsFacetsExpected.put("density sedimentation", 3L);
-        detectionMethodsFacetsExpected.put("elisa", 1L);
-        detectionMethodsFacetsExpected.put("affinity chrom", 1L);
-        detectionMethodsFacetsExpected.put("molecular sieving", 1L);
-
-        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_S);
-        assertEquals(5, facetFieldEntryPage.getTotalElements());
-        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
-            assertEquals(detectionMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
-        }
-
         HashMap<String, Long> detectionMethodsStyledFacetsExpected = new HashMap<>();
         detectionMethodsStyledFacetsExpected.put("MI:0006__anti bait coip", 4L);
         detectionMethodsStyledFacetsExpected.put("MI:0029__density sedimentation", 3L);

@@ -6,11 +6,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.test.context.junit4.SpringRunner;
-import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.model.parameters.PagedInteractionSearchParameters;
 import uk.ac.ebi.intact.search.interactions.model.parameters.SimpleInteractionQueryParameters;
@@ -21,13 +19,13 @@ import uk.ac.ebi.intact.search.interactions.utils.as.converters.TextFieldConvert
 import uk.ac.ebi.intact.search.interactions.utils.as.converters.XrefFieldConverter;
 
 import javax.annotation.Resource;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static org.junit.Assert.*;
 import static uk.ac.ebi.intact.search.interactions.model.AdvancedSearchInteractionFields.MiqlFieldConstants.*;
-import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields.AC;
-import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields.DETECTION_METHOD_S;
+import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields.DETECTION_METHOD_MI_STYLED;
 import static uk.ac.ebi.intact.search.interactions.service.util.TestUtil.merge;
 
 /**
@@ -49,7 +47,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
      * Before any tests run, this cleans the solr index and creates a new index with stored searchInteractions in an xml
      */
     @Before
-    public void setUp() {
+    public void setUp() throws ParseException {
         asParams = PagedInteractionSearchParameters.builder()
                 .advancedSearch(true)
                 .negativeFilter(NegativeFilterStatus.POSITIVE_AND_NEGATIVE);
@@ -70,6 +68,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 new HashSet<>(Collections.singletonList("publication_1")));
         searchInteraction1.setPublicationPubmedIdentifier("unassigned1");
         searchInteraction1.setDetectionMethod("detection_method1");
+        searchInteraction1.setDetectionMethodMIIdentifierStyled("MI:0001__detection_method1");
         searchInteraction1.setAsAltidA(merge(XrefFieldConverter.indexFieldValues("uniprotkb", "P12345"),
                 XrefFieldConverter.indexFieldValues("intact", "EBI-12345")));// all interactor A identifiers
         searchInteraction1.setAsAltidB(merge(XrefFieldConverter.indexFieldValues("uniprotkb", "O12345"),
@@ -110,11 +109,8 @@ public class AdvancedSearchInteractionSearchServiceTest {
         searchInteraction1.setAsInteractionXrefs(XrefFieldConverter.indexFieldValues("go", "GO:412345"));
         searchInteraction1.setAsSource(TextFieldConverter.indexFieldValues("psi-mi", "MI:0469", "European Bioinformatics Institute"));
         searchInteraction1.setAsExpansionMethod(TextFieldConverter.indexFieldValues("psi-mi", "MI:1060", "spoke expansion"));
-        try {
-            searchInteraction1.setAsUpdationDate(DateFieldConverter.indexFieldValues(new SimpleDateFormat("yyyy/MM/dd").parse("2012/01/01")));
-            searchInteraction1.setAsReleaseDate(DateFieldConverter.indexFieldValues(new SimpleDateFormat("yyyy/MM/dd").parse("2013/01/01")));
-        } catch (Exception e) {
-        }
+        searchInteraction1.setAsUpdationDate(DateFieldConverter.indexFieldValues(new SimpleDateFormat("yyyy/MM/dd").parse("2012/01/01")));
+        searchInteraction1.setAsReleaseDate(DateFieldConverter.indexFieldValues(new SimpleDateFormat("yyyy/MM/dd").parse("2013/01/01")));
         searchInteraction1.setAsIntactMiscore(0.5);
         searchInteraction1.setAsNegative(true);
         searchInteraction1.setAsStoichiometry(true);
@@ -128,7 +124,6 @@ public class AdvancedSearchInteractionSearchServiceTest {
         searchInteraction1.setAsGeneNameB("Gene NameB1");
 
         SearchInteraction searchInteraction2 = new SearchInteraction();
-        List<SearchChildInteractor> searchChildInteractors2 = new ArrayList<>();
 
         searchInteraction2.setAc("interaction_c2");
         searchInteraction2.setDocumentType(DocumentType.INTERACTION);
@@ -140,6 +135,7 @@ public class AdvancedSearchInteractionSearchServiceTest {
                 new HashSet<>(Collections.singletonList("publication_2")));
         searchInteraction2.setPublicationPubmedIdentifier("unassigned2");
         searchInteraction2.setDetectionMethod("detection_method2");
+        searchInteraction2.setDetectionMethodMIIdentifierStyled("MI:0002__detection_method2");
         searchInteraction2.setAsAltidA(merge(XrefFieldConverter.indexFieldValues("uniprotkb", "P123456"),
                 XrefFieldConverter.indexFieldValues("intact", "EBI-123456")));// all interactor A identifiers
         searchInteraction2.setAsAltidB(merge(XrefFieldConverter.indexFieldValues("uniprotkb", "O123456"),
@@ -180,11 +176,8 @@ public class AdvancedSearchInteractionSearchServiceTest {
         searchInteraction2.setAsInteractionXrefs(XrefFieldConverter.indexFieldValues("go", "GO:512345"));
         searchInteraction2.setAsSource(TextFieldConverter.indexFieldValues("psi-mi", "MI:0471", "Mint"));
         searchInteraction2.setAsExpansionMethod(TextFieldConverter.indexFieldValues("psi-mi", "MI:1061", "matrix expansion"));
-        try {
-            searchInteraction2.setAsUpdationDate(DateFieldConverter.indexFieldValues(new SimpleDateFormat("yyyy/MM/dd").parse("2015/01/01")));
-            searchInteraction2.setAsReleaseDate(DateFieldConverter.indexFieldValues(new SimpleDateFormat("yyyy/MM/dd").parse("2016/01/01")));
-        } catch (Exception e) {
-        }
+        searchInteraction2.setAsUpdationDate(DateFieldConverter.indexFieldValues(new SimpleDateFormat("yyyy/MM/dd").parse("2015/01/01")));
+        searchInteraction2.setAsReleaseDate(DateFieldConverter.indexFieldValues(new SimpleDateFormat("yyyy/MM/dd").parse("2016/01/01")));
         searchInteraction2.setAsIntactMiscore(1.0);
         searchInteraction2.setAsNegative(false);
         searchInteraction2.setAsStoichiometry(false);
@@ -242,10 +235,10 @@ public class AdvancedSearchInteractionSearchServiceTest {
 
         //detection method facet checking
         HashMap<String, Long> detectionMethodsFacetsExpected = new HashMap<>();
-        detectionMethodsFacetsExpected.put("detection_method1", 1L);
-        detectionMethodsFacetsExpected.put("detection_method2", 1L);
+        detectionMethodsFacetsExpected.put("MI:0001__detection_method1", 1L);
+        detectionMethodsFacetsExpected.put("MI:0002__detection_method2", 1L);
 
-        Page<FacetFieldEntry> facetFieldEntryPage = interactionFacetPage2.getFacetResultPage(DETECTION_METHOD_S);
+        Page<FacetFieldEntry> facetFieldEntryPage = interactionFacetPage2.getFacetResultPage(DETECTION_METHOD_MI_STYLED);
         assertEquals(2, facetFieldEntryPage.getTotalElements());
         for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
             assertEquals(detectionMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
