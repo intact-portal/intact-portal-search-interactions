@@ -26,6 +26,7 @@ public class InteractionSearchParameters extends InteractionGraphJSONParameters 
                 .advancedSearch(parameters.isAdvancedSearch())
 
                 .interactionDetectionMethodsFilter(parameters.getInteractionDetectionMethodsFilter())
+                .participantDetectionMethodsFilter(parameters.getParticipantDetectionMethodsFilter())
                 .interactionTypesFilter(parameters.getInteractionTypesFilter())
                 .interactionHostOrganismsFilter(parameters.getInteractionHostOrganismsFilter())
                 .interactorTypesFilter(parameters.getInteractorTypesFilter())

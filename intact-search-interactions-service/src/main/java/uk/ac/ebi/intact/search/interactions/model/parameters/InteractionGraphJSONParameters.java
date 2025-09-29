@@ -32,6 +32,8 @@ public class InteractionGraphJSONParameters implements SimpleSearchParametersI {
     protected Set<String> interactorTypesFilter;
     @Schema(description = "Filters interactions based on interaction detection method", example = "[]")
     protected Set<String> interactionDetectionMethodsFilter;
+    @Schema(description = "Filters interactions based on participant detection method", example = "[]")
+    protected Set<String> participantDetectionMethodsFilter;
     @Schema(description = "Filters interactions based on interaction types", example = "[]")
     protected Set<String> interactionTypesFilter;
     @Schema(description = "Filters interactions based on interaction host organism", example = "[]")

@@ -311,17 +311,29 @@ public class InteractionSearchServiceTest {
         }
 
         //detection method facet checking
-        HashMap<String, Long> detectionMethodsFacetsExpected = new HashMap<>();
-        detectionMethodsFacetsExpected.put("anti bait coip", 4L);
-        detectionMethodsFacetsExpected.put("density sedimentation", 3L);
-        detectionMethodsFacetsExpected.put("elisa", 1L);
-        detectionMethodsFacetsExpected.put("affinity chrom", 1L);
-        detectionMethodsFacetsExpected.put("molecular sieving", 1L);
+        HashMap<String, Long> detectionMethodsStyledFacetsExpected = new HashMap<>();
+        detectionMethodsStyledFacetsExpected.put("MI:0006__anti bait coip", 4L);
+        detectionMethodsStyledFacetsExpected.put("MI:0029__density sedimentation", 3L);
+        detectionMethodsStyledFacetsExpected.put("MI:0411__elisa", 1L);
+        detectionMethodsStyledFacetsExpected.put("MI:0004__affinity chrom", 1L);
+        detectionMethodsStyledFacetsExpected.put("MI:0071__molecular sieving", 1L);
 
-        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_S);
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_MI_STYLED);
         assertEquals(5, facetFieldEntryPage.getTotalElements());
         for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
-            assertEquals(detectionMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+            assertEquals(detectionMethodsStyledFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+        }
+
+        //identification method facet checking
+        HashMap<String, Long> identificationMethodsFacetsExpected = new HashMap<>();
+        identificationMethodsFacetsExpected.put("MI:0396__predetermined", 5L);
+        identificationMethodsFacetsExpected.put("MI:0113__western blot", 4L);
+        identificationMethodsFacetsExpected.put("MI:0981__tag perox activity", 1L);
+
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(IDENTIFICATION_METHOD_MI_A_B_STYLED);
+        assertEquals(3, facetFieldEntryPage.getTotalElements());
+        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
+            assertEquals(identificationMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
         }
 
         //interaction type facet checking
@@ -437,11 +449,11 @@ public class InteractionSearchServiceTest {
         FacetPage<SearchInteraction> interactionFacetPage = interactionSearchService.findInteractionWithFacet(
                 PagedInteractionSearchParameters.builder()
                         .query("physical association")
-                        .interactorSpeciesFilter(Set.of("Homo sapiens"))
+                        .interactorSpeciesFilter(Set.of("Homo sapiens__9606"))
                         .interactionTypesFilter(Set.of("physical association"))
                         .interactionDetectionMethodsFilter(Set.of("molecular sieving"))
                         .interactorTypesFilter(Set.of("protein"))
-                        .interactionHostOrganismsFilter(Set.of("In vitro"))
+                        .interactionHostOrganismsFilter(Set.of("In vitro__-1"))
                         .minMIScore(0)
                         .maxMIScore(0.7)
                         .build()
@@ -483,16 +495,26 @@ public class InteractionSearchServiceTest {
         }
 
         //detection method facet checking
-        HashMap<String, Long> detectionMethodsFacetsExpected = new HashMap<>();
-        detectionMethodsFacetsExpected.put("density sedimentation", 3L);
-        detectionMethodsFacetsExpected.put("elisa", 1L);
-        detectionMethodsFacetsExpected.put("affinity chrom", 1L);
-        detectionMethodsFacetsExpected.put("molecular sieving", 1L);
+        HashMap<String, Long> detectionMethodsStyledFacetsExpected = new HashMap<>();
+        detectionMethodsStyledFacetsExpected.put("MI:0029__density sedimentation", 3L);
+        detectionMethodsStyledFacetsExpected.put("MI:0411__elisa", 1L);
+        detectionMethodsStyledFacetsExpected.put("MI:0004__affinity chrom", 1L);
+        detectionMethodsStyledFacetsExpected.put("MI:0071__molecular sieving", 1L);
 
-        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_S);
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_MI_STYLED);
         assertEquals(4, facetFieldEntryPage.getTotalElements());
         for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
-            assertEquals(detectionMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+            assertEquals(detectionMethodsStyledFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+        }
+
+        //identification method facet checking
+        HashMap<String, Long> identificationMethodsFacetsExpected = new HashMap<>();
+        identificationMethodsFacetsExpected.put("MI:0396__predetermined", 1L);
+
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(IDENTIFICATION_METHOD_MI_A_B_STYLED);
+        assertEquals(1, facetFieldEntryPage.getTotalElements());
+        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
+            assertEquals(identificationMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
         }
 
         //interaction type facet checking
@@ -568,11 +590,11 @@ public class InteractionSearchServiceTest {
         FacetPage<SearchInteraction> interactionFacetPage = interactionSearchService.findInteractionWithFacet(
                 PagedInteractionSearchParameters.builder()
                         .query("physical association")
-                        .interactorSpeciesFilter(Set.of("Homo sapiens", "Rattus norvegicus (Rat)"))
+                        .interactorSpeciesFilter(Set.of("Homo sapiens__9606", "Rattus norvegicus (Rat)__10116"))
                         .interactorTypesFilter(Set.of("protein"))
                         .interactionDetectionMethodsFilter(Set.of("molecular sieving"))
                         .interactionTypesFilter(Set.of("physical association"))
-                        .interactionHostOrganismsFilter(Set.of("In vitro"))
+                        .interactionHostOrganismsFilter(Set.of("In vitro__-1"))
                         .minMIScore(0)
                         .maxMIScore(0.6)
                         .intraSpeciesFilter(true)
@@ -601,16 +623,20 @@ public class InteractionSearchServiceTest {
 
 
         //detection method facet checking
-        HashMap<String, Long> detectionMethodsFacetsExpected = new HashMap<>();
-        detectionMethodsFacetsExpected.put("density sedimentation", 1L);
-        detectionMethodsFacetsExpected.put("elisa", 1L);
-        detectionMethodsFacetsExpected.put("affinity chrom", 1L);
+        HashMap<String, Long> detectionMethodsStyledFacetsExpected = new HashMap<>();
+        detectionMethodsStyledFacetsExpected.put("MI:0029__density sedimentation", 1L);
+        detectionMethodsStyledFacetsExpected.put("MI:0411__elisa", 1L);
+        detectionMethodsStyledFacetsExpected.put("MI:0004__affinity chrom", 1L);
 
-        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_S);
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_MI_STYLED);
         assertEquals(3, facetFieldEntryPage.getTotalElements());
         for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
-            assertEquals(detectionMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+            assertEquals(detectionMethodsStyledFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
         }
+
+        //identification method facet checking
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(IDENTIFICATION_METHOD_MI_A_B_STYLED);
+        assertEquals(0, facetFieldEntryPage.getTotalElements());
 
         //interaction type facet checking
         facetFieldEntryPage = interactionFacetPage.getFacetResultPage(TYPE_MI_IDENTIFIER_STYLED);
@@ -697,13 +723,23 @@ public class InteractionSearchServiceTest {
         }
 
         //detection method facet checking
-        HashMap<String, Long> detectionMethodsFacetsExpected = new HashMap<>();
-        detectionMethodsFacetsExpected.put("anti bait coip", 4L);
+        HashMap<String, Long> detectionMethodsStyledFacetsExpected = new HashMap<>();
+        detectionMethodsStyledFacetsExpected.put("MI:0006__anti bait coip", 4L);
 
-        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_S);
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_MI_STYLED);
         assertEquals(1, facetFieldEntryPage.getTotalElements());
         for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
-            assertEquals(detectionMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+            assertEquals(detectionMethodsStyledFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+        }
+
+        //identification method facet checking
+        HashMap<String, Long> identificationMethodsFacetsExpected = new HashMap<>();
+        identificationMethodsFacetsExpected.put("MI:0113__western blot", 4L);
+
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(IDENTIFICATION_METHOD_MI_A_B_STYLED);
+        assertEquals(1, facetFieldEntryPage.getTotalElements());
+        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
+            assertEquals(identificationMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
         }
 
         //interaction type facet checking
@@ -819,13 +855,23 @@ public class InteractionSearchServiceTest {
         }
 
         //detection method facet checking
-        HashMap<String, Long> detectionMethodsFacetsExpected = new HashMap<>();
-        detectionMethodsFacetsExpected.put("elisa", 1L);
+        HashMap<String, Long> detectionMethodsStyledFacetsExpected = new HashMap<>();
+        detectionMethodsStyledFacetsExpected.put("MI:0411__elisa", 1L);
 
-        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_S);
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_MI_STYLED);
         assertEquals(1, facetFieldEntryPage.getTotalElements());
         for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
-            assertEquals(detectionMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+            assertEquals(detectionMethodsStyledFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+        }
+
+        //identification method facet checking
+        HashMap<String, Long> identificationMethodsFacetsExpected = new HashMap<>();
+        identificationMethodsFacetsExpected.put("MI:0981__tag perox activity", 1L);
+
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(IDENTIFICATION_METHOD_MI_A_B_STYLED);
+        assertEquals(1, facetFieldEntryPage.getTotalElements());
+        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
+            assertEquals(identificationMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
         }
 
         //interaction type facet checking
@@ -941,17 +987,29 @@ public class InteractionSearchServiceTest {
         }
 
         //detection method facet checking
-        HashMap<String, Long> detectionMethodsFacetsExpected = new HashMap<>();
-        detectionMethodsFacetsExpected.put("anti bait coip", 4L);
-        detectionMethodsFacetsExpected.put("density sedimentation", 3L);
-        detectionMethodsFacetsExpected.put("elisa", 1L);
-        detectionMethodsFacetsExpected.put("affinity chrom", 1L);
-        detectionMethodsFacetsExpected.put("molecular sieving", 1L);
+        HashMap<String, Long> detectionMethodsStyledFacetsExpected = new HashMap<>();
+        detectionMethodsStyledFacetsExpected.put("MI:0006__anti bait coip", 4L);
+        detectionMethodsStyledFacetsExpected.put("MI:0029__density sedimentation", 3L);
+        detectionMethodsStyledFacetsExpected.put("MI:0411__elisa", 1L);
+        detectionMethodsStyledFacetsExpected.put("MI:0004__affinity chrom", 1L);
+        detectionMethodsStyledFacetsExpected.put("MI:0071__molecular sieving", 1L);
 
-        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_S);
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_MI_STYLED);
         assertEquals(5, facetFieldEntryPage.getTotalElements());
         for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
-            assertEquals(detectionMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+            assertEquals(detectionMethodsStyledFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+        }
+
+        //identification method facet checking
+        HashMap<String, Long> identificationMethodsFacetsExpected = new HashMap<>();
+        identificationMethodsFacetsExpected.put("MI:0396__predetermined", 5L);
+        identificationMethodsFacetsExpected.put("MI:0113__western blot", 4L);
+        identificationMethodsFacetsExpected.put("MI:0981__tag perox activity", 1L);
+
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(IDENTIFICATION_METHOD_MI_A_B_STYLED);
+        assertEquals(3, facetFieldEntryPage.getTotalElements());
+        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
+            assertEquals(identificationMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
         }
 
         //interaction type facet checking
@@ -1072,17 +1130,29 @@ public class InteractionSearchServiceTest {
         }
 
         //detection method facet checking
-        HashMap<String, Long> detectionMethodsFacetsExpected = new HashMap<>();
-        detectionMethodsFacetsExpected.put("anti bait coip", 4L);
-        detectionMethodsFacetsExpected.put("density sedimentation", 3L);
-        detectionMethodsFacetsExpected.put("elisa", 1L);
-        detectionMethodsFacetsExpected.put("affinity chrom", 1L);
-        detectionMethodsFacetsExpected.put("molecular sieving", 1L);
+        HashMap<String, Long> detectionMethodsStyledFacetsExpected = new HashMap<>();
+        detectionMethodsStyledFacetsExpected.put("MI:0006__anti bait coip", 4L);
+        detectionMethodsStyledFacetsExpected.put("MI:0029__density sedimentation", 3L);
+        detectionMethodsStyledFacetsExpected.put("MI:0411__elisa", 1L);
+        detectionMethodsStyledFacetsExpected.put("MI:0004__affinity chrom", 1L);
+        detectionMethodsStyledFacetsExpected.put("MI:0071__molecular sieving", 1L);
 
-        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_S);
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_MI_STYLED);
         assertEquals(5, facetFieldEntryPage.getTotalElements());
         for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
-            assertEquals(detectionMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+            assertEquals(detectionMethodsStyledFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+        }
+
+        //identification method facet checking
+        HashMap<String, Long> identificationMethodsFacetsExpected = new HashMap<>();
+        identificationMethodsFacetsExpected.put("MI:0396__predetermined", 5L);
+        identificationMethodsFacetsExpected.put("MI:0113__western blot", 4L);
+        identificationMethodsFacetsExpected.put("MI:0981__tag perox activity", 1L);
+
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(IDENTIFICATION_METHOD_MI_A_B_STYLED);
+        assertEquals(3, facetFieldEntryPage.getTotalElements());
+        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
+            assertEquals(identificationMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
         }
 
         //interaction type facet checking
@@ -1202,14 +1272,24 @@ public class InteractionSearchServiceTest {
         }
 
         //detection method facet checking
-        HashMap<String, Long> detectionMethodsFacetsExpected = new HashMap<>();
-        detectionMethodsFacetsExpected.put("density sedimentation", 3L);
-        detectionMethodsFacetsExpected.put("molecular sieving", 1L);
+        HashMap<String, Long> detectionMethodsStyledFacetsExpected = new HashMap<>();
+        detectionMethodsStyledFacetsExpected.put("MI:0029__density sedimentation", 3L);
+        detectionMethodsStyledFacetsExpected.put("MI:0071__molecular sieving", 1L);
 
-        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_S);
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_MI_STYLED);
         assertEquals(2, facetFieldEntryPage.getTotalElements());
         for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
-            assertEquals(detectionMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+            assertEquals(detectionMethodsStyledFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+        }
+
+        //identification method facet checking
+        HashMap<String, Long> identificationMethodsFacetsExpected = new HashMap<>();
+        identificationMethodsFacetsExpected.put("MI:0396__predetermined", 4L);
+
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(IDENTIFICATION_METHOD_MI_A_B_STYLED);
+        assertEquals(1, facetFieldEntryPage.getTotalElements());
+        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
+            assertEquals(identificationMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
         }
 
         //interaction type facet checking
@@ -1340,16 +1420,28 @@ public class InteractionSearchServiceTest {
         }
 
         //detection method facet checking
-        HashMap<String, Long> detectionMethodsFacetsExpected = new HashMap<>();
-        detectionMethodsFacetsExpected.put("density sedimentation", 3L);
-        detectionMethodsFacetsExpected.put("molecular sieving", 1L);
-        detectionMethodsFacetsExpected.put("elisa", 1L);
-        detectionMethodsFacetsExpected.put("affinity chrom", 1L);
+        HashMap<String, Long> detectionMethodsStyledFacetsExpected = new HashMap<>();
+        detectionMethodsStyledFacetsExpected.put("MI:0029__density sedimentation", 3L);
+        detectionMethodsStyledFacetsExpected.put("MI:0411__elisa", 1L);
+        detectionMethodsStyledFacetsExpected.put("MI:0004__affinity chrom", 1L);
+        detectionMethodsStyledFacetsExpected.put("MI:0071__molecular sieving", 1L);
 
-        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_S);
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_MI_STYLED);
         assertEquals(4, facetFieldEntryPage.getTotalElements());
         for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
-            assertEquals(detectionMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+            assertEquals(detectionMethodsStyledFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+        }
+
+        //identification method facet checking
+        HashMap<String, Long> identificationMethodsFacetsExpected = new HashMap<>();
+        identificationMethodsFacetsExpected.put("MI:0396__predetermined", 5L);
+        identificationMethodsFacetsExpected.put("MI:0113__western blot", 4L);
+        identificationMethodsFacetsExpected.put("MI:0981__tag perox activity", 1L);
+
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(IDENTIFICATION_METHOD_MI_A_B_STYLED);
+        assertEquals(2, facetFieldEntryPage.getTotalElements());
+        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
+            assertEquals(identificationMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
         }
 
         //interaction type facet checking
@@ -1478,16 +1570,28 @@ public class InteractionSearchServiceTest {
         }
 
         //detection method facet checking
-        HashMap<String, Long> detectionMethodsFacetsExpected = new HashMap<>();
-        detectionMethodsFacetsExpected.put("density sedimentation", 3L);
-        detectionMethodsFacetsExpected.put("molecular sieving", 1L);
-        detectionMethodsFacetsExpected.put("elisa", 1L);
-        detectionMethodsFacetsExpected.put("affinity chrom", 1L);
+        HashMap<String, Long> detectionMethodsStyledFacetsExpected = new HashMap<>();
+        detectionMethodsStyledFacetsExpected.put("MI:0029__density sedimentation", 3L);
+        detectionMethodsStyledFacetsExpected.put("MI:0411__elisa", 1L);
+        detectionMethodsStyledFacetsExpected.put("MI:0004__affinity chrom", 1L);
+        detectionMethodsStyledFacetsExpected.put("MI:0071__molecular sieving", 1L);
 
-        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_S);
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_MI_STYLED);
         assertEquals(4, facetFieldEntryPage.getTotalElements());
         for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
-            assertEquals(detectionMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+            assertEquals(detectionMethodsStyledFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+        }
+
+        //identification method facet checking
+        HashMap<String, Long> identificationMethodsFacetsExpected = new HashMap<>();
+        identificationMethodsFacetsExpected.put("MI:0396__predetermined", 5L);
+        identificationMethodsFacetsExpected.put("MI:0113__western blot", 4L);
+        identificationMethodsFacetsExpected.put("MI:0981__tag perox activity", 1L);
+
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(IDENTIFICATION_METHOD_MI_A_B_STYLED);
+        assertEquals(2, facetFieldEntryPage.getTotalElements());
+        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
+            assertEquals(identificationMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
         }
 
         //interaction type facet checking
@@ -1561,11 +1665,10 @@ public class InteractionSearchServiceTest {
      **/
     @Test
     public void filterByMultipleDetectionMethods() {
-
         FacetPage<SearchInteraction> interactionFacetPage = interactionSearchService.findInteractionWithFacet(
                 PagedInteractionSearchParameters.builder()
                         .query("physical association")
-                        .interactionDetectionMethodsFilter(Set.of("density sedimentation", "molecular sieving"))
+                        .interactionDetectionMethodsFilter(Set.of("MI:0029", "MI:0071"))
                         .build()
         );
 
@@ -1614,17 +1717,27 @@ public class InteractionSearchServiceTest {
         }
 
         //detection method facet checking
-        HashMap<String, Long> detectionMethodsFacetsExpected = new HashMap<>();
-        detectionMethodsFacetsExpected.put("anti bait coip", 4L);
-        detectionMethodsFacetsExpected.put("density sedimentation", 3L);
-        detectionMethodsFacetsExpected.put("molecular sieving", 1L);
-        detectionMethodsFacetsExpected.put("elisa", 1L);
-        detectionMethodsFacetsExpected.put("affinity chrom", 1L);
+        HashMap<String, Long> detectionMethodsStyledFacetsExpected = new HashMap<>();
+        detectionMethodsStyledFacetsExpected.put("MI:0006__anti bait coip", 4L);
+        detectionMethodsStyledFacetsExpected.put("MI:0029__density sedimentation", 3L);
+        detectionMethodsStyledFacetsExpected.put("MI:0411__elisa", 1L);
+        detectionMethodsStyledFacetsExpected.put("MI:0004__affinity chrom", 1L);
+        detectionMethodsStyledFacetsExpected.put("MI:0071__molecular sieving", 1L);
 
-        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_S);
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_MI_STYLED);
         assertEquals(5, facetFieldEntryPage.getTotalElements());
         for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
-            assertEquals(detectionMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+            assertEquals(detectionMethodsStyledFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+        }
+
+        //identification method facet checking
+        HashMap<String, Long> identificationMethodsFacetsExpected = new HashMap<>();
+        identificationMethodsFacetsExpected.put("MI:0396__predetermined", 4L);
+
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(IDENTIFICATION_METHOD_MI_A_B_STYLED);
+        assertEquals(1, facetFieldEntryPage.getTotalElements());
+        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
+            assertEquals(identificationMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
         }
 
         //interaction type facet checking
@@ -1691,6 +1804,154 @@ public class InteractionSearchServiceTest {
         }
     }
 
+    @Test
+    public void filterByMultipleIdentificationMethods() {
+        FacetPage<SearchInteraction> interactionFacetPage = interactionSearchService.findInteractionWithFacet(
+                PagedInteractionSearchParameters.builder()
+                        .query("physical association")
+//                        .participantDetectionMethodsFilter(Set.of("predetermined", "tag perox activity"))
+                        .participantDetectionMethodsFilter(Set.of("MI:0396", "MI:0981"))
+                        .build()
+        );
+
+        // page checks
+        assertFalse(interactionFacetPage.getContent().isEmpty());
+        assertEquals(6, interactionFacetPage.getContent().size());
+        assertEquals(6, interactionFacetPage.getNumberOfElements());
+        assertEquals(0, interactionFacetPage.getPageable().getPageNumber());
+        assertEquals(10, interactionFacetPage.getPageable().getPageSize());
+        assertEquals(6, interactionFacetPage.getTotalElements());
+
+        Set<String> interactionsExpected = new HashSet<>();
+        interactionsExpected.add("EBI-1000008");
+        interactionsExpected.add("EBI-1000026");
+        interactionsExpected.add("EBI-1000048");
+        interactionsExpected.add("EBI-10000862");
+
+        for (SearchInteraction interaction : interactionFacetPage.getContent()) {
+            assertTrue(interactionsExpected.contains(interaction.getAc()));
+        }
+
+        //facet checking
+        //species facet checking
+        HashMap<String, Long> specieFacetsExpected = new HashMap<>();
+        specieFacetsExpected.put("9606__Homo sapiens__#335e94", 6L);
+
+        Page<FacetFieldEntry> facetFieldEntryPage = interactionFacetPage.getFacetResultPage(TAX_ID_A_B_STYLED);
+        assertEquals(1, facetFieldEntryPage.getTotalElements());
+        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
+            assertEquals(specieFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+        }
+
+        // intra species, in these case the number are the same than TAX_ID_A_B_STYLED
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(INTRA_TAX_ID_STYLED);
+        assertEquals(1, facetFieldEntryPage.getTotalElements());
+        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
+            assertEquals(specieFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+        }
+
+        //interactor type facet checking
+        HashMap<String, Long> interactorTypeFacetsExpected = new HashMap<>();
+        interactorTypeFacetsExpected.put("MI:0326__protein__ELLIPSE", 6L);
+        interactorTypeFacetsExpected.put("MI:0319__dna__VEE", 1L);
+
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(TYPE_MI_A_B_STYLED);
+        assertEquals(2, facetFieldEntryPage.getTotalElements());
+        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
+            assertEquals(interactorTypeFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+        }
+
+        //detection method facet checking
+        HashMap<String, Long> detectionMethodsStyledFacetsExpected = new HashMap<>();
+        detectionMethodsStyledFacetsExpected.put("MI:0029__density sedimentation", 3L);
+        detectionMethodsStyledFacetsExpected.put("MI:0411__elisa", 1L);
+        detectionMethodsStyledFacetsExpected.put("MI:0004__affinity chrom", 1L);
+        detectionMethodsStyledFacetsExpected.put("MI:0071__molecular sieving", 1L);
+
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_MI_STYLED);
+        assertEquals(4, facetFieldEntryPage.getTotalElements());
+        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
+            assertEquals(detectionMethodsStyledFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+        }
+
+        //identification method facet checking
+        HashMap<String, Long> identificationMethodsFacetsExpected = new HashMap<>();
+        identificationMethodsFacetsExpected.put("MI:0396__predetermined", 5L);
+        identificationMethodsFacetsExpected.put("MI:0113__western blot", 4L);
+        identificationMethodsFacetsExpected.put("MI:0981__tag perox activity", 1L);
+
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(IDENTIFICATION_METHOD_MI_A_B_STYLED);
+        assertEquals(3, facetFieldEntryPage.getTotalElements());
+        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
+            assertEquals(identificationMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+        }
+
+        //interaction type facet checking
+        HashMap<String, Long> interactionTypeFacetsExpected = new HashMap<>();
+        interactionTypeFacetsExpected.put("MI:0915__physical association__#7bccc4", 6L);
+
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(TYPE_MI_IDENTIFIER_STYLED);
+        assertEquals(1, facetFieldEntryPage.getTotalElements());
+        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
+            assertEquals(interactionTypeFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+        }
+
+        //host organism facet checking
+        HashMap<String, Long> hostOrganismFacetsExpected = new HashMap<>();
+        hostOrganismFacetsExpected.put("-1__In vitro__#8d6666", 6L);
+
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(HOST_ORGANISM_TAXID_STYLED);
+        assertEquals(1, facetFieldEntryPage.getTotalElements());
+        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
+            assertEquals(hostOrganismFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+        }
+
+        // negative facet checking
+        HashMap<String, Long> negativeFacetsExpected = new HashMap<>();
+        negativeFacetsExpected.put("false", 6L);
+
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(NEGATIVE);
+        assertEquals(1, facetFieldEntryPage.getTotalElements());
+        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
+            assertEquals(negativeFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+        }
+
+        // affected by mutation
+        HashMap<String, Long> mutationFacetsExpected = new HashMap<>();
+        mutationFacetsExpected.put("none__false__#7e8389", 6L);
+
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(AFFECTED_BY_MUTATION_STYLED);
+        assertEquals(1, facetFieldEntryPage.getTotalElements());
+        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
+            assertEquals(mutationFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+        }
+
+        // MIscore facet checking
+        HashMap<String, Long> miScoreFacetsExpected = new HashMap<>();
+        miScoreFacetsExpected.put("0.64", 2L);
+        miScoreFacetsExpected.put("0.56", 1L);
+        miScoreFacetsExpected.put("0.4", 1L);
+        miScoreFacetsExpected.put("0.53", 1L);
+        miScoreFacetsExpected.put("0.69", 1L);
+
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(INTACT_MISCORE);
+        assertEquals(5, facetFieldEntryPage.getTotalElements());
+        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
+            assertEquals(miScoreFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+        }
+
+        // expansion method facet checking
+        HashMap<String, Long> expansionMethodExpected = new HashMap<>();
+        expansionMethodExpected.put("expansion_true", 3L);
+        expansionMethodExpected.put("expansion_false", 3L);
+
+        Page<FacetQueryEntry> facetPageFacetQueryResult = interactionFacetPage.getFacetQueryResult();
+        assertEquals(2, facetPageFacetQueryResult.getTotalElements());
+        for (FacetQueryEntry facetQueryEntry : facetPageFacetQueryResult) {
+            assertEquals(expansionMethodExpected.get(facetQueryEntry.getValue()), new Long(facetQueryEntry.getValueCount()));
+        }
+    }
+
     /*
      * Expected interactions/facets when queried and filtered by multiple host organism
      **/
@@ -1701,8 +1962,8 @@ public class InteractionSearchServiceTest {
                 PagedInteractionSearchParameters.builder()
                         .query("physical association")
                         .interactionHostOrganismsFilter(Set.of(
-                                "In vitro",
-                                "rattus norvegicus liver")
+                                "In vitro__-1",
+                                "rattus norvegicus liver__10116")
                         ).build()
         );
 
@@ -1744,17 +2005,29 @@ public class InteractionSearchServiceTest {
         }
 
         //detection method facet checking
-        HashMap<String, Long> detectionMethodsFacetsExpected = new HashMap<>();
-        detectionMethodsFacetsExpected.put("anti bait coip", 4L);
-        detectionMethodsFacetsExpected.put("density sedimentation", 3L);
-        detectionMethodsFacetsExpected.put("elisa", 1L);
-        detectionMethodsFacetsExpected.put("affinity chrom", 1L);
-        detectionMethodsFacetsExpected.put("molecular sieving", 1L);
+        HashMap<String, Long> detectionMethodsStyledFacetsExpected = new HashMap<>();
+        detectionMethodsStyledFacetsExpected.put("MI:0006__anti bait coip", 4L);
+        detectionMethodsStyledFacetsExpected.put("MI:0029__density sedimentation", 3L);
+        detectionMethodsStyledFacetsExpected.put("MI:0411__elisa", 1L);
+        detectionMethodsStyledFacetsExpected.put("MI:0004__affinity chrom", 1L);
+        detectionMethodsStyledFacetsExpected.put("MI:0071__molecular sieving", 1L);
 
-        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_S);
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_MI_STYLED);
         assertEquals(5, facetFieldEntryPage.getTotalElements());
         for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
-            assertEquals(detectionMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+            assertEquals(detectionMethodsStyledFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+        }
+
+        //identification method facet checking
+        HashMap<String, Long> identificationMethodsFacetsExpected = new HashMap<>();
+        identificationMethodsFacetsExpected.put("MI:0396__predetermined", 5L);
+        identificationMethodsFacetsExpected.put("MI:0113__western blot", 4L);
+        identificationMethodsFacetsExpected.put("MI:0981__tag perox activity", 1L);
+
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(IDENTIFICATION_METHOD_MI_A_B_STYLED);
+        assertEquals(3, facetFieldEntryPage.getTotalElements());
+        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
+            assertEquals(identificationMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
         }
 
         //interaction type facet checking
@@ -1830,7 +2103,7 @@ public class InteractionSearchServiceTest {
     @Test
     public void filterByInteractionType() {
 
-        Set<String> interactionTypesFilter = Set.of("physical association");
+        Set<String> interactionTypesFilter = Set.of("MI:0915");
 
         FacetPage<SearchInteraction> interactionFacetPage = interactionSearchService.findInteractionWithFacet(
                 PagedInteractionSearchParameters.builder()
@@ -1877,17 +2150,29 @@ public class InteractionSearchServiceTest {
         }
 
         //detection method facet checking
-        HashMap<String, Long> detectionMethodsFacetsExpected = new HashMap<>();
-        detectionMethodsFacetsExpected.put("anti bait coip", 4L);
-        detectionMethodsFacetsExpected.put("density sedimentation", 3L);
-        detectionMethodsFacetsExpected.put("elisa", 1L);
-        detectionMethodsFacetsExpected.put("affinity chrom", 1L);
-        detectionMethodsFacetsExpected.put("molecular sieving", 1L);
+        HashMap<String, Long> detectionMethodsStyledFacetsExpected = new HashMap<>();
+        detectionMethodsStyledFacetsExpected.put("MI:0006__anti bait coip", 4L);
+        detectionMethodsStyledFacetsExpected.put("MI:0029__density sedimentation", 3L);
+        detectionMethodsStyledFacetsExpected.put("MI:0411__elisa", 1L);
+        detectionMethodsStyledFacetsExpected.put("MI:0004__affinity chrom", 1L);
+        detectionMethodsStyledFacetsExpected.put("MI:0071__molecular sieving", 1L);
 
-        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_S);
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(DETECTION_METHOD_MI_STYLED);
         assertEquals(5, facetFieldEntryPage.getTotalElements());
         for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
-            assertEquals(detectionMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+            assertEquals(detectionMethodsStyledFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
+        }
+
+        //identification method facet checking
+        HashMap<String, Long> identificationMethodsFacetsExpected = new HashMap<>();
+        identificationMethodsFacetsExpected.put("MI:0396__predetermined", 5L);
+        identificationMethodsFacetsExpected.put("MI:0113__western blot", 4L);
+        identificationMethodsFacetsExpected.put("MI:0981__tag perox activity", 1L);
+
+        facetFieldEntryPage = interactionFacetPage.getFacetResultPage(IDENTIFICATION_METHOD_MI_A_B_STYLED);
+        assertEquals(3, facetFieldEntryPage.getTotalElements());
+        for (FacetFieldEntry facetFieldEntry : facetFieldEntryPage) {
+            assertEquals(identificationMethodsFacetsExpected.get(facetFieldEntry.getValue()), new Long(facetFieldEntry.getValueCount()));
         }
 
         //interaction type facet checking

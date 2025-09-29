@@ -124,6 +124,35 @@ public class ChildInteractorSearchServiceTest {
         }
     }
 
+    @Test
+    public void getUniqueChildInteractorsFromInteractionFilterQueryWithIdentifiers() {
+        PagedInteractionSearchParameters params = PagedInteractionSearchParameters.builder()
+                .query("physical association")
+                .interactorSpeciesFilter(Set.of("Homo sapiens__9606"))
+                .interactorTypesFilter(Set.of("MI:0326"))
+                .interactionDetectionMethodsFilter(Set.of("MI:0071"))
+                .interactionTypesFilter(Set.of("MI:0915"))
+                .interactionHostOrganismsFilter(Set.of("In vitro__-1"))
+                .minMIScore(0)
+                .maxMIScore(0.7)
+                .build();
+        GroupPage<SearchChildInteractor> childInteractorsOp = childInteractorSearchService.findInteractorsWithGroup(
+                params);
+        assertEquals(2, childInteractorsOp.getTotalElements()); //Total documents found before grouping
+        assertEquals(2, childInteractorsOp.getNumberOfElements()); //Elements in the page
+
+        long numInteractors = childInteractorSearchService.countInteractorsWithGroup(params);
+        assertEquals(2, numInteractors);
+
+        List<String> interactorAcs = List.of("EBI-724102", "EBI-715849");
+
+        for (SearchChildInteractor searchChildInteractor : childInteractorsOp.getContent()) {
+            if (!interactorAcs.contains(searchChildInteractor.getInteractorAc())) {
+                Assert.fail("The interactor is not in the list of interactors expected");
+            }
+        }
+    }
+
     /**
      * Expected sync between interactions and child interactors
      */
@@ -298,7 +327,99 @@ public class ChildInteractorSearchServiceTest {
         for (SearchChildInteractor interactor : interactorOp.getContent()) {
             assertTrue(interactorsExpected.contains(interactor.getInteractorAc()));
         }
+    }
 
+    @Test
+    public void filterByMultipleDetectionMethodMiIdentifiers() {
+        PagedInteractionSearchParameters params = PagedInteractionSearchParameters.builder()
+                .query("physical association")
+                .interactionDetectionMethodsFilter(Set.of(
+                        "MI:0029",
+                        "MI:0071"
+                )).build();
+
+        GroupPage<SearchChildInteractor> interactorOp = childInteractorSearchService.findInteractorsWithGroup(params);
+        assertEquals(4, interactorOp.getTotalElements());
+
+        long numInteractors = childInteractorSearchService.countInteractorsWithGroup(params);
+
+        assertEquals(4, numInteractors);
+
+        Set<String> interactorsExpected = new HashSet<>();
+        interactorsExpected.add("EBI-715849");
+        interactorsExpected.add("EBI-724102");
+        interactorsExpected.add("EBI-999909");
+        interactorsExpected.add("EBI-999900");
+
+        for (SearchChildInteractor interactor : interactorOp.getContent()) {
+            assertTrue(interactorsExpected.contains(interactor.getInteractorAc()));
+        }
+    }
+
+    @Test
+    public void filterByMultipleIdentificationMethods() {
+        PagedInteractionSearchParameters params = PagedInteractionSearchParameters.builder()
+                .query("physical association")
+                .participantDetectionMethodsFilter(Set.of(
+                        "tag perox activity",
+                        "western blot"
+                )).build();
+
+        GroupPage<SearchChildInteractor> interactorOp = childInteractorSearchService.findInteractorsWithGroup(params);
+        assertEquals(10, interactorOp.getTotalElements());
+        assertEquals(7, interactorOp.getContent().size());
+        // 10 participants found, with 7 distinct interactors, so total elements is 10,
+        // but then the content contains just 7 elements.
+
+        long numInteractors = childInteractorSearchService.countInteractorsWithGroup(params);
+
+        assertEquals(7, numInteractors);
+
+        Set<String> interactorsExpected = new HashSet<>();
+        interactorsExpected.add("EBI-10000824");
+        interactorsExpected.add("EBI-73886");
+        interactorsExpected.add("EBI-9997695");
+        interactorsExpected.add("EBI-7837133");
+        interactorsExpected.add("EBI-915507");
+        interactorsExpected.add("EBI-2028244");
+        interactorsExpected.add("EBI-4423297");
+
+        for (SearchChildInteractor interactor : interactorOp.getContent()) {
+            assertTrue(interactorsExpected.contains(interactor.getInteractorAc()));
+        }
+    }
+
+    @Test
+    public void filterByMultipleIdentificationMethodMiIdentifiers() {
+        PagedInteractionSearchParameters params = PagedInteractionSearchParameters.builder()
+                .query("physical association")
+                .participantDetectionMethodsFilter(Set.of(
+                        "MI:0981",
+                        "MI:0113"
+                )).build();
+
+        GroupPage<SearchChildInteractor> interactorOp = childInteractorSearchService.findInteractorsWithGroup(params);
+        assertEquals(10, interactorOp.getTotalElements());
+        assertEquals(7, interactorOp.getContent().size());
+        // 10 participants found, with 7 distinct interactors, so total elements is 10,
+        // but then the content contains just 7 elements.
+
+        long numInteractors = childInteractorSearchService.countInteractorsWithGroup(params);
+
+        assertEquals(7, numInteractors);
+
+        Set<String> interactorsExpected = new HashSet<>();
+        interactorsExpected.add("EBI-10000824");
+        interactorsExpected.add("EBI-73886");
+        interactorsExpected.add("EBI-9997695");
+        interactorsExpected.add("EBI-7837133");
+        interactorsExpected.add("EBI-915507");
+        interactorsExpected.add("EBI-2028244");
+        interactorsExpected.add("EBI-4423297");
+
+        for (SearchChildInteractor interactor : interactorOp.getContent()) {
+            assertTrue(interactorsExpected.contains(interactor.getInteractorAc()));
+        }
     }
 
     @Test
