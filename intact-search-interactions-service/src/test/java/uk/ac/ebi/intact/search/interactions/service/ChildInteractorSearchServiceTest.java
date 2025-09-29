@@ -424,16 +424,19 @@ public class ChildInteractorSearchServiceTest {
 
     @Test
     public void sortAllInteractorsByPopularity() {
-        // There are 11 different interactors, 5 that appear multiple times, and 6 other than appear just once
-        // There are 4 interactors that appear in 4 interactions
-        Set<String> interactorsAcsThatAppearFourTimes = Set.of(
-                "EBI-715849", "EBI-9997695");
-        // There are 3 interactors that appear in 2 interactions
-        Set<String> interactorsAcsThatAppearTwice = Set.of(
-                "EBI-724102", "EBI-999900", "EBI-999909");
-        // The other 6 interactors appear just once
-        Set<String> interactorsAcsThatAppearOnce = Set.of(
-                "EBI-7837133", "EBI-915507", "EBI-2028244", "EBI-4423297", "EBI-10000824", "EBI-73886");
+        List<String> interactorsAcsSortedByInteractionCount = List.of(
+                "EBI-73886", // 66
+                "EBI-715849", // 29
+                "EBI-2028244", // 27
+                "EBI-7837133", // 22
+                "EBI-9997695", // 11
+                "EBI-4423297", // 10
+                "EBI-915507", // 9
+                "EBI-999909", // 8
+                "EBI-999900", // 5
+                "EBI-724102", // 4
+                "EBI-10000824" // 2
+        );
 
         GroupPage<SearchChildInteractor> interactorOp = childInteractorSearchService.findInteractorsWithGroup(
                 PagedInteractionSearchParameters.builder()
@@ -445,20 +448,10 @@ public class ChildInteractorSearchServiceTest {
         assertEquals(6, interactorOp.getNumberOfElements());
 
         List<SearchChildInteractor> interactors = interactorOp.getContent();
-        // On the first page, the first 5 interactors are those that appear multiple times,
-        // and the last one is one of those that appears just once
-
-        Set<String> interactorAcs = interactors.subList(0, 2).stream()
+        List<String> interactorAcs = interactors.stream()
                 .map(SearchChildInteractor::getInteractorAc)
-                .collect(Collectors.toSet());
-        assertEquals(interactorsAcsThatAppearFourTimes, interactorAcs);
-
-        interactorAcs = interactors.subList(2, 5).stream()
-                .map(SearchChildInteractor::getInteractorAc)
-                .collect(Collectors.toSet());
-        assertEquals(interactorsAcsThatAppearTwice, interactorAcs);
-
-        assertTrue(interactorsAcsThatAppearOnce.contains(interactors.get(5).getInteractorAc()));
+                .collect(Collectors.toList());
+        assertEquals(interactorsAcsSortedByInteractionCount.subList(0, 6), interactorAcs);
 
         interactorOp = childInteractorSearchService.findInteractorsWithGroup(
                 PagedInteractionSearchParameters.builder()
@@ -471,12 +464,20 @@ public class ChildInteractorSearchServiceTest {
 
         // On the second page, we only get interactors that appear just once
         interactors = interactorOp.getContent();
-        interactors.forEach(interactor ->
-                assertTrue(interactorsAcsThatAppearOnce.contains(interactor.getInteractorAc())));
+        interactorAcs = interactors.stream()
+                .map(SearchChildInteractor::getInteractorAc)
+                .collect(Collectors.toList());
+        assertEquals(interactorsAcsSortedByInteractionCount.subList(6, interactorsAcsSortedByInteractionCount.size()), interactorAcs);
     }
 
     @Test
-    public void sortInteractorsByPopularityInGivenQuery() {
+    public void sortInteractorsInQueryByPopularity() {
+        List<String> interactorsAcsSortedByInteractionCount = List.of(
+                "EBI-715849", // 29
+                "EBI-999909", // 8
+                "EBI-999900" // 5
+        );
+
         // Search for interactions with 1 specific protein that return 3 different interactors.
         GroupPage<SearchChildInteractor> interactorOp = childInteractorSearchService.findInteractorsWithGroup(
                 PagedInteractionSearchParameters.builder()
@@ -487,12 +488,9 @@ public class ChildInteractorSearchServiceTest {
         assertEquals(3, interactorOp.getNumberOfElements());
 
         List<SearchChildInteractor> interactors = interactorOp.getContent();
-        // The first interactor is the most popular in the query results, appearing in all interactions
-        Assert.assertEquals("EBI-999900", interactors.get(0).getInteractorAc());
-        // The other interactors appear only once in the query results, so they are sorted by the total number
-        // of interactions for them in the DB. So, as EBI-715849 appear in 4 interactions, it is sorted above the
-        // other interactor.
-        Assert.assertEquals("EBI-715849", interactors.get(1).getInteractorAc());
-        Assert.assertEquals("EBI-999909", interactors.get(2).getInteractorAc());
+        List<String> interactorAcs = interactors.stream()
+                .map(SearchChildInteractor::getInteractorAc)
+                .collect(Collectors.toList());
+        assertEquals(interactorsAcsSortedByInteractionCount, interactorAcs);
     }
 }
