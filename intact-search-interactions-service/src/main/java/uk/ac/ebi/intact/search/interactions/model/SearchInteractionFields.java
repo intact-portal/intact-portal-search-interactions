@@ -72,11 +72,14 @@ public class SearchInteractionFields {
     public static final String IDENTIFICATION_METHODS_B = "identification_method_B";
     public static final String IDENTIFICATION_METHOD_MI_IDENTIFIERS_A = "identification_method_mi_identifier_A";
     public static final String IDENTIFICATION_METHOD_MI_IDENTIFIERS_B = "identification_method_mi_identifier_B";
+    public static final String IDENTIFICATION_METHODS_A_B_S = "identification_method_A_B_str";
+    public static final String IDENTIFICATION_METHODS_MI_IDS_A_B_S = "identification_method_mi_identifier_A_B_str";
 
     public static final String DETECTION_METHOD = "detection_method";
     // CopyField for faceting
     public static final String DETECTION_METHOD_S = "detection_method_s";
     public static final String DETECTION_METHOD_MI_IDENTIFIER = "detection_method_mi_identifier";
+    public static final String DETECTION_METHOD_MI_IDENTIFIER_S = "detection_method_mi_identifier_s";
     public static final String PUBLICATION_AUTHORS = "publication_authors";
     public static final String FIRST_AUTHOR = "first_author";
     public static final String PUBLICATION_IDENTIFIERS = "publication_identifiers";
@@ -100,6 +103,7 @@ public class SearchInteractionFields {
     public static final String NEGATIVE = "negative";
     public static final String TYPE = "type";
     public static final String TYPE_MI_IDENTIFIER = "type_mi_identifier";
+    public static final String TYPE_MI_IDENTIFIER_S = "type_mi_identifier_s";
     public static final String TYPE_S = "type_s";
     public static final String HOST_ORGANISM = "host_organism";
     public static final String HOST_ORGANISM_TAX_ID = "host_organism_taxId";
@@ -140,6 +144,14 @@ public class SearchInteractionFields {
 
     // Interaction type
     public static final String TYPE_MI_IDENTIFIER_STYLED = "type_mi_identifier_styled";
+
+    // Interaction detection method
+    public static final String DETECTION_METHOD_MI_STYLED = "detection_method_mi_styled";
+
+    // Participant detection method
+    public static final String IDENTIFICATION_METHOD_MI_A_STYLED = "identification_method_mi_A_styled";
+    public static final String IDENTIFICATION_METHOD_MI_B_STYLED = "identification_method_mi_B_styled";
+    public static final String IDENTIFICATION_METHOD_MI_A_B_STYLED = "identification_method_mi_A_B_styled";
 
     // Interactor type
     public static final String TYPE_MI_A_STYLED = "type_MI_A_styled";

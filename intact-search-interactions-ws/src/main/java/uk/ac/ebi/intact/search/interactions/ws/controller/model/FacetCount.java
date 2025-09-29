@@ -19,10 +19,12 @@ public class FacetCount<T> {
     public void setValue(String value) {
         if (value != null) {
             String[] styledValue = value.split("__");
-            if (styledValue.length == 3) {
+            if (styledValue.length >= 2) {
                 setTermId(styledValue[0]);
                 this.value = styledValue[1];
-                setVisualProperty(styledValue[2]);
+                if (styledValue.length >= 3) {
+                    setVisualProperty(styledValue[2]);
+                }
             }
             else {
                 this.value = value;

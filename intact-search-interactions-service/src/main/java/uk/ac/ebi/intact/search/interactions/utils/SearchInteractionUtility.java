@@ -141,6 +141,9 @@ public class SearchInteractionUtility {
         //Interaction detection method filter
         createInteractionDetectionMethodsFilterCriteria(parameters.getInteractionDetectionMethodsFilter(), filterQueries);
 
+        //Participant detection method filter
+        createParticipantDetectionMethodsFilterCriteria(parameters.getParticipantDetectionMethodsFilter(), filterQueries);
+
         //Interaction type filter
         createInteractionTypeFilterCriteria(parameters.getInteractionTypesFilter(), filterQueries);
 
@@ -201,12 +204,13 @@ public class SearchInteractionUtility {
     }
 
     private void createInteractionDetectionMethodsFilterCriteria(Set<String> values, List<FilterQuery> filterQueries) {
-        if (values != null && !values.isEmpty()) {
-            // TODO: add search for MI ids for detection method when new field is added in SOLR
-            String tagForExcludingFacets = "{!tag=DETECTION_METHOD}";
-            Criteria conditions = createCriteriaForStringValues(tagForExcludingFacets, DETECTION_METHOD_S, values);
-            filterQueries.add(new SimpleFilterQuery(conditions));
-        }
+        String tagForExcludingFacets = "{!tag=DETECTION_METHOD}";
+        createStringLabelsOrMiIdsFilterCriteria(tagForExcludingFacets, values, DETECTION_METHOD_MI_IDENTIFIER_S, DETECTION_METHOD_S, filterQueries);
+    }
+
+    private void createParticipantDetectionMethodsFilterCriteria(Set<String> values, List<FilterQuery> filterQueries) {
+        String tagForExcludingFacets = "{!tag=PARTICIPANT_DETECTION_METHOD}";
+        createStringLabelsOrMiIdsFilterCriteria(tagForExcludingFacets, values, IDENTIFICATION_METHODS_MI_IDS_A_B_S, IDENTIFICATION_METHODS_A_B_S, filterQueries);
     }
 
     private void createBinaryInteractionIdsFilterCriteria(Set<Long> values, List<FilterQuery> filterQueries) {
@@ -270,12 +274,8 @@ public class SearchInteractionUtility {
     }
 
     private void createInteractionTypeFilterCriteria(Set<String> interactionTypesFilter, List<FilterQuery> filterQueries) {
-        if (interactionTypesFilter != null && !interactionTypesFilter.isEmpty()) {
-            // TODO: add search for MI ids for interaction type when new field is added in SOLR
-            String tagForExcludingFacets = "{!tag=INTERACTION_TYPE}";
-            Criteria conditions = createCriteriaForStringValues(tagForExcludingFacets, TYPE_S, interactionTypesFilter);
-            filterQueries.add(new SimpleFilterQuery(conditions));
-        }
+        String tagForExcludingFacets = "{!tag=INTERACTION_TYPE}";
+        createStringLabelsOrMiIdsFilterCriteria(tagForExcludingFacets, interactionTypesFilter, TYPE_MI_IDENTIFIER_S, TYPE_S, filterQueries);
     }
 
     private void createInteractionHostOrganismsFilterCriteria(Set<String> interactionHostOrganismsFilter, List<FilterQuery> filterQueries) {
