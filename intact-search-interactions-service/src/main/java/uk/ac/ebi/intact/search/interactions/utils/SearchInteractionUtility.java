@@ -154,7 +154,7 @@ public class SearchInteractionUtility {
         createNegativeInteractionsFilterCriteria(parameters.getNegativeFilter().booleanValue, filterQueries);
 
         //Mutation filter
-        createFilterCriteriaForBoolean("{!tag=MUTATION}", parameters.isMutationFilter(), AFFECTED_BY_MUTATION, filterQueries);
+        createMutationFilterCriteria(parameters.isMutationFilter(), filterQueries);
 
         //Expansion filter
         createExpansionFilterCriteria(parameters.isExpansionFilter(), filterQueries);
@@ -196,9 +196,11 @@ public class SearchInteractionUtility {
         }
     }
 
-    private void createFilterCriteriaForBoolean(String tagForExcludingFacets, Boolean value, String field, List<FilterQuery> filterQueries) {
-        if (value != null) {
-            Criteria conditions = new Criteria(tagForExcludingFacets + field).is(value);
+    private void createMutationFilterCriteria(Boolean value, List<FilterQuery> filterQueries) {
+        if (value != null && value) {
+            String tagForExcludingFacets = "{!tag=MUTATION}";
+            // Mutation filter only applies when it is set to true
+            Criteria conditions = new Criteria(tagForExcludingFacets + AFFECTED_BY_MUTATION).is(true);
             filterQueries.add(new SimpleFilterQuery(conditions));
         }
     }
@@ -224,7 +226,8 @@ public class SearchInteractionUtility {
     private void createNegativeInteractionsFilterCriteria(Boolean value, List<FilterQuery> filterQueries) {
         if (value != null) {
             String tagForExcludingFacets = "{!tag=NEGATIVE_INTERACTION}";
-            createFilterCriteriaForBoolean(tagForExcludingFacets, value, NEGATIVE, filterQueries);
+            Criteria conditions = new Criteria(tagForExcludingFacets + NEGATIVE).is(value);
+            filterQueries.add(new SimpleFilterQuery(conditions));
         }
     }
 
