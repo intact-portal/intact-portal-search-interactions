@@ -424,18 +424,18 @@ public class ChildInteractorSearchServiceTest {
 
     @Test
     public void sortAllInteractorsByPopularity() {
-        List<String> interactorsAcsSortedByInteractionCount = List.of(
-                "EBI-73886", // 66
-                "EBI-715849", // 29
-                "EBI-2028244", // 27
-                "EBI-7837133", // 22
-                "EBI-9997695", // 11
-                "EBI-4423297", // 10
-                "EBI-915507", // 9
-                "EBI-999909", // 8
-                "EBI-999900", // 5
-                "EBI-724102", // 4
-                "EBI-10000824" // 2
+        List<String> interactorsAcsSorted = List.of(
+                "EBI-715849", // 4 times in the search, 29 interaction count
+                "EBI-9997695", // 4 times in the search, 11 interaction count
+                "EBI-999909", // 2 times in the search, 8 interaction count
+                "EBI-999900", // 2 times in the search, 5 interaction count
+                "EBI-724102", // 2 times in the search, 4 interaction count
+                "EBI-73886", // once in the search, 66 interaction count
+                "EBI-2028244", // once in the search, 27 interaction count
+                "EBI-7837133", // once in the search, 22 interaction count
+                "EBI-4423297", // once in the search, 10 interaction count
+                "EBI-915507", // once in the search, 9 interaction count
+                "EBI-10000824" // once in the search, 2 interaction count
         );
 
         GroupPage<SearchChildInteractor> interactorOp = childInteractorSearchService.findInteractorsWithGroup(
@@ -451,7 +451,7 @@ public class ChildInteractorSearchServiceTest {
         List<String> interactorAcs = interactors.stream()
                 .map(SearchChildInteractor::getInteractorAc)
                 .collect(Collectors.toList());
-        assertEquals(interactorsAcsSortedByInteractionCount.subList(0, 6), interactorAcs);
+        assertEquals(interactorsAcsSorted.subList(0, 6), interactorAcs);
 
         interactorOp = childInteractorSearchService.findInteractorsWithGroup(
                 PagedInteractionSearchParameters.builder()
@@ -467,15 +467,15 @@ public class ChildInteractorSearchServiceTest {
         interactorAcs = interactors.stream()
                 .map(SearchChildInteractor::getInteractorAc)
                 .collect(Collectors.toList());
-        assertEquals(interactorsAcsSortedByInteractionCount.subList(6, interactorsAcsSortedByInteractionCount.size()), interactorAcs);
+        assertEquals(interactorsAcsSorted.subList(6, interactorsAcsSorted.size()), interactorAcs);
     }
 
     @Test
-    public void sortInteractorsInQueryByPopularity() {
+    public void sortInteractorsByPopularityInGivenQuery() {
         List<String> interactorsAcsSortedByInteractionCount = List.of(
-                "EBI-715849", // 29
-                "EBI-999909", // 8
-                "EBI-999900" // 5
+                "EBI-999900", // 3 times in the search, 5 interaction count
+                "EBI-715849", // once in the search, 29 interaction count
+                "EBI-999909" // once in the search, 8 interaction count
         );
 
         // Search for interactions with 1 specific protein that return 3 different interactors.
