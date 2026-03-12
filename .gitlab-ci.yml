@@ -74,7 +74,7 @@ hh-test-deploy:
   environment:
     name: hh/test
     deployment_tier: testing
-    url: http://hh-rke-wp-webadmin-99-worker-1.caas.ebi.ac.uk:31242/intact/ws/interaction
+    url: http://hh-rke-wp-webadmin-99-master-1.caas.ebi.ac.uk:31242/intact/ws/interaction
 
 hx-prod-deploy:
   extends: .kubernetes-deploy
@@ -84,7 +84,7 @@ hx-prod-deploy:
   environment:
     name: hx/prod
     deployment_tier: production
-    url: http://hx-rke-wp-webadmin-78-worker-1.caas.ebi.ac.uk:31242/intact/ws/interaction
+    url: http://hx-rke-wp-webadmin-78-master-1.caas.ebi.ac.uk:31242/intact/ws/interaction
 
 hh-prod-deploy:
   extends: .kubernetes-deploy
@@ -94,5 +94,5 @@ hh-prod-deploy:
   environment:
     name: hh/prod
     deployment_tier: production
-    url: http://hh-rke-wp-webadmin-102-worker-1.caas.ebi.ac.uk:31242/intact/ws/interaction
+    url: http://hh-rke-wp-webadmin-102-master-1.caas.ebi.ac.uk:31242/intact/ws/interaction
 
