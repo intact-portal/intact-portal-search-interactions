@@ -9,112 +9,90 @@ stages:
   - build-docker-image
   - kubernetes-deploy
 
-maven-build-test:
+maven-build:
   image: maven:3.6-jdk-11
   stage: build-jar
-  script: "mvn package -B -s settings.xml -P ip-solr-indexing-hx,dev-config"
-  after_script:
-    - "mkdir /builds/intact-ci/intact-portal-search-interactions/target/"
-    - "cp /builds/intact-ci/intact-portal-search-interactions/intact-search-interactions-ws/target/intact-search-interactions-ws.jar /builds/intact-ci/intact-portal-search-interactions/target/"
+  script:
+    - mvn package -B -s settings.xml -P search-interactions-ws
+    - POM_VERSION=$(mvn -Dexec.executable='echo' -Dexec.args='${project.version}' --non-recursive exec:exec -q)
+    - echo "IMAGE_TAG=$POM_VERSION-$CI_COMMIT_SHORT_SHA" > build.env
+    - mkdir /builds/intact-ci/intact-portal-search-interactions/target/
+    - cp /builds/intact-ci/intact-portal-search-interactions/intact-search-interactions-ws/target/intact-search-interactions-ws.jar /builds/intact-ci/intact-portal-search-interactions/target/
   artifacts:
     paths:
       - target/*.jar
+    reports:
+      dotenv: build.env
   when: manual
 
-maven-build-prod:
-  image: maven:3.6-jdk-11
-  stage: build-jar
-  script: "mvn package -B -s settings.xml -P ip-solr-indexing-hx,prod-config"
-  after_script:
-    - "mkdir /builds/intact-ci/intact-portal-search-interactions/target/"
-    - "cp /builds/intact-ci/intact-portal-search-interactions/intact-search-interactions-ws/target/intact-search-interactions-ws.jar /builds/intact-ci/intact-portal-search-interactions/target/"
-  artifacts:
-    paths:
-      - target/*.jar
-  when: manual
-
-.docker-build:
+docker-build:
   stage: build-docker-image
+  needs: [ maven-build ]
   before_script:
     - unset DOCKER_HOST
     - unset DOCKER_AUTH_CONFIG
-    - echo "$CI_REGISTRY_PASSWORD" | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
-    - docker --version
-    - echo ${CONTAINER_IMAGE}
+    - docker system prune -af
   script:
-    - docker build -t ${CONTAINER_IMAGE} --no-cache .
+    - echo "$CI_DOCKER_HUB_PASSWORD" | docker login -u $CI_DOCKER_HUB_USER --password-stdin
+    - echo "$CI_REGISTRY_IMAGE:$IMAGE_TAG"
+    - docker build -t "$CI_REGISTRY_IMAGE:$IMAGE_TAG" --no-cache .
     - docker image ls
-    - docker push ${CONTAINER_IMAGE}
-    - docker rmi ${CONTAINER_IMAGE}
-    - docker logout "$CI_REGISTRY"
+    - docker logout
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
+    - docker push "$CI_REGISTRY_IMAGE:$IMAGE_TAG"
+    - docker rmi "$CI_REGISTRY_IMAGE:$IMAGE_TAG"
+    - docker logout $CI_REGISTRY
 
-docker-build-test:
-  needs: [ maven-build-test ]
-  extends: [ .docker-build ]
-
-docker-build-prod:
-  needs: [ maven-build-prod ]
-  extends: [ .docker-build ]
-
-hh-production-deploy:
+.kubernetes-deploy:
   stage: kubernetes-deploy
   image: alpine
-  script:
+  before_script:
     - apk add --no-cache curl git
     - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
     - chmod +x ./kubectl
     - mv ./kubectl /usr/local/bin/kubectl
-    - git clone https://k8s-config-token:${K8S_CONFIG_TOKEN_HH}@gitlab.ebi.ac.uk/intact-ci/k8s-config
+    - git clone https://k8s-config-token:$K8S_CONFIG_TOKEN@gitlab.ebi.ac.uk/intact-ci/k8s-config
     - mkdir ~/.kube
     - cp k8s-config/config ~/.kube/
-    - kubectl config use-context harlow-production
-    - 'printf "$(kubectl create secret docker-registry gitlab-registry --docker-server=$CI_REGISTRY --docker-username=$CI_DEPLOY_USER --docker-password=$CI_DEPLOY_PASSWORD --docker-email=$GITLAB_USER_EMAIL -o yaml --dry-run=client)" | kubectl apply -f -'
-    - kubectl get secrets gitlab-registry -o yaml
-    - kubectl apply -f k8s-production/k8s_deploy.yml
-    - kubectl rollout restart deployment/intact-portal-search-interactions-deployment
-    - kubectl get nodes
-  when: manual
-  needs: [ docker-build-prod ]
-
-hx-production-deploy:
-  stage: kubernetes-deploy
-  image: alpine
   script:
-    - apk add --no-cache curl git
-    - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-    - chmod +x ./kubectl
-    - mv ./kubectl /usr/local/bin/kubectl
-    - git clone https://k8s-config-token:${K8S_CONFIG_TOKEN_HX}@gitlab.ebi.ac.uk/intact-ci/k8s-config
-    - mkdir ~/.kube
-    - cp k8s-config/config ~/.kube/
-    - kubectl config use-context hinxton-production
-    - 'printf "$(kubectl create secret docker-registry gitlab-registry --docker-server=$CI_REGISTRY --docker-username=$CI_DEPLOY_USER --docker-password=$CI_DEPLOY_PASSWORD --docker-email=$GITLAB_USER_EMAIL -o yaml --dry-run=client)" | kubectl apply -f -'
+    - kubectl config get-contexts
+    - kubectl config use-context $KUBE_CONTEXT
+    - kubectl create secret docker-registry gitlab-registry --docker-server=$CI_REGISTRY --docker-username=$CI_REGISTRY_USER --docker-password=$CI_JOB_TOKEN --docker-email=$GITLAB_USER_EMAIL --dry-run=client -o yaml | kubectl apply -f -
     - kubectl get secrets gitlab-registry -o yaml
-    - kubectl apply -f k8s-production/k8s_deploy.yml
+    - echo "$CI_REGISTRY_IMAGE:$IMAGE_TAG"
+    - sed -i -e "s|<IMAGE_TAG>|$CI_REGISTRY_IMAGE:$IMAGE_TAG|g" k8s-deploy-config/k8s_deploy.yml
+    - kubectl apply -f k8s-deploy-config/k8s_deploy.yml
     - kubectl rollout restart deployment/intact-portal-search-interactions-deployment
     - kubectl get nodes
   when: manual
-  needs: [ docker-build-prod ]
 
 hh-test-deploy:
-  stage: kubernetes-deploy
-  image: alpine
-  script:
-    - apk add --no-cache curl git
-    - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-    - chmod +x ./kubectl
-    - mv ./kubectl /usr/local/bin/kubectl
-    - git clone https://k8s-config-token:${K8S_CONFIG_TOKEN_HH}@gitlab.ebi.ac.uk/intact-ci/k8s-config
-    - mkdir ~/.kube
-    - cp k8s-config/config ~/.kube/
-    - kubectl config get-contexts
-    - kubectl config use-context harlow-test
-    - 'printf "$(kubectl create secret docker-registry gitlab-registry --docker-server=$CI_REGISTRY --docker-username=$CI_DEPLOY_USER --docker-password=$CI_DEPLOY_PASSWORD --docker-email=$GITLAB_USER_EMAIL -o yaml --dry-run=client)" | kubectl apply -f -'
-    - kubectl get secrets gitlab-registry -o yaml
-    - kubectl apply -f k8s-test/k8s_deploy.yml
-    - kubectl rollout restart deployment/intact-portal-search-interactions-deployment
-    - kubectl get nodes
-  when: manual
-  needs: [ docker-build-test ]
+  extends: .kubernetes-deploy
+  needs: [ maven-build, docker-build ]
+  variables:
+    KUBE_CONTEXT: hh-intact-test
+  environment:
+    name: hh/test
+    deployment_tier: testing
+    url: http://hh-rke-wp-webadmin-99-worker-1.caas.ebi.ac.uk:31242/intact/ws/interaction
 
+hx-prod-deploy:
+  extends: .kubernetes-deploy
+  needs: [ maven-build, docker-build ]
+  variables:
+    KUBE_CONTEXT: hx-intact-prod
+  environment:
+    name: hx/prod
+    deployment_tier: production
+    url: http://hx-rke-wp-webadmin-78-worker-1.caas.ebi.ac.uk:31242/intact/ws/interaction
+
+hh-prod-deploy:
+  extends: .kubernetes-deploy
+  needs: [ maven-build, docker-build ]
+  variables:
+    KUBE_CONTEXT: hh-intact-prod
+  environment:
+    name: hh/prod
+    deployment_tier: production
+    url: http://hh-rke-wp-webadmin-102-worker-1.caas.ebi.ac.uk:31242/intact/ws/interaction
 
