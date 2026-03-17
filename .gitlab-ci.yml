@@ -62,6 +62,7 @@ docker-build:
     - echo "$CI_REGISTRY_IMAGE:$IMAGE_TAG"
     - sed -i -e "s|<IMAGE_TAG>|$CI_REGISTRY_IMAGE:$IMAGE_TAG|g" k8s-deploy-config/k8s_deploy.yml
     - kubectl apply -f k8s-deploy-config/k8s_deploy.yml
+    - kubectl apply -f $K8S_INGRESS_FILE
     - kubectl rollout restart deployment/intact-portal-search-interactions-deployment
     - kubectl get nodes
   when: manual
@@ -71,28 +72,31 @@ hh-test-deploy:
   needs: [ maven-build, docker-build ]
   variables:
     KUBE_CONTEXT: hh-intact-test
+    K8S_INGRESS_FILE: k8s-deploy-config/k8s_ingress_dev.yml
   environment:
     name: hh/test
     deployment_tier: testing
-    url: http://hh-rke-wp-webadmin-99-master-1.caas.ebi.ac.uk:31242/intact/ws/interaction
+    url: http://hh-rke-wp-webadmin-99-master-1.caas.ebi.ac.uk:31903/intact/ws/interaction
 
 hx-prod-deploy:
   extends: .kubernetes-deploy
   needs: [ maven-build, docker-build ]
   variables:
     KUBE_CONTEXT: hx-intact-prod
+    K8S_INGRESS_FILE: k8s-deploy-config/k8s_ingress_prod.yml
   environment:
     name: hx/prod
     deployment_tier: production
-    url: http://hx-rke-wp-webadmin-78-master-1.caas.ebi.ac.uk:31242/intact/ws/interaction
+    url: http://hx-rke-wp-webadmin-78-master-1.caas.ebi.ac.uk:31903/intact/ws/interaction
 
 hh-prod-deploy:
   extends: .kubernetes-deploy
   needs: [ maven-build, docker-build ]
   variables:
     KUBE_CONTEXT: hh-intact-prod
+    K8S_INGRESS_FILE: k8s-deploy-config/k8s_ingress_prod.yml
   environment:
     name: hh/prod
     deployment_tier: production
-    url: http://hh-rke-wp-webadmin-102-master-1.caas.ebi.ac.uk:31242/intact/ws/interaction
+    url: http://hh-rke-wp-webadmin-102-master-1.caas.ebi.ac.uk:31903/intact/ws/interaction
 
