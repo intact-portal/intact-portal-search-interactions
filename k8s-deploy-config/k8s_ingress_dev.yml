@@ -29,6 +29,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-          name: intact-portal-search-interactions-service
-          port:
-            number: 31242
+            name: intact-portal-search-interactions-service
+            port:
+              number: 31242
