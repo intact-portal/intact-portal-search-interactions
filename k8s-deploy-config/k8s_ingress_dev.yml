@@ -17,7 +17,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: intact-portal-search-interactions-ingress-1
+  name: intact-portal-search-interactions-ingress-2
   annotations:
     nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /intact/ws/interaction/$2
