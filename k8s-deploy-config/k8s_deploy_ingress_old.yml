@@ -1,0 +1,12 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: intact-portal-search-interactions-ingress
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /intact/ws/interaction
+            backend:
+              serviceName: intact-portal-search-interactions-service
+              servicePort: 31253

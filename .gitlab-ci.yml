@@ -64,7 +64,8 @@ docker-build:
     - kubectl apply -f k8s-deploy-config/k8s_deploy.yml
     - kubectl apply -f $K8S_INGRESS_FILE
     - kubectl rollout restart deployment/intact-portal-search-interactions-deployment
-    - kubectl get nodes
+    - kubectl rollout status deployment/intact-portal-search-interactions-deployment --timeout=180s # Wait for rollout to complete
+    - kubectl get pods
   when: manual
 
 hh-test-deploy:
@@ -72,31 +73,31 @@ hh-test-deploy:
   needs: [ maven-build, docker-build ]
   variables:
     KUBE_CONTEXT: hh-intact-test
-    K8S_INGRESS_FILE: k8s-deploy-config/k8s_ingress_dev.yml
+    K8S_INGRESS_FILE: k8s-deploy-config/k8s_deploy_ingress_new.yml
   environment:
     name: hh/test
     deployment_tier: testing
-    url: http://hh-rke-wp-webadmin-99-master-1.caas.ebi.ac.uk:31903/intact/ws/interaction
+    url: http://hh-rke-wp-webadmin-99-master-1.caas.ebi.ac.uk:31736/intact/ws/interaction
 
 hx-prod-deploy:
   extends: .kubernetes-deploy
   needs: [ maven-build, docker-build ]
   variables:
-    KUBE_CONTEXT: hx-intact-prod
-    K8S_INGRESS_FILE: k8s-deploy-config/k8s_ingress_prod.yml
+    KUBE_CONTEXT: hinxton-production
+    K8S_INGRESS_FILE: k8s-deploy-config/k8s_deploy_ingress_old.yml
   environment:
     name: hx/prod
     deployment_tier: production
-    url: http://hx-rke-wp-webadmin-78-master-1.caas.ebi.ac.uk:32280/intact/ws/interaction
+    url: http://hx-rke-wp-webadmin-24-master-1.caas.ebi.ac.uk:32091/intact/ws/interaction
 
 hh-prod-deploy:
   extends: .kubernetes-deploy
   needs: [ maven-build, docker-build ]
   variables:
-    KUBE_CONTEXT: hh-intact-prod
-    K8S_INGRESS_FILE: k8s-deploy-config/k8s_ingress_prod.yml
+    KUBE_CONTEXT: harlow-production
+    K8S_INGRESS_FILE: k8s-deploy-config/k8s_deploy_ingress_old.yml
   environment:
     name: hh/prod
     deployment_tier: production
-    url: http://hh-rke-wp-webadmin-102-master-1.caas.ebi.ac.uk:31269/intact/ws/interaction
+    url: http://hh-rke-wp-webadmin-24-master-1.caas.ebi.ac.uk:32339/intact/ws/interaction
 

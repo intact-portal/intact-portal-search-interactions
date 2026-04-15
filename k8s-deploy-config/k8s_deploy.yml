@@ -6,15 +6,17 @@ metadata:
   name: intact-portal-search-interactions-service
 spec:
   ports:
-    - port: 31242
+    - port: 31253
       protocol: TCP
+      # The port which will be externally exposed. Must be in the range [30000, 32767].
+      nodePort: 31247
       # The port on your Deployment which it will expose
       targetPort: 8082
   selector:
     # Selects the disease-portal-client Deployment to attach the Service to
     app: intact-portal-search-interactions
     # Tell K8s this wants to expose an external port
-  type: ClusterIP
+  type: NodePort
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -41,6 +43,7 @@ spec:
         - name: intact-portal-search-interactions
           # Pull the latest image which contains intact-portal-search-interactions webservice and the built assets from EBI's dockerhub
           image: <IMAGE_TAG>
+          imagePullPolicy: IfNotPresent
           ports:
             # We are using interaction webservice config which serves on port 8082
             - containerPort: 8082
