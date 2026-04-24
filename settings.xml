@@ -8,7 +8,7 @@
     <!-- =========================================================== -->
     <profiles>
         <profile>
-            <id>ip-solr-indexing-hx</id>
+            <id>search-interactions-ws</id>
             <properties>
                 <solr.server>http://solr-service:8983/solr</solr.server>
                 <style.full.index>true</style.full.index>

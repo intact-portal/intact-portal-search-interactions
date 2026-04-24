@@ -1,15 +1,20 @@
 package uk.ac.ebi.intact.search.interactions.utils;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.solr.core.query.Criteria;
 import org.springframework.data.solr.core.query.FilterQuery;
 import org.springframework.data.solr.core.query.SimpleFilterQuery;
 import org.springframework.data.solr.core.query.SimpleStringCriteria;
-import uk.ac.ebi.intact.search.interactions.model.AdvancedSearchInteractionFields;
+import uk.ac.ebi.intact.search.interactions.model.parameters.InteractionSearchParameters;
+import uk.ac.ebi.intact.search.interactions.model.parameters.SimpleSearchParametersI;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields.*;
 
@@ -17,6 +22,9 @@ import static uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields
  * Created by anjali on 17/02/20.
  */
 public class SearchInteractionUtility {
+
+    private static final Pattern MI_ID_PATTERN = Pattern.compile("MI:.*");
+    private static final Pattern TAX_ID_PATTERN = Pattern.compile("-?[0-9]+");
 
     //Custom version of ClientUtils.escapeQueryChars from solrJ
     public static String escapeQueryChars(String s) {
@@ -39,54 +47,60 @@ public class SearchInteractionUtility {
         return s.toLowerCase();
     }
 
-    public Criteria createSearchConditions(String searchTerms, boolean batchSearch, boolean advancedSearch) {
+    public Criteria createSearchConditions(SimpleSearchParametersI parameters) {
         Criteria conditions;
         Criteria userConditions = null;
         Criteria documentConditions = new Criteria(DOCUMENT_TYPE).is(DocumentType.INTERACTION);
         List<String> words = new ArrayList<>();
 
+        String searchTerms = parameters.getQuery();
+        boolean batchSearch = parameters.isBatchSearch();
+        boolean advancedSearch = parameters.isAdvancedSearch();
+
         //We prepare the term to split by several characters
 
-        searchTerms = searchTerms.trim();
-        if (searchTerms != null && !searchTerms.isEmpty()) {
-            if (advancedSearch) {
-                userConditions= new SimpleStringCriteria(AdvancedSearchInteractionUtility.getAdvancedSearchQuery(searchTerms));
-            } else {
-                if (searchTerms.startsWith("\"") && searchTerms.endsWith("\"")) {
-                    words.add(searchTerms);
+        if (searchTerms != null) {
+            searchTerms = searchTerms.trim();
+            if (!searchTerms.isEmpty()) {
+                if (advancedSearch) {
+                    userConditions = new SimpleStringCriteria(AdvancedSearchInteractionUtility.getAdvancedSearchQuery(searchTerms));
                 } else {
-                    words = Arrays.asList(searchTerms.split("[\\s,\\n]"));
-                }
+                    if (searchTerms.startsWith("\"") && searchTerms.endsWith("\"")) {
+                        words.add(searchTerms);
+                    } else {
+                        words = Arrays.asList(searchTerms.split("[\\s,\\n]"));
+                    }
 
-                if (batchSearch) {
-                    userConditions = batchSearchConditions(words);
-                } else {
-                    //TODO Review query formation
-                    if (!searchTerms.trim().equals("*")) {
-                        for (String word : words) {
-                            word = word.trim();
-                            if (!word.isEmpty()) {
-                                if (word.equals("AND") || word.equals("OR") || word.equals("NOT")) {// solr treats these Capital words as logical words
-                                    word = lowerCaseWord(word);
-                                }
-                                if (userConditions == null) {
-                                    if (isEBIAc(word)) {
-                                        userConditions = new Criteria(AC_A_S).is(word)
-                                                .or(AC_B_S).is(word)
-                                                .or(AC_S).is(word);
-                                    } else {
-                                        word = escapeQueryChars(word);
-                                        userConditions = new Criteria(DEFAULT).expression(word);
+                    if (batchSearch) {
+                        userConditions = batchSearchConditions(words);
+                    } else {
+                        //TODO Review query formation
+                        if (!searchTerms.trim().equals("*")) {
+                            for (String word : words) {
+                                word = word.trim();
+                                if (!word.isEmpty()) {
+                                    if (word.equals("AND") || word.equals("OR") || word.equals("NOT")) {// solr treats these Capital words as logical words
+                                        word = lowerCaseWord(word);
                                     }
-                                } else {
-                                    if (isEBIAc(word)) {
-                                        Criteria criteria = new Criteria(AC_A_S).is(word)
-                                                .or(AC_B_S).is(word)
-                                                .or(AC_S).is(word);
-                                        userConditions.or(criteria);
+                                    if (userConditions == null) {
+                                        if (isEBIAc(word)) {
+                                            userConditions = new Criteria(AC_A_S).is(word)
+                                                    .or(AC_B_S).is(word)
+                                                    .or(AC_S).is(word);
+                                        } else {
+                                            word = escapeQueryChars(word);
+                                            userConditions = new Criteria(DEFAULT).expression(word);
+                                        }
                                     } else {
-                                        word = escapeQueryChars(word);
-                                        userConditions = userConditions.or(DEFAULT).expression(word);
+                                        if (isEBIAc(word)) {
+                                            Criteria criteria = new Criteria(AC_A_S).is(word)
+                                                    .or(AC_B_S).is(word)
+                                                    .or(AC_S).is(word);
+                                            userConditions.or(criteria);
+                                        } else {
+                                            word = escapeQueryChars(word);
+                                            userConditions = userConditions.or(DEFAULT).expression(word);
+                                        }
                                     }
                                 }
                             }
@@ -114,114 +128,123 @@ public class SearchInteractionUtility {
         return userConditions;
     }
 
-    public List<FilterQuery> createFilterQuery(Set<String> interactorSpeciesFilter,
-                                               Set<String> interactorTypesFilter,
-                                               Set<String> interactionDetectionMethodsFilter,
-                                               Set<String> interactionTypesFilter,
-                                               Set<String> interactionHostOrganismsFilter,
-                                               Boolean negativeFilter,
-                                               boolean mutationFilter,
-                                               boolean expansionFilter,
-                                               double minMIScore,
-                                               double maxMIScore,
-                                               boolean intraSpeciesFilter,
-                                               Set<Long> binaryInteractionIds,
-                                               Set<String> interactorAcs) {
+    public List<FilterQuery> createFilterQuery(InteractionSearchParameters parameters) {
 
         List<FilterQuery> filterQueries = new ArrayList<>();
 
         //Interactor species filter
-        createInteractorSpeciesFilterCriteria(interactorSpeciesFilter, intraSpeciesFilter, filterQueries);
+        createInteractorSpeciesFilterCriteria(parameters.getInteractorSpeciesFilter(), parameters.isIntraSpeciesFilter(), filterQueries);
 
         //Interactor type filter
-        createInteractorTypeFilterCriteria("{!tag=TYPE}", interactorTypesFilter, filterQueries);
+        createInteractorTypeFilterCriteria(parameters.getInteractorTypesFilter(), filterQueries);
 
         //Interaction detection method filter
-        createFilterCriteriaForStringValues("{!tag=DETECTION_METHOD}", interactionDetectionMethodsFilter, DETECTION_METHOD_S, filterQueries);
+        createInteractionDetectionMethodsFilterCriteria(parameters.getInteractionDetectionMethodsFilter(), filterQueries);
+
+        //Participant detection method filter
+        createParticipantDetectionMethodsFilterCriteria(parameters.getParticipantDetectionMethodsFilter(), filterQueries);
 
         //Interaction type filter
-        createFilterCriteriaForStringValues("{!tag=INTERACTION_TYPE}", interactionTypesFilter, TYPE_S, filterQueries);
+        createInteractionTypeFilterCriteria(parameters.getInteractionTypesFilter(), filterQueries);
 
         //Interaction host organism filter
-        createFilterCriteriaForStringValues("{!tag=HOST_ORGANISM}", interactionHostOrganismsFilter, HOST_ORGANISM_S, filterQueries);
+        createInteractionHostOrganismsFilterCriteria(parameters.getInteractionHostOrganismsFilter(), filterQueries);
 
         //Negative filter
-        createNegativeInteractionsFilterCriteria("{!tag=NEGATIVE_INTERACTION}", negativeFilter, NEGATIVE, filterQueries);
+        createNegativeInteractionsFilterCriteria(parameters.getNegativeFilter().booleanValue, filterQueries);
 
         //Mutation filter
-        createFilterCriteriaForBoolean("{!tag=MUTATION}", mutationFilter, AFFECTED_BY_MUTATION, filterQueries);
+        createMutationFilterCriteria(parameters.isMutationFilter(), filterQueries);
 
         //Expansion filter
-        createExpansionFilterCriteria("{!tag=EXPANSION}", expansionFilter, filterQueries);
+        createExpansionFilterCriteria(parameters.isExpansionFilter(), filterQueries);
 
         //MIScore filter
-        createMIScoreFilterCriteria("{!tag=MI_SCORE}", minMIScore, maxMIScore, filterQueries);
+        createMIScoreFilterCriteria(parameters.getMinMIScore(), parameters.getMaxMIScore(), filterQueries);
 
         //binaryInteractionIds filter
-        createFilterCriteriaForLongValues("{!tag=GRAPH_FILTER}", binaryInteractionIds, BINARY_INTERACTION_ID, filterQueries);
+        createBinaryInteractionIdsFilterCriteria(parameters.getBinaryInteractionIds(), filterQueries);
 
         //InteractorAcs filter
-        createInteractorAcsFilter("{!tag=GRAPH_FILTER}", interactorAcs, filterQueries);
+        createInteractorAcsFilter(parameters.getInteractorAcs(), filterQueries);
 
         return filterQueries;
     }
 
-    private void createFilterCriteriaForStringValues(String tagForExcludingFacets, Set<String> values, String field, List<FilterQuery> filterQueries) {
-
+    private Criteria createCriteriaForLongValues(String tagForExcludingFacets, String field, Set<Long> values) {
+        Criteria conditions = null;
         if (values != null && !values.isEmpty()) {
-            Criteria conditions = new Criteria(tagForExcludingFacets + field).in(values);
-            conditions.isOr();
-            filterQueries.add(new SimpleFilterQuery(conditions));
-
+            conditions = new Criteria(tagForExcludingFacets + field).in(values);
         }
+        return conditions;
     }
 
-    private void createFilterCriteriaForLongValues(String tagForExcludingFacets, Set<Long> values, String field, List<FilterQuery> filterQueries) {
-
+    private Criteria createCriteriaForStringValues(String tagForExcludingFacets, String field, Set<String> values) {
+        Criteria conditions = null;
         if (values != null && !values.isEmpty()) {
-            Criteria conditions = new Criteria(tagForExcludingFacets + field).in(values);
-            conditions.isOr();
-            filterQueries.add(new SimpleFilterQuery(conditions));
+            conditions = new Criteria(tagForExcludingFacets + field).in(values);
         }
+        return conditions;
     }
 
-    private void createInteractorAcsFilter(String tagForExcludingFacets, Set<String> values, List<FilterQuery> filterQueries) {
+    private void createInteractorAcsFilter(Set<String> values, List<FilterQuery> filterQueries) {
         if (values != null && !values.isEmpty()) {
+            String tagForExcludingFacets = "{!tag=GRAPH_FILTER}";
             Criteria conditions = new Criteria(tagForExcludingFacets + AC_A_S).in(values)
                     .or(AC_B_S).in(values);
             filterQueries.add(new SimpleFilterQuery(conditions));
-
         }
     }
 
-    private void createFilterCriteriaForBoolean(String tagForExcludingFacets, boolean value, String field, List<FilterQuery> filterQueries) {
-
-        if (value) {
-            Criteria conditions = new Criteria(tagForExcludingFacets + field).is(value);
+    private void createMutationFilterCriteria(Boolean value, List<FilterQuery> filterQueries) {
+        if (value != null && value) {
+            String tagForExcludingFacets = "{!tag=MUTATION}";
+            // Mutation filter only applies when it is set to true
+            Criteria conditions = new Criteria(tagForExcludingFacets + AFFECTED_BY_MUTATION).is(true);
             filterQueries.add(new SimpleFilterQuery(conditions));
         }
     }
 
-    private void createNegativeInteractionsFilterCriteria(String tagForExcludingFacets, Boolean value, String field, List<FilterQuery> filterQueries) {
+    private void createInteractionDetectionMethodsFilterCriteria(Set<String> values, List<FilterQuery> filterQueries) {
+        String tagForExcludingFacets = "{!tag=DETECTION_METHOD}";
+        createStringLabelsOrMiIdsFilterCriteria(tagForExcludingFacets, values, DETECTION_METHOD_MI_IDENTIFIER_S, DETECTION_METHOD_S, filterQueries);
+    }
 
+    private void createParticipantDetectionMethodsFilterCriteria(Set<String> values, List<FilterQuery> filterQueries) {
+        String tagForExcludingFacets = "{!tag=PARTICIPANT_DETECTION_METHOD}";
+        createStringLabelsOrMiIdsFilterCriteria(tagForExcludingFacets, values, IDENTIFICATION_METHODS_MI_IDS_A_B_S, IDENTIFICATION_METHODS_A_B_S, filterQueries);
+    }
+
+    private void createBinaryInteractionIdsFilterCriteria(Set<Long> values, List<FilterQuery> filterQueries) {
+        if (values != null && !values.isEmpty()) {
+            String tagForExcludingFacets = "{!tag=GRAPH_FILTER}";
+            Criteria conditions = createCriteriaForLongValues(tagForExcludingFacets, BINARY_INTERACTION_ID, values);
+            filterQueries.add(new SimpleFilterQuery(conditions));
+        }
+    }
+
+    private void createNegativeInteractionsFilterCriteria(Boolean value, List<FilterQuery> filterQueries) {
         if (value != null) {
-            Criteria conditions = new Criteria(tagForExcludingFacets + field).is(value);
+            String tagForExcludingFacets = "{!tag=NEGATIVE_INTERACTION}";
+            Criteria conditions = new Criteria(tagForExcludingFacets + NEGATIVE).is(value);
             filterQueries.add(new SimpleFilterQuery(conditions));
         }
     }
 
-    private void createExpansionFilterCriteria(String tagForExcludingFacets, boolean value, List<FilterQuery> filterQueries) {
+    private void createExpansionFilterCriteria(boolean value, List<FilterQuery> filterQueries) {
         // Expansion filter meaning:
         // true: hides spoke expanded interactions
         // false: keeps every interaction
         if (value) {
+            String tagForExcludingFacets = "{!tag=EXPANSION}";
             Criteria conditions = new Criteria(tagForExcludingFacets + "-" + EXPANSION_METHOD).is("spoke expansion");
             filterQueries.add(new SimpleFilterQuery(conditions));
         }
     }
 
 
-    private void createMIScoreFilterCriteria(String tagForExcludingFacets, double minScore, double maxScore, List<FilterQuery> filterQueries) {
+    private void createMIScoreFilterCriteria(double minScore, double maxScore, List<FilterQuery> filterQueries) {
+        String tagForExcludingFacets = "{!tag=MI_SCORE}";
         Criteria conditions = new Criteria(tagForExcludingFacets + INTACT_MISCORE).between(minScore, maxScore);
         filterQueries.add(new SimpleFilterQuery(conditions));
     }
@@ -230,35 +253,88 @@ public class SearchInteractionUtility {
     //               if true it creates 'or' condition between set of species
     // Adds tags in solr to allow calculate properly the facets for multiselection in species and interactor type
     private void createInteractorSpeciesFilterCriteria(Set<String> species, boolean intraSpeciesFilter, List<FilterQuery> filterQueries) {
-        Criteria conditions = null;
-
-        if (species != null && !species.isEmpty()) {
-            if (!intraSpeciesFilter) {
-                conditions = new Criteria("{!tag=SPECIES}" + SPECIES_A_B_STR).in(species);
-                conditions.isOr();
-            } else { // Return only interactions from exactly the same species in both interactors.
-                conditions = new Criteria("{!tag=INTRA_SPECIES}" + INTRA_SPECIES).in(species);
+        if (intraSpeciesFilter) {
+            if (species != null && !species.isEmpty()) {
+                // Return only interactions from exactly the same species in both interactors.
+                String tagForExcludingFacets = "{!tag=INTRA_SPECIES}";
+                createStringLabelsOrTaxIdsFilterCriteria(
+                        tagForExcludingFacets, species, INTRA_TAX_ID, INTRA_SPECIES, filterQueries);
+            } else {
+                Criteria conditions = new Criteria("{!tag=INTRA_SPECIES}" + INTRA_TAX_ID).isNotNull();
+                filterQueries.add(new SimpleFilterQuery(conditions));
             }
-        } else {
-            if (intraSpeciesFilter) {
-                conditions = new Criteria("{!tag=INTRA_SPECIES}" + INTRA_SPECIES).isNotNull();
-            }
-        }
-        if (conditions != null) {
-            filterQueries.add(new SimpleFilterQuery(conditions));
+        } else if (species != null && !species.isEmpty()) {
+            String tagForExcludingFacets = "{!tag=SPECIES}";
+            createStringLabelsOrTaxIdsFilterCriteria(
+                    tagForExcludingFacets, species, TAX_ID_A_B, SPECIES_A_B_STR, filterQueries);
         }
     }
 
     // Adds tags in solr to allow calculate properly the facets for multiselection in species and interactor type
-    private void createInteractorTypeFilterCriteria(String tagForExcludingFacets, Set<String> interactorTypesFilter, List<FilterQuery> filterQueries) {
+    private void createInteractorTypeFilterCriteria(Set<String> interactorTypesFilter, List<FilterQuery> filterQueries) {
+        String tagForExcludingFacets = "{!tag=TYPE}";
+        createStringLabelsOrMiIdsFilterCriteria(tagForExcludingFacets, interactorTypesFilter, TYPE_MI_A_B_STR, TYPE_A_B_STR, filterQueries);
+    }
 
-        if (interactorTypesFilter != null && !interactorTypesFilter.isEmpty()) {
-            Criteria conditions = null;
+    private void createInteractionTypeFilterCriteria(Set<String> interactionTypesFilter, List<FilterQuery> filterQueries) {
+        String tagForExcludingFacets = "{!tag=INTERACTION_TYPE}";
+        createStringLabelsOrMiIdsFilterCriteria(tagForExcludingFacets, interactionTypesFilter, TYPE_MI_IDENTIFIER_S, TYPE_S, filterQueries);
+    }
 
-            conditions = new Criteria(tagForExcludingFacets + TYPE_A_B_STR).in(interactorTypesFilter);
-            conditions.isOr();
+    private void createInteractionHostOrganismsFilterCriteria(Set<String> interactionHostOrganismsFilter, List<FilterQuery> filterQueries) {
+        if (interactionHostOrganismsFilter != null && !interactionHostOrganismsFilter.isEmpty()) {
+            String tagForExcludingFacets = "{!tag=HOST_ORGANISM}";
+            createStringLabelsOrTaxIdsFilterCriteria(
+                    tagForExcludingFacets, interactionHostOrganismsFilter, HOST_ORGANISM_TAX_ID, HOST_ORGANISM_S, filterQueries);
+        }
+    }
 
-            filterQueries.add(new SimpleFilterQuery(conditions));
+    private void createStringLabelsOrTaxIdsFilterCriteria(
+            String tagForExcludingFacets,
+            Set<String> values,
+            String taxIdField,
+            String labelField,
+            List<FilterQuery> filterQueries) {
+
+        if (values != null && !values.isEmpty()) {
+            Set<Long> taxIds = filterTaxIdsValues(values);
+            Set<String> labels = filterNotTaxIdsValues(values);
+
+            List<Criteria> conditions = new ArrayList<>();
+            if (!taxIds.isEmpty()) {
+                if (!labels.isEmpty()) {
+                    conditions.add(createCriteriaForLongValues(tagForExcludingFacets, taxIdField, taxIds));
+                    conditions.add(createCriteriaForStringValues(tagForExcludingFacets, labelField, labels));
+                } else {
+                    conditions.add(createCriteriaForLongValues(tagForExcludingFacets, taxIdField, taxIds));
+                }
+            } else if (!labels.isEmpty()) {
+                conditions.add(createCriteriaForStringValues(tagForExcludingFacets, labelField, labels));
+            }
+
+            conditions.forEach(condition -> filterQueries.add(new SimpleFilterQuery(condition)));
+        }
+    }
+
+    private void createStringLabelsOrMiIdsFilterCriteria(
+            String tagForExcludingFacets,
+            Set<String> values,
+            String miIdField,
+            String labelField,
+            List<FilterQuery> filterQueries) {
+
+        if (values != null && !values.isEmpty()) {
+            Set<String> miIds = filterMiIdsValues(values);
+            Set<String> labels = filterNotMiIdsValues(values);
+
+            List<Criteria> conditions = new ArrayList<>();
+            if (!miIds.isEmpty()) {
+                conditions.add(createCriteriaForStringValues(tagForExcludingFacets, miIdField, miIds));
+            }
+            if (!labels.isEmpty()) {
+                conditions.add(createCriteriaForStringValues(tagForExcludingFacets, labelField, labels));
+            }
+            conditions.forEach(condition -> filterQueries.add(new SimpleFilterQuery(condition)));
         }
     }
 
@@ -268,5 +344,44 @@ public class SearchInteractionUtility {
         Matcher m = r1.matcher(term);
 
         return m.matches();
+    }
+
+    private Set<String> filterMiIdsValues(Set<String> values) {
+        return values.stream()
+                .filter(this::isMiId)
+                .collect(Collectors.toSet());
+    }
+
+    private Set<String> filterNotMiIdsValues(Set<String> values) {
+        return values.stream()
+                .filter(value -> !isMiId(value))
+                .collect(Collectors.toSet());
+    }
+
+    private Set<Long> filterTaxIdsValues(Set<String> values) {
+        return values.stream()
+                .flatMap(this::splitTerm)
+                .filter(this::isTaxId)
+                .map(Long::parseLong)
+                .collect(Collectors.toSet());
+    }
+
+    private Set<String> filterNotTaxIdsValues(Set<String> values) {
+        return values.stream()
+                .flatMap(this::splitTerm)
+                .filter(value -> !isTaxId(value))
+                .collect(Collectors.toSet());
+    }
+
+    private boolean isMiId(String term) {
+        return MI_ID_PATTERN.matcher(term).matches();
+    }
+
+    private boolean isTaxId(String term) {
+        return TAX_ID_PATTERN.matcher(term).matches();
+    }
+
+    private Stream<String> splitTerm(String term) {
+        return Arrays.stream(term.split("__"));
     }
 }

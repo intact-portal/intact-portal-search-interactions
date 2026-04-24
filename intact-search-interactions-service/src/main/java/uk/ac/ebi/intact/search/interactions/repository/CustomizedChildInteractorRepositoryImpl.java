@@ -2,23 +2,31 @@ package uk.ac.ebi.intact.search.interactions.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.solr.core.RequestMethod;
 import org.springframework.data.solr.core.SolrOperations;
 import org.springframework.data.solr.core.query.Criteria;
+import org.springframework.data.solr.core.query.FacetOptions;
 import org.springframework.data.solr.core.query.FilterQuery;
 import org.springframework.data.solr.core.query.GroupOptions;
+import org.springframework.data.solr.core.query.SimpleFacetQuery;
 import org.springframework.data.solr.core.query.SimpleQuery;
+import org.springframework.data.solr.core.query.result.CountEntry;
+import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.data.solr.core.query.result.GroupPage;
 import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
-import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractorFields;
+import uk.ac.ebi.intact.search.interactions.model.parameters.InteractionSearchParameters;
+import uk.ac.ebi.intact.search.interactions.model.parameters.PagedInteractionSearchParameters;
 import uk.ac.ebi.intact.search.interactions.utils.NestedCriteria;
 import uk.ac.ebi.intact.search.interactions.utils.SearchInteractionUtility;
 
+import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import static uk.ac.ebi.intact.search.interactions.model.SearchChildInteractorFields.DOCUMENT_ID;
+import static uk.ac.ebi.intact.search.interactions.model.SearchChildInteractorFields.INTERACTION_COUNT;
 import static uk.ac.ebi.intact.search.interactions.model.SearchInteraction.INTERACTIONS;
 
 /**
@@ -27,12 +35,12 @@ import static uk.ac.ebi.intact.search.interactions.model.SearchInteraction.INTER
 public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildInteractorRepository {
     // default minimum counts for faceting
     private static final int FACET_MIN_COUNT = 10000;
-    private SolrOperations solrOperations;
-    private SearchInteractionUtility searchInteractionUtility = new SearchInteractionUtility();
+    // We need to add a new sort field with the sum of the frequency for each top interactor in the search,
+    // so we limit we how many interactors we get to not build a query too long.
+    private static final int NUMBER_OF_TOP_DOCUMENTS_TO_GET = 25;
 
-    // default sorting for the query results
-    //TODO Solve problems with multivalue fields that are not allow to be sorted. Schema-less create all the fields as multivalues
-//    private static final Sort DEFAULT_QUERY_SORT_WITH_QUERY = new Sort(Sort.Direction.DESC, SearchInteractorFields.INTERACTION_COUNT);
+    private final SolrOperations solrOperations;
+    private final SearchInteractionUtility searchInteractionUtility = new SearchInteractionUtility();
 
     @Autowired
     public CustomizedChildInteractorRepositoryImpl(SolrOperations solrOperations) {
@@ -40,95 +48,43 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
     }
 
     @Override
-    public GroupPage<SearchChildInteractor> findChildInteractors(String query,
-                                                                 boolean batchSearch,
-                                                                 boolean advancedSearch,
-                                                                 Set<String> interactorSpeciesFilter,
-                                                                 Set<String> interactorTypesFilter,
-                                                                 Set<String> interactionDetectionMethodsFilter,
-                                                                 Set<String> interactionTypesFilter,
-                                                                 Set<String> interactionHostOrganismsFilter,
-                                                                 Boolean negativeFilter,
-                                                                 boolean mutationFilter,
-                                                                 boolean expansionFilter,
-                                                                 double minMIScore,
-                                                                 double maxMIScore,
-                                                                 boolean intraSpeciesFilter,
-                                                                 Set<Long> binaryInteractionIds,
-                                                                 Set<String> interactorAcs,
-                                                                 Sort sort, Pageable pageable) {
+    public GroupPage<SearchChildInteractor> findChildInteractors(PagedInteractionSearchParameters parameters) {
+        SimpleQuery search = queryToFindInteractors(parameters);
 
-        // filters
-        List<FilterQuery> interactionFilterQueries = searchInteractionUtility.createFilterQuery(interactorSpeciesFilter, interactorTypesFilter, interactionDetectionMethodsFilter,
-                interactionTypesFilter, interactionHostOrganismsFilter, negativeFilter, mutationFilter, expansionFilter, minMIScore, maxMIScore, intraSpeciesFilter, binaryInteractionIds, interactorAcs);
-
-        // search query
-        SimpleQuery search = new SimpleQuery();
-
-        // search criterias
-        Criteria interactionSearchCriteria = searchInteractionUtility.createSearchConditions(query, batchSearch, advancedSearch);
-        Criteria interactorCriteria = new NestedCriteria(interactionSearchCriteria, interactionFilterQueries);
-
-        search.addCriteria(interactorCriteria);
-
-        //group
-        GroupOptions groupOptions = new GroupOptions()
-                .addGroupByField(SearchChildInteractorFields.DOCUMENT_ID);
+        // group
+        GroupOptions groupOptions = new GroupOptions().addGroupByField(DOCUMENT_ID);
         groupOptions.setLimit(1);
         groupOptions.setGroupMain(true);
         search.setGroupOptions(groupOptions);
 
         // pagination
-        search.setPageRequest(pageable);
+        search.setPageRequest(PageRequest.of(parameters.getPage(), parameters.getPageSize()));
 
         // sorting
-        if (sort != null) {
-            search.addSort(sort);
+        if (parameters.getSort() != null) {
+            search.addSort(parameters.standardiseSort());
+        } else {
+            // First we sort by the document id of the top interactors, to put on top the interactors appearing
+            // in multiple interactions in the query results.
+            search.addSort(getDocumentIdsSortingField(parameters));
+            // Then we sort by the interaction count for each interactor, which counts the total number of interactions
+            // in the DB, not just for the current query.
+            search.addSort(Sort.by(Sort.Direction.DESC, INTERACTION_COUNT));
         }
-//        else {
-//            search.addSort(DEFAULT_QUERY_SORT_WITH_QUERY);
-//        }
 
         return solrOperations.queryForGroupPage(INTERACTIONS, search, SearchChildInteractor.class,
-                (batchSearch ? RequestMethod.POST : RequestMethod.GET));
+                (parameters.isBatchSearch() ? RequestMethod.POST : RequestMethod.GET));
     }
 
     // By default the numCount return by solr when group.main=true is the total documents instead of the number of groups.
     // To make the pagination of interactors working we need to ask solr the number of groups for that group.main=false and
     // group.ngroups=true (setTotalCount(true) in spring-data-solr)
     @Override
-    public long countChildInteractors(String query,
-                                      boolean batchSearch,
-                                      boolean advancedSearch,
-                                      Set<String> interactorSpeciesFilter,
-                                      Set<String> interactorTypeFilter,
-                                      Set<String> interactionDetectionMethodFilter,
-                                      Set<String> interactionTypeFilter,
-                                      Set<String> interactionHostOrganismFilter,
-                                      Boolean negativeFilter,
-                                      boolean mutationFilter,
-                                      boolean expansionFilter,
-                                      double minMIScore,
-                                      double maxMIScore,
-                                      boolean intraSpeciesFilter,
-                                      Set<Long> binaryInteractionIds,
-                                      Set<String> interactorAcs) {
-        // filters
-        List<FilterQuery> interactionFilterQueries = searchInteractionUtility.createFilterQuery(interactorSpeciesFilter, interactorTypeFilter, interactionDetectionMethodFilter,
-                interactionTypeFilter, interactionHostOrganismFilter, negativeFilter, mutationFilter, expansionFilter, minMIScore, maxMIScore, intraSpeciesFilter, binaryInteractionIds, interactorAcs);
+    public long countChildInteractors(InteractionSearchParameters parameters) {
+        SimpleQuery search = queryToFindInteractors(parameters);
 
-        // search query
-        SimpleQuery search = new SimpleQuery();
-
-        // search criterias
-        Criteria interactionSearchCriteria = searchInteractionUtility.createSearchConditions(query, batchSearch, advancedSearch);
-        Criteria interactorCriteria = new NestedCriteria(interactionSearchCriteria, interactionFilterQueries);
-
-        search.addCriteria(interactorCriteria);
-
-        //group
-        GroupOptions groupOptions = new GroupOptions()
-                .addGroupByField(SearchChildInteractorFields.DOCUMENT_ID);
+        // group
+        GroupOptions groupOptions = new GroupOptions().addGroupByField(DOCUMENT_ID);
         groupOptions.setLimit(1);
         groupOptions.setGroupMain(false);
         groupOptions.setTotalCount(true);
@@ -138,7 +94,82 @@ public class CustomizedChildInteractorRepositoryImpl implements CustomizedChildI
         search.setPageRequest(PageRequest.of(0, 1));
 
         GroupPage<SearchChildInteractor> groupPage = solrOperations.queryForGroupPage(INTERACTIONS, search, SearchChildInteractor.class,
-                (batchSearch ? RequestMethod.POST : RequestMethod.GET));
-        return groupPage.getGroupResult(SearchChildInteractorFields.DOCUMENT_ID).getGroupsCount();
+                (parameters.isBatchSearch() ? RequestMethod.POST : RequestMethod.GET));
+        return groupPage.getGroupResult(DOCUMENT_ID).getGroupsCount();
+    }
+
+    private SimpleQuery queryToFindInteractors(InteractionSearchParameters parameters) {
+        // search query
+        SimpleQuery search = new SimpleQuery();
+        addFiltersToQueryToFindInteractors(search, parameters);
+        return search;
+    }
+
+    private SimpleFacetQuery facetQueryToFindInteractors(InteractionSearchParameters parameters) {
+        // search query
+        SimpleFacetQuery search = new SimpleFacetQuery();
+        addFiltersToQueryToFindInteractors(search, parameters);
+        return search;
+    }
+
+    private void addFiltersToQueryToFindInteractors(SimpleQuery search, InteractionSearchParameters parameters) {
+        // filters
+        List<FilterQuery> interactionFilterQueries = searchInteractionUtility.createFilterQuery(parameters);
+
+        // search criteria
+        Criteria interactionSearchCriteria = searchInteractionUtility.createSearchConditions(parameters);
+        Criteria interactorCriteria = new NestedCriteria(interactionSearchCriteria, interactionFilterQueries);
+        search.addCriteria(interactorCriteria);
+    }
+
+    private SimpleFacetQuery createQueryWithFacetOptions(PagedInteractionSearchParameters parameters, FacetOptions facetOptions) {
+        // search query
+        SimpleFacetQuery search = facetQueryToFindInteractors(parameters);
+
+        facetOptions.setFacetLimit(FACET_MIN_COUNT);
+
+        search.setFacetOptions(facetOptions);
+
+        // pagination
+        search.setPageRequest(PageRequest.of(parameters.getPage(), parameters.getPageSize()));
+
+        // projection
+        search.addProjectionOnFields(DOCUMENT_ID);
+
+        return search;
+    }
+
+    private FacetPage<SearchChildInteractor> findInteractorFacets(InteractionSearchParameters parameters, FacetOptions facetOptions) {
+        // search query
+        SimpleFacetQuery search = createQueryWithFacetOptions(
+                PagedInteractionSearchParameters.copyParameters(parameters).pageSize(1).build(),
+                facetOptions);
+
+        return solrOperations.queryForFacetPage(INTERACTIONS, search, SearchChildInteractor.class,
+                (parameters.isBatchSearch() ? RequestMethod.POST : RequestMethod.GET));
+    }
+
+    private Sort getDocumentIdsSortingField(InteractionSearchParameters parameters) {
+        FacetOptions facetOptions = new FacetOptions(DOCUMENT_ID);
+        // We only want the documents ids of interactors that appear more than once, to prioritise the interactors
+        // with multiple interactions.
+        facetOptions.setFacetMinCount(2);
+        facetOptions.setFacetLimit(NUMBER_OF_TOP_DOCUMENTS_TO_GET);
+        FacetPage<SearchChildInteractor> facets = findInteractorFacets(parameters, facetOptions);
+        Stream<String> scoresByDocument = facets.getFacetResultPage(DOCUMENT_ID).getContent().stream()
+                .sorted(Comparator.comparing(CountEntry::getValueCount).reversed())
+                .limit(NUMBER_OF_TOP_DOCUMENTS_TO_GET)
+                .map(entry -> {
+                    String documentId = entry.getValue();
+                    long count = entry.getValueCount();
+                    return String.format(
+                            "product(termfreq(%s, '%s'),%d)",
+                            DOCUMENT_ID,
+                            documentId,
+                            count);
+                });
+        return Sort.by(
+                Sort.Direction.DESC,
+                String.format("sum(%s)",scoresByDocument.collect(Collectors.joining(","))));
     }
 }

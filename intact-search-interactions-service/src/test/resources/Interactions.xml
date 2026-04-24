@@ -1921,6 +1921,51 @@
     <void property="typeMIIdentifierStyled">
      <string>MI:0915__physical association__#7bccc4</string>
     </void>
+    <void property="detectionMethodMIIdentifierStyled">
+     <string>MI:0071__molecular sieving</string>
+    </void>
+    <void property="identificationMethodsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>predetermined</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>predetermined</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifiersA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0396</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifiersB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0396</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIAStyled">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0396__predetermined</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIBStyled">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0396__predetermined</string>
+      </void>
+     </object>
+    </void>
     <void property="uniqueIdA">
      <string>Q9BZD4</string>
     </void>
@@ -3728,6 +3773,51 @@
     </void>
     <void property="typeMIIdentifierStyled">
      <string>MI:0915__physical association__#7bccc4</string>
+    </void>
+    <void property="detectionMethodMIIdentifierStyled">
+     <string>MI:0004__affinity chrom</string>
+    </void>
+    <void property="identificationMethodsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>predetermined</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>predetermined</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifiersA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0396</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifiersB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0396</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIAStyled">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0396__predetermined</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIBStyled">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0396__predetermined</string>
+      </void>
+     </object>
     </void>
     <void property="uniqueIdA">
      <string>Q8NBT2</string>
@@ -5759,6 +5849,51 @@
     </void>
     <void property="typeMIIdentifierStyled">
      <string>MI:0915__physical association__#7bccc4</string>
+    </void>
+    <void property="detectionMethodMIIdentifierStyled">
+     <string>MI:0029__density sedimentation</string>
+    </void>
+    <void property="identificationMethodsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>predetermined</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>predetermined</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifiersA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0396</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifiersB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0396</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIAStyled">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0396__predetermined</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIBStyled">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0396__predetermined</string>
+      </void>
+     </object>
     </void>
     <void property="uniqueIdA">
      <string>O14777</string>
@@ -7803,6 +7938,51 @@
     </void>
     <void property="typeMIIdentifierStyled">
      <string>MI:0915__physical association__#7bccc4</string>
+    </void>
+    <void property="detectionMethodMIIdentifierStyled">
+     <string>MI:0029__density sedimentation</string>
+    </void>
+    <void property="identificationMethodsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>predetermined</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>predetermined</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifiersA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0396</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifiersB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0396</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIAStyled">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0396__predetermined</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIBStyled">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0396__predetermined</string>
+      </void>
+     </object>
     </void>
     <void property="uniqueIdA">
      <string>O14777</string>
@@ -9938,6 +10118,51 @@
     <void property="typeMIIdentifierStyled">
      <string>MI:0915__physical association__#7bccc4</string>
     </void>
+    <void property="detectionMethodMIIdentifierStyled">
+     <string>MI:0029__density sedimentation</string>
+    </void>
+    <void property="identificationMethodsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>predetermined</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>predetermined</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifiersA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0396</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifiersB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0396</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIAStyled">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0396__predetermined</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIBStyled">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0396__predetermined</string>
+      </void>
+     </object>
+    </void>
     <void property="uniqueIdA">
      <string>O14777</string>
     </void>
@@ -11706,6 +11931,51 @@
     <void property="typeMIIdentifierStyled">
      <string>MI:0915__physical association__#7bccc4</string>
     </void>
+    <void property="detectionMethodMIIdentifierStyled">
+     <string>MI:0006__anti bait coip</string>
+    </void>
+    <void property="identificationMethodsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>western blot</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>western blot</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifiersA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0113</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifiersB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0113</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIAStyled">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0113__western blot</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIBStyled">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0113__western blot</string>
+      </void>
+     </object>
+    </void>
     <void property="uniqueIdA">
      <string>O35152</string>
     </void>
@@ -13432,6 +13702,51 @@
     </void>
     <void property="typeMIIdentifierStyled">
      <string>MI:0915__physical association__#7bccc4</string>
+    </void>
+    <void property="detectionMethodMIIdentifierStyled">
+     <string>MI:0006__anti bait coip</string>
+    </void>
+    <void property="identificationMethodsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>western blot</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>western blot</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifiersA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0113</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifiersB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0113</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIAStyled">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0113__western blot</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIBStyled">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0113__western blot</string>
+      </void>
+     </object>
     </void>
     <void property="uniqueIdA">
      <string>O35152</string>
@@ -15252,6 +15567,51 @@
     <void property="typeMIIdentifierStyled">
      <string>MI:0915__physical association__#7bccc4</string>
     </void>
+    <void property="detectionMethodMIIdentifierStyled">
+     <string>MI:0006__anti bait coip</string>
+    </void>
+    <void property="identificationMethodsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>western blot</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>western blot</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifiersA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0113</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifiersB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0113</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIAStyled">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0113__western blot</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIBStyled">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0113__western blot</string>
+      </void>
+     </object>
+    </void>
     <void property="uniqueIdA">
      <string>O35152</string>
     </void>
@@ -17022,6 +17382,51 @@
     </void>
     <void property="typeMIIdentifierStyled">
      <string>MI:0915__physical association__#7bccc4</string>
+    </void>
+    <void property="detectionMethodMIIdentifierStyled">
+     <string>MI:0006__anti bait coip</string>
+    </void>
+    <void property="identificationMethodsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>western blot</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>western blot</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifiersA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0113</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifiersB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0113</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIAStyled">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0113__western blot</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIBStyled">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0113__western blot</string>
+      </void>
+     </object>
     </void>
     <void property="uniqueIdA">
      <string>O35152</string>
@@ -19849,6 +20254,51 @@
     </void>
     <void property="typeMIIdentifierStyled">
      <string>MI:0915__physical association__#7bccc4</string>
+    </void>
+    <void property="detectionMethodMIIdentifierStyled">
+     <string>MI:0411__elisa</string>
+    </void>
+    <void property="identificationMethodsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>tag perox activity</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>tag perox activity</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifiersA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0981</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIIdentifiersB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0981</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIAStyled">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0981__tag perox activity</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodMIBStyled">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MI:0981__tag perox activity</string>
+      </void>
+     </object>
     </void>
     <void property="uniqueIdA">
      <string>EBI-10000824</string>
